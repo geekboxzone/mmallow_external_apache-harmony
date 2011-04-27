@@ -43,7 +43,6 @@ import java.nio.channels.SocketChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.channels.FileChannel.MapMode;
 import java.util.Arrays;
-import org.apache.harmony.luni.platform.Platform;
 
 import junit.framework.TestCase;
 
@@ -1981,7 +1980,6 @@ public class FileChannelTest extends TestCase {
         int[] sizes = {
             4096, // 4K size (normal page size for Linux & Windows)
             65536, // 64K size (alocation granularity size for Windows)
-            Platform.getFileSystem().getAllocGranularity() // alloc granularity
         };
         final int CONTENT_LEN = 10;
 

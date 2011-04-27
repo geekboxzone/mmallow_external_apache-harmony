@@ -32,7 +32,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-import tests.support.Support_NetworkInterface;
 import tests.support.Support_PortManager;
 
 public class MulticastSocketTest extends SocketTestCase {
@@ -288,8 +287,7 @@ public class MulticastSocketTest extends SocketTestCase {
 	/**
 	 * @tests java.net.MulticastSocket#getTimeToLive()
 	 */
-	public void test_getTimeToLive() {
-		try {
+	public void test_getTimeToLive() throws Exception {
 			mss = new MulticastSocket();
 			mss.setTimeToLive(120);
 			assertEquals("Returned incorrect 1st TTL",
@@ -298,26 +296,19 @@ public class MulticastSocketTest extends SocketTestCase {
 			assertEquals("Returned incorrect 2nd TTL",
                                      220, mss.getTimeToLive());
 			ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_MULTICAST);
-		} catch (Exception e) {
-			handleException(e, SO_MULTICAST);
-		}
 	}
 
 	/**
 	 * @tests java.net.MulticastSocket#getTTL()
 	 */
-	public void test_getTTL() {
+	public void test_getTTL() throws Exception {
 		// Test for method byte java.net.MulticastSocket.getTTL()
 
-		try {
 			mss = new MulticastSocket();
 			mss.setTTL((byte) 120);
 			assertEquals("Returned incorrect TTL",
                                      120, mss.getTTL());
 			ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_MULTICAST);
-		} catch (Exception e) {
-			handleException(e, SO_MULTICAST);
-		}
 	}
 
 	/**
@@ -352,15 +343,6 @@ public class MulticastSocketTest extends SocketTestCase {
 	 * @tests java.net.MulticastSocket#joinGroup(java.net.SocketAddress,java.net.NetworkInterface)
 	 */
 	public void test_joinGroupLjava_net_SocketAddressLjava_net_NetworkInterface() throws IOException, InterruptedException {
-		// security manager that allows us to check that we only return the
-		// addresses that we should
-		class mySecurityManager extends SecurityManager {
-
-			public void checkMulticast(InetAddress address) {
-				throw new SecurityException("not allowed");
-			}
-		}
-
 		String msg = null;
 		InetAddress group = null;
 		SocketAddress groupSockAddr = null;
@@ -391,15 +373,9 @@ public class MulticastSocketTest extends SocketTestCase {
         // now try to join a group if we are not authorized
         // set the security manager that will make the first address not
         // visible
-        System.setSecurityManager(new mySecurityManager());
-        try {
-            group = InetAddress.getByName("224.0.0.3");
-            groupSockAddr = new InetSocketAddress(group, groupPort);
-            mss.joinGroup(groupSockAddr, null);
-            fail("Did not get exception when joining group is not allowed");
-        } catch (SecurityException e) {
-        }
-        System.setSecurityManager(null);
+        group = InetAddress.getByName("224.0.0.3");
+        groupSockAddr = new InetSocketAddress(group, groupPort);
+        mss.joinGroup(groupSockAddr, null);
 
         if (atLeastOneInterface) {
             // now validate that we can properly join a group with a null
@@ -470,9 +446,7 @@ public class MulticastSocketTest extends SocketTestCase {
                 theInterfaces = NetworkInterface.getNetworkInterfaces();
                 while (theInterfaces.hasMoreElements()) {
                     NetworkInterface thisInterface = (NetworkInterface) theInterfaces.nextElement();
-                    if (thisInterface.getInetAddresses().hasMoreElements()
-                            && (Support_NetworkInterface
-                                    .useInterface(thisInterface) == true)){
+                    if (thisInterface.getInetAddresses().hasMoreElements()){
                         realInterfaces.add(thisInterface);
                     }
                 }
@@ -561,7 +535,6 @@ public class MulticastSocketTest extends SocketTestCase {
                 }
             }
         }
-		System.setSecurityManager(null);
 	}
 
 	/**
@@ -601,15 +574,6 @@ public class MulticastSocketTest extends SocketTestCase {
 	 * @tests java.net.MulticastSocket#leaveGroup(java.net.SocketAddress,java.net.NetworkInterface)
 	 */
 	public void test_leaveGroupLjava_net_SocketAddressLjava_net_NetworkInterface() throws Exception {
-		// security manager that allows us to check that we only return the
-		// addresses that we should
-		class mySecurityManager extends SecurityManager {
-
-			public void checkMulticast(InetAddress address) {
-				throw new SecurityException("not allowed");
-			}
-		}
-
 		String msg = null;
 		InetAddress group = null;
 		int groupPort = Support_PortManager.getNextPortForUDP();
@@ -636,18 +600,9 @@ public class MulticastSocketTest extends SocketTestCase {
                 } catch (IOException e) {
                 }
 
-                // now try to leave a group if we are not authorized
-                // set the security manager that will make the first address not
-                // visible
-                System.setSecurityManager(new mySecurityManager());
-                try {
                         group = InetAddress.getByName("224.0.0.3");
                         groupSockAddr = new InetSocketAddress(group, groupPort);
                         mss.leaveGroup(groupSockAddr, null);
-                        fail("Did not get exception when joining group is not allowed");
-                } catch (SecurityException e) {
-                }
-                System.setSecurityManager(null);
 
                 if (atLeastOneInterface) {
 
@@ -688,8 +643,6 @@ public class MulticastSocketTest extends SocketTestCase {
                                 }
                         }
                 }
-
-                System.setSecurityManager(null);
 	}
 
 	/**
@@ -820,15 +773,7 @@ public class MulticastSocketTest extends SocketTestCase {
                 NetworkInterface thisInterface = (NetworkInterface) theInterfaces
                         .nextElement();
                 if (thisInterface.getInetAddresses().hasMoreElements()) {
-                    if ((!((InetAddress) thisInterface.getInetAddresses()
-                            .nextElement()).isLoopbackAddress())
-                            &&
-                            // for windows we cannot use these pseudo
-                            // interfaces for the test as the packets still
-                            // come from the actual interface, not the
-                            // Pseudo interface that was set
-                            (Support_NetworkInterface
-                                    .useInterface(thisInterface) == true)) {
+                    if ((!((InetAddress) thisInterface.getInetAddresses().nextElement()).isLoopbackAddress())) {
                         ports = Support_PortManager.getNextPortsForUDP(2);
                         serverPort = ports[0];
                         server = new MulticastServer(group, serverPort);
@@ -1096,10 +1041,7 @@ public class MulticastSocketTest extends SocketTestCase {
                     && (atLeastOneInterface == false)) {
                 networkInterface1 = (NetworkInterface) theInterfaces
                         .nextElement();
-                if (networkInterface1.getInetAddresses().hasMoreElements() &&
-                        // we only want real interfaces
-                        (Support_NetworkInterface
-                                .useInterface(networkInterface1) == true)) {
+                if (networkInterface1.getInetAddresses().hasMoreElements()) {
                     atLeastOneInterface = true;
                 }
             }
@@ -1110,11 +1052,7 @@ public class MulticastSocketTest extends SocketTestCase {
                         && (atLeastTwoInterfaces == false)) {
                     networkInterface2 = (NetworkInterface) theInterfaces
                             .nextElement();
-                    if (networkInterface2.getInetAddresses().hasMoreElements()
-                            &&
-                            // we only want real interfaces
-                            (Support_NetworkInterface
-                                    .useInterface(networkInterface2) == true)) {
+                    if (networkInterface2.getInetAddresses().hasMoreElements()) {
                         atLeastTwoInterfaces = true;
                     }
                 }
