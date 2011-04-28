@@ -32,14 +32,10 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>Permissions</code>
- * 
+ *
  */
 
 public class PermissionsTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(PermissionsTest.class);
-    }
 
     /**
      * Can add any type of permissions. Cannot add if collection is read-only.
@@ -96,7 +92,7 @@ public class PermissionsTest extends TestCase {
         Enumeration en = ps.elements();
         assertNotNull(en);
         assertFalse(en.hasMoreElements());
-        
+
         ps.add(up1);
         en = ps.elements();
         assertTrue(en.hasMoreElements());
@@ -122,10 +118,10 @@ public class PermissionsTest extends TestCase {
         //assertEquals(5, els.size());
         assertTrue(els.containsAll(Arrays.asList(arr)));
     }
-    
-     
+
+
     /**
-     * input parameter is null 
+     * input parameter is null
      */
     public void testNull(){
     	Permissions ps = new Permissions();
@@ -138,14 +134,14 @@ public class PermissionsTest extends TestCase {
     		fail("should throw NPE");
     	} catch (NullPointerException e){
     	}
-    	
-    	try {	
+
+    	try {
     		ps.add(null);
     		fail("should throw NullPointerException");
     	} catch (NullPointerException e){}
 
     }
-    
+
     public void test_toString() {
         Permissions ps = new Permissions();
         String address = getAddress(ps.toString());

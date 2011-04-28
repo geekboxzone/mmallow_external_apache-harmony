@@ -25,14 +25,10 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>GuardedObject</code>
- * 
+ *
  */
 
 public class GuardedObjectTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(GuardedObjectTest.class);
-    }
 
     /** Null guard imposes no restriction. */
     public void testNoGuard() {

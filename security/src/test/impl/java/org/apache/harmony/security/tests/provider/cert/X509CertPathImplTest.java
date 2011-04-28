@@ -41,7 +41,7 @@ import org.apache.harmony.security.provider.cert.X509CertPathImpl;
  * X509CertPathImplTest
  */
 public class X509CertPathImplTest extends TestCase {
-    
+
     private X509Certificate certificate;
     {
         try {
@@ -54,7 +54,7 @@ public class X509CertPathImplTest extends TestCase {
     }
     private X509CertPathImpl certPath;
     private List certList;
-        
+
     protected void setUp() throws java.lang.Exception {
         certList = new ArrayList();
         for (int i=0; i<2; i++) {
@@ -62,15 +62,15 @@ public class X509CertPathImplTest extends TestCase {
         }
         certPath = new X509CertPathImpl(certList);
     }
-    
+
     /**
      * @tests org.apache.harmony.security.provider.cert.X509CertPathImpl.X509CertPathImpl(List)
      */
     public void test_X509CertPathImpl_List() throws Exception {
-        assertEquals("Certificate list size missmatch", 
+        assertEquals("Certificate list size missmatch",
                 certList.size(), certPath.getCertificates().size());
     }
-    
+
     /**
      * @tests org.apache.harmony.security.provider.cert.X509CertPathImpl.getInstance(InputStream)
      */
@@ -81,7 +81,7 @@ public class X509CertPathImplTest extends TestCase {
         assertEquals("Certificate list size missmatch", certList.size(), cpath
                 .getCertificates().size());
     }
-    
+
     /**
      * @tests org.apache.harmony.security.provider.cert.X509CertPathImpl.getInstance(byte[])
      */
@@ -136,14 +136,14 @@ public class X509CertPathImplTest extends TestCase {
             //pass
         }
     }
-    
+
     /**
      * getEncoded() method testing.
      */
     public void testGetEncoded1() throws Exception {
         certPath.getEncoded();
     }
-    
+
     /**
      * getEncoded(String encoding) method testing.
      */
@@ -154,7 +154,7 @@ public class X509CertPathImplTest extends TestCase {
         } catch (CertificateEncodingException e) {
         }
     }
-    
+
     /**
      * getEncodings() method testing.
      */
@@ -169,13 +169,9 @@ public class X509CertPathImplTest extends TestCase {
             // pass
         }
     }
-    
+
     public static Test suite() {
         return new TestSuite(X509CertPathImplTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

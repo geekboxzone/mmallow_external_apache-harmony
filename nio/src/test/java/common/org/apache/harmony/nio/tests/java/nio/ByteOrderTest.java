@@ -27,10 +27,6 @@ import junit.framework.TestCase;
  */
 public class ByteOrderTest extends TestCase {
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(ByteOrderTest.class);
-    }
-
     public void testToString() {
         assertEquals(ByteOrder.BIG_ENDIAN.toString(), "BIG_ENDIAN");
         assertEquals(ByteOrder.LITTLE_ENDIAN.toString(), "LITTLE_ENDIAN");

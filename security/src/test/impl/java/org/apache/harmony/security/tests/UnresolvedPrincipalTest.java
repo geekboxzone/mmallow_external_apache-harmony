@@ -28,14 +28,10 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>UnresolvedPrincipal</code>
- * 
+ *
  */
 
 public class UnresolvedPrincipalTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(UnresolvedPrincipalTest.class);
-    }
 
     public void testCtor() {
         String klass = "abc";

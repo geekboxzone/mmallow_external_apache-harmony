@@ -197,8 +197,4 @@ public class RC2ParameterSpecTest extends TestCase {
         return new TestSuite(RC2ParameterSpecTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

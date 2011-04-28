@@ -157,7 +157,7 @@ public class X509CRLEntryTest extends TestCase {
      * appropriate exception.
      */
     public void testGetCertificateIssuer() {
-        assertNull("The default implementation should return null.", 
+        assertNull("The default implementation should return null.",
                 tbt_crlentry.getCertificateIssuer());
     }
 
@@ -165,8 +165,4 @@ public class X509CRLEntryTest extends TestCase {
         return new TestSuite(X509CRLEntryTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

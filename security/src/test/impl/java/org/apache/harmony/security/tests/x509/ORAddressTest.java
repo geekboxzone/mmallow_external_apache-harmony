@@ -39,10 +39,10 @@ public class ORAddressTest extends TestCase {
         for (int i=0; i<data.length; i++) {
             String tail = Integer.toHexString(0x000000ff & data[i]);
             if (tail.length() == 1) {
-                tail = "0" + tail; 
+                tail = "0" + tail;
             }
             System.out.print(prefix + "0x" + tail + delimiter);
- 
+
             if (((i+1)%perLine) == 0) {
                 System.out.println();
             }
@@ -59,7 +59,7 @@ public class ORAddressTest extends TestCase {
         System.out.println("ORAddress:");
         printAsHex(8, "", " ", ora.getEncoded());
         System.out.println("");
-        
+
         GeneralName gName = new GeneralName(ora);
         System.out.println("GeneralName:");
         printAsHex(8, "", " ", gName.getEncoded());
@@ -71,13 +71,9 @@ public class ORAddressTest extends TestCase {
         printAsHex(8, "", " ", gNames.getEncoded());
         System.out.println("");
     }
-    
+
     public static Test suite() {
         return new TestSuite(ORAddressTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

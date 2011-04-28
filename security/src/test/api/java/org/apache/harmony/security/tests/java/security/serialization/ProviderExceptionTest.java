@@ -27,8 +27,8 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 
 /**
- * Test for ProviderException serialization 
- *  
+ * Test for ProviderException serialization
+ *
  */
 
 public class ProviderExceptionTest extends SerializationTest {
@@ -48,7 +48,4 @@ public class ProviderExceptionTest extends SerializationTest {
                 new ProviderException(msgs[1], dExc) };
     }
 
-    public static void main(String[] args) {
-       junit.textui.TestRunner.run(ProviderExceptionTest.class);
-    }
 }

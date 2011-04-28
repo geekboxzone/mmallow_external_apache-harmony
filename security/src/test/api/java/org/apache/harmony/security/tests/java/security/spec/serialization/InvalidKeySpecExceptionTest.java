@@ -27,8 +27,8 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 
 /**
- * Test for InvalidKeySpecException serialization 
- *  
+ * Test for InvalidKeySpecException serialization
+ *
  */
 
 public class InvalidKeySpecExceptionTest extends SerializationTest {
@@ -48,7 +48,4 @@ public class InvalidKeySpecExceptionTest extends SerializationTest {
                 new InvalidKeySpecException(msgs[1], dExc) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(InvalidKeySpecExceptionTest.class);
-    }
 }

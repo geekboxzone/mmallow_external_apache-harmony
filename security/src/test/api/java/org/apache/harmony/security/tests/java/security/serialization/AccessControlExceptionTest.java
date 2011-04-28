@@ -31,15 +31,11 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Serialization tests for <code>AccessControlException</code>
- * 
+ *
  */
 
 public class AccessControlExceptionTest extends SerializationTest implements
         SerializationTest.SerializableAssert {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(AccessControlExceptionTest.class);
-    }
 
     protected Object[] getData() {
         AllPermission allperms = new AllPermission();
@@ -50,7 +46,7 @@ public class AccessControlExceptionTest extends SerializationTest implements
     }
 
     public void assertDeserialized(Serializable oref, Serializable otest) {
-        
+
         // common checks
         THROWABLE_COMPARATOR.assertDeserialized(oref, otest);
 

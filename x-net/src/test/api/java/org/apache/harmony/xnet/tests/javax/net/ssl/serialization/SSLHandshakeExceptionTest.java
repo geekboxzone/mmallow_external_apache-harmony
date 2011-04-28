@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for SSLHandshakeException seialization
- * 
+ *
  */
 
 public class SSLHandshakeExceptionTest extends SerializationTest {
@@ -43,7 +43,4 @@ public class SSLHandshakeExceptionTest extends SerializationTest {
                 new SSLHandshakeException(msgs[0]), new SSLHandshakeException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(SSLHandshakeExceptionTest.class);
-    }
 }

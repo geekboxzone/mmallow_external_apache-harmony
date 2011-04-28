@@ -357,8 +357,4 @@ public class SSLSocketFunctionalTest extends TestCase {
         return new TestSuite(SSLSocketFunctionalTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

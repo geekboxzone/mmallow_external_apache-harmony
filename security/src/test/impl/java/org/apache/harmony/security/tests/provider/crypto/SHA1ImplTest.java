@@ -84,11 +84,11 @@ public class SHA1ImplTest extends TestCase {
         for ( int k = 0; k < 5; k++ ) {
             int i = k*4;
 
-            int j = ((dgst[i  ]&0xff)<<24) | ((dgst[i+1]&0xff)<<16) | 
+            int j = ((dgst[i  ]&0xff)<<24) | ((dgst[i+1]&0xff)<<16) |
                     ((dgst[i+2]&0xff)<<8 ) | (dgst[i+3]&0xff)  ;
 
-            assertTrue("false1: k=" + k + " hash1[k]=" + Integer.toHexString(hash1[k]), 
-                       hash[k] == hash1[k] ); 
+            assertTrue("false1: k=" + k + " hash1[k]=" + Integer.toHexString(hash1[k]),
+                       hash[k] == hash1[k] );
 
             assertTrue("false2: k=" + k + " j=" + Integer.toHexString(j), hash[k] == j );
         }
@@ -113,7 +113,7 @@ public class SHA1ImplTest extends TestCase {
         for ( int k = 0; k < 5; k++ ) {
             int i = k*4;
 
-                int j = ((dgst[i  ]&0xff)<<24) | ((dgst[i+1]&0xff)<<16) | 
+                int j = ((dgst[i  ]&0xff)<<24) | ((dgst[i+1]&0xff)<<16) |
                         ((dgst[i+2]&0xff)<<8 ) | (dgst[i+3]&0xff)  ;
 
             assertTrue("false: k=" + k + " j=" + Integer.toHexString(j), hash[k] == j );
@@ -122,7 +122,7 @@ public class SHA1ImplTest extends TestCase {
 
 
     /*
-     * The test checks out that SHA1Impl returns correct values 
+     * The test checks out that SHA1Impl returns correct values
      * for four different cases of infilling internal buffer and computing intermediate hash.
      */
     public final void testLongMessage() {
@@ -150,10 +150,10 @@ public class SHA1ImplTest extends TestCase {
             for ( int k = 0; k < 5; k++ ) {
                 int i = k*4;
 
-                int j = ((dgst[i  ]&0xff)<<24) | ((dgst[i+1]&0xff)<<16) | 
+                int j = ((dgst[i  ]&0xff)<<24) | ((dgst[i+1]&0xff)<<16) |
                         ((dgst[i+2]&0xff)<<8 ) | (dgst[i+3]&0xff)  ;
 
-                assertTrue("false: n =" + n + "  k=" + k + " j" + Integer.toHexString(j), 
+                assertTrue("false: n =" + n + "  k=" + k + " j" + Integer.toHexString(j),
                             hash[k] == j );
             }
         }
@@ -166,7 +166,7 @@ public class SHA1ImplTest extends TestCase {
     private void alternateHash(int[] bufW, int[] hash) {
 
         // constants defined in Secure Hash Standard
-        final int[] K = { 
+        final int[] K = {
 
             0x5A827999, 0x5A827999, 0x5A827999, 0x5A827999,
             0x5A827999, 0x5A827999, 0x5A827999, 0x5A827999,
@@ -246,10 +246,6 @@ public class SHA1ImplTest extends TestCase {
 
     public static Test suite() {
         return new TestSuite(SHA1ImplTest.class);
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
     }
 
  }

@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Tests for DigestException serialization
- * 
+ *
  */
 
 public class DigestExceptionTest extends SerializationTest {
@@ -48,7 +48,4 @@ public class DigestExceptionTest extends SerializationTest {
                 new DigestException(msgs[1], dExc) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(DigestExceptionTest.class);
-    }
 }

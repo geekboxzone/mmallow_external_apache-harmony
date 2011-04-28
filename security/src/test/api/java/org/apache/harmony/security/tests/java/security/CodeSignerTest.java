@@ -30,18 +30,10 @@ import junit.framework.TestCase;
 
 
 /**
- * Unit test for CodeSigner. 
+ * Unit test for CodeSigner.
  */
 
 public class CodeSignerTest extends TestCase {
-
-    /**
-     * Entry point for standalone runs.
-     * @param args command line arguments
-     */
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(CodeSignerTest.class);
-    }
 
     private CertPath cpath = TestCertUtils.genCertPath(3, 0);
     private Date now = new Date();
@@ -71,11 +63,11 @@ public class CodeSignerTest extends TestCase {
      * Test various assertions about equals()
      */
     public final void testEqualsObject() {
-        
+
         CodeSigner one = new CodeSigner(cpath, ts);
         CodeSigner two = new CodeSigner(cpath, ts);
         CodeSigner three = new CodeSigner(cpath, null);
-        
+
         CertPath cpath2 = TestCertUtils.genCertPath(5, 3);
         CodeSigner four = new CodeSigner(cpath2, null);
 

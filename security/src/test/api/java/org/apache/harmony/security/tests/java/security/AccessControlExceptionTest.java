@@ -32,14 +32,6 @@ import junit.framework.TestCase;
 public class AccessControlExceptionTest extends TestCase {
 
     /**
-     * Entry point for standalone run.
-     * @param args command line arguments
-     */
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(AccessControlExceptionTest.class);
-    }
-
-    /**
      * Tests AccessControlException(String)
      */
     public void testAccessControlExceptionString() {
@@ -56,7 +48,7 @@ public class AccessControlExceptionTest extends TestCase {
     }
 
     /**
-     * 
+     *
      * Tests AccessControlException.getPermission()
      */
     public void testGetPermission() {

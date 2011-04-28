@@ -16,9 +16,6 @@
 
 package org.apache.harmony.nio.tests.java.nio.channels;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.nio.channels.SelectableChannel;
@@ -82,11 +79,11 @@ public class UnixSelectorTest extends TestCase {
         serverChannel.register(sel1, SelectionKey.OP_ACCEPT);
 
         // HUP is treating as acceptable
-        assertThat(sel0.select(100), is(1));
-        assertThat(sel0.selectedKeys().contains(mkey0), is(true));
+        assertEquals(1, sel0.select(100));
+        assertEquals(true, sel0.selectedKeys().contains(mkey0));
         server.initialize();
         // after bind can not accept
-        assertThat(sel1.select(100), is(0));
+        assertEquals(0, sel1.select(100));
         server.accept();
         Thread.sleep(1000);
         int port = server.getPort();
@@ -99,11 +96,11 @@ public class UnixSelectorTest extends TestCase {
             socketChannel.finishConnect();
         }
 
-        assertThat(socketChannel.isConnected(), is(true));
+        assertEquals(true, socketChannel.isConnected());
         server.close();
         Thread.sleep(3000);
-        assertThat(socketChannel.isConnected(), is(true));
-        assertThat(sel2.select(100), is(1));
+        assertEquals(true, socketChannel.isConnected());
+        assertEquals(1, sel2.select(100));
     }
 
     public void testSelectUnConnectedChannel() throws Exception {
@@ -112,22 +109,22 @@ public class UnixSelectorTest extends TestCase {
         Selector sel3 = Selector.open();
         SelectionKey mkey3 = socketChannel2.register(sel3, SelectionKey.OP_WRITE);
         // HUP is also treating as writable
-        assertThat(sel3.select(100), is(1));
-        assertThat(mkey3.isConnectable(), is(false));
+        assertEquals(1, sel3.select(100));
+        assertEquals(false, mkey3.isConnectable());
         // even the channel is not connected, the selector could be writable
-        assertThat(socketChannel2.isConnected(), is(false));
-        assertThat(mkey3.isWritable(), is(true));
+        assertEquals(false, socketChannel2.isConnected());
+        assertEquals(true, mkey3.isWritable());
 
         Selector sel4 = Selector.open();
         SelectionKey mkey4 = socketChannel2.register(sel4, SelectionKey.OP_CONNECT);
-        assertThat(sel4.select(100), is(1));
-        assertThat(mkey4.isWritable(), is(false));
-        assertThat(mkey4.isConnectable(), is(true));
+        assertEquals(1, sel4.select(100));
+        assertEquals(false, mkey4.isWritable());
+        assertEquals(true, mkey4.isConnectable());
 
         Selector sel5 = Selector.open();
         SelectionKey mkey5 = socketChannel2.register(sel5, SelectionKey.OP_CONNECT | SelectionKey.OP_WRITE);
-        assertThat(sel5.select(100), is(1));
-        assertThat(mkey5.isWritable(), is(true));
-        assertThat(mkey5.isConnectable(), is(true));
+        assertEquals(1, sel5.select(100));
+        assertEquals(true, mkey5.isWritable());
+        assertEquals(true, mkey5.isConnectable());
     }
 }

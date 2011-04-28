@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for UnrecoverableKeyException serialization
- * 
+ *
  */
 
 public class UnrecoverableKeyExceptionTest extends SerializationTest {
@@ -43,7 +43,4 @@ public class UnrecoverableKeyExceptionTest extends SerializationTest {
                 new UnrecoverableKeyException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(UnrecoverableKeyExceptionTest.class);
-    }
 }

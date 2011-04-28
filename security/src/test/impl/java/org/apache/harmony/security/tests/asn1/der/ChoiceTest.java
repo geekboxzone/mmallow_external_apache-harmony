@@ -45,15 +45,11 @@ import org.apache.harmony.security.asn1.DerOutputStream;
 
 /**
  * ASN.1 DER test for Choice type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 
 public class ChoiceTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(ChoiceTest.class);
-    }
 
     private static ASN1SequenceOf sequence = new ASN1SequenceOf(ASN1Boolean
             .getInstance());
@@ -89,7 +85,7 @@ public class ChoiceTest extends TestCase {
     //
 
     private static Object[][] testcases = {
-            // format: object to encode / byte array 
+            // format: object to encode / byte array
 
             // choice = Boolean (false)
             { Boolean.FALSE, new byte[] { 0x01, 0x01, 0x00 } },
@@ -100,7 +96,7 @@ public class ChoiceTest extends TestCase {
             // choice = SequenceOf (empty)
             { new ArrayList(), new byte[] { 0x30, 0x00 } },
 
-    //TODO add testcase for another ASN.1 type` 
+    //TODO add testcase for another ASN.1 type`
 
     };
 
@@ -164,10 +160,10 @@ public class ChoiceTest extends TestCase {
         assertTrue("Second: ", Arrays.equals(new byte[] { 0x09 },
                 (byte[]) values.get(1)));
     }
-    
+
     //
     //
-    // 
+    //
     //
     //
 
@@ -195,7 +191,7 @@ public class ChoiceTest extends TestCase {
 
         assertEquals("True: ", Boolean.TRUE, explicit.decode(encoded));
     }
-    
+
     /**
      * TODO Put method description here
      */

@@ -27,8 +27,8 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 
 /**
- * Test for InvalidParameterSpecException serialization 
- *  
+ * Test for InvalidParameterSpecException serialization
+ *
  */
 
 public class InvalidParameterSpecExceptionTest extends SerializationTest {
@@ -38,12 +38,9 @@ public class InvalidParameterSpecExceptionTest extends SerializationTest {
             "Long message for Exception. Long message for Exception. Long message for Exception." };
 
     protected Object[] getData() {
-       return new Object[] { new InvalidParameterSpecException(), 
+       return new Object[] { new InvalidParameterSpecException(),
                new InvalidParameterSpecException(null),
                 new InvalidParameterSpecException(msgs[1])};
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(InvalidParameterSpecExceptionTest.class);
-    }
 }

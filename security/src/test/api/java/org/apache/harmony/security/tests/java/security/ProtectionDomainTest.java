@@ -30,18 +30,10 @@ import junit.framework.TestCase;
 
 /**
  * Unit tests for java.security.ProtectionDomain.
- * 
+ *
  */
 
 public class ProtectionDomainTest extends TestCase {
-
-    /**
-     * Entry point for standalone runs.
-     * @param args command line arguments
-     */
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(ProtectionDomainTest.class);
-    }
 
     private final AllPermission allperm = new AllPermission();
 
@@ -168,12 +160,12 @@ public class ProtectionDomainTest extends TestCase {
     }
 
     /**
-     * ProtectionDomain created with a static set of permissions must not query 
-     * policy. 
+     * ProtectionDomain created with a static set of permissions must not query
+     * policy.
      */
     public void testImplies_02() {
         TestPolicy policy = new TestPolicy();
-        // null set of permissions [must] force the PD to use Policy - for 
+        // null set of permissions [must] force the PD to use Policy - for
         // dynamic permissions
         ProtectionDomain pd = new ProtectionDomain(cs, null);
         policy.setTrackPD(pd);
@@ -187,8 +179,8 @@ public class ProtectionDomainTest extends TestCase {
     }
 
     /**
-     * ProtectionDomain created with dynamic set of permissions must query 
-     * policy. 
+     * ProtectionDomain created with dynamic set of permissions must query
+     * policy.
      */
     public void testImplies_03() {
         TestPolicy policy = new TestPolicy();

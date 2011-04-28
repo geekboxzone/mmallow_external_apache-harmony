@@ -75,7 +75,7 @@ public class X509CRLSelectorTest extends TestCase {
             this.thisUpdate = thisUpdate;
             this.nextUpdate = nextUpdate;
         }
-        
+
         public void setCrlNumber(BigInteger crlNumber) {
             this.crlNumber = crlNumber;
         }
@@ -350,7 +350,7 @@ public class X509CRLSelectorTest extends TestCase {
      * setMinCRLNumber(BigInteger minCRL) method testing.
      * Tests if CRLs with any crl number value match the selector in the case of
      * null crlNumber criteria, if specified minCRL value matches the selector,
-     * and if CRL with inappropriate crlNumber value does not match the selector. 
+     * and if CRL with inappropriate crlNumber value does not match the selector.
      */
     public void testSetMinCRLNumber() {
         X509CRLSelector selector = new X509CRLSelector();
@@ -372,7 +372,7 @@ public class X509CRLSelectorTest extends TestCase {
      * setMaxCRLNumber(BigInteger maxCRL) method testing.
      * Tests if CRLs with any crl number value match the selector in the case of
      * null crlNumber criteria, if specified maxCRL value matches the selector,
-     * and if CRL with inappropriate crlNumber value does not match the selector. 
+     * and if CRL with inappropriate crlNumber value does not match the selector.
      */
     public void testSetMaxCRLNumber() {
         X509CRLSelector selector = new X509CRLSelector();
@@ -393,7 +393,7 @@ public class X509CRLSelectorTest extends TestCase {
     /**
      * setDateAndTime(Date dateAndTime) method testing.
      * Tests if CRLs with any update dates match the selector in the case of
-     * null dateAndTime criteria, if correct dates match and incorrect 
+     * null dateAndTime criteria, if correct dates match and incorrect
      * do not match the selector.
      */
     public void testSetDateAndTime() {
@@ -440,7 +440,7 @@ public class X509CRLSelectorTest extends TestCase {
         selector.addIssuerName(iss_name_2);
         selector.addIssuer(iss2);
         selector.addIssuerName(iss_name_3);
-            
+
         Collection result = selector.getIssuers();
         assertEquals("Size does not correspond to expected",
                 5, result.size());
@@ -493,7 +493,7 @@ public class X509CRLSelectorTest extends TestCase {
 
     /**
      * getMinCRL() method testing.
-     * Tests if the method return null in the case of not specified minCRL 
+     * Tests if the method return null in the case of not specified minCRL
      * criteria, and if the returned value corresponds to the specified one.
      */
     public void testGetMinCRL() {
@@ -508,7 +508,7 @@ public class X509CRLSelectorTest extends TestCase {
 
     /**
      * getMaxCRL() method testing.
-     * Tests if the method return null in the case of not specified maxCRL 
+     * Tests if the method return null in the case of not specified maxCRL
      * criteria, and if the returned value corresponds to the specified one.
      */
     public void testGetMaxCRL() {
@@ -523,7 +523,7 @@ public class X509CRLSelectorTest extends TestCase {
 
     /**
      * getDateAndTime() method testing.
-     * Tests if the method return null in the case of not specified dateAndTime 
+     * Tests if the method return null in the case of not specified dateAndTime
      * criteria, and if the returned value corresponds to the specified one.
      */
     public void testGetDateAndTime() {
@@ -542,7 +542,7 @@ public class X509CRLSelectorTest extends TestCase {
      */
     public void testMatch() {
         X509CRLSelector selector = new X509CRLSelector();
-        assertFalse("The null object should not match", 
+        assertFalse("The null object should not match",
                                         selector.match((X509CRL) null));
     }
 
@@ -576,7 +576,7 @@ public class X509CRLSelectorTest extends TestCase {
 
         clone.addIssuer(iss3);
         assertFalse("The changes of the clone selector should not cause "
-                    + "the changes of initial object", 
+                    + "the changes of initial object",
                                     selector.getIssuerNames().size() == 3);
     }
 
@@ -601,8 +601,4 @@ public class X509CRLSelectorTest extends TestCase {
         return new TestSuite(X509CRLSelectorTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

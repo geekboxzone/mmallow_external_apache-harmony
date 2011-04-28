@@ -29,7 +29,7 @@ import junit.framework.TestSuite;
 /**
  * Test class for java.beans.beancontext.BeanContextServicesSupport.
  * <p>
- * 
+ *
  * @author Sergey A. Krivenko
  */
 
@@ -48,7 +48,7 @@ public class BeanContextServicesSupportTest extends TestCase {
     /**
      * Constructs this test case with the given name.
      * <p>
-     * 
+     *
      * @param name -
      *            The name for this test case.
      *            <p>
@@ -63,7 +63,7 @@ public class BeanContextServicesSupportTest extends TestCase {
      * Test constructor with BeanContextServices, Locale, boolean, boolean
      * parameters.
      * <p>
-     * 
+     *
      * @see BeanContextServicesSupport#BeanContextServicesSupport(
      *      BeanContextServices, Locale, boolean, boolean)
      */
@@ -73,7 +73,7 @@ public class BeanContextServicesSupportTest extends TestCase {
 
     /**
      * Test constructor with BeanContextServices, Locale, boolean parameters
-     * 
+     *
      * @see BeanContextServicesSupport#BeanContextServicesSupport(
      *      BeanContextServices, Locale, boolean)
      */
@@ -84,7 +84,7 @@ public class BeanContextServicesSupportTest extends TestCase {
     /**
      * Test constructor with BeanContextServices, Locale parameters.
      * <p>
-     * 
+     *
      * @see BeanContextServicesSupport#BeanContextServicesSupport(
      *      BeanContextServices, Locale)
      */
@@ -95,7 +95,7 @@ public class BeanContextServicesSupportTest extends TestCase {
     /**
      * Test constructor with BeanContextServices parameter.
      * <p>
-     * 
+     *
      * @see BeanContextServicesSupport#BeanContextServicesSupport(
      *      BeanContextServices)
      */
@@ -106,7 +106,7 @@ public class BeanContextServicesSupportTest extends TestCase {
     /**
      * * Test constructor with no parameters.
      * <p>
-     * 
+     *
      * @see BeanContextServicesSupport#BeanContextServicesSupport()
      */
     public void testConstructor() {
@@ -279,7 +279,7 @@ public class BeanContextServicesSupportTest extends TestCase {
     private BeanContextServiceProvider getProvider() {
 
         return new BeanContextServiceProvider() {
-            
+
             public java.util.Iterator getCurrentServiceSelectors(
                     BeanContextServices bcs, Class serviceClass) {
 
@@ -306,17 +306,5 @@ public class BeanContextServicesSupportTest extends TestCase {
      */
     public static Test suite() {
         return new TestSuite(BeanContextServicesSupportTest.class);
-    }
-
-    /**
-     * Start testing from the command line.
-     * <p>
-     * 
-     * @param args -
-     *            Command line parameters.
-     *            <p>
-     */
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(suite());
     }
 }

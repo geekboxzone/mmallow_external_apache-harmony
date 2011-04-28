@@ -25,17 +25,10 @@ import junit.framework.TestCase;
 
 /**
  * Unit test for java.security.PrivilegedActionException.
- * 
+ *
  */
 
 public class PrivilegedActionExceptionTest extends TestCase {
-    /**
-     * Entry point for standalone runs.
-     * @param args command line arguments
-     */
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(PrivilegedActionExceptionTest.class);
-    }
 
     /**
      * Tests PrivilegedActionException(Exception)

@@ -46,7 +46,7 @@ public class BeanContextSupportTest extends TestCase {
     /**
      * Constructs this test case with the given name.
      * <p>
-     * 
+     *
      * @param name -
      *            The name for this test case.
      *            <p>
@@ -60,7 +60,7 @@ public class BeanContextSupportTest extends TestCase {
     /**
      * * Test constructor with BeanContext, Locale, boolean, boolean parameters.
      * <p>
-     * 
+     *
      * @see BeanContextSupport#BeanContextSupport(BeanContext, Locale, boolean,
      *      boolean)
      */
@@ -71,7 +71,7 @@ public class BeanContextSupportTest extends TestCase {
     /**
      * * Test constructor with BeanContext, Locale, boolean parameters.
      * <p>
-     * 
+     *
      * @see BeanContextSupport#BeanContextSupport(BeanContext, Locale, boolean)
      */
     public void testConstructorBeanContextLocaleboolean() {
@@ -81,7 +81,7 @@ public class BeanContextSupportTest extends TestCase {
     /**
      * * Test constructor with BeanContext, Locale parameters.
      * <p>
-     * 
+     *
      * @see BeanContextSupport#BeanContextSupport(BeanContext, Locale)
      */
     public void testConstructorBeanContextLocale() {
@@ -91,7 +91,7 @@ public class BeanContextSupportTest extends TestCase {
     /**
      * * Test constructor with BeanContext parameter.
      * <p>
-     * 
+     *
      * @see BeanContextSupport#BeanContextSupport(BeanContext)
      */
     public void testConstructorBeanContext() {
@@ -101,7 +101,7 @@ public class BeanContextSupportTest extends TestCase {
     /**
      * * Test constructor with no parameters.
      * <p>
-     * 
+     *
      * @see BeanContextSupport#BeanContextSupport()
      */
     public void testConstructor() {
@@ -205,11 +205,11 @@ public class BeanContextSupportTest extends TestCase {
          * BeanContextChildSupport(); Object obj = new Object(); sup.add(ch);
          * sup.add(obj); // Create collection with BCS children that just were
          * added java.util.Collection col = new java.util.ArrayList();
-         * 
+         *
          * for (java.util.Iterator it = sup.bcsChildren(); it.hasNext(); ) {
          * col.add(it.next()); } // Two collections have the same elements if
          * (!sup.containsAll(col)) { fail("True should be returned"); }
-         * 
+         *
          * sup.remove(obj); // Now they are different if (sup.containsAll(col)) {
          * fail("False should be returned"); }
          */
@@ -441,7 +441,7 @@ public class BeanContextSupportTest extends TestCase {
          * // Create BeanContext instance BeanContextSupport sup = new
          * BeanContextSupport(); // Add a child and then clear sup.add(new
          * Object()); sup.clear();
-         * 
+         *
          * if (!sup.isEmpty()) { fail("The collection of children should be
          * empty"); }
          */
@@ -495,7 +495,7 @@ public class BeanContextSupportTest extends TestCase {
     /**
      * Test method vetoableChange() with PropertyChangeEvent=null parameter.
      * <p>
-     * 
+     *
      * @throws Exception
      */
     public void test_vetoableChangeLjava_beans_PropertyChangeEvent()
@@ -562,15 +562,4 @@ public class BeanContextSupportTest extends TestCase {
         return new TestSuite(BeanContextSupportTest.class);
     }
 
-    /**
-     * Start testing from the command line.
-     * <p>
-     * 
-     * @param args -
-     *            Command line parameters.
-     *            <p>
-     */
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(suite());
-    }
 }

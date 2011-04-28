@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -54,11 +54,7 @@ public class BeanContextEventTest extends TestCase {
             assertSame(bc, getBeanContext());
             assertNull(this.propagatedFrom);
         }
-        
-    }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(BeanContextEventTest.class);
     }
 
     public void testBeanContextEvent_NullParam() {
@@ -132,7 +128,7 @@ public class BeanContextEventTest extends TestCase {
         event.setPropagatedFrom(null);
         assertNull(event.getPropagatedFrom());
     }
-    
+
     public void testSerialization() throws Exception {
         final BeanContextServicesSupport ctx = new BeanContextServicesSupport(
                 null, Locale.FRANCE, false, false);
@@ -151,7 +147,7 @@ public class BeanContextEventTest extends TestCase {
             }
         });
     }
-    
+
     public static void assertEqualsSerially(BeanContextServicesSupport orig,
             BeanContextServicesSupport ser) {
 
@@ -197,14 +193,14 @@ public class BeanContextEventTest extends TestCase {
             }
         }
         assertEquals(count, serServices.size());
-    }    
+    }
 
     public void testSerializationComptibility() throws Exception {
         final BeanContextServicesSupport ctx = new BeanContextServicesSupport(
                 null, Locale.ITALY, true, true);
         final BeanContextServicesSupport ctx2 = new BeanContextServicesSupport(
                 null, Locale.CHINA, true, true);
-        
+
         BeanContextEvent event = new MockBeanContextEvent(ctx);
         event.setPropagatedFrom(ctx2);
         SerializationTest.verifyGolden(this, event, new SerializableAssert(){

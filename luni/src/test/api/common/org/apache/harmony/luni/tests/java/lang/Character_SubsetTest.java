@@ -46,7 +46,4 @@ public class Character_SubsetTest extends TestCase {
         assertSame(name, subset.toString());
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(Character_SubsetTest.class);
-    }
 }

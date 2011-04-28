@@ -47,10 +47,6 @@ public class PolicyTest extends TestCase {
 
     public static final String JAVA_SECURITY_POLICY = "java.security.policy";
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(PolicyTest.class);
-    }
-
     /**
      * @tests java.security.Policy#setPolicy(java.security.Policy)
      */
@@ -117,8 +113,8 @@ public class PolicyTest extends TestCase {
         public void refresh() {
         }
     }
-    
-    /** 
+
+    /**
      * Tests that getPermissions() does proper permission evaluation.
      */
     public void testGetPermissions() {
@@ -130,18 +126,18 @@ public class PolicyTest extends TestCase {
         ProtectionDomain pd2 = new ProtectionDomain(null, spc);
         TestProvider policy = new TestProvider();
         policy.pc = sp.newPermissionCollection();
-                 
+
         //case1: empty policy, no static permissions in PD
         PermissionCollection pc4pd = policy.getPermissions(pd);
         assertNotNull(pc4pd);
         Enumeration en = pc4pd.elements();
         assertFalse(en.hasMoreElements());
-        
+
         //case2: empty policy, some static permissions in PD
         pc4pd = policy.getPermissions(pd2);
         assertNotNull(pc4pd);
         //no check for static permissions
-        
+
         //case3: non-empty policy, no static permissions in PD
         policy.pc.add(sp);
         pc4pd = policy.getPermissions(pd);
@@ -151,7 +147,7 @@ public class PolicyTest extends TestCase {
         }
 
         assertTrue(c.contains(sp));
-        
+
         //case4: non-empty policy, some static permissions in PD
         pc4pd = policy.getPermissions(pd2);
         assertNotNull(pc4pd);
@@ -162,7 +158,7 @@ public class PolicyTest extends TestCase {
         assertTrue(c.contains(sp));
         //no check for static permissions
     }
-    
+
     /**
      * @tests java.security.Policy#getPolicy()
      * @tests java.security.Policy#setPolicy()
@@ -187,9 +183,9 @@ public class PolicyTest extends TestCase {
             Policy.setPolicy(oldPolicy);
         }
     }
-    
+
     /**
-     * Test property expansion in policy files 
+     * Test property expansion in policy files
      */
     public void testPropertyExpansion() throws Exception {
 
@@ -225,7 +221,7 @@ public class PolicyTest extends TestCase {
 
     /**
      * Asserts codeBase property expansion in policy file
-     * 
+     *
      * @param codeSourceURL -
      *            code source for policy object
      * @param codeBaseURL -

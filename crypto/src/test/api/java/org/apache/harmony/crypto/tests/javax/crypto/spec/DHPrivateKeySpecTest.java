@@ -63,8 +63,4 @@ public class DHPrivateKeySpecTest extends TestCase {
         return new TestSuite(DHPrivateKeySpecTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

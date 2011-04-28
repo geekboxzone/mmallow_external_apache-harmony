@@ -31,14 +31,10 @@ import org.apache.harmony.security.tests.support.TestCertUtils;
 
 /**
  * Serialization tests for <code>Timestamp</code>
- * 
+ *
  */
 
 public class TimestampTest extends SerializationTest {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(TimestampTest.class);
-    }
 
     /**
      * @see com.intel.drl.test.SerializationTest#getData()

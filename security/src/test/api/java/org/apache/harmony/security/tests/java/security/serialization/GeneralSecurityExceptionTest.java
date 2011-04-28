@@ -27,8 +27,8 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 
 /**
- * Test for GeneralSecurityException serialization 
- *  
+ * Test for GeneralSecurityException serialization
+ *
  */
 
 public class GeneralSecurityExceptionTest extends SerializationTest {
@@ -48,7 +48,4 @@ public class GeneralSecurityExceptionTest extends SerializationTest {
                 new GeneralSecurityException(msgs[1], dExc) };
     }
 
-    public static void main(String[] args) {
-       junit.textui.TestRunner.run(GeneralSecurityExceptionTest.class);
-    }
 }

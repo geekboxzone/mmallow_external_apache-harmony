@@ -821,7 +821,7 @@ public class HttpsURLConnectionTest extends TestCase {
      * Returns the file name of the key/trust store. The key store file (named
      * as "key_store." + extension equals to the default KeyStore type installed
      * in the system in lower case) is searched in classpath.
-     * 
+     *
      * @throws AssertionFailedError
      *             if property was not set or file does not exist.
      */
@@ -984,7 +984,7 @@ public class HttpsURLConnectionTest extends TestCase {
     /**
      * Performs interaction between client's HttpURLConnection and servers side
      * (ServerSocket). Server will response with specified response code.
-     * 
+     *
      * @param doAuthentication
      *            specifies if the server needs client authentication.
      */
@@ -1177,7 +1177,7 @@ public class HttpsURLConnectionTest extends TestCase {
 
         /**
          * Creates the thread acting as a server side.
-         * 
+         *
          * @param serverSocket
          *            the server socket to be used during connection
          * @param responseCode
@@ -1395,7 +1395,7 @@ public class HttpsURLConnectionTest extends TestCase {
 
         /**
          * Creates the thread acting as a client side.
-         * 
+         *
          * @param connection
          *            connection to be used to contact the server side
          */
@@ -1452,7 +1452,4 @@ public class HttpsURLConnectionTest extends TestCase {
         return new TestSuite(HttpsURLConnectionTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }

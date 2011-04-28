@@ -25,14 +25,10 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>BasicPermission</code>
- * 
+ *
  */
 
 public class BasicPermissionTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(BasicPermissionTest.class);
-    }
 
     /**
      * Constructor for BasicPermissionTest.
@@ -43,9 +39,9 @@ public class BasicPermissionTest extends TestCase {
     }
 
     /**
-     * Check all constructors: an object is created with the specified valid name. 
-     * If name equal null then NPE should be thrown. 
-     * If  name is empty then IAE should be thrown. 
+     * Check all constructors: an object is created with the specified valid name.
+     * If name equal null then NPE should be thrown.
+     * If  name is empty then IAE should be thrown.
      * Action is ignored.
      */
     public void testCtor()
@@ -62,13 +58,13 @@ public class BasicPermissionTest extends TestCase {
             fail("NPE is not thrown");
         }
         catch (NullPointerException ok){}
-        
+
         try{
             new BasicPermission(null, "ds235"){};
             fail("NPE is not thrown");
         }
         catch (NullPointerException ok){}
-        
+
         try{
             new BasicPermission(""){};
             fail("IAE is not thrown");
@@ -80,7 +76,7 @@ public class BasicPermissionTest extends TestCase {
         }
         catch (IllegalArgumentException ok){}
     }
-    
+
     private final class BasicPermissionImpl extends BasicPermission
     {
         public BasicPermissionImpl(String name)
@@ -88,16 +84,16 @@ public class BasicPermissionTest extends TestCase {
             super(name);
         }
     }
-    
+
     /**
-     * two BasicPermissions are equal if name and class are equal; 
+     * two BasicPermissions are equal if name and class are equal;
      * equal permissions should have the same hash code
      */
     public void testEquals()
     {
         BasicPermission b1 = new BasicPermissionImpl("abc");
         BasicPermission b2 = null;
-        assertTrue(b1.equals(b1)); 
+        assertTrue(b1.equals(b1));
         assertFalse(b1.equals(null));
         assertFalse(b1.equals(new Object()));
         assertFalse(b1.equals("abc"));
@@ -107,8 +103,8 @@ public class BasicPermissionTest extends TestCase {
         assertFalse(b1.equals(new BasicPermissionImpl("abc.*")));
     }
 
-    /** 
-     * implies() should return true if a permission is equal to or is implied 
+    /**
+     * implies() should return true if a permission is equal to or is implied
      * by wildcarded permission, false otherwise.
      */
     public void testImplies()
@@ -126,7 +122,7 @@ public class BasicPermissionTest extends TestCase {
         assertTrue(new BasicPermissionImpl("1.*").implies(new BasicPermissionImpl("1.234.*")));
         assertTrue(new BasicPermissionImpl("*").implies(new BasicPermissionImpl("*")));
     }
-    
+
     /**
      * newPermissionCollection() should return new BasicPermissionCollection on every invocation
      */

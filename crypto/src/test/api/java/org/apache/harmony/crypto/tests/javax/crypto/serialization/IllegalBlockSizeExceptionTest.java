@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for IllegalBlockSizeException serialization
- * 
+ *
  */
 
 public class IllegalBlockSizeExceptionTest extends SerializationTest {
@@ -42,7 +42,4 @@ public class IllegalBlockSizeExceptionTest extends SerializationTest {
                 new IllegalBlockSizeException(null), new IllegalBlockSizeException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(IllegalBlockSizeExceptionTest.class);
-    }
 }

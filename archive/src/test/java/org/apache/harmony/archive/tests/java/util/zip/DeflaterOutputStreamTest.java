@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -85,7 +85,7 @@ public class DeflaterOutputStreamTest extends TestCase {
      */
     public void test_ConstructorLjava_io_OutputStreamLjava_util_zip_Deflater() throws Exception {
         byte byteArray[] = { 1, 3, 4, 7, 8 };
-        File f1 = new File("hyts_Constru(OD).tst");
+        File f1 = new File("hyts_ConstruOD.tst");
         FileOutputStream fos = new FileOutputStream(f1);
         Deflater defl = null;
         MyDeflaterOutputStream dos;
@@ -111,7 +111,7 @@ public class DeflaterOutputStreamTest extends TestCase {
      * @tests java.util.zip.DeflaterOutputStream#DeflaterOutputStream(java.io.OutputStream)
      */
     public void test_ConstructorLjava_io_OutputStream() throws Exception {
-        File f1 = new File("hyts_Constru(O).tst");
+        File f1 = new File("hyts_ConstruO.tst");
         FileOutputStream fos = new FileOutputStream(f1);
         MyDeflaterOutputStream dos = new MyDeflaterOutputStream(fos);
 
@@ -134,7 +134,7 @@ public class DeflaterOutputStreamTest extends TestCase {
         int negBuf = -5;
         int zeroBuf = 0;
         byte byteArray[] = { 1, 3, 4, 7, 8, 3, 6 };
-        File f1 = new File("hyts_Constru(ODI).tst");
+        File f1 = new File("hyts_ConstruODI.tst");
         FileOutputStream fos = new FileOutputStream(f1);
         Deflater defl = null;
         MyDeflaterOutputStream dos;

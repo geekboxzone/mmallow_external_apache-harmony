@@ -25,13 +25,9 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>AllPermission</code>
- * 
+ *
  */
 public class AllPermissionTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(AllPermissionTest.class);
-    }
 
     /**
      * Constructor for AllPermissionsTest.
@@ -40,7 +36,7 @@ public class AllPermissionTest extends TestCase {
     public AllPermissionTest(String arg0) {
         super(arg0);
     }
-    
+
     /**
      * Test all constructors: an object is created, name and actions are ignored
      */
@@ -49,11 +45,11 @@ public class AllPermissionTest extends TestCase {
         AllPermission a1 = new AllPermission();
         assertEquals("<all permissions>", a1.getName());
         assertEquals("<all actions>", a1.getActions());
-        
+
         a1 = new AllPermission("sdfsdfwe&^$", "*&IUGJKHVB764");
         assertEquals("<all permissions>", a1.getName());
         assertEquals("<all actions>", a1.getActions());
-        
+
         a1 = new AllPermission(null, "");
         assertEquals("<all permissions>", a1.getName());
         assertEquals("<all actions>", a1.getActions());
@@ -69,7 +65,7 @@ public class AllPermissionTest extends TestCase {
         assertFalse(a1.equals(null));
         assertFalse(a1.equals(new BasicPermission("hgf"){}));
     }
-    
+
     /** AllPermission implies any other permission */
     public void testImplies()
     {
@@ -78,7 +74,7 @@ public class AllPermissionTest extends TestCase {
         assertTrue(a1.implies(new BasicPermission("2323"){}));
         assertTrue(a1.implies(new UnresolvedPermission("2323", "", "", null)));
     }
-    
+
     /** newPermissionCollection() returns a new AllPermissionCollection on every invocation. */
     public void testCollection()
     {

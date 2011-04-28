@@ -71,7 +71,7 @@ public class CertificateListTest extends TestCase {
     private static Extension crlEntryExtension;
     static {
         // Invalidity Date Extension (rfc 3280)
-        crlEntryExtension = new Extension("2.5.29.24", 
+        crlEntryExtension = new Extension("2.5.29.24",
                     ASN1GeneralizedTime.getInstance().encode(new Date()));
     }
     private static Extensions crlEntryExtensions = new Extensions();
@@ -86,7 +86,7 @@ public class CertificateListTest extends TestCase {
         // RECOMMENDS that implementations recognize this extension."
         try {
             crlEntryExtensions.addExtension(
-                    new Extension("2.5.29.29", true, 
+                    new Extension("2.5.29.29", true,
                         //*
                         //ASN1OctetString.getInstance().encode(
                             GeneralNames.ASN1.encode(
@@ -108,11 +108,11 @@ public class CertificateListTest extends TestCase {
     private static Date revocationDate = new Date();
     private static List revokedCertificates = Arrays.asList(
             new TBSCertList.RevokedCertificate[] {
-                new TBSCertList.RevokedCertificate(BigInteger.valueOf(555), 
+                new TBSCertList.RevokedCertificate(BigInteger.valueOf(555),
                     revocationDate, null),//crlEntryExtensions),
-                new TBSCertList.RevokedCertificate(BigInteger.valueOf(666), 
+                new TBSCertList.RevokedCertificate(BigInteger.valueOf(666),
                     revocationDate, crlEntryExtensions),
-                new TBSCertList.RevokedCertificate(BigInteger.valueOf(777), 
+                new TBSCertList.RevokedCertificate(BigInteger.valueOf(777),
                     revocationDate, null),//crlEntryExtensions)
             });
     private static Extensions crlExtensions = new Extensions(
@@ -123,18 +123,18 @@ public class CertificateListTest extends TestCase {
         }));
 
     private CertificateList certificateList;
-    private TBSCertList tbscertlist; 
+    private TBSCertList tbscertlist;
     private byte[] encoding;
-    
+
     protected void setUp() throws java.lang.Exception {
         try {
             Name issuer = new Name(issuerName);
 
-            tbscertlist = 
-                new TBSCertList(2, signature, issuer, thisUpdate, 
+            tbscertlist =
+                new TBSCertList(2, signature, issuer, thisUpdate,
                     nextUpdate, revokedCertificates, crlExtensions);
-            
-            certificateList = 
+
+            certificateList =
                 new CertificateList(tbscertlist, signature, signatureValue);
 
             encoding = CertificateList.ASN1.encode(certificateList);
@@ -147,28 +147,28 @@ public class CertificateListTest extends TestCase {
             fail("Unexpected IOException was thrown: "+e.getMessage());
         }
     }
-    
-    
+
+
     /**
      * CertificateList(TBSCertList tbsCertList, AlgorithmIdentifier
      * signatureAlgorithm, byte[] signatureValue) method testing.
      */
     public void testCertificateList() {
         try {
-            AlgorithmIdentifier signature = 
+            AlgorithmIdentifier signature =
                 new AlgorithmIdentifier(algOID, algParams);
             Name issuer = new Name(issuerName);
-            TBSCertList tbscl = 
+            TBSCertList tbscl =
                 new TBSCertList(signature, issuer, thisUpdate);
-            CertificateList cl = 
+            CertificateList cl =
                 new CertificateList(tbscl, signature, new byte[] {0});
-            
+
             byte[] encoding = CertificateList.ASN1.encode(cl);
             CertificateList.ASN1.decode(encoding);
 
-            tbscl = new TBSCertList(2, signature, issuer, thisUpdate, 
+            tbscl = new TBSCertList(2, signature, issuer, thisUpdate,
                     nextUpdate, revokedCertificates, crlExtensions);
-            
+
             cl = new CertificateList(tbscl, signature, new byte[] {0});
 
             encoding = CertificateList.ASN1.encode(cl);
@@ -179,7 +179,7 @@ public class CertificateListTest extends TestCase {
             fail("Unexpected IOException was thrown: "+e.getMessage());
         }
     }
-    
+
     /**
      * getTbsCertList() method testing.
      */
@@ -187,7 +187,7 @@ public class CertificateListTest extends TestCase {
         assertTrue("Returned tbsCertList value is incorrect",
                 tbscertlist.equals(certificateList.getTbsCertList()));
     }
-    
+
     /**
      * getSignatureAlgorithm() method testing.
      */
@@ -195,7 +195,7 @@ public class CertificateListTest extends TestCase {
         assertTrue("Returned signatureAlgorithm value is incorrect",
                 signature.equals(certificateList.getSignatureAlgorithm()));
     }
-    
+
     /**
      * getSignatureValue() method testing.
      */
@@ -210,7 +210,7 @@ public class CertificateListTest extends TestCase {
                     new ByteArrayInputStream(encoding));
         Set rcerts = crl.getRevokedCertificates();
         System.out.println(">> rcerts:"+rcerts);
- 
+
         System.out.println("}>> "+ rcerts.toArray()[0]);
         System.out.println("}>> "+((X509CRLEntry) rcerts.toArray()[0]).getCertificateIssuer());
         System.out.println("}>> "+((X509CRLEntry) rcerts.toArray()[1]).getCertificateIssuer());
@@ -218,13 +218,9 @@ public class CertificateListTest extends TestCase {
         System.out.println(">> "+crl.getRevokedCertificate(
                     BigInteger.valueOf(555)).getCertificateIssuer());
     }
-    
+
     public static Test suite() {
         return new TestSuite(CertificateListTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

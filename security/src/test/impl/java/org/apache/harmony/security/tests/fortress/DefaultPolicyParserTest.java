@@ -38,18 +38,14 @@ import junit.framework.TestCase;
 
 /**
  * Tests for DefaultPolicyParser
- * 
+ *
  */
 
 public class DefaultPolicyParserTest extends TestCase {
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(DefaultPolicyParserTest.class);
-    }
-
     /**
      * Tests parsing of a sample policy from temporary file, validates returned
-     * PolicyEntries. 
+     * PolicyEntries.
      */
     public void testParse() throws Exception {
         File tmp = File.createTempFile("policy", null);

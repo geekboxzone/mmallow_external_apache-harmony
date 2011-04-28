@@ -34,15 +34,11 @@ import junit.framework.TestCase;
 
 /**
  * ASN.1 DER test for OID type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 
 public class OidTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(OidTest.class);
-    }
 
     private static Object[][] oid = {
             //oid array format: string / int array / DER encoding
@@ -95,7 +91,7 @@ public class OidTest extends TestCase {
             { "2.5.4.3",// as string
                     new int[] { 2, 5, 4, 3 }, // as int array
                     new byte[] { 0x06, 0x03, 0x55, 0x04, 0x03 } },
-            // 
+            //
             { "2.39.3", // as string
                     new int[] { 2, 39, 3 }, // as int array
                     new byte[] { 0x06, 0x02, 0x77, 0x03 } },
@@ -135,7 +131,7 @@ public class OidTest extends TestCase {
                     Arrays.equals((int[]) oid[i][1], // expected array
                             decoded));
         }
-        
+
         // testing encoding
         for (int i = 0; i < oid.length; i++) {
 
@@ -154,9 +150,9 @@ public class OidTest extends TestCase {
                 new byte[] { 0x02, 0x01, 0x00 },
                 // wrong length: length is 0
                 new byte[] { 0x06, 0x00 },
-                // wrong content: bit 8 of the last byte is not 0 
+                // wrong content: bit 8 of the last byte is not 0
                 new byte[] { 0x06, 0x02, (byte) 0x81, (byte) 0x80 },
-        // wrong content: is not encoded in fewest number of bytes 
+        // wrong content: is not encoded in fewest number of bytes
         //FIXME new byte[] { 0x06, 0x02, (byte) 0x80, (byte) 0x01 }
         };
 
@@ -174,7 +170,7 @@ public class OidTest extends TestCase {
 
         // oid decoder/encoder for testing
         ASN1Oid asn1 = ASN1Oid.getInstanceForString();
-        
+
         // testing decoding
         for (int i = 0; i < oid.length; i++) {
             assertEquals("Failed to decode oid: " + oid[i][0], // error message

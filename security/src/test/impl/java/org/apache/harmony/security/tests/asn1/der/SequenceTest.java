@@ -41,15 +41,11 @@ import junit.framework.TestCase;
 
 /**
  * ASN.1 DER test for Sequence type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 
 public class SequenceTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(SequenceTest.class);
-    }
 
     private static ASN1SequenceOf sequenceOf = new ASN1SequenceOf(ASN1Boolean
             .getInstance());
@@ -99,7 +95,7 @@ public class SequenceTest extends TestCase {
         //
 
         testcases = new Object[][] {
-                // format: object to encode / byte array 
+                // format: object to encode / byte array
 
                 // sequence : all values are default
                 { new AppClass(Boolean.TRUE, defaultList),
@@ -117,7 +113,7 @@ public class SequenceTest extends TestCase {
                 { new AppClass(Boolean.FALSE, new ArrayList()),
                         new byte[] { 0x30, 0x05, 0x01, 0x01, 0x00, 0x30, 0x00 } },
 
-        //TODO add testcase for another ASN.1 type` 
+        //TODO add testcase for another ASN.1 type`
 
         };
     }
@@ -194,7 +190,7 @@ public class SequenceTest extends TestCase {
     }
 
     /**
-     * Tests encoding default fields 
+     * Tests encoding default fields
      */
     public void testEncodeDefault() throws IOException {
 
@@ -233,9 +229,9 @@ public class SequenceTest extends TestCase {
         encoded = s.encode(new Object[] { new byte[] { 0x01 } });
         assertTrue("Encoded integer:", Arrays.equals(expectedArray, encoded));
     }
-    
+
     /**
-     * Tests encoding optional fields 
+     * Tests encoding optional fields
      */
     public void testEncodeOptional() throws IOException {
 
@@ -252,7 +248,7 @@ public class SequenceTest extends TestCase {
 
         try {
             s.encode(new Object[] { null });
-            fail("No expected RuntimeException"); 
+            fail("No expected RuntimeException");
         } catch (RuntimeException e) {
         }
 

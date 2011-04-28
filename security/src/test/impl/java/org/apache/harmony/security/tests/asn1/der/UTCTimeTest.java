@@ -32,7 +32,7 @@ import org.apache.harmony.security.asn1.DerOutputStream;
 
 /**
  * ASN.1 DER test for UTCTime type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 
@@ -121,7 +121,4 @@ public class UTCTimeTest extends TestCase {
         }
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(UTCTimeTest.class);
-    }
 }

@@ -50,7 +50,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
     private static final int LIMIT2 = 50;    //
 
     private static final int CASES = 4;
- 
+
     static String algorithm = "SHA1PRNG";    // name of algorithm
     static String provider  = "Crypto";     // name of provider
 
@@ -70,7 +70,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
 
         SecureRandom sr;
         Object[] data = new Object[5];
-      
+
 
         for ( int i = 0; i < data.length ; i++ ) {
             try {
@@ -93,7 +93,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
                            break;
                 }
                 data[i] = sr;
- 
+
             } catch (NoSuchAlgorithmException e) {
                 throw new RuntimeException("ATTENTION: " + e);
             } catch (NoSuchProviderException e) {
@@ -105,7 +105,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
 
 
     /**
-     * Comparing sequencies of bytes 
+     * Comparing sequencies of bytes
      * returned by "nextBytes(..)" of referenced and tested objects
      */
     private void testingSame(SecureRandom ref, SecureRandom test) {
@@ -137,7 +137,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
 
 
     /**
-     * Comparing sequencies of bytes 
+     * Comparing sequencies of bytes
      * returned by "nextBytes(..)" of referenced and tested objects
      */
     private void testingNotSame(SecureRandom ref, SecureRandom test) {
@@ -173,7 +173,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
                 b &= refTotalBytes[n1] == testTotalBytes[n1];
 
                 if ( j >= 20 || n1 == n ) {
-                    assertFalse("the same sequencies :: testcase=" + testcase + 
+                    assertFalse("the same sequencies :: testcase=" + testcase +
                                 " k=" +k + "n1 =" + n1, b);
                     b = true;
                     j = 0;
@@ -190,7 +190,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
     private SerializableAssert comparator = new SerializableAssert(){
 
         /**
-         * Tests that data objects can be serialized and deserialized without exceptions 
+         * Tests that data objects can be serialized and deserialized without exceptions
          * and the deserialization produces object of the same class.
          */
         public void assertDeserialized(Serializable reference, Serializable test) {
@@ -406,10 +406,6 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
 
     public static Test suite() {
         return new TestSuite(SHA1PRNG_SecureRandomTest.class);
-    }
-
-    public static void main(String[] args)  {
-        junit.textui.TestRunner.run(suite());
     }
 
 }

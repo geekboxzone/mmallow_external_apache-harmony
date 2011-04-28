@@ -34,7 +34,7 @@ import org.apache.harmony.security.asn1.DerOutputStream;
 
 /**
  * ASN.1 DER test for GeneralizedTime type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 
@@ -97,8 +97,8 @@ public class GeneralizedTimeTest extends TestCase {
 
     /**
      * Verifies DER decoding/encoding ASN.1 GeneralizedTime.
-     * GeneralizedTime expresses Greenwich Mean Time by 
-     * the following pattern: YYYYMMDDHHMMSS'Z' 
+     * GeneralizedTime expresses Greenwich Mean Time by
+     * the following pattern: YYYYMMDDHHMMSS'Z'
      */
     public void test_Decode_Encode() throws Exception {
 
@@ -140,7 +140,7 @@ public class GeneralizedTimeTest extends TestCase {
                 .getTime();
         assertEquals(old_date, new_date);
     }
-    
+
     public void test_EncodeMilliseconds() throws IOException{
         //cRegression for HARMONY-2302
         long old_date = 1164358741071L;
@@ -148,8 +148,5 @@ public class GeneralizedTimeTest extends TestCase {
                 .getTime();
         assertEquals(old_date, new_date);
     }
-    
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(GeneralizedTimeTest.class);
-    }
+
 }

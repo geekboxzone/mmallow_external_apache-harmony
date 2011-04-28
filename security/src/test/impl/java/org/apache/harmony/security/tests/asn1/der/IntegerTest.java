@@ -36,15 +36,11 @@ import org.apache.harmony.security.asn1.DerOutputStream;
 
 /**
  * ASN.1 DER test for INTEGER type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 
 public class IntegerTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(IntegerTest.class);
-    }
 
     public static final Object[][] validTestcase = {
             // BigInteger / two's-complement representation / encoding
@@ -99,7 +95,7 @@ public class IntegerTest extends TestCase {
                     Arrays.equals((byte[]) validTestcase[i][1], // expected
                             (byte[]) asn1.decode(in))); // returned
         }
-        
+
         // decode from input stream
         for (int i = 0; i < validTestcase.length; i++) {
             DerInputStream in = new DerInputStream(new ByteArrayInputStream(
@@ -127,9 +123,9 @@ public class IntegerTest extends TestCase {
                 new byte[] { 0x01, 0x01, 0x00 },
                 // wrong length: length is 0
                 new byte[] { 0x02, 0x00 },
-                // wrong content: is not encoded in minimum number of octets 
+                // wrong content: is not encoded in minimum number of octets
                 new byte[] { 0x02, 0x02, 0x00, 0x00 },
-                // wrong content: is not encoded in minimum number of octets 
+                // wrong content: is not encoded in minimum number of octets
                 new byte[] { 0x02, 0x02, (byte) 0xFF, (byte) 0x80 } };
 
         for (int i = 0; i < invalid.length; i++) {

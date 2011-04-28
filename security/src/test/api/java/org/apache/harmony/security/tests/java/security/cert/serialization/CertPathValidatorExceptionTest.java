@@ -30,7 +30,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for CertPathValidatorException serialization
- * 
+ *
  */
 
 public class CertPathValidatorExceptionTest extends SerializationTest implements
@@ -56,10 +56,10 @@ public class CertPathValidatorExceptionTest extends SerializationTest implements
     }
 
     public void assertDeserialized(Serializable oref, Serializable otest) {
-        
+
         // common checks
         THROWABLE_COMPARATOR.assertDeserialized(oref, otest);
-        
+
         // class specific checks
         CertPathValidatorException ref = (CertPathValidatorException) oref;
         CertPathValidatorException test = (CertPathValidatorException) otest;
@@ -74,7 +74,4 @@ public class CertPathValidatorExceptionTest extends SerializationTest implements
         }
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(CertPathValidatorExceptionTest.class);
-    }
 }

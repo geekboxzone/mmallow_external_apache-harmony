@@ -255,8 +255,4 @@ public class X509CRLTest extends TestCase {
         return new TestSuite(X509CRLTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

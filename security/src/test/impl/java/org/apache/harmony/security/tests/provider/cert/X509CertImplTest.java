@@ -85,36 +85,36 @@ public class X509CertImplTest extends TestCase {
     //
     // The values of certificate's fields:
     //
-    
+
     int         version         = 2; //v3
     BigInteger  serialNumber    = BigInteger.valueOf(555L);
-    
+
     // Algorithm name and its OID (http://oid.elibel.tm.fr)
     String      algOID          = "1.2.840.10040.4.3";
     String      algName         = "SHA1withDSA";
-    
+
     // DER boolean false encoding (http://asn1.elibel.tm.fr)
-    // Makes no sense. For testing purposes we need just provide 
+    // Makes no sense. For testing purposes we need just provide
     // some ASN.1 structure:
     byte[]      algParams       = {1, 1, 0};
     String      issuerName      = "O=Certificate Issuer";
     long        notBefore       = 1000000000L;
     long        notAfter        = 2000000000L;
     String      subjectName     = "O=Subject Organization";
-    
+
     // keys are using to make signature and to verify it
     static PublicKey   publicKey;
     static PrivateKey  privateKey;
     byte[]      key             = new byte[] {1, 2, 3, 4, 5, 6, 7, 8}; // random value
     byte[]      keyEncoding     = null;
-    boolean[]   issuerUniqueID  = new boolean[] 
+    boolean[]   issuerUniqueID  = new boolean[]
                 {true, false, true, false, true, false, true, false}; // random value
     boolean[]   subjectUniqueID = new boolean[]
                 {false, true, false, true, false, true, false, true}; // random value
 
     // Extensions' values
     byte[]      extValEncoding  = new byte[] {1, 1, 1}; // random value
-    boolean[]   extnKeyUsage    = new boolean[] 
+    boolean[]   extnKeyUsage    = new boolean[]
                 {true, false, true, false, true, false, true, false, true}; // random value
     List    extnExtendedKeyUsage = Arrays.asList(new int[][] {
 
@@ -139,7 +139,7 @@ public class X509CertImplTest extends TestCase {
     int extnBCLen = 5;
     static GeneralNames extnSANames;
     static GeneralNames extnIANames;
-    
+
     static {
         try {
             extnSANames = new GeneralNames(
@@ -165,7 +165,7 @@ public class X509CertImplTest extends TestCase {
                             new GeneralName(2, "BadDNSName")))
                     .addSubtree(new GeneralSubtree(
                             new GeneralName(8, "2.3.4.4444.222"), 2));
-            nameConstraints = 
+            nameConstraints =
                 new NameConstraints(permittedNames, excludedNames);
         } catch (IOException e) {
             // should not be thrown
@@ -193,14 +193,14 @@ public class X509CertImplTest extends TestCase {
         // http://www.ietf.org/rfc/rfc3280.txt):
         // Key Usage
         new Extension("2.5.29.15", true, new KeyUsage(extnKeyUsage)),
-        // Basic Constraints    
+        // Basic Constraints
         new Extension("2.5.29.19", true, new BasicConstraints(true, extnBCLen)),
         // Certificate Policies with ANY policy
-        new Extension("2.5.29.32", true, 
+        new Extension("2.5.29.32", true,
                 new CertificatePolicies()
                 .addPolicyInformation(new PolicyInformation("2.5.29.32.0"))),
         // Subject Alternative Name
-        new Extension("2.5.29.17", true, 
+        new Extension("2.5.29.17", true,
                 new AlternativeName(AlternativeName.SUBJECT, extnSANames)),
         // Name Constraints
         new Extension("2.5.29.30", true, nameConstraints),
@@ -215,24 +215,24 @@ public class X509CertImplTest extends TestCase {
         // Unsupported critical extensions:
         new Extension("1.2.77.777", true, extValEncoding),
 
-        
+
         // Non-critical extensions (as specified in rfc 3280
         // http://www.ietf.org/rfc/rfc3280.txt):
- 
+
         // Issuer Alternative Name
-        new Extension("2.5.29.18", false, 
+        new Extension("2.5.29.18", false,
                 new AlternativeName(AlternativeName.ISSUER, extnSANames)),
         // CRL Distribution Points
-        new Extension("2.5.29.31", false, 
+        new Extension("2.5.29.31", false,
                 new CRLDistributionPoints(Arrays.asList(new DistributionPoint[] {
                     new DistributionPoint(
-                        new DistributionPointName(extnSANames), 
+                        new DistributionPointName(extnSANames),
                         new ReasonFlags(extnKeyUsage),
                         extnSANames
                         ),
                 }))),
         // Authority Key Identifier
-        new Extension("2.5.29.35", false, 
+        new Extension("2.5.29.35", false,
                 new AuthorityKeyIdentifier(
                     // random value for key identifier
                     new byte[] {1, 2, 3, 4, 5}, extnSANames, serialNumber)),
@@ -258,31 +258,31 @@ public class X509CertImplTest extends TestCase {
     byte[] certEncoding;
 
     /**
-     * Creates the master certificate on the base of which 
+     * Creates the master certificate on the base of which
      * all functionality will be tested.
      * @return
-     * @throws java.lang.Exception 
+     * @throws java.lang.Exception
      */
     protected void setUp() throws java.lang.Exception {
-        AlgorithmIdentifier signature = 
+        AlgorithmIdentifier signature =
             new AlgorithmIdentifier(algOID, algParams);
         Name issuer = new Name(issuerName);
         Name subject = new Name(subjectName);
-        Validity validity = 
+        Validity validity =
             new Validity(new Date(notBefore), new Date(notAfter));
 
-        SubjectPublicKeyInfo subjectPublicKeyInfo = (SubjectPublicKeyInfo) 
+        SubjectPublicKeyInfo subjectPublicKeyInfo = (SubjectPublicKeyInfo)
             SubjectPublicKeyInfo.ASN1.decode(publicKey.getEncoded());
         keyEncoding = subjectPublicKeyInfo.getEncoded();
 
         Extensions exts = new Extensions(Arrays.asList(extensions));
-       
-        TBSCertificate tbsCertificate = 
-            new TBSCertificate(version, serialNumber, 
-                signature, issuer, validity, subject, subjectPublicKeyInfo, 
+
+        TBSCertificate tbsCertificate =
+            new TBSCertificate(version, serialNumber,
+                signature, issuer, validity, subject, subjectPublicKeyInfo,
                 issuerUniqueID, subjectUniqueID, exts);
         tbsCertEncoding = tbsCertificate.getEncoded();
-       
+
         if (signatureValueBytes == null) {
             try {
                 Signature sig= Signature.getInstance("DSA");//new byte[32];
@@ -297,14 +297,14 @@ public class X509CertImplTest extends TestCase {
         if ("testVerify3".equals(getName())) {
             signatureValue = new byte[signatureValueBytes.length];
             // make incorrect signature value:
-            System.arraycopy(signatureValueBytes, 0, 
+            System.arraycopy(signatureValueBytes, 0,
                     signatureValue, 0, signatureValueBytes.length);
             signatureValue[20]++;
         } else {
             signatureValue = signatureValueBytes;
         }
-        
-        Certificate cert = 
+
+        Certificate cert =
             new Certificate(tbsCertificate, signature, signatureValue);
 
         certEncoding = cert.getEncoded();
@@ -317,7 +317,7 @@ public class X509CertImplTest extends TestCase {
         ByteArrayInputStream bis = new ByteArrayInputStream(certEncoding);
         certificate = new X509CertImpl(bis);
     }
-    
+
     /**
      * checkValidity() method testing.
      */
@@ -330,7 +330,7 @@ public class X509CertImplTest extends TestCase {
         } catch (CertificateExpiredException e) {
         }
     }
-    
+
     /**
      * checkValidity(Date date) method testing.
      */
@@ -359,7 +359,7 @@ public class X509CertImplTest extends TestCase {
             fail("Unexpected CertificateNotYetValidException was thrown.");
         }
     }
-    
+
     /**
      * @tests java.security.cert.X509Certificate#getVersion()
      */
@@ -387,51 +387,51 @@ public class X509CertImplTest extends TestCase {
         assertEquals("Version 3:", 3, new X509CertImpl(x509CertEnc)
                 .getVersion());
     }
-    
+
     /**
      * getSerialNumber() method testing.
      */
     public void testGetSerialNumber() {
-        assertEquals("Incorrect value of version", 
+        assertEquals("Incorrect value of version",
                 serialNumber, certificate.getSerialNumber());
     }
-    
+
     /**
      * getIssuerDN() method testing.
      */
     public void testGetIssuerDN() {
-        assertEquals("Incorrect issuer", 
-                new X500Principal(issuerName).getName(), 
+        assertEquals("Incorrect issuer",
+                new X500Principal(issuerName).getName(),
                 certificate.getIssuerDN().getName());
     }
-    
+
     /**
      * getIssuerX500Principal() method testing.
      */
     public void testGetIssuerX500Principal() {
-        assertEquals("Incorrect issuer", 
-                new X500Principal(issuerName), 
+        assertEquals("Incorrect issuer",
+                new X500Principal(issuerName),
                 certificate.getIssuerX500Principal());
     }
-    
+
     /**
      * getSubjectDN() method testing.
      */
     public void testGetSubjectDN() {
-        assertEquals("Incorrect subject", 
-                new X500Principal(subjectName).getName(), 
+        assertEquals("Incorrect subject",
+                new X500Principal(subjectName).getName(),
                 certificate.getSubjectDN().getName());
     }
-    
+
     /**
      * getSubjectX500Principal() method testing.
      */
     public void testGetSubjectX500Principal() {
-        assertEquals("Incorrect subject", 
-                new X500Principal(subjectName), 
+        assertEquals("Incorrect subject",
+                new X500Principal(subjectName),
                 certificate.getSubjectX500Principal());
     }
-    
+
     /**
      * getNotBefore() method testing.
      */
@@ -439,7 +439,7 @@ public class X509CertImplTest extends TestCase {
         assertEquals("Incorrect notBefore date",
                 new Date(notBefore), certificate.getNotBefore());
     }
-    
+
     /**
      * getNotAfter() method testing.
      */
@@ -447,23 +447,23 @@ public class X509CertImplTest extends TestCase {
         assertEquals("Incorrect notAfter date",
                 new Date(notAfter), certificate.getNotAfter());
     }
-    
-    public static void printAsHex(int perLine, String prefix, 
+
+    public static void printAsHex(int perLine, String prefix,
                                         String delimiter, byte[] data) {
         for (int i=0; i<data.length; i++) {
             String tail = Integer.toHexString(0x000000ff & data[i]);
             if (tail.length() == 1) {
-                tail = "0" + tail; 
+                tail = "0" + tail;
             }
             System.out.print(prefix + "0x" + tail + delimiter);
- 
+
             if (((i+1)%perLine) == 0) {
                 System.out.println();
             }
         }
         System.out.println();
     }
-    
+
     /**
      * getTBSCertificate() method testing.
      */
@@ -482,7 +482,7 @@ public class X509CertImplTest extends TestCase {
             fail("Unexpected CertificateEncodingException was thrown.");
         }
     }
-    
+
     /**
      * getSignature() method testing.
      */
@@ -491,7 +491,7 @@ public class X509CertImplTest extends TestCase {
             fail("Incorrect Signature value.");
         }
     }
-    
+
     /**
      * getSigAlgName() method testing.
      */
@@ -499,7 +499,7 @@ public class X509CertImplTest extends TestCase {
         assertEquals("Incorrect value of signature algorithm name",
                 algName, certificate.getSigAlgName());
     }
-    
+
     /**
      * getSigAlgOID() method testing.
      */
@@ -507,7 +507,7 @@ public class X509CertImplTest extends TestCase {
         assertEquals("Incorrect value of signature algorithm OID",
                 algOID, certificate.getSigAlgOID());
     }
-    
+
     /**
      * getSigAlgParams() method testing.
      */
@@ -516,7 +516,7 @@ public class X509CertImplTest extends TestCase {
             fail("Incorrect SigAlgParams value.");
         }
     }
-    
+
     /**
      * getIssuerUniqueID() method testing.
      */
@@ -525,7 +525,7 @@ public class X509CertImplTest extends TestCase {
             fail("Incorrect issuerUniqueID value.");
         }
     }
-    
+
     /**
      * getSubjectUniqueID() method testing.
      */
@@ -534,7 +534,7 @@ public class X509CertImplTest extends TestCase {
             fail("Incorrect subjectUniqueID value.");
         }
     }
-    
+
     /**
      * getKeyUsage() method testing.
      */
@@ -549,13 +549,13 @@ public class X509CertImplTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * getExtendedKeyUsage() method testing.
      */
     public void testGetExtendedKeyUsage() throws Exception {
         List exku = certificate.getExtendedKeyUsage();
-        if ((exku == null) 
+        if ((exku == null)
                 || (exku.size() != extnExtendedKeyUsage.size())) {
             fail("Incorrect Extended Key Usage value.");
         }
@@ -567,14 +567,14 @@ public class X509CertImplTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * getBasicConstraints() method testing.
      */
     public void testGetBasicConstraints() {
         assertEquals(extnBCLen, certificate.getBasicConstraints());
     }
-    
+
     /**
      * getSubjectAlternativeNames() method testing.
      */
@@ -605,7 +605,7 @@ public class X509CertImplTest extends TestCase {
             fail("Subject Alternative Name extension was incorrectly encoded.");
         }
     }
-    
+
     /**
      * getIssuerAlternativeNames() method testing.
      */
@@ -636,7 +636,7 @@ public class X509CertImplTest extends TestCase {
             fail("Issuer Alternative Name extension was incorrectly encoded.");
         }
     }
-    
+
     /**
      * getEncoded() method testing.
      */
@@ -649,7 +649,7 @@ public class X509CertImplTest extends TestCase {
             fail("Unexpected CertificateEncodingException was thrown.");
         }
     }
-    
+
     /**
      * getPublicKey() method testing.
      */
@@ -658,7 +658,7 @@ public class X509CertImplTest extends TestCase {
             fail("Incorrect Public Key.");
         }
     }
-    
+
     /**
      * getExtensionValue(String oid) method testing.
      */
@@ -682,49 +682,49 @@ public class X509CertImplTest extends TestCase {
             }
         }
         assertNull("Null value should be returned in the case of "
-                + "nonexisting extension", 
+                + "nonexisting extension",
                 certificate.getExtensionValue("1.1.1.1"));
     }
-    
+
     /**
      * getCriticalExtensionOIDs() method testing.
      */
     public void testGetCriticalExtensionOIDs() {
         Set certCEOids = certificate.getCriticalExtensionOIDs();
-        if (!(certCEOids.containsAll(allCritical) 
+        if (!(certCEOids.containsAll(allCritical)
                     && allCritical.containsAll(certCEOids))) {
             fail("Incorrect value of Critical Extension OIDs");
         }
     }
-    
+
     /**
      * getNonCriticalExtensionOIDs() method testing.
      */
     public void testGetNonCriticalExtensionOIDs() {
         Set certNCEOids = certificate.getNonCriticalExtensionOIDs();
-        if (!(certNCEOids.containsAll(allNonCritical) 
+        if (!(certNCEOids.containsAll(allNonCritical)
                     && allNonCritical.containsAll(certNCEOids))) {
             fail("Incorrect value of Non Critical Extension OIDs");
         }
     }
-    
+
     /**
      * hasUnsupportedCriticalExtension() method testing.
      */
     public void testHasUnsupportedCriticalExtension() {
-        assertTrue("Incorrect value of hasUnsupportedCriticalExtension", 
+        assertTrue("Incorrect value of hasUnsupportedCriticalExtension",
                 certificate.hasUnsupportedCriticalExtension());
 
         if (!certificate.hasUnsupportedCriticalExtension()) {
             fail("Incorrect value of hasUnsupportedCriticalExtension");
         }
     }
-    
+
     /**
      * toString() method testing.
      */
     public void testToString() {
-        assertNotNull("String representation should not be null", 
+        assertNotNull("String representation should not be null",
                 certificate.toString());
     }
 
@@ -735,7 +735,7 @@ public class X509CertImplTest extends TestCase {
     public void testVerify1() throws Exception {
         certificate.verify(publicKey);
     }
-    
+
     /**
      * TODO
      * verify(PublicKey key, String sigProvider) method testing.
@@ -744,7 +744,7 @@ public class X509CertImplTest extends TestCase {
         certificate.verify(publicKey, Signature.getInstance("SHA1withDSA")
                 .getProvider().getName());
     }
-    
+
     /**
      * TODO
      * verify(PublicKey key) method testing.
@@ -756,13 +756,9 @@ public class X509CertImplTest extends TestCase {
         } catch (Exception e) {
         }
     }
-    
+
     public static Test suite() {
         return new TestSuite(X509CertImplTest.class);
     }
 
-    public static void main(String[] args) throws Exception {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

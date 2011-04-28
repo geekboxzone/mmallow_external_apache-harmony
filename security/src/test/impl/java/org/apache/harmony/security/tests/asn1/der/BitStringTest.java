@@ -36,23 +36,19 @@ import org.apache.harmony.security.asn1.ASN1BitString.ASN1NamedBitList;
 
 /**
  * ASN.1 DER test for Bitstring type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 
 public class BitStringTest extends TestCase {
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(BitStringTest.class);
-    }
-
     private static Object[][] validBitstring = new Object[][] {
     //bitstring array format: bitstring object/ byte array
             //
-            { new BitString(new byte[] {}, 0), // object 
+            { new BitString(new byte[] {}, 0), // object
                     new byte[] { 0x03, 0x01, 0x00 } },
             //
-            { new BitString(new byte[] { 0x05 }, 0), // object 
+            { new BitString(new byte[] { 0x05 }, 0), // object
                     new byte[] { 0x03, 0x02, 0x00, 0x05 } },
             //
             { new BitString(new byte[] { (byte) 0x80 }, 7), // object
@@ -143,7 +139,7 @@ public class BitStringTest extends TestCase {
                 //
                 { new boolean[] { true }, // object
                         new byte[] { 0x03, 0x02, 0x07, (byte) 0x80 } },
-                // 
+                //
                 { new boolean[] { true, false, true }, // object
                         new byte[] { 0x03, 0x02, 0x05, (byte) 0xA0 } },
                 //
@@ -183,7 +179,7 @@ public class BitStringTest extends TestCase {
                         new boolean[] { true, false, false, false, false,
                                 false, false, false }, // object
                         new byte[] { 0x03, 0x02, 0x07, (byte) 0x80 } },
-                // 
+                //
                 {
                         new boolean[] { true, false, true, false, false, false,
                                 false, false }, // object
@@ -224,7 +220,7 @@ public class BitStringTest extends TestCase {
                 //
                 { new boolean[] { true }, // object
                         new byte[] { 0x03, 0x02, 0x07, (byte) 0x80 } },
-                // 
+                //
                 { new boolean[] { true, false, true }, // object
                         new byte[] { 0x03, 0x02, 0x05, (byte) 0xA0 } },
                 //

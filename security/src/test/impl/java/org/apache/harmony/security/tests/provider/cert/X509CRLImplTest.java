@@ -73,7 +73,7 @@ public class X509CRLImplTest extends TestCase {
     private static String algOID          = "1.2.840.10040.4.3";
     private static String algName         = "SHA1withDSA";
     // DER boolean false encoding (http://asn1.elibel.tm.fr)
-    // Makes no sense. For testing purposes we need just provide 
+    // Makes no sense. For testing purposes we need just provide
     // some ASN.1 structure:
     private static byte[] algParams       = {1, 1, 0};
     private static AlgorithmIdentifier signature;
@@ -123,12 +123,12 @@ public class X509CRLImplTest extends TestCase {
     private static Date revocationDate = new Date();
     private static List revokedCertificates = Arrays.asList(
             new TBSCertList.RevokedCertificate[] {
-                new TBSCertList.RevokedCertificate(certSerialNumber1, 
+                new TBSCertList.RevokedCertificate(certSerialNumber1,
                     revocationDate, null),
                 // the item for certificate issued by other authority
                 new TBSCertList.RevokedCertificate(certSerialNumber2,
                     revocationDate, crlEntryExtensions),
-                new TBSCertList.RevokedCertificate(certSerialNumber3, 
+                new TBSCertList.RevokedCertificate(certSerialNumber3,
                     revocationDate, null),
             });
     private static Extensions crlExtensions;
@@ -140,7 +140,7 @@ public class X509CRLImplTest extends TestCase {
                     new Extension("2.5.29.20", Extension.NON_CRITICAL,
                         new CRLNumber(BigInteger.valueOf(4444))),
                     // Authority Key Identifier
-                    new Extension("2.5.29.35", false, 
+                    new Extension("2.5.29.35", false,
                         new AuthorityKeyIdentifier(
                             // keyIdentifier (random value)
                             new byte[] {1, 2, 3, 4, 5},
@@ -148,7 +148,7 @@ public class X509CRLImplTest extends TestCase {
                             new GeneralNames(
                                 Arrays.asList(new GeneralName[] {
                                     new GeneralName(new Name(certIssuerName))
-                            })), 
+                            })),
                             // authorityCertSerialNumber
                             certSerialNumber2)),
                     // Issuing Distribution Point
@@ -189,7 +189,7 @@ public class X509CRLImplTest extends TestCase {
 
     private static X509CRLImpl crl;
     private static CertificateList certificateList;
-    private static TBSCertList tbscertlist; 
+    private static TBSCertList tbscertlist;
     private static byte[] encoding;
     private static byte[] tbsEncoding;
     static CertificateFactory factory;
@@ -198,12 +198,12 @@ public class X509CRLImplTest extends TestCase {
         try {
             Name issuer = new Name(issuerName);
 
-            tbscertlist = 
-                new TBSCertList(2, signature, issuer, thisUpdate, 
+            tbscertlist =
+                new TBSCertList(2, signature, issuer, thisUpdate,
                     nextUpdate, revokedCertificates, crlExtensions);
-           
+
             tbsEncoding = tbscertlist.getEncoded();
-            
+
             try {
                 Signature sig= Signature.getInstance("DSA");
                 sig.initSign(privateKey);
@@ -219,20 +219,20 @@ public class X509CRLImplTest extends TestCase {
             fail("Unexpected Exception was thrown: "+e.getMessage());
         }
     }
-   
+
     ByteArrayInputStream stream;
-    
+
     protected void setUp() throws java.lang.Exception {
         if ("testVerify3".equals(getName())) {
             signatureValue = new byte[signatureValueBytes.length];
             // make incorrect signature value:
-            System.arraycopy(signatureValueBytes, 0, 
+            System.arraycopy(signatureValueBytes, 0,
                     signatureValue, 0, signatureValueBytes.length);
             signatureValue[20]++;
         } else {
             signatureValue = signatureValueBytes;
         }
-        certificateList = 
+        certificateList =
             new CertificateList(tbscertlist, signature, signatureValue);
 
         encoding = CertificateList.ASN1.encode(certificateList);
@@ -240,7 +240,7 @@ public class X509CRLImplTest extends TestCase {
 
         crl = new X509CRLImpl(certificateList);
     }
-    
+
     private static int XXX = 0, counter = 0;
 
     public void testCreationCRL() throws Exception {
@@ -250,23 +250,23 @@ public class X509CRLImplTest extends TestCase {
         }
         byte tmp[] = BigInteger.valueOf(XXX).toByteArray();
         System.arraycopy(tmp, 0, stamp, 0, tmp.length);
-        System.arraycopy(stamp, 0, encoding, 
+        System.arraycopy(stamp, 0, encoding,
                 encoding.length-stamp.length, stamp.length);
 
         stream.reset();
         java.security.cert.X509CRL c = (java.security.cert.X509CRL)
             factory.generateCRL(stream);
-        
+
         if (counter == 1) {
             System.out.println("\nUSING: "+ c.getClass());
         }
-        
+
         byte[] enc = c.getEncoded();
         byte[] stamp_chek = new byte[stamp.length];
-        
-        System.arraycopy(enc, enc.length - stamp.length, 
+
+        System.arraycopy(enc, enc.length - stamp.length,
                 stamp_chek, 0, stamp.length);
-       
+
         if (!Arrays.equals(stamp, stamp_chek)) {
             fail("Wrong encoding received.");
         }
@@ -278,13 +278,13 @@ public class X509CRLImplTest extends TestCase {
      */
     public void testX509CRLImpl() {
         try {
-            new X509CRLImpl((CertificateList) 
+            new X509CRLImpl((CertificateList)
                     CertificateList.ASN1.decode(encoding));
         } catch (IOException e) {
             fail("Unexpected exception was thrown");
         }
     }
-    
+
     /**
      * getEncoded() method testing.
      */
@@ -297,30 +297,30 @@ public class X509CRLImplTest extends TestCase {
             fail("Unexpected CRLException was thrown.");
         }
     }
-    
+
     /**
      * getVersion() method testing.
      */
     public void testGetVersion() {
         assertEquals("Incorrect version value", 2, crl.getVersion());
     }
-    
+
     /**
      * getIssuerDN() method testing.
      */
     public void testGetIssuerDN() {
-        assertEquals("Incorrect issuer value", 
+        assertEquals("Incorrect issuer value",
                 new X500Principal(issuerName), crl.getIssuerDN());
     }
-    
+
     /**
      * getIssuerX500Principal() method testing.
      */
     public void testGetIssuerX500Principal() {
-        assertEquals("Incorrect issuer value", 
+        assertEquals("Incorrect issuer value",
                 new X500Principal(issuerName), crl.getIssuerDN());
     }
-    
+
     /**
      * getThisUpdate() method testing.
      */
@@ -328,7 +328,7 @@ public class X509CRLImplTest extends TestCase {
         assertTrue("Incorrect thisUpdate value",
                 thisUpdate.getTime()/1000 == crl.getThisUpdate().getTime()/1000);
     }
-    
+
     /**
      * getNextUpdate() method testing.
      */
@@ -336,7 +336,7 @@ public class X509CRLImplTest extends TestCase {
         assertTrue("Incorrect nextUpdate value",
                 nextUpdate.getTime()/1000 == crl.getNextUpdate().getTime()/1000);
     }
-    
+
     /**
      * getRevokedCertificate(X509Certificate certificate) method testing.
      */
@@ -344,38 +344,38 @@ public class X509CRLImplTest extends TestCase {
         try {
             X509CertImpl cert1 = new X509CertImpl(
                 new Certificate(
-                    new TBSCertificate(2, certSerialNumber1, signature, 
-                        new Name(certIssuerName), 
+                    new TBSCertificate(2, certSerialNumber1, signature,
+                        new Name(certIssuerName),
                         new Validity(new Date(), new Date()),
-                    new Name(certIssuerName), 
+                    new Name(certIssuerName),
                     new SubjectPublicKeyInfo(signature, new byte[10]),
                     null, null, null),
                 signature, new byte[10]));
             X509CertImpl cert2 = new X509CertImpl(
                 new Certificate(
-                    new TBSCertificate(2, certSerialNumber2, signature, 
-                        new Name(certIssuerName), 
+                    new TBSCertificate(2, certSerialNumber2, signature,
+                        new Name(certIssuerName),
                         new Validity(new Date(), new Date()),
-                    new Name(certIssuerName), 
+                    new Name(certIssuerName),
                     new SubjectPublicKeyInfo(signature, new byte[10]),
                     null, null, null),
                 signature, new byte[10]));
             X509CertImpl cert3 = new X509CertImpl(
                 new Certificate(
-                    new TBSCertificate(2, certSerialNumber3, signature, 
-                        new Name("O=Another Cert Issuer"), 
+                    new TBSCertificate(2, certSerialNumber3, signature,
+                        new Name("O=Another Cert Issuer"),
                         new Validity(new Date(), new Date()),
-                    new Name(certIssuerName), 
+                    new Name(certIssuerName),
                     new SubjectPublicKeyInfo(signature, new byte[10]),
                     null, null, null),
                 signature, new byte[10]));
-            assertNull("Certificate should not be presented in CRL " 
-                    + "because issuer is not the same as CRL issuer", 
+            assertNull("Certificate should not be presented in CRL "
+                    + "because issuer is not the same as CRL issuer",
                     crl.getRevokedCertificate(cert1));
-            assertNotNull("Certificate should be presented in CRL", 
+            assertNotNull("Certificate should be presented in CRL",
                     crl.getRevokedCertificate(cert2));
-            assertNull("Certificate should not be presented in CRL " 
-                    + "because issuer is not the same as CRL issuer", 
+            assertNull("Certificate should not be presented in CRL "
+                    + "because issuer is not the same as CRL issuer",
                     crl.getRevokedCertificate(cert3));
         } catch (IOException e) {
             // should never happen;
@@ -383,22 +383,22 @@ public class X509CRLImplTest extends TestCase {
             fail("Unexpected IOException was thrown:"+e.getMessage());
         }
     }
-    
+
     /**
      * getRevokedCertificate(BigInteger serialNumber) method testing.
      */
     public void testGetRevokedCertificate2() {
         assertNotNull("The revoked certificate with the serial number '"
-                + certSerialNumber1 + "' should be presented in CRL.", 
+                + certSerialNumber1 + "' should be presented in CRL.",
                 crl.getRevokedCertificate(certSerialNumber1));
         assertNull("The revoked certificate with the serial number '"
-                + certSerialNumber2 + "' should not be presented in CRL.", 
+                + certSerialNumber2 + "' should not be presented in CRL.",
                 crl.getRevokedCertificate(certSerialNumber2));
         assertNull("The revoked certificate with the serial number '"
-                + certSerialNumber3 + "' should not be presented in CRL.", 
+                + certSerialNumber3 + "' should not be presented in CRL.",
                 crl.getRevokedCertificate(certSerialNumber3));
     }
-    
+
     /**
      * getRevokedCertificates() method testing.
      */
@@ -408,14 +408,14 @@ public class X509CRLImplTest extends TestCase {
         assertTrue("The size of returned set is incorrect",
                 rcerts.size() == revokedCertificates.size());
     }
-    
+
     /**
      * getTBSCertList() method testing.
      */
     public void testGetTBSCertList() {
         try {
             assertTrue(
-                "Retrieved tbsCertList encoding does not equal to expected", 
+                "Retrieved tbsCertList encoding does not equal to expected",
                 Arrays.equals(tbscertlist.getEncoded(),
                 crl.getTBSCertList()));
         } catch(CRLException e) {
@@ -423,7 +423,7 @@ public class X509CRLImplTest extends TestCase {
             fail("Unexpected CRLException was thrown: "+e.getMessage());
         }
     }
-    
+
     /**
      * getSignature() method testing.
      */
@@ -432,7 +432,7 @@ public class X509CRLImplTest extends TestCase {
             fail("Incorrect Signature value.");
         }
     }
-    
+
     /**
      * getSigAlgName() method testing.
      */
@@ -440,7 +440,7 @@ public class X509CRLImplTest extends TestCase {
         assertEquals("Incorrect value of signature algorithm name",
                 algName, crl.getSigAlgName());
     }
-    
+
     /**
      * getSigAlgOID() method testing.
      */
@@ -448,7 +448,7 @@ public class X509CRLImplTest extends TestCase {
         assertEquals("Incorrect value of signature algorithm OID",
                 algOID, crl.getSigAlgOID());
     }
-    
+
     /**
      * getSigAlgParams() method testing.
      */
@@ -457,14 +457,14 @@ public class X509CRLImplTest extends TestCase {
             fail("Incorrect SigAlgParams value.");
         }
     }
-    
+
     /**
      * verify(PublicKey key) method testing.
      */
     public void testVerify1() throws Exception {
         crl.verify(publicKey);
     }
-    
+
     /**
      * verify(PublicKey key, String sigProvider) method testing.
      */
@@ -472,7 +472,7 @@ public class X509CRLImplTest extends TestCase {
         crl.verify(publicKey, Signature.getInstance("SHA1withDSA")
                 .getProvider().getName());
     }
-    
+
     /**
      * verify(PublicKey key) method testing.
      */
@@ -491,38 +491,38 @@ public class X509CRLImplTest extends TestCase {
         try {
             X509CertImpl cert1 = new X509CertImpl(
                 new Certificate(
-                    new TBSCertificate(2, certSerialNumber1, signature, 
-                        new Name(certIssuerName), 
+                    new TBSCertificate(2, certSerialNumber1, signature,
+                        new Name(certIssuerName),
                         new Validity(new Date(), new Date()),
-                    new Name(certIssuerName), 
+                    new Name(certIssuerName),
                     new SubjectPublicKeyInfo(signature, new byte[10]),
                     null, null, null),
                 signature, new byte[10]));
             X509CertImpl cert2 = new X509CertImpl(
                 new Certificate(
-                    new TBSCertificate(2, certSerialNumber2, signature, 
-                        new Name(certIssuerName), 
+                    new TBSCertificate(2, certSerialNumber2, signature,
+                        new Name(certIssuerName),
                         new Validity(new Date(), new Date()),
-                    new Name(certIssuerName), 
+                    new Name(certIssuerName),
                     new SubjectPublicKeyInfo(signature, new byte[10]),
                     null, null, null),
                 signature, new byte[10]));
             X509CertImpl cert3 = new X509CertImpl(
                 new Certificate(
-                    new TBSCertificate(2, certSerialNumber3, signature, 
-                        new Name("O=Another Cert Issuer"), 
+                    new TBSCertificate(2, certSerialNumber3, signature,
+                        new Name("O=Another Cert Issuer"),
                         new Validity(new Date(), new Date()),
-                    new Name(certIssuerName), 
+                    new Name(certIssuerName),
                     new SubjectPublicKeyInfo(signature, new byte[10]),
                     null, null, null),
                 signature, new byte[10]));
-            assertFalse("Certificate should not be presented in CRL " 
-                    + "because issuer is not the same as CRL issuer", 
+            assertFalse("Certificate should not be presented in CRL "
+                    + "because issuer is not the same as CRL issuer",
                     crl.isRevoked(cert1));
-            assertTrue("Certificate should be presented in CRL", 
+            assertTrue("Certificate should be presented in CRL",
                     crl.isRevoked(cert2));
-            assertFalse("Certificate should not be presented in CRL " 
-                    + "because issuer is not the same as CRL issuer", 
+            assertFalse("Certificate should not be presented in CRL "
+                    + "because issuer is not the same as CRL issuer",
                     crl.isRevoked(cert3));
         } catch (IOException e) {
             // should never happen;
@@ -530,7 +530,7 @@ public class X509CRLImplTest extends TestCase {
             fail("Unexpected IOException was thrown:"+e.getMessage());
         }
     }
-    
+
     /**
      * toString() method testing.
      */
@@ -538,7 +538,7 @@ public class X509CRLImplTest extends TestCase {
         assertNotNull("The string representation should not be null",
                 crl.toString());
     }
-   
+
     // the following implementations are tested in X509CertImplTest:
 
     /**
@@ -548,7 +548,7 @@ public class X509CRLImplTest extends TestCase {
         System.out.println("getNonCriticalExtensionOIDs: "
                 + crl.getNonCriticalExtensionOIDs());
     }
-    
+
     /**
      * getCriticalExtensionOIDs() method testing.
      */
@@ -556,7 +556,7 @@ public class X509CRLImplTest extends TestCase {
         System.out.println("getCriticalExtensionOIDs: "
                 + crl.getCriticalExtensionOIDs());
     }
-    
+
     /**
      * getExtensionValue(String oid) method testing.
      */
@@ -565,7 +565,7 @@ public class X509CRLImplTest extends TestCase {
         assertNull("Null value should be returned in the case of "
                 + "nonexisting extension", crl.getExtensionValue("1.1.1.1"));
     }
-    
+
     /**
      * hasUnsupportedCriticalExtension() method testing.
      */
@@ -573,22 +573,9 @@ public class X509CRLImplTest extends TestCase {
         System.out.println("hasUnsupportedCriticalExtension: "
                 + crl.hasUnsupportedCriticalExtension());
     }
-    
+
     public static Test suite() {
         return new TestSuite(X509CRLImplTest.class);
     }
 
-    public static void main(String[] args) throws Exception {
-        /*
-        X509CRLImplTest test = new X509CRLImplTest();
-        test.setUp();
-        long startTime = System.currentTimeMillis();
-        for (int i=0; i<100000; i++) {
-            test.testCreationCRL();
-        }
-        System.out.println("time: "+(System.currentTimeMillis() - startTime));
-        /*/
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

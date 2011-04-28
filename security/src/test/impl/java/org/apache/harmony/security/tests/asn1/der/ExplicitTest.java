@@ -38,15 +38,11 @@ import junit.framework.TestCase;
 
 /**
  * ASN.1 DER test for Explicitly tagged type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 
 public class ExplicitTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(ExplicitTest.class);
-    }
 
     private static ASN1SequenceOf sequence = new ASN1SequenceOf(ASN1Boolean
             .getInstance());

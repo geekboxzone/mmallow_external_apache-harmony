@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -107,7 +107,7 @@ public class BeanContextServicesSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextSupport#initialize()
          */
         @Override
@@ -121,7 +121,7 @@ public class BeanContextServicesSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextServicesSupport#addService(java.lang.Class,
          *      java.beans.beancontext.BeanContextServiceProvider, boolean)
          */
@@ -133,7 +133,7 @@ public class BeanContextServicesSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextSupport#childJustRemovedHook(java.lang.Object,
          *      java.beans.beancontext.BeanContextSupport.BCSChild)
          */
@@ -145,7 +145,7 @@ public class BeanContextServicesSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextServicesSupport#createBCSSServiceProvider(java.lang.Class,
          *      java.beans.beancontext.BeanContextServiceProvider)
          */
@@ -181,7 +181,7 @@ public class BeanContextServicesSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextServicesListener#serviceAvailable(java.beans.beancontext.BeanContextServiceAvailableEvent)
          */
         @Override
@@ -192,7 +192,7 @@ public class BeanContextServicesSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextServiceRevokedListener#serviceRevoked(java.beans.beancontext.BeanContextServiceRevokedEvent)
          */
         @Override
@@ -200,10 +200,6 @@ public class BeanContextServicesSupportTest extends TestCase {
             super.serviceRevoked(bcssre);
             records.add("serviceRevoked", bcssre, null);
         }
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(BeanContextServicesSupportTest.class);
     }
 
     public void testAddBeanContextServicesListener_NullParam() {
@@ -1037,7 +1033,7 @@ public class BeanContextServicesSupportTest extends TestCase {
         provider.records.assertEndOfRecords();
         assertNull(l.lastEvent);
     }
-    
+
     /*
      * regression test for HARMONY-4272
      */
@@ -1045,8 +1041,8 @@ public class BeanContextServicesSupportTest extends TestCase {
             throws TooManyListenersException {
         MockBeanContextServicesSupport support = new MockBeanContextServicesSupport();
         MockBeanContextChild child = new MockBeanContextChild();
-        support.add(child); 
-        support.releaseService(child, child, new Object()); 
+        support.add(child);
+        support.releaseService(child, child, new Object());
     }
 
     public void testReleaseService() throws TooManyListenersException,
@@ -1283,9 +1279,9 @@ public class BeanContextServicesSupportTest extends TestCase {
         beanContextServicesSupport.add(mockChildBeanContextServicesSupport);
         BeanContextServiceRevokedEvent beanContextServiceRevokedEvent = new BeanContextServiceRevokedEvent(new BeanContextServicesSupport(), Collection.class,false);
         beanContextServicesSupport.serviceRevoked(beanContextServiceRevokedEvent);
-        assertTrue(mockChildBeanContextServicesSupport.revokeCalled);        
+        assertTrue(mockChildBeanContextServicesSupport.revokeCalled);
     }
-    
+
     public static class MockChildBeanContextServicesSupport extends
             BeanContextServicesSupport {
         private static final long serialVersionUID = 1L;
@@ -1323,7 +1319,7 @@ public class BeanContextServicesSupportTest extends TestCase {
                 (BeanContextServicesSupport) SerializationTester
                         .getDeserilizedObject(support));
     }
-    
+
 
     static int serviceRevoked = 0;
 
@@ -1346,7 +1342,7 @@ public class BeanContextServicesSupportTest extends TestCase {
 		public void serviceRevoked(BeanContextServiceRevokedEvent event) {
 			serviceRevoked++;
 		}
-		
+
 		public void serviceAvailable(BeanContextServiceAvailableEvent event) {
 			serviceAvailable++;
 		}
@@ -1388,7 +1384,7 @@ public class BeanContextServicesSupportTest extends TestCase {
 		support.serviceRevoked(revokeEvent);
         assertEquals(0, serviceRevoked);
         assertEquals(2, serviceAvailable);
-        
+
 	}
 
 	public void test_serviceAvailable_LBeanContextServiceRevokedEvent() {
@@ -1405,11 +1401,11 @@ public class BeanContextServicesSupportTest extends TestCase {
 	    support.serviceAvailable(availableEvent);
         assertEquals(0, serviceRevoked);
         assertEquals(2, serviceAvailable);
-        
+
 	}
-	
-    
-	
+
+
+
      public void testSerialization_Compatibility() throws Exception {
          BeanContextServicesSupport support = new BeanContextServicesSupport(
                  null, Locale.ITALY, true, true);
@@ -1438,7 +1434,7 @@ public class BeanContextServicesSupportTest extends TestCase {
              }
          });
      }
-  
+
 
     public static void assertEqualsSerially(BeanContextServicesSupport orig,
             BeanContextServicesSupport ser) {
@@ -1486,7 +1482,7 @@ public class BeanContextServicesSupportTest extends TestCase {
         }
         assertEquals(count, serServices.size());
     }
-    
+
     //Regression for HARMONY-3830
     public void testAddService_with_fireEvent_false() {
         MyBeanContextServicesSupport myBeanContextServicesSupport = new MyBeanContextServicesSupport();
@@ -1508,7 +1504,7 @@ public class BeanContextServicesSupportTest extends TestCase {
     public static class MyService implements Serializable {
         private static final long serialVersionUID = 1L;
     }
-    
+
     public static class MyBeanContextServiceProvider implements
             BeanContextServiceProvider {
         public Iterator getCurrentServiceSelectors(BeanContextServices arg0,
@@ -1520,12 +1516,12 @@ public class BeanContextServicesSupportTest extends TestCase {
                 Class arg2, Object arg3) {
             return null;
         }
-        
+
         public void releaseService(BeanContextServices arg0, Object arg1,
                 Object arg2) {
         }
     }
-    
+
     /*
      * @see TestCase#setUp()
      */

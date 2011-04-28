@@ -30,14 +30,14 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyPairGeneratorSpi</code> class constructors and methods.
- * 
+ *
  */
 
 public class KeyPairGeneratorSpiTest extends TestCase {
 
     /**
      * Constructor for KeyPairGeneratorSpiTest.
-     * 
+     *
      * @param arg0
      */
     public KeyPairGeneratorSpiTest(String arg0) {
@@ -45,7 +45,7 @@ public class KeyPairGeneratorSpiTest extends TestCase {
     }
 
     /**
-     * Test for <code>KeyPairGeneratorSpi</code> constructor 
+     * Test for <code>KeyPairGeneratorSpi</code> constructor
      * Assertion: constructs KeyPairGeneratorSpi
      */
     public void testKeyPairGeneratorSpi01()
@@ -76,8 +76,4 @@ public class KeyPairGeneratorSpiTest extends TestCase {
         KeyPair kp = keyPairGen.generateKeyPair();
         assertNull("Not null KeyPair", kp);
     }
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(KeyPairGeneratorSpiTest.class);
-    }
-
 }

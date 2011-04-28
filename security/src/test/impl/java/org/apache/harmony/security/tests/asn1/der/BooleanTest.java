@@ -34,14 +34,10 @@ import org.apache.harmony.security.asn1.DerOutputStream;
 
 /**
  * ASN.1 DER test for Boolean type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 public class BooleanTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(BooleanTest.class);
-    }
 
     private static byte[] eFalse = new byte[] { 0x01, 0x01, 0x00 };
 

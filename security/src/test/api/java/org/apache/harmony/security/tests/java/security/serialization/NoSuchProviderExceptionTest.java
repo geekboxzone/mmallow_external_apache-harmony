@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for NoSuchProviderException serialization
- * 
+ *
  */
 
 public class NoSuchProviderExceptionTest extends SerializationTest {
@@ -43,7 +43,4 @@ public class NoSuchProviderExceptionTest extends SerializationTest {
                 new NoSuchProviderException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(NoSuchProviderExceptionTest.class);
-    }
 }

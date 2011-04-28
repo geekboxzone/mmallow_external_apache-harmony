@@ -72,7 +72,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
         for ( int i = 0; i < LENGTH; i++ ) {
 
             byte[] myBytes = sr.generateSeed(i);
-            assertFalse("unexpected: myBytes.length != i  :: i==" + i + 
+            assertFalse("unexpected: myBytes.length != i  :: i==" + i +
                         " myBytes.length=" + myBytes.length, myBytes.length != i);
         }
     }
@@ -80,7 +80,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
 
     /**
      * test against the "void generateSeed(int)" method;
-     * it checks out the quality of entropy 
+     * it checks out the quality of entropy
      * (# of different bytes in sequential calls is more or equal to 50%)
      */
     public final void testGenerateSeedint03() {
@@ -115,11 +115,11 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
 
     /**
      * test against the "void nextBytes(byte[])" method;
-     * it checks out that different SecureRandom objects 
+     * it checks out that different SecureRandom objects
      * being supplied with the same seed return the same sequencies of bytes
      * as results of their "nextBytes(byte[])" methods
      */
@@ -148,7 +148,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
                 sr2.nextBytes(myBytes2);
 
                 for ( int l = 0; l < k; l++ ) {
-                    assertFalse("unexpected: myBytes1[l] != myBytes2[l]  :: l==" + l + 
+                    assertFalse("unexpected: myBytes1[l] != myBytes2[l]  :: l==" + l +
                         " k=" + k + " i=" + i + " myBytes1[l]=" + myBytes1[l] +
                         " myBytes2[l]=" + myBytes2[l], myBytes1[l] != myBytes2[l] );
                 }
@@ -175,7 +175,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
                 int i2 = k %n1;
                 int i3 = k /n2;
                 int i4 = k %n2;
-                assertTrue("non-equality: i1="+ i1 +" i2="+i2 +" i3="+i3 +" i4=" +i4, 
+                assertTrue("non-equality: i1="+ i1 +" i2="+i2 +" i3="+i3 +" i4=" +i4,
                            bytes1[i1][i2] == bytes2[i3][i4]);
             }
         }
@@ -184,7 +184,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
 
     /**
      * test against the "void nextBytes(byte[])" method;
-     * it checks out that different SecureRandom objects 
+     * it checks out that different SecureRandom objects
      * being supplied with seed by themselves return different sequencies of bytes
      * as results of their "nextBytes(byte[])" methods
      */
@@ -230,7 +230,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
 
     /**
      * test against the "void nextBytes(byte[])" method;
-     * it checks out behavior of SecureRandom object in cases of passing 
+     * it checks out behavior of SecureRandom object in cases of passing
      * byte array of zero length to "nextBytes(byte[])" method.
      * The test contains two testcases:
      * - first testcase checks out that if for two newly created SecureRandom objects
@@ -308,7 +308,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
             for ( int k = 0; k < 2 ; k++ ) {
                 for ( int j = 0; j < n; j++ ) {
                     assertTrue("non-equality: k="+ k +" j="+j +
-                               " bytes1[k][j]="+bytes1[k][j] +" bytes2[k][j]=" +bytes2[k][j], 
+                               " bytes1[k][j]="+bytes1[k][j] +" bytes2[k][j]=" +bytes2[k][j],
                            bytes1[k][j] == bytes2[k][j] );
                 }
             }
@@ -421,10 +421,6 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
 
     public static Test suite() {
         return new TestSuite(SHA1PRNG_SecureRandomTest.class);
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
     }
 
 }

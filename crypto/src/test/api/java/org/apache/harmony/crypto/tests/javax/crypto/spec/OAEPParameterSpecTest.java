@@ -158,8 +158,4 @@ public class OAEPParameterSpecTest extends TestCase {
         return new TestSuite(OAEPParameterSpecTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

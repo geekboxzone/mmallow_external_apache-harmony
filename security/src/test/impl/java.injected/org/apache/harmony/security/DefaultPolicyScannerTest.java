@@ -36,14 +36,10 @@ import junit.framework.TestCase;
 
 /**
  * TODO Put your class description here
- * 
+ *
  */
 
 public class DefaultPolicyScannerTest extends TestCase {
-    
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(DefaultPolicyScannerTest.class);
-    }
 
     private static String IO_ERROR = "Failed intentionally";
 

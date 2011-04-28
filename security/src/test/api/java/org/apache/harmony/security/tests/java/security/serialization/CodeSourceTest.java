@@ -42,14 +42,10 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Serialization test for CodeSource.
- * 
+ *
  */
 
 public class CodeSourceTest extends SerializationTest {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(CodeSourceTest.class);
-    }
 
     protected void setUp() throws Exception {
         super.setUp();
@@ -64,13 +60,13 @@ public class CodeSourceTest extends SerializationTest {
     public void testGolden() throws Throwable {
         super.testGolden();
         // do special testing to cover Exceptions in the {read/write}Data
-        
+
         //
         // test writeObject()
         //
-        
+
         {//~
-            
+
         Certificate[] certs = new Certificate[] { new InvalidX509Certificate_00() };
         CodeSource cs = new CodeSource(null, certs);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -84,7 +80,7 @@ public class CodeSourceTest extends SerializationTest {
         }
 
         }//~
-        
+
         //
         // test readObject
         //
@@ -93,12 +89,12 @@ public class CodeSourceTest extends SerializationTest {
         CodeSource cs = new CodeSource(null, certs);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baos);
-        
+
         oos.writeObject(cs);
-        
+
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         ObjectInputStream ois = new ObjectInputStream(bais);
-        
+
         try {
             ois.readObject();
             fail("must not pass here");
@@ -107,21 +103,21 @@ public class CodeSourceTest extends SerializationTest {
             // ok
         }
         }//~
-        
-        // test readObject, force the CertFactory to throw an Exception from 
+
+        // test readObject, force the CertFactory to throw an Exception from
         // inside the generateCertificate
-        
+
         {//~
             Certificate[] certs = new Certificate[] { new InvalidX509Certificate_01() };
             CodeSource cs = new CodeSource(null, certs);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);
-            
+
             oos.writeObject(cs);
-            
+
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ObjectInputStream ois = new ObjectInputStream(bais);
-            
+
             try {
                 ois.readObject();
                 fail("must not pass here");
@@ -131,7 +127,7 @@ public class CodeSourceTest extends SerializationTest {
             }
         }//~
     }
-    
+
     private class InvalidX509Certificate_00 extends TestCertUtils.TestX509Certificate {
         InvalidX509Certificate_00() {
             super(TestCertUtils.rootPrincipal, TestCertUtils.rootPrincipal);
@@ -141,24 +137,24 @@ public class CodeSourceTest extends SerializationTest {
             throw new CertificateEncodingException("CEE");
         }
     }
-    
+
     private class InvalidX509Certificate_01 extends TestCertUtils.TestX509Certificate {
         InvalidX509Certificate_01() {
             super(TestCertUtils.rootPrincipal, TestCertUtils.rootPrincipal);
         }
         public byte[] getEncoded() throws CertificateEncodingException {
             // this is invalid encoding for TestX509Certificate
-            return new byte[] {1,2,3,4,5}; 
+            return new byte[] {1,2,3,4,5};
         }
     }
-    
+
 
     private class CertificateOfUnsupportedType extends TestCertUtils.TestCertificate {
         CertificateOfUnsupportedType() {
             super(null, "this is indeed unsupported type of certificates. I do believe so.");
         }
     }
-    
+
     protected Object[] getData() {
         URL url;
         CodeSigner[] signers = null;
@@ -175,7 +171,7 @@ public class CodeSourceTest extends SerializationTest {
         Certificate[] x509chain = new Certificate[] {
                 TestCertUtils.rootCA
         };
-        
+
         Object[] data = new Object[] {
                 new CodeSource(url, (Certificate[])null),
                 new CodeSource(url, new Certificate[0]),

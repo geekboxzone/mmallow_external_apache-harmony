@@ -27,8 +27,8 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 
 /**
- * Test for SignatureException serialization 
- *  
+ * Test for SignatureException serialization
+ *
  */
 
 public class SignatureExceptionTest extends SerializationTest {
@@ -48,7 +48,4 @@ public class SignatureExceptionTest extends SerializationTest {
                 new SignatureException(msgs[1], dExc) };
     }
 
-    public static void main(String[] args) {
-       junit.textui.TestRunner.run(SignatureExceptionTest.class);
-    }
 }

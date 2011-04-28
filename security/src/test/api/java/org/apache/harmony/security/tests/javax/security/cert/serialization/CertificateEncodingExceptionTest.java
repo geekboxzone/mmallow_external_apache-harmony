@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for CertificateEncodingException serialization
- * 
+ *
  */
 
 public class CertificateEncodingExceptionTest extends SerializationTest {
@@ -44,7 +44,4 @@ public class CertificateEncodingExceptionTest extends SerializationTest {
                 new CertificateEncodingException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(CertificateEncodingExceptionTest.class);
-    }
 }

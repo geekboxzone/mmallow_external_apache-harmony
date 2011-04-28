@@ -27,8 +27,8 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 
 /**
- * Test for CRLException serialization 
- *  
+ * Test for CRLException serialization
+ *
  */
 
 public class CRLExceptionTest extends SerializationTest {
@@ -48,7 +48,4 @@ public class CRLExceptionTest extends SerializationTest {
                 new CRLException(msgs[1], dExc) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(CRLExceptionTest.class);
-    }
 }

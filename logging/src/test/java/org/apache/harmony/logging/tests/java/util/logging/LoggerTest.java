@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +30,6 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-import java.util.logging.LoggerExtension;
 import java.util.logging.LoggingPermission;
 
 import junit.framework.TestCase;
@@ -41,7 +40,7 @@ import tests.util.CallVerificationStack;
 
 /**
  * Test suite for the class java.util.logging.Logger.
- * 
+ *
  */
 public class LoggerTest extends TestCase {
 
@@ -52,7 +51,7 @@ public class LoggerTest extends TestCase {
 	private final static String VALID_RESOURCE_BUNDLE3 = "bundles/java/util/logging/res3";
 
 	private final static String INVALID_RESOURCE_BUNDLE = "impossible_not_existing";
-    
+
     private final static String LOGGING_CONFIG_FILE= "resources/config/java/util/logging/logging.config";
 
 	private final static String VALID_KEY = "LOGGERTEST";
@@ -64,7 +63,7 @@ public class LoggerTest extends TestCase {
 	private Logger sharedLogger = null;
 
 	private Locale oldLocale = null;
-    
+
 	/*
 	 * @see TestCase#setUp()
 	 */
@@ -87,7 +86,7 @@ public class LoggerTest extends TestCase {
 
 	/**
 	 * Constructor for LoggerTest.
-	 * 
+	 *
 	 * @param arg0
 	 */
 	public LoggerTest(String arg0) {
@@ -113,7 +112,7 @@ public class LoggerTest extends TestCase {
 
 	/*
 	 * Test constructor under normal conditions.
-	 * 
+	 *
 	 * TODO: using a series of class loaders to load resource bundles
 	 */
 	public void testConstructor_Normal() {
@@ -322,7 +321,7 @@ public class LoggerTest extends TestCase {
 		}
         Logger logger = Logger.getLogger("", null);
         assertNull(logger.getResourceBundleName());
-        assertNull(logger.getResourceBundle());        
+        assertNull(logger.getResourceBundle());
 	}
 
 	/*
@@ -2726,7 +2725,7 @@ public class LoggerTest extends TestCase {
 		assertNull(r.getParameters()[0]);
 		assertSame(r.getThrown(), null);
 	}
-    
+
     /**
      * @tests java.util.logging.Logger#logrb(Level, String, String, String,
      *        String, Object)
@@ -3400,7 +3399,7 @@ public class LoggerTest extends TestCase {
 	 * Test whether privileged code is used to load resource bundles.
 	 */
 	public void testLoadResourceBundle() {
-        // 
+        //
 		SecurityManager oldMan = System.getSecurityManager();
 		System.setSecurityManager(new MockNoLoadingClassSecurityManager());
 		try {
@@ -3409,18 +3408,20 @@ public class LoggerTest extends TestCase {
 			System.setSecurityManager(oldMan);
 		}
 	}
-    
-    public void testLoadResourceBundleNonExistent() {
-        try {
-            // Try a load a non-existent resource bundle.
-            LoggerExtension.loadResourceBundle("missinglogger.properties");
-            fail("Expected an exception.");
-        } catch (MissingResourceException ex) {
-            // Expected exception is precisely a MissingResourceException
-            assertTrue(ex.getClass() == MissingResourceException.class);
+
+    /* Logger.loadResourceBundle is not publicly accessible in Android
+        public void testLoadResourceBundleNonExistent() {
+            try {
+                // Try a load a non-existent resource bundle.
+                LoggerExtension.loadResourceBundle("missinglogger.properties");
+                fail("Expected an exception.");
+            } catch (MissingResourceException ex) {
+                // Expected exception is precisely a MissingResourceException
+                assertTrue(ex.getClass() == MissingResourceException.class);
+            }
         }
-    }
-    
+    */
+
     /**
      * @tests java.util.logging.Logger#logrb(Level, String, String, String,
      *        String, Object)
@@ -3456,7 +3457,7 @@ public class LoggerTest extends TestCase {
             System.setSecurityManager(originalSecurityManager);
         }
     }
-    
+
     /*
      * test initHandler
      */

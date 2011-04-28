@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for ExemptionMechanismException serialization
- * 
+ *
  */
 
 public class ExemptionMechanismExceptionTest extends SerializationTest {
@@ -42,7 +42,4 @@ public class ExemptionMechanismExceptionTest extends SerializationTest {
                 new ExemptionMechanismException(null), new ExemptionMechanismException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(ExemptionMechanismExceptionTest.class);
-    }
 }

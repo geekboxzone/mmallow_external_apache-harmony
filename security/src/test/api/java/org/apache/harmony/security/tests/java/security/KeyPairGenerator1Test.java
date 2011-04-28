@@ -33,14 +33,14 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyPairGenerator</code> class constructors and methods.
- * 
+ *
  */
 
 public class KeyPairGenerator1Test extends TestCase {
 
     /**
      * Constructor for KayPairGeneratorTest.
-     * 
+     *
      * @param arg0
      */
     public KeyPairGenerator1Test(String arg0) {
@@ -48,7 +48,7 @@ public class KeyPairGenerator1Test extends TestCase {
     }
 
     private static String[] invalidValues = SpiEngUtils.invalidValues;
-    
+
     public static final String srvKeyPairGenerator = "KeyPairGenerator";
 
     public static String[] algs = {
@@ -61,7 +61,7 @@ public class KeyPairGenerator1Test extends TestCase {
     public static Provider validProvider = null;
 
     private static boolean DSASupported = false;
-    
+
     public static String NotSupportMsg = "";
 
     static {
@@ -71,10 +71,10 @@ public class KeyPairGenerator1Test extends TestCase {
         DSASupported = (validProvider != null);
         if (!DSASupported) {
             NotSupportMsg = validAlgName + " algorithm is not supported" ;
-        }        
+        }
         validProviderName = (DSASupported ? validProvider.getName() : null);
     }
-    
+
     protected KeyPairGenerator [] createKPGen() {
         if (!DSASupported) {
             fail(NotSupportMsg);
@@ -93,10 +93,10 @@ public class KeyPairGenerator1Test extends TestCase {
     }
 
     /**
-     * Test for <code>getInstance(String algorithm)</code> method 
+     * Test for <code>getInstance(String algorithm)</code> method
      * Assertion:
      * throws NullPointerException  when algorithm is null
-     * throws NoSuchAlgorithmException when algorithm is incorrect; 
+     * throws NoSuchAlgorithmException when algorithm is incorrect;
      */
     public void testKeyPairGenerator01() throws NoSuchAlgorithmException {
         try {
@@ -116,7 +116,7 @@ public class KeyPairGenerator1Test extends TestCase {
     }
 
     /**
-     * Test for <code>getInstance(String algorithm)</code> method 
+     * Test for <code>getInstance(String algorithm)</code> method
      * Assertion: returns KeyPairGenerator object
      */
     public void testKeyPairGenerator02() throws NoSuchAlgorithmException {
@@ -134,7 +134,7 @@ public class KeyPairGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
-     * method 
+     * method
      * Assertion: throws IllegalArgumentException when provider is null or empty
      */
     public void testKeyPairGenerator03() throws NoSuchAlgorithmException,
@@ -160,10 +160,10 @@ public class KeyPairGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
-     * method 
+     * method
      * Assertion:
      * throws NullPointerException  when algorithm is null
-     * throws NoSuchAlgorithmException when algorithm is incorrect; 
+     * throws NoSuchAlgorithmException when algorithm is incorrect;
      */
     public void testKeyPairGenerator04() throws NoSuchAlgorithmException,
             IllegalArgumentException {
@@ -186,7 +186,7 @@ public class KeyPairGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
-     * method 
+     * method
      * Assertion: throws NoSuchAlgorithmException when algorithm is not
      * available oe null
      */
@@ -216,7 +216,7 @@ public class KeyPairGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
-     * method 
+     * method
      * Assertion: returns KeyPairGenerator object
      */
     public void testKeyPairGenerator06() throws NoSuchProviderException,
@@ -237,7 +237,7 @@ public class KeyPairGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
-     * method 
+     * method
      * Assertion: throws IllegalArgumentException when provider is null
      */
     public void testKeyPairGenerator07() throws NoSuchAlgorithmException {
@@ -257,10 +257,10 @@ public class KeyPairGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
-     * method 
-     * Assertion: 
+     * method
+     * Assertion:
      * throws NullPointerException  when algorithm is null
-     * throws NoSuchAlgorithmException when algorithm is incorrect; 
+     * throws NoSuchAlgorithmException when algorithm is incorrect;
      */
     public void testKeyPairGenerator08() throws IllegalArgumentException {
         if (!DSASupported) {
@@ -286,7 +286,7 @@ public class KeyPairGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
-     * method 
+     * method
      * Assertion: returns KeyPairGenerator object
      */
     public void testKeyPairGenerator09() throws NoSuchAlgorithmException,
@@ -303,11 +303,11 @@ public class KeyPairGenerator1Test extends TestCase {
             assertEquals("Incorrect provider", kpg.getProvider(), validProvider);
         }
     }
-    
+
     /**
      * Test for <code>generateKeyPair()</code> and <code>genKeyPair()</code>
      * methods
-     * Assertion: KeyPairGenerator was initialized before the invocation 
+     * Assertion: KeyPairGenerator was initialized before the invocation
      * of these methods
      */
     public void testKeyPairGenerator10() throws NoSuchAlgorithmException,
@@ -330,9 +330,9 @@ public class KeyPairGenerator1Test extends TestCase {
                         kp1.getPublic()));
             }
     }
-    
+
     /**
-     * Test for methods: 
+     * Test for methods:
      * <code>initialize(int keysize)</code>
      * <code>initialize(int keysize, SecureRandom random)</code>
      * <code>initialize(AlgorithmParameterSpec param)</code>
@@ -340,7 +340,7 @@ public class KeyPairGenerator1Test extends TestCase {
      * Assertion: throws InvalidParameterException or
      * InvalidAlgorithmParameterException when parameters keysize or param are
      * incorrect
-     */   
+     */
     public void testKeyPairGenerator11() throws NoSuchAlgorithmException,
             NoSuchProviderException {
         if (!DSASupported) {
@@ -354,14 +354,14 @@ public class KeyPairGenerator1Test extends TestCase {
         AlgorithmParameterSpec aps = null;
 
         for (int i = 0; i < kpg.length; i++) {
-                        
-            for (int j = 0; j < keys.length; j++) {                
+
+            for (int j = 0; j < keys.length; j++) {
                 try {
                     kpg[i].initialize(keys[j]);
                     kpg[i].initialize(keys[j], random);
                 } catch (InvalidParameterException e) {
                 }
-            }            
+            }
 
             try {
                 kpg[i].initialize(aps);
@@ -370,7 +370,7 @@ public class KeyPairGenerator1Test extends TestCase {
             }
         }
     }
-    
+
     /**
      * Test for methods: <code>initialize(int keysize)</code>
      * <code>initialize(int keysize, SecureRandom random)</code>
@@ -445,7 +445,7 @@ public class KeyPairGenerator1Test extends TestCase {
             }
         }
     }
-    
+
     /**
      * Test for methods: <code>initialize(int keysize)</code>
      * <code>initialize(int keysize, SecureRandom random)</code>
@@ -500,7 +500,4 @@ public class KeyPairGenerator1Test extends TestCase {
         }
     }
 
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(KeyPairGenerator1Test.class);
-    }
 }

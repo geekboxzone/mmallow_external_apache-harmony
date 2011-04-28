@@ -16,9 +16,9 @@
  */
 
 /*
- * TODO 
+ * TODO
  * Two testcases, one in testDigestbyteArrayintint01() and one in testUpdatebyteArrayintint01(),
- * and testUpdatebyteArrayintint03() test are commented out because 
+ * and testUpdatebyteArrayintint03() test are commented out because
  * current implementations of the MessageDigest and MessageDigestSpi classes
  * are not compatible with RI; see JIRA ## 1120 and 1148.
  */
@@ -59,25 +59,25 @@ public class SHA1_MessageDigestTest extends TestCase {
                 },{
                 (byte) 0x80, (byte) 0x47, (byte) 0xf8, (byte) 0x24,     //  63 n=1
                 (byte) 0x13, (byte) 0xbf, (byte) 0x4c, (byte) 0x0b,
-                (byte) 0x6e, (byte) 0xfb, (byte) 0x6e, (byte) 0xa0, 
-                (byte) 0x91, (byte) 0xce, (byte) 0x08, (byte) 0x22, 
+                (byte) 0x6e, (byte) 0xfb, (byte) 0x6e, (byte) 0xa0,
+                (byte) 0x91, (byte) 0xce, (byte) 0x08, (byte) 0x22,
                 (byte) 0x02, (byte) 0x0d, (byte) 0x2e, (byte) 0xfc
                 },{
                 (byte) 0x92, (byte) 0xcb, (byte) 0x89, (byte) 0xdf,     //  64 n=2
                 (byte) 0x62, (byte) 0xd9, (byte) 0x00, (byte) 0xb3,
-                (byte) 0x50, (byte) 0xd9, (byte) 0x3e, (byte) 0x42, 
+                (byte) 0x50, (byte) 0xd9, (byte) 0x3e, (byte) 0x42,
                 (byte) 0x25, (byte) 0xca, (byte) 0x6f, (byte) 0x08,
                 (byte) 0x1d, (byte) 0x54, (byte) 0x7a, (byte) 0x28
                 },{
                 (byte) 0x70, (byte) 0x59, (byte) 0xd4, (byte) 0x34,     //  65 n=3
                 (byte) 0xa3, (byte) 0xb6, (byte) 0x28, (byte) 0x25,
-                (byte) 0x5c, (byte) 0x3e, (byte) 0xf8, (byte) 0xc8, 
+                (byte) 0x5c, (byte) 0x3e, (byte) 0xf8, (byte) 0xc8,
                 (byte) 0x92, (byte) 0x83, (byte) 0x9a, (byte) 0xb3,
                 (byte) 0xb9, (byte) 0x1c, (byte) 0x4f, (byte) 0xe6
                 },{
                 (byte) 0x03, (byte) 0x2f, (byte) 0x1c, (byte) 0x65,     // 639 n=4
                 (byte) 0x44, (byte) 0xcc, (byte) 0x88, (byte) 0xf7,
-                (byte) 0x34, (byte) 0xac, (byte) 0xad, (byte) 0xd3, 
+                (byte) 0x34, (byte) 0xac, (byte) 0xad, (byte) 0xd3,
                 (byte) 0xc4, (byte) 0xe2, (byte) 0x19, (byte) 0x32,
                 (byte) 0xdf, (byte) 0x6c, (byte) 0x88, (byte) 0xfe
                 },{
@@ -121,8 +121,8 @@ public class SHA1_MessageDigestTest extends TestCase {
 
     /*
      * array of numbers for which above data were calculated
-     */ 
-    private static final int[] LENGTHS = { 1, 63,64,65, 639,640,641, 6399,6400,6401, 9999 }; 
+     */
+    private static final int[] LENGTHS = { 1, 63,64,65, 639,640,641, 6399,6400,6401, 9999 };
 
     private static final int DIGESTLENGTH = 20;      // implementation constants
     private static final int LENGTH       = 100;     //
@@ -195,7 +195,7 @@ public class SHA1_MessageDigestTest extends TestCase {
 
     /**
      * test against "byte[] digest()" method;
-     * it checks out that for given seed arrays 
+     * it checks out that for given seed arrays
      * hash arrays returned by the method are the same as in RI
      */
     public final void testDigest02() {
@@ -211,7 +211,7 @@ public class SHA1_MessageDigestTest extends TestCase {
             results = md.digest();
 
             for ( int j = 0; j < DIGESTLENGTH; j++ ) {
-                assertEquals("results[j] != HASHTOCOMPARE[i][j] :: n=" + n + " j=" + j + 
+                assertEquals("results[j] != HASHTOCOMPARE[i][j] :: n=" + n + " j=" + j +
                              " i=" + i, results[j], HASHTOCOMPARE[i][j]);
             }
             i++;
@@ -288,7 +288,7 @@ public class SHA1_MessageDigestTest extends TestCase {
         for ( len = DIGESTLENGTH -1; len >=0 ; len-- ) {
             try {
                 md.digest(new byte[DIGESTLENGTH], 0, len);
-                fail("md.digest(new byte[DIGESTLENGTH], 0, len) :: len=" + 
+                fail("md.digest(new byte[DIGESTLENGTH], 0, len) :: len=" +
                       len + " :: No DigestException");
             } catch (DigestException e) {
             }
@@ -298,7 +298,7 @@ public class SHA1_MessageDigestTest extends TestCase {
 //        for ( offset = -5;  offset < 0 ; offset++ ) {
 //            try {
 //                md.digest(new byte[30], offset, DIGESTLENGTH);
-//                fail("md.digest(new byte[30], offset, DIGESTLENGTH) :: " + 
+//                fail("md.digest(new byte[30], offset, DIGESTLENGTH) :: " +
 //                     "offset=" + offset + " :: no ArrayIndexOutOfBoundsException");
 //            } catch (ArrayIndexOutOfBoundsException e) {
 //            }
@@ -308,7 +308,7 @@ public class SHA1_MessageDigestTest extends TestCase {
 
     /**
      * test agains "int digest(byte[], int, int)" method
-     * it checks out that for given seed arrays 
+     * it checks out that for given seed arrays
      * hash arrays returned by the method are the same as in RI
      */
     public final void testDigestbyteArrayintint02() throws DigestException {
@@ -346,7 +346,7 @@ public class SHA1_MessageDigestTest extends TestCase {
         byte[] bytes2 = new byte[DIGESTLENGTH];
 
         for ( int n = 1 ; n < LENGTH; n++ ) {
-        
+
             byte[] b = new byte[n];
             for ( int j = 0; j < b.length; j++ ) {
                 b[j] = (byte) j;
@@ -369,7 +369,7 @@ public class SHA1_MessageDigestTest extends TestCase {
      * test against the "int GetDigestLength()" method;
      * it checks out that the method returns the same value
      * regardless of previous calls to other methods
-     */ 
+     */
     public final void testGetDigestLength() throws DigestException {
 
         int digestlength = md.getDigestLength();
@@ -495,7 +495,7 @@ public class SHA1_MessageDigestTest extends TestCase {
 
     /**
      * test against the "void update(byte[],int,int)" method;
-     * it checks out that two sequential digest, 
+     * it checks out that two sequential digest,
      * second is byte array update to first,
      * are different, provided length of the byte array > 0.
      */
@@ -559,12 +559,12 @@ public class SHA1_MessageDigestTest extends TestCase {
 //            md.update(new byte[1], 0, 0);
 //            digest2 = md.digest();
 //
-//            assertTrue("digest's lengths are different : length1=" + 
-//                       digest1.length + " length2=" + digest2.length, 
+//            assertTrue("digest's lengths are different : length1=" +
+//                       digest1.length + " length2=" + digest2.length,
 //                       digest1.length == digest2.length );
 //
 //            for ( int i = 0; i < digest1.length ; i++ ) {
-//                assertTrue("different digests : i=" +i + 
+//                assertTrue("different digests : i=" +i +
 //                           " digest1[i]=" + digest1[i] + " digest2[i]=" + digest2[i],
 //                           digest1[i] == digest2[i] );
 //            }
@@ -574,10 +574,6 @@ public class SHA1_MessageDigestTest extends TestCase {
 
     public static Test suite() {
         return new TestSuite(SHA1_MessageDigestTest.class);
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
     }
 
  }

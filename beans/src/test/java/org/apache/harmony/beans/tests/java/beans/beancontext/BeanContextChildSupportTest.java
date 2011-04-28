@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -66,7 +66,7 @@ public class BeanContextChildSupportTest extends TestCase {
         public boolean vetoBeanContext = false;
 
         /**
-         * 
+         *
          */
         public MockBeanContextChildSupport() {
             super();
@@ -91,7 +91,7 @@ public class BeanContextChildSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextChildSupport#initializeBeanContextResources()
          */
         @Override
@@ -101,7 +101,7 @@ public class BeanContextChildSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextChildSupport#releaseBeanContextResources()
          */
         @Override
@@ -116,7 +116,7 @@ public class BeanContextChildSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextChildSupport#validatePendingSetBeanContext(java.beans.beancontext.BeanContext)
          */
         @Override
@@ -126,10 +126,6 @@ public class BeanContextChildSupportTest extends TestCase {
             }
             return super.validatePendingSetBeanContext(newValue);
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        junit.textui.TestRunner.run(BeanContextChildSupportTest.class);
     }
 
     public void testAddPropertyChangeListener_NullParam() {
@@ -916,7 +912,7 @@ public class BeanContextChildSupportTest extends TestCase {
     /**
      * * Test constructor with BeanContextChild parameter.
      * <p>
-     * 
+     *
      * @see BeanContextChildSupport#BeanContextChildSupport(BeanContextChild)
      */
     public void testConstructorBeanContextChild() throws Exception {
@@ -926,7 +922,7 @@ public class BeanContextChildSupportTest extends TestCase {
     /**
      * * Test constructor with no parameters.
      * <p>
-     * 
+     *
      * @see BeanContextChildSupport#BeanContextChildSupport()
      */
     public void testConstructor() throws Exception {
@@ -945,7 +941,7 @@ public class BeanContextChildSupportTest extends TestCase {
 
         assertNotNull("BeanContext should not be null", sup.getBeanContext());
     }
-    
+
     public void testSetBeanContextBeanContextWithPropertyVetoException()
             throws Exception {
         MyBeanContextChildSupport myBeanContextChildSupport = new MyBeanContextChildSupport();
@@ -955,39 +951,39 @@ public class BeanContextChildSupportTest extends TestCase {
         try {
             myBeanContextChildSupport.setBeanContext(beanContext);
             fail("should throw PropertyVetoException");
-        } catch (PropertyVetoException e) {           
+        } catch (PropertyVetoException e) {
             // expected
         }
         assertTrue(myBeanContextChildSupport.getRejectedSetBCOnce());
         assertNull(myBeanContextChildSupport.getBeanContext());
-        
+
         myBeanContextChildSupport.setBeanContext(beanContext);
         assertFalse(myBeanContextChildSupport.getRejectedSetBCOnce());
         assertNotNull(myBeanContextChildSupport.getBeanContext());
-        
+
         try {
             myBeanContextChildSupport.setBeanContext(new BeanContextSupport());
             fail("should throw PropertyVetoException");
         } catch (PropertyVetoException e) {
             // expected
         }
-        
+
         myBeanContextChildSupport
                 .removeVetoableChangeListener("beanContext", vcl);
         myBeanContextChildSupport.setBeanContext(beanContext);
         assertTrue(myBeanContextChildSupport.getRejectedSetBCOnce());
         assertSame(beanContext, myBeanContextChildSupport.getBeanContext());
     }
-    
-    
-    class MyVetoableChangeListener implements VetoableChangeListener 
-    { 
 
-        public void vetoableChange(PropertyChangeEvent arg0) throws PropertyVetoException { 
-            throw new PropertyVetoException("TESTSTRING", null); 
-        } 
+
+    class MyVetoableChangeListener implements VetoableChangeListener
+    {
+
+        public void vetoableChange(PropertyChangeEvent arg0) throws PropertyVetoException {
+            throw new PropertyVetoException("TESTSTRING", null);
+        }
     }
-    
+
     class MyBeanContextChildSupport extends BeanContextChildSupport {
         public boolean getRejectedSetBCOnce() {
             return rejectedSetBCOnce;

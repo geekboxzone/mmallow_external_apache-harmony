@@ -41,10 +41,10 @@ public class EDIPartyNameTest extends TestCase {
         for (int i=0; i<data.length; i++) {
             String tail = Integer.toHexString(0x000000ff & data[i]);
             if (tail.length() == 1) {
-                tail = "0" + tail; 
+                tail = "0" + tail;
             }
             System.out.print(prefix + "0x" + tail + delimiter);
- 
+
             if (((i+1)%perLine) == 0) {
                 System.out.println();
             }
@@ -61,14 +61,14 @@ public class EDIPartyNameTest extends TestCase {
         EDIPartyName ediPN = new EDIPartyName("nameAssigner", "partyName");
         byte[] encoded = ediPN.getEncoded();
         // manually derived data:
-        byte[] _encoded = { 
-            (byte) 0x30, (byte) 0x1d, (byte) 0x80, (byte) 0x0e, 
-            (byte) 0x13, (byte) 0x0c, (byte) 0x6e, (byte) 0x61, 
-            (byte) 0x6d, (byte) 0x65, (byte) 0x41, (byte) 0x73, 
+        byte[] _encoded = {
+            (byte) 0x30, (byte) 0x1d, (byte) 0x80, (byte) 0x0e,
+            (byte) 0x13, (byte) 0x0c, (byte) 0x6e, (byte) 0x61,
+            (byte) 0x6d, (byte) 0x65, (byte) 0x41, (byte) 0x73,
             (byte) 0x73, (byte) 0x69, (byte) 0x67, (byte) 0x6e,
-            (byte) 0x65, (byte) 0x72, (byte) 0x81, (byte) 0x0b, 
-            (byte) 0x13, (byte) 0x09, (byte) 0x70, (byte) 0x61, 
-            (byte) 0x72, (byte) 0x74, (byte) 0x79, (byte) 0x4e, 
+            (byte) 0x65, (byte) 0x72, (byte) 0x81, (byte) 0x0b,
+            (byte) 0x13, (byte) 0x09, (byte) 0x70, (byte) 0x61,
+            (byte) 0x72, (byte) 0x74, (byte) 0x79, (byte) 0x4e,
             (byte) 0x61, (byte) 0x6d, (byte) 0x65
         };
         if (!Arrays.equals(encoded, _encoded)) {
@@ -84,13 +84,13 @@ public class EDIPartyNameTest extends TestCase {
         encoded = gName.getEncoded();
         // manually derived data:
         _encoded = new byte[] {
-            (byte) 0xa5, (byte) 0x1d, (byte) 0x80, (byte) 0x0e, 
-            (byte) 0x13, (byte) 0x0c, (byte) 0x6e, (byte) 0x61, 
-            (byte) 0x6d, (byte) 0x65, (byte) 0x41, (byte) 0x73, 
-            (byte) 0x73, (byte) 0x69, (byte) 0x67, (byte) 0x6e, 
-            (byte) 0x65, (byte) 0x72, (byte) 0x81, (byte) 0x0b, 
-            (byte) 0x13, (byte) 0x09, (byte) 0x70, (byte) 0x61, 
-            (byte) 0x72, (byte) 0x74, (byte) 0x79, (byte) 0x4e, 
+            (byte) 0xa5, (byte) 0x1d, (byte) 0x80, (byte) 0x0e,
+            (byte) 0x13, (byte) 0x0c, (byte) 0x6e, (byte) 0x61,
+            (byte) 0x6d, (byte) 0x65, (byte) 0x41, (byte) 0x73,
+            (byte) 0x73, (byte) 0x69, (byte) 0x67, (byte) 0x6e,
+            (byte) 0x65, (byte) 0x72, (byte) 0x81, (byte) 0x0b,
+            (byte) 0x13, (byte) 0x09, (byte) 0x70, (byte) 0x61,
+            (byte) 0x72, (byte) 0x74, (byte) 0x79, (byte) 0x4e,
             (byte) 0x61, (byte) 0x6d, (byte) 0x65
         };
         if (!Arrays.equals(encoded, _encoded)) {
@@ -128,7 +128,7 @@ public class EDIPartyNameTest extends TestCase {
 
         assertTrue("Some problems occured.", pass);
     }
-    
+
     /**
      * EDIPartyName(String nameAssigner, String partyName, byte[] encoding)
      * method testing.
@@ -140,70 +140,66 @@ public class EDIPartyNameTest extends TestCase {
         new GeneralName(5, encoding);
 
         GeneralName gn = new GeneralName(ediName);
-       
+
         new GeneralName(5, gn.getEncodedName());
     }
-    
+
     /**
      * getNameAssigner() method testing.
      */
     public void testGetNameAssigner() {
     }
-    
+
     /**
      * getPartyName() method testing.
      */
     public void testGetPartyName() {
     }
-    
+
     /**
      * getEncoded() method testing.
      */
     public void testGetEncoded() {
     }
-    
+
     /**
      * getEncoder() method testing.
      */
     public void testGetEncoder() {
     }
-    
+
     /**
      * DerEncoder(String nameAssigner, String partyName) method testing.
      */
     public void testDerEncoder() {
     }
-    
+
     /**
      * getDirStrAlternatives() method testing.
      */
     public void testGetDirStrAlternatives() {
     }
-    
+
     /**
      * DerDecoder() method testing.
      */
     public void testDerDecoder() {
     }
-    
+
     /**
      * getValue(byte[] encoding) method testing.
      */
     public void testGetValue1() {
     }
-    
+
     /**
      * getValue() method testing.
      */
     public void testGetValue2() {
     }
-    
+
     public static Test suite() {
         return new TestSuite(EDIPartyNameTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

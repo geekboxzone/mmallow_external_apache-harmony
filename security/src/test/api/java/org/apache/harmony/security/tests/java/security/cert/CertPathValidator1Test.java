@@ -41,7 +41,7 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>CertPathValidator</code> class constructors and
  * methods.
- * 
+ *
  */
 
 public class CertPathValidator1Test extends TestCase {
@@ -54,18 +54,18 @@ public class CertPathValidator1Test extends TestCase {
         super(name);
     }
     public static final String srvCertPathValidator = "CertPathValidator";
-    
-    private static final String defaultType = "PKIX";    
+
+    private static final String defaultType = "PKIX";
     public static final String [] validValues = {
             "PKIX", "pkix", "PkiX", "pKiX" };
-     
+
     private static String [] invalidValues = SpiEngUtils.invalidValues;
-    
+
     private static boolean PKIXSupport = false;
 
     private static Provider defaultProvider;
     private static String defaultProviderName;
-    
+
     private static String NotSupportMsg = "";
 
     static {
@@ -74,10 +74,10 @@ public class CertPathValidator1Test extends TestCase {
         PKIXSupport = (defaultProvider != null);
         defaultProviderName = (PKIXSupport ? defaultProvider.getName() : null);
         NotSupportMsg = defaultType.concat(" is not supported");
-    }    
-    
-    
-    
+    }
+
+
+
     private static CertPathValidator[] createCPVs() {
         if (!PKIXSupport) {
             fail(NotSupportMsg);
@@ -94,13 +94,13 @@ public class CertPathValidator1Test extends TestCase {
         } catch (Exception e) {
             return null;
         }
-    }    
-    
-    
+    }
+
+
     /**
      * Test for <code>getDefaultType()</code> method
 	 * Assertion: returns security property "certpathvalidator.type" or "PKIX"
-     */    
+     */
     public void testCertPathValidator01() {
         if (!PKIXSupport) {
             fail(NotSupportMsg);
@@ -108,29 +108,29 @@ public class CertPathValidator1Test extends TestCase {
         }
         String propName = "certpathvalidator.type";
         String defCPV = Security.getProperty(propName);
-        
+
         String dt = CertPathValidator.getDefaultType();
-        String resType = defCPV; 
+        String resType = defCPV;
         if (resType == null) {
             resType = defaultType;
         }
         assertNotNull("Default type have not be null", dt);
         assertEquals("Incorrect default type", dt, resType);
-        
+
         if (defCPV == null) {
             Security.setProperty(propName, defaultType);
             dt = CertPathValidator.getDefaultType();
             resType = Security.getProperty(propName);
             assertNotNull("Incorrect default type", resType);
             assertNotNull("Default type have not be null", dt);
-            assertEquals("Incorrect default type", dt, resType);            
+            assertEquals("Incorrect default type", dt, resType);
         }
     }
-    
+
     /**
      * Test for <code>getInstance(String algorithm)</code> method
-	 * Assertion: 
-	 * throws NullPointerException when algorithm is null 
+	 * Assertion:
+	 * throws NullPointerException when algorithm is null
 	 * throws NoSuchAlgorithmException when algorithm  is not available
      */
     public void testCertPathValidator02() {
@@ -147,11 +147,11 @@ public class CertPathValidator1Test extends TestCase {
             } catch (NoSuchAlgorithmException e) {
             }
         }
-    }   
+    }
     /**
      * Test for <code>getInstance(String algorithm)</code> method
 	 * Assertion: returns CertPathValidator object
-     */ 
+     */
     public void testCertPathValidator03() throws NoSuchAlgorithmException  {
         if (!PKIXSupport) {
             fail(NotSupportMsg);
@@ -166,9 +166,9 @@ public class CertPathValidator1Test extends TestCase {
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
 	 * Assertion: throws IllegalArgumentException when provider is null or empty
-	 * 
+	 *
 	 * FIXME: verify what exception will be thrown if provider is empty
-     */  
+     */
     public void testCertPathValidator04()
             throws NoSuchAlgorithmException, NoSuchProviderException  {
         if (!PKIXSupport) {
@@ -176,7 +176,7 @@ public class CertPathValidator1Test extends TestCase {
             return;
         }
         String provider = null;
-        for (int i = 0; i < validValues.length; i++) {        
+        for (int i = 0; i < validValues.length; i++) {
             try {
                 CertPathValidator.getInstance(validValues[i], provider);
                 fail("IllegalArgumentException must be thrown thrown");
@@ -191,7 +191,7 @@ public class CertPathValidator1Test extends TestCase {
     }
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
-	 * Assertion: 
+	 * Assertion:
 	 * throws NoSuchProviderException when provider has invalid value
      */
     public void testCertPathValidator05() throws NoSuchAlgorithmException {
@@ -210,11 +210,11 @@ public class CertPathValidator1Test extends TestCase {
             }
         }
     }
-    
+
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
-	 * Assertion: 
-	 * throws NullPointerException when algorithm is null 
+	 * Assertion:
+	 * throws NullPointerException when algorithm is null
 	 * throws NoSuchAlgorithmException when algorithm  is not available
      */
     public void testCertPathValidator06()
@@ -257,7 +257,7 @@ public class CertPathValidator1Test extends TestCase {
                     .getName(), defaultProviderName);
         }
     }
-    
+
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code> method
 	 * Assertion: throws IllegalArgumentException when provider is null
@@ -275,13 +275,13 @@ public class CertPathValidator1Test extends TestCase {
                 fail("IllegalArgumentException must be thrown");
             } catch (IllegalArgumentException e1) {
             }
-        }        
+        }
     }
-    
+
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
-	 * Assertion: 
-	 * throws NullPointerException when algorithm is null 
+	 * Assertion:
+	 * throws NullPointerException when algorithm is null
 	 * throws NoSuchAlgorithmException when algorithm  is not available
      */
     public void testCertPathValidator09()
@@ -353,9 +353,9 @@ public class CertPathValidator1Test extends TestCase {
             }
         }
     }
-    
+
      /**
-     * Test for 
+     * Test for
      * <code>CertPathValidator</code> constructor
      * Assertion: returns CertPathValidator object
      */
@@ -367,7 +367,7 @@ public class CertPathValidator1Test extends TestCase {
             return;
         }
         CertPathValidatorSpi spi = new MyCertPathValidatorSpi();
-        CertPathValidator certPV = new myCertPathValidator(spi, 
+        CertPathValidator certPV = new myCertPathValidator(spi,
                     defaultProvider, defaultType);
         assertEquals("Incorrect algorithm", certPV.getAlgorithm(), defaultType);
         assertEquals("Incorrect provider", certPV.getProvider(), defaultProvider);
@@ -376,7 +376,7 @@ public class CertPathValidator1Test extends TestCase {
             certPV.validate(null, null);
             fail("CertPathValidatorException must be thrown");
         } catch (CertPathValidatorException e) {
-        }        
+        }
         certPV = new myCertPathValidator(null, null, null);
         assertNull("Incorrect algorithm", certPV.getAlgorithm());
         assertNull("Incorrect provider", certPV.getProvider());
@@ -386,9 +386,6 @@ public class CertPathValidator1Test extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(CertPathValidator1Test.class);
-    }  
 }
 /**
  * Additional class to verify CertPathValidator constructor

@@ -34,15 +34,11 @@ import org.apache.harmony.security.asn1.BerInputStream;
 
 /**
  * Tests BerInputStream implementation
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 
 public class BerInputStreamTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(BerInputStreamTest.class);
-    }
 
     /**
      * @tests org.apache.harmony.security.asn1.BerInputStream#BerInputStream(

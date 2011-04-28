@@ -35,12 +35,8 @@ import junit.framework.TestCase;
 
 public class GeneralNamesTest extends TestCase {
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(GeneralNamesTest.class);
-    }
-
     public void test_EncodeDecode() throws IOException {
-        
+
         GeneralNames subj_alt_names = new GeneralNames(Arrays
                 .asList(new GeneralName[] { new GeneralName(1, "rfc@822.Name"),
                         new GeneralName(2, "dNSName"),
@@ -48,11 +44,11 @@ public class GeneralNamesTest extends TestCase {
                         new GeneralName(6, "http://uniform.Resource.Id"),
                         new GeneralName(7, "255.255.255.0"),
                         new GeneralName(8, "1.2.3.4444.55555") }));
-        
+
         byte[] encoding = GeneralNames.ASN1.encode(subj_alt_names);
-        
+
         GeneralNames gnames = (GeneralNames) GeneralNames.ASN1.decode(encoding);
-        
+
         assertEquals("Names: ", subj_alt_names.getNames(), gnames.getNames());
     }
 }

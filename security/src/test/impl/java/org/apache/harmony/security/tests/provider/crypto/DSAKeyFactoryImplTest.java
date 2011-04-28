@@ -338,7 +338,7 @@ public class DSAKeyFactoryImplTest extends TestCase {
     /**
      * A compatibility with RI test.
      * It checks out that if key encoding in KeySpec has correct ASN1 structure
-     * but AlgorithmIdentifier contains value that connot be translated to "DSA"  
+     * but AlgorithmIdentifier contains value that connot be translated to "DSA"
      * the "generatePublic" method returns DSA public key
      * whose algorithm is neither null nor "DSA".
      */
@@ -414,7 +414,7 @@ public class DSAKeyFactoryImplTest extends TestCase {
      */
     public final void testGeneratePrivateKeySpec03() throws Exception {
 
-        KeySpec keySpec = (KeySpec) new DSAPrivateKeySpec(privateX, 
+        KeySpec keySpec = (KeySpec) new DSAPrivateKeySpec(privateX,
                                                           privateP, privateQ, privateG);
 
         checkPrivateKeys( (DSAPrivateKey) kf.generatePrivate(keySpec) );
@@ -463,7 +463,7 @@ public class DSAKeyFactoryImplTest extends TestCase {
     /**
      * A compatibility with RI test.
      * It checks out that if key encoding in KeySpec has correct ASN1 structure
-     * but AlgorithmIdentifier contains value that connot be translated to "DSA"  
+     * but AlgorithmIdentifier contains value that connot be translated to "DSA"
      * the "generatePrivate" method returns DSA private key
      * whose algorithm is neither null nor "DSA".
      */
@@ -574,9 +574,9 @@ public class DSAKeyFactoryImplTest extends TestCase {
 
     /**
      * A test against the "getKeySpec(Key, Class)" method.
-     * The test checks out that 
-     * 1) a KeySpec returned by the method is being casted to 
-     *    expected "DSAPublicKeySpec" or "X509EncodedKeySpec", and 
+     * The test checks out that
+     * 1) a KeySpec returned by the method is being casted to
+     *    expected "DSAPublicKeySpec" or "X509EncodedKeySpec", and
      * 2) DSAPublickey object generated from KeySpec is equal a "publicKey" argument.
      */
     public final void testGetKeySpec03() throws Exception {
@@ -593,9 +593,9 @@ public class DSAKeyFactoryImplTest extends TestCase {
 
     /**
      * A test against the "getKeySpec(Key, Class)" method.
-     * The test checks out that 
-     * 1) a KeySpec returned by the method is being casted to 
-          expected "DSAPrivateKeySpec" or "PKCS8EncodedKeySpec", and 
+     * The test checks out that
+     * 1) a KeySpec returned by the method is being casted to
+          expected "DSAPrivateKeySpec" or "PKCS8EncodedKeySpec", and
      * 2) DSAPublickey object generated from KeySpec is equal a "privateKey" argument.
      */
     public final void testGetKeySpec04() throws Exception {
@@ -743,9 +743,9 @@ public class DSAKeyFactoryImplTest extends TestCase {
     /**
      * A compatibility with RI test.
      * The test against the "translateKey(Key)" method.
-     * It checks out that 
+     * It checks out that
      * if a key encoding in a DSAPrivateKey argument has correct ASN1 structure
-     * but AlgorithmIdentifier contains value that connot be translated to "DSA"  
+     * but AlgorithmIdentifier contains value that connot be translated to "DSA"
      * the method returns DSAPrivateKey whose algorithm is neither null nor "DSA".
      */
     public final void testTranslateKey04() throws Exception {
@@ -787,9 +787,9 @@ public class DSAKeyFactoryImplTest extends TestCase {
     /**
      * A compatibility with RI test.
      * The test against the "translateKey(Key)" method.
-     * It checks out that 
+     * It checks out that
      * if a key encoding in a DSAPrivateKey argument has correct ASN1 structure
-     * but AlgorithmIdentifier contains value that connot be translated to "DSA"  
+     * but AlgorithmIdentifier contains value that connot be translated to "DSA"
      * the method returns DSAPrivateKey whose algorithm is neither null nor "DSA".
      */
     public final void testTranslateKey05() throws Exception {
@@ -832,8 +832,4 @@ public class DSAKeyFactoryImplTest extends TestCase {
         return new TestSuite(DSAKeyFactoryImplTest.class);
     }
 
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }

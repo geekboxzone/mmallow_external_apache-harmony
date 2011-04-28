@@ -27,8 +27,8 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 
 /**
- * Test for InvalidAlgorithmParameterException serialization 
- *  
+ * Test for InvalidAlgorithmParameterException serialization
+ *
  */
 
 public class InvalidAlgorithmParameterExceptionTest extends SerializationTest {
@@ -48,7 +48,4 @@ public class InvalidAlgorithmParameterExceptionTest extends SerializationTest {
                 new InvalidAlgorithmParameterException(msgs[1], dExc) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(InvalidAlgorithmParameterExceptionTest.class);
-    }
 }

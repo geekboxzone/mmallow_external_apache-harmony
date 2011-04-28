@@ -59,7 +59,7 @@ import org.apache.harmony.security.x509.Validity;
  *   Certificate  ::=  SEQUENCE  {
  *        tbsCertificate       TBSCertificate,
  *        signatureAlgorithm   AlgorithmIdentifier,
- *        signatureValue       BIT STRING  
+ *        signatureValue       BIT STRING
  *   }
  *
  *   TBSCertificate  ::=  SEQUENCE  {
@@ -84,19 +84,19 @@ import org.apache.harmony.security.x509.Validity;
  *
  *   Validity ::= SEQUENCE {
  *        notBefore      Time,
- *        notAfter       Time 
+ *        notAfter       Time
  *   }
  *
  *   Time ::= CHOICE {
  *        utcTime        UTCTime,
- *        generalTime    GeneralizedTime 
+ *        generalTime    GeneralizedTime
  *   }
  *
  *   UniqueIdentifier  ::=  BIT STRING
  *
  *   SubjectPublicKeyInfo  ::=  SEQUENCE  {
  *        algorithm            AlgorithmIdentifier,
- *        subjectPublicKey     BIT STRING  
+ *        subjectPublicKey     BIT STRING
  *   }
  *
  *   Extensions  ::=  SEQUENCE SIZE (1..MAX) OF Extension
@@ -104,7 +104,7 @@ import org.apache.harmony.security.x509.Validity;
  *   Extension  ::=  SEQUENCE  {
  *        extnID      OBJECT IDENTIFIER,
  *        critical    BOOLEAN DEFAULT FALSE,
- *        extnValue   OCTET STRING  
+ *        extnValue   OCTET STRING
  *   }
  * </pre>
  */
@@ -121,15 +121,15 @@ public class CertificateTest extends TestCase {
     public void testCertificate() throws Exception {
         // make the TBSCertificate for Certificate
         int version = 2; //v3
-        BigInteger serialNumber = BigInteger.valueOf(555L); 
+        BigInteger serialNumber = BigInteger.valueOf(555L);
         AlgorithmIdentifier signature = new AlgorithmIdentifier("1.2.3.44.555"); // random value
         Name issuer = new Name("O=Certificate Issuer");
         Validity validity = new Validity(new Date(100000000), new Date(200000000));
-        Name subject = new Name("O=Subject Organization"); 
-        SubjectPublicKeyInfo subjectPublicKeyInfo = 
-            new SubjectPublicKeyInfo(new AlgorithmIdentifier("1.2.840.113549.1.1.2"), 
+        Name subject = new Name("O=Subject Organization");
+        SubjectPublicKeyInfo subjectPublicKeyInfo =
+            new SubjectPublicKeyInfo(new AlgorithmIdentifier("1.2.840.113549.1.1.2"),
                     new byte[10]);
-        boolean[]   issuerUniqueID  = new boolean[] 
+        boolean[]   issuerUniqueID  = new boolean[]
                     {true, false, true, false, true, false, true, false}; // random value
         boolean[]   subjectUniqueID = new boolean[]
                     {false, true, false, true, false, true, false, true}; // random value
@@ -153,12 +153,12 @@ public class CertificateTest extends TestCase {
         Extension extension = new Extension("2.5.29.17", true, sans.getEncoded());
         Extensions extensions = new Extensions();
         extensions.addExtension(extension);
-        
+
         byte[] encoding = extensions.getEncoded();
         Extensions.ASN1.decode(encoding);
-        
-        TBSCertificate tbsCertificate = new TBSCertificate(version, serialNumber, 
-                signature, issuer, validity, subject, subjectPublicKeyInfo, 
+
+        TBSCertificate tbsCertificate = new TBSCertificate(version, serialNumber,
+                signature, issuer, validity, subject, subjectPublicKeyInfo,
                 issuerUniqueID, subjectUniqueID, extensions);
 
         encoding = tbsCertificate.getEncoded();
@@ -167,11 +167,11 @@ public class CertificateTest extends TestCase {
         Certificate certificate = new Certificate(tbsCertificate, signature, new byte[10]);
 
         encoding = certificate.getEncoded();
-        
+
         Certificate.ASN1.decode(encoding);
 
         encoding = Certificate.ASN1.encode(certificate);
-        
+
         ByteArrayInputStream bais = new ByteArrayInputStream(encoding);
 
         //try {
@@ -181,17 +181,17 @@ public class CertificateTest extends TestCase {
             // there is no X.509 certificate factory implementation installed
         //}
     }
-    
+
     /**
      * getTbsCertificate() method testing.
      */
     public void testGetTbsCertificate() throws IOException {
         // manually derived data:
         byte[] encoding = new byte[] {
-            (byte)0x30,(byte)0x13, // NameConstraints 
+            (byte)0x30,(byte)0x13, // NameConstraints
                 (byte)0xa1,(byte)0x11, // GeneralSubtrees (excludedSubtrees)
-                    (byte)0x30,(byte)0x0f, // GeneralSubtree 
-                        (byte)0xa0,(byte)0x0a, // GeneralName 
+                    (byte)0x30,(byte)0x0f, // GeneralSubtree
+                        (byte)0xa0,(byte)0x0a, // GeneralName
                             // OtherName:
                             (byte)0x06,(byte)0x03, // type-id (OID)
                                 (byte)0x00,(byte)0x01,(byte)0x02, // oid
@@ -201,31 +201,27 @@ public class CertificateTest extends TestCase {
         };
         NameConstraints.ASN1.decode(encoding);
     }
-    
+
     /**
      * getSignatureAlgorithm() method testing.
      */
     public void testGetSignatureAlgorithm() {
     }
-    
+
     /**
      * getSignatureValue() method testing.
      */
     public void testGetSignatureValue() {
     }
-    
+
     /**
      * getValue() method testing.
      */
     public void testGetValue() {
     }
-    
+
     public static Test suite() {
         return new TestSuite(CertificateTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

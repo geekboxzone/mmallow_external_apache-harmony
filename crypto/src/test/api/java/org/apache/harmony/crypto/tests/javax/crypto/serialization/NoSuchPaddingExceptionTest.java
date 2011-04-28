@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for NuSuchPaddingException serialization
- * 
+ *
  */
 
 public class NoSuchPaddingExceptionTest extends SerializationTest {
@@ -42,7 +42,4 @@ public class NoSuchPaddingExceptionTest extends SerializationTest {
                 new NoSuchPaddingException(null), new NoSuchPaddingException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(NoSuchPaddingExceptionTest.class);
-    }
 }

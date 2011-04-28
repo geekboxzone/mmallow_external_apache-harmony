@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +30,6 @@ import java.util.EventObject;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import junit.textui.TestRunner;
 import org.apache.harmony.beans.tests.support.SampleEvent;
 import org.apache.harmony.beans.tests.support.SampleListener;
 import org.apache.harmony.beans.tests.support.mock.MockButton;
@@ -227,7 +226,7 @@ public class EventHandlerTest extends TestCase {
 
         assertEquals("setSomeValue", getMethodName());
     }
-    
+
     /**
      * fileSampleEvent scenario by throwing RuntimeException
      */
@@ -244,7 +243,7 @@ public class EventHandlerTest extends TestCase {
     }
 
     /**
-     * 
+     *
      */
     public static Test suite() {
         // TestSuite suite = new TestSuite();
@@ -253,13 +252,6 @@ public class EventHandlerTest extends TestCase {
         // EventHandlerTest("testCreateClassObjectStringStringString_PropertyNull"));
         // return suite;
         return new TestSuite(EventHandlerTest.class);
-    }
-
-    /**
-     * 
-     */
-    public static void main(String[] args) {
-        TestRunner.run(suite());
     }
 
     public void logMethodCall(Object object, String methodName, Object[] params) {
@@ -428,7 +420,7 @@ public class EventHandlerTest extends TestCase {
             fail("should throw NPE");
         } catch (NullPointerException e) {
 
-        }    
+        }
     }
 
     /*
@@ -563,7 +555,7 @@ public class EventHandlerTest extends TestCase {
             fail("should throw NPE");
         } catch (NullPointerException e) {
 
-        }        
+        }
     }
 
     /*
@@ -1003,8 +995,8 @@ public class EventHandlerTest extends TestCase {
 
     /**
      * Checks some invalid property cases Regression for HARMONY-1884
-     * 
-     * Note: this test fails on RI and it is considered as Non-Bug Difference, 
+     *
+     * Note: this test fails on RI and it is considered as Non-Bug Difference,
      * please refer HARMONY-1884 for details
      */
     public void testInvalidProperties_HY1884() {
@@ -1278,7 +1270,7 @@ public class EventHandlerTest extends TestCase {
             logMethodCall(this, "setSomeValue", new Object[] { new Integer(
                     intValue) });
         }
-        
+
         public void throwRuntimeException() {
             throw new RuntimeException("forced throw RuntimeException");
         }

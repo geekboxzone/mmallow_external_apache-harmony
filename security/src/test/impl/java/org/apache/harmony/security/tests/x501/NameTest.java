@@ -29,7 +29,7 @@ import junit.framework.TestCase;
 
 /**
  * Test Name class
- * 
+ *
  * @see http://www.ietf.org/rfc/rfc1779.txt
  * @see http://www.ietf.org/rfc/rfc2253.txt
  */
@@ -63,10 +63,6 @@ public class NameTest extends TestCase {
             0x30, 0x08, 0x06, 0x03, 0x55, 0x04, 0x03, 0x13, 0x01, 0x41,
             0x30, 0x09, 0x06, 0x03, 0x55, 0x04, 0x08, 0x13, 0x02, 0x43, 0x41
     };
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(NameTest.class);
-    }
 
     public void testGetName1779() throws Exception {
 

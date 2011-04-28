@@ -32,7 +32,7 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyPairGenerator</code> class constructors and methods.
- * 
+ *
  */
 
 public class KeyPairGenerator2Test extends TestCase {
@@ -42,7 +42,7 @@ public class KeyPairGenerator2Test extends TestCase {
     private static final String KeyPairGeneratorProviderClass2 = "org.apache.harmony.security.tests.support.MyKeyPairGenerator2";
     private static final String KeyPairGeneratorProviderClass3 = "org.apache.harmony.security.tests.support.MyKeyPairGenerator3";
     private static final String KeyPairGeneratorProviderClass4 = "org.apache.harmony.security.tests.support.MyKeyPairGeneratorSpi";
-    
+
     private static final String defaultAlg = "KPGen";
 
     private static final String[] invalidValues = SpiEngUtils.invalidValues;
@@ -50,7 +50,7 @@ public class KeyPairGenerator2Test extends TestCase {
     private static final String[] validValues;
 
     String post;
-    
+
     static {
         validValues = new String[4];
         validValues[0] = defaultAlg;
@@ -59,7 +59,7 @@ public class KeyPairGenerator2Test extends TestCase {
         validValues[3] = "kPGEn";
     }
 
-    Provider mProv; 
+    Provider mProv;
     String resAlg;
 
     /*
@@ -80,7 +80,7 @@ public class KeyPairGenerator2Test extends TestCase {
 
     /**
      * Constructor for SecurityManagerFactoryTest2.
-     * 
+     *
      * @param arg0
      */
     public KeyPairGenerator2Test(String arg0) {
@@ -181,7 +181,7 @@ public class KeyPairGenerator2Test extends TestCase {
      * throws NullPointerException when algorithm is null throws
      * NoSuchAlgorithmException when algorithm is incorrect; returns
      * KeyPairGenerator object
-     *  
+     *
      */
     private void GetInstance01(int mode) throws NoSuchAlgorithmException,
             InvalidAlgorithmParameterException {
@@ -212,12 +212,12 @@ public class KeyPairGenerator2Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
-     * method 
-     * Assertions: 
+     * method
+     * Assertions:
      * throws NullPointerException  when algorithm is null
-     * throws NoSuchAlgorithmException when algorithm is incorrect; 
+     * throws NoSuchAlgorithmException when algorithm is incorrect;
      * throws IllegalArgumentException when provider is null;
-     * throws NoSuchProviderException when provider is available; 
+     * throws NoSuchProviderException when provider is available;
      * returns
      * KeyPairGenerator object
      */
@@ -274,10 +274,10 @@ public class KeyPairGenerator2Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
-     * method 
-     * Assertions: 
+     * method
+     * Assertions:
      * throws NullPointerException  when algorithm is null
-     * throws NoSuchAlgorithmException when algorithm is incorrect; 
+     * throws NoSuchAlgorithmException when algorithm is incorrect;
      * throws IllegalArgumentException when provider is null;
      * returns KeyPairGenerator object
      */
@@ -428,8 +428,5 @@ public class KeyPairGenerator2Test extends TestCase {
         post = "_4";
         setProv();
         GetInstance03(4);
-    }
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(KeyPairGenerator2Test.class);
     }
 }

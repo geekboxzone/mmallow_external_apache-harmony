@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for SSLPeerUnverifiedException serialization
- * 
+ *
  */
 
 public class SSLPeerUnverifiedExceptionTest extends SerializationTest {
@@ -43,7 +43,4 @@ public class SSLPeerUnverifiedExceptionTest extends SerializationTest {
                 new SSLPeerUnverifiedException(msgs[0]), new SSLPeerUnverifiedException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(SSLPeerUnverifiedExceptionTest.class);
-    }
 }

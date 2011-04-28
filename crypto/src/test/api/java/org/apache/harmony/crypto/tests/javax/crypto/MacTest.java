@@ -45,7 +45,7 @@ import junit.framework.TestSuite;
 
 /**
  * Tests for Mac class constructors and methods
- * 
+ *
  */
 
 public class MacTest extends TestCase {
@@ -53,7 +53,7 @@ public class MacTest extends TestCase {
     public static final String srvMac = "Mac";
 
     private static String defaultAlgorithm = null;
-        
+
     private static String defaultProviderName = null;
 
     private static Provider defaultProvider = null;
@@ -65,11 +65,11 @@ public class MacTest extends TestCase {
     private static final String[] invalidValues = SpiEngUtils.invalidValues;
 
     private static String[] validValues = new String[3];
-    
-    public static final String validAlgorithmsMac [] = 
+
+    public static final String validAlgorithmsMac [] =
         {"HmacSHA1", "HmacMD5", "HmacSHA256", "HmacSHA384", "HmacSHA512"};
 
-        
+
     static {
         for (int i = 0; i < validAlgorithmsMac.length; i++) {
             defaultProvider = SpiEngUtils.isSupport(validAlgorithmsMac[i],
@@ -104,7 +104,7 @@ public class MacTest extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm)</code> method
-     * Assertion: 
+     * Assertion:
      * throws NullPointerException when algorithm is null
      * throws NoSuchAlgorithmException when algorithm is not available
      */
@@ -121,10 +121,10 @@ public class MacTest extends TestCase {
                 fail("NoSuchAlgorithmException must be thrown when algorithm is not available: "
                         .concat(invalidValues[i]));
             } catch (NoSuchAlgorithmException e) {
-            }            
+            }
         }
     }
-    
+
     /**
      * Test for <code>getInstance(String algorithm)</code> method
      * Assertion: returns Mac object
@@ -142,7 +142,7 @@ public class MacTest extends TestCase {
     }
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
-     * Assertion: 
+     * Assertion:
      * throws IllegalArgumentException when provider is null or empty
      * throws NoSuchProviderException when provider is not available
      */
@@ -174,14 +174,14 @@ public class MacTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
-     * Assertion: 
+     * Assertion:
      * throws NullPointerException when algorithm is null
      * throws NoSuchAlgorithmException when algorithm is not available
      */
-    public void testMac04() throws NoSuchAlgorithmException, 
+    public void testMac04() throws NoSuchAlgorithmException,
             IllegalArgumentException, NoSuchProviderException {
         if (!DEFSupported) {
             fail(NotSupportedMsg);
@@ -216,7 +216,7 @@ public class MacTest extends TestCase {
         for (int i = 0; i < validValues.length; i++) {
             mac = Mac.getInstance(validValues[i], defaultProviderName);
             assertEquals("Incorrect algorithm", mac.getAlgorithm(), validValues[i]);
-            assertEquals("Incorrect provider", mac.getProvider().getName(), 
+            assertEquals("Incorrect provider", mac.getProvider().getName(),
                     defaultProviderName);
         }
     }
@@ -241,11 +241,11 @@ public class MacTest extends TestCase {
     }
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code> method
-     * Assertion: 
+     * Assertion:
      * throws NullPointerException when algorithm is null
      * throws NoSuchAlgorithmException when algorithm is not available
      */
-    public void testMac07() throws NoSuchAlgorithmException, 
+    public void testMac07() throws NoSuchAlgorithmException,
             NoSuchProviderException, IllegalArgumentException {
         if (!DEFSupported) {
             fail(NotSupportedMsg);
@@ -266,7 +266,7 @@ public class MacTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code> method
      * Assertion: returns Mac object
@@ -317,7 +317,7 @@ public class MacTest extends TestCase {
                 macs[i].update(bBuf);
                 fail("IllegalStateException must be thrown");
             } catch (IllegalStateException e) {
-            }            
+            }
             try {
                 macs[i].doFinal();
                 fail("IllegalStateException must be thrown");
@@ -337,8 +337,8 @@ public class MacTest extends TestCase {
     }
     /**
      * Test for <code>doFinal(byte[] output, int outOffset)</code> method
-     * Assertion: 
-     * throws ShotBufferException when outOffset  is negative or  
+     * Assertion:
+     * throws ShotBufferException when outOffset  is negative or
      * outOffset >= output.length  or when given buffer is small
      */
     public void testMac10() throws NoSuchAlgorithmException,
@@ -374,7 +374,7 @@ public class MacTest extends TestCase {
                 macs[i].doFinal(new byte[1], 0);
                 fail("ShortBufferException must be thrown");
             } catch (ShortBufferException e) {
-            }           
+            }
             byte[] res = macs[i].doFinal();
             try {
                 macs[i].doFinal(new byte[res.length - 1], 0);
@@ -383,7 +383,7 @@ public class MacTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * Test for <code>doFinal(byte[] output, int outOffset)</code> and
      * <code>doFinal()</code> methods Assertion: Mac result is stored in
@@ -430,7 +430,7 @@ public class MacTest extends TestCase {
         for (int i = 0; i < macs.length; i++) {
             macs[i].init(scs);
             byte [] res1 = macs[i].doFinal();
-            byte [] res2 = macs[i].doFinal();            
+            byte [] res2 = macs[i].doFinal();
             assertEquals("Results are not the same", res1.length, res2.length);
             for(int t = 0; t < res1.length; t++) {
                 assertEquals("Results are not the same", res1[t], res2[t]);
@@ -444,13 +444,13 @@ public class MacTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * Test for <code>update(byte[] input, int outset, int len)</code> method
      * Assertion: throws IllegalArgumentException when offset or len is negative,
      * offset + len >= input.length
      */
-    public void testMac13() throws NoSuchAlgorithmException, 
+    public void testMac13() throws NoSuchAlgorithmException,
             NoSuchProviderException, IllegalArgumentException, IllegalStateException,
             InvalidKeyException {
         if (!DEFSupported) {
@@ -482,16 +482,16 @@ public class MacTest extends TestCase {
                 macs[i].update(b, b.length - 1, 2);
                 fail("IllegalArgumentException must be thrown");
             } catch (IllegalArgumentException e) {
-            }            
+            }
         }
-    }    
+    }
     /**
      * Test for <code>update(byte[] input, int outset, int len)</code> and
-     * <code>update(byte[] input</code> 
+     * <code>update(byte[] input</code>
      * methods
      * Assertion: updates Mac
      */
-    public void testMac14() throws NoSuchAlgorithmException, 
+    public void testMac14() throws NoSuchAlgorithmException,
             NoSuchProviderException, IllegalArgumentException, IllegalStateException,
             InvalidKeyException {
         if (!DEFSupported) {
@@ -528,11 +528,11 @@ public class MacTest extends TestCase {
                 assertEquals("Results are not the same", res1[t], res2[t]);
             }
         }
-    }    
+    }
     /**
      * Test for <code>clone()</code> method
      * Assertion: returns Mac object or throws CloneNotSupportedException
-     */    
+     */
     public void testMacClone() throws NoSuchAlgorithmException, CloneNotSupportedException {
         if (!DEFSupported) {
             fail(NotSupportedMsg);
@@ -551,13 +551,13 @@ public class MacTest extends TestCase {
         }
     }
     /**
-     * Test for 
-     * <code>init(Key key, AlgorithmParameterSpec params)</code> 
-     * <code>init(Key key)</code> 
+     * Test for
+     * <code>init(Key key, AlgorithmParameterSpec params)</code>
+     * <code>init(Key key)</code>
      * methods
      * Assertion: throws InvalidKeyException and InvalidAlgorithmParameterException
-     * when parameters are not appropriate 
-     */    
+     * when parameters are not appropriate
+     */
     public void testInit() throws NoSuchAlgorithmException, NoSuchProviderException,
             IllegalArgumentException, IllegalStateException, InvalidAlgorithmParameterException,
             InvalidKeyException {
@@ -581,23 +581,23 @@ public class MacTest extends TestCase {
             try {
                 macs[i].init(null, null);
                 fail("InvalidKeyException must be thrown");
-            } catch (InvalidKeyException e) {                
+            } catch (InvalidKeyException e) {
             }
 
             try {
                 macs[i].init(null);
                 fail("InvalidKeyException must be thrown");
-            } catch (InvalidKeyException e) {                
-            }            
+            } catch (InvalidKeyException e) {
+            }
         }
     }
-    
+
     /**
      * Test for <code>update(ByteBuffer input)</code>
      * <code>update(byte[] input, int offset, int len)</code>
      * methods
-     * Assertion: processes Mac; if input is null then do nothing 
-     */    
+     * Assertion: processes Mac; if input is null then do nothing
+     */
     public void testUpdateByteBuffer01() throws NoSuchAlgorithmException, NoSuchProviderException,
             IllegalArgumentException, IllegalStateException, InvalidAlgorithmParameterException,
             InvalidKeyException {
@@ -632,15 +632,15 @@ public class MacTest extends TestCase {
             bb2 = macs[i].doFinal();
             for (int t = 0; t < bb1.length; t++) {
                 assertEquals("Incorrect doFinal result", bb1[t], bb2[t]);
-            }            
+            }
         }
     }
     /**
      * Test for <code>update(ByteBuffer input)</code>
      * <code>update(byte[] input, int offset, int len)</code>
      * methods
-     * Assertion: processes Mac 
-     */    
+     * Assertion: processes Mac
+     */
     public void testUpdateByteBuffer02() throws NoSuchAlgorithmException, NoSuchProviderException,
             IllegalArgumentException, IllegalStateException, InvalidAlgorithmParameterException,
             InvalidKeyException {
@@ -657,13 +657,13 @@ public class MacTest extends TestCase {
         byte [] bb1;
         byte [] bb2;
         for (int i = 0; i < macs.length; i++) {
-            byteBuf = ByteBuffer.allocate(5);        
+            byteBuf = ByteBuffer.allocate(5);
             byteBuf.put(bbuf);
-            byteBuf.position(2);            
-            macs[i].init(sks);            
-            macs[i].update(byteBuf);                
+            byteBuf.position(2);
+            macs[i].init(sks);
+            macs[i].update(byteBuf);
             bb1 = macs[i].doFinal();
-            
+
             macs[i].init(sks);
             macs[i].update(bbuf, 2, 3);
             bb2 = macs[i].doFinal();
@@ -674,8 +674,8 @@ public class MacTest extends TestCase {
     }
     /**
      * Test for <code>clone()</code> method
-     * Assertion: clone if provider is clo  
-     */    
+     * Assertion: clone if provider is clo
+     */
     public void testClone()  {
         if (!DEFSupported) {
             fail(NotSupportedMsg);
@@ -708,11 +708,11 @@ public class MacTest extends TestCase {
             assertTrue("Length should be positive", (macs[i].getMacLength() >= 0));
         }
     }
-    
+
     /**
      * Test for <code>reset()</code> method
      * Assertion: return Mac length
-     */    
+     */
     public void testReset() throws InvalidKeyException {
         if (!DEFSupported) {
             fail(NotSupportedMsg);
@@ -728,26 +728,26 @@ public class MacTest extends TestCase {
         for (int i = 0; i < macs.length; i++) {
             macs[i].init(sks);
             bb1 = macs[i].doFinal();
-            macs[i].reset();            
+            macs[i].reset();
             bb2 = macs[i].doFinal();
             assertEquals("incorrect result",bb1.length, bb2.length);
             for (int t = 0; t < bb1.length; t++) {
-               assertEquals("Incorrect doFinal result", bb1[t], bb2[t]);               
+               assertEquals("Incorrect doFinal result", bb1[t], bb2[t]);
             }
             macs[i].reset();
             macs[i].update(bbuf);
             bb1 = macs[i].doFinal();
-            macs[i].reset();            
+            macs[i].reset();
             macs[i].update(bbuf, 0, bbuf.length);
             bb2 = macs[i].doFinal();
             assertEquals("incorrect result",bb1.length, bb2.length);
             for (int t = 0; t < bb1.length; t++) {
-               assertEquals("Incorrect doFinal result", bb1[t], bb2[t]);               
-            }            
+               assertEquals("Incorrect doFinal result", bb1[t], bb2[t]);
+            }
         }
     }
     /**
-     * Test for <code>Mac</code> constructor 
+     * Test for <code>Mac</code> constructor
      * Assertion: returns Mac object
      */
     public void testMacConstructor() throws NoSuchAlgorithmException,
@@ -767,7 +767,7 @@ public class MacTest extends TestCase {
         } catch (Exception e) {
         }
         assertEquals("Invalid mac length", mac.getMacLength(), 0);
-        
+
         mac = new myMac(null, null, null);
         assertNull("Algorithm must be null", mac.getAlgorithm());
         assertNull("Provider must be null", mac.getProvider());
@@ -782,15 +782,11 @@ public class MacTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     public static Test suite() {
         return new TestSuite(MacTest.class);
     }
 
-    public static void main(String args[]) {        
-        junit.textui.TestRunner.run(suite());
-        
-    }        
 }
 /**
  * Additional class for Mac constructor verification

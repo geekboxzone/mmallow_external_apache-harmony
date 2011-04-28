@@ -49,16 +49,16 @@ public class X509CertFactoryImplTest extends TestCase {
     public void testEngineGenerateCertificate() throws Exception {
         X509CertFactoryImpl certFactory = new X509CertFactoryImpl();
         Certificate cert;
-        
+
         // DER encoded certificate generation testing
-        ByteArrayInputStream bais = 
+        ByteArrayInputStream bais =
             new ByteArrayInputStream(
                     CertFactoryTestData.getCertEncoding());
         cert = certFactory.engineGenerateCertificate(bais);
         assertNotNull("First generated certificate is null", cert);
         cert = certFactory.engineGenerateCertificate(bais);
         assertNotNull("Second generated certificate is null", cert);
-        
+
         try {
             certFactory.engineGenerateCertificate(bais);
             fail("Expected CertificateException was not thrown.");
@@ -72,50 +72,50 @@ public class X509CertFactoryImplTest extends TestCase {
         assertNotNull("First generated certificate is null", cert);
         cert = certFactory.engineGenerateCertificate(bais);
         assertNotNull("Second generated certificate is null", cert);
-        
+
         try {
             certFactory.engineGenerateCertificate(bais);
             fail("Expected CertificateException was not thrown.");
         } catch (CertificateException e) {
         }
     }
-    
+
     /**
      * engineGenerateCertificates(InputStream inStream) method testing.
      */
     public void testEngineGenerateCertificates() throws Exception {
         X509CertFactoryImpl certFactory = new X509CertFactoryImpl();
-        
+
         // DER encoded certificate generation testing
-        ByteArrayInputStream bais = 
+        ByteArrayInputStream bais =
             new ByteArrayInputStream(
                     CertFactoryTestData.getCertEncoding());
         assertEquals("The size of collection is not correct", 2, certFactory
                 .engineGenerateCertificates(bais).size());
-        
+
         // Base64 testing
         bais = new ByteArrayInputStream(
                 CertFactoryTestData.getBase64CertEncoding());
         assertEquals("The size of collection is not correct", 2, certFactory
                 .engineGenerateCertificates(bais).size());
     }
-    
+
     /**
      * engineGenerateCRL(InputStream inStream) method testing.
      */
     public void testEngineGenerateCRL() throws Exception {
         X509CertFactoryImpl certFactory = new X509CertFactoryImpl();
         CRL crl;
-        
+
         // DER encoded crt generation testing
-        ByteArrayInputStream bais = 
+        ByteArrayInputStream bais =
             new ByteArrayInputStream(
                     CertFactoryTestData.getCRLEncoding());
         crl = certFactory.engineGenerateCRL(bais);
         assertNotNull("First generated CRL is null", crl);
         crl = certFactory.engineGenerateCRL(bais);
         assertNotNull("Second generated CRL is null", crl);
-        
+
         try {
             certFactory.engineGenerateCRL(bais);
             fail("Expected CRLException was not thrown.");
@@ -130,22 +130,22 @@ public class X509CertFactoryImplTest extends TestCase {
         assertNotNull("First generated CRL is null", crl);
         crl = certFactory.engineGenerateCRL(bais);
         assertNotNull("Second generated CRL is null", crl);
-        
+
         try {
             certFactory.engineGenerateCRL(bais);
             fail("Expected CRLException was not thrown.");
         } catch (CRLException e) {
         }
     }
-    
+
     /**
      * engineGenerateCRLs(InputStream inStream) method testing.
      */
     public void testEngineGenerateCRLs() throws Exception {
         X509CertFactoryImpl certFactory = new X509CertFactoryImpl();
-        
+
         // DER encoded crt generation testing
-        ByteArrayInputStream bais = 
+        ByteArrayInputStream bais =
             new ByteArrayInputStream(
                     CertFactoryTestData.getCRLEncoding());
         assertEquals("The size of collection is not correct", 2, certFactory
@@ -157,13 +157,13 @@ public class X509CertFactoryImplTest extends TestCase {
         assertEquals("The size of collection is not correct", 2, certFactory
                 .engineGenerateCRLs(bais).size());
     }
-    
+
     /**
      * engineGenerateCertPath(InputStream inStream) method testing.
      */
     public void testEngineGenerateCertPath() throws Exception {
         X509CertFactoryImpl certFactory = new X509CertFactoryImpl();
-        ByteArrayInputStream bais = 
+        ByteArrayInputStream bais =
                 new ByteArrayInputStream(
                         CertFactoryTestData.getCertPathPkiPathEncoding());
         certFactory.engineGenerateCertPath(bais);
@@ -174,14 +174,14 @@ public class X509CertFactoryImplTest extends TestCase {
         } catch (CertificateException e) {
         }
     }
-    
+
     /**
      * engineGenerateCertPath(InputStream inStream, String encoding) method
      * testing.
      */
     public void testEngineGenerateCertPath1() throws Exception {
         X509CertFactoryImpl certFactory = new X509CertFactoryImpl();
-        ByteArrayInputStream bais = 
+        ByteArrayInputStream bais =
                 new ByteArrayInputStream(
                         CertFactoryTestData.getCertPathPKCS7Encoding());
         certFactory.engineGenerateCertPath(bais, "PKCS7");
@@ -192,7 +192,7 @@ public class X509CertFactoryImplTest extends TestCase {
         } catch (CertificateException e) {
         }
     }
-    
+
     /**
      * engineGenerateCertPath(List certificates) method testing.
      */
@@ -217,13 +217,13 @@ public class X509CertFactoryImplTest extends TestCase {
         } catch (CertificateException e) {
         }
     }
-    
+
     /**
      * engineGetCertPathEncodings() method testing.
      */
     public void testEngineGetCertPathEncodings() {
         try {
-            Iterator it = 
+            Iterator it =
                 new X509CertFactoryImpl().engineGetCertPathEncodings();
             Object encoding  = it.next();
             assertNotNull("Default encodings should not be null", encoding);
@@ -233,21 +233,9 @@ public class X509CertFactoryImplTest extends TestCase {
             // pass
         }
     }
-    
+
     public static Test suite() {
         return new TestSuite(X509CertFactoryImplTest.class);
     }
 
-    public static void main(String[] args) {
-        /*
-        X509CertFactoryImplTest test = new X509CertFactoryImplTest();
-        long startTime = System.currentTimeMillis();
-        for (int i=0; i<10000; i++) {
-            test.testEngineGenerateCertificate();
-        }
-        System.out.println("time: "+(System.currentTimeMillis() - startTime));
-        */
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

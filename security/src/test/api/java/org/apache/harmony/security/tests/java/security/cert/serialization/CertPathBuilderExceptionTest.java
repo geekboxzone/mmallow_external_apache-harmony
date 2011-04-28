@@ -27,8 +27,8 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 
 /**
- * Test for CertPathBuilderException serialization 
- *  
+ * Test for CertPathBuilderException serialization
+ *
  */
 
 public class CertPathBuilderExceptionTest extends SerializationTest {
@@ -46,9 +46,5 @@ public class CertPathBuilderExceptionTest extends SerializationTest {
                 new CertPathBuilderException(msgs[1]),
                 new CertPathBuilderException(new Throwable()), new CertPathBuilderException(th),
                 new CertPathBuilderException(msgs[1], dExc) };
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(CertPathBuilderExceptionTest.class);
     }
 }

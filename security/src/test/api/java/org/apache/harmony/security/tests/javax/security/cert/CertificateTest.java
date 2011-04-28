@@ -47,7 +47,7 @@ public class CertificateTest extends TestCase {
         public byte[] getEncoded()
                 throws CertificateEncodingException {
             return null;
-        } 
+        }
 
         public void verify(PublicKey key)
                 throws CertificateException, NoSuchAlgorithmException,
@@ -56,7 +56,7 @@ public class CertificateTest extends TestCase {
         }
 
         public void verify(PublicKey key, String sigProvider)
-                throws CertificateException, NoSuchAlgorithmException, 
+                throws CertificateException, NoSuchAlgorithmException,
                        InvalidKeyException, NoSuchProviderException,
                        SignatureException {
         }
@@ -122,7 +122,7 @@ public class CertificateTest extends TestCase {
         assertFalse("The Certificates with differing encoded form "
                     + "should not be equal", tbt_cert.equals(tbt_cert_3));
         assertFalse("The Certificates should not be equals to the object "
-                    + "which is not an instance of Certificate", 
+                    + "which is not an instance of Certificate",
                                                 tbt_cert.equals(new Object()));
     }
 
@@ -149,8 +149,4 @@ public class CertificateTest extends TestCase {
         return new TestSuite(CertificateTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

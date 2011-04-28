@@ -29,10 +29,6 @@ import junit.framework.TestCase;
 
 public class PrivateKeyUsagePeriodTest extends TestCase {
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(PrivateKeyUsagePeriodTest.class);
-    }
-
     public void testEncodeDecode() throws Exception {
 
         Date notBeforeDate = new Date(200000000);

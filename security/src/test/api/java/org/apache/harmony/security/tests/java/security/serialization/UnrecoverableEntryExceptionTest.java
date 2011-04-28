@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for UnrecoverableEntryException serialization
- * 
+ *
  */
 
 public class UnrecoverableEntryExceptionTest extends SerializationTest {
@@ -43,7 +43,4 @@ public class UnrecoverableEntryExceptionTest extends SerializationTest {
                 new UnrecoverableEntryException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(UnrecoverableEntryExceptionTest.class);
-    }
 }

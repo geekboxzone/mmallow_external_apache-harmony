@@ -302,8 +302,4 @@ public class PBEKeySpecTest extends TestCase {
         return new TestSuite(PBEKeySpecTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

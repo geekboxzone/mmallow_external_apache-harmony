@@ -29,13 +29,9 @@ import junit.framework.TestCase;
 
 public class PermissionTest extends TestCase {
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(PermissionTest.class);
-    }
-
     /**
      * Constructor for PermissionTest.
-     * 
+     *
      * @param arg0
      */
     public PermissionTest(String arg0) {

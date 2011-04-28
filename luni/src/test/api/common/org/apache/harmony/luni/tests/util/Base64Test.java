@@ -42,8 +42,4 @@ public class Base64Test extends TestCase {
         return new TestSuite(Base64Test.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

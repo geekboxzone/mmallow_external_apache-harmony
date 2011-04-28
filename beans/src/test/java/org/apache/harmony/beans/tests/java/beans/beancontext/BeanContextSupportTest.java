@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -86,11 +86,11 @@ public class BeanContextSupportTest extends TestCase {
         transient MethodInvocationRecords records;
 
         transient boolean vetoAddRemove = false;
-        
+
         transient boolean waitOnChildInHooks = true;
 
         /**
-         * 
+         *
          */
         public MockBeanContextSupport() {
             super();
@@ -198,7 +198,7 @@ public class BeanContextSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextSupport#bcsPreDeserializationHook(java.io.ObjectInputStream)
          */
         @Override
@@ -213,7 +213,7 @@ public class BeanContextSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextSupport#bcsPreSerializationHook(java.io.ObjectOutputStream)
          */
         @Override
@@ -225,7 +225,7 @@ public class BeanContextSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextSupport#childDeserializedHook(java.lang.Object,
          *      java.beans.beancontext.BeanContextSupport.BCSChild)
          */
@@ -237,7 +237,7 @@ public class BeanContextSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextSupport#childJustAddedHook(java.lang.Object,
          *      java.beans.beancontext.BeanContextSupport.BCSChild)
          */
@@ -257,7 +257,7 @@ public class BeanContextSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextSupport#childJustRemovedHook(java.lang.Object,
          *      java.beans.beancontext.BeanContextSupport.BCSChild)
          */
@@ -277,7 +277,7 @@ public class BeanContextSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextSupport#createBCSChild(java.lang.Object,
          *      java.lang.Object)
          */
@@ -290,7 +290,7 @@ public class BeanContextSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextSupport#initialize()
          */
         @Override
@@ -304,7 +304,7 @@ public class BeanContextSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
          */
         @Override
@@ -315,7 +315,7 @@ public class BeanContextSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextSupport#validatePendingAdd(java.lang.Object)
          */
         @Override
@@ -329,7 +329,7 @@ public class BeanContextSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.beancontext.BeanContextSupport#validatePendingRemove(java.lang.Object)
          */
         @Override
@@ -343,7 +343,7 @@ public class BeanContextSupportTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.beans.VetoableChangeListener#vetoableChange(java.beans.PropertyChangeEvent)
          */
         @Override
@@ -389,17 +389,6 @@ public class BeanContextSupportTest extends TestCase {
             // Auto-generated method stub
             return null;
         }
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(BeanContextSupportTest.class);
-
-        // MockBeanContextSupport support = new MockBeanContextSupport();
-        // BeanContextChild childPeer = new MockBeanContextChild();
-        // BeanContextProxy child = new MockBeanContextProxy(childPeer);
-        // support.add(child);
-        // System.out.println(support.records);
-        // System.out.println(support.children());
     }
 
     public void testAdd_NullParam() {
@@ -1171,7 +1160,7 @@ public class BeanContextSupportTest extends TestCase {
         final String RESOURCE_NAME = "org/apache/harmony/beans/tests/support/beancontext/mock/mockdata.txt";
         URL url = support.getResource(RESOURCE_NAME, child);
         assertTrue(url.toString().endsWith(RESOURCE_NAME));
-        
+
         BeanContextSupport beanContextSupport = new BeanContextSupport();
         beanContextSupport.add(child);
         url = beanContextSupport.getResource(RESOURCE_NAME, child);
@@ -1313,7 +1302,7 @@ public class BeanContextSupportTest extends TestCase {
         /*
          * MockBeanContextSupport support = new MockBeanContextSupport();
          * assertFalse(support.needsGui());
-         * 
+         *
          * Component child = new Component() {/* mock
          */
         // };
@@ -1883,7 +1872,7 @@ public class BeanContextSupportTest extends TestCase {
                 return childSupport;
             }
         }
-        
+
         // Regression test for HARMONY-1829
         BeanContextSupport obj = new BeanContextSupport();
         obj.add(new TestBean());
@@ -2120,7 +2109,7 @@ public class BeanContextSupportTest extends TestCase {
              }
          });
      }
- 
+
     private byte[] serialize(Serializable obj) {
         try {
             ByteArrayOutputStream bout = new ByteArrayOutputStream();
@@ -2230,7 +2219,7 @@ public class BeanContextSupportTest extends TestCase {
         p.addPropertyChangeListener(s);
         p.firePropertyChange(null, new Object(), new Object());
     }
-    
+
     //Regression Test for HARMONY-3757
     public void testSelfSerializatoin() throws Exception {
         BeanContextSupport beanContextSupport = new BeanContextSupport();
@@ -2241,33 +2230,33 @@ public class BeanContextSupportTest extends TestCase {
         Object obj = oin.readObject();
         assertTrue(obj instanceof BeanContextSupport);
     }
-    
+
     public void testAvoidGui() throws Exception
     {
         MockBeanContextSupport1 mockBeanContextSupport1 = new MockBeanContextSupport1();
         mockBeanContextSupport1.setOkToUseGui(false);
         assertFalse(mockBeanContextSupport1.avoidingGui());
-        
+
         mockBeanContextSupport1 = new MockBeanContextSupport1();
         mockBeanContextSupport1.setOkToUseGui(true);
         assertFalse(mockBeanContextSupport1.avoidingGui());
-        
+
         mockBeanContextSupport1 = new MockBeanContextSupport1();
         Component component = new Button();
         mockBeanContextSupport1.add(component);
         mockBeanContextSupport1.setOkToUseGui(false);
         assertTrue(mockBeanContextSupport1.needsGui());
         assertTrue(mockBeanContextSupport1.avoidingGui());
-        
+
         mockBeanContextSupport1 = new MockBeanContextSupport1();
         component = new Button();
-        mockBeanContextSupport1.add(component);        
+        mockBeanContextSupport1.add(component);
         mockBeanContextSupport1.setOkToUseGui(true);
         assertTrue(mockBeanContextSupport1.needsGui());
-        assertFalse(mockBeanContextSupport1.avoidingGui());     
+        assertFalse(mockBeanContextSupport1.avoidingGui());
     }
-    
-    
+
+
     public class MockBeanContextSupport1 extends BeanContextSupport
     {
         private static final long serialVersionUID = 1L;
@@ -2275,7 +2264,7 @@ public class BeanContextSupportTest extends TestCase {
         public void setOkToUseGui(boolean ok)
         {
             this.okToUseGui = ok;
-        }      
+        }
     }
 
 }

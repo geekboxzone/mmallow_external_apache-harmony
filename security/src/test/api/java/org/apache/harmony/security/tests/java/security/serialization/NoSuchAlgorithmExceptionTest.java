@@ -27,8 +27,8 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 
 /**
- * Test for NoSuchAlgorithmException serialization 
- *  
+ * Test for NoSuchAlgorithmException serialization
+ *
  */
 
 public class NoSuchAlgorithmExceptionTest extends SerializationTest {
@@ -48,7 +48,4 @@ public class NoSuchAlgorithmExceptionTest extends SerializationTest {
                 new NoSuchAlgorithmException(msgs[1], dExc) };
     }
 
-    public static void main(String[] args) {
-       junit.textui.TestRunner.run(NoSuchAlgorithmExceptionTest.class);
-    }
 }

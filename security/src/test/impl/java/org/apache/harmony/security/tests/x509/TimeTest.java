@@ -47,7 +47,4 @@ public class TimeTest extends TestCase {
                 enc[0]);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(TimeTest.class);
-    }
 }

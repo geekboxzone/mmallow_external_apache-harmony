@@ -27,8 +27,8 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 
 /**
- * Test for KeyException serialization 
- *  
+ * Test for KeyException serialization
+ *
  */
 
 public class KeyExceptionTest extends SerializationTest {
@@ -48,7 +48,4 @@ public class KeyExceptionTest extends SerializationTest {
                 new KeyException(msgs[1], dExc) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(KeyExceptionTest.class);
-    }
 }

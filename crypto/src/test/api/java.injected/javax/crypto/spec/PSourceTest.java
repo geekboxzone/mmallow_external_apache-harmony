@@ -106,8 +106,4 @@ public class PSourceTest extends TestCase {
         return new TestSuite(PSourceTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

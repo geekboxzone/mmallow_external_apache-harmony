@@ -28,14 +28,10 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>PermissionCollection</code>
- * 
+ *
  */
 
 public class PermissionCollectionTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(PermissionCollectionTest.class);
-    }
 
     /**
      * Constructor for PermissionCollectionTest.
@@ -44,29 +40,29 @@ public class PermissionCollectionTest extends TestCase {
     public PermissionCollectionTest(String arg0) {
         super(arg0);
     }
-   
+
     // Bare extension to instantiate abstract PermissionCollection class
     private static final class RealPermissionCollection extends PermissionCollection
     {
-        final private Collection col; 
+        final private Collection col;
         public RealPermissionCollection(Collection col)
         {
-            this.col = col;            
+            this.col = col;
         }
-        
+
         public void add(Permission permission) {}
-        
-        public Enumeration elements() 
+
+        public Enumeration elements()
         {
             return col == null ? null : Collections.enumeration(col);
         }
-        
-        public boolean implies(Permission permission) 
+
+        public boolean implies(Permission permission)
         {
             return false;
         }
     }
-        
+
     /** Test read-only flag. Should be false by default and can be set once forever. */
     public void testReadOnly()
     {
@@ -77,7 +73,7 @@ public class PermissionCollectionTest extends TestCase {
         pc.setReadOnly();
         assertTrue("more calls to setReadOnly() should not harm", pc.isReadOnly());
     }
-    
+
     // Regression test for "exitVM' special treatement in Java 6.
     public void test_implies_exitVM() {
 

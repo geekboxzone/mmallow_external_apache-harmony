@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for SSLProtocolException serialization
- * 
+ *
  */
 
 public class SSLProtocolExceptionTest extends SerializationTest {
@@ -43,7 +43,4 @@ public class SSLProtocolExceptionTest extends SerializationTest {
                 new SSLProtocolException(msgs[0]), new SSLProtocolException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(SSLProtocolExceptionTest.class);
-    }
 }

@@ -33,10 +33,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 public class PrivilegedActionExceptionTest extends SerializationTest implements
         SerializationTest.SerializableAssert {
-    
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(PrivilegedActionExceptionTest.class);
-    }
 
     protected Object[] getData() {
         Exception ex = new Exception();
@@ -47,12 +43,12 @@ public class PrivilegedActionExceptionTest extends SerializationTest implements
               new PrivilegedActionException(ex1)
         };
     }
-    
+
     public void assertDeserialized(Serializable reference, Serializable otest) {
-        
+
         // common checks
         THROWABLE_COMPARATOR.assertDeserialized(reference, otest);
-        
+
         // class specific checks
         PrivilegedActionException ref = (PrivilegedActionException)reference;
         PrivilegedActionException test = (PrivilegedActionException)otest;
@@ -63,6 +59,6 @@ public class PrivilegedActionExceptionTest extends SerializationTest implements
                     .getException());
         }
     }
-    
+
 
 }

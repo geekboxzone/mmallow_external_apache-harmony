@@ -37,15 +37,11 @@ import junit.framework.TestCase;
 
 /**
  * ASN.1 DER test for SequenceOf type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 
 public class SequenceOfTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(SequenceOfTest.class);
-    }
 
     private static ASN1SequenceOf sequenceOf = new ASN1SequenceOf(ASN1Boolean
             .getInstance());
@@ -55,7 +51,7 @@ public class SequenceOfTest extends TestCase {
     //
 
     private static Object[][] testcases = new Object[][] {
-            // format: object to encode / byte array 
+            // format: object to encode / byte array
 
             // sequence : empty sequence
             new Object[] { new ArrayList(), new byte[] { 0x30, 0x00 } },
@@ -76,7 +72,7 @@ public class SequenceOfTest extends TestCase {
                             0x01, 0x01, 0x00 } //false
             },
 
-    //TODO add testcase for another ASN.1 type` 
+    //TODO add testcase for another ASN.1 type`
 
     };
 

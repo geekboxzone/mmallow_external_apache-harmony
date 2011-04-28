@@ -16,8 +16,8 @@
  */
 
 /*
- * Notes. 
- * 1. The class doesn't contain tests against "update(..)" methods 
+ * Notes.
+ * 1. The class doesn't contain tests against "update(..)" methods
  *    invoked on a Signature objects whose state is "INIT" or "VERIFY".
  *    Relevant checks are in tests against MessageDigest class methods.
  *
@@ -307,9 +307,9 @@ public class SHA1withDSA_SignatureTest extends TestCase {
 
     /**
      * The test against "initSign(PrivateKey)" method.
-     * It checks out that regardless of a Signature object's state 
+     * It checks out that regardless of a Signature object's state
      * the method throws InvalidKeyException if
-     * PrivateKey is DSAPrivateKey and the key is invalid, that is, 
+     * PrivateKey is DSAPrivateKey and the key is invalid, that is,
      * BigIntegers constituting the key have incorrect values.
      */
     public final void testInitSignPrivateKey02() throws Exception {
@@ -331,7 +331,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
      * if it is invoked with a different argument.
      *
      * Note.
-     * In RI, negating effect of previous call includes 
+     * In RI, negating effect of previous call includes
      * discarding updates done before calling the method.
      */
     public final void testInitSignPrivateKey03() throws Exception {
@@ -364,7 +364,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
      * if it is invoked with the same argument.
      *
      * Notes.
-     * 1. In RI, negating effect of previous call includes 
+     * 1. In RI, negating effect of previous call includes
      *    discarding updates done before calling the method.
      * 2.
      * The specification for the method contains the following clause:
@@ -372,7 +372,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
      *     it negates the effect of this call."
      * which meaning requires certainty in case of sequence
      *    initSign - update - initSign
-     * RI behavior is such that with respect to "update" 
+     * RI behavior is such that with respect to "update"
      * it doesn't matter whether argument is the same or different.
      */
     public final void testInitSignPrivateKey04() throws Exception {
@@ -418,9 +418,9 @@ public class SHA1withDSA_SignatureTest extends TestCase {
 
     /**
      * The test against "initSign(PrivateKey)" method.
-     * It checks out that regardless of a Signature object's state 
+     * It checks out that regardless of a Signature object's state
      * the method throws InvalidKeyException if
-     * PublicKey is DSAPublicKey and the key is invalid, that is, 
+     * PublicKey is DSAPublicKey and the key is invalid, that is,
      * BigIntegers constituting the key have incorrect values.
      */
     public final void testInitVerifyPublicKey02() throws Exception {
@@ -457,11 +457,11 @@ public class SHA1withDSA_SignatureTest extends TestCase {
      * The test against the "initVerify(PublicKey)" method.
      * It checks out that the method negates the effect of previous call
      * if it is invoked with the same argument.
-     * Like it is for "initSign", RI behavior is such that with respect to "update" 
+     * Like it is for "initSign", RI behavior is such that with respect to "update"
      * it doesn't matter whether argument is the same or different.
      *
      * Note.
-     * In RI negating effect of previous call includes 
+     * In RI negating effect of previous call includes
      * discarding updates done before calling the method.
      */
     public final void testInitVerifyPublicKey04() throws Exception {
@@ -477,7 +477,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
     }
 
     /*
-     * The method returns 
+     * The method returns
      * -  -1 if a signature's syntax is incorrect
      * -  length of the signature otherwise.
      */
@@ -593,7 +593,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
     //
     //            signingSigns[i].update(message);
     //
-    //            // because 50 is more than length of any signature, 
+    //            // because 50 is more than length of any signature,
     //            // for offset==-1 and len==50 ArrayIndexOutOfBoundsException is expected
     //            //
     //            try {
@@ -602,7 +602,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
     //            } catch (ArrayIndexOutOfBoundsException e) {
     //            }
     //
-    //            // because 40 is less than length of any signature", 
+    //            // because 40 is less than length of any signature",
     //            //for offset==-1 and len==40 ArrayIndexOutOfBoundsException is not expected
     //            //
     //            try {
@@ -640,7 +640,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
     /**
      * The test is against the pair "sign() - verify(byte[])" method.
      * It checks out that the "verify" method returns "true"
-     * if a verifying Signature object was updated with the same message 
+     * if a verifying Signature object was updated with the same message
      * which was used to update a signing Signature object.
      */
     public final void testVerifybyteArray02() throws Exception {
@@ -677,9 +677,9 @@ public class SHA1withDSA_SignatureTest extends TestCase {
 
     /**
      * The compatibility with RI test.
-     * It checks out that 
+     * It checks out that
      * for the predefined message and signature signed with PrivateKey from RI
-     * the method invoked on a Signature object initialized with corresponding PublicKey from RI 
+     * the method invoked on a Signature object initialized with corresponding PublicKey from RI
      * returns "true".
      */
     public final void testVerifybyteArray03() throws Exception {
@@ -693,7 +693,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
     /**
      * The test against the pair "sign - verify" methods.
      * Its specific is that signing and verifying are performed by two providers,
-     * provider and provider1; 
+     * provider and provider1;
      * so, the test checks up on compatibility signing-verifying between implementations.
      */
     public final void testVerifybyteArray04() throws Exception {
@@ -737,12 +737,12 @@ public class SHA1withDSA_SignatureTest extends TestCase {
 
     /**
      * The test against the "verify(byte[], int, int)" method.
-     * It checks out that if Signature object's state is VERIFY 
+     * It checks out that if Signature object's state is VERIFY
      * the method throws IllegalArgumentException in case of the following arguments :
-     *       outbufs == null or 
-     *       offset < 0      or 
-     *       length < 0      or 
-     *       offset+length > outbuf.length 
+     *       outbufs == null or
+     *       offset < 0      or
+     *       length < 0      or
+     *       offset+length > outbuf.length
      */
     public final void testVerifybyteArrayintint01() throws Exception {
 
@@ -780,7 +780,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
      * the method throws up SignatureException if
      * (1) offset+length < 0
      * (2) offset > signature.length
-     * (3) SignatureException if outbuf's lentgh is correct 
+     * (3) SignatureException if outbuf's lentgh is correct
      *     whereas a signature doesn't meet ASN1 syntax.
      */
     public final void testVerifybyteArrayintint02() throws Exception {
@@ -857,7 +857,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
         signingSigns[0].update(message);
         n = signingSigns[0].sign(sigBytes, 0, 50);
 
-        // testcase1: first call returns true, 
+        // testcase1: first call returns true,
         // second returns false though signature is the same
 
         verifyingSign.update(message);
@@ -865,7 +865,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
         assertTrue("case1: test failure", verifyingSign.verify(sigBytes, 0, n));
         assertFalse("case2: test failure", verifyingSign.verify(sigBytes, 0, n));
 
-        // testcase2: first call returns false (incorrect signature), 
+        // testcase2: first call returns false (incorrect signature),
         // second returns false too, in spite of correct signature (!),
         // because Signature object was reset in first call
 
@@ -925,7 +925,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
     /**
      * The test is against the pair "sign(byte[],int,int) - verify(byte[],int,int)" method.
      * It checks out that the "verify" method returns "true"
-     * if a verifying Signature object was updated with the same message 
+     * if a verifying Signature object was updated with the same message
      * which was used to update a signing Signature object.
      */
     public final void testVerifybyteArrayintint06() throws Exception {
@@ -966,9 +966,6 @@ public class SHA1withDSA_SignatureTest extends TestCase {
         return new TestSuite(SHA1withDSA_SignatureTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
 
 class Predefined {

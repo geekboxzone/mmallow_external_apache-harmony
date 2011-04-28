@@ -33,15 +33,11 @@ import junit.framework.TestCase;
 
 /**
  * ASN.1 DER test for ANY type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 
 public class AnyTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(AnyTest.class);
-    }
 
     private static byte[] encoded = new byte[] { 0x01, 0x03, 0x11, 0x13, 0x15 };
 

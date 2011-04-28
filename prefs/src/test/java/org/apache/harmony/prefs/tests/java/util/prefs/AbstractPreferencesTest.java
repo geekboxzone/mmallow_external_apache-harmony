@@ -39,14 +39,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.TestCase;
 
-import org.apache.xpath.XPathAPI;
+//import org.apache.xpath.XPathAPI;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 /**
  * TODO: refine this test to adapt all implementations
- * 
+ *
  */
 public class AbstractPreferencesTest extends TestCase {
 
@@ -1093,6 +1093,7 @@ public class AbstractPreferencesTest extends TestCase {
         Document doc = parseXmlStream(in, false);
 
         // only output this node without parent and children
+        /* Android doesn't have XPathAPI
         String rootpath = "/preferences[@EXTERNAL_XML_VERSION='1.0']/root[@type='user']/node[@name='java']/node[@name='util']/node[@name='prefs']";
         Node node = XPathAPI
         .selectSingleNode(
@@ -1109,6 +1110,7 @@ public class AbstractPreferencesTest extends TestCase {
         node = XPathAPI.selectSingleNode(doc, rootpath
                 + "/node[@name='mock']/node[@name='child']/node");
         assertNull(node);
+        */
     }
 
     private static Document parseXmlStream(InputStream input, boolean validating)
@@ -1147,6 +1149,7 @@ public class AbstractPreferencesTest extends TestCase {
         ByteArrayInputStream in = new ByteArrayInputStream(result);
         Document doc = parseXmlStream(in, false);
 
+        /* Android doesn't have XPathAPI
         // only output this node and subtree without parent
         String rootpath = "/preferences[@EXTERNAL_XML_VERSION='1.0']/root[@type='user']/node[@name='java']/node[@name='util']/node[@name='prefs']";
         Node node = XPathAPI
@@ -1179,6 +1182,7 @@ public class AbstractPreferencesTest extends TestCase {
                 rootpath
                 + "/node[@name='mock']/node[@name='child']/node[@name='grandson2']/map");
         assertNotNull(node);
+        */
     }
 
     public void testCachedChildren() throws Exception {
@@ -1914,9 +1918,9 @@ public class AbstractPreferencesTest extends TestCase {
     /**
      * Regression for HARMONY-828
      */
-    public void testLongPath() throws Exception { 
+    public void testLongPath() throws Exception {
         assertFalse(pref.nodeExists("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"));
-    } 
+    }
 
     public static class MockPreferenceChangeListener implements
     PreferenceChangeListener {

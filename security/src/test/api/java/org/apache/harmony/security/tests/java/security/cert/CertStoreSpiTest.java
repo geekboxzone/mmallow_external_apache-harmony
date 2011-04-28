@@ -39,14 +39,14 @@ import junit.framework.TestSuite;
 
 /**
  * Tests for <code>CertStoreSpi</code> class constructors and methods.
- * 
+ *
  */
 
 public class CertStoreSpiTest extends TestCase {
 
     /**
      * Constructor for CertStoreSpiTest.
-     * 
+     *
      * @param arg0
      */
     public CertStoreSpiTest(String arg0) {
@@ -74,16 +74,12 @@ public class CertStoreSpiTest extends TestCase {
         assertNull("Not null collection", certStoreSpi
                 .engineGetCRLs(crlSelector));
     }
-    
+
     public static Test suite() {
         return new TestSuite(CertStoreSpiTest.class);
     }
 
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(suite());
-    }
-    
-    /** 
+    /**
      * Additional classes for verification CertStoreSpi class
      */
     public static class tmpCRLSelector implements CRLSelector {
@@ -102,5 +98,5 @@ public class CertStoreSpiTest extends TestCase {
             return true;
         }
     }
-    
+
 }

@@ -45,7 +45,7 @@ public class X509CRLEntryImplTest extends TestCase {
      */
     public void testGetExtensionValue() throws Exception {
         // revoked certificate issuer
-        X500Principal issuer = 
+        X500Principal issuer =
             new X500Principal("O=Certificate Issuer");
         // revoked certificate serial number
         BigInteger serialNumber = BigInteger.valueOf(555);
@@ -77,8 +77,4 @@ public class X509CRLEntryImplTest extends TestCase {
         return new TestSuite(X509CRLEntryImplTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

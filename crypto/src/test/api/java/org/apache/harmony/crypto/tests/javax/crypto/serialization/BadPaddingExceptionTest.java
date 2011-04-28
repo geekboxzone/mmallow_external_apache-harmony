@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for BadPaddingException serialization
- * 
+ *
  */
 
 public class BadPaddingExceptionTest extends SerializationTest {
@@ -42,7 +42,4 @@ public class BadPaddingExceptionTest extends SerializationTest {
                 new BadPaddingException(null), new BadPaddingException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(BadPaddingExceptionTest.class);
-    }
 }

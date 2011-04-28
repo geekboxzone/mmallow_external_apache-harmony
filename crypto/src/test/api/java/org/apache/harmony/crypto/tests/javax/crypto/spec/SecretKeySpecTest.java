@@ -263,8 +263,4 @@ public class SecretKeySpecTest extends TestCase {
         return new TestSuite(SecretKeySpecTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

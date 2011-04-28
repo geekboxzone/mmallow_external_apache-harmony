@@ -644,8 +644,4 @@ public class SSLServerSocketImplTest extends TestCase {
         return new TestSuite(SSLServerSocketImplTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

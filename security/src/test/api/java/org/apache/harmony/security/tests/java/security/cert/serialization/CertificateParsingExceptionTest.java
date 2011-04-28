@@ -27,8 +27,8 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 
 /**
- * Test for CertificateParsingException serialization 
- *  
+ * Test for CertificateParsingException serialization
+ *
  */
 
 public class CertificateParsingExceptionTest extends SerializationTest {
@@ -48,7 +48,4 @@ public class CertificateParsingExceptionTest extends SerializationTest {
                 new CertificateParsingException(msgs[1], dExc) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(CertificateParsingExceptionTest.class);
-    }
 }

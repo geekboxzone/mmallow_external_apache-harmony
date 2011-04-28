@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -36,7 +36,6 @@ import java.net.URL;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import junit.textui.TestRunner;
 
 import org.apache.harmony.beans.tests.support.SampleBean;
 import org.apache.harmony.beans.tests.support.mock.CorruptedSerBean;
@@ -290,7 +289,7 @@ public class BeansTest extends TestCase {
     // public void
     // testInstantiateClassLoaderStringBeanContextAppletInitializer_AppletBean_SER()
     // throws IOException, ClassNotFoundException {
-    //    
+    //
     // String beanName = MockAppletBean2.class.getName(); BeanContext context =
     // new BeanContextSupport(); MockAppletInitializer appInit = new
     // MockAppletInitializer(); MockAppletBean2 bean = (MockAppletBean2)
@@ -301,18 +300,18 @@ public class BeansTest extends TestCase {
     // assertTrue(appInit.activateHasBeenCalled());
     // assertTrue(appInit.initializeHasBeenCalled());
     // assertFalse(bean.initHasBeenCalled());
-    //     
+    //
     // }
 
     // public void
     // testInstantiateClassLoaderStringBeanContextAppletInitializer_AppletBean_2()
     // throws IOException, ClassNotFoundException {
-    //    
+    //
     // String beanName = MockAppletBean.class.getName(); BeanContext context =
     // new BeanContextSupport(); MockAppletInitializer appInit = new
     // MockAppletInitializer(); MockAppletBean bean = (MockAppletBean)
     // Beans.instantiate(null, beanName, context, null);
-    //     
+    //
     // }
 
     /*
@@ -510,10 +509,6 @@ public class BeansTest extends TestCase {
 
     public static Test suite() {
         return new TestSuite(BeansTest.class);
-    }
-
-    public static void main(String[] args) {
-        TestRunner.run(suite());
     }
 
     private ClassLoader createSpecificClassLoader() {

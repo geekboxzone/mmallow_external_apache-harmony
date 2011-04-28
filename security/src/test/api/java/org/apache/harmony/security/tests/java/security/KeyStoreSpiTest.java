@@ -41,14 +41,14 @@ import org.apache.harmony.security.tests.support.cert.MyCertificate;
 
 /**
  * Tests for <code>KeyStoreSpi</code> constructor and methods
- * 
+ *
  */
 
 public class KeyStoreSpiTest extends TestCase {
 
     /**
      * Constructor for KeyStoreSpi.
-     * 
+     *
      * @param arg0
      */
     public KeyStoreSpiTest(String arg0) {
@@ -56,17 +56,17 @@ public class KeyStoreSpiTest extends TestCase {
     }
 
     /**
-     * Test for <code>KeyStoreSpi()</code> constructor 
-     * and the following methods: 
+     * Test for <code>KeyStoreSpi()</code> constructor
+     * and the following methods:
      * <code>engineLoad(KeyStore.LoadStoreParameter param)</code>
      * <code>engineStore(KeyStore.LoadStoreParameter param)</code>
      * <code>engineGetEntry(String alias, KeyStore.ProtectionParameter param)</code>
      * <code>engineSetEntry(String alias, KeyStore.Entry entry, KeyStore.ProtectionParameter param)</code>
-     * Assertions: 
+     * Assertions:
      * creates new KeyStoreSpi object;
      * engineGetEntry(..) returns null entry;
      * engineStore(..) throws UnexpectedOperationException;
-     * engineSetEntry(..) throws KeyStoreException or NullPointerException 
+     * engineSetEntry(..) throws KeyStoreException or NullPointerException
      */
     public void testKeyStoteSpi01() throws IOException,
             NoSuchAlgorithmException, CertificateException,
@@ -95,7 +95,7 @@ public class KeyStoreSpiTest extends TestCase {
             ksSpi.engineSetEntry("", new KeyStore.TrustedCertificateEntry(
                     new MyCertificate("type", new byte[0])), null);
             fail("KeyStoreException must be thrown");
-        } catch (KeyStoreException e) {            
+        } catch (KeyStoreException e) {
         }
 
         try {
@@ -107,7 +107,7 @@ public class KeyStoreSpiTest extends TestCase {
 
 
     /**
-     * Test for <code>KeyStoreSpi()</code> constructor 
+     * Test for <code>KeyStoreSpi()</code> constructor
      * and abstract engine methods.
      * Assertion: creates new KeyStoreSpi object.
      */
@@ -120,7 +120,7 @@ public class KeyStoreSpiTest extends TestCase {
                 .engineGetCertificateChain(""));
         assertNull("engineGetCertificate(..) must return null", ksSpi
                 .engineGetCertificate(""));
-        assertEquals("engineGetCreationDate(..) must return Date(0)", 
+        assertEquals("engineGetCreationDate(..) must return Date(0)",
                 new Date(0), ksSpi.engineGetCreationDate(""));
         try {
             ksSpi.engineSetKeyEntry("", null, new char[0], new Certificate[0]);
@@ -152,7 +152,7 @@ public class KeyStoreSpiTest extends TestCase {
         } catch (IOException e) {
         }
     }
-    
+
     /**
      * @tests java.security.KeyStoreSpi#engineLoad(KeyStore.LoadStoreParameter)
      */
@@ -175,14 +175,14 @@ public class KeyStoreSpiTest extends TestCase {
             assertSame(msg, e.getMessage());
         }
 
-        // test: protection parameter is null  
+        // test: protection parameter is null
         try {
             ksSpi.engineLoad(new MyLoadStoreParams(null));
             fail("No expected UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
         }
 
-        // test: protection parameter is not instanceof 
+        // test: protection parameter is not instanceof
         // PasswordProtection or CallbackHandlerProtection
         try {
             ksSpi.engineLoad(new MyLoadStoreParams(new tmpProtection()));
@@ -190,15 +190,12 @@ public class KeyStoreSpiTest extends TestCase {
         } catch (UnsupportedOperationException e) {
         }
     }
-    
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(KeyStoreSpiTest.class);
-    }
+
 }
 /**
  * Additional class implements KeyStore.Entry interface
  */
-class tmpEntry  implements KeyStore.Entry {  
+class tmpEntry  implements KeyStore.Entry {
 }
 class tmpProtection implements KeyStore.ProtectionParameter {
 }

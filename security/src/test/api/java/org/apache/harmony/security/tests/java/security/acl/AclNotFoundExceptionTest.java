@@ -27,14 +27,10 @@ import junit.framework.TestCase;
 
 /**
  * Unit test for AclNotFoundException.
- * 
+ *
  */
 
 public class AclNotFoundExceptionTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(AclNotFoundExceptionTest.class);
-    }
 
     /**
      * @tests java.security.acl.AclNotFoundException#AclNotFoundException()

@@ -34,19 +34,15 @@ import junit.framework.TestCase;
 
 
 /**
- * Unit test for class org.apache.harmony.security.SystemScope 
- * 
+ * Unit test for class org.apache.harmony.security.SystemScope
+ *
  */
 
 public class SystemScopeTest extends TestCase {
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(SystemScopeTest.class);
-    }
-
     IdentityScope ss = null;
-    final static boolean mode = true; 
-    
+    final static boolean mode = true;
+
     /*
      * @see TestCase#setUp()
      */
@@ -71,7 +67,7 @@ public class SystemScopeTest extends TestCase {
     /**
      * verify SystemScope.size() returns number of Identities
      */
-    
+
     public void testSize() throws Exception {
         //SystemScope ss = new SystemScope("SystemScope");
         assertEquals(0, ss.size());
@@ -87,12 +83,12 @@ public class SystemScopeTest extends TestCase {
     public void testGetIdentityString() throws Exception {
         //SystemScope ss = new SystemScope("SystemScope");
         assertNull(ss.getIdentity("aaa"));
-        
+
         java.security.Identity aaa = new IdentityScopeStub("aaa");
         ss.addIdentity(aaa);
         assertSame(aaa, ss.getIdentity(aaa.getName()));
         assertNull(ss.getIdentity("bbb"));
-        
+
     }
 
     /*
@@ -105,8 +101,8 @@ public class SystemScopeTest extends TestCase {
         java.security.Identity aaa = new IdentityScopeStub("aaa");
         aaa.setPublicKey(kkk);
         ss.addIdentity(aaa);
-        
-        assertSame(aaa, ss.getIdentity(kkk));                
+
+        assertSame(aaa, ss.getIdentity(kkk));
     }
 
     /**
@@ -115,35 +111,35 @@ public class SystemScopeTest extends TestCase {
      */
     public void testAddIdentity() throws Exception {
 //        SystemScope ss = new SystemScope("SystemScope");
-        java.security.PublicKey kkk = new PublicKeyStub("kkk", "fff", null);        
+        java.security.PublicKey kkk = new PublicKeyStub("kkk", "fff", null);
         java.security.Identity aaa = new IdentityScopeStub("aaa");
         aaa.setPublicKey(kkk);
         ss.addIdentity(aaa);
-        
+
         java.security.Identity bbb = new IdentityScopeStub("aaa");
         try {
             ss.addIdentity(bbb);
             fail("KeyManagementException should be thrown for already used name");
         } catch (KeyManagementException ok) {}
-        
+
         java.security.Identity ccc = new IdentityScopeStub("ccc");
         ccc.setPublicKey(kkk);
         try {
             ss.addIdentity(ccc);
             fail("KeyManagementException should be thrown for already used key");
-        } catch (KeyManagementException ok) {}            
-                
-        
+        } catch (KeyManagementException ok) {}
+
+
     }
 
     /**
      * verify that identities are removed
      * @throws Exception
      */
-    
+
     public void testRemoveIdentity() throws Exception{
-//        SystemScope ss = new SystemScope("SystemScope");              
-        java.security.Identity aaa = new IdentityScopeStub("aaa");        
+//        SystemScope ss = new SystemScope("SystemScope");
+        java.security.Identity aaa = new IdentityScopeStub("aaa");
         ss.addIdentity(aaa);
         assertEquals(1, ss.size());
         ss.removeIdentity(aaa);
@@ -151,12 +147,12 @@ public class SystemScopeTest extends TestCase {
     }
 
     public void testIdentities() throws Exception {
-//        SystemScope ss = new SystemScope("SystemScope");              
+//        SystemScope ss = new SystemScope("SystemScope");
         java.security.Identity aaa = new IdentityScopeStub("aaa");
         java.security.Identity bbb = new IdentityScopeStub("bbb");
         ss.addIdentity(aaa);
         ss.addIdentity(bbb);
-        
+
         boolean hasAaa = false, hasBbb = false;
         Enumeration e = ss.identities();
         while (e.hasMoreElements()){
@@ -164,7 +160,7 @@ public class SystemScopeTest extends TestCase {
             if (!hasAaa) hasAaa = (i==aaa);
             if (!hasBbb) hasBbb = (i==bbb);
         }
-        assertTrue(hasAaa && hasBbb);        
+        assertTrue(hasAaa && hasBbb);
     }
 
     /*
@@ -178,7 +174,7 @@ public class SystemScopeTest extends TestCase {
      */
     public void testSystemScopeString() {
         SystemScope ss = new SystemScope("SystemScope");
-        assertEquals("SystemScope", ss.getName());       
+        assertEquals("SystemScope", ss.getName());
     }
 
     /*

@@ -31,14 +31,10 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>Timestamp</code> class fields and methods
- * 
+ *
  */
 
 public class TimestampTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(TimestampTest.class);
-    }
 
     private Date now = new Date();
 
@@ -73,12 +69,12 @@ public class TimestampTest extends TestCase {
         assertTrue(two.equals(one));
         assertFalse(one.equals(null));
         assertFalse(one.equals(new Object()));
-        
+
         Timestamp two1 = new Timestamp(new Date(9999), cpath);
         assertFalse(one.equals(two1));
         assertTrue(two1.equals(two1));
     }
-    
+
     public void testGetSignerCertPath() {
         assertSame(new Timestamp(now, cpath).getSignerCertPath(), cpath);
     }

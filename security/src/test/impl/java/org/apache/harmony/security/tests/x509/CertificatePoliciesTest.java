@@ -45,7 +45,7 @@ public class CertificatePoliciesTest extends TestCase {
             "1.1.1.1.1.1",
             "2.2.2.2.2.2"
         };
-        CertificatePolicies certificatePolicies = 
+        CertificatePolicies certificatePolicies =
                                         new CertificatePolicies();
         for (int i=0; i<policies.length; i++) {
             PolicyInformation policyInformation =
@@ -54,19 +54,15 @@ public class CertificatePoliciesTest extends TestCase {
         }
 
         byte[] encoding = certificatePolicies.getEncoded();
-        List policyInformations = ((CertificatePolicies) 
+        List policyInformations = ((CertificatePolicies)
                 CertificatePolicies.ASN1.decode(encoding))
                 .getPolicyInformations();
         Iterator it = policyInformations.iterator();
         ((PolicyInformation) it.next()).getPolicyIdentifier();
     }
-    
+
     public static Test suite() {
         return new TestSuite(CertificatePoliciesTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

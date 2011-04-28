@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for ShortBufferException serialization
- * 
+ *
  */
 
 public class ShortBufferExceptionTest extends SerializationTest {
@@ -42,7 +42,4 @@ public class ShortBufferExceptionTest extends SerializationTest {
                 new ShortBufferException(null), new ShortBufferException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(ShortBufferExceptionTest.class);
-    }
 }

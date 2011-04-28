@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,7 +26,6 @@ import java.util.Vector;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import junit.textui.TestRunner;
 
 import org.apache.harmony.beans.tests.support.SampleException;
 import org.apache.harmony.beans.tests.support.TInspectorCluster;
@@ -137,44 +136,37 @@ public class StatementTest extends TestCase {
     }
 
     /**
-     * 
+     *
      */
     public static int getTestId() {
         return testId;
     }
 
     /**
-     * 
+     *
      */
     public static void nextTestId() {
         ++testId;
     }
 
     /**
-     * 
+     *
      */
     public static void methodWithException() throws Exception {
         throw new SampleException("sample");
     }
 
     /**
-     * 
+     *
      */
     public static void methodWithIntArray(int[] array) {
     }
 
     /**
-     * 
+     *
      */
     public static Test suite() {
         return new TestSuite(StatementTest.class);
-    }
-
-    /**
-     * 
-     */
-    public static void main(String[] args) {
-        TestRunner.run(suite());
     }
 
     public class Bean {
@@ -585,7 +577,7 @@ public class StatementTest extends TestCase {
         t = new Statement(MockObject.class, "new", arguments);
         t.execute();
         //FIXME: the following 2 commented assert cannot pass neither in RI nor in Harmony (HARMONY-4392),
-        // waiting for dev-list approval to fix Harmony implementation following spec        
+        // waiting for dev-list approval to fix Harmony implementation following spec
 //         MockObject.assertCalled("new3", arguments);
 
         Object[] arguments2 = new Object[] { new Integer(1) };
@@ -593,7 +585,7 @@ public class StatementTest extends TestCase {
         t.execute();
 //        MockObject.assertCalled("new1-2", arguments2);
     }
-    
+
     /*
      * Test the method execute() with the Class object, a static method name and
      * valid arguments.
@@ -759,7 +751,7 @@ public class StatementTest extends TestCase {
      * Test the method execute() with a normal object with overloaded methods
      * (primitive type VS wrapper class), a valid method name and valid
      * arguments.
-     * 
+     *
      * Note: decided by definition position!
      */
     public void testExecute_PrimitiveVSWrapper() throws Exception {
@@ -810,7 +802,7 @@ public class StatementTest extends TestCase {
 
     /*
      * Test the method execute() with two equal specific methods.
-     * 
+     *
      * Note: decided by definition position!
      */
     // public void testExecute_EqualSpecificMethods() throws Exception {
@@ -824,7 +816,7 @@ public class StatementTest extends TestCase {
     /*
      * Test the method execute() with two equal specific methods but one
      * declaring thrown exception.
-     * 
+     *
      * Note: decided by definition position!
      */
     // public void testExecute_EqualSpecificMethodsException() throws Exception
@@ -883,8 +875,8 @@ public class StatementTest extends TestCase {
             // expected
         }
     }
-    
-    
+
+
     /*
      * Test for special case of overloaded method execute
      */
@@ -894,12 +886,12 @@ public class StatementTest extends TestCase {
         Statement t = new Statement(mo, "overloadedMethod", arguments);
         t.execute();
         MockObject.assertCalled("overloadedmethod", arguments);
-        
+
         arguments = new Object[] { new MockParent(), new MockParent() };
         t = new Statement(mo, "overloadedMethod", arguments);
         t.execute();
         MockObject.assertCalled("overloadedmethod2", arguments);
-        
+
         arguments = new Object[] { new MockObject(), new MockObject() };
         t = new Statement(mo, "overloadedMethodB", arguments);
         try{
@@ -907,13 +899,13 @@ public class StatementTest extends TestCase {
             fail("should throw Exception");
         }catch(Exception e){
         }
-        
+
         arguments = new Object[] { new MockObject(), new MockParent() };
         t = new Statement(mo, "overloadedMethodB", arguments);
         t.execute();
         MockObject.assertCalled("overloadedmethodB", arguments);
     }
-    
+
     /*
      * Test for special case of the same signature but different return type
      */
@@ -1156,13 +1148,13 @@ public class StatementTest extends TestCase {
                 calledMethod = "new1";
             }
         }
-        
+
         public MockObject(String o) {
             reset();
             calledMethod = "new3";
             receivedArguments.add(o);
         }
-        
+
         public MockObject(Object o) {
             reset();
             calledMethod = "new2";
@@ -1220,42 +1212,42 @@ public class StatementTest extends TestCase {
             calledMethod = "methodB2";
             receivedArguments.add(new Boolean(b));
         }
-        
+
         public void overloadedMethod(MockObject o1, MockObject o2){
             reset();
             calledMethod = "overloadedmethod";
             receivedArguments.add(o1);
             receivedArguments.add(o2);
         }
-        
+
         public void overloadedMethod(MockParent o1, MockParent o2){
             reset();
             calledMethod = "overloadedmethod2";
             receivedArguments.add(o1);
             receivedArguments.add(o2);
         }
-        
+
         public void overloadedMethod(MockObject o1, MockParent o2){
             reset();
             calledMethod = "overloadedmethod2";
             receivedArguments.add(o1);
             receivedArguments.add(o2);
         }
-        
+
         public void overloadedMethodB(MockObject o1, MockParent o2){
             reset();
             calledMethod = "overloadedmethodB";
             receivedArguments.add(o1);
             receivedArguments.add(o2);
         }
-        
+
         public void overloadedMethodB(MockParent o1, MockObject o2){
             reset();
             calledMethod = "overloadedmethodB2";
             receivedArguments.add(o1);
             receivedArguments.add(o2);
         }
-        
+
         public static void staticMethod(Object o) {
             reset();
             calledMethod = "staticMethod";

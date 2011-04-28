@@ -27,8 +27,8 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 
 /**
- * Test for CertificateNotYetValidException serialization 
- *  
+ * Test for CertificateNotYetValidException serialization
+ *
  */
 
 public class CertificateNotYetValidExceptionTest extends SerializationTest {
@@ -43,7 +43,4 @@ public class CertificateNotYetValidExceptionTest extends SerializationTest {
                 new CertificateNotYetValidException(msgs[1])};
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(CertificateNotYetValidExceptionTest.class);
-    }
 }

@@ -1153,8 +1153,4 @@ public class SSLSocketImplTest extends TestCase {
         return new TestSuite(SSLSocketImplTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

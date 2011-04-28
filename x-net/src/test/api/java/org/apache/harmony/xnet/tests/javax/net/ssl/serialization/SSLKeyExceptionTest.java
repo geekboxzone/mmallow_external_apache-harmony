@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for SSLKeyException serialization
- * 
+ *
  */
 
 public class SSLKeyExceptionTest extends SerializationTest {
@@ -43,7 +43,4 @@ public class SSLKeyExceptionTest extends SerializationTest {
                 new SSLKeyException(msgs[0]), new SSLKeyException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(SSLKeyExceptionTest.class);
-    }
 }

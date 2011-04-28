@@ -40,15 +40,11 @@ import org.apache.harmony.security.asn1.DerOutputStream;
 
 /**
  * ASN.1 DER test for Implicitly tagged type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 
 public class ImplicitTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(ImplicitTest.class);
-    }
 
     private static ASN1SequenceOf sequence = new ASN1SequenceOf(ASN1Boolean
             .getInstance());
@@ -185,10 +181,10 @@ public class ImplicitTest extends TestCase {
                     (byte[]) taggedType[i][1], out.encoded));
         }
     }
-    
+
     /**
      * Tests 2 consecutive implicit string type tagging
-     * 
+     *
      * TYPE1 = [1] IMPLICIT OCTET STRING
      * TYPE2 = [2] IMPLICIT TYPE1
      */
@@ -198,7 +194,7 @@ public class ImplicitTest extends TestCase {
         ASN1Implicit type2 = new ASN1Implicit(2, type1);
 
         byte[] primitiveEncoding = new byte[] {
-        // tag: class(CONTEXT SPECIFIC) + number (2) 
+        // tag: class(CONTEXT SPECIFIC) + number (2)
                 (byte) 0x82,
                 // length
                 0x03,
@@ -206,7 +202,7 @@ public class ImplicitTest extends TestCase {
                 0x00, 0x01, 0x02 };
 
         byte[] constructedEncoding = new byte[] {
-        // tag: class(CONTEXT SPECIFIC) + constructed +number (2) 
+        // tag: class(CONTEXT SPECIFIC) + constructed +number (2)
                 (byte) 0xA2,
                 // length
                 0x00 };

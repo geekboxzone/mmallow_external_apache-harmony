@@ -28,7 +28,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for CertificateExpiredException serialization
- * 
+ *
  */
 
 public class CertificateExpiredExceptionTest extends SerializationTest {
@@ -44,7 +44,4 @@ public class CertificateExpiredExceptionTest extends SerializationTest {
                 new CertificateExpiredException(msgs[1]) };
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(CertificateExpiredExceptionTest.class);
-    }
 }

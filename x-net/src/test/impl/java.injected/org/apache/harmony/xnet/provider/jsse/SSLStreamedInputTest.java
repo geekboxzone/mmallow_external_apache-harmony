@@ -51,8 +51,4 @@ public class SSLStreamedInputTest extends TestCase {
         return new TestSuite(SSLStreamedInputTest.class);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

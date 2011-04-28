@@ -32,14 +32,10 @@ import org.apache.harmony.security.tests.support.TestCertUtils;
 
 /**
  * Serialization tests for <code>CodeSigner</code>
- * 
+ *
  */
 
 public class CodeSignerTest extends SerializationTest {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(CodeSignerTest.class);
-    }
 
     /**
      * @see com.intel.drl.test.SerializationTest#getData()

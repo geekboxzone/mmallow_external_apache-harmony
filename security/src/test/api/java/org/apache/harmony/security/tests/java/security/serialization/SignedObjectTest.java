@@ -37,7 +37,7 @@ import org.apache.harmony.security.tests.support.TestKeyPair;
 
 /**
  * Tests for SignedObject serialization
- * 
+ *
  */
 public class SignedObjectTest extends SerializationTest implements
         SerializationTest.SerializableAssert {
@@ -45,10 +45,10 @@ public class SignedObjectTest extends SerializationTest implements
 	private Signature sig;
 	private TestKeyPair tkp = null;
     private Properties prop;
-    
+
     protected Object[] getData() {
     	try {
-        	sig = Signature.getInstance("SHA1withDSA");		
+        	sig = Signature.getInstance("SHA1withDSA");
     	} catch (NoSuchAlgorithmException e) {
     		fail(e.toString());
     	}
@@ -63,11 +63,11 @@ public class SignedObjectTest extends SerializationTest implements
     	try {
     		o = new SignedObject(prop, tkp.getPrivate(), sig);
     	} catch (IOException e) {
-           	fail(e.toString());  
-    	} catch (SignatureException e) {   
-           	fail(e.toString());  
+           	fail(e.toString());
+    	} catch (SignatureException e) {
+           	fail(e.toString());
     	} catch (InvalidKeyException e) {
-           	fail(e.toString());  
+           	fail(e.toString());
     	} catch (InvalidKeySpecException e) {
           	fail(e.toString());
 		}
@@ -79,28 +79,25 @@ public class SignedObjectTest extends SerializationTest implements
     	SignedObject test = (SignedObject) otest;
 
     	assertEquals(test.getAlgorithm(), ref.getAlgorithm());
- 
+
         try {
-            assertEquals(test.getObject(), prop);      	
+            assertEquals(test.getObject(), prop);
         } catch (ClassNotFoundException e) {
-           	fail(e.toString());  
+           	fail(e.toString());
         } catch (IOException e) {
-           	fail(e.toString());  
+           	fail(e.toString());
         }
         try {
         	if (!test.verify(tkp.getPublic(), sig)) {
             	fail("verify() failed");
-            }	
+            }
         } catch (SignatureException e) {
-        	fail(e.toString());      	
+        	fail(e.toString());
         } catch (InvalidKeyException e) {
-           	fail(e.toString());         	
+           	fail(e.toString());
         } catch (InvalidKeySpecException e) {
-           	fail(e.toString()); 
-		}                     
+           	fail(e.toString());
+		}
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(DigestExceptionTest.class);
-    }
 }

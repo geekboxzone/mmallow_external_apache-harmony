@@ -60,7 +60,7 @@ public class X509CertFactoryPerfTest extends TestCase {
     //
     // The values of certificate's fields:
     //
-    
+
     static int         version         = 2; //v3
     static BigInteger  serialNumber    = BigInteger.valueOf(555555555555555555L);
 
@@ -69,7 +69,7 @@ public class X509CertFactoryPerfTest extends TestCase {
     static String      algName         = "SHA1withDSA";
 
     // DER boolean false encoding (http://asn1.elibel.tm.fr)
-    // Makes no sense. For testing purposes we need just provide 
+    // Makes no sense. For testing purposes we need just provide
     // some ASN.1 structure:
     static byte[]      algParams       = {1, 1, 0};
     static String      issuerName      = "O=Certificate Issuer";
@@ -82,14 +82,14 @@ public class X509CertFactoryPerfTest extends TestCase {
     static PrivateKey  privateKey;
     static byte[]      key             = new byte[] {1, 2, 3, 4, 5, 6, 7, 8}; // random value
     static byte[]      keyEncoding     = null;
-    static boolean[]   issuerUniqueID  = new boolean[] 
+    static boolean[]   issuerUniqueID  = new boolean[]
                 {true, false, true, false, true, false, true, false}; // random value
     static boolean[]   subjectUniqueID = new boolean[]
                 {false, true, false, true, false, true, false, true}; // random value
 
     // Extensions' values
     static byte[]      extValEncoding  = new byte[] {1, 1, 1}; // random value
-    static boolean[]   extnKeyUsage    = new boolean[] 
+    static boolean[]   extnKeyUsage    = new boolean[]
                 {true, false, true, false, true, false, true, false, true}; // random value
     static List    extnExtendedKeyUsage = Arrays.asList(new int[][] {
         // Extended key usage values as specified in rfc 3280:
@@ -113,7 +113,7 @@ public class X509CertFactoryPerfTest extends TestCase {
     static int extnBCLen = 5;
     static GeneralNames extnSANames;
     static GeneralNames extnIANames;
-    
+
     static {
         try {
             extnSANames = new GeneralNames(
@@ -139,7 +139,7 @@ public class X509CertFactoryPerfTest extends TestCase {
                             new GeneralName(2, "BadDNSName")))
                     .addSubtree(new GeneralSubtree(
                             new GeneralName(8, "2.3.4.4444.222"), 2));
-            nameConstraints = 
+            nameConstraints =
                 new NameConstraints(permittedNames, excludedNames);
         } catch (IOException e) {
             // should not be thrown
@@ -162,22 +162,22 @@ public class X509CertFactoryPerfTest extends TestCase {
 
     // Extensions
     static Extension[] extensions      = new Extension[] {
-        
+
         // Supported critical extensions (as specified in rfc 3280
         // http://www.ietf.org/rfc/rfc3280.txt):
 
         // Key Usage
-        new Extension("2.5.29.15", true, 
+        new Extension("2.5.29.15", true,
                 ASN1BitString.getInstance()
-                .encode(new BitString(extnKeyUsage))),  
-        // Basic Constraints    
+                .encode(new BitString(extnKeyUsage))),
+        // Basic Constraints
         new Extension("2.5.29.19", true, new BasicConstraints(true, extnBCLen)),
         // Certificate Policies with ANY policy
-        new Extension("2.5.29.32", true, 
+        new Extension("2.5.29.32", true,
                 new CertificatePolicies()
                 .addPolicyInformation(new PolicyInformation("2.5.29.32.0"))),
         // Subject Alternative Name
-        new Extension("2.5.29.17", true, 
+        new Extension("2.5.29.17", true,
                 new AlternativeName(AlternativeName.SUBJECT, extnSANames)),
         // Name Constraints
         new Extension("2.5.29.30", true, nameConstraints),
@@ -193,21 +193,21 @@ public class X509CertFactoryPerfTest extends TestCase {
 
         // Non-critical extensions (as specified in rfc 3280
         // http://www.ietf.org/rfc/rfc3280.txt):
- 
+
         // Issuer Alternative Name
-        new Extension("2.5.29.18", false, 
+        new Extension("2.5.29.18", false,
                 new AlternativeName(AlternativeName.ISSUER, extnSANames)),
         // CRL Distribution Points
-        new Extension("2.5.29.31", false, 
+        new Extension("2.5.29.31", false,
                 new CRLDistributionPoints(Arrays.asList(new DistributionPoint[] {
                     new DistributionPoint(
-                        new DistributionPointName(extnSANames), 
+                        new DistributionPointName(extnSANames),
                         new ReasonFlags(extnKeyUsage),
                         extnSANames
                         ),
                 }))),
         // Authority Key Identifier
-        new Extension("2.5.29.35", false, 
+        new Extension("2.5.29.35", false,
                 new AuthorityKeyIdentifier(
                     // random value for key identifier
                     new byte[] {1, 2, 3, 4, 5}, extnSANames, serialNumber)),
@@ -235,28 +235,28 @@ public class X509CertFactoryPerfTest extends TestCase {
     // stored in this field
     static byte[] signatureValueBytes;
     static byte[] certEncoding, certEncoding_b64;
-   
+
     static {
         try {
-            signature = 
+            signature =
                 new AlgorithmIdentifier(algOID, algParams);
             Name issuer = new Name(issuerName);
             Name subject = new Name(subjectName);
-            Validity validity = 
+            Validity validity =
                 new Validity(new Date(notBefore), new Date(notAfter));
 
-            SubjectPublicKeyInfo subjectPublicKeyInfo = (SubjectPublicKeyInfo) 
+            SubjectPublicKeyInfo subjectPublicKeyInfo = (SubjectPublicKeyInfo)
                 SubjectPublicKeyInfo.ASN1.decode(publicKey.getEncoded());
             keyEncoding = subjectPublicKeyInfo.getEncoded();
-            
+
             Extensions exts = new Extensions(Arrays.asList(extensions));
-            
-            tbsCertificate = 
-                new TBSCertificate(version, serialNumber, 
-                    signature, issuer, validity, subject, subjectPublicKeyInfo, 
+
+            tbsCertificate =
+                new TBSCertificate(version, serialNumber,
+                    signature, issuer, validity, subject, subjectPublicKeyInfo,
                     issuerUniqueID, subjectUniqueID, exts);
             tbsCertEncoding = tbsCertificate.getEncoded();
-           
+
             try {
                 Signature sig= Signature.getInstance("DSA");
                 sig.initSign(privateKey);
@@ -271,12 +271,12 @@ public class X509CertFactoryPerfTest extends TestCase {
             e.printStackTrace();
         }
     }
-    
-    // the testing data was generated by using of classes 
+
+    // the testing data was generated by using of classes
     // from org.apache.harmony.security.asn1 package encoded
     // by org.apache.harmony.misc.Base64 class.
 
-    private static String base64certEncoding = 
+    private static String base64certEncoding =
         "-----BEGIN CERTIFICATE-----\n" +
         "MIIC+jCCAragAwIBAgICAiswDAYHKoZIzjgEAwEBADAdMRswGQYDVQQKExJDZXJ0a" +
         "WZpY2F0ZSBJc3N1ZXIwIhgPMTk3MDAxMTIxMzQ2NDBaGA8xOTcwMDEyNDAzMzMyMF" +
@@ -323,24 +323,24 @@ public class X509CertFactoryPerfTest extends TestCase {
         stream_b64 = new ByteArrayInputStream(certEncoding_b64);
         stream_b64.mark(certEncoding_b64.length);
     }
-    
+
     /**
-     * Creates the master certificate on the base of which 
+     * Creates the master certificate on the base of which
      * all functionality will be tested.
      * @return
-     * @throws java.lang.Exception 
+     * @throws java.lang.Exception
      */
     protected void setUp() throws java.lang.Exception {
         if ("testVerify3".equals(getName())) {
             signatureValue = new byte[signatureValueBytes.length];
             // make incorrect signature value:
-            System.arraycopy(signatureValueBytes, 0, 
+            System.arraycopy(signatureValueBytes, 0,
                     signatureValue, 0, signatureValueBytes.length);
             signatureValue[20]++;
         } else {
             signatureValue = signatureValueBytes;
         }
-        Certificate cert = 
+        Certificate cert =
             new Certificate(tbsCertificate, signature, signatureValue);
 
         certEncoding = cert.getEncoded();
@@ -362,7 +362,7 @@ public class X509CertFactoryPerfTest extends TestCase {
         }
         byte tmp[] = BigInteger.valueOf(XXX).toByteArray();
         System.arraycopy(tmp, 0, stamp, 0, tmp.length);
-        System.arraycopy(stamp, 0, certEncoding, 
+        System.arraycopy(stamp, 0, certEncoding,
                 certEncoding.length-stamp.length, stamp.length);
 
         stream.reset();
@@ -370,15 +370,15 @@ public class X509CertFactoryPerfTest extends TestCase {
 
         byte[] enc = c.getEncoded();
         byte[] stamp_chek = new byte[stamp.length];
-        
-        System.arraycopy(enc, enc.length - stamp.length, 
+
+        System.arraycopy(enc, enc.length - stamp.length,
                 stamp_chek, 0, stamp.length);
-       
+
         if (!Arrays.equals(stamp, stamp_chek)) {
             fail("Wrong encoding received.");
         }
     }
-    
+
     public void testCreation1() throws Exception {
         byte[] stamp = new byte[10];
         if ((++flag)%2 != 0) {
@@ -386,7 +386,7 @@ public class X509CertFactoryPerfTest extends TestCase {
         }
         byte tmp[] = BigInteger.valueOf(XXX).toByteArray();
         System.arraycopy(tmp, 0, stamp, 0, tmp.length);
-        System.arraycopy(stamp, 0, certEncoding, 
+        System.arraycopy(stamp, 0, certEncoding,
                 certEncoding.length-stamp.length, stamp.length);
 
         stream.reset();
@@ -394,20 +394,20 @@ public class X509CertFactoryPerfTest extends TestCase {
 
         byte[] enc = c.getEncoded();
         byte[] stamp_chek = new byte[stamp.length];
-        
-        System.arraycopy(enc, enc.length - stamp.length, 
+
+        System.arraycopy(enc, enc.length - stamp.length,
                 stamp_chek, 0, stamp.length);
-       
+
         if (!Arrays.equals(stamp, stamp_chek)) {
             fail("Wrong encoding received.");
         }
     }
-    
+
     public void testCreation2() throws Exception {
         stream_b64.reset();
         factory.generateCertificate(stream_b64);
     }
-    
+
     /**
      * checkValidity() method testing.
      */
@@ -420,7 +420,7 @@ public class X509CertFactoryPerfTest extends TestCase {
         } catch (CertificateExpiredException e) {
         }
     }
-    
+
     /**
      * checkValidity(Date date) method testing.
      */
@@ -449,59 +449,59 @@ public class X509CertFactoryPerfTest extends TestCase {
             fail("Unexpected CertificateNotYetValidException was thrown.");
         }
     }
-    
+
     /**
      * getVersion() method testing.
      */
     public void testGetVersion() {
-        assertEquals("The version of the certificate should be 3", 
+        assertEquals("The version of the certificate should be 3",
                 3, certificate.getVersion());
     }
-    
+
     /**
      * getSerialNumber() method testing.
      */
     public void testGetSerialNumber() {
-        assertEquals("Incorrect value of version", 
+        assertEquals("Incorrect value of version",
                 serialNumber, certificate.getSerialNumber());
     }
-    
+
     /**
      * getIssuerDN() method testing.
      */
     public void testGetIssuerDN() {
-        assertEquals("Incorrect issuer", 
-                new X500Principal(issuerName).getName(), 
+        assertEquals("Incorrect issuer",
+                new X500Principal(issuerName).getName(),
                 certificate.getIssuerDN().getName());
     }
-    
+
     /**
      * getIssuerX500Principal() method testing.
      */
     public void testGetIssuerX500Principal() {
-        assertEquals("Incorrect issuer", 
-                new X500Principal(issuerName), 
+        assertEquals("Incorrect issuer",
+                new X500Principal(issuerName),
                 certificate.getIssuerX500Principal());
     }
-    
+
     /**
      * getSubjectDN() method testing.
      */
     public void testGetSubjectDN() {
-        assertEquals("Incorrect subject", 
-                new X500Principal(subjectName).getName(), 
+        assertEquals("Incorrect subject",
+                new X500Principal(subjectName).getName(),
                 certificate.getSubjectDN().getName());
     }
-    
+
     /**
      * getSubjectX500Principal() method testing.
      */
     public void testGetSubjectX500Principal() {
-        assertEquals("Incorrect subject", 
-                new X500Principal(subjectName), 
+        assertEquals("Incorrect subject",
+                new X500Principal(subjectName),
                 certificate.getSubjectX500Principal());
     }
-    
+
     /**
      * getNotBefore() method testing.
      */
@@ -509,7 +509,7 @@ public class X509CertFactoryPerfTest extends TestCase {
         assertEquals("Incorrect notBefore date",
                 new Date(notBefore), certificate.getNotBefore());
     }
-    
+
     /**
      * getNotAfter() method testing.
      */
@@ -517,23 +517,23 @@ public class X509CertFactoryPerfTest extends TestCase {
         assertEquals("Incorrect notAfter date",
                 new Date(notAfter), certificate.getNotAfter());
     }
-    
-    public static void printAsHex(int perLine, String prefix, 
+
+    public static void printAsHex(int perLine, String prefix,
                                         String delimiter, byte[] data) {
         for (int i=0; i<data.length; i++) {
             String tail = Integer.toHexString(0x000000ff & data[i]);
             if (tail.length() == 1) {
-                tail = "0" + tail; 
+                tail = "0" + tail;
             }
             System.out.print(prefix + "0x" + tail + delimiter);
- 
+
             if (((i+1)%perLine) == 0) {
                 System.out.println();
             }
         }
         System.out.println();
     }
-    
+
     /**
      * getTBSCertificate() method testing.
      */
@@ -552,7 +552,7 @@ public class X509CertFactoryPerfTest extends TestCase {
             fail("Unexpected CertificateEncodingException was thrown.");
         }
     }
-    
+
     /**
      * getSignature() method testing.
      */
@@ -561,7 +561,7 @@ public class X509CertFactoryPerfTest extends TestCase {
             fail("Incorrect Signature value.");
         }
     }
-    
+
     /**
      * getSigAlgName() method testing.
      */
@@ -569,7 +569,7 @@ public class X509CertFactoryPerfTest extends TestCase {
         assertEquals("Incorrect value of signature algorithm name",
                 algName, certificate.getSigAlgName());
     }
-    
+
     /**
      * getSigAlgOID() method testing.
      */
@@ -577,7 +577,7 @@ public class X509CertFactoryPerfTest extends TestCase {
         assertEquals("Incorrect value of signature algorithm OID",
                 algOID, certificate.getSigAlgOID());
     }
-    
+
     /**
      * getSigAlgParams() method testing.
      */
@@ -586,7 +586,7 @@ public class X509CertFactoryPerfTest extends TestCase {
             fail("Incorrect Signature value.");
         }
     }
-    
+
     /**
      * getIssuerUniqueID() method testing.
      */
@@ -595,7 +595,7 @@ public class X509CertFactoryPerfTest extends TestCase {
             fail("Incorrect issuerUniqueID value.");
         }
     }
-    
+
     /**
      * getSubjectUniqueID() method testing.
      */
@@ -604,7 +604,7 @@ public class X509CertFactoryPerfTest extends TestCase {
             fail("Incorrect subjectUniqueID value.");
         }
     }
-    
+
     /**
      * getKeyUsage() method testing.
      */
@@ -619,13 +619,13 @@ public class X509CertFactoryPerfTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * getExtendedKeyUsage() method testing.
      */
     public void testGetExtendedKeyUsage() throws Exception {
         List exku = certificate.getExtendedKeyUsage();
-        if ((exku == null) 
+        if ((exku == null)
                 || (exku.size() != extnExtendedKeyUsage.size())) {
             fail("Incorrect Extended Key Usage value.");
         }
@@ -637,14 +637,14 @@ public class X509CertFactoryPerfTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * getBasicConstraints() method testing.
      */
     public void testGetBasicConstraints() {
         assertEquals(extnBCLen, certificate.getBasicConstraints());
     }
-    
+
     /**
      * getSubjectAlternativeNames() method testing.
      */
@@ -675,7 +675,7 @@ public class X509CertFactoryPerfTest extends TestCase {
             fail("Subject Alternative Name extension was incorrectly encoded.");
         }
     }
-    
+
     /**
      * getIssuerAlternativeNames() method testing.
      */
@@ -706,7 +706,7 @@ public class X509CertFactoryPerfTest extends TestCase {
             fail("Issuer Alternative Name extension was incorrectly encoded.");
         }
     }
-    
+
     /**
      * getEncoded() method testing.
      */
@@ -719,7 +719,7 @@ public class X509CertFactoryPerfTest extends TestCase {
             fail("Unexpected CertificateEncodingException was thrown.");
         }
     }
-    
+
     /**
      * getPublicKey() method testing.
      */
@@ -728,7 +728,7 @@ public class X509CertFactoryPerfTest extends TestCase {
             fail("Incorrect Public Key.");
         }
     }
-    
+
     /**
      * getExtensionValue(String oid) method testing.
      */
@@ -752,46 +752,46 @@ public class X509CertFactoryPerfTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * getCriticalExtensionOIDs() method testing.
      */
     public void testGetCriticalExtensionOIDs() {
         Set certCEOids = certificate.getCriticalExtensionOIDs();
-        if (!(certCEOids.containsAll(allCritical) 
+        if (!(certCEOids.containsAll(allCritical)
                     && allCritical.containsAll(certCEOids))) {
             fail("Incorrect value of Critical Extension OIDs");
         }
     }
-    
+
     /**
      * getNonCriticalExtensionOIDs() method testing.
      */
     public void testGetNonCriticalExtensionOIDs() {
         Set certNCEOids = certificate.getNonCriticalExtensionOIDs();
-        if (!(certNCEOids.containsAll(allNonCritical) 
+        if (!(certNCEOids.containsAll(allNonCritical)
                     && allNonCritical.containsAll(certNCEOids))) {
             fail("Incorrect value of Non Critical Extension OIDs");
         }
     }
-    
+
     /**
      * hasUnsupportedCriticalExtension() method testing.
      */
     public void testHasUnsupportedCriticalExtension() {
-        assertTrue("Incorrect value of hasUnsupportedCriticalExtension", 
+        assertTrue("Incorrect value of hasUnsupportedCriticalExtension",
                 certificate.hasUnsupportedCriticalExtension());
 
         if (!certificate.hasUnsupportedCriticalExtension()) {
             fail("Incorrect value of hasUnsupportedCriticalExtension");
         }
     }
-    
+
     /**
      * toString() method testing.
      */
     public void testToString() {
-        assertNotNull("String representation should not be null", 
+        assertNotNull("String representation should not be null",
                 certificate.toString());
     }
 
@@ -802,17 +802,17 @@ public class X509CertFactoryPerfTest extends TestCase {
     public void testVerify1() throws Exception {
         certificate.verify(publicKey);
     }
-    
+
     /**
      * TODO
      * verify(PublicKey key, String sigProvider) method testing.
      */
     public void testVerify2() throws Exception {
-        certificate.verify(publicKey, 
+        certificate.verify(publicKey,
                Signature.getInstance("SHA1withDSA")
                                .getProvider().getName());
     }
-    
+
     /**
      * TODO
      * verify(PublicKey key) method testing.
@@ -824,24 +824,9 @@ public class X509CertFactoryPerfTest extends TestCase {
         } catch (Exception e) {
         }
     }
-    
+
     public static Test suite() {
         return new TestSuite(X509CertFactoryPerfTest.class);
     }
 
-    public static void main(String[] args) throws Exception {
-        /*
-        X509CertFactoryPerfTest test = new X509CertFactoryPerfTest();
-        test.setUp();
-        long startTime = System.currentTimeMillis();
-        for (int i=0; i<100000; i++) {
-            test.testCreation1();
-        }
-        System.out.println("time: "+(System.currentTimeMillis() - startTime));
-        */
-        junit.textui.TestRunner.run(suite());
-    }
 }
-
-
-

@@ -32,13 +32,13 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>AlgorithmParameterGenerator</code> class constructors and
  * methods.
- * 
+ *
  */
 
 public class AlgorithmParameterGenerator1Test extends TestCase {
     /**
      * Constructor for AlgorithmParameterGeneratorTests.
-     * 
+     *
      * @param arg0
      */
     public AlgorithmParameterGenerator1Test(String arg0) {
@@ -48,8 +48,8 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
     private static String[] invalidValues = SpiEngUtils.invalidValues;
     private static String validAlgName = "DSA";
     private static String[] algs =  {
-            "DSA", "dsa", "Dsa", "DsA", "dsA" }; 
-            
+            "DSA", "dsa", "Dsa", "DsA", "dsA" };
+
     public static final String srvAlgorithmParameterGenerator = "AlgorithmParameterGenerator";
 
 
@@ -88,10 +88,10 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm)</code> method
-     * Assertion: 
+     * Assertion:
      * throws NullPointerException must be thrown is null
      * throws NoSuchAlgorithmException must be thrown if algorithm is not available
-     * 
+     *
      */
     public void testAlgorithmParameterGenerator01()
             throws NoSuchAlgorithmException {
@@ -112,7 +112,7 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm)</code> method
-     * Assertion: returns AlgorithmParameterGenerator instance 
+     * Assertion: returns AlgorithmParameterGenerator instance
      * when algorithm is DSA
      */
     public void testAlgorithmParameterGenerator02()
@@ -130,8 +130,8 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
-     * method 
-     * Assertion: 
+     * method
+     * Assertion:
      * throws IllegalArgumentException if provider is null or empty
      */
     public void testAlgorithmParameterGenerator03()
@@ -157,7 +157,7 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
-     * method 
+     * method
      * Assertion: throws NoSuchProviderException if provider is not
      * available
      */
@@ -182,8 +182,8 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
-     * method 
-     * Assertion: 
+     * method
+     * Assertion:
      * throws NullPointerException must be thrown is null
      * throws NoSuchAlgorithmException must be thrown if algorithm is not available
      */
@@ -212,7 +212,7 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
-     * method 
+     * method
      * Assertion: return AlgorithmParameterGenerator
      */
     public void testAlgorithmParameterGenerator06()
@@ -233,7 +233,7 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
-     * method 
+     * method
      * Assertion: throws IllegalArgumentException when provider is null
      */
     public void testAlgorithmParameterGenerator07()
@@ -254,8 +254,8 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
-     * method 
-     * Assertion: 
+     * method
+     * Assertion:
      * throws NullPointerException must be thrown is null
      * throws NoSuchAlgorithmException must be thrown if algorithm is not available
      */
@@ -283,7 +283,7 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
-     * method 
+     * method
      * Assertion: returns AlgorithmParameterGenerator object
      */
     public void testAlgorithmParameterGenerator09()
@@ -304,7 +304,7 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
     /**
      * Test for <code>generateParameters()</code> method
      * Assertion: returns AlgorithmParameters object
-     */  
+     */
     public void testAlgorithmParameterGenerator10()
             throws NoSuchAlgorithmException {
         if (!DSASupported) {
@@ -318,10 +318,10 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
         assertEquals("Incorrect algorithm", ap.getAlgorithm().toUpperCase(),
                 apg.getAlgorithm().toUpperCase());
     }
-    
+
     /**
-     * Test for <code>init(AlgorithmParameterSpec param)</code> and 
-     * <code>init(AlgorithmParameterSpec param, SecureRandom random<code> 
+     * Test for <code>init(AlgorithmParameterSpec param)</code> and
+     * <code>init(AlgorithmParameterSpec param, SecureRandom random<code>
      * methods
      * Assertion: throws InvalidAlgorithmParameterException when param is null
      */
@@ -339,13 +339,13 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
             try {
                 apgs[i].init(aps, random);
                 fail("InvalidAlgorithmParameterException must be throws when param is null");
-            } catch (InvalidAlgorithmParameterException e) {                    
+            } catch (InvalidAlgorithmParameterException e) {
             }
-        }        
+        }
     }
-    
+
     /**
-     * Test for <code>AlgorithmParameterGenerator</code> constructor 
+     * Test for <code>AlgorithmParameterGenerator</code> constructor
      * Assertion: returns AlgorithmParameterGenerator object
      */
     public void testAlgorithmParameterGeneratorConstr() throws NoSuchAlgorithmException {
@@ -354,7 +354,7 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
             return;
         }
         AlgorithmParameterGeneratorSpi spi = new MyAlgorithmParameterGeneratorSpi();
-        AlgorithmParameterGenerator apg = 
+        AlgorithmParameterGenerator apg =
                 new myAlgPG(spi, validProvider, validAlgName);
         assertEquals("Incorrect algorithm", apg.getAlgorithm(), validAlgName);
         assertEquals("Incorrect provider",apg.getProvider(),validProvider);
@@ -363,7 +363,7 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
             fail("IllegalArgumentException must be thrown");
         } catch (IllegalArgumentException e) {
         }
-        
+
         apg = new myAlgPG(null, null, null);
         assertNull("Incorrect algorithm", apg.getAlgorithm());
         assertNull("Incorrect provider", apg.getProvider());
@@ -374,9 +374,6 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
         }
     }
 
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(AlgorithmParameterGenerator1Test.class);
-    }
 }
 /**
  * Additional class to verify AlgorithmParameterGenerator constructor

@@ -43,13 +43,9 @@ import junit.framework.TestCase;
 
 /**
  * Tests for DefaultPolicy
- * 
+ *
  */
 public class DefaultPolicyTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(DefaultPolicyTest.class);
-    }
 
     static class TestParser extends DefaultPolicyParser {
 
@@ -69,7 +65,7 @@ public class DefaultPolicyTest extends TestCase {
     }
 
     /**
-     * Tests that policy is really resetted on refresh(). 
+     * Tests that policy is really resetted on refresh().
      */
     public void testRefresh() {
         Permission sp = new SecurityPermission("sdf");

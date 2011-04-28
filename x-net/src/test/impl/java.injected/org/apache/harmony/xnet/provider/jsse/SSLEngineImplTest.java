@@ -1375,8 +1375,4 @@ public class SSLEngineImplTest extends TestCase {
         return new TestSuite(SSLEngineImplTest.class);
     }
 
-    public static void main(String[] args) throws Exception {
-        junit.textui.TestRunner.run(suite());
-    }
 }
-

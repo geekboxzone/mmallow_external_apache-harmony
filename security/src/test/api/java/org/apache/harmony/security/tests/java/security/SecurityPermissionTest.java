@@ -25,13 +25,9 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SecurityPermission</code>
- * 
+ *
  */
 public class SecurityPermissionTest extends TestCase {
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(SecurityPermissionTest.class);
-    }
 
     /**
      * Constructor for SecurityPermissionTest.
@@ -40,11 +36,11 @@ public class SecurityPermissionTest extends TestCase {
     public SecurityPermissionTest(String arg0) {
         super(arg0);
     }
-    
+
     /**
-     * Check all constructors: an object is created with the specified valid name. 
-     * If name equal null then NPE should be thrown. 
-     * If  name is empty then IAE should be thrown. 
+     * Check all constructors: an object is created with the specified valid name.
+     * If name equal null then NPE should be thrown.
+     * If  name is empty then IAE should be thrown.
      * Action is ignored.
      */
     public void testCtor()
@@ -61,13 +57,13 @@ public class SecurityPermissionTest extends TestCase {
             fail("NPE is not thrown");
         }
         catch (NullPointerException ok){}
-        
+
         try{
             new SecurityPermission(null, "ds235");
             fail("NPE is not thrown");
         }
         catch (NullPointerException ok){}
-        
+
         try{
             new SecurityPermission("");
             fail("IAE is not thrown");
@@ -77,6 +73,6 @@ public class SecurityPermissionTest extends TestCase {
             new SecurityPermission("", "ertre 3454");
             fail("IAE is not thrown");
         }
-        catch (IllegalArgumentException ok){} 
+        catch (IllegalArgumentException ok){}
     }
 }
