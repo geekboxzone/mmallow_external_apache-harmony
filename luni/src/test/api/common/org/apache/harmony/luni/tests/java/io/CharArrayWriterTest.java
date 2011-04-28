@@ -124,11 +124,8 @@ public class CharArrayWriterTest extends junit.framework.TestCase {
         CharArrayWriter obj = new CharArrayWriter();
         try {
             obj.write(new char[] { '0' }, 0, -1);
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
-            assertEquals(
-                    "IndexOutOfBoundsException rather than a subclass expected",
-                    IndexOutOfBoundsException.class, t.getClass());
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 

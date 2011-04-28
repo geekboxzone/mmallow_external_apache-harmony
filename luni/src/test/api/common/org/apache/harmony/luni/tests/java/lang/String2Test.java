@@ -347,18 +347,8 @@ public class String2Test extends junit.framework.TestCase {
         // Test for method byte [] java.lang.String.getBytes()
         byte[] sbytes = hw1.getBytes();
 
-        boolean isEbcdic = Charset.defaultCharset().equals(Charset.forName("IBM1047"));
-        if (!isEbcdic) {
-            for (int i = 0; i < hw1.length(); i++)
-                assertTrue("Returned incorrect bytes", sbytes[i] == (byte) hw1
-                        .charAt(i));
-        } else {
-            // On EBCDIC platforms, getBytes() returns different values
-            // Reference values taken from J9 5.0
-            byte[] expectedValues = {-56, -123, -109, -109, -106, -26, -106,
-                -103, -109, -124};
-            for (int i = 0; i < hw1.length(); i++)
-                assertEquals(expectedValues[i], sbytes[i]);
+        for (int i = 0; i < hw1.length(); i++) {
+            assertTrue("Returned incorrect bytes", sbytes[i] == (byte) hw1.charAt(i));
         }
 
         char[] chars = new char[1];
@@ -435,17 +425,7 @@ public class String2Test extends junit.framework.TestCase {
         // int)
         byte[] buf = new byte[5];
         "Hello World".getBytes(6, 11, buf, 0);
-
-        boolean isEbcdic = Charset.defaultCharset().equals(Charset.forName("IBM1047"));
-        if (!isEbcdic) {
-            assertEquals("Returned incorrect bytes", "World", new String(buf));
-        } else {
-            // On EBCDIC platforms, getBytes() returns different values
-            // Reference values taken from J9 5.0
-            byte[] expectedValues = {87, 111, 114, 108, 100};
-            for (int i = 0; i < 5; i++)
-                assertEquals(expectedValues[i], buf[i]);
-        }
+        assertEquals("Returned incorrect bytes", "World", new String(buf));
 
         try {
             "Hello World".getBytes(-1, 1, null, 0);
@@ -498,8 +478,8 @@ public class String2Test extends junit.framework.TestCase {
         try {
             "abc".getBytes((String) null);
             fail("Should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // Expected
+        } catch (UnsupportedEncodingException whatTheRiDocumentsAndWeThrow) {
+        } catch (NullPointerException whatTheRiActuallyThrows) {
         }
 
         try {

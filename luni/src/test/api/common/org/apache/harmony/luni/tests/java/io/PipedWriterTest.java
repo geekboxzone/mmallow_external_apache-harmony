@@ -201,10 +201,7 @@ public class PipedWriterTest extends junit.framework.TestCase {
             obj = new java.io.PipedWriter(pr);
             obj.write(new char[0], (int) 0, (int) -1);
             fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
-            assertEquals(
-                    "IndexOutOfBoundsException rather than a subclass expected",
-                    IndexOutOfBoundsException.class, t.getClass());
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 
@@ -217,10 +214,8 @@ public class PipedWriterTest extends junit.framework.TestCase {
         try {
             obj = new java.io.PipedWriter(pr);
             obj.write(new char[0], (int) -1, (int) 0);
-            fail("IndexOutOfBoundsException expected");
-        } catch (ArrayIndexOutOfBoundsException t) {
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {}
+            fail();
+        } catch (IndexOutOfBoundsException expected) {}
     }
 
     /**
@@ -232,10 +227,8 @@ public class PipedWriterTest extends junit.framework.TestCase {
         try {
             obj = new java.io.PipedWriter(pr);
             obj.write(new char[0], (int) -1, (int) -1);
-            fail("IndexOutOfBoundsException expected");
-        } catch (ArrayIndexOutOfBoundsException t) {
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {}
+            fail();
+        } catch (IndexOutOfBoundsException expected) {}
     }
 
     /**

@@ -43,7 +43,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Arrays;
 
-import org.apache.harmony.luni.internal.nls.Messages;
 import org.apache.harmony.testframework.serialization.SerializationTest;
 import org.apache.harmony.testframework.serialization.SerializationTest.SerializableAssert;
 
@@ -1977,11 +1976,8 @@ public class CollectionsTest extends junit.framework.TestCase {
     		
    		try {
    			m.invoke(null, new Object(), int.class);
-   			fail("should throw InvocationTargetException");
-   		} catch (InvocationTargetException e) {
-            String errMsg = Messages.getString(
-                    "luni.05", Object.class, int.class);
-   			assertEquals(errMsg, e.getCause().getMessage());
+   			fail();
+   		} catch (InvocationTargetException expected) {
    		}
     }
     

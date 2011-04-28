@@ -22,19 +22,6 @@ import junit.framework.TestCase;
 
 public class CharacterTest extends TestCase {
 
-    public void test_valueOfC() {
-        // test the cache range
-        for (char c = '\u0000'; c < 512; c++) {
-            Character e = new Character(c);
-            Character a = Character.valueOf(c);
-            assertEquals(e, a);
-        }
-        // test the rest of the chars
-        for (int c = 512; c <= Character.MAX_VALUE; c++) {
-            assertEquals(new Character((char) c), Character.valueOf((char) c));
-        }
-    }
-
     public void test_isValidCodePointI() {
         assertFalse(Character.isValidCodePoint(-1));
         assertTrue(Character.isValidCodePoint(0));

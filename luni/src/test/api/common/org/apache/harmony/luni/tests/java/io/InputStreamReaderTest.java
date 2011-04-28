@@ -471,19 +471,17 @@ public class InputStreamReaderTest extends TestCase {
      */
     public void test_read$CII_1() throws IOException {
         try {
-            // Throws IndexOutOfBoundsException before NullPointerException
             reader.read(null, -1, 1);
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
-            // Throws NullPointerException before IndexOutOfBoundsException
             reader.read(null, 0, -1);
             fail("Should throw NullPointerException");
         } catch (NullPointerException e) {
-            // expected
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {

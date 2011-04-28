@@ -40,7 +40,6 @@ public class BigIntegerConstructorsTest extends TestCase {
             new BigInteger(aBytes);
             fail("NumberFormatException has not been caught");
         } catch (NumberFormatException e) {
-            assertEquals("Improper exception message", "Zero length BigInteger", e.getMessage());
         }
     }
     
@@ -198,7 +197,6 @@ public class BigIntegerConstructorsTest extends TestCase {
             new BigInteger(aSign, aBytes);
             fail("NumberFormatException has not been caught");
         } catch (NumberFormatException e) {
-            assertEquals("Improper exception message", "Invalid signum value", e.getMessage());
         }
     }
     
@@ -580,7 +578,6 @@ public class BigIntegerConstructorsTest extends TestCase {
             new BigInteger(value, radix);
             fail("NumberFormatException has not been caught");
         } catch (NumberFormatException e) {
-            assertEquals("Improper exception message", "Radix out of range", e.getMessage());
         }
     }
     

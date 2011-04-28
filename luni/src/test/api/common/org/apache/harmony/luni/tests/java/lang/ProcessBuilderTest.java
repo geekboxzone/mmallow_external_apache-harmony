@@ -121,10 +121,10 @@ public class ProcessBuilderTest extends TestCase {
             // expected;
         }
         try {
-            env.get(new Object());
-            fail("should throw ClassCastException.");
-        } catch (ClassCastException e) {
-            // expected;
+            assertNull(env.get(new Object()));
+            // Android's get doesn't throw (because it's just a regular HashMap).
+            // fail("should throw ClassCastException.");
+        } catch (ClassCastException thrownByRi) {
         }
     }
 

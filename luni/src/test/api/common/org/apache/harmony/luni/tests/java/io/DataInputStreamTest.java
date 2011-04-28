@@ -214,23 +214,23 @@ public class DataInputStreamTest extends junit.framework.TestCase {
 
         try {
             is.readFully(nullByteArray, -1, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
             is.readFully(nullByteArray, 0, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
             is.readFully(nullByteArray, 1, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         is.readFully(nullByteArray, -1, 0);
@@ -239,9 +239,9 @@ public class DataInputStreamTest extends junit.framework.TestCase {
 
         try {
             is.readFully(nullByteArray, -1, 1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
@@ -275,23 +275,23 @@ public class DataInputStreamTest extends junit.framework.TestCase {
 
         try {
             is.readFully(byteArray, -1, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
             is.readFully(byteArray, 0, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
             is.readFully(byteArray, 1, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         is.readFully(byteArray, -1, 0);
@@ -336,23 +336,23 @@ public class DataInputStreamTest extends junit.framework.TestCase {
 
         try {
             is.readFully(nullByteArray, -1, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
             is.readFully(nullByteArray, 0, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
             is.readFully(nullByteArray, 1, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         is.readFully(nullByteArray, -1, 0);

@@ -380,16 +380,16 @@ public class BufferedReaderTest extends TestCase {
 		
 		try {
 			br.read(nullCharArray, -1, -1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
+			fail();
+		} catch (NullPointerException expected) {
+		} catch (IndexOutOfBoundsException expected) {
 		}
 		
 		try {
 			br.read(nullCharArray, -1, 0);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
+			fail();
+		} catch (NullPointerException expected) {
+		} catch (IndexOutOfBoundsException expected) {
 		}
 
 		try {

@@ -352,9 +352,9 @@ public class StringBuffer2Test extends junit.framework.TestCase {
 		StringBuffer buf1 = new StringBuffer("abcd");
 		try {
 			buf1.insert(-1, (char[]) null, 0, 0);
-            fail("Should throw StringIndexOutOfBoundsException");
-		} catch (StringIndexOutOfBoundsException e) {
-            //expected
+			fail();
+		} catch (NullPointerException expected) {
+		} catch (StringIndexOutOfBoundsException expected) {
 		}
         
         try {

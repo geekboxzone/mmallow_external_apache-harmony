@@ -1047,7 +1047,8 @@ public class DeflaterTest extends TestCase {
 			defl.reset();
 			fail("defl.reset() can still be used after " + desc
 					+ " is called in test_" + desc);
-		} catch (NullPointerException e) {
+		} catch (NullPointerException expected) {
+		} catch (IllegalStateException expected) {
 		}
 
         // Methods where we expect NullPointerException to be thrown
@@ -1055,7 +1056,8 @@ public class DeflaterTest extends TestCase {
             defl.getBytesRead();
             fail("defl.reset() can still be used after " + desc
                     + " is called in test_" + desc);
-        } catch (NullPointerException e) {
+	} catch (NullPointerException expected) {
+	} catch (IllegalStateException expected) {
         }
         
         // Methods where we expect NullPointerException to be thrown
@@ -1063,7 +1065,8 @@ public class DeflaterTest extends TestCase {
             defl.getBytesWritten();
             fail("defl.getBytesWritten() can still be used after " + desc
                     + " is called in test_" + desc);
-        } catch (NullPointerException e) {
+	} catch (NullPointerException expected) {
+	} catch (IllegalStateException expected) {
         }        
         
 		// Methods that should be allowed to be called after end() is called

@@ -161,8 +161,8 @@ public class BufferedWriterTest extends junit.framework.TestCase {
         try {
             bWriter.write(nullCharArray, -1, -1);
             fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
