@@ -329,22 +329,22 @@ public class BufferedOutputStreamTest extends junit.framework.TestCase {
         try {
             bos.write(byteArray, -1, -1);
             fail();
-        } catch (IndexOutOfBoundsException e) {
-            // expected IndexOutOfBoundsException
+        } catch (IOException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
             bos.write(null, -1, -1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected NullPointerException.
+            fail();
+        } catch (IOException expected) {
+        } catch (NullPointerException expected) {
         }
 
         try {
             bos.write(null, 0, 1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected NullPointerException.
+            fail();
+        } catch (IOException expected) {
+        } catch (NullPointerException expected) {
         }
     }
 
@@ -823,11 +823,12 @@ public class BufferedOutputStreamTest extends junit.framework.TestCase {
 
     // Regression test for flush on closed stream
     public void test_flush_on_closed_stream() throws IOException {
-        BufferedOutputStream bos =
-            new BufferedOutputStream(
-                new ByteArrayOutputStream());
+        BufferedOutputStream bos = new BufferedOutputStream(new ByteArrayOutputStream());
         bos.close();
-        bos.flush(); // RI does not throw exception
+        try {
+            bos.flush(); // RI does not throw exception
+        } catch (IOException expected) { // but Android does
+        }
     }
 
     /**

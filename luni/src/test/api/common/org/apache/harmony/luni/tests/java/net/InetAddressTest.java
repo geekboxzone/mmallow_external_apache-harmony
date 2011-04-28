@@ -47,7 +47,7 @@ public class InetAddressTest extends junit.framework.TestCase {
                 InetAddress.getByName("unknown.unknown.bad");
                 fail("An UnknownHostException should have been thrown");
             } catch (UnknownHostException e) {
-                assertEquals("unknown.unknown.bad", e.getMessage());
+                assertTrue(e.getMessage().contains("unknown.unknown.bad"));
             }
         }
     }

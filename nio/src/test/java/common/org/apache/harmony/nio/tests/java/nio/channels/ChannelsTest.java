@@ -116,13 +116,12 @@ public class ChannelsTest extends TestCase {
         ByteBuffer byteBuf = ByteBuffer.allocate(this.testNum);
         this.fins = null;
         int readres = this.testNum;
-        ReadableByteChannel rbChannel = Channels.newChannel(this.fins);
-        assertNotNull(rbChannel);
         try {
+            ReadableByteChannel rbChannel = Channels.newChannel(this.fins);
+            assertNotNull(rbChannel);
             readres = rbChannel.read(byteBuf);
             fail();
-        } catch (NullPointerException e) {
-            // correct
+        } catch (NullPointerException expected) {
         }
         assertEquals(this.testNum, readres);
     }
@@ -188,15 +187,15 @@ public class ChannelsTest extends TestCase {
             writebuf.putChar((char) (val + 64));
         }
         this.fouts = null;
-        WritableByteChannel rbChannel = Channels.newChannel(this.fouts);
-        writeres = rbChannel.write(writebuf);
-        assertEquals(0, writeres);
-
-        writebuf.flip();
         try {
+            WritableByteChannel rbChannel = Channels.newChannel(this.fouts);
+            writeres = rbChannel.write(writebuf);
+            assertEquals(0, writeres);
+
+            writebuf.flip();
             writeres = rbChannel.write(writebuf);
             fail("Should throw NPE.");
-        } catch (NullPointerException e) {
+        } catch (NullPointerException expected) {
         }
     }
 
@@ -275,23 +274,14 @@ public class ChannelsTest extends TestCase {
         ReadableByteChannel readbc = this.fins.getChannel();
         assertEquals(this.fileSize, this.fins.available());
         assertTrue(readbc.isOpen());
-        InputStream testins = Channels.newInputStream(null);
-        assertNotNull(testins);
 
         try {
+            InputStream testins = Channels.newInputStream(null);
+            assertNotNull(testins);
             testins.read(readbuf);
             fail();
-        } catch (NullPointerException e) {
-            // correct
+        } catch (NullPointerException expected) {
         }
-        assertEquals(0, testins.available());
-        try {
-            testins.close();
-            fail();
-        } catch (NullPointerException e) {
-            // correct
-        }
-
     }
 
     public void testNewInputStreamReadableByteChannel() throws Exception {
@@ -324,29 +314,20 @@ public class ChannelsTest extends TestCase {
     public void testNewOutputStreamWritableByteChannel_InputNull()
             throws Exception {
         byte[] writebuf = new byte[this.testNum];
-        OutputStream testouts = Channels.newOutputStream(null);
-        assertNotNull(testouts);
         try {
+            OutputStream testouts = Channels.newOutputStream(null);
+            assertNotNull(testouts);
             testouts.write(writebuf);
             fail();
-        } catch (NullPointerException e) {
-            // correct
+        } catch (NullPointerException expected) {
         }
-        testouts.flush();
         try {
-            testouts.close();
-            fail();
-        } catch (NullPointerException e) {
-            // correct
-        }
-        WritableByteChannel writebc = Channels.newChannel((OutputStream) null);
-        assertTrue(writebc.isOpen());
-        OutputStream testoutputS = Channels.newOutputStream(writebc);
-        try {
+            WritableByteChannel writebc = Channels.newChannel((OutputStream) null);
+            assertTrue(writebc.isOpen());
+            OutputStream testoutputS = Channels.newOutputStream(writebc);
             testoutputS.write(writebuf);
             fail();
-        } catch (NullPointerException e) {
-            // correct
+        } catch (NullPointerException expected) {
         }
     }
 
@@ -414,33 +395,25 @@ public class ChannelsTest extends TestCase {
         CharBuffer charBuf = CharBuffer.allocate(bufSize);
         this.fins = new FileInputStream(tmpFile);
         // channel null
-        Reader testReader = Channels.newReader(null, Charset.forName(CODE_SET)
-                .newDecoder(), -1);
-        assertNotNull(testReader);
-        assertFalse(testReader.ready());
+        Reader testReader;
         try {
+            testReader = Channels.newReader(null, Charset.forName(CODE_SET).newDecoder(), -1);
+            assertNotNull(testReader);
+            assertFalse(testReader.ready());
             readres = testReader.read((CharBuffer) null);
             fail();
         } catch (NullPointerException e) {
             // correct
         }
         assertEquals(0, readres);
-        try {
-            readres = testReader.read(charBuf);
-            fail();
-        } catch (NullPointerException e) {
-            // correct
-        }
 
         this.fins = null;
-        ReadableByteChannel rbChannel = Channels.newChannel(this.fins);
         // channel with null inputs
-        testReader = Channels.newReader(rbChannel, Charset.forName(CODE_SET)
-                .newDecoder(), //$NON-NLS-1$
-                -1);
-        assertNotNull(testReader);
-        assertFalse(testReader.ready());
         try {
+            ReadableByteChannel rbChannel = Channels.newChannel(this.fins);
+            testReader = Channels.newReader(rbChannel, Charset.forName(CODE_SET).newDecoder(), -1);
+            assertNotNull(testReader);
+            assertFalse(testReader.ready());
             readres = testReader.read(charBuf);
             fail();
         } catch (NullPointerException e) {
@@ -459,33 +432,24 @@ public class ChannelsTest extends TestCase {
         CharBuffer charBuf = CharBuffer.allocate(bufSize);
         this.fins = new FileInputStream(tmpFile);
         // channel null
-        Reader testReader = Channels.newReader(null, Charset.forName(CODE_SET)
-                .newDecoder(), //$NON-NLS-1$
-                0);
-        assertNotNull(testReader);
-        assertFalse(testReader.ready());
+        Reader testReader;
         try {
+            testReader = Channels.newReader(null, Charset.forName(CODE_SET).newDecoder(), 0);
+            assertNotNull(testReader);
+            assertFalse(testReader.ready());
             readres = testReader.read((CharBuffer) null);
             fail();
-        } catch (NullPointerException e) {
-            // correct
+        } catch (NullPointerException expected) {
         }
         assertEquals(0, readres);
-        try {
-            readres = testReader.read(charBuf);
-            fail();
-        } catch (NullPointerException e) {
-            // correct
-        }
+
         this.fins = null;
-        ReadableByteChannel rbChannel = Channels.newChannel(this.fins);
         // channel with null inputs
-        testReader = Channels.newReader(rbChannel, Charset.forName(CODE_SET)
-                .newDecoder(), //$NON-NLS-1$
-                -1);
-        assertNotNull(testReader);
-        assertFalse(testReader.ready());
         try {
+            ReadableByteChannel rbChannel = Channels.newChannel(this.fins);
+            testReader = Channels.newReader(rbChannel, Charset.forName(CODE_SET).newDecoder(), -1);
+            assertNotNull(testReader);
+            assertFalse(testReader.ready());
             readres = testReader.read(charBuf);
             fail();
         } catch (NullPointerException e) {
@@ -541,43 +505,16 @@ public class ChannelsTest extends TestCase {
             writebuf = writebuf + ((char) (val + 64));
         }
         // null channel
-        Writer testWriter = Channels.newWriter(null, Charset.forName(CODE_SET)
-                .newEncoder(), //$NON-NLS-1$
-                -1);
-        // can write to buffer
-        testWriter.write(writebuf);
         try {
-            testWriter.flush();
-            fail();
-        } catch (NullPointerException e) {
-            // correct
-        }
-        try {
-            testWriter.close();
-            fail();
-        } catch (NullPointerException e) {
-            // correct
+            Writer testWriter = Channels.newWriter(null, Charset.forName(CODE_SET).newEncoder(), -1);
+        } catch (NullPointerException expected) {
         }
 
         // channel with null input
         this.fouts = null;
-        WritableByteChannel wbChannel = Channels.newChannel(this.fouts);
-        testWriter = Channels.newWriter(wbChannel, Charset.forName(CODE_SET)
-                .newEncoder(), //$NON-NLS-1$
-                -1);
-        // can write to buffer
-        testWriter.write(writebuf);
         try {
-            testWriter.flush();
-            fail();
-        } catch (NullPointerException e) {
-            // correct
-        }
-        try {
-            testWriter.close();
-            fail();
-        } catch (NullPointerException e) {
-            // correct
+            WritableByteChannel wbChannel = Channels.newChannel(this.fouts);
+        } catch (NullPointerException expected) {
         }
     }
 
@@ -668,14 +605,16 @@ public class ChannelsTest extends TestCase {
 		assertFalse(sc.isBlocking());
 
 		Reader reader = Channels.newReader(sc, "UTF16");
-		int i = reader.read();
-		assertEquals(-1, i);
+		try {
+			int i = reader.read();
+			fail("should throw IllegalBlockingModeException");
+		} catch (IllegalBlockingModeException expected) {
+		}
 
 		try {
 			Channels.newInputStream(sc).read();
 			fail("should throw IllegalBlockingModeException");
-		} catch (IllegalBlockingModeException e) {
-			// expected
+		} catch (IllegalBlockingModeException expected) {
 		}
 
 		sc.close();

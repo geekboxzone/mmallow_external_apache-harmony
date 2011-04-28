@@ -88,20 +88,20 @@ public class WrappedCharBufferTest2 extends ReadOnlyCharBufferTest {
         try {
             buf.put((char[]) null, 0, 1);
             fail("Should throw NullPointerException"); //$NON-NLS-1$
-        } catch (NullPointerException e) {
-            // expected
+        } catch (ReadOnlyBufferException expected) {
+        } catch (NullPointerException expected) {
         }
         try {
             buf.put(new char[buf.capacity() + 1], 0, buf.capacity() + 1);
             fail("Should throw BufferOverflowException"); //$NON-NLS-1$
-        } catch (BufferOverflowException e) {
-            // expected
+        } catch (ReadOnlyBufferException expected) {
+        } catch (BufferOverflowException expected) {
         }
         try {
             buf.put(array, -1, array.length);
             fail("Should throw IndexOutOfBoundsException"); //$NON-NLS-1$
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+        } catch (ReadOnlyBufferException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 

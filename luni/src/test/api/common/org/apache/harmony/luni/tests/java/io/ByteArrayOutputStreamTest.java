@@ -189,11 +189,8 @@ public class ByteArrayOutputStreamTest extends TestCase {
         ByteArrayOutputStream obj = new ByteArrayOutputStream();
         try {
             obj.write(new byte[] { (byte) 0x00 }, -1, 0);
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
-            assertEquals(
-                    "IndexOutOfBoundsException rather than a subclass expected",
-                    IndexOutOfBoundsException.class, t.getClass());
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 

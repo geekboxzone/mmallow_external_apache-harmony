@@ -853,6 +853,7 @@ public class ArrayListTest extends junit.framework.TestCase {
         Vector v = new Vector();
         v.add("a");
         ArrayList al = new ArrayList(v);
+        al.add("b");
         Iterator it = al.iterator();
         al.trimToSize();
         try {

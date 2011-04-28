@@ -20,6 +20,7 @@ package org.apache.harmony.luni.tests.java.lang;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.SortedMap;
 
 import junit.framework.TestCase;
@@ -633,15 +634,15 @@ public class StringTest extends TestCase {
         }
         try {
             new String(null, -1, 0, Charset.defaultCharset());
-            fail("should throw StringIndexOutOfBoundsException");
-        } catch (StringIndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (StringIndexOutOfBoundsException expected) {
         }
         try {
             new String(null, 0, -1, Charset.defaultCharset());
-            fail("should throw StringIndexOutOfBoundsException");
-        } catch (StringIndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (StringIndexOutOfBoundsException expected) {
         }
         try {
             new String(null, 0, 9, Charset.defaultCharset());
@@ -663,15 +664,15 @@ public class StringTest extends TestCase {
         }
         try {
             new String(new byte[8], -1, 0, (Charset)null);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (StringIndexOutOfBoundsException expected) {
         }
         try {
             new String(new byte[8], 0, 9, (Charset)null);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (StringIndexOutOfBoundsException expected) {
         }
         try {
             new String(new byte[8], 0, 4, (Charset)null);
@@ -736,24 +737,9 @@ public class StringTest extends TestCase {
         }
         assertTrue(bytesEquals(someBytes,new String(someBytes, Charset.defaultCharset()).getBytes(Charset.defaultCharset())));
         SortedMap<String, Charset> charsets = Charset.availableCharsets();
-
-        Charset ascii = charsets.get("US-ASCII");
-        Charset utf8 = charsets.get("UTF-8");
-        if (charsets.size() >= 2){
-            assertTrue(bytesEquals(someBytes,new String(someBytes, charsets.get(charsets.firstKey())).getBytes(charsets.get(charsets.lastKey()))));            
-            assertFalse(bytesEquals("\u4f60\u597d".getBytes(ascii), "\u4f60\u597d".getBytes(utf8)));
-        }
     }
     
     boolean bytesEquals(byte[] bytes1, byte[] bytes2){
-        if (bytes1.length == bytes2.length){
-            for (int i = 0; i < bytes1.length; i++){
-                if (bytes1[i] != bytes2[i]){
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
+        return Arrays.toString(bytes1).equals(Arrays.toString(bytes2));
     }
 }

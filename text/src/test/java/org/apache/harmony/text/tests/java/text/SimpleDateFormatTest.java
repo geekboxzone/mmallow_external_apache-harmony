@@ -610,8 +610,8 @@ public class SimpleDateFormatTest extends junit.framework.TestCase {
                 Calendar.JANUARY, 1, 0, 0, 59).getTime(), 0, 4);
         test.parse("m:s", "59:0", new GregorianCalendar(1970, Calendar.JANUARY,
                 1, 0, 59, 0).getTime(), 0, 4);
-//        test.parse("ms", "059", new GregorianCalendar(1970, Calendar.JANUARY,
-//                1, 0, 0, 59).getTime(), 0, 3);
+        test.parse("ms", "059", new GregorianCalendar(1970, Calendar.JANUARY,
+                1, 0, 0, 59).getTime(), 0, 3);
 
         cal = new GregorianCalendar(1970, Calendar.JANUARY, 1);
         test.parse("S", "0", cal.getTime(), 0, 1);
@@ -621,7 +621,7 @@ public class SimpleDateFormatTest extends junit.framework.TestCase {
 
         cal = new GregorianCalendar(1970, Calendar.JANUARY, 1);
         cal.set(Calendar.ERA, GregorianCalendar.BC);
-//        test.parse("G", "Bc ", cal.getTime(), 0, 2);
+        test.parse("G", "Bc ", cal.getTime(), 0, 2);
 
         test.parse("y", "00", new GregorianCalendar(2000, Calendar.JANUARY, 1)
                 .getTime(), 0, 2);

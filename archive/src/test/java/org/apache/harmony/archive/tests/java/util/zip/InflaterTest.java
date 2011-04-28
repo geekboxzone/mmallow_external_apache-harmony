@@ -1097,21 +1097,23 @@ public class InflaterTest extends junit.framework.TestCase {
         try{
             inflate.getAdler();
             fail("IllegalStateException expected");
-        }catch(IllegalStateException ise){
+        }catch(IllegalStateException expected){
             //expected
         }
 
         try{
             inflate.getBytesRead();
             fail("NullPointerException expected");
-        }catch(NullPointerException ise){
+        }catch(IllegalStateException expected){
+        }catch(NullPointerException expected){
             //expected
         }
         
         try{
             inflate.getBytesWritten();
             fail("NullPointerException expected");
-        }catch(NullPointerException ise){
+        }catch(NullPointerException expected){
+        }catch(IllegalStateException expected){
             //expected
         }
          

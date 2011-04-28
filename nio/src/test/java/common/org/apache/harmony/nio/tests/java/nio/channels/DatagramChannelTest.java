@@ -356,7 +356,7 @@ public class DatagramChannelTest extends TestCase {
         assertFalse(s.getBroadcast());
         assertFalse(s.getReuseAddress());
         assertNull(s.getInetAddress());
-        assertEquals(s.getLocalAddress().getHostAddress(), "0.0.0.0");
+        assertEquals(s.getLocalAddress().isAnyLocalAddress());
         assertEquals(s.getLocalPort(), 0);
         assertNull(s.getLocalSocketAddress());
         assertEquals(s.getPort(), -1);

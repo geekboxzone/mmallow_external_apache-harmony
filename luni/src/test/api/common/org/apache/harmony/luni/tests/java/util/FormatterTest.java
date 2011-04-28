@@ -991,21 +991,23 @@ public class FormatterTest extends TestCase {
         Formatter f = null;
 
         String oldSeparator = System.getProperty("line.separator");
-        System.setProperty("line.separator", "!\n");
+        try {
+            System.setProperty("line.separator", "!\n");
 
-        f = new Formatter(Locale.US);
-        f.format("%1$n", 1);
-        assertEquals("!\n", f.toString());
+            f = new Formatter(Locale.US);
+            f.format("%1$n", 1);
+            assertEquals("!\n", f.toString());
 
-        f = new Formatter(Locale.KOREAN);
-        f.format("head%1$n%2$n", 1, new Date());
-        assertEquals("head!\n!\n", f.toString());
+            f = new Formatter(Locale.KOREAN);
+            f.format("head%1$n%2$n", 1, new Date());
+            assertEquals("head!\n!\n", f.toString());
 
-        f = new Formatter(Locale.US);
-        f.format("%n%s", "hello");
-        assertEquals("!\nhello", f.toString());
-
-        System.setProperty("line.separator", oldSeparator);
+            f = new Formatter(Locale.US);
+            f.format("%n%s", "hello");
+            assertEquals("!\nhello", f.toString());
+        } finally {
+            System.setProperty("line.separator", oldSeparator);
+        }
 
         f = new Formatter(Locale.US);
         try {
@@ -2752,48 +2754,38 @@ public class FormatterTest extends TestCase {
          */
         f = new Formatter(Locale.US);
         try {
-            // compare IllegalFormatConversionException and
-            // FormatFlagsConversionMismatchException
             f.format("%(o", false);
-            fail("should throw IllegalFormatConversionException");
-        } catch (IllegalFormatConversionException e) {
-            // expected
+            fail();
+        } catch (FormatFlagsConversionMismatchException expected) {
+        } catch (IllegalFormatConversionException expected) {
         }
 
         try {
-            // compare IllegalFormatPrecisionException and
-            // IllegalFormatConversionException
             f.format("%.4o", false);
-            fail("should throw IllegalFormatPrecisionException");
-        } catch (IllegalFormatPrecisionException e) {
-            // expected
+            fail();
+        } catch (IllegalFormatPrecisionException expected) {
+        } catch (IllegalFormatConversionException expected) {
         }
 
         try {
-            // compare IllegalFormatFlagsException and
-            // IllegalFormatPrecisionException
             f.format("%+ .4o", big);
-            fail("should throw IllegalFormatFlagsException");
-        } catch (IllegalFormatFlagsException e) {
-            // expected
+            fail();
+        } catch (IllegalFormatPrecisionException expected) {
+        } catch (IllegalFormatFlagsException expected) {
         }
 
         try {
-            // compare MissingFormatWidthException and
-            // IllegalFormatFlagsException
             f.format("%+ -o", big);
-            fail("should throw MissingFormatWidthException");
-        } catch (MissingFormatWidthException e) {
-            // expected
+            fail();
+        } catch (MissingFormatWidthException expected) {
+        } catch (IllegalFormatFlagsException expected) {
         }
 
         try {
-            // compare UnknownFormatConversionException and
-            // MissingFormatWidthException
             f.format("%-O", big);
-            fail("should throw UnknownFormatConversionException");
-        } catch (UnknownFormatConversionException e) {
-            // expected
+            fail();
+        } catch (MissingFormatWidthException expected) {
+        } catch (UnknownFormatConversionException expected) {
         }
     }
     

@@ -173,14 +173,14 @@ public class ReadOnlyCharBufferTest extends CharBufferTest {
         try {
             buf.put((String) null, 0, 0);
             fail("Should throw Exception"); //$NON-NLS-1$
-        } catch (NullPointerException e) {
-            // expected
+        } catch (ReadOnlyBufferException expected) {
+        } catch (NullPointerException expected) {
         }
         try {
             buf.put(str, -1, str.length());
             fail("Should throw Exception"); //$NON-NLS-1$
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+        } catch (ReadOnlyBufferException expected) {
+        } catch (NullPointerException expected) {
         }
         String longStr = String.valueOf(new char[buf.capacity()+1]);
         try {

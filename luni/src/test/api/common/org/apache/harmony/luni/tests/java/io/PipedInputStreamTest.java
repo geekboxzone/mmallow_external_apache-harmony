@@ -90,10 +90,7 @@ public class PipedInputStreamTest extends junit.framework.TestCase {
                 pis.read();
                 t.interrupt();
             }
-        } catch (IOException e) {
-            if (!e.getMessage().contains("Write end dead")) {
-                throw e;
-            }
+        } catch (IOException expected) {
         } finally {
             try {
                 pis.close();
@@ -222,11 +219,8 @@ public class PipedInputStreamTest extends junit.framework.TestCase {
         PipedInputStream obj = new PipedInputStream();
         try {
             obj.read(new byte[0], 0, -1);
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
-            assertEquals(
-                    "IndexOutOfBoundsException rather than a subclass expected",
-                    IndexOutOfBoundsException.class, t.getClass());
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 
@@ -237,10 +231,8 @@ public class PipedInputStreamTest extends junit.framework.TestCase {
         PipedInputStream obj = new PipedInputStream();
         try {
             obj.read(new byte[0], -1, 0);
-            fail("IndexOutOfBoundsException expected");
-        } catch (ArrayIndexOutOfBoundsException t) {
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 
@@ -251,10 +243,8 @@ public class PipedInputStreamTest extends junit.framework.TestCase {
         PipedInputStream obj = new PipedInputStream();
         try {
             obj.read(new byte[0], -1, -1);
-            fail("IndexOutOfBoundsException expected");
-        } catch (ArrayIndexOutOfBoundsException t) {
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 

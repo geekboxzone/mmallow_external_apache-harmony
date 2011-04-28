@@ -114,17 +114,17 @@ public class OutputStreamWriterTest extends TestCase {
         // Throws IndexOutOfBoundsException if offset is negative
         try {
             writer.write((char[]) null, -1, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // Expected
+            fail();
+        } catch (NullPointerException exception) {
+        } catch (IndexOutOfBoundsException exception) {
         }
 
         // throws NullPointerException though count is negative
         try {
             writer.write((char[]) null, 1, -1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // Expected
+            fail();
+        } catch (NullPointerException exception) {
+        } catch (IndexOutOfBoundsException exception) {
         }
 
         try {
@@ -243,21 +243,19 @@ public class OutputStreamWriterTest extends TestCase {
             // Expected
         }
 
-        // Throws IndexOutOfBoundsException before NullPointerException if count
-        // is negative
         try {
             writer.write((String) null, -1, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // Expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         // Throws NullPointerException before StringIndexOutOfBoundsException
         try {
             writer.write((String) null, -1, 0);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         writer.write("abc", 1, 2);
@@ -271,16 +269,16 @@ public class OutputStreamWriterTest extends TestCase {
         // Throws IndexOutOfBoundsException first if count is negative
         try {
             writer.write((String) null, 0, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // Expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
             writer.write((String) null, -1, 0);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // Expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {

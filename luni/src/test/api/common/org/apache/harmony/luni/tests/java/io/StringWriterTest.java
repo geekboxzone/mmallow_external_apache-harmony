@@ -98,11 +98,8 @@ public class StringWriterTest extends junit.framework.TestCase {
         try {
             obj = new StringWriter();
             obj.write(new char[0], (int) 0, (int) -1);
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
-            assertEquals(
-                    "IndexOutOfBoundsException rather than a subclass expected",
-                    IndexOutOfBoundsException.class, t.getClass());
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 
@@ -114,10 +111,8 @@ public class StringWriterTest extends junit.framework.TestCase {
         try {
             obj = new StringWriter();
             obj.write(new char[0], (int) -1, (int) 0);
-            fail("IndexOutOfBoundsException expected");
-        } catch (ArrayIndexOutOfBoundsException t) {
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 
@@ -129,10 +124,8 @@ public class StringWriterTest extends junit.framework.TestCase {
         try {
             obj = new StringWriter();
             obj.write(new char[0], (int) -1, (int) -1);
-            fail("IndexOutOfBoundsException expected");
-        } catch (ArrayIndexOutOfBoundsException t) {
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 

@@ -167,11 +167,8 @@ public class PipedOutputStreamTest extends TestCase {
         try {
             pos = new PipedOutputStream(pis);
             pos.write(new byte[0], -1, -1);
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
-            assertEquals(
-                    "IndexOutOfBoundsException rather than a subclass expected",
-                    IndexOutOfBoundsException.class, t.getClass());
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         // Regression for HARMONY-4311

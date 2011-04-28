@@ -326,8 +326,8 @@ public class LongBufferTest extends AbstractBufferTest {
         try {
             buf.get(array, 1, Integer.MAX_VALUE);
             fail("Should throw Exception"); //$NON-NLS-1$
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+        } catch (BufferUnderflowException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
             buf.get(array, Integer.MAX_VALUE, 1);
@@ -498,8 +498,8 @@ public class LongBufferTest extends AbstractBufferTest {
         try {
             buf.put(array, 1, Integer.MAX_VALUE);
             fail("Should throw Exception"); //$NON-NLS-1$
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+        } catch (BufferOverflowException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
         assertEquals(buf.position(), 0);
 

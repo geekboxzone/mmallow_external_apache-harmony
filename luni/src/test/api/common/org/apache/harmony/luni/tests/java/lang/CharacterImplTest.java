@@ -22,7 +22,7 @@ public class CharacterImplTest extends TestCase {
 
     public void test_valueOfC() {
         // test the cache range
-        for (char c = '\u0000'; c < 512; c++) {
+        for (char c = '\u0000'; c < 128; c++) {
             Character e = new Character(c);
             Character a = Character.valueOf(c);
             assertEquals(e, a);
@@ -31,7 +31,7 @@ public class CharacterImplTest extends TestCase {
             assertSame(Character.valueOf(c), Character.valueOf(c));
         }
         // test the rest of the chars
-        for (int c = '\u0512'; c <= Character.MAX_VALUE; c++) {
+        for (int c = 128; c <= Character.MAX_VALUE; c++) {
             assertEquals(new Character((char) c), Character.valueOf((char) c));
         }
     }
