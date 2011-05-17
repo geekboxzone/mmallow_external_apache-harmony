@@ -33,16 +33,17 @@ LOCAL_NO_EMMA_INSTRUMENT := true
 LOCAL_NO_EMMA_COMPILE := true
 include $(BUILD_STATIC_JAVA_LIBRARY)
 
-#ifeq ($(WITH_HOST_DALVIK),true)
-#    include $(CLEAR_VARS)
-#    LOCAL_SRC_FILES := $(harmony_test_src_files)
-#    LOCAL_JAVA_RESOURCE_DIRS := $(harmony_test_resource_dirs)
-#    LOCAL_NO_STANDARD_LIBRARIES := true
-#    LOCAL_JAVA_LIBRARIES := core-hostdex core-junit #-hostdex
-#    LOCAL_JAVACFLAGS := $(harmony_test_javac_flags)
-#    LOCAL_MODULE_TAGS := tests
-#    LOCAL_MODULE := apache-harmony-tests-host
-#    LOCAL_NO_EMMA_INSTRUMENT := true
-#    LOCAL_NO_EMMA_COMPILE := true
-#    include $(BUILD_HOST_JAVA_LIBRARY)
-#endif
+ifeq ($(WITH_HOST_DALVIK),true)
+    include $(CLEAR_VARS)
+    LOCAL_SRC_FILES := $(harmony_test_src_files)
+    LOCAL_JAVA_RESOURCE_DIRS := $(harmony_test_resource_dirs)
+    LOCAL_NO_STANDARD_LIBRARIES := true
+    LOCAL_JAVA_LIBRARIES := core-hostdex core-junit-hostdex
+    LOCAL_JAVACFLAGS := $(harmony_test_javac_flags)
+    LOCAL_MODULE_TAGS := tests
+    LOCAL_MODULE := apache-harmony-tests-host
+    LOCAL_NO_EMMA_INSTRUMENT := true
+    LOCAL_NO_EMMA_COMPILE := true
+    LOCAL_BUILD_HOST_DEX := true
+    include $(BUILD_HOST_JAVA_LIBRARY)
+endif
