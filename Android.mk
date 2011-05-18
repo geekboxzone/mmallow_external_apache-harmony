@@ -17,6 +17,7 @@ harmony_test_dirs := \
     nio_char \
     prefs \
     regex \
+    sql \
     support \
     text \
 
@@ -24,7 +25,6 @@ harmony_test_dirs := \
 #    auth \
 #    crypto \
 #    security \
-#    sql \
 #    x-net
 
 harmony_test_src_files := \
