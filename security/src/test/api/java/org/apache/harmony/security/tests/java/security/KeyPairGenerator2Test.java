@@ -78,11 +78,6 @@ public class KeyPairGenerator2Test extends TestCase {
         Security.insertProviderAt(mProv, 1);
     }
 
-    /**
-     * Constructor for SecurityManagerFactoryTest2.
-     *
-     * @param arg0
-     */
     public KeyPairGenerator2Test(String arg0) {
         super(arg0);
     }

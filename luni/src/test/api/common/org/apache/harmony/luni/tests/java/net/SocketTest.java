@@ -38,7 +38,7 @@ import java.security.Permission;
 import java.util.Arrays;
 import java.util.Locale;
 
-import org.apache.harmony.luni.net.PlainSocketImpl;
+import java.net.PlainSocketImpl;
 
 import tests.support.Support_Configuration;
 
@@ -710,19 +710,6 @@ public class SocketTest extends SocketTestCase {
      */
     public void test_ConstructorLjava_net_Proxy_Exception() {
 
-        class MockSecurityManager extends SecurityManager {
-
-            public void checkConnect(String host, int port) {
-                if ("127.0.0.1".equals(host)) {
-                    throw new SecurityException("permission is not allowed");
-                }
-            }
-
-            public void checkPermission(Permission permission) {
-                return;
-            }
-        }
-
         SocketAddress addr1 = InetSocketAddress.createUnresolved("127.0.0.1",
                 80);
         SocketAddress addr2 = new InetSocketAddress("localhost", 80);
@@ -740,36 +727,6 @@ public class SocketTest extends SocketTestCase {
         // should not throw any exception
         new Socket(proxy2);
         new Socket(Proxy.NO_PROXY);
-
-        // SecurityException test
-        SecurityManager originalSecurityManager = System.getSecurityManager();
-        try {
-            System.setSecurityManager(new MockSecurityManager());
-        } catch (SecurityException e) {
-            System.err
-                    .println("No permission to setSecurityManager, security related test in test_ConstructorLjava_net_Proxy_Security is ignored");
-            return;
-        }
-
-        Proxy proxy3 = new Proxy(Proxy.Type.SOCKS, addr1);
-        Proxy proxy4 = new Proxy(Proxy.Type.SOCKS, addr2);
-        try {
-            try {
-                new Socket(proxy3);
-                fail("should throw SecurityException");
-            } catch (SecurityException e) {
-                // expected
-            }
-            try {
-                new Socket(proxy4);
-                fail("should throw SecurityException");
-            } catch (SecurityException e) {
-                // expected
-            }
-        } finally {
-            System.setSecurityManager(originalSecurityManager);
-        }
-
     }
 
     /**
@@ -1963,7 +1920,7 @@ public class SocketTest extends SocketTestCase {
         server.close();
 
         // Regression test for HARMONY-2944
-        // Port 0 is not allowed to be used in connect() on some platforms, 
+        // Port 0 is not allowed to be used in connect() on some platforms,
         // Since server has been closed here, so the port is free now
         Socket s = new Socket("0.0.0.0", port, false);
         s.shutdownInput();
@@ -2005,7 +1962,7 @@ public class SocketTest extends SocketTestCase {
         server.close();
 
         // Regression test for HARMONY-2944
-        // Port 0 is not allowed to be used in connect() on some platforms, 
+        // Port 0 is not allowed to be used in connect() on some platforms,
         // Since server has been closed here, so the port is free now
         Socket s = new Socket("0.0.0.0", port, false);
         s.shutdownOutput();
@@ -2033,7 +1990,7 @@ public class SocketTest extends SocketTestCase {
         client.close();
         server.close();
     }
-    
+
     /**
      * @tests {@link java.net.Socket#setSocketImplFactory(SocketImplFactory)}
      */

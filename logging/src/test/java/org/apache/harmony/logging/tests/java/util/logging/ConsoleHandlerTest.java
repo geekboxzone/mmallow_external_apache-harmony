@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -90,33 +90,6 @@ public class ConsoleHandlerTest extends TestCase {
 		assertTrue(h.getFormatter() instanceof SimpleFormatter);
 		assertNull(h.getFilter());
 		assertSame(h.getEncoding(), null);
-	}
-
-	/*
-	 * Test the constructor with insufficient privilege.
-	 */
-	public void testConstructor_InsufficientPrivilege() {
-		assertNull(LogManager.getLogManager().getProperty(
-				"java.util.logging.ConsoleHandler.level"));
-		assertNull(LogManager.getLogManager().getProperty(
-				"java.util.logging.ConsoleHandler.filter"));
-		assertNull(LogManager.getLogManager().getProperty(
-				"java.util.logging.ConsoleHandler.formatter"));
-		assertNull(LogManager.getLogManager().getProperty(
-				"java.util.logging.ConsoleHandler.encoding"));
-
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		// set a normal value
-		try {
-			ConsoleHandler h = new ConsoleHandler();
-			assertSame(h.getLevel(), Level.INFO);
-			assertTrue(h.getFormatter() instanceof SimpleFormatter);
-			assertNull(h.getFilter());
-			assertSame(h.getEncoding(), null);
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
 	}
 
 	/*
@@ -225,25 +198,6 @@ public class ConsoleHandlerTest extends TestCase {
 				.getCurrentSourceMethod());
 		assertNull(CallVerificationStack.getInstance().pop());
 		assertTrue(CallVerificationStack.getInstance().empty());
-	}
-
-	/*
-	 * Test close() when having insufficient privilege.
-	 */
-	public void testClose_InsufficientPrivilege() throws Exception {
-		Properties p = new Properties();
-		p.put("java.util.logging.ConsoleHandler.formatter", className
-				+ "$MockFormatter");
-		LogManager.getLogManager().readConfiguration(
-				EnvironmentHelper.PropertiesToInputStream(p));
-		ConsoleHandler h = new ConsoleHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			h.close();
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
 	}
 
 	/*
@@ -486,7 +440,7 @@ public class ConsoleHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.util.logging.Formatter#getHead(java.util.logging.Handler)
 		 */
 		public String getHead(Handler h) {
@@ -495,7 +449,7 @@ public class ConsoleHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.util.logging.Formatter#getTail(java.util.logging.Handler)
 		 */
 		public String getTail(Handler h) {
@@ -510,7 +464,7 @@ public class ConsoleHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.io.OutputStream#close()
 		 */
 		public void close() throws IOException {
@@ -520,7 +474,7 @@ public class ConsoleHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.io.OutputStream#flush()
 		 */
 		public void flush() throws IOException {
@@ -530,35 +484,12 @@ public class ConsoleHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.io.OutputStream#write(int)
 		 */
 		public void write(int oneByte) {
 			// TODO Auto-generated method stub
 			super.write(oneByte);
-		}
-	}
-
-	/*
-	 * Used to grant all permissions except logging control.
-	 */
-	public static class MockSecurityManager extends SecurityManager {
-
-		public MockSecurityManager() {
-		}
-
-		public void checkPermission(Permission perm) {
-			// grant all permissions except logging control
-			if (perm instanceof LoggingPermission) {
-				throw new SecurityException();
-			}
-		}
-
-		public void checkPermission(Permission perm, Object context) {
-			// grant all permissions except logging control
-			if (perm instanceof LoggingPermission) {
-				throw new SecurityException();
-			}
 		}
 	}
 

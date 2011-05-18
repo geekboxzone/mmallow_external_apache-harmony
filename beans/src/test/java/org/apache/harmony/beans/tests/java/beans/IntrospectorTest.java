@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -73,11 +73,11 @@ import org.apache.harmony.beans.tests.support.mock.MockSubClass;
 public class IntrospectorTest extends TestCase {
 
     private String[] defaultPackage;
-    
+
     public IntrospectorTest(String str) {
         super(str);
     }
-    
+
     public IntrospectorTest() {}
 
     @Override
@@ -129,7 +129,7 @@ public class IntrospectorTest extends TestCase {
 
     /**
      * The test checks the getMethodDescriptor method
-     * 
+     *
      * @throws IntrospectionException
      */
     public void testNonUniqueByNameMethodDescriptors()
@@ -143,7 +143,7 @@ public class IntrospectorTest extends TestCase {
 
     /**
      * The test checks the getEventSetDescriptors method
-     * 
+     *
      * @throws IntrospectionException
      */
     public void testUnicastEventSetDescriptor() throws IntrospectionException {
@@ -175,7 +175,7 @@ public class IntrospectorTest extends TestCase {
 
     /**
      * The test checks the getEventSetDescriptors method
-     * 
+     *
      * @throws IntrospectionException
      */
     public void testEventSetDescriptorWithoutAddListenerMethod()
@@ -192,7 +192,7 @@ public class IntrospectorTest extends TestCase {
 
     /**
      * The test checks the getEventSetDescriptors method
-     * 
+     *
      * @throws IntrospectionException
      */
     public void testIllegalEventSetDescriptor() throws IntrospectionException {
@@ -205,7 +205,7 @@ public class IntrospectorTest extends TestCase {
 
     /**
      * The test checks the getPropertyDescriptors method
-     * 
+     *
      * @throws IntrospectionException
      */
     public void testPropertyDescriptorWithSetMethod()
@@ -221,7 +221,7 @@ public class IntrospectorTest extends TestCase {
 
     /**
      * The test checks the getPropertyDescriptors method
-     * 
+     *
      * @throws IntrospectionException
      */
     public void testUseAllBeanInfo() throws IntrospectionException {
@@ -257,7 +257,7 @@ public class IntrospectorTest extends TestCase {
     /**
      * The test checks the getPropertyDescriptors method for
      * IGNORE_IMMEDIATE_BEANINFO flag
-     * 
+     *
      * @throws IntrospectionException
      */
     public void testIgnoreImmediateBeanInfo() throws IntrospectionException {
@@ -271,7 +271,7 @@ public class IntrospectorTest extends TestCase {
     /**
      * The test checks the getPropertyDescriptors method for IGNORE_ALL_BEANINFO
      * flag
-     * 
+     *
      * @throws IntrospectionException
      */
     public void testIgnoreAllBeanInfo() throws IntrospectionException {
@@ -285,7 +285,7 @@ public class IntrospectorTest extends TestCase {
 
     /**
      * The test checks the getPropertyDescriptors method
-     * 
+     *
      * @throws IntrospectionException
      */
     public void testAdditionalBeanInfo() throws IntrospectionException {
@@ -298,7 +298,7 @@ public class IntrospectorTest extends TestCase {
 
     /**
      * The test checks the getPropertyDescriptors for stop class prune
-     * 
+     *
      * @throws IntrospectionException
      */
     public void testStopClass() throws IntrospectionException {
@@ -443,7 +443,7 @@ public class IntrospectorTest extends TestCase {
         BeanInfo info = Introspector.getBeanInfo(MockFoo.class,
                 MockFooStop.class);
         MethodDescriptor[] mds = info.getMethodDescriptors();
-        
+
         assertEquals(4, mds.length);
         assertTrue(contains("getName", mds));
         assertTrue(contains("setName", mds));
@@ -529,7 +529,7 @@ public class IntrospectorTest extends TestCase {
         assertTrue(contains("getStaticName", methodDescriptors));
         assertTrue(contains("setStaticName", methodDescriptors));
     }
-    
+
     public void testMockIncompatibleGetterAndIndexedGetterBean() throws Exception {
         Class beanClass = MockIncompatibleGetterAndIndexedGetterBean.class;
         BeanInfo beanInfo = Introspector.getBeanInfo(beanClass);
@@ -553,7 +553,7 @@ public class IntrospectorTest extends TestCase {
         assertEquals(indexedReadMethod, ipd.getIndexedReadMethod());
         assertEquals(indexedWriteMethod, ipd.getIndexedWriteMethod());
     }
-    
+
     public void testMockIncompatibleSetterAndIndexedSetterBean() throws Exception {
         Class beanClass = MockIncompatibleSetterAndIndexedSetterBean.class;
         BeanInfo beanInfo = Introspector.getBeanInfo(beanClass);
@@ -577,7 +577,7 @@ public class IntrospectorTest extends TestCase {
         assertEquals(indexedReadMethod, ipd.getIndexedReadMethod());
         assertEquals(indexedWriteMethod, ipd.getIndexedWriteMethod());
     }
-    
+
     public void testMockIncompatibleAllSetterAndGetterBean() throws Exception {
         Class beanClass = MockIncompatibleAllSetterAndGetterBean.class;
         BeanInfo beanInfo = Introspector.getBeanInfo(beanClass);
@@ -601,7 +601,7 @@ public class IntrospectorTest extends TestCase {
         assertEquals(indexedReadMethod, ipd.getIndexedReadMethod());
         assertEquals(indexedWriteMethod, ipd.getIndexedWriteMethod());
     }
-    
+
     public class MockIncompatibleGetterAndIndexedGetterBean {
         private int[] datas;
 
@@ -617,49 +617,49 @@ public class IntrospectorTest extends TestCase {
             this.datas[index] = data;
         }
     }
-    
+
     public class MockIncompatibleSetterAndIndexedSetterBean {
-        
+
         private int[] datas;
-        
+
         public int getData(int index){
             return datas[index];
         }
-        
+
         public void setData(int index, int data) {
             this.datas[index] = data;
         }
-        
+
         public void setData(int data){
             this.datas[0] = data;
         }
-        
+
     }
-    
+
     public class MockIncompatibleAllSetterAndGetterBean {
-        
+
         private int[] datas;
-        
+
         public int getData(){
             return datas[0];
         }
-        
+
         public int getData(int index){
             return datas[index];
         }
-        
+
         public void setData(int index, int data) {
             this.datas[index] = data;
         }
-        
+
         public void setData(int data){
             this.datas[0] = data;
         }
-        
+
         public void setData(){
             this.datas[0] = 0;
         }
-        
+
     }
 
     public static class StaticClazz {
@@ -698,7 +698,7 @@ public class IntrospectorTest extends TestCase {
             staticName = name;
         }
     }
-    
+
     public void testGetBeanInfoClassClass_StopNull()
             throws IntrospectionException {
         BeanInfo info = Introspector.getBeanInfo(MockFoo.class);// , null);
@@ -926,7 +926,7 @@ public class IntrospectorTest extends TestCase {
             assertEquals(pds[i], pds2[i]);
         }
     }
-    
+
     /*
      * @test Introspector.getBeanInfo
      * @test StandardBeanInfo.mergeProps
@@ -959,7 +959,7 @@ public class IntrospectorTest extends TestCase {
         assertNotNull(pd);
         assertEquals(Integer.TYPE, pd.getPropertyType());
     }
-    
+
     public void testSetBeanInfoSearchPath_null() throws IntrospectionException{
         String[] oldPath = Introspector.getBeanInfoSearchPath();
         try{
@@ -1135,7 +1135,7 @@ public class IntrospectorTest extends TestCase {
         BeanInfo info = Introspector.getBeanInfo(beanClass);
         PropertyDescriptor[] pds;
 
-        
+
         assertEquals(0, info.getEventSetDescriptors().length);
         assertEquals(13, info.getMethodDescriptors().length);
 
@@ -1149,7 +1149,7 @@ public class IntrospectorTest extends TestCase {
             } else {
                 IndexedPropertyDescriptor indexedDesc =
                         (IndexedPropertyDescriptor) element;
-                
+
                 assertEquals("fox401", element.getName());
                 assertEquals(String[].class.getName(), element
                         .getPropertyType().getName());
@@ -1197,7 +1197,7 @@ public class IntrospectorTest extends TestCase {
         Class<FakeFox501> beanClass = FakeFox501.class;
         BeanInfo info = Introspector.getBeanInfo(beanClass);
         PropertyDescriptor[] propertyDesc;
-        
+
         assertEquals(0, info.getEventSetDescriptors().length);
         assertEquals(12, info.getMethodDescriptors().length);
 
@@ -1211,7 +1211,7 @@ public class IntrospectorTest extends TestCase {
             } else {
                 IndexedPropertyDescriptor indexedDesc =
                         (IndexedPropertyDescriptor) element;
-                
+
                 assertEquals("fox501", element.getName());
                 assertEquals(String[].class.getName(), element
                         .getPropertyType().getName());
@@ -1296,7 +1296,7 @@ public class IntrospectorTest extends TestCase {
         BeanInfo info = Introspector.getBeanInfo(beanClass);
         PropertyDescriptor[] propertyDesc;
         EventSetDescriptor eventDesc;
-        
+
         assertEquals(1, info.getEventSetDescriptors().length);
         eventDesc = info.getEventSetDescriptors()[0];
         assertNotNull(eventDesc.getAddListenerMethod());
@@ -1624,92 +1624,8 @@ public class IntrospectorTest extends TestCase {
     }
 
     /*
-     * setBeanInfoSearchPath method of Introspector doesn't invoke
-     * checkPropertiesAccess method of SecurityManager class
-     */
-    public void testSetBeanInfoSearchPath2() {
-        SecurityManager dfl = System.getSecurityManager();
-        try {
-            SecurityManager sm = new MockSecurity1();
-            System.setSecurityManager(sm);
-            assertSame(sm, System.getSecurityManager());
-            try {
-                // test here
-                {
-                    String[] newPath = new String[] { "a", "b" };
-                    Introspector.setBeanInfoSearchPath(newPath);
-                    String[] path = Introspector.getBeanInfoSearchPath();
-                    assertTrue(Arrays.equals(newPath, path));
-                    assertNotSame(newPath, path);
-                    path[0] = "c";
-                    newPath[0] = "d";
-                    String[] path2 = Introspector.getBeanInfoSearchPath();
-                    assertEquals("d", path2[0]);
-                }
-                {
-                    String[] newPath = new String[] {};
-                    Introspector.setBeanInfoSearchPath(newPath);
-                    String[] path = Introspector.getBeanInfoSearchPath();
-                    assertNotSame(newPath, path);
-                    assertTrue(Arrays.equals(newPath, path));
-                }
-                {
-                    String[] newPath = null;
-                    Introspector.setBeanInfoSearchPath(newPath);
-                    try {
-                        Introspector.getBeanInfoSearchPath();
-                        fail("Should throw NullPointerException.");
-                    } catch (NullPointerException e) {
-                    }
-                }
-            } catch (SecurityException e) {
-            }
-        } finally {
-            try {
-                System.setSecurityManager(dfl);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-
-        }
-
-    }
-
-    static class MockSecurity1 extends SecurityManager {
-
-        @Override
-        public void checkPermission(Permission p) {
-
-        }
-    }
-
-    public void testSetBeanInfoSearchPath3() {
-        SecurityManager dfl = System.getSecurityManager();
-        try {
-            SecurityManager sm = new MockSecurity2();
-            System.setSecurityManager(sm);
-            assertSame(sm, System.getSecurityManager());
-
-            Introspector.getBeanInfoSearchPath();
-            String[] newPath = new String[] { "a", "b" };
-            try {
-                // test here
-                Introspector.setBeanInfoSearchPath(newPath);
-                fail("Should throw SecurityException");
-            } catch (SecurityException e) {
-                // System.out.println(e);
-            }
-        } finally {
-            try {
-                System.setSecurityManager(dfl);
-            } catch (Exception e) {
-            }
-        }
-    }
-
-    /*
      * @test setBeanInfoSearchPath
-     * 
+     *
      * Change the sequence of the paths in Introspector.searchpaths, check
      * whether the BeanInfo is consistent with the bean class
      */
@@ -1745,16 +1661,6 @@ public class IntrospectorTest extends TestCase {
                 beanDesc.getBeanClass(),
                 org.apache.harmony.beans.tests.support.mock.homonymy.mocksubject1.MockHomonymySubject.class);
 
-    }
-
-    static class MockSecurity2 extends SecurityManager {
-
-        @Override
-        public void checkPermission(Permission p) {
-            if (p instanceof PropertyPermission) {
-                throw new SecurityException("Expected exception.");
-            }
-        }
     }
 
     /*
@@ -1806,7 +1712,7 @@ public class IntrospectorTest extends TestCase {
     }
 
     /*
-     * 
+     *
      */
     public void testGetPropertyDescriptors() throws IntrospectionException {
         Class<Bean2> clazz = Bean2.class;
@@ -1817,7 +1723,7 @@ public class IntrospectorTest extends TestCase {
         assertEquals("property1", pds[0].getName());
         assertEquals("property8", pds[1].getName());
     }
-    
+
     public void testHarmony4861() throws IntrospectionException {
 		final PropertyDescriptor[] propertyDescriptors = Introspector
 				.getBeanInfo(TestBean.class).getPropertyDescriptors();
@@ -1849,11 +1755,11 @@ public class IntrospectorTest extends TestCase {
     public static TestSuite suite() {
 //        TestSuite suite = new TestSuite();
         TestSuite suite = new TestSuite(IntrospectorTest.class);
-        
+
 //        suite.addTest(new IntrospectorTest("testIntrospection_7"));
         return suite;
     }
-    
+
     public static class Bean1 {
 
         private int i;
@@ -1954,10 +1860,10 @@ public class IntrospectorTest extends TestCase {
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     private static boolean contains(String methodName,
             MethodDescriptor[] mds)
     {
@@ -1966,7 +1872,7 @@ public class IntrospectorTest extends TestCase {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -1978,10 +1884,10 @@ public class IntrospectorTest extends TestCase {
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     /*
      * The following classes are used to test introspect properties
      */
@@ -2431,7 +2337,7 @@ public class IntrospectorTest extends TestCase {
             assertFalse(pd.isPreferred());
         }
         assertEquals(2, info.getPropertyDescriptors().length);
-        
+
         BeanInfo dummyInfo = Introspector.getBeanInfo(FakeFox041.class);
         PropertyDescriptor[] p = dummyInfo.getPropertyDescriptors();
         assertFalse(p[0].isBound());
@@ -2440,7 +2346,7 @@ public class IntrospectorTest extends TestCase {
         assertFalse(p[1].isConstrained());
         assertTrue(p[2].isBound());
         assertTrue(p[2].isConstrained());
-        
+
         dummyInfo = Introspector.getBeanInfo(FakeFox0411.class);
         p = dummyInfo.getPropertyDescriptors();
         assertFalse(p[0].isBound());
@@ -2451,7 +2357,7 @@ public class IntrospectorTest extends TestCase {
         assertFalse(p[2].isConstrained());
         assertTrue(p[3].isBound());
         assertTrue(p[3].isConstrained());
-        
+
         dummyInfo = Introspector.getBeanInfo(FakeFox0411.class, FakeFox041.class);
         p = dummyInfo.getPropertyDescriptors();
         assertFalse(p[0].isBound());
@@ -2502,7 +2408,7 @@ public class IntrospectorTest extends TestCase {
             a = i;
         }
     }
-    
+
     static class MockClassForDefaultEvent {
         public void addPropertyChangeListener(PropertyChangeListener a) {
         }

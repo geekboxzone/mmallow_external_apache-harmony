@@ -160,32 +160,6 @@ public class ThreadGroupTest extends junit.framework.TestCase {
 	}
 
 	/**
-	 * @tests java.lang.ThreadGroup#checkAccess()
-	 */
-	public void test_checkAccess() {
-		// Test for method void java.lang.ThreadGroup.checkAccess()
-
-		final ThreadGroup originalCurrent = getInitialThreadGroup();
-		ThreadGroup testRoot = new ThreadGroup(originalCurrent, "Test group");
-
-		SecurityManager currentManager = System.getSecurityManager();
-		boolean passed = true;
-
-		try {
-			if (currentManager != null) {
-                testRoot.checkAccess();
-            }
-		} catch (SecurityException se) {
-			passed = false;
-		}
-
-		assertTrue("CheckAccess is no-op with no SecurityManager", passed);
-
-		testRoot.destroy();
-
-	}
-
-	/**
 	 * @tests java.lang.ThreadGroup#destroy()
 	 */
 	public void test_destroy() {
@@ -404,29 +378,6 @@ public class ThreadGroupTest extends junit.framework.TestCase {
 			assertTrue("Parent is wrong", current.getParent() == previous);
 		}
 
-        final ThreadGroup[] checkAccessGroup = new ThreadGroup[1];
-        class SecurityManagerImpl extends MutableSecurityManager {
-            @Override
-            public void checkAccess(ThreadGroup group) {
-                checkAccessGroup[0] = group;
-            }
-        }
-        SecurityManagerImpl sm = new SecurityManagerImpl();
-        //add permission to allow reset of security manager
-        sm.addPermission(MutableSecurityManager.SET_SECURITY_MANAGER);
-        
-		ThreadGroup parent;
-		try {
-			// To see if it checks Thread creation with our SecurityManager
-			System.setSecurityManager(sm); 
-			parent = testRoot.getParent();
-		} finally {
-			// restore original, no side-effects
-			System.setSecurityManager(null);
-		}
-		assertTrue("checkAccess with incorrect group",
-				checkAccessGroup[0] == parent);
-
 		testRoot.destroy();
 	}
 
@@ -471,17 +422,17 @@ public class ThreadGroupTest extends junit.framework.TestCase {
 
 			/*
 			 * The output has to look like this
-			 * 
+			 *
 			 * java.lang.ThreadGroup[name=main,maxpri=10] Thread[main,5,main]
 			 * java.lang.ThreadGroup[name=Test group,maxpri=10]
-			 * 
+			 *
 			 */
 
             String contents = new String(contentsStream.toByteArray());
             boolean passed = (contents.indexOf("ThreadGroup[name=main") != -1) &&
                              (contents.indexOf("Thread[") != -1) &&
                              (contents.indexOf("ThreadGroup[name=Test group") != -1);
-            assertTrue("'list()' does not print expected contents. " 
+            assertTrue("'list()' does not print expected contents. "
                     + "Result from list: "
                     + contents, passed);
 			// Do proper cleanup
@@ -518,14 +469,6 @@ public class ThreadGroupTest extends junit.framework.TestCase {
 		testRoot.destroy();
 		assertTrue("Parent can't have test group as subgroup anymore",
 				!arrayIncludes(groups(testRoot.getParent()), testRoot));
-
-		try {
-			System.setSecurityManager(new MutableSecurityManager(MutableSecurityManager.SET_SECURITY_MANAGER));
-			assertTrue("Should not be parent", !testRoot
-					.parentOf(originalCurrent));
-		} finally {
-			System.setSecurityManager(null);
-		}
 	}
 
 	/**
@@ -735,32 +678,6 @@ public class ThreadGroupTest extends junit.framework.TestCase {
 				"Max Priority = Thread.MAX_PRIORITY should be possible if the test is run with default system ThreadGroup as root",
 				passed);
 		testRoot.destroy();
-
-		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-		passed = true;
-		testRoot = new ThreadGroup(originalCurrent, "Test group");
-		System.setSecurityManager(new MutableSecurityManager(MutableSecurityManager.SET_SECURITY_MANAGER));
-		try {
-			try {
-				testRoot.setMaxPriority(Thread.MIN_PRIORITY);
-			} catch (IllegalArgumentException iae) {
-				passed = false;
-			}
-		} finally {
-			System.setSecurityManager(null);
-		}
-		assertTrue(
-				"Min Priority = Thread.MIN_PRIORITY should be possible, always",
-				passed);
-		testRoot.destroy();
-
-		try {            
-			System.setSecurityManager(new MutableSecurityManager(MutableSecurityManager.SET_SECURITY_MANAGER));
-			originalCurrent.setMaxPriority(Thread.MAX_PRIORITY);
-		} finally {
-			System.setSecurityManager(null);
-		}
 	}
 
 	/**
@@ -1426,7 +1343,7 @@ public class ThreadGroupTest extends junit.framework.TestCase {
 		} catch (InterruptedException ie) {
 			fail("Should not have been interrupted");
 		}
-		// The thread had plenty (subjective) of time to die so there 
+		// The thread had plenty (subjective) of time to die so there
 		// is a problem.
 		if (t.isAlive()) {
             return false;

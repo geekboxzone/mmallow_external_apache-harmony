@@ -37,6 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+// TODO: rewrite these tests to use MockWebServer, assuming we don't already have better equivalent tests.
+/*
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,6 +49,7 @@ import org.mortbay.jetty.Server;
 import org.mortbay.jetty.handler.DefaultHandler;
 
 import tests.support.Support_Jetty;
+*/
 
 import junit.framework.TestCase;
 
@@ -55,6 +58,7 @@ import junit.framework.TestCase;
  */
 public class HttpURLConnectionTest extends TestCase {
 
+/*
     private static final boolean DEBUG = false;
 
     private final static Object bound = new Object();
@@ -326,9 +330,7 @@ public class HttpURLConnectionTest extends TestCase {
         }
     }
 
-    /**
-     * Test response code which need authenticate
-     */
+    // Test response code which need authenticate
     public void testGetResponseCode() throws Exception {
         ResponseServer server = new ResponseServer();
         HttpURLConnection conn = null;
@@ -388,21 +390,17 @@ public class HttpURLConnectionTest extends TestCase {
         }
     }
 
-    /**
-     * ProxySelector implementation used in the test.
-     */
+    // ProxySelector implementation used in the test.
     static class TestProxySelector extends ProxySelector {
         // proxy port
         private int proxy_port;
         // server port
         private int server_port;
 
-        /**
-         * Creates proxy selector instance. Selector will return the proxy, only
-         * if the connection is made to localhost:server_port. Otherwise it will
-         * return NO_PROXY. Address of the returned proxy will be
-         * localhost:proxy_port.
-         */
+        // Creates proxy selector instance. Selector will return the proxy, only
+        // if the connection is made to localhost:server_port. Otherwise it will
+        // return NO_PROXY. Address of the returned proxy will be
+        // localhost:proxy_port.
         public TestProxySelector(int server_port, int proxy_port) {
             this.server_port = server_port;
             this.proxy_port = proxy_port;
@@ -427,9 +425,6 @@ public class HttpURLConnectionTest extends TestCase {
         }
     }
 
-    /**
-     * @tests HttpURLConnection.getHeaderFields
-     */
     public void test_getHeaderFields() throws Exception {
         URL url = new URL(jettyURL);
         HttpURLConnection httpURLConnect = (HttpURLConnection) url
@@ -456,7 +451,7 @@ public class HttpURLConnectionTest extends TestCase {
         } catch (UnsupportedOperationException e) {
             // Expected
         }
-        
+
         try {
             httpURLConnect.setRequestProperty("key", "value");
             fail("should throw IlegalStateException");
@@ -465,9 +460,7 @@ public class HttpURLConnectionTest extends TestCase {
         }
     }
 
-    /**
-     * @tests the url with space
-     */
+    // @tests the url with space
     public void testConnectWithSpaceinURL() throws Exception {
         String jettyURLwithSpace = "http://localhost:" + jettyPort
                 + "/servlet with space";
@@ -479,9 +472,7 @@ public class HttpURLConnectionTest extends TestCase {
         assertEquals("OK", httpURLConnect.getResponseMessage());
     }
 
-    /**
-     * @tests the url with space
-     */
+    // @tests the url with space
     public void testConnectWithSpaceinURL1() throws Exception {
         String jettyURLwithSpace = "http://localhost:" + jettyPort
                 + "/servlet with space?arg1=value>1&arg2=%aval%1Aue&arg3=#";
@@ -493,9 +484,6 @@ public class HttpURLConnectionTest extends TestCase {
         assertEquals("OK", httpURLConnect.getResponseMessage());
     }
 
-    /**
-     * @tests org.apache.harmony.luni.internal.net.www.http.getOutputStream()
-     */
     public void testGetOutputStream() throws Exception {
         // Regression for HARMONY-482
         MockServer httpServer = new MockServer(
@@ -516,9 +504,7 @@ public class HttpURLConnectionTest extends TestCase {
         httpServer.join();
     }
 
-    /**
-     * Test whether getOutputStream can work after connection
-     */
+    // Test whether getOutputStream can work after connection
     public void test_getOutputStream_AfterConnect() throws Exception {
         URL url = new URL(jettyURL);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -533,10 +519,8 @@ public class HttpURLConnectionTest extends TestCase {
         assertTrue(str_post.equalsIgnoreCase("POST"));
     }
 
-    /**
-     * Test checks if the proxy specified in openConnection method will be used
-     * for connection to the server
-     */
+    // Test checks if the proxy specified in openConnection method will be used
+    // for connection to the server
     public void testUsingProxy() throws Exception {
         // Regression for HARMONY-570
         MockServer server = new MockServer("server");
@@ -575,9 +559,6 @@ public class HttpURLConnectionTest extends TestCase {
         assertFalse(huc.usingProxy());
     }
 
-    /**
-     * @tests HttpURLConnection.usingProxy
-     */
     public void testUsingProxy2() throws Exception {
         try {
             System.setProperty("http.proxyHost", "localhost");
@@ -587,18 +568,18 @@ public class HttpURLConnectionTest extends TestCase {
                     .openConnection();
             urlConnect.getInputStream();
             assertTrue(urlConnect.usingProxy());
-            
+
             // find a free port
             ServerSocket serverSocket = new ServerSocket(0);
             int port = serverSocket.getLocalPort();
             serverSocket.close();
-            
+
             System.setProperty("http.proxyPort", port + "");
             url = new URL(jettyURL);
             urlConnect = (HttpURLConnection) url.openConnection();
             urlConnect.getInputStream();
             assertFalse(urlConnect.usingProxy());
-            
+
             url = new URL("http://localhost:" + port);
             urlConnect = (HttpURLConnection) url.openConnection();
             try {
@@ -613,10 +594,8 @@ public class HttpURLConnectionTest extends TestCase {
         }
     }
 
-    /**
-     * Test checks if the proxy provided by proxy selector will be used for
-     * connection to the server
-     */
+    // Test checks if the proxy provided by proxy selector will be used for
+    // connection to the server
     public void testUsingProxySelector() throws Exception {
         // Regression for HARMONY-570
         MockServer server = new MockServer("server");
@@ -694,10 +673,8 @@ public class HttpURLConnectionTest extends TestCase {
         }
     }
 
-    /**
-     * Test that a connection is not closed if the client reads all the data but
-     * not closes input stream. read until -1.
-     */
+    // Test that a connection is not closed if the client reads all the data but
+    // not closes input stream. read until -1.
     public void testConnectionPersistence() throws Exception {
         MockHTTPServer httpServer = new MockHTTPServer(
                 "HTTP Server for persistence checking", 2);
@@ -747,10 +724,8 @@ public class HttpURLConnectionTest extends TestCase {
         }
     }
 
-    /**
-     * Test that a connection is not closed if the client reads all the data but
-     * not closes input stream. read() not receives -1.
-     */
+    // Test that a connection is not closed if the client reads all the data but
+    // not closes input stream. read() not receives -1.
     public void testConnectionPersistence2() throws Exception {
         MockHTTPServer httpServer = new MockHTTPServer(
                 "HTTP Server for persistence checking", 2);
@@ -796,10 +771,8 @@ public class HttpURLConnectionTest extends TestCase {
         }
     }
 
-    /**
-     * Test that a connection is not closed if it firstly does POST, and then
-     * does GET requests.
-     */
+    // Test that a connection is not closed if it firstly does POST, and then
+    // does GET requests.
     public void testConnectionPersistence3() throws Exception {
         MockHTTPServer httpServer = new MockHTTPServer(
                 "HTTP Server for persistence checking", 2);
@@ -848,10 +821,8 @@ public class HttpURLConnectionTest extends TestCase {
         }
     }
 
-    /**
-     * Test that a connection is not closed if it firstly does GET, and then
-     * does POST requests.
-     */
+    // Test that a connection is not closed if it firstly does GET, and then
+    // does POST requests.
     public void testConnectionPersistence4() throws Exception {
         MockHTTPServer httpServer = new MockHTTPServer(
                 "HTTP Server for persistence checking", 2);
@@ -900,9 +871,7 @@ public class HttpURLConnectionTest extends TestCase {
         }
     }
 
-    /**
-     * Test that a connection is not closed if it does POST for 2 times.
-     */
+    // Test that a connection is not closed if it does POST for 2 times.
     public void testConnectionPersistence5() throws Exception {
         MockHTTPServer httpServer = new MockHTTPServer(
                 "HTTP Server for persistence checking", 2);
@@ -951,10 +920,8 @@ public class HttpURLConnectionTest extends TestCase {
         }
     }
 
-    /**
-     * Test that a connection made through proxy will be reused for connection
-     * establishing without proxy.
-     */
+    // Test that a connection made through proxy will be reused for connection
+    // establishing without proxy.
     public void testProxiedConnectionPersistence() throws Exception {
         MockHTTPServer httpServer = new MockHTTPServer(
                 "HTTP Server for persistence checking", 2);
@@ -1005,85 +972,6 @@ public class HttpURLConnectionTest extends TestCase {
         }
     }
 
-    public void testSecurityManager() throws MalformedURLException,
-            IOException, InterruptedException {
-        try {
-            MockHTTPServer httpServer = new MockHTTPServer(
-                    "HTTP Server for persistence checking", 2);
-            httpServer.start();
-            synchronized (bound) {
-                if (!httpServer.started) {
-                    bound.wait(5000);
-                }
-            }
-            MySecurityManager sm = new MySecurityManager();
-            System.setSecurityManager(sm);
-
-            // Check that a first connection calls checkConnect
-            try {
-                HttpURLConnection c = (HttpURLConnection) new URL(
-                        "http://localhost:" + httpServer.port())
-                        .openConnection();
-                if (DEBUG) {
-                    System.out.println("Actual connection class: "
-                            + c.getClass());
-                }
-                c.connect();
-                fail("Should have thrown a SecurityException upon connection");
-
-            } catch (SecurityException e) {
-            }
-
-            // Now create a connection properly
-            System.setSecurityManager(null);
-            HttpURLConnection c = (HttpURLConnection) new URL(
-                    "http://localhost:" + httpServer.port()).openConnection();
-            c.setDoInput(true);
-            c.setConnectTimeout(5000);
-            c.setReadTimeout(5000);
-            InputStream is = c.getInputStream();
-            byte[] buffer = new byte[128];
-            int totalBytes = 0;
-            int bytesRead = 0;
-            while ((bytesRead = is.read(buffer)) > 0) {
-                if (DEBUG) {
-                    System.out.println("Client got response: '"
-                            + new String(buffer, 0, bytesRead) + "'");
-                }
-                totalBytes += bytesRead;
-            }
-
-            // Now check that a second connection also calls checkConnect
-            System.setSecurityManager(sm);
-            try {
-                HttpURLConnection c2 = (HttpURLConnection) new URL(
-                        "http://localhost:" + httpServer.port())
-                        .openConnection();
-                c2.setDoInput(true);
-                c2.setConnectTimeout(5000);
-                c2.setReadTimeout(5000);
-                is = c2.getInputStream();
-                buffer = new byte[128];
-                totalBytes = 0;
-                bytesRead = 0;
-                while ((bytesRead = is.read(buffer)) > 0) {
-                    if (DEBUG) {
-                        System.out.println("Client got response: '"
-                                + new String(buffer, 0, bytesRead) + "'");
-                        totalBytes += bytesRead;
-                    }
-                }
-                fail("Expected a SecurityException to be thrown");
-            } catch (SecurityException e) {
-            }
-        } finally {
-            System.setSecurityManager(null);
-        }
-    }
-    
-    /*
-     * @test HttpURLConnection.setRequestProperty
-     */
     public void testSetRequestProperty() throws Exception {
         MockHTTPServer httpServer = new MockHTTPServer(
                 "HTTP Server for User-Specified Request Property", 2);
@@ -1112,24 +1000,5 @@ public class HttpURLConnectionTest extends TestCase {
         assertEquals("/", urlConnection.getRequestProperty(PROPERTY1));
         assertNull(urlConnection.getRequestProperty(PROPERTY2));
     }
-
-    private static class MySecurityManager extends SecurityManager {
-
-        @Override
-        public void checkConnect(String host, int port) {
-            throw new SecurityException();
-        }
-
-        @Override
-        public void checkConnect(String host, int port, Object context) {
-            throw new SecurityException();
-        }
-
-        @Override
-        public void checkPermission(Permission permission) {
-            // allows a new security manager to be set
-        }
-
-    }
-
+*/
 }

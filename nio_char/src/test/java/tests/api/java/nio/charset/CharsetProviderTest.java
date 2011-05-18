@@ -4,9 +4,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,7 +26,6 @@ import java.util.Vector;
 
 import junit.framework.TestCase;
 import tests.api.java.nio.charset.CharsetTest.MockCharset;
-import tests.api.java.nio.charset.CharsetTest.MockSecurityManager;
 
 /**
  * Test charset providers managed by Charset.
@@ -51,7 +50,7 @@ public class CharsetProviderTest extends TestCase {
 	public CharsetProviderTest(String arg0) {
 		super(arg0);
                 CONFIG_FILE1 = System.getProperty("user.dir") + "/resources";
-        
+
 		String sep = System.getProperty("file.separator");
 
 		if (!CONFIG_FILE1.endsWith(sep)) {
@@ -69,7 +68,7 @@ public class CharsetProviderTest extends TestCase {
 		int sepIndex = path.lastIndexOf(sep);
 		File f = new File(path.substring(0, sepIndex));
 		f.mkdirs();
-        
+
 		FileOutputStream fos = new FileOutputStream(path);
 		OutputStreamWriter writer = new OutputStreamWriter(fos, "UTF-8");
 		try {
@@ -132,7 +131,7 @@ public class CharsetProviderTest extends TestCase {
 			sb
 					.append(" \ttests.api.java.nio.charset.CharsetProviderTest$MockCharsetProvider \t\n\r");
 			setupFile(CONFIG_FILE1, sb.toString());
-            
+
 			assertTrue(Charset.isSupported("mockCharset10"));
 			// ignore case problem in mock, intended
 			assertTrue(Charset.isSupported("MockCharset11"));
@@ -141,7 +140,7 @@ public class CharsetProviderTest extends TestCase {
 			// intended case problem in mock
 			assertTrue(Charset.isSupported("MOCKCharset11"));
 			assertTrue(Charset.isSupported("MOCKCharset12"));
-            
+
             assertTrue(Charset.forName("mockCharset10") instanceof MockCharset);
             assertTrue(Charset.forName("mockCharset11") instanceof MockCharset);
             assertTrue(Charset.forName("mockCharset12") instanceof MockCharset);
@@ -190,34 +189,6 @@ public class CharsetProviderTest extends TestCase {
 			// expected
 		} finally {
 			cleanupFile(CONFIG_FILE1);
-		}
-	}
-
-	/*
-	 * Test the method isSupported(String) with insufficient privilege to use
-	 * charset provider.
-	 */
-	public void testIsSupported_InsufficientPrivilege() throws Exception {
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			Charset.isSupported("UTF-8");
-
-			try {
-				StringBuffer sb = new StringBuffer();
-				sb
-						.append("tests.api.java.nio.charset.CharsetProviderTest$MockCharsetProvider\r");
-				setupFile(CONFIG_FILE1, sb.toString());
-
-				Charset.isSupported("gb180300000");
-				fail("Should throw SecurityException!");
-			} catch (SecurityException e) {
-				// expected
-			} finally {
-				cleanupFile(CONFIG_FILE1);
-			}
-		} finally {
-			System.setSecurityManager(oldMan);
 		}
 	}
 
@@ -393,7 +364,7 @@ public class CharsetProviderTest extends TestCase {
 			cleanupFile(CONFIG_FILE1);
 		}
 	}
-    
+
     /*
      * Mock charset provider.
      */
@@ -414,7 +385,7 @@ public class CharsetProviderTest extends TestCase {
             return v.iterator();
         }
     }
-    
+
     /*
      * Another mock charset provider providing build-in charset "ascii".
      */

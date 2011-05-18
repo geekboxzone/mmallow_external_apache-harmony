@@ -22,7 +22,7 @@ import java.net.URLConnection;
 
 import junit.framework.TestCase;
 
-import org.apache.harmony.luni.internal.net.www.protocol.file.FileURLConnection;
+import libcore.net.url.FileURLConnection;
 
 /**
  * Tests for <code>FileURLConnection</code> class constructors and methods.
@@ -46,17 +46,17 @@ public class FileURLConnectionTest extends TestCase {
         assertEquals("application/xml", getContentType("test.xml"));
         assertEquals("text/plain", getContentType("."));
     }
-    
+
     public void testGetInputStream() throws IOException {
         // Regression for Harmony-5737
         String resourceName = "org/apache/harmony/luni/tests/" + "test.rtf";
         URL url = ClassLoader.getSystemClassLoader().getResource(resourceName);
         URL anchorUrl = new URL(url,"#anchor");
         assertNotNull("Cannot find test resource " + resourceName, anchorUrl);
-        
+
         FileURLConnection conn = new FileURLConnection(anchorUrl);
         assertNotNull(conn.getInputStream());
-        
+
         // Regression for Harmony-5779
         String localURLString = "file://localhost/" + url.getFile();
         URL localURL = new URL(localURLString);
@@ -71,7 +71,7 @@ public class FileURLConnectionTest extends TestCase {
         FileURLConnection conn = new FileURLConnection(url);
         assertNotNull(conn.getInputStream());
         assertEquals(conn.getContentType(),  conn.getHeaderField("content-type")) ;
-        
+
         resourceName = "org/apache/harmony/luni/tests/" +  "test.rtf";;  //folder name
         url = ClassLoader.getSystemClassLoader().getResource(resourceName);
         conn = new FileURLConnection(url);

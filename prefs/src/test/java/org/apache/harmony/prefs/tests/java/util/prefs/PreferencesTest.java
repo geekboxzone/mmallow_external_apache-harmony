@@ -4,9 +4,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,11 +31,9 @@ import java.util.prefs.Preferences;
 import junit.framework.TestCase;
 
 /**
- * 
+ *
  */
 public class PreferencesTest extends TestCase {
-
-    MockSecurityManager manager = new MockSecurityManager();
 
     MockInputStream stream = null;
 
@@ -65,7 +63,7 @@ public class PreferencesTest extends TestCase {
         try {
             p = Preferences.systemNodeForPackage(Object.class);
         } catch (SecurityException e) {
-            // may be caused by absence of privileges on the underlying OS 
+            // may be caused by absence of privileges on the underlying OS
             return;
         }
         assertEquals("/java/lang", p.absolutePath());
@@ -238,47 +236,6 @@ public class PreferencesTest extends TestCase {
             fail("should throw RuntimeException");
         } catch (RuntimeException e) {
             // Expected
-        }
-    }
-
-    public void testSecurity() throws InvalidPreferencesFormatException,
-    IOException {
-        try {
-            manager.install();
-            try {
-                Preferences.userRoot();
-                fail("should throw SecurityException");
-            } catch (SecurityException e) {
-                // Expected
-            }
-            try {
-                Preferences.systemRoot();
-                fail("should throw SecurityException");
-            } catch (SecurityException e) {
-                // Expected
-            }
-            try {
-                Preferences.userNodeForPackage(null);
-                fail("should throw SecurityException");
-            } catch (SecurityException e) {
-                // Expected
-            }
-
-            try {
-                Preferences.systemNodeForPackage(null);
-                fail("should throw SecurityException");
-            } catch (SecurityException e) {
-                // Expected
-            }
-
-            try {
-                Preferences.importPreferences(stream);
-                fail("should throw SecurityException");
-            } catch (SecurityException e) {
-                // Expected
-            }
-        } finally {
-            manager.restoreDefault();
         }
     }
 
@@ -497,4 +454,3 @@ public class PreferencesTest extends TestCase {
     }
 
 }
-

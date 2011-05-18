@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -58,8 +58,6 @@ public class FileHandlerTest extends TestCase {
 
     final static StringWriter writer = new StringWriter();
 
-    final static SecurityManager securityManager = new MockLogSecurityManager();
-
     final static String USR_HOME_KEY = "user.home";
 
     final static String TMP_DIR_KEY = "java.io.tmpdir";
@@ -96,7 +94,7 @@ public class FileHandlerTest extends TestCase {
     }
 
     /**
-     * 
+     *
      */
     private void initProps() {
         props.clear();
@@ -293,7 +291,7 @@ public class FileHandlerTest extends TestCase {
 
     /**
      * Does a cleanup of given file
-     * 
+     *
      * @param homepath
      * @param filename
      */
@@ -401,93 +399,6 @@ public class FileHandlerTest extends TestCase {
             } catch (Exception e) {
             }
             reset("log", "");
-        }
-    }
-
-    public void testSecurity() throws IOException {
-        SecurityManager currentManager = System.getSecurityManager();
-
-        try {
-            System.setSecurityManager(new MockLogSecurityManager());
-            try {
-                handler.close();
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-
-            handler.publish(new LogRecord(Level.SEVERE, "msg"));
-            try {
-                handler = new FileHandler();
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-
-            try {
-                handler = new FileHandler("pattern1");
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-            try {
-                handler = new FileHandler("pattern2", true);
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-            try {
-                handler = new FileHandler("pattern3", 1000, 1);
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-            try {
-                handler = new FileHandler("pattern4", 1000, 1, true);
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-        } finally {
-            System.setSecurityManager(currentManager);
-        }
-
-    }
-
-    public void testFileSecurity() throws IOException {
-        SecurityManager currentManager = System.getSecurityManager();
-
-        try {
-            System.setSecurityManager(new MockFileSecurityManager());
-            handler.publish(new LogRecord(Level.SEVERE, "msg"));
-            try {
-                handler.close();
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-
-            try {
-                handler = new FileHandler();
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-
-            try {
-                handler = new FileHandler("pattern1");
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-            try {
-                handler = new FileHandler("pattern2", true);
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-            try {
-                handler = new FileHandler("pattern3", 1000, 1);
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-            try {
-                handler = new FileHandler("pattern4", 1000, 1, true);
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-        } finally {
-            System.setSecurityManager(currentManager);
         }
     }
 
@@ -735,23 +646,6 @@ public class FileHandlerTest extends TestCase {
 
         public String getHead(Handler h) {
             return "head\n";
-        }
-    }
-
-    public static class MockLogSecurityManager extends SecurityManager {
-        public void checkPermission(Permission perm) {
-            if (perm instanceof LoggingPermission) {
-                throw new SecurityException();
-            }
-            return;
-        }
-    }
-
-    public static class MockFileSecurityManager extends SecurityManager {
-        public void checkPermission(Permission perm) {
-            if (perm instanceof FilePermission) {
-                throw new SecurityException();
-            }
         }
     }
 

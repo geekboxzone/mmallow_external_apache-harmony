@@ -18,7 +18,6 @@ package org.apache.harmony.luni.tests.java.lang.reflect;
 
 import java.lang.reflect.GenericSignatureFormatError;
 import junit.framework.TestCase;
-import org.junit.Test;
 
 public class GenericSignatureFormatErrorTest extends TestCase {
 
@@ -26,7 +25,6 @@ public class GenericSignatureFormatErrorTest extends TestCase {
      * @tests java.lang.reflect.GenericSignatureFormatError#
      *        GenericSignatureFormatError()
      */
-    @Test
     public void test_GenericSignatureFormatError() {
         GenericSignatureFormatError e = new GenericSignatureFormatError();
         assertNotNull(e);

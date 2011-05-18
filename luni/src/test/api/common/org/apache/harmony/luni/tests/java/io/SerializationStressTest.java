@@ -57,12 +57,11 @@ import java.util.TimeZone;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
-
-import org.apache.harmony.luni.util.InputStreamHelper;
+import libcore.io.Streams;
 
 /**
  * Automated Test Suite for class java.io.ObjectOutputStream
- * 
+ *
  */
 @SuppressWarnings("serial")
 public class SerializationStressTest extends junit.framework.TestCase implements
@@ -567,7 +566,7 @@ public class SerializationStressTest extends junit.framework.TestCase implements
 			oos.writeUTF("HelloWorld");
 			oos.close();
 			ois = new ObjectInputStream(loadStream());
-			assertEquals("Wrote incorrect UTF value", 
+			assertEquals("Wrote incorrect UTF value",
 					"HelloWorld", ois.readUTF());
 		} catch (IOException e) {
 			fail("IOException serializing data : " + e.getMessage());
@@ -668,7 +667,7 @@ public class SerializationStressTest extends junit.framework.TestCase implements
         oos.close();
 
         DataInputStream dis = new DataInputStream(loadStream());
-        byte[] input = InputStreamHelper.readFullyAndClose(dis);
+        byte[] input = Streams.readFully(dis);
         byte[] result = new byte[] { (byte) 0xac, (byte) 0xed, (byte) 0,
                 (byte) 5, (byte) 0x79, (byte) 0x74, (byte) 0, (byte) 1,
                 (byte) 'R', (byte) 0x79, (byte) 0x77, (byte) 1, (byte) 24 };

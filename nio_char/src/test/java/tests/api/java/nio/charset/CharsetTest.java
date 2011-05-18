@@ -4,9 +4,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -109,7 +109,7 @@ public class CharsetTest extends TestCase {
 
 	/*
 	 * Test the method isSupported(String) with empty string.
-	 * 
+	 *
 	 */
 	public void testIsSupported_EmptyString() {
 		try {
@@ -122,7 +122,7 @@ public class CharsetTest extends TestCase {
 
 	/*
 	 * Test the method isSupported(String) with a string starting with ".".
-	 * 
+	 *
 	 */
 	public void testIsSupported_InvalidInitialCharacter() {
 		try {
@@ -226,7 +226,7 @@ public class CharsetTest extends TestCase {
 
 	/*
 	 * Test the constructor with empty canonical name.
-	 * 
+	 *
 	 */
 	public void testConstructor_EmptyCanonicalName() {
 		try {
@@ -240,7 +240,7 @@ public class CharsetTest extends TestCase {
 	/*
 	 * Test the constructor with illegal canonical name: starting with neither a
 	 * digit nor a letter.
-	 * 
+	 *
 	 */
 	public void testConstructor_IllegalCanonicalName_Initial() {
 		try {
@@ -317,7 +317,7 @@ public class CharsetTest extends TestCase {
 
 	/*
 	 * Test the constructor with empty aliases.
-	 * 
+	 *
 	 */
 	public void testConstructor_EmptyAliases() {
 		try {
@@ -331,7 +331,7 @@ public class CharsetTest extends TestCase {
 	/*
 	 * Test the constructor with illegal aliases: starting with neither a digit
 	 * nor a letter.
-	 * 
+	 *
 	 */
 	public void testConstructor_IllegalAliases_Initial() {
 		try {
@@ -719,7 +719,7 @@ public class CharsetTest extends TestCase {
             Thread.currentThread().setContextClassLoader(originalClassLoader);
         }
     }
-    
+
     /**
      * @tests java.nio.charset.Charset#availableCharsets()
      */
@@ -735,7 +735,7 @@ public class CharsetTest extends TestCase {
             Thread.currentThread().setContextClassLoader(originalClassLoader);
         }
     }
-    
+
 	/*
 	 * Mock charset class.
 	 */
@@ -835,35 +835,6 @@ public class CharsetTest extends TestCase {
 			v.add(new MockCharset("mockCharset00", new String[] {
 					"mockCharset01", "mockCharset02" }));
 			return v.iterator();
-		}
-	}
-    
-	/*
-	 * Used to grant all permissions except charset provider access.
-	 */
-	public static class MockSecurityManager extends SecurityManager {
-
-		public MockSecurityManager() {
-		}
-
-		public void checkPermission(Permission perm) {
-			// grant all permissions except logging control
-			if (perm instanceof RuntimePermission) {
-				RuntimePermission rp = (RuntimePermission) perm;
-				if (rp.getName().equals("charsetProvider")) {
-					throw new SecurityException();
-				}
-			}
-		}
-
-		public void checkPermission(Permission perm, Object context) {
-			// grant all permissions except logging control
-			if (perm instanceof RuntimePermission) {
-				RuntimePermission rp = (RuntimePermission) perm;
-				if (rp.getName().equals("charsetProvider")) {
-					throw new SecurityException();
-				}
-			}
 		}
 	}
 }

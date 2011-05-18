@@ -1474,39 +1474,7 @@ public class DatagramChannelTest extends TestCase {
         assertEquals(new String(buf, 0, bufSize).trim(), expectedString);
     }
 
-    // -------------------------------------------------------------------
-    // Test for security check of receive and send
-    // -------------------------------------------------------------------
-
-    private class mockAddress extends SocketAddress {
-        private static final long serialVersionUID = 1L;
-    }
-
-    public void testSend_MockSocketAddress() throws Exception {
-
-        SocketAddress badAddr = new mockAddress();
-        final SecurityManager sm = System.getSecurityManager();
-        System.setSecurityManager(new MockSecurityManager());
-        try {
-            // no problem.
-            this.channel1
-                    .send(ByteBuffer.allocate(CAPACITY_NORMAL), localAddr1);
-            // re open
-            this.channel1.close();
-            this.channel1 = DatagramChannel.open();
-            try {
-                this.channel1.send(ByteBuffer.allocate(CAPACITY_NORMAL),
-                        badAddr);
-                fail("Should throw ClassCastException");
-            } catch (ClassCastException e) {
-                // ok
-            }
-        } finally {
-            System.setSecurityManager(sm);
-        }
-    }
-
-    public void testRead_Security() throws Exception {
+    public void testRead_NoSecurity() throws Exception {
         ByteBuffer buf = ByteBuffer.allocate(CAPACITY_NORMAL);
         String strHello = "hello";
         localAddr1 = new InetSocketAddress("127.0.0.1", testPort);
@@ -1514,32 +1482,18 @@ public class DatagramChannelTest extends TestCase {
         this.channel2.socket().bind(localAddr2);
         this.channel1.connect(localAddr2);
         this.channel2.send(ByteBuffer.wrap(strHello.getBytes()), localAddr1);
-        final SecurityManager sm = System.getSecurityManager();
-        System.setSecurityManager(new MockSecurityManager("10.0.0.1"));
-
-        // seems no security check
-        try {
-            assertEquals(strHello.length(), this.channel1.read(buf));
-        } finally {
-            System.setSecurityManager(sm);
-        }
+        assertEquals(strHello.length(), this.channel1.read(buf));
     }
 
-    public void testReceive_Peek_Security_Nonblocking() throws Exception {
+    public void testReceive_Peek_NoSecurity_Nonblocking() throws Exception {
         ByteBuffer buf = ByteBuffer.allocate(CAPACITY_NORMAL);
         String strHello = "hello";
         localAddr1 = new InetSocketAddress("127.0.0.1", testPort);
         this.channel1.socket().bind(localAddr1);
         sendByChannel(strHello, localAddr1);
-        final SecurityManager sm = System.getSecurityManager();
-        try {
-            System.setSecurityManager(new MockSecurityManager("10.0.0.1"));
-            this.channel1.configureBlocking(false);
-            // for accepted addr, no problem.
-            assertNull(this.channel1.receive(buf));
-        } finally {
-            System.setSecurityManager(sm);
-        }
+        this.channel1.configureBlocking(false);
+        // for accepted addr, no problem.
+        assertNull(this.channel1.receive(buf));
     }
 
     // -------------------------------------------------------------------
@@ -2592,69 +2546,4 @@ public class DatagramChannelTest extends TestCase {
         server.close();
         client.close();
     }
-
-    // -------------------------------------------------------------------
-    // Mock class for security test.
-    // -------------------------------------------------------------------
-    private class MockSecurityManager extends SecurityManager {
-
-        String validHost = null;
-
-        int validPort = -1;
-
-        MockSecurityManager() {
-            super();
-            this.validHost = null;
-        }
-
-        MockSecurityManager(String host) {
-            super();
-            this.validHost = host;
-        }
-
-        MockSecurityManager(int port) {
-            super();
-            this.validPort = port;
-        }
-
-        public void checkPermission(Permission perm) {
-            // no-op
-        }
-
-        public void checkPermission(Permission perm, Object context) {
-            // no-op
-        }
-
-        public void checkConnect(String host, int port) {
-            // our local addr is OK.
-            if (null != this.validHost) {
-                if (!this.validHost.equals(host)) {
-                    throw new SecurityException();
-                }
-            }
-            if ("127.0.0.1".equals(host)) {
-                return;
-            }
-            super.checkConnect(host, port);
-        }
-
-        public void checkAccept(String host, int port) {
-            // our local addr is OK.
-            if (null != this.validHost) {
-                if (!this.validHost.equals(host)) {
-                    throw new SecurityException();
-                }
-            }
-            if (-1 != this.validPort) {
-                if (this.validPort != port) {
-                    throw new SecurityException();
-                }
-            }
-            if ("127.0.0.1".equals(host)) {
-                return;
-            }
-            super.checkAccept(host, port);
-        }
-    }
-
 }

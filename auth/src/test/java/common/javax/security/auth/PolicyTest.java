@@ -32,7 +32,6 @@ import java.security.Security;
 import java.security.cert.Certificate;
 import java.util.Enumeration;
 import junit.framework.TestCase;
-import org.apache.harmony.auth.tests.support.SecurityChecker;
 import org.apache.harmony.auth.tests.support.TestUtils;
 import tests.support.resource.Support_Resources;
 
@@ -41,65 +40,6 @@ import tests.support.resource.Support_Resources;
  */
 @SuppressWarnings("deprecation")
 public class PolicyTest extends TestCase {
-
-    /**
-     * Tests that setPolicy() is properly secured via SecurityManager.
-     */
-    public void testSetPolicy() {
-        SecurityManager old = System.getSecurityManager();
-        Policy oldPolicy = null;
-        oldPolicy = Policy.getPolicy();
-
-        try {
-            SecurityChecker checker = new SecurityChecker(new AuthPermission(
-                    "setPolicy"), true);
-            System.setSecurityManager(checker);
-            Policy custom = new TestProvider();
-            Policy.setPolicy(custom);
-            assertTrue(checker.checkAsserted);
-            assertSame(custom, Policy.getPolicy());
-
-            checker.reset();
-            checker.enableAccess = false;
-            try {
-                Policy.setPolicy(new TestProvider());
-                fail("SecurityException is intercepted");
-            } catch (SecurityException ok) {
-            }
-        } finally {
-            System.setSecurityManager(old);
-            Policy.setPolicy(oldPolicy);
-        }
-    }
-
-    /**
-     * Tests that getPolicy() is properly secured via SecurityManager.
-     */
-    public void testGetPolicy_CheckPermission() {
-        SecurityManager old = System.getSecurityManager();
-        Policy oldPolicy = null;
-        oldPolicy = Policy.getPolicy();
-
-        try {
-            Policy.setPolicy(new TestProvider());
-            SecurityChecker checker = new SecurityChecker(new AuthPermission(
-                    "getPolicy"), true);
-            System.setSecurityManager(checker);
-            Policy.getPolicy();
-            assertTrue(checker.checkAsserted);
-
-            checker.reset();
-            checker.enableAccess = false;
-            try {
-                Policy.getPolicy();
-                fail("SecurityException is intercepted");
-            } catch (SecurityException ok) {
-            }
-        } finally {
-            System.setSecurityManager(old);
-            Policy.setPolicy(oldPolicy);
-        }
-    }
 
     public static class TestProvider extends Policy {
         @Override
@@ -142,7 +82,7 @@ public class PolicyTest extends TestCase {
                 fail("No SecurityException on failed provider");
             } catch (SecurityException ok) {
             }
-            
+
             // not a policy class
             Security.setProperty(POLICY_PROVIDER, FakePolicy.class.getName());
             Policy.setPolicy(null);
@@ -170,13 +110,13 @@ public class PolicyTest extends TestCase {
             .getAbsoluteResourcePath("auth_policy2.txt");
 
     private static final String POLICY_PROP = "java.security.auth.policy";
-    
+
     public void test_GetPermissions() throws Exception {
 
         PermissionCollection c;
         Permission per;
         Subject subject;
-        
+
         CodeSource source;
 
         String oldProp = System.getProperty(POLICY_PROP);

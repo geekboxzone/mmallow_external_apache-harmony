@@ -35,8 +35,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Date;
 
-import org.apache.harmony.luni.net.PlainDatagramSocketImpl;
-import org.junit.Test;
+import java.net.PlainDatagramSocketImpl;
 
 import tests.support.Support_Configuration;
 import tests.support.Support_PortManager;
@@ -731,7 +730,7 @@ public class DatagramSocketTest extends SocketTestCase {
      * Tests receive() method in various combinations with
      * DatagramPacket#getLength() and DatagramPacket#getLength(). This is
      * regression test for HARMONY-2276.
-     * 
+     *
      * @throws IOException
      *             if some I/O error occured
      */
@@ -759,7 +758,7 @@ public class DatagramSocketTest extends SocketTestCase {
     // socket.receive(recvDatagram);
     // String recvMessage = new String(recvData, 0, recvDatagram.getLength());
     // assertEquals(message, recvMessage);
-    //        
+    //
     // // send & receive longer packet
     // sendData = longerMessage.getBytes();
     // sendDatagram = new DatagramPacket(sendData, 0, sendData.length,
@@ -939,13 +938,12 @@ public class DatagramSocketTest extends SocketTestCase {
             // expected
         }
     }
-    
+
     /**
      * If the InetAddress of DatagramPacket is null, DatagramSocket.send(DatagramPacket)
      * should throw NullPointer Exception.
      * @tests java.net.DatagramSocket#send(java.net.DatagramPacket)
      */
-    @Test
     public void test_sendLjava_net_DatagramPacket2() throws IOException {
         int udp_port = 20000;
         int send_port = 23000;
@@ -962,7 +960,7 @@ public class DatagramSocketTest extends SocketTestCase {
         }
 
     }
-    
+
     /**
      * @tests {@link java.net.DatagramSocket#setDatagramSocketImplFactory(DatagramSocketImplFactory)}
      */

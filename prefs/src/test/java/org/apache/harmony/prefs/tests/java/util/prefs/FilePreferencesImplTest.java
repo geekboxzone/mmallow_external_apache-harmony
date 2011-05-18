@@ -4,9 +4,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -124,85 +124,5 @@ public class FilePreferencesImplTest extends TestCase {
         child2.removeNode();
         childNames = sroot.childrenNames();
         assertEquals(0, childNames.length);
-    }
-
-    public void testSecurityException() throws BackingStoreException {
-        Preferences child1 = uroot.node("child1");
-        MockFileSecurityManager manager = new MockFileSecurityManager();
-        manager.install();
-        try {
-            try {
-                uroot.node("securityNode");
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-            try {
-                // need FilePermission(delete);
-                child1.removeNode();
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-            try {
-                uroot.childrenNames();
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            }
-            uroot.keys();
-            uroot.put("securitykey", "value1");
-            uroot.remove("securitykey");
-            try {
-                uroot.flush();
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            } catch (BackingStoreException e) {
-                assertTrue(e.getCause() instanceof SecurityException);
-            }
-            try {
-                uroot.sync();
-                fail("should throw security exception");
-            } catch (SecurityException e) {
-            } catch (BackingStoreException e) {
-                assertTrue(e.getCause() instanceof SecurityException);
-            }
-        } finally {
-            manager.restoreDefault();
-        }
-    }
-
-    static class MockFileSecurityManager extends SecurityManager {
-
-        SecurityManager dflt;
-
-        public MockFileSecurityManager() {
-            super();
-            dflt = System.getSecurityManager();
-        }
-
-        public void install() {
-            System.setSecurityManager(this);
-        }
-
-        public void restoreDefault() {
-            System.setSecurityManager(dflt);
-        }
-
-        @Override
-        public void checkPermission(Permission perm) {
-            if (perm instanceof FilePermission) {
-                throw new SecurityException();
-            } else if (dflt != null) {
-                dflt.checkPermission(perm);
-            }
-        }
-
-        @Override
-        public void checkPermission(Permission perm, Object ctx) {
-            if (perm instanceof FilePermission) {
-                throw new SecurityException();
-            } else if (dflt != null) {
-                dflt.checkPermission(perm, ctx);
-            }
-        }
-
     }
 }

@@ -38,7 +38,7 @@ import junit.framework.TestCase;
  */
 
 public class AlgorithmParameterGenerator2Test extends TestCase {
-    
+
     private static final String AlgorithmParameterGeneratorProviderClass = "org.apache.harmony.security.tests.support.MyAlgorithmParameterGeneratorSpi";
 
     private static final String defaultAlg = "APG";
@@ -59,12 +59,12 @@ public class AlgorithmParameterGenerator2Test extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        mProv = (new SpiEngUtils()).new MyProvider("MyAPGProvider", "Testing provider", 
+        mProv = (new SpiEngUtils()).new MyProvider("MyAPGProvider", "Testing provider",
                 AlgorithmParameterGenerator1Test.srvAlgorithmParameterGenerator.concat(".").concat(defaultAlg),
                 AlgorithmParameterGeneratorProviderClass);
         Security.insertProviderAt(mProv, 1);
     }
-    
+
     /*
      * @see TestCase#tearDown()
      */
@@ -73,20 +73,15 @@ public class AlgorithmParameterGenerator2Test extends TestCase {
         Security.removeProvider(mProv.getName());
     }
 
-    /**
-     * Constructor for SecurityManagerFactoryTest2.
-     * 
-     * @param arg0
-     */
     public AlgorithmParameterGenerator2Test(String arg0) {
         super(arg0);
     }
 
-    private void checkResult(AlgorithmParameterGenerator algParGen) 
+    private void checkResult(AlgorithmParameterGenerator algParGen)
             throws InvalidAlgorithmParameterException {
         AlgorithmParameters param = algParGen.generateParameters();
         assertNull("Not null parameters", param);
-        
+
         AlgorithmParameterSpec pp = null;
         algParGen.init(pp, new SecureRandom());
         algParGen.init(pp);
@@ -98,10 +93,10 @@ public class AlgorithmParameterGenerator2Test extends TestCase {
         pp = new tmpAlgorithmParameterSpec("Proba");
         algParGen.init(pp, new SecureRandom());
         algParGen.init(pp);
-        
+
         algParGen.init(0, null);
-        algParGen.init(0, new SecureRandom());        
-        
+        algParGen.init(0, new SecureRandom());
+
         try {
             algParGen.init(-10, null);
             fail("IllegalArgumentException must be thrown");
@@ -149,7 +144,7 @@ public class AlgorithmParameterGenerator2Test extends TestCase {
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
      * method
-     * Assertions: 
+     * Assertions:
      * throws NullPointerException must be thrown is null
      * throws NoSuchAlgorithmException must be thrown if algorithm is not available
      * throws IllegalArgumentException when provider is null;

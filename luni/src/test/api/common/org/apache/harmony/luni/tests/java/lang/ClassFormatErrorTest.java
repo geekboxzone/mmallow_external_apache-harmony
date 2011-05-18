@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,10 +16,9 @@
  */
 package org.apache.harmony.luni.tests.java.lang;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
+import junit.framework.TestCase;
 
-public class ClassFormatErrorTest {
+public class ClassFormatErrorTest extends TestCase {
     /**
      * Thrown when the Java Virtual Machine attempts to read a class file and
      * determines that the file is malformed or otherwise cannot be interpreted
@@ -29,7 +28,6 @@ public class ClassFormatErrorTest {
     /**
      * @tests java.lang.ClassFormatError#ClassFormatError()
      */
-    @Test
     public void test_ClassFormatError() {
         new ClassFormatError();
     }
@@ -37,7 +35,6 @@ public class ClassFormatErrorTest {
     /**
      * @tests java.lang.ClassFormatError#ClassFormatError(java.lang.String)
      */
-    @Test
     public void test_ClassFormatError_LString() {
         ClassFormatError e = new ClassFormatError("Some Error Message");
         assertEquals("Wrong message", "Some Error Message", e.getMessage());

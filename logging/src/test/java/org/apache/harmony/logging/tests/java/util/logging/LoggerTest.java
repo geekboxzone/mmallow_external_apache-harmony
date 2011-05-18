@@ -178,31 +178,6 @@ public class LoggerTest extends TestCase {
 	}
 
 	/*
-	 * Test getAnonymousLogger()
-	 */
-	public void testGetAnonymousLogger() {
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-
-		try {
-			Logger alog = Logger.getAnonymousLogger();
-			assertNotSame(alog, Logger.getAnonymousLogger());
-			assertNull(alog.getFilter());
-			assertEquals(0, alog.getHandlers().length);
-			assertNull(alog.getLevel());
-			assertNull(alog.getName());
-			assertNull(alog.getParent().getParent());
-			assertNull(alog.getResourceBundle());
-			assertNull(alog.getResourceBundleName());
-			assertTrue(alog.getUseParentHandlers());
-			// fail("Should throw SecurityException!");
-			// } catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
 	 * Test getAnonymousLogger(String resourceBundleName) with valid resource
 	 * bundle.
 	 */
@@ -624,44 +599,6 @@ public class LoggerTest extends TestCase {
 	}
 
 	/*
-	 * Test addHandler(Handler) for a named logger with insufficient privilege.
-	 */
-	public void testAddHandler_NamedLoggerInsufficientPrivilege() {
-		Logger log = Logger
-				.getLogger("testAddHandler_NamedLoggerInsufficientPrivilege");
-		MockHandler h = new MockHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-
-		try {
-			log.addHandler(h);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
-	 * Test addHandler(Handler) for a named logger with insufficient privilege,
-	 * using a null handler.
-	 */
-	public void testAddHandler_NamedLoggerInsufficientPrivilegeNull() {
-		Logger log = Logger
-				.getLogger("testAddHandler_NamedLoggerInsufficientPrivilege");
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-
-		try {
-			log.addHandler(null);
-			fail("Should throw NullPointerException!");
-		} catch (NullPointerException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
 	 * Test addHandler(Handler) for an anonymous logger with sufficient
 	 * privilege.
 	 */
@@ -672,43 +609,6 @@ public class LoggerTest extends TestCase {
 		log.addHandler(h);
 		assertEquals(log.getHandlers().length, 1);
 		assertSame(log.getHandlers()[0], h);
-	}
-
-	/*
-	 * Test addHandler(Handler) for an anonymous logger with insufficient
-	 * privilege.
-	 */
-	public void testAddHandler_AnonyLoggerInsufficientPrivilege() {
-		Logger log = Logger.getAnonymousLogger();
-		MockHandler h = new MockHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			assertEquals(log.getHandlers().length, 0);
-			log.addHandler(h);
-			assertEquals(log.getHandlers().length, 1);
-			assertSame(log.getHandlers()[0], h);
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
-	 * Test addHandler(Handler) for a null-named mock logger with insufficient
-	 * privilege.
-	 */
-	public void testAddHandler_NullNamedMockLoggerInsufficientPrivilege() {
-		MockLogger mlog = new MockLogger(null, null);
-		MockHandler h = new MockHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			mlog.addHandler(h);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
 	}
 
 	/*
@@ -748,45 +648,6 @@ public class LoggerTest extends TestCase {
 	}
 
 	/*
-	 * Test removeHandler(Handler) for a named logger with insufficient
-	 * privilege.
-	 */
-	public void testRemoveHandler_NamedLoggerInsufficientPrivilege() {
-		Logger log = Logger
-				.getLogger("testRemoveHandler_NamedLoggerInsufficientPrivilege");
-		MockHandler h = new MockHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-
-		try {
-			log.removeHandler(h);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
-	 * Test removeHandler(Handler) for a named logger with insufficient
-	 * privilege, using a null handler.
-	 */
-	public void testRemoveHandler_NamedLoggerInsufficientPrivilegeNull() {
-		Logger log = Logger
-				.getLogger("testRemoveHandler_NamedLoggerInsufficientPrivilege");
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-
-		try {
-			log.removeHandler(null);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
 	 * Test removeHandler(Handler) for an anonymous logger with sufficient
 	 * privilege.
 	 */
@@ -797,43 +658,6 @@ public class LoggerTest extends TestCase {
 		assertEquals(log.getHandlers().length, 1);
 		log.removeHandler(h);
 		assertEquals(log.getHandlers().length, 0);
-	}
-
-	/*
-	 * Test removeHandler(Handler) for an anonymous logger with insufficient
-	 * privilege.
-	 */
-	public void testRemoveHandler_AnonyLoggerInsufficientPrivilege() {
-		Logger log = Logger.getAnonymousLogger();
-		MockHandler h = new MockHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			log.addHandler(h);
-			assertEquals(log.getHandlers().length, 1);
-			log.removeHandler(h);
-			assertEquals(log.getHandlers().length, 0);
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
-	 * Test removeHandler(Handler) for a null-named mock logger with
-	 * insufficient privilege.
-	 */
-	public void testRemoveHandler_NullNamedMockLoggerInsufficientPrivilege() {
-		MockLogger mlog = new MockLogger(null, null);
-		MockHandler h = new MockHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			mlog.removeHandler(h);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
 	}
 
 	/*
@@ -896,25 +720,6 @@ public class LoggerTest extends TestCase {
 	}
 
 	/*
-	 * Test setFilter with normal value for a named logger, having insufficient
-	 * privilege.
-	 */
-	public void testGetSetFilter_NamedLoggerInsufficientPrivilege() {
-		Logger log = Logger
-				.getLogger("testGetSetFilter_NamedLoggerInsufficientPrivilege");
-		Filter f = new MockFilter();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			log.setFilter(f);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
 	 * Test setFilter for an anonymous logger with sufficient privilege.
 	 */
 	public void testSetFilter_AnonyLoggerSufficientPrivilege() {
@@ -923,40 +728,6 @@ public class LoggerTest extends TestCase {
 		assertNull(log.getFilter());
 		log.setFilter(f);
 		assertSame(f, log.getFilter());
-	}
-
-	/*
-	 * Test setFilter for an anonymous logger with insufficient privilege.
-	 */
-	public void testSetFilter_AnonyLoggerInsufficientPrivilege() {
-		Logger log = Logger.getAnonymousLogger();
-		Filter f = new MockFilter();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			assertNull(log.getFilter());
-			log.setFilter(f);
-			assertSame(f, log.getFilter());
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
-	 * Test setFilter for a null-named mock logger with insufficient privilege.
-	 */
-	public void testSetFilter_NullNamedMockLoggerInsufficientPrivilege() {
-		MockLogger mlog = new MockLogger(null, null);
-		Filter f = new MockFilter();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			mlog.setFilter(f);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
 	}
 
 	/*
@@ -987,24 +758,6 @@ public class LoggerTest extends TestCase {
 	}
 
 	/*
-	 * Test setLevel with normal value for a named logger, having insufficient
-	 * privilege.
-	 */
-	public void testGetSetLevel_NamedLoggerInsufficientPrivilege() {
-		Logger log = Logger
-				.getLogger("testGetSetLevel_NamedLoggerInsufficientPrivilege");
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			log.setLevel(Level.CONFIG);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
 	 * Test setLevel for an anonymous logger with sufficient privilege.
 	 */
 	public void testSetLevel_AnonyLoggerSufficientPrivilege() {
@@ -1012,38 +765,6 @@ public class LoggerTest extends TestCase {
 		assertNull(log.getLevel());
 		log.setLevel(Level.CONFIG);
 		assertSame(Level.CONFIG, log.getLevel());
-	}
-
-	/*
-	 * Test setLevel for an anonymous logger with insufficient privilege.
-	 */
-	public void testSetLevel_AnonyLoggerInsufficientPrivilege() {
-		Logger log = Logger.getAnonymousLogger();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			assertNull(log.getLevel());
-			log.setLevel(Level.CONFIG);
-			assertSame(Level.CONFIG, log.getLevel());
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
-	 * Test setLevel for a null-named mock logger with insufficient privilege.
-	 */
-	public void testSetLevel_NullNamedMockLoggerInsufficientPrivilege() {
-		MockLogger mlog = new MockLogger(null, null);
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			mlog.setLevel(Level.CONFIG);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
 	}
 
 	/*
@@ -1060,24 +781,6 @@ public class LoggerTest extends TestCase {
 	}
 
 	/*
-	 * Test setUseParentHandlers with normal value for a named logger, having
-	 * insufficient privilege.
-	 */
-	public void testGetSetUseParentHandlers_NamedLoggerInsufficientPrivilege() {
-		Logger log = Logger
-				.getLogger("testGetSetUseParentHandlers_NamedLoggerInsufficientPrivilege");
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			log.setUseParentHandlers(true);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
 	 * Test setUseParentHandlers for an anonymous logger with sufficient
 	 * privilege.
 	 */
@@ -1086,40 +789,6 @@ public class LoggerTest extends TestCase {
 		assertTrue(log.getUseParentHandlers());
 		log.setUseParentHandlers(false);
 		assertFalse(log.getUseParentHandlers());
-	}
-
-	/*
-	 * Test setUseParentHandlers for an anonymous logger with insufficient
-	 * privilege.
-	 */
-	public void testSetUseParentHandlers_AnonyLoggerInsufficientPrivilege() {
-		Logger log = Logger.getAnonymousLogger();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			assertTrue(log.getUseParentHandlers());
-			log.setUseParentHandlers(false);
-			assertFalse(log.getUseParentHandlers());
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
-	 * Test setUseParentHandlers for a null-named mock logger with insufficient
-	 * privilege.
-	 */
-	public void testSetUseParentHandlers_NullNamedMockLoggerInsufficientPrivilege() {
-		MockLogger mlog = new MockLogger(null, null);
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			mlog.setUseParentHandlers(true);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
 	}
 
 	/*
@@ -1169,55 +838,6 @@ public class LoggerTest extends TestCase {
 			(new MockLogger(null, null)).setParent(null);
 			fail("Should throw NullPointerException!");
 		} catch (NullPointerException e) {
-		}
-	}
-
-	/*
-	 * Test setParent(Logger), having insufficient privilege.
-	 */
-	public void testSetParent_InsufficientPrivilege() {
-		MockLogger log = new MockLogger(null, null);
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			log.setParent(log);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
-	 * Test setParent(Logger) with null, having insufficient privilege.
-	 */
-	public void testSetParent_InsufficientPrivilegeNull() {
-		MockLogger log = new MockLogger(null, null);
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			log.setParent(null);
-			fail("Should throw NullPointerException!");
-		} catch (NullPointerException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
-	 * Test setParent(Logger) for an anonymous logger with insufficient
-	 * privilege.
-	 */
-	public void testSetParent_AnonyLoggerInsufficientPrivilege() {
-		Logger log = Logger.getAnonymousLogger();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			log.setParent(log);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
 		}
 	}
 
@@ -2726,22 +2346,6 @@ public class LoggerTest extends TestCase {
 		assertSame(r.getThrown(), null);
 	}
 
-    /**
-     * @tests java.util.logging.Logger#logrb(Level, String, String, String,
-     *        String, Object)
-     */
-    public void test_logrbLLevel_LString_LString_LObject_Security()
-            throws Exception {
-        // regression test for Harmony-1290
-        SecurityManager originalSecurityManager = System.getSecurityManager();
-        try {
-            System.setSecurityManager(new SecurityManager());
-            Logger.global.logrb(Level.OFF, null, null, "abc", "def");
-        } finally {
-            System.setSecurityManager(originalSecurityManager);
-        }
-    }
-
 	/*
 	 * Test logrb(Level, String, String, String, String, Object) with null
 	 * level.
@@ -3395,20 +2999,6 @@ public class LoggerTest extends TestCase {
 		assertTrue(CallVerificationStack.getInstance().empty());
 	}
 
-	/*
-	 * Test whether privileged code is used to load resource bundles.
-	 */
-	public void testLoadResourceBundle() {
-        //
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockNoLoadingClassSecurityManager());
-		try {
-			Logger.getAnonymousLogger(VALID_RESOURCE_BUNDLE);
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
     /* Logger.loadResourceBundle is not publicly accessible in Android
         public void testLoadResourceBundleNonExistent() {
             try {
@@ -3421,42 +3011,6 @@ public class LoggerTest extends TestCase {
             }
         }
     */
-
-    /**
-     * @tests java.util.logging.Logger#logrb(Level, String, String, String,
-     *        String, Object)
-     */
-    public void test_init_logger()
-            throws Exception {
-        Properties p = new Properties();
-        p.put("testGetLogger_Normal_ANewLogger2.level", "ALL");
-        LogManager.getLogManager().readConfiguration(
-                EnvironmentHelper.PropertiesToInputStream(p));
-
-        assertNull(LogManager.getLogManager().getLogger(
-                "testGetLogger_Normal_ANewLogger2"));
-        SecurityManager originalSecurityManager = System.getSecurityManager();
-        try {
-            System.setSecurityManager(new SecurityManager());
-            // should not throw expection
-            Logger logger = Logger.getLogger("testGetLogger_Normal_ANewLogger2");
-            // should thrpw exception
-            try{
-                logger.setLevel(Level.ALL);
-                fail("should throw SecurityException");
-            } catch (SecurityException e){
-                // expected
-            }
-            try{
-                logger.setParent(Logger.getLogger("root"));
-                fail("should throw SecurityException");
-            } catch (SecurityException e){
-                // expected
-            }
-        } finally {
-            System.setSecurityManager(originalSecurityManager);
-        }
-    }
 
     /*
      * test initHandler
@@ -3534,55 +3088,6 @@ public class LoggerTest extends TestCase {
 		public void publish(LogRecord record) {
 			// System.out.println("publish!");
 			throw new RuntimeException();
-		}
-	}
-
-	/*
-	 * Used to grant all permissions except logging control.
-	 */
-	public static class MockSecurityManager extends SecurityManager {
-
-		public MockSecurityManager() {
-		}
-
-		public void checkPermission(Permission perm) {
-			// grant all permissions except logging control
-			if (perm instanceof LoggingPermission) {
-				throw new SecurityException();
-			}
-		}
-
-		public void checkPermission(Permission perm, Object context) {
-			// grant all permissions except logging control
-			if (perm instanceof LoggingPermission) {
-				throw new SecurityException();
-			}
-		}
-	}
-
-	/*
-	 * Used to grant all permissions except getting class loader.
-	 */
-	public static class MockNoLoadingClassSecurityManager extends
-			SecurityManager {
-
-		public MockNoLoadingClassSecurityManager() {
-		}
-
-		public void checkPermission(Permission perm) {
-			// grant all permissions except getting class loader
-			if (perm instanceof RuntimePermission) {
-				if ("getClassLoader".equals(perm.getName())) {
-					throw new SecurityException();
-				}
-			}
-		}
-
-		public void checkPermission(Permission perm, Object context) {
-			// grant all permissions except logging control
-			if (perm instanceof LoggingPermission) {
-				throw new SecurityException();
-			}
 		}
 	}
 

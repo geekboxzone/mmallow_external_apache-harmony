@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,10 +16,9 @@
  */
 package org.apache.harmony.luni.tests.java.lang;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
+import junit.framework.TestCase;
 
-public class UnsupportedClassVersionErrorTest {
+public class UnsupportedClassVersionErrorTest extends TestCase {
     /**
      * Thrown when the Java Virtual Machine attempts to read a class file and
      * determines that the major and minor version numbers in the file are not
@@ -29,7 +28,6 @@ public class UnsupportedClassVersionErrorTest {
     /**
      * @tests java.lang.UnsupportedClassVersionError#UnsupportedClassVersionError()
      */
-    @Test
     public void test_UnsupportedClassVersionError() {
         UnsupportedClassVersionError error = new UnsupportedClassVersionError();
         assertNotNull(error);
@@ -39,7 +37,6 @@ public class UnsupportedClassVersionErrorTest {
     /**
      *@tests java.lang.UnsupportedClassVersionError#UnsupportedClassVersionError(java.lang.String)
      */
-    @Test
     public void test_UnsupportedClassVersionError_LString() {
         UnsupportedClassVersionError e = new UnsupportedClassVersionError(
                 "Some Error Message");

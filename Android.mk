@@ -9,7 +9,10 @@ endef
 harmony_test_dirs := annotation archive logging math nio nio_char prefs regex support text
 harmony_test_src_files := \
     $(call all-harmony-test-java-files-under,$(harmony_test_dirs),src/test/java) \
-    $(call all-harmony-test-java-files-under,luni,src/test/{api,impl}/{common,unix})
+    $(call all-harmony-test-java-files-under,luni,src/test/api/common) \
+    $(call all-harmony-test-java-files-under,luni,src/test/api/unix) \
+    $(call all-harmony-test-java-files-under,luni,src/test/impl/common) \
+    $(call all-harmony-test-java-files-under,luni,src/test/impl/unix)
 
 define harmony-test-resource-dirs
   $(shell cd $(LOCAL_PATH) && ls -d $(1)/src/test/{java,resources} 2> /dev/null)

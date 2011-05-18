@@ -17,17 +17,12 @@
 
 package org.apache.harmony.luni.tests.java.lang.reflect;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import java.io.ByteArrayOutputStream;
 import java.io.CharArrayWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
-import org.junit.Test;
 
 public class InvocationTargetExceptionTest extends junit.framework.TestCase {
 
@@ -171,7 +166,7 @@ public class InvocationTargetExceptionTest extends junit.framework.TestCase {
 			assertTrue("Returned incorrect target exception", e
 					.getTargetException() instanceof NullPointerException);
 			return;
-		} 
+		}
 
 		fail("Failed to throw exception");
 	}
@@ -250,7 +245,6 @@ public class InvocationTargetExceptionTest extends junit.framework.TestCase {
      * {@link java.lang.reflect.InvocationTargetException#InvocationTargetException(java.lang.Throwable, java.lang.String)}
      *
      */
-    @Test
     public void testInvocationTargetExceptionThrowableString() {
         Exception cause = null;
         InvocationTargetException e = new InvocationTargetException(cause,
@@ -268,7 +262,6 @@ public class InvocationTargetExceptionTest extends junit.framework.TestCase {
      * {@link java.lang.reflect.InvocationTargetException#InvocationTargetException()}
      *
      */
-    @Test
     public void testInvocationTargetException() {
         InvocationTargetException e = new MyInvocationTargetException();
         assertNull(e.getCause());

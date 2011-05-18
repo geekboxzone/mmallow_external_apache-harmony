@@ -4,9 +4,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -48,50 +48,6 @@ public class CookieHandlerTest extends TestCase {
         assertNull(CookieHandler.getDefault());
     }
 
-    /**
-     * @tests java.net.CookieHandler#getDefault()
-     */
-    public void testGetDefault_Security() {
-        SecurityManager old = System.getSecurityManager();
-        try {
-            System.setSecurityManager(new MockSM());
-        } catch (SecurityException e) {
-            System.err.println("Unable to reset securityManager,test ignored");
-            return;
-        }
-        try {
-            CookieHandler.getDefault();
-            fail("should throw SecurityException");
-        } catch (SecurityException e) {
-            // correct
-        } finally {
-            System.setSecurityManager(old);
-        }
-    }
-
-    /**
-     * @tests java.net.CookieHandler#setDefault(CookieHandler)
-     */
-    public void testSetDefault_Security() {
-        CookieHandler rc = new MockCookieHandler();
-        SecurityManager old = System.getSecurityManager();
-        try {
-            System.setSecurityManager(new MockSM());
-        } catch (SecurityException e) {
-            System.err.println("Unable to reset securityManager,test ignored");
-            return;
-        }
-
-        try {
-            CookieHandler.setDefault(rc);
-            fail("should throw SecurityException");
-        } catch (SecurityException e) {
-            // correct
-        } finally {
-            System.setSecurityManager(old);
-        }
-    }
-
     class MockCookieHandler extends CookieHandler {
 
         public Map get(URI uri, Map requestHeaders) throws IOException {
@@ -102,27 +58,5 @@ public class CookieHandlerTest extends TestCase {
             // empty
         }
 
-    }
-
-    class MockSM extends SecurityManager {
-        public void checkPermission(Permission permission) {
-            if (permission instanceof NetPermission) {
-                if ("setCookieHandler".equals(permission.getName())) {
-                    throw new SecurityException();
-                }
-            }
-
-            if (permission instanceof NetPermission) {
-                if ("getCookieHandler".equals(permission.getName())) {
-                    throw new SecurityException();
-                }
-            }
-
-            if (permission instanceof RuntimePermission) {
-                if ("setSecurityManager".equals(permission.getName())) {
-                    return;
-                }
-            }
-        }
     }
 }

@@ -35,7 +35,6 @@ import java.util.HashSet;
 
 import junit.framework.TestCase;
 
-import org.apache.harmony.security.tests.support.SecurityChecker;
 import org.apache.harmony.security.tests.support.TestUtils;
 
 import tests.support.resource.Support_Resources;
@@ -46,61 +45,6 @@ import tests.support.resource.Support_Resources;
 public class PolicyTest extends TestCase {
 
     public static final String JAVA_SECURITY_POLICY = "java.security.policy";
-
-    /**
-     * @tests java.security.Policy#setPolicy(java.security.Policy)
-     */
-    public void test_setPolicyLjava_security_Policy() {
-        SecurityManager old = System.getSecurityManager();
-        Policy oldPolicy = Policy.getPolicy();
-        try {
-            SecurityChecker checker = new SecurityChecker(
-                new SecurityPermission("setPolicy"), true);
-            System.setSecurityManager(checker);
-            Policy custom = new TestProvider();
-            Policy.setPolicy(custom);
-            assertTrue(checker.checkAsserted);
-            assertSame(custom, Policy.getPolicy());
-
-            checker.reset();
-            checker.enableAccess = false;
-            try {
-                Policy.setPolicy(new TestProvider());
-                fail("SecurityException is intercepted");
-            } catch (SecurityException ok) {
-            }
-        } finally {
-            System.setSecurityManager(old);
-            Policy.setPolicy(oldPolicy);
-        }
-    }
-
-    /**
-     * @tests java.security.Policy#getPolicy()
-     */
-    public void test_getPolicy() {
-        SecurityManager old = System.getSecurityManager();
-        Policy oldPolicy = Policy.getPolicy();
-        try {
-            Policy.setPolicy(new TestProvider());
-            SecurityChecker checker = new SecurityChecker(
-                new SecurityPermission("getPolicy"), true);
-            System.setSecurityManager(checker);
-            Policy.getPolicy();
-            assertTrue(checker.checkAsserted);
-
-            checker.reset();
-            checker.enableAccess = false;
-            try {
-                Policy.getPolicy();
-                fail("SecurityException is intercepted");
-            } catch (SecurityException ok) {
-            }
-        } finally {
-            System.setSecurityManager(old);
-            Policy.setPolicy(oldPolicy);
-        }
-    }
 
     public static class TestProvider extends Policy {
 

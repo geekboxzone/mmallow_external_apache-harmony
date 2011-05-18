@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,7 +37,7 @@ import junit.framework.TestCase;
 
 /**
  * JUnit Testcase for the java.sql.DriverManager class
- * 
+ *
  */
 public class DriverManagerTest extends TestCase {
 
@@ -76,7 +76,7 @@ public class DriverManagerTest extends TestCase {
 
     /**
      * Test for the method DriverManager.deregisterDriver
-     * 
+     *
      * @throws SQLException
      */
     public void testDeregisterDriver() throws Exception {
@@ -296,7 +296,7 @@ public class DriverManagerTest extends TestCase {
             Driver validDriver = DriverManager.getDriver(element);
             assertNotNull(validDriver);
         } // end for
-        
+
 //      Comment out since it depends on the drivers providered
 //        for (String element : invalidURLs) {
 //            System.out.println(element);
@@ -435,26 +435,6 @@ public class DriverManagerTest extends TestCase {
         DriverManager.setLogStream(null);
 
         assertNull(DriverManager.getLogStream());
-
-        // Now let's deal with the case where there is a SecurityManager in
-        // place
-        TestSecurityManager theSecManager = new TestSecurityManager();
-        System.setSecurityManager(theSecManager);
-
-        theSecManager.setLogAccess(false);
-
-        try {
-            DriverManager.setLogStream(testPrintStream);
-            fail("Should throw SecurityException.");
-        } catch (SecurityException s) {
-            // expected
-        }
-
-        theSecManager.setLogAccess(true);
-
-        DriverManager.setLogStream(testPrintStream);
-
-        System.setSecurityManager(null);
     } // end method testSetLogStream()
 
     static ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -474,25 +454,6 @@ public class DriverManagerTest extends TestCase {
 
         assertNull("testDriverManager: Log writer not null:", DriverManager
                 .getLogWriter());
-
-        // Now let's deal with the case where there is a SecurityManager in
-        // place
-        TestSecurityManager theSecManager = new TestSecurityManager();
-        System.setSecurityManager(theSecManager);
-
-        theSecManager.setLogAccess(false);
-
-        try {
-            DriverManager.setLogWriter(testPrintWriter);
-            fail("Should throw SecurityException.");
-        } catch (SecurityException s) {
-            // expected
-        }
-
-        theSecManager.setLogAccess(true);
-        DriverManager.setLogWriter(testPrintWriter);
-
-        System.setSecurityManager(null);
     } // end method testSetLogWriter()
 
     /*
@@ -535,45 +496,11 @@ public class DriverManagerTest extends TestCase {
         return numberLoaded;
     } // end method loadDrivers()
 
-    class TestSecurityManager extends SecurityManager {
-
-        boolean logAccess = true;
-
-        SQLPermission sqlPermission = new SQLPermission("setLog");
-
-        RuntimePermission setManagerPermission = new RuntimePermission(
-                "setSecurityManager");
-
-        TestSecurityManager() {
-            super();
-        } // end method TestSecurityManager()
-
-        void setLogAccess(boolean allow) {
-            logAccess = allow;
-        } // end method setLogAccess( boolean )
-
-        @Override
-        public void checkPermission(Permission thePermission) {
-            if (thePermission.equals(sqlPermission)) {
-                if (!logAccess) {
-                    throw new SecurityException("Cannot set the sql Log Writer");
-                } // end if
-                return;
-            } // end if
-
-            if (thePermission.equals(setManagerPermission)) {
-                return;
-            } // end if
-            // super.checkPermission( thePermission );
-        } // end method checkPermission( Permission )
-
-    } // end class TestSecurityManager
-
     /**
      * @tests {@link java.sql.DriverManager#registerDriver(Driver)}
-     * 
+     *
      * Registers a driver for multiple times and deregisters it only once.
-     * 
+     *
      * Regression for HARMONY-4205
      */
     public void test_registerDriver_MultiTimes() throws SQLException {
@@ -640,4 +567,3 @@ public class DriverManagerTest extends TestCase {
     }
 
 } // end class DriverManagerTest
-

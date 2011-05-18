@@ -62,38 +62,6 @@ public class NetworkInterfaceTest extends junit.framework.TestCase {
 	 * @tests java.net.NetworkInterface#getInetAddresses()
 	 */
 	public void test_getInetAddresses() throws Exception {
-
-		// security manager that allows us to check that we only return the
-		// addresses that we should
-		class mySecurityManager extends SecurityManager {
-
-			ArrayList disallowedNames = null;
-
-			public mySecurityManager(ArrayList addresses) {
-				disallowedNames = new ArrayList();
-				for (int i = 0; i < addresses.size(); i++) {
-					disallowedNames.add(((InetAddress) addresses.get(i))
-							.getHostName());
-					disallowedNames.add(((InetAddress) addresses.get(i))
-							.getHostAddress());
-				}
-			}
-
-			public void checkConnect(String host, int port) {
-
-				if (host == null) {
-					throw new NullPointerException("host was null)");
-				}
-
-				for (int i = 0; i < disallowedNames.size(); i++) {
-					if (((String) disallowedNames.get(i)).equals(host)) {
-						throw new SecurityException("not allowed");
-					}
-				}
-			}
-
-		}
-
 		if (atLeastOneInterface) {
             Enumeration theAddresses = networkInterface1.getInetAddresses();
             while (theAddresses.hasMoreElements()) {
@@ -120,11 +88,7 @@ public class NetworkInterfaceTest extends junit.framework.TestCase {
 			ArrayList notOkAddresses = new ArrayList();
 			while (addresses.hasMoreElements()) {
                 InetAddress theAddress = (InetAddress) addresses.nextElement();
-                if (index != 0) {
                     okAddresses.add(theAddress);
-                } else {
-                    notOkAddresses.add(theAddress);
-                }
                 index++;
             }
 
@@ -135,18 +99,10 @@ public class NetworkInterfaceTest extends junit.framework.TestCase {
 				while (addresses.hasMoreElements()) {
 					InetAddress theAddress = (InetAddress) addresses
 							.nextElement();
-					if (index != 0) {
 						okAddresses.add(theAddress);
-					} else {
-						notOkAddresses.add(theAddress);
-					}
 					index++;
 				}
 			}
-
-			// set the security manager that will make the first address not
-			// visible
-			System.setSecurityManager(new mySecurityManager(notOkAddresses));
 
 			// validate not ok addresses are not returned
 			for (int i = 0; i < notOkAddresses.size(); i++) {
@@ -216,8 +172,6 @@ public class NetworkInterfaceTest extends junit.framework.TestCase {
                                 .getByInetAddress((InetAddress) okAddresses
                                         .get(i)));
             }
-
-			System.setSecurityManager(null);
 		}
 	}
 
@@ -249,7 +203,7 @@ public class NetworkInterfaceTest extends junit.framework.TestCase {
                                    NetworkInterface.getByName(null));
 			fail("getByName did not throw NullPointerException for null argument");
 		} catch (NullPointerException e) {
-		} 
+		}
 
 		assertNull("validate handled ok if we ask for name not associated with any interface",
                                   NetworkInterface.getByName("8not a name4"));
@@ -381,72 +335,53 @@ public class NetworkInterfaceTest extends junit.framework.TestCase {
 			assertFalse("validate that non-zero length string is generated",
 					networkInterface1.toString().equals(""));
 
-            SecurityManager backup = System.getSecurityManager();
-            System.setSecurityManager(new SecurityManager());
-            assertNotNull(networkInterface1.toString());
-            System.setSecurityManager(backup);
 		}
 		if (atLeastTwoInterfaces) {
 			assertFalse(
 					"Validate strings are different for different interfaces",
 					networkInterface1.toString().equals(
 							networkInterface2.toString()));
-            
-            SecurityManager backup = System.getSecurityManager();
-            System.setSecurityManager(new SecurityManager());
-            assertNotNull(networkInterface2.toString());
-            System.setSecurityManager(backup);
+
 		}
 	}
 
-    private class MockSecurityManager extends SecurityManager {
-        @Override
-        public void checkConnect(String host, int port) {
-            throw new SecurityException();
-        }
-    }
-
     /**
-     * 
+     *
      * @tests java.net.NetworkInterface#getInterfaceAddresses()
-     * 
+     *
      * @since 1.6
      */
     public void test_getInterfaceAddresses() throws SocketException {
         if (theInterfaces != null) {
-            SecurityManager oldSM = System.getSecurityManager();
-            System.setSecurityManager(new MockSecurityManager());
-            
             while (theInterfaces.hasMoreElements()) {
                 NetworkInterface netif = theInterfaces.nextElement();
                 assertEquals(netif.getName()
                         + " getInterfaceAddresses should contain no element", 0,
                         netif.getInterfaceAddresses().size());
             }
-            System.setSecurityManager(oldSM);
-            
+
             theInterfaces = NetworkInterface.getNetworkInterfaces();
             while (theInterfaces.hasMoreElements()) {
                 NetworkInterface netif = theInterfaces.nextElement();
                 List<InterfaceAddress> interfaceAddrs = netif.getInterfaceAddresses();
                 assertTrue(interfaceAddrs instanceof ArrayList);
                 for (InterfaceAddress addr : interfaceAddrs) {
-                    assertNotNull(addr);                    
+                    assertNotNull(addr);
                 }
-                
+
                 List<InterfaceAddress> interfaceAddrs2 = netif.getInterfaceAddresses();
-                // RI fails on this since it cannot tolerate null broadcast address. 
-                assertEquals(interfaceAddrs, interfaceAddrs2);              
+                // RI fails on this since it cannot tolerate null broadcast address.
+                assertEquals(interfaceAddrs, interfaceAddrs2);
             }
         }
-    }   
-    
+    }
+
     /**
      * @tests java.net.NetworkInterface#isLoopback()
-     * 
+     *
      * @since 1.6
      */
-    public void test_isLoopback() throws SocketException {  
+    public void test_isLoopback() throws SocketException {
         if (theInterfaces != null) {
             while (theInterfaces.hasMoreElements()) {
                 NetworkInterface netif = theInterfaces.nextElement();
@@ -462,10 +397,10 @@ public class NetworkInterfaceTest extends junit.framework.TestCase {
             }
         }
     }
-    
+
     /**
      * @tests java.net.NetworkInterface#getHardwareAddress()
-     * 
+     *
      * @since 1.6
      */
     public void test_getHardwareAddress() throws SocketException {
@@ -481,22 +416,22 @@ public class NetworkInterfaceTest extends junit.framework.TestCase {
             }
         }
     }
-    
+
     /**
-     * 
+     *
      * @tests java.net.NetworkInterface#getHardwareAddress()
-     * 
+     *
      * @since 1.6
      */
-    public void test_getMTU() throws SocketException {      
+    public void test_getMTU() throws SocketException {
         if (theInterfaces != null) {
             while (theInterfaces.hasMoreElements()) {
                 NetworkInterface netif = theInterfaces.nextElement();
                 assertTrue(netif.getName() + "has non-positive MTU", netif.getMTU() >= 0);
-            }           
+            }
         }
     }
-    
+
 	protected void setUp() throws SocketException {
 
 		Enumeration theInterfaces = null;
@@ -505,15 +440,15 @@ public class NetworkInterfaceTest extends junit.framework.TestCase {
 		} catch (Exception e) {
 			fail("Exception occurred getting network interfaces : " + e);
 		}
-		
+
 		// Set up NetworkInterface instance members. Note that because the call
-		// to NetworkInterface.getNetworkInterfaces() returns *all* of the 
-		// interfaces on the test machine it is possible that one or more of 
+		// to NetworkInterface.getNetworkInterfaces() returns *all* of the
+		// interfaces on the test machine it is possible that one or more of
 		// them will not currently be bound to an InetAddress. e.g. a laptop
-		// running connected by a wire to the local network may also have a 
-		// wireless interface that is not active and so has no InetAddress 
-		// bound to it. For these tests only work with NetworkInterface objects 
-		// that are bound to an InetAddress.   
+		// running connected by a wire to the local network may also have a
+		// wireless interface that is not active and so has no InetAddress
+		// bound to it. For these tests only work with NetworkInterface objects
+		// that are bound to an InetAddress.
 		if ((theInterfaces != null) && (theInterfaces.hasMoreElements())) {
 			while ((theInterfaces.hasMoreElements())
 					&& (atLeastOneInterface == false)) {
@@ -521,12 +456,12 @@ public class NetworkInterfaceTest extends junit.framework.TestCase {
 						.nextElement();
 				if (theInterface.getInetAddresses().hasMoreElements()) {
 					// Ensure that the current NetworkInterface has at least
-					// one InetAddress bound to it.  
+					// one InetAddress bound to it.
 					Enumeration addrs = theInterface.getInetAddresses();
 					if ((addrs != null) && (addrs.hasMoreElements())) {
 						atLeastOneInterface = true;
 						networkInterface1 = theInterface;
-					}// end if 
+					}// end if
 				}
 			}
 
@@ -536,16 +471,16 @@ public class NetworkInterfaceTest extends junit.framework.TestCase {
 						.nextElement();
 				if (theInterface.getInetAddresses().hasMoreElements()) {
 					// Ensure that the current NetworkInterface has at least
-					// one InetAddress bound to it.  
+					// one InetAddress bound to it.
 					Enumeration addrs = theInterface.getInetAddresses();
 					if ((addrs != null) && (addrs.hasMoreElements())) {
 						atLeastTwoInterfaces = true;
 						networkInterface2 = theInterface;
-					}// end if 
+					}// end if
 				}
 			}
 
-			// Only set sameAsNetworkInterface1 if we succeeded in finding 
+			// Only set sameAsNetworkInterface1 if we succeeded in finding
 			// at least one good NetworkInterface
 			if (atLeastOneInterface) {
 				Enumeration addresses = networkInterface1.getInetAddresses();
@@ -563,9 +498,5 @@ public class NetworkInterfaceTest extends junit.framework.TestCase {
 			}// end if atLeastOneInterface
 		}
         theInterfaces = NetworkInterface.getNetworkInterfaces();
-	}
-
-	protected void tearDown() {
-		System.setSecurityManager(null);
 	}
 }

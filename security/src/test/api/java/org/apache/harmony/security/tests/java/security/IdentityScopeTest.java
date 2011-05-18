@@ -33,13 +33,6 @@ import junit.framework.TestCase;
 
 public class IdentityScopeTest extends TestCase {
 
-    public static class MySecurityManager extends SecurityManager {
-        public Permissions denied = new Permissions();
-        public void checkPermission(Permission permission){
-            if (denied!=null && denied.implies(permission)) throw new SecurityException();
-        }
-    }
-
     IdentityScope is;
 
     /**
@@ -94,47 +87,6 @@ public class IdentityScopeTest extends TestCase {
         assertNotNull(scope);
         assertEquals(name, scope.getClass().getName());
     }
-
-    /**
-     * check that if permission given - set/get works
-     * if permission is denied than SecurityException is thrown
-     *
-     */
-
-    public final void testSetSystemScope() {
-//      default implementation is specified by security property system.scope
-        IdentityScope systemScope = IdentityScope.getSystemScope();
-
-        try {
-            // all permissions are granted - sm is not installed
-            is = new IdentityScopeStub("Aleksei Semenov");
-            IdentityScopeStub.mySetSystemScope(is);
-            assertSame(is, IdentityScope.getSystemScope());
-            // all permissions are granted - sm is installed
-            MySecurityManager sm = new MySecurityManager();
-            System.setSecurityManager(sm);
-            try {
-                is = new IdentityScopeStub("aaa");
-                IdentityScopeStub.mySetSystemScope(is);
-                assertSame(is, IdentityScope.getSystemScope());
-                // permission is denied
-                sm.denied.add(new SecurityPermission("setSystemScope"));
-                IdentityScope is2 = new IdentityScopeStub("bbb");
-                try{
-                    IdentityScopeStub.mySetSystemScope(is2);
-                    fail("SecurityException should be thrown");
-                } catch (SecurityException e){
-                    assertSame(is, IdentityScope.getSystemScope());
-                }
-            } finally {
-                System.setSecurityManager(null);
-                assertNull("Error, security manager is not removed!", System.getSecurityManager());
-            }
-        } finally {
-            IdentityScopeStub.mySetSystemScope(systemScope);
-        }
-    }
-
 
     /**
      * Class under test for Identity getIdentity(Principal)

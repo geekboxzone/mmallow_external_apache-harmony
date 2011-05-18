@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -55,7 +55,7 @@ public class DomainCombinerTest extends junit.framework.TestCase {
 				pc.add(new AllPermission());
 				ProtectionDomain pd;
 				// if run with the system classloader then there will be no
-				// execution domains 
+				// execution domains
 				if (executionDomains.length > 0) {
 					pd = new ProtectionDomain(executionDomains[0]
 							.getCodeSource(), pc);
@@ -81,41 +81,6 @@ public class DomainCombinerTest extends junit.framework.TestCase {
                         super(s);
                     }
                 }
-        
-        SecurityManager sm = new SecurityManager() {
-            public void checkPermission(Permission p) {
-                if( p instanceof TestPermission ) {
-                    super.checkPermission(p);   
-                }
-            }
-        };
-        sm.checkPermission(new SecurityPermission("let it load"));
-        
-        System.setSecurityManager(sm);
-		try {
-			AccessController.doPrivileged(new PrivilegedAction() {
-				public Object run() {
-					// AccessController.getContext();
-					AccessController.checkPermission(new TestPermission(
-							"MyTest"));
 
-					AccessController.doPrivileged(new PrivilegedAction() {
-						public Object run() {
-							AccessController
-									.checkPermission(new TestPermission(
-											"MyTest"));
-							return null;
-						}
-					}, c1);
-					return null;
-				}
-			}, c0);
-			assertTrue("Failed to combine domains for security permission",
-					calledDomainCombiner[0]);
-			assertTrue("Failed to combine domains for security permission",
-					calledDomainCombiner[1]);
-		} finally {
-			System.setSecurityManager(null);
-		}
 	}
 }

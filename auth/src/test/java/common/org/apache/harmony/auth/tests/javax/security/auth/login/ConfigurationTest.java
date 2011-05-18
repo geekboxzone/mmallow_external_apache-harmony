@@ -38,7 +38,6 @@ import javax.security.auth.login.ConfigurationSpi;
 
 import junit.framework.TestCase;
 
-import org.apache.harmony.auth.tests.support.SecurityChecker;
 import org.apache.harmony.auth.tests.support.TestUtils;
 
 import tests.support.Support_Exec;
@@ -49,13 +48,13 @@ import tests.support.resource.Support_Resources;
  */
 public class ConfigurationTest extends TestCase {
 
-    // system property to specify another login configuration file 
+    // system property to specify another login configuration file
     private static final String AUTH_LOGIN_CONFIG = "java.security.auth.login.config";
 
-    // security property to specify default configuration implementation 
+    // security property to specify default configuration implementation
     private static final String LOGIN_CONFIG_PROVIDER = "login.configuration.provider";
 
-    // testing config file 
+    // testing config file
     private static String testConfFile = Support_Resources
             .getAbsoluteResourcePath("auth.conf");
 
@@ -75,9 +74,6 @@ public class ConfigurationTest extends TestCase {
 		}
 	}
 
-    // installed security manager 
-    SecurityManager oldSM;
-
     // default implementation of Configuration class
     Configuration defaultConfig;
 
@@ -87,13 +83,11 @@ public class ConfigurationTest extends TestCase {
     @Override
     protected void setUp() {
 
-        // point to some existing file to be read 
+        // point to some existing file to be read
         oldAuthConfig = System.setProperty(AUTH_LOGIN_CONFIG, "="
                 + testConfFile);
 
         defaultConfig = Configuration.getConfiguration();
-
-        oldSM = System.getSecurityManager();
     }
 
     @Override
@@ -101,49 +95,8 @@ public class ConfigurationTest extends TestCase {
 
         TestUtils.setSystemProperty(AUTH_LOGIN_CONFIG, oldAuthConfig);
 
-        System.setSecurityManager(oldSM);
         Configuration.setConfiguration(defaultConfig);
     }
-
-	/**
-	 * Tests that setConfiguration() is properly secured via SecurityManager.
-	 */
-	public void testSetConfiguration() {
-        SecurityChecker checker = new SecurityChecker(new AuthPermission(
-				"setLoginConfiguration"), true);
-		System.setSecurityManager(checker);
-		Configuration custom = new ConfTestProvider();
-		Configuration.setConfiguration(custom);
-		assertTrue(checker.checkAsserted);
-		assertSame(custom, Configuration.getConfiguration());
-
-		checker.reset();
-		checker.enableAccess = false;
-		try {
-			Configuration.setConfiguration(new ConfTestProvider());
-			fail("No expected SecurityException");
-		} catch (SecurityException ex) {
-		}
-	}
-
-	/**
-	 * Tests that getConfiguration() is properly secured via SecurityManager.
-	 */
-	public void testGetConfiguration() {
-		Configuration.setConfiguration(new ConfTestProvider());
-        SecurityChecker checker = new SecurityChecker(new AuthPermission(
-				"getLoginConfiguration"), true);
-		System.setSecurityManager(checker);
-		Configuration.getConfiguration();
-		assertTrue(checker.checkAsserted);
-		checker.reset();
-		checker.enableAccess = false;
-		try {
-			Configuration.getConfiguration();
-			fail("No expected SecurityException");
-		} catch (SecurityException ex) {
-		}
-	}
 
 	/**
 	 * Tests loading of a default provider, both valid and invalid class
@@ -222,7 +175,7 @@ public class ConfigurationTest extends TestCase {
 
     public static class NoConfigFileToBeRead {
 
-        // the test is based on assumption that security properties 
+        // the test is based on assumption that security properties
         // login.config.url.N are unset and there is no file
         // ${user.home}/.java.login.config
         public static void main(String[] args) {
@@ -238,11 +191,11 @@ public class ConfigurationTest extends TestCase {
             }
         }
     }
-    
+
     /**
-     * Tests loading config files specified with the security properties  
+     * Tests loading config files specified with the security properties
      * login.config.url.N
-     * 
+     *
      * TODO create test for loading a default config file:
      * ${user.home}/.java.login.config
      */
@@ -251,14 +204,14 @@ public class ConfigurationTest extends TestCase {
         // create tmp config file
         File tmpConfFile = File.createTempFile("login", "config");
         tmpConfFile.deleteOnExit();
-        
+
         String newConfFile = "LoginNew {\n org.apache.harmony.auth.module.LoginModule1 optional"
                 + " debug=\"true\" test=false;\n};";
 
         FileOutputStream out = new FileOutputStream(tmpConfFile);
         out.write(newConfFile.getBytes());
         out.close();
-        
+
         // set up security properties
         Properties props = new Properties();
         props.setProperty("login.config.url.1", "file:"
@@ -272,10 +225,10 @@ public class ConfigurationTest extends TestCase {
         String[] arg = new String[] {
                 "-Djava.security.properties=" + javaSecurityFile,
                 SecurityPropertiesToBeRead.class.getName() };
-        
+
         Support_Exec.execJava(arg, null, true);
     }
-    
+
     /**
      * @tests javax.security.auth.login.Configuration#getInstance(java.lang.String, javax.security.auth.login.Configuration.Parameters, java.security.Provider)
      */
@@ -293,7 +246,7 @@ public class ConfigurationTest extends TestCase {
         catch(NullPointerException e){
             //expect to catch NullPointerException here
         }
-        
+
         try{
             Configuration.getInstance("MockType2", mcp, mp);
             fail("Should throw NoSuchAlgorithmException here");
@@ -301,7 +254,7 @@ public class ConfigurationTest extends TestCase {
         catch(NoSuchAlgorithmException e){
             //expect to catch NoSuchAlgorithmException here
         }
-        
+
         try{
             Configuration.getInstance("MockType2", mcp, (Provider)null);
             fail("Should throw IllegalArgumentException here");
@@ -309,12 +262,12 @@ public class ConfigurationTest extends TestCase {
         catch(IllegalArgumentException e){
             //expect to catch NoSuchAlgorithmException here
         }
-        
+
         cf = Configuration.getInstance("MockType", null, mp);
         assertEquals("MockType", cf.getType());
         assertNull(cf.getParameters());
     }
-    
+
     /**
      * @tests javax.security.auth.login.Configuration#getInstance(java.lang.String, javax.security.auth.login.Configuration.Parameters, java.lang.String)
      */
@@ -323,7 +276,7 @@ public class ConfigurationTest extends TestCase {
         MockProvider mp = new MockProvider();
         Security.addProvider(mp);
         Configuration cf = Configuration.getInstance("MockType", mcp, "MockProvider");
-        
+
         assertEquals("Configuration parameters got should be equals to parameters provided",cf.getParameters(),mcp);
         assertEquals("Configuration provider got should be equals to provider provided",cf.getProvider(),mp);
         assertEquals("Configuration type got should be equals to type provided",cf.getType(),"MockType");
@@ -334,7 +287,7 @@ public class ConfigurationTest extends TestCase {
         catch(NullPointerException e){
             //expect to catch NullPointerException here
         }
-        
+
         try{
             Configuration.getInstance("MockType2", mcp, "MockProvider");
             fail("Should throw NoSuchAlgorithmException here");
@@ -342,7 +295,7 @@ public class ConfigurationTest extends TestCase {
         catch(NoSuchAlgorithmException e){
             //expect to catch NoSuchAlgorithmException here
         }
-        
+
         try{
             Configuration.getInstance("MockType2", mcp, (String)null);
             fail("Should throw IllegalArgumentException here");
@@ -350,7 +303,7 @@ public class ConfigurationTest extends TestCase {
         catch(IllegalArgumentException e){
             //expect to catch NoSuchAlgorithmException here
         }
-        
+
         try{
             Configuration.getInstance("MockType2", mcp, "");
             fail("Should throw IllegalArgumentException here");
@@ -358,7 +311,7 @@ public class ConfigurationTest extends TestCase {
         catch(IllegalArgumentException e){
             //expect to catch NoSuchAlgorithmException here
         }
-        
+
         try{
             Configuration.getInstance("MockType2", mcp, "not_exist_provider");
             fail("Should throw NoSuchProviderException here");
@@ -366,10 +319,10 @@ public class ConfigurationTest extends TestCase {
         catch(NoSuchProviderException e){
             //expect to catch NoSuchAlgorithmException here
         }
-        
+
         Security.removeProvider("MockProvider");
     }
-    
+
     /**
      * @tests javax.security.auth.login.Configuration#getInstance(java.lang.String, javax.security.auth.login.Configuration.Parameters)
      */
@@ -378,11 +331,11 @@ public class ConfigurationTest extends TestCase {
         MockProvider mp = new MockProvider();
         Security.addProvider(mp);
         Configuration cf = Configuration.getInstance("MockType", mcp);
-        
+
         assertEquals("Configuration parameters got should be equals to parameters provided",cf.getParameters(),mcp);
         assertEquals("Configuration provider got should be equals to provider provided",cf.getProvider(),mp);
         assertEquals("Configuration type got should be equals to type provided",cf.getType(),"MockType");
-        
+
         try{
             Configuration.getInstance(null, mcp);
             fail("Should throw NullPointerException here");
@@ -390,7 +343,7 @@ public class ConfigurationTest extends TestCase {
         catch(NullPointerException e){
             //expect to catch NullPointerException here
         }
-        
+
         try{
             Configuration.getInstance("MockType2", mcp);
             fail("Should throw NoSuchAlgorithmException here");
@@ -398,12 +351,12 @@ public class ConfigurationTest extends TestCase {
         catch(NoSuchAlgorithmException e){
             //expect to catch NoSuchAlgorithmException here
         }
-        
+
         Security.removeProvider("MockProvider");
-    }  
-    
+    }
+
     /**
-     * @throws NoSuchAlgorithmException 
+     * @throws NoSuchAlgorithmException
      * @tests javax.security.auth.login.Configuration#getProvider()
      */
     public void test_getProvider() throws NoSuchAlgorithmException{
@@ -412,9 +365,9 @@ public class ConfigurationTest extends TestCase {
         Configuration cf = Configuration.getInstance("MockType", mcp, mp);
         assertEquals("Configuration provider got should be equals to provider provided",cf.getProvider(),mp);
     }
-    
+
     /**
-     * @throws NoSuchAlgorithmException 
+     * @throws NoSuchAlgorithmException
      * @tests javax.security.auth.login.Configuration#getProvider()
      */
     public void test_getParameter() throws NoSuchAlgorithmException{
@@ -423,9 +376,9 @@ public class ConfigurationTest extends TestCase {
         Configuration cf = Configuration.getInstance("MockType", mcp, mp);
         assertEquals("Configuration parameters got should be equals to parameters provided",cf.getParameters(),mcp);
     }
-    
+
     /**
-     * @throws NoSuchAlgorithmException 
+     * @throws NoSuchAlgorithmException
      * @tests javax.security.auth.login.Configuration#getProvider()
      */
     public void test_getType() throws NoSuchAlgorithmException{
@@ -434,13 +387,13 @@ public class ConfigurationTest extends TestCase {
         Configuration cf = Configuration.getInstance("MockType", mcp, mp);
         assertEquals("Configuration type got should be equals to type provided",cf.getType(),"MockType");
     }
-    
+
     private static class MockConfigurationParameters implements Configuration.Parameters{
-        
+
     }
-    
+
     public static class MockConfiguration extends ConfigurationSpi {
-        
+
         public MockConfiguration(Configuration.Parameters params) {
 
         }
@@ -451,10 +404,10 @@ public class ConfigurationTest extends TestCase {
             return null;
         }
     }
-    
+
     private static class MockProvider extends Provider{
         /**
-         * 
+         *
          */
         private static final long serialVersionUID = 1L;
 
@@ -463,12 +416,12 @@ public class ConfigurationTest extends TestCase {
             put("Configuration.MockType", MockConfiguration.class.getName());
         }
     }
-    
-    
-    
+
+
+
     public static class SecurityPropertiesToBeRead {
 
-        // the test is based on assumption that security properties 
+        // the test is based on assumption that security properties
         // login.config.url.1 and login.config.url.1 are set
         public static void main(String[] args) {
 

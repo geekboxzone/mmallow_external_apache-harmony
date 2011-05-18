@@ -36,13 +36,6 @@ import junit.framework.TestCase;
 
 public class IdentityTest extends TestCase {
 
-    public static class MySecurityManager extends SecurityManager {
-        public Permissions denied = new Permissions();
-        public void checkPermission(Permission permission){
-            if (denied!=null && denied.implies(permission)) throw new SecurityException();
-        }
-    }
-
     /**
      * Constructor for IdentityTest.
      * @param name
@@ -76,21 +69,6 @@ public class IdentityTest extends TestCase {
 
     }
 
-    /**
-     * verify Identity.toString() throws Exception is permission is denied
-     */
-    public void testToString1() {
-        MySecurityManager sm = new MySecurityManager();
-        sm.denied.add(new SecurityPermission("printIdentity"));
-        System.setSecurityManager(sm);
-        try {
-            new IdentityStub("testToString").toString();
-            fail("SecurityException should be thrown");
-        } catch (SecurityException ok) {
-        } finally {
-            System.setSecurityManager(null);
-        }
-    }
     /**
      * verify Identity.toString()
      */
@@ -164,22 +142,6 @@ public class IdentityTest extends TestCase {
     }
 
     /**
-     * verify addCertificate(Certificate certificate) throws SecurityException is permission is denied
-     */
-    public void testAddCertificate3() throws Exception {
-        MySecurityManager sm = new MySecurityManager();
-        sm.denied.add(new SecurityPermission("addIdentityCertificate"));
-        System.setSecurityManager(sm);
-        try {
-            new IdentityStub("iii").addCertificate(new CertificateStub("ccc", null, null, null));
-            fail("SecurityException should be thrown");
-        } catch (SecurityException ok) {
-        } finally {
-            System.setSecurityManager(null);
-        }
-    }
-
-    /**
      * verify addCertificate(Certificate certificate) throws KeyManagementException if certificate is null
      */
     public void testAddCertificate4() throws Exception {
@@ -216,24 +178,6 @@ public class IdentityTest extends TestCase {
 //
 //        }
 //    }
-    /**
-     * verify removeCertificate(Certificate certificate) throws SecurityException if permission is denied
-     */
-    public void testRemoveCertificate2() throws Exception{
-        MySecurityManager sm = new MySecurityManager();
-        sm.denied.add(new SecurityPermission("removeIdentityCertificate"));
-        Identity i = new IdentityStub("iii");
-        i.addCertificate(new CertificateStub("ccc", null, null, null));
-        System.setSecurityManager(sm);
-        try {
-            i.removeCertificate(i.certificates()[0]);
-            fail("SecurityException should be thrown");
-        } catch (SecurityException ok) {
-        } finally {
-            System.setSecurityManager(null);
-        }
-
-    }
 
     /**
      * verify certificates() returns a copy of all certificates for this identity
@@ -307,24 +251,7 @@ public class IdentityTest extends TestCase {
        assertSame(s, i2.getScope());
 
     }
-    /**
-     *
-     * verify Identity.setPublicKey() throws SecurityException if permission is denied
-     *
-     */
-    public void testSetPublicKey1() throws Exception {
-        MySecurityManager sm = new MySecurityManager();
-        sm.denied.add(new SecurityPermission("setIdentityPublicKey"));
-        System.setSecurityManager(sm);
-        try {
-            new IdentityStub("testSetPublicKey1").setPublicKey(new PublicKeyStub("kkk", "testSetPublicKey1", null));
-            fail("SecurityException should be thrown");
-        } catch (SecurityException ok) {
-        } finally {
-            System.setSecurityManager(null);
-        }
 
-    }
     /**
      *
      * verify Identity.setPublicKey() throws KeyManagementException if key is invalid
@@ -387,25 +314,6 @@ public class IdentityTest extends TestCase {
         PublicKey pk = new PublicKeyStub("kkk", "Identity.testGetPublicKey", null);
         i.setPublicKey(pk);
         assertSame(pk, i.getPublicKey());
-    }
-
-    /**
-     *
-     * verify Identity.setInfo() throws SecurityException if permission is denied
-     *
-     *
-     */
-    public void testSetInfo() throws Exception {
-        MySecurityManager sm = new MySecurityManager();
-        sm.denied.add(new SecurityPermission("setIdentityInfo"));
-        System.setSecurityManager(sm);
-        try {
-            new IdentityStub("testSetInfo").setInfo("some info");
-            fail("SecurityException should be thrown");
-        } catch (SecurityException ok) {
-        } finally {
-            System.setSecurityManager(null);
-        }
     }
 
     public void testGetInfo() {

@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -51,11 +51,11 @@ public class SocketHandlerTest extends TestCase {
 	private static final LogManager LOG_MANAGER = LogManager.getLogManager();
 
     private final static String INVALID_LEVEL = "impossible_level";
-    
+
     private final PrintStream err = System.err;
 
-    private OutputStream errSubstituteStream = null;    
-    
+    private OutputStream errSubstituteStream = null;
+
 	private static String className = SocketHandlerTest.class.getName();
 
 	private SocketHandler h = null;
@@ -68,7 +68,7 @@ public class SocketHandlerTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
         errSubstituteStream = new NullOutputStream();
-        System.setErr(new PrintStream(errSubstituteStream));  
+        System.setErr(new PrintStream(errSubstituteStream));
 	}
 
 	/*
@@ -87,7 +87,7 @@ public class SocketHandlerTest extends TestCase {
         System.setErr(err);
         super.tearDown();
 	}
-    
+
 
     private void initProps() throws Exception {
         props = new Properties();
@@ -218,42 +218,6 @@ public class SocketHandlerTest extends TestCase {
 			h = new SocketHandler("127.0.sdfcdsfsa%%&&^0.1", 6665);
 			fail("Should throw IOException!");
 		} catch (IOException e) {
-		}
-	}
-
-	/*
-	 * Test the constructor with insufficient privilege for connection.
-	 */
-	public void testConstructor_InsufficientPrivilege() throws Exception {
-		SecurityManager oldMan = null;
-		Properties p = new Properties();
-		p.put("java.util.logging.SocketHandler.level", "FINE");
-		p.put("java.util.logging.SocketHandler.filter", className
-				+ "$MockFilter");
-		p.put("java.util.logging.SocketHandler.formatter", className
-				+ "$MockFormatter");
-		p.put("java.util.logging.SocketHandler.encoding", "utf-8");
-		p.put("java.util.logging.SocketHandler.host", "127.0.0.1");
-		p.put("java.util.logging.SocketHandler.port", "6666");
-		LOG_MANAGER.readConfiguration(
-				EnvironmentHelper.PropertiesToInputStream(p));
-
-		oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockNoSocketSecurityManager());
-		try {
-			new SocketHandler();
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-		System.setSecurityManager(new MockNoSocketSecurityManager());
-		try {
-			new SocketHandler("127.0.0.1", 6666);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
 		}
 	}
 
@@ -494,40 +458,6 @@ public class SocketHandlerTest extends TestCase {
 	}
 
 	/*
-	 * Test close() when having insufficient privilege.
-	 */
-	public void testClose_InsufficientPrivilege() throws Exception {
-		Properties p = new Properties();
-		p.put("java.util.logging.SocketHandler.formatter", className
-				+ "$MockFormatter");
-		p.put("java.util.logging.SocketHandler.host", "127.0.0.1");
-		p.put("java.util.logging.SocketHandler.port", "6666");
-		LOG_MANAGER.readConfiguration(
-				EnvironmentHelper.PropertiesToInputStream(p));
-
-		// start the server to be ready to accept log messages
-		ServerThread thread = new ServerThread();
-		thread.start();
-		Thread.sleep(2000);
-
-		h = new SocketHandler();
-		h.setLevel(Level.INFO);
-
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			h.close();
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-			h.close();
-			// ensure the thread exits and the port becomes available again
-			thread.getReadString();
-		}
-	}
-
-	/*
 	 * Test publish(), use no filter, having output stream, normal log record.
 	 */
 	public void testPublish_NoFilter() throws Exception {
@@ -728,7 +658,7 @@ public class SocketHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.util.logging.Formatter#getHead(java.util.logging.Handler)
 		 */
 		public String getHead(Handler h) {
@@ -737,53 +667,11 @@ public class SocketHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.util.logging.Formatter#getTail(java.util.logging.Handler)
 		 */
 		public String getTail(Handler h) {
 			return "MockFormatter_Tail";
-		}
-	}
-
-	/*
-	 * Used to grant all permissions except logging control.
-	 */
-	public static class MockSecurityManager extends SecurityManager {
-
-		public MockSecurityManager() {
-		}
-
-		public void checkPermission(Permission perm) {
-			// grant all permissions except logging control
-			if (perm instanceof LoggingPermission) {
-				throw new SecurityException();
-			}
-		}
-
-		public void checkPermission(Permission perm, Object context) {
-			// grant all permissions except logging control
-			if (perm instanceof LoggingPermission) {
-				throw new SecurityException();
-			}
-		}
-	}
-
-	/*
-	 * Used to grant all permissions except logging control.
-	 */
-	public static class MockNoSocketSecurityManager extends SecurityManager {
-
-		public MockNoSocketSecurityManager() {
-		}
-
-		public void checkPermission(Permission perm) {
-		}
-
-		public void checkPermission(Permission perm, Object context) {
-		}
-
-		public void checkConnect(String host, int port) {
-			throw new SecurityException();
 		}
 	}
 

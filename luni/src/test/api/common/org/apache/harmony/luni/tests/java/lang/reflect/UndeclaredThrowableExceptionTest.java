@@ -20,15 +20,12 @@ import java.lang.reflect.UndeclaredThrowableException;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
-
 public class UndeclaredThrowableExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.lang.reflect.UndeclaredThrowableException#UndeclaredThrowableException(java.lang.Throwable)}
      *
      */
-    @Test
     public void test_UndeclaredThrowableException_LThrowable() {
         UndeclaredThrowableException e = new UndeclaredThrowableException(
                 (Exception) null);
@@ -41,7 +38,6 @@ public class UndeclaredThrowableExceptionTest extends TestCase {
      * @tests {@link java.lang.reflect.UndeclaredThrowableException#UndeclaredThrowableException(java.lang.Throwable, java.lang.String)}
      *
      */
-    @Test
     public void test_UndeclaredThrowableException_LThrowable_LString() {
         UndeclaredThrowableException e = new UndeclaredThrowableException(null,
                 "SomeMsg");
@@ -53,7 +49,6 @@ public class UndeclaredThrowableExceptionTest extends TestCase {
     /**
      * @tests {@link java.lang.reflect.UndeclaredThrowableException#getUndeclaredThrowable()}
      */
-    @Test
     public void test_getUndeclaredThrowable() {
         UndeclaredThrowableException e = new UndeclaredThrowableException(null);
         assertNotNull(e);

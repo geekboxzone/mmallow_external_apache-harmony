@@ -72,7 +72,7 @@ public class LoginContext1Test extends TestCase {
     private static final int SUFFICIENT = 3;
 
     /**
-     * Converts short (local) class names (like TestLoginModule) into the 
+     * Converts short (local) class names (like TestLoginModule) into the
      * global (fully qualified) ones.<br>
      * For example:<br>
      * TestLoginModule => javax.security.auth.login.LoginContextTest$TestLoginModule
@@ -106,17 +106,17 @@ public class LoginContext1Test extends TestCase {
      * A special purpose Configuration.<br>
      * Special functions are:<br>
      * <il>
-     * <li>it keeps track of the configuration names requested via 
+     * <li>it keeps track of the configuration names requested via
      * getAppConfigurationEntry - see {@link #wasTheNameQueried(String)}
-     * <li>can dynamically add modules - see 
+     * <li>can dynamically add modules - see
      * add{Optional|Required|Requisite|Sufficient}
-     * <li>with a presumption that the statically installed Configuration 
+     * <li>with a presumption that the statically installed Configuration
      * is also of type TestConfig, allows to dynamically add modules to that
      * installed Configuration - see addInstalled{*}.
-     * <li>can handle several Configurations with a different names for the 
-     * {@link #getAppConfigurationEntry(String)} - see 
+     * <li>can handle several Configurations with a different names for the
+     * {@link #getAppConfigurationEntry(String)} - see
      * {@link #addConfig(String, Configuration)} (again, with a presumption that
-     * the Configuration.getConfiguration() is instanceof TestConfig )  
+     * the Configuration.getConfiguration() is instanceof TestConfig )
      * </il>
      */
     private static final class TestConfig extends Configuration {
@@ -250,36 +250,36 @@ public class LoginContext1Test extends TestCase {
      * A special-purpose LoginModule.<br>
      * It has the following features:<br>
      * <il>
-     * <li>its behaviour is managed - either on by-instance level (via a flags 
+     * <li>its behaviour is managed - either on by-instance level (via a flags
      * passed to its ctor) ar on a global level - through the static mask
-     * 
-     * <li>the behaviour managed includes: returning a specified value 
+     *
+     * <li>the behaviour managed includes: returning a specified value
      * (true/false) from defined methods/ctor, or throwing an
-     * Error/RuntimeException/LoginException -either specified by user or 
+     * Error/RuntimeException/LoginException -either specified by user or
      * created dynamically - from defined methods
-     * 
+     *
      * <li>it keeps track of instances created
-     * 
-     * <li>each instance keeps track of which method was called 
+     *
+     * <li>each instance keeps track of which method was called
      * </il>
-     * 
-     * The behaviour can be managed either for each particular instance - by 
+     *
+     * The behaviour can be managed either for each particular instance - by
      * passing an appropriate mask into ctor, or can be managed globally - via
      * static field {@link #staticMask}.<br>
      * By default, all the methods return <code>true</code> (success) and do not
      * throw anything.<br>
-     * The constants <b>FAIL_AT_*</b> shows where to fail. Then if 
+     * The constants <b>FAIL_AT_*</b> shows where to fail. Then if
      * {@link staticRE} field is set, then this RuntimeException will be thrown,
-     * otherwise if {@link #staticErr} is set, then this Error will be thrown, 
-     * otherwise, if {@link #staticLE} is set, then this LoginException will be 
-     * thrown, otherwise, finally, a new LoginException will be constructed and 
-     * thrown.<br>    
-     * The constants <b>FALSE_AT_*</b> shows which method must return 
-     * <code>false</code>. 
-     * The <b><code>FAIL_AT_*</code></b> constants have priority before 
+     * otherwise if {@link #staticErr} is set, then this Error will be thrown,
+     * otherwise, if {@link #staticLE} is set, then this LoginException will be
+     * thrown, otherwise, finally, a new LoginException will be constructed and
+     * thrown.<br>
+     * The constants <b>FALSE_AT_*</b> shows which method must return
+     * <code>false</code>.
+     * The <b><code>FAIL_AT_*</code></b> constants have priority before
      * <b><code>FALSE_AT_*</code></b><br>
-     * Note: if an instance executes <code>FAIL_AT_CTOR</code>, then this 
-     * instance do <b>not</b> get tracked. 
+     * Note: if an instance executes <code>FAIL_AT_CTOR</code>, then this
+     * instance do <b>not</b> get tracked.
      */
 
     public static class TestLoginModule implements LoginModule {
@@ -382,12 +382,12 @@ public class LoginContext1Test extends TestCase {
 
         /**
          * Constructs and initializes instance of the TestLoginModule.<br>
-         * If you want the instance to use {@link #staticMask} then pass 
-         * <code>-1</code> as <code>mask</code>. To fail at nowhere, pass 
+         * If you want the instance to use {@link #staticMask} then pass
+         * <code>-1</code> as <code>mask</code>. To fail at nowhere, pass
          * <code>0</code> as <code>mask</code>.<br>
-         * The appropriate <code>re</code>, <code>err</code> and 
+         * The appropriate <code>re</code>, <code>err</code> and
          * <code>le</code> will be used to throw appropriate Throwable (if any).
-         * 
+         *
          * @param mask
          * @param re
          * @param err
@@ -409,9 +409,9 @@ public class LoginContext1Test extends TestCase {
         }
 
         /**
-         * Checks whether the instance variables are set and throw either 
+         * Checks whether the instance variables are set and throw either
          * RuntimeException (checked first) or Error (checked next).<br>
-         * If none of them specified, then the method returns silently. 
+         * If none of them specified, then the method returns silently.
          * @throws RuntimeException
          * @throws Error
          */
@@ -425,12 +425,12 @@ public class LoginContext1Test extends TestCase {
         }
 
         /**
-         * This method calls {@link #check()} first to check for possible 
+         * This method calls {@link #check()} first to check for possible
          * RuntimeException or Error.<br>
-         * Then, it checks whether an instance variable specifying 
-         * LoginException to throw is set. If the variable is set, then this 
+         * Then, it checks whether an instance variable specifying
+         * LoginException to throw is set. If the variable is set, then this
          * LoginException is thrown. Otherwise new LoginException is created
-         * and thrown.  
+         * and thrown.
          *
          * @throws LoginException
          */
@@ -440,14 +440,14 @@ public class LoginContext1Test extends TestCase {
         }
 
         /**
-         * Checks whether the passed <code>msk</code> is set - either at 
-         * instance level or on the global level and returns appropriate 
+         * Checks whether the passed <code>msk</code> is set - either at
+         * instance level or on the global level and returns appropriate
          * value.<br>
-         * If this instance's <code>mask</mask> is not set, then 
-         * {@link #staticMask} is checked. If the <code>staticMask</code> is 
+         * If this instance's <code>mask</mask> is not set, then
+         * {@link #staticMask} is checked. If the <code>staticMask</code> is
          * also not set, then the method returns <code>true</code>. If either
-         * the static mask or the instance mask is set and match the 
-         * <code>msk</code> passed, then the method returns false. 
+         * the static mask or the instance mask is set and match the
+         * <code>msk</code> passed, then the method returns false.
          * @param msk
          * @return
          */
@@ -540,7 +540,7 @@ public class LoginContext1Test extends TestCase {
     }
 
     /**
-     * A special-purpose LoginModule whose initialize() method throws 
+     * A special-purpose LoginModule whose initialize() method throws
      * RuntimeException.
      */
     public static final class TestLoginModule_InitFails extends TestLoginModule {
@@ -563,7 +563,7 @@ public class LoginContext1Test extends TestCase {
     }
 
     /**
-     * A special-purpose LoginModule whose commit() method throws 
+     * A special-purpose LoginModule whose commit() method throws
      * RuntimeException.
      */
     public static final class TestLoginModule_CommitFails extends
@@ -576,7 +576,7 @@ public class LoginContext1Test extends TestCase {
     }
 
     /**
-     * A special-purpose LoginModule whose methods (but ctor) throw 
+     * A special-purpose LoginModule whose methods (but ctor) throw
      * LoginException.
      */
     public static final class TestLoginModule_Fail extends TestLoginModule {
@@ -587,8 +587,8 @@ public class LoginContext1Test extends TestCase {
     }
 
     /**
-     * A special-purpose LoginModule whose methods (where applicable) return 
-     * <code>false</code>. 
+     * A special-purpose LoginModule whose methods (where applicable) return
+     * <code>false</code>.
      */
     public static final class TestLoginModule_Ignore extends TestLoginModule {
         public TestLoginModule_Ignore() {
@@ -598,7 +598,7 @@ public class LoginContext1Test extends TestCase {
     }
 
     /**
-     * A special-purpose CallbackHandler which keeps track of instances 
+     * A special-purpose CallbackHandler which keeps track of instances
      * created.<br>
      */
     public static class TestCallbackHandler implements CallbackHandler {
@@ -640,7 +640,7 @@ public class LoginContext1Test extends TestCase {
         Configuration.setConfiguration(new TestConfig());
         clear();
     }
-    
+
     private void clear() {
         TestConfig.clear();
         TestLoginModule.clear();
@@ -664,7 +664,7 @@ public class LoginContext1Test extends TestCase {
         } catch (LoginException _) {
             // gut
         }
-        // Invalid names (which are not presented in Config) must not 
+        // Invalid names (which are not presented in Config) must not
         // be accepted - of no 'other' configuration exists
         String name = "some strange and non existing name";
         try {
@@ -684,13 +684,13 @@ public class LoginContext1Test extends TestCase {
         name = "this strange and non existing name will be treated as 'other'";
         new LoginContext(name);
 
-        //1st, static installed Config must be queried 
+        //1st, static installed Config must be queried
         assertTrue(TestConfig.get().wasTheNameQueried(name));
         //2d, the another config must be queried for other
         assertTrue(TestConfig.get().wasTheNameQueried("other"));
 
-        // Valid names which exist but does not have any entries must 
-        // also be accepted. Empty set will be considered as a problem 
+        // Valid names which exist but does not have any entries must
+        // also be accepted. Empty set will be considered as a problem
         // much later - at login() phase
         new LoginContext(CONFIG_NAME);
         //
@@ -707,7 +707,7 @@ public class LoginContext1Test extends TestCase {
         // This also shows that the cbHandler is instantiated at the ctor
         new LoginContext(CONFIG_NAME);
         assertEquals(1, TestCallbackHandler.size());
-        // ugh... cant set 'null' here... 
+        // ugh... cant set 'null' here...
         Security.setProperty(DEFAULT_CBHANDLER_PROPERTY, "");
         // additional cleanup to make it PerfTests compatible
         clear();
@@ -717,7 +717,7 @@ public class LoginContext1Test extends TestCase {
      * Tests LoginContext(String, CallbackHandler)
      */
     public void testLoginContextStringCallbackHandler() {
-        // Must not accept nulls as CallbackHandler, name 
+        // Must not accept nulls as CallbackHandler, name
         // The exception to be thrown is LoginException and not NPE
         try {
             new LoginContext(CONFIG_NAME, (CallbackHandler) null);
@@ -764,7 +764,7 @@ public class LoginContext1Test extends TestCase {
     public void testLoginContextStringSubjectCallbackHandler() {
         // The exceptions to be thrown are LoginExceptions and not NPEs
 
-        // Must not accept null as Subject, CallbackHandler, name 
+        // Must not accept null as Subject, CallbackHandler, name
         try {
             new LoginContext(CONFIG_NAME, (Subject) null,
                     new TestCallbackHandler());
@@ -836,7 +836,7 @@ public class LoginContext1Test extends TestCase {
         } finally {
             Thread.currentThread().setContextClassLoader(saveCCL);
         }
-        // If failed, then it seems, that wrong (not context) class loader was 
+        // If failed, then it seems, that wrong (not context) class loader was
         // used - the class was not requested to load
         assertTrue(requests.contains(klassName));
         // additional cleanup to make it PerfTests compatible
@@ -859,7 +859,7 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * If no Subject provided, then new Subject created and this subject is 
+     * If no Subject provided, then new Subject created and this subject is
      * used for all subsequent operations.
      */
     public void testLogin_01() throws Exception {
@@ -879,7 +879,7 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * init() must be called only once. 
+     * init() must be called only once.
      */
     public void testLogin_02_0() throws Exception {
         TestConfig.addInstalledSufficient("TestLoginModule_Success");
@@ -906,7 +906,7 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * init() must be called only once - even if it fails first time. 
+     * init() must be called only once - even if it fails first time.
      */
     public void testLogin_02_1() throws Exception {
         TestConfig.addInstalledSufficient("TestLoginModule");
@@ -950,19 +950,19 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * If any module not found, then overall attempt must fail. 
-     * If a module fails during it's ctor/init/commit - it must be processed 
+     * If any module not found, then overall attempt must fail.
+     * If a module fails during it's ctor/init/commit - it must be processed
      * the same way as if it were failing during it's login().<br>
      * Various combinations are checked.
      */
     public void testLogin_03() throws Exception {
         // A little bit sophisticated structure
-        // if variant[i][0] == -1 then: 
+        // if variant[i][0] == -1 then:
         // 	- it starts a new variant
         //	- variants[i][1] contains description for the variant started
         //	- variants[i][2] contains expected result (true - success, false-failure) for the variant
         Object[][] variants = new Object[][] {
-                //  
+                //
                 { new Integer(-1), "[if no class found - overall failure]",
                         Boolean.FALSE },
                 { new Integer(OPTIONAL), "no such class" },
@@ -1089,8 +1089,8 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * If module fails during it's ctor, then it must be 
-     * created/initialized/logged next time. 
+     * If module fails during it's ctor, then it must be
+     * created/initialized/logged next time.
      */
     public void testLogin_04() throws Exception {
         TestConfig.addInstalledRequired("TestLoginModule");
@@ -1191,7 +1191,7 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * RuntimeException-s (if any) must be handled and then LoginException must 
+     * RuntimeException-s (if any) must be handled and then LoginException must
      * be thrown
      */
     public void testLogin_08_0() throws Exception {
@@ -1212,7 +1212,7 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * RuntimeException-s (if any) must be handled and then LoginException must 
+     * RuntimeException-s (if any) must be handled and then LoginException must
      * be thrown
      */
     public void testLogin_08_1() throws Exception {
@@ -1347,7 +1347,7 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * A failure during commit() must be treated exactly as a failure during 
+     * A failure during commit() must be treated exactly as a failure during
      * login()/whatever
      */
     public void testLogin_0A_0() throws Exception {
@@ -1471,7 +1471,7 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * If any a module returns false from commit() - then nothing happens. 
+     * If any a module returns false from commit() - then nothing happens.
      */
     public void testLogin_0D() throws Exception {
         TestConfig.addInstalledRequired("TestLoginModule_Success");
@@ -1496,9 +1496,9 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * If any REQUIRED module returns false from login() - this does 
+     * If any REQUIRED module returns false from login() - this does
      * not break the overall attempt.<br>
-     * It sounds odd, but its commit() method will also be called. 
+     * It sounds odd, but its commit() method will also be called.
      */
     public void testLogin_0E_0() throws Exception {
         TestConfig.addInstalledRequired("TestLoginModule_Success");
@@ -1525,9 +1525,9 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * If any REQUISITE module returns false from login() - this does 
+     * If any REQUISITE module returns false from login() - this does
      * not break the overall attempt.<br>
-     * It sounds odd, but its commit() method will be called anyway. 
+     * It sounds odd, but its commit() method will be called anyway.
      */
     public void testLogin_0E_1() throws Exception {
         TestConfig.addInstalledRequisite("TestLoginModule_Success");
@@ -1554,8 +1554,8 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * If any REQUIRED module fails during its login() -  
-     * then its abort() gets called anyway. 
+     * If any REQUIRED module fails during its login() -
+     * then its abort() gets called anyway.
      */
     public void testLogin_0F() throws Exception {
         TestConfig.addInstalledRequired("TestLoginModule_Success");
@@ -1587,7 +1587,7 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.login()<br>
-     * RI investigation: check if an exception thrown from abort() method gets 
+     * RI investigation: check if an exception thrown from abort() method gets
      * rethrown, or a new LoginException is created.
      */
     public void testLogin_10() throws Exception {
@@ -1602,7 +1602,7 @@ public class LoginContext1Test extends TestCase {
         try {
             lc.login();
         } catch (LoginException ex) {
-            // RI does not rethrow this exception, but I do. 
+            // RI does not rethrow this exception, but I do.
             // Anyway, the login() failed - that is expected result
             // assertSame( ex, TestLoginModule.staticLE);
         }
@@ -1619,7 +1619,7 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.logout()<br>
-     * Calling logout() simply invokes logout() to be called. 
+     * Calling logout() simply invokes logout() to be called.
      */
     public void testLogout_00_0() throws Exception {
         // No modules configured - must fail in both login() and logout()
@@ -1643,8 +1643,8 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.logout()<br>
-     * Calling logout() on a context that had login() called, but is still not 
-     * logged in must be successful - as it just invokes logout() for modules 
+     * Calling logout() on a context that had login() called, but is still not
+     * logged in must be successful - as it just invokes logout() for modules
      */
     public void testLogout_00_1() throws Exception {
         TestConfig.addInstalledRequired("TestLoginModule");
@@ -1768,7 +1768,7 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests LoginContext.getSubject()<br>
-     * Must return null if no subject was provided by user an no login attempt 
+     * Must return null if no subject was provided by user an no login attempt
      * was made.
      */
     public void testGetSubject_00() throws Exception {
@@ -1820,7 +1820,7 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests context usage.
-     * Case 0: If no Config provided by user, then LoginContext uses 
+     * Case 0: If no Config provided by user, then LoginContext uses
      * its own context to invoke LoginModule's methods.
      */
     public void testContextUsage_0() throws Exception {
@@ -1841,8 +1841,8 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Tests context usage.
-     * Case 1: If Config was provided by user, then LoginContext 
-     * uses stored user's context and performs all call to LoginModule's 
+     * Case 1: If Config was provided by user, then LoginContext
+     * uses stored user's context and performs all call to LoginModule's
      * methods in that context.
      */
     public void testContextUsage_1() throws Exception {
@@ -1869,12 +1869,12 @@ public class LoginContext1Test extends TestCase {
      * A special-purpose CallbackHandler<br>
      * with the following abilities:<br>
      * <il>
-     * <li>it shows whether its class was initialized or not (via the external 
+     * <li>it shows whether its class was initialized or not (via the external
      * variable <code>boolean TestCallbackHandler_Contexted_staticDone</code>)
-     * 
-     * <li>keeps track of the active security contexts for each operation - 
+     *
+     * <li>keeps track of the active security contexts for each operation -
      * static{}, ctor(), handle()
-     * </il> 
+     * </il>
      */
     public static class TestCallbackHandler_Contexted extends
             TestCallbackHandler {
@@ -1911,14 +1911,14 @@ public class LoginContext1Test extends TestCase {
      * A special-purpose LoginModule<br>
      * with the following features:<br>
      * <il>
-     * <li>it shows whether its class was initialized or not (via the external 
+     * <li>it shows whether its class was initialized or not (via the external
      * variable <code>boolean TestLoginModule_Contexted_staticDone</code>)
-     * 
-     * <li>keeps track of the active security contexts for each operation - 
+     *
+     * <li>keeps track of the active security contexts for each operation -
      * static{}, ctor(), initialize/login/commit/logout/abort
-     * 
+     *
      * <li>it also invokes callback handler (if any) during its login() method
-     * </il> 
+     * </il>
      */
     public static class TestLoginModule_Contexted extends TestLoginModule {
         public static AccessControlContext accStatic;
@@ -1928,7 +1928,7 @@ public class LoginContext1Test extends TestCase {
         }
 
         /**
-         * Provides an easy access to instances of 
+         * Provides an easy access to instances of
          * TestLoginModule_Contexted_staticDone.
          */
         public static TestLoginModule_Contexted item(int i) {
@@ -1936,7 +1936,7 @@ public class LoginContext1Test extends TestCase {
         }
 
         /**
-         * Provides an easy access to the very first instance of 
+         * Provides an easy access to the very first instance of
          * TestLoginModule_Contexted_staticDone.
          */
         public static TestLoginModule_Contexted item() {
@@ -2001,7 +2001,7 @@ public class LoginContext1Test extends TestCase {
         }
     }
     /**
-     * The real implementation of TestContextUsage_0 and TestContextUsage_1 
+     * The real implementation of TestContextUsage_0 and TestContextUsage_1
      * methods.
      * @param useInstalledConfig
      * @param dc - which domain combiner to test for
@@ -2072,15 +2072,15 @@ public class LoginContext1Test extends TestCase {
         assertSame(TestLoginModule_Contexted.item().accAbort
                 .getDomainCombiner(), match);
 
-        // handle() must be called from the wrapper, so it must be 'dc' and not 
-        // 'match' here  
+        // handle() must be called from the wrapper, so it must be 'dc' and not
+        // 'match' here
         assertSame(TestCallbackHandler_Contexted.item().accHandle
                 .getDomainCombiner(), dc);
 
-        // ctor() for the Handler is called somewhere in 
+        // ctor() for the Handler is called somewhere in
         // LoginContext.LoginContext().
-        // It seems it's always get called from inside the powerful context 
-        // of LoginContext, so it's always 'null' here - they seem to use 
+        // It seems it's always get called from inside the powerful context
+        // of LoginContext, so it's always 'null' here - they seem to use
         // doPriv(action) there
         assertSame(TestCallbackHandler_Contexted.item().accCtor
                 .getDomainCombiner(), null);
@@ -2099,121 +2099,4 @@ public class LoginContext1Test extends TestCase {
                     TestLoginModule_Contexted.item().cbHandler);
         }
     }
-
-    /** 
-     * Just a small helper function which takes a list of AuthPermission
-     * instances and looks up through it for the given <code>name</code>. 
-     * @return <code>true</code> is the name is in the list, 
-     * <code>false</code> otherwise. 
-     */
-    private static boolean lookupAuthPermission(ArrayList<Permission> al, String name) {
-        for (int i = 0; i < al.size(); i++) {
-            Permission p = al.get(i);
-            if (p instanceof AuthPermission && name.equals(p.getName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Tests for the proper usage of SecurityManager.
-     */
-    public void testSecurityManagerUsage() throws Exception {
-        // 1. create a special-purpose SecurityManager which keeps track 
-        // of Permissions checked
-        final ArrayList<Permission> requests = new ArrayList<Permission>();
-        // a list of permissions allowed - just to make sure I'll be able to 
-        // set security manager back.
-        final ArrayList<BasicPermission> allowedPerms = new ArrayList<BasicPermission>();
-        //
-        allowedPerms.add(new RuntimePermission("setIO"));
-        allowedPerms.add(new RuntimePermission("setSecurityManager"));
-        //
-        SecurityManager sm = new SecurityManager() {
-            @Override
-            public void checkPermission(Permission p) {
-                requests.add(p);
-                for (int i = 0; i < allowedPerms.size(); i++) {
-                    Permission good = allowedPerms.get(i);
-                    if (good.equals(p)) {
-                        return;
-                    }
-                }
-                super.checkPermission(p);
-            }
-        };
-        // 2. Prepare a low-priority ProtectionDomain, and then run all the 
-        // tests in this PD. This need to be done, as the test's class normally 
-        // reside in the system pd, so all sm.checkXXX() will succeed which is
-        // not good for the goals of the test.
-        CodeSource cs = new CodeSource(new URL(
-                "http://127.0.0.1/no/such/path/i/do/believe."),
-                (java.security.cert.Certificate[]) null);
-        // create a protection domain with an empty set of permissions
-        ProtectionDomain[] pds = new ProtectionDomain[] { new ProtectionDomain(
-                cs, new Permissions()) };
-        AccessControlContext acc = new AccessControlContext(pds);
-
-        try {
-            System.setSecurityManager(sm);
-
-            AccessController.doPrivileged(new PrivilegedAction<Void>() {
-                public Void run() {
-                    implTestSecurityManagerUsage(requests, allowedPerms);
-                    return null;
-                }
-            }, acc);
-        } finally {
-            System.setSecurityManager(null);
-        }
-        // additional cleanup to make it PerfTests compatible
-        clear();
-    }
-
-    /**
-     * The real machinery of the testSecurityManagerUsage.<br>
-     * Tests that the appropriate AuthPermission(createLoginContext.${name})
-     * and AuthPermission(createLoginContext.other) get checked in the 
-     * proper order.
-     * @param requests
-     * @param allowedPerms
-     */
-    private void implTestSecurityManagerUsage(ArrayList<Permission> requests,
-            ArrayList<BasicPermission> allowedPerms) {
-        String configPermName = "createLoginContext." + CONFIG_NAME;
-        String otherPermName = "createLoginContext.other";
-        String dummyName = "no such name";
-        String dummyPermName = "createLoginContext." + dummyName;
-
-        try {
-            new LoginContext(CONFIG_NAME);
-            fail("must not pass here");
-        } catch (LoginException _) {
-            fail("no, no, no. Throw SecurityException instead");
-        } catch (SecurityException se) {
-            // gut
-        }
-        // the real CONFIG must be requested
-        assertTrue(lookupAuthPermission(requests, configPermName));
-        // 'other' must not
-        assertFalse(lookupAuthPermission(requests, otherPermName));
-        //
-        // now check whether 'other' was also checked
-        //
-        requests.clear();
-        allowedPerms.add(new AuthPermission(dummyPermName));
-        try {
-            new LoginContext(dummyName);
-            fail("must not pass here - 1.");
-        } catch (LoginException _) {
-            fail("no, no, no. Throw SecurityException instead");
-        } catch (SecurityException se) {
-            // gut
-        }
-        // both must be checked
-        assertTrue(lookupAuthPermission(requests, dummyPermName));
-        assertTrue(lookupAuthPermission(requests, otherPermName));
-    }
-
 }

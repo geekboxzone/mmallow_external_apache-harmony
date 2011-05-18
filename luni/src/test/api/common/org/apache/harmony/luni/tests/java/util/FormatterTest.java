@@ -4,9 +4,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -72,18 +72,6 @@ public class FormatterTest extends TestCase {
         public Appendable append(CharSequence arg0, int arg1, int arg2)
                 throws IOException {
             return null;
-        }
-    }
-
-    class MockSecurityManager extends SecurityManager {
-        public void checkPermission(Permission p) {
-            if (p.getActions().equals("write") && p instanceof FilePermission) {
-                throw new SecurityException("Always throw security exception");
-            }
-        }
-
-        public void checkPermission(Permission p, Object ctx) {
-            checkPermission(p);
         }
     }
 
@@ -161,7 +149,7 @@ public class FormatterTest extends TestCase {
     private File readOnly;
 
     private File secret;
-    
+
     private TimeZone defaultTimeZone;
 
     /**
@@ -258,17 +246,6 @@ public class FormatterTest extends TestCase {
                 // expected
             }
         }
-
-        SecurityManager oldsm = System.getSecurityManager();
-        System.setSecurityManager(new MockSecurityManager());
-        try {
-            f = new Formatter(secret.getPath());
-            fail("should throw SecurityException");
-        } catch (SecurityException se) {
-            // expected
-        } finally {
-            System.setSecurityManager(oldsm);
-        }
     }
 
     /**
@@ -313,17 +290,6 @@ public class FormatterTest extends TestCase {
             } catch (FileNotFoundException e) {
                 // expected
             }
-        }
-
-        SecurityManager oldsm = System.getSecurityManager();
-        System.setSecurityManager(new MockSecurityManager());
-        try {
-            f = new Formatter(secret.getPath(), "UTF-16BE");
-            fail("should throw SecurityException");
-        } catch (SecurityException se) {
-            // expected
-        } finally {
-            System.setSecurityManager(oldsm);
         }
     }
 
@@ -379,18 +345,6 @@ public class FormatterTest extends TestCase {
                 // expected
             }
         }
-        
-        SecurityManager oldsm = System.getSecurityManager();
-        System.setSecurityManager(new MockSecurityManager());
-        try {
-            f = new Formatter(secret.getPath(),
-                    Charset.defaultCharset().name(), Locale.SIMPLIFIED_CHINESE);
-            fail("should throw SecurityException");
-        } catch (SecurityException se) {
-            // expected
-        } finally {
-            System.setSecurityManager(oldsm);
-        }
     }
 
     /**
@@ -420,17 +374,6 @@ public class FormatterTest extends TestCase {
             } catch (FileNotFoundException e) {
                 // expected
             }
-        }
-        
-        SecurityManager oldsm = System.getSecurityManager();
-        System.setSecurityManager(new MockSecurityManager());
-        try {
-            f = new Formatter(secret);
-            fail("should throw SecurityException");
-        } catch (SecurityException se) {
-            // expected
-        } finally {
-            System.setSecurityManager(oldsm);
         }
     }
 
@@ -462,17 +405,6 @@ public class FormatterTest extends TestCase {
             } catch (FileNotFoundException e) {
                 // expected
             }
-        }
-
-        SecurityManager oldsm = System.getSecurityManager();
-        System.setSecurityManager(new MockSecurityManager());
-        try {
-            f = new Formatter(secret, Charset.defaultCharset().name());
-            fail("should throw SecurityException");
-        } catch (SecurityException se) {
-            // expected
-        } finally {
-            System.setSecurityManager(oldsm);
         }
 
         try {
@@ -551,18 +483,6 @@ public class FormatterTest extends TestCase {
             } catch (FileNotFoundException e) {
                 // expected
             }
-        }
-
-        SecurityManager oldsm = System.getSecurityManager();
-        System.setSecurityManager(new MockSecurityManager());
-        try {
-            f = new Formatter(secret.getPath(),
-                    Charset.defaultCharset().name(), Locale.SIMPLIFIED_CHINESE);
-            fail("should throw SecurityException");
-        } catch (SecurityException se) {
-            // expected
-        } finally {
-            System.setSecurityManager(oldsm);
         }
     }
 
@@ -835,14 +755,14 @@ public class FormatterTest extends TestCase {
         } catch (UnknownFormatConversionException e) {
             // expected
         }
-        
+
         try {
             Formatter f = new Formatter(Locale.US);
             f.format("%", "string");
             fail("should throw UnknownFormatConversionException");
         } catch (UnknownFormatConversionException e) {
             // expected
-        }       
+        }
 
         formatter = new Formatter(Locale.FRANCE);
         formatter.format("%1$s%2$s%3$s%4$s%5$s%6$s%7$s%8$s%<s%s%s%<s", "1",
@@ -1084,7 +1004,7 @@ public class FormatterTest extends TestCase {
         } catch (IllegalFormatPrecisionException e) {
             // expected
         }
-        
+
         System.setProperty("line.separator", oldSeparator);
     }
 
@@ -1129,7 +1049,7 @@ public class FormatterTest extends TestCase {
         assertFormatFlagsConversionMismatchException(f, "%0%");
         assertFormatFlagsConversionMismatchException(f, "%,%");
         assertFormatFlagsConversionMismatchException(f, "%(%");
-        
+
 
         f = new Formatter(Locale.KOREAN);
         f.format("%4%", 1);
@@ -1200,10 +1120,10 @@ public class FormatterTest extends TestCase {
      *        conversion b/B
      */
     public void test_format_LString$LObject_GeneralConversionB() {
-        final Object[][] triple = { 
+        final Object[][] triple = {
                 { Boolean.FALSE,                "%3.2b",  " fa", },
                 { Boolean.FALSE,                "%-4.6b", "false", },
-                { Boolean.FALSE,                "%.2b",   "fa", }, 
+                { Boolean.FALSE,                "%.2b",   "fa", },
                 { Boolean.TRUE,                 "%3.2b",  " tr", },
                 { Boolean.TRUE,                 "%-4.6b", "true", },
                 { Boolean.TRUE,                 "%.2b",   "tr", },
@@ -1242,7 +1162,7 @@ public class FormatterTest extends TestCase {
 
         final int input   = 0;
         final int pattern = 1;
-        final int output  = 2; 
+        final int output  = 2;
         Formatter f = null;
         for (int i = 0; i < triple.length; i++) {
             f = new Formatter(Locale.FRANCE);
@@ -1257,17 +1177,17 @@ public class FormatterTest extends TestCase {
                     .toUpperCase(Locale.US), f.toString());
         }
     }
-    
+
     /**
      * @tests java.util.Formatter#format(String, Object...) for general
      *        conversion type 's' and 'S'
      */
     public void test_format_LString$LObject_GeneralConversionS() {
 
-        final Object[][] triple = { 
+        final Object[][] triple = {
                 { Boolean.FALSE,                "%2.3s",  "fal", },
                 { Boolean.FALSE,                "%-6.4s", "fals  ", },
-                { Boolean.FALSE,                "%.5s",   "false", }, 
+                { Boolean.FALSE,                "%.5s",   "false", },
                 { Boolean.TRUE,                 "%2.3s",  "tru", },
                 { Boolean.TRUE,                 "%-6.4s", "true  ", },
                 { Boolean.TRUE,                 "%.5s",   "true", },
@@ -1321,42 +1241,42 @@ public class FormatterTest extends TestCase {
                     .toUpperCase(Locale.US), f.toString());
         }
     }
-    
+
     /**
      * @tests java.util.Formatter#format(String, Object...) for general
      *        conversion type 'h' and 'H'
      */
     public void test_format_LString$LObject_GeneralConversionH() {
 
-        final Object[] input = { 
-                 Boolean.FALSE,                 
-                 Boolean.TRUE,                  
-                 new Character('c'),            
-                 new Byte((byte) 0x01),         
-                 new Short((short) 0x0001),     
-                 new Integer(1),                
-                 new Float(1.1f),               
-                 new Double(1.1d),              
-                 "",                            
-                 "string content",              
-                 new MockFormattable(),         
-                 (Object) null,                 
+        final Object[] input = {
+                 Boolean.FALSE,
+                 Boolean.TRUE,
+                 new Character('c'),
+                 new Byte((byte) 0x01),
+                 new Short((short) 0x0001),
+                 new Integer(1),
+                 new Float(1.1f),
+                 new Double(1.1d),
+                 "",
+                 "string content",
+                 new MockFormattable(),
+                 (Object) null,
                 };
 
         Formatter f = null;
         for (int i = 0; i < input.length - 1; i++) {
             f = new Formatter(Locale.FRANCE);
             f.format("%h", input[i]);
-            assertEquals("triple[" + i + "]:" + input[i], 
+            assertEquals("triple[" + i + "]:" + input[i],
                     Integer.toHexString(input[i].hashCode()), f.toString());
 
             f = new Formatter(Locale.GERMAN);
             f.format("%H", input[i]);
-            assertEquals("triple[" + i + "]:" + input[i], 
+            assertEquals("triple[" + i + "]:" + input[i],
                     Integer.toHexString(input[i].hashCode()).toUpperCase(Locale.US), f.toString());
         }
     }
-    
+
     /**
      * @tests java.util.Formatter#format(String, Object...) for general
      *        conversion other cases
@@ -1371,19 +1291,19 @@ public class FormatterTest extends TestCase {
         f.format("%S", "\u0069");
         assertEquals("\u0049", f.toString());
 
-        final Object[] input = { 
-                Boolean.FALSE,                 
-                Boolean.TRUE,                  
-                new Character('c'),            
-                new Byte((byte) 0x01),         
-                new Short((short) 0x0001),     
-                new Integer(1),                
-                new Float(1.1f),               
-                new Double(1.1d),              
-                "",                            
-                "string content",              
-                new MockFormattable(),         
-                (Object) null,                 
+        final Object[] input = {
+                Boolean.FALSE,
+                Boolean.TRUE,
+                new Character('c'),
+                new Byte((byte) 0x01),
+                new Short((short) 0x0001),
+                new Integer(1),
+                new Float(1.1f),
+                new Double(1.1d),
+                "",
+                "string content",
+                new MockFormattable(),
+                (Object) null,
                };
         f = new Formatter(Locale.GERMAN);
         for (int i = 0; i < input.length; i++) {
@@ -1440,7 +1360,7 @@ public class FormatterTest extends TestCase {
                 // expected
             }
         }
-        
+
         // Regression test
         f = new Formatter();
         try {
@@ -1449,7 +1369,7 @@ public class FormatterTest extends TestCase {
         } catch (IllegalFormatCodePointException e) {
             // expected
         }
-        
+
         f = new Formatter();
         try {
             f.format("%c", (short)-0x0001);
@@ -1457,7 +1377,7 @@ public class FormatterTest extends TestCase {
         } catch (IllegalFormatCodePointException e) {
             // expected
         }
-        
+
         f = new Formatter();
         try {
             f.format("%c", -0x0001);
@@ -1543,91 +1463,91 @@ public class FormatterTest extends TestCase {
         // RI do not support converter 'C'
         assertEquals("\u1111ed", f.toString());
     }
-    
-    
-    
+
+
+
     /**
      * @tests java.util.Formatter#format(String, Object...) for legal
      *        Byte/Short/Integer/Long conversion type 'd'
      */
     public void test_formatLjava_lang_String$Ljava_lang_Object_ByteShortIntegerLongConversionD() {
-        final Object[][] triple = { 
-                { 0,                "%d",                  "0" }, 
-                { 0,                "%10d",       "         0" }, 
-                { 0,                "%-1d",                "0" }, 
-                { 0,                "%+d",                "+0" }, 
-                { 0,                "% d",                " 0" }, 
-                { 0,                "%,d",                 "0" }, 
-                { 0,                "%(d",                 "0" }, 
-                { 0,                "%08d",         "00000000" }, 
-                { 0,                "%-+,(11d",  "+0         " }, 
-                { 0,                "%0 ,(11d",  " 0000000000" }, 
+        final Object[][] triple = {
+                { 0,                "%d",                  "0" },
+                { 0,                "%10d",       "         0" },
+                { 0,                "%-1d",                "0" },
+                { 0,                "%+d",                "+0" },
+                { 0,                "% d",                " 0" },
+                { 0,                "%,d",                 "0" },
+                { 0,                "%(d",                 "0" },
+                { 0,                "%08d",         "00000000" },
+                { 0,                "%-+,(11d",  "+0         " },
+                { 0,                "%0 ,(11d",  " 0000000000" },
 
-                { (byte) 0xff,      "%d",                 "-1" }, 
-                { (byte) 0xff,      "%10d",       "        -1" }, 
-                { (byte) 0xff,      "%-1d",               "-1" }, 
-                { (byte) 0xff,      "%+d",                "-1" }, 
-                { (byte) 0xff,      "% d",                "-1" }, 
-                { (byte) 0xff,      "%,d",                "-1" }, 
-                { (byte) 0xff,      "%(d",               "(1)" }, 
-                { (byte) 0xff,      "%08d",         "-0000001" }, 
-                { (byte) 0xff,      "%-+,(11d",  "(1)        " }, 
-                { (byte) 0xff,      "%0 ,(11d",  "(000000001)" }, 
-                
-                { (short) 0xf123,   "%d",              "-3805" }, 
-                { (short) 0xf123,   "%10d",       "     -3805" }, 
-                { (short) 0xf123,   "%-1d",            "-3805" }, 
-                { (short) 0xf123,   "%+d",             "-3805" }, 
-                { (short) 0xf123,   "% d",             "-3805" }, 
-                { (short) 0xf123,   "%,d",            "-3.805" }, 
-                { (short) 0xf123,   "%(d",            "(3805)" }, 
-                { (short) 0xf123,   "%08d",         "-0003805" }, 
-                { (short) 0xf123,   "%-+,(11d",  "(3.805)    " }, 
-                { (short) 0xf123,   "%0 ,(11d",  "(00003.805)" }, 
-                
-                {  0x123456,        "%d",            "1193046" }, 
-                {  0x123456,        "%10d",       "   1193046" }, 
-                {  0x123456,        "%-1d",          "1193046" }, 
-                {  0x123456,        "%+d",          "+1193046" }, 
-                {  0x123456,        "% d",          " 1193046" }, 
-                {  0x123456,        "%,d",         "1.193.046" }, 
-                {  0x123456,        "%(d",           "1193046" }, 
-                {  0x123456,        "%08d",         "01193046" }, 
-                {  0x123456,        "%-+,(11d",  "+1.193.046 " }, 
-                {  0x123456,        "%0 ,(11d",  " 01.193.046" }, 
-                
-                { -3,               "%d",                 "-3" }, 
-                { -3,               "%10d",       "        -3" }, 
-                { -3,               "%-1d",               "-3" }, 
-                { -3,               "%+d",                "-3" }, 
-                { -3,               "% d",                "-3" }, 
-                { -3,               "%,d",                "-3" }, 
-                { -3,               "%(d",               "(3)" }, 
-                { -3,               "%08d",         "-0000003" }, 
-                { -3,               "%-+,(11d",  "(3)        " }, 
+                { (byte) 0xff,      "%d",                 "-1" },
+                { (byte) 0xff,      "%10d",       "        -1" },
+                { (byte) 0xff,      "%-1d",               "-1" },
+                { (byte) 0xff,      "%+d",                "-1" },
+                { (byte) 0xff,      "% d",                "-1" },
+                { (byte) 0xff,      "%,d",                "-1" },
+                { (byte) 0xff,      "%(d",               "(1)" },
+                { (byte) 0xff,      "%08d",         "-0000001" },
+                { (byte) 0xff,      "%-+,(11d",  "(1)        " },
+                { (byte) 0xff,      "%0 ,(11d",  "(000000001)" },
+
+                { (short) 0xf123,   "%d",              "-3805" },
+                { (short) 0xf123,   "%10d",       "     -3805" },
+                { (short) 0xf123,   "%-1d",            "-3805" },
+                { (short) 0xf123,   "%+d",             "-3805" },
+                { (short) 0xf123,   "% d",             "-3805" },
+                { (short) 0xf123,   "%,d",            "-3.805" },
+                { (short) 0xf123,   "%(d",            "(3805)" },
+                { (short) 0xf123,   "%08d",         "-0003805" },
+                { (short) 0xf123,   "%-+,(11d",  "(3.805)    " },
+                { (short) 0xf123,   "%0 ,(11d",  "(00003.805)" },
+
+                {  0x123456,        "%d",            "1193046" },
+                {  0x123456,        "%10d",       "   1193046" },
+                {  0x123456,        "%-1d",          "1193046" },
+                {  0x123456,        "%+d",          "+1193046" },
+                {  0x123456,        "% d",          " 1193046" },
+                {  0x123456,        "%,d",         "1.193.046" },
+                {  0x123456,        "%(d",           "1193046" },
+                {  0x123456,        "%08d",         "01193046" },
+                {  0x123456,        "%-+,(11d",  "+1.193.046 " },
+                {  0x123456,        "%0 ,(11d",  " 01.193.046" },
+
+                { -3,               "%d",                 "-3" },
+                { -3,               "%10d",       "        -3" },
+                { -3,               "%-1d",               "-3" },
+                { -3,               "%+d",                "-3" },
+                { -3,               "% d",                "-3" },
+                { -3,               "%,d",                "-3" },
+                { -3,               "%(d",               "(3)" },
+                { -3,               "%08d",         "-0000003" },
+                { -3,               "%-+,(11d",  "(3)        " },
                 { -3,               "%0 ,(11d",  "(000000003)" },
-                
-                { 0x7654321L,       "%d",          "124076833" }, 
-                { 0x7654321L,       "%10d",       " 124076833" }, 
-                { 0x7654321L,       "%-1d",        "124076833" }, 
-                { 0x7654321L,       "%+d",        "+124076833" }, 
-                { 0x7654321L,       "% d",        " 124076833" }, 
-                { 0x7654321L,       "%,d",       "124.076.833" }, 
-                { 0x7654321L,       "%(d",         "124076833" }, 
-                { 0x7654321L,       "%08d",        "124076833" }, 
-                { 0x7654321L,       "%-+,(11d", "+124.076.833" }, 
-                { 0x7654321L,       "%0 ,(11d", " 124.076.833" }, 
-                
-                { -1L,              "%d",                 "-1" }, 
-                { -1L,              "%10d",       "        -1" }, 
-                { -1L,              "%-1d",               "-1" }, 
-                { -1L,              "%+d",                "-1" }, 
-                { -1L,              "% d",                "-1" }, 
-                { -1L,              "%,d",                "-1" }, 
-                { -1L,              "%(d",               "(1)" }, 
-                { -1L,              "%08d",         "-0000001" }, 
-                { -1L,              "%-+,(11d",  "(1)        " }, 
-                { -1L,              "%0 ,(11d",  "(000000001)" }, 
+
+                { 0x7654321L,       "%d",          "124076833" },
+                { 0x7654321L,       "%10d",       " 124076833" },
+                { 0x7654321L,       "%-1d",        "124076833" },
+                { 0x7654321L,       "%+d",        "+124076833" },
+                { 0x7654321L,       "% d",        " 124076833" },
+                { 0x7654321L,       "%,d",       "124.076.833" },
+                { 0x7654321L,       "%(d",         "124076833" },
+                { 0x7654321L,       "%08d",        "124076833" },
+                { 0x7654321L,       "%-+,(11d", "+124.076.833" },
+                { 0x7654321L,       "%0 ,(11d", " 124.076.833" },
+
+                { -1L,              "%d",                 "-1" },
+                { -1L,              "%10d",       "        -1" },
+                { -1L,              "%-1d",               "-1" },
+                { -1L,              "%+d",                "-1" },
+                { -1L,              "% d",                "-1" },
+                { -1L,              "%,d",                "-1" },
+                { -1L,              "%(d",               "(1)" },
+                { -1L,              "%08d",         "-0000001" },
+                { -1L,              "%-+,(11d",  "(1)        " },
+                { -1L,              "%0 ,(11d",  "(000000001)" },
                 };
 
         final int input = 0;
@@ -1643,61 +1563,61 @@ public class FormatterTest extends TestCase {
                     .toString());
         }
     }
-    
+
     /**
      * @tests java.util.Formatter#format(String, Object...) for legal
      *        Byte/Short/Integer/Long conversion type 'o'
      */
     public void test_formatLjava_lang_String$Ljava_lang_Object_ByteShortIntegerLongConversionO() {
-        final Object[][] triple = { 
-                { 0,                "%o",                 "0" }, 
-                { 0,                "%-6o",          "0     " }, 
-                { 0,                "%08o",        "00000000" }, 
-                { 0,                "%#o",               "00" }, 
-                { 0,                "%0#11o",   "00000000000" }, 
-                { 0,                "%-#9o",      "00       " }, 
+        final Object[][] triple = {
+                { 0,                "%o",                 "0" },
+                { 0,                "%-6o",          "0     " },
+                { 0,                "%08o",        "00000000" },
+                { 0,                "%#o",               "00" },
+                { 0,                "%0#11o",   "00000000000" },
+                { 0,                "%-#9o",      "00       " },
 
-                { (byte) 0xff,      "%o",               "377" }, 
-                { (byte) 0xff,      "%-6o",          "377   " }, 
-                { (byte) 0xff,      "%08o",        "00000377" }, 
-                { (byte) 0xff,      "%#o",             "0377" }, 
-                { (byte) 0xff,      "%0#11o",   "00000000377" }, 
-                { (byte) 0xff,      "%-#9o",      "0377     " }, 
-                
-                { (short) 0xf123,   "%o",            "170443" }, 
-                { (short) 0xf123,   "%-6o",          "170443" }, 
-                { (short) 0xf123,   "%08o",        "00170443" }, 
-                { (short) 0xf123,   "%#o",          "0170443" }, 
-                { (short) 0xf123,   "%0#11o",   "00000170443" }, 
-                { (short) 0xf123,   "%-#9o",      "0170443  " }, 
-                
-                {  0x123456,        "%o",           "4432126" }, 
-                {  0x123456,        "%-6o",         "4432126" }, 
-                {  0x123456,        "%08o",        "04432126" }, 
-                {  0x123456,        "%#o",         "04432126" }, 
-                {  0x123456,        "%0#11o",   "00004432126" }, 
-                {  0x123456,        "%-#9o",      "04432126 " }, 
-                
-                { -3,               "%o",       "37777777775" }, 
-                { -3,               "%-6o",     "37777777775" }, 
-                { -3,               "%08o",     "37777777775" }, 
-                { -3,               "%#o",     "037777777775" }, 
-                { -3,               "%0#11o",  "037777777775" }, 
-                { -3,               "%-#9o",   "037777777775" }, 
-                
-                { 0x7654321L,       "%o",          "731241441" }, 
-                { 0x7654321L,       "%-6o",        "731241441" }, 
-                { 0x7654321L,       "%08o",        "731241441" }, 
-                { 0x7654321L,       "%#o",        "0731241441" }, 
-                { 0x7654321L,       "%0#11o",    "00731241441" }, 
-                { 0x7654321L,       "%-#9o",      "0731241441" }, 
-                
-                { -1L,              "%o",       "1777777777777777777777" }, 
-                { -1L,              "%-6o",     "1777777777777777777777" }, 
-                { -1L,              "%08o",     "1777777777777777777777" }, 
-                { -1L,              "%#o",     "01777777777777777777777" }, 
-                { -1L,              "%0#11o",  "01777777777777777777777" }, 
-                { -1L,              "%-#9o",   "01777777777777777777777" }, 
+                { (byte) 0xff,      "%o",               "377" },
+                { (byte) 0xff,      "%-6o",          "377   " },
+                { (byte) 0xff,      "%08o",        "00000377" },
+                { (byte) 0xff,      "%#o",             "0377" },
+                { (byte) 0xff,      "%0#11o",   "00000000377" },
+                { (byte) 0xff,      "%-#9o",      "0377     " },
+
+                { (short) 0xf123,   "%o",            "170443" },
+                { (short) 0xf123,   "%-6o",          "170443" },
+                { (short) 0xf123,   "%08o",        "00170443" },
+                { (short) 0xf123,   "%#o",          "0170443" },
+                { (short) 0xf123,   "%0#11o",   "00000170443" },
+                { (short) 0xf123,   "%-#9o",      "0170443  " },
+
+                {  0x123456,        "%o",           "4432126" },
+                {  0x123456,        "%-6o",         "4432126" },
+                {  0x123456,        "%08o",        "04432126" },
+                {  0x123456,        "%#o",         "04432126" },
+                {  0x123456,        "%0#11o",   "00004432126" },
+                {  0x123456,        "%-#9o",      "04432126 " },
+
+                { -3,               "%o",       "37777777775" },
+                { -3,               "%-6o",     "37777777775" },
+                { -3,               "%08o",     "37777777775" },
+                { -3,               "%#o",     "037777777775" },
+                { -3,               "%0#11o",  "037777777775" },
+                { -3,               "%-#9o",   "037777777775" },
+
+                { 0x7654321L,       "%o",          "731241441" },
+                { 0x7654321L,       "%-6o",        "731241441" },
+                { 0x7654321L,       "%08o",        "731241441" },
+                { 0x7654321L,       "%#o",        "0731241441" },
+                { 0x7654321L,       "%0#11o",    "00731241441" },
+                { 0x7654321L,       "%-#9o",      "0731241441" },
+
+                { -1L,              "%o",       "1777777777777777777777" },
+                { -1L,              "%-6o",     "1777777777777777777777" },
+                { -1L,              "%08o",     "1777777777777777777777" },
+                { -1L,              "%#o",     "01777777777777777777777" },
+                { -1L,              "%0#11o",  "01777777777777777777777" },
+                { -1L,              "%-#9o",   "01777777777777777777777" },
                 };
 
         final int input = 0;
@@ -1713,61 +1633,61 @@ public class FormatterTest extends TestCase {
                     .toString());
         }
     }
-    
+
     /**
      * @tests java.util.Formatter#format(String, Object...) for legal
      *        Byte/Short/Integer/Long conversion type 'x' and 'X'
      */
     public void test_formatLjava_lang_String$Ljava_lang_Object_ByteShortIntegerLongConversionX() {
-        final Object[][] triple = { 
-                { 0,                "%x",                 "0" }, 
-                { 0,                "%-8x",        "0       " }, 
-                { 0,                "%06x",          "000000" }, 
-                { 0,                "%#x",              "0x0" }, 
-                { 0,                "%0#12x",  "0x0000000000" }, 
-                { 0,                "%-#9x",      "0x0      " }, 
+        final Object[][] triple = {
+                { 0,                "%x",                 "0" },
+                { 0,                "%-8x",        "0       " },
+                { 0,                "%06x",          "000000" },
+                { 0,                "%#x",              "0x0" },
+                { 0,                "%0#12x",  "0x0000000000" },
+                { 0,                "%-#9x",      "0x0      " },
 
-                { (byte) 0xff,      "%x",                "ff" }, 
-                { (byte) 0xff,      "%-8x",        "ff      " }, 
-                { (byte) 0xff,      "%06x",          "0000ff" }, 
-                { (byte) 0xff,      "%#x",             "0xff" }, 
-                { (byte) 0xff,      "%0#12x",  "0x00000000ff" }, 
-                { (byte) 0xff,      "%-#9x",      "0xff     " }, 
-                
-                { (short) 0xf123,   "%x",              "f123" }, 
-                { (short) 0xf123,   "%-8x",        "f123    " }, 
-                { (short) 0xf123,   "%06x",          "00f123" }, 
-                { (short) 0xf123,   "%#x",           "0xf123" }, 
-                { (short) 0xf123,   "%0#12x",  "0x000000f123" }, 
-                { (short) 0xf123,   "%-#9x",      "0xf123   " }, 
-                
-                {  0x123456,        "%x",            "123456" }, 
-                {  0x123456,        "%-8x",        "123456  " }, 
-                {  0x123456,        "%06x",          "123456" }, 
-                {  0x123456,        "%#x",         "0x123456" }, 
-                {  0x123456,        "%0#12x",  "0x0000123456" }, 
-                {  0x123456,        "%-#9x",      "0x123456 " }, 
-                
-                { -3,               "%x",          "fffffffd" }, 
-                { -3,               "%-8x",        "fffffffd" }, 
-                { -3,               "%06x",        "fffffffd" }, 
-                { -3,               "%#x",       "0xfffffffd" }, 
-                { -3,               "%0#12x",  "0x00fffffffd" }, 
-                { -3,               "%-#9x",     "0xfffffffd" }, 
-                
-                { 0x7654321L,       "%x",          "7654321" }, 
-                { 0x7654321L,       "%-8x",       "7654321 " }, 
-                { 0x7654321L,       "%06x",        "7654321" }, 
-                { 0x7654321L,       "%#x",       "0x7654321" }, 
-                { 0x7654321L,       "%0#12x", "0x0007654321" }, 
-                { 0x7654321L,       "%-#9x",     "0x7654321" }, 
-                
-                { -1L,              "%x",       "ffffffffffffffff" }, 
-                { -1L,              "%-8x",     "ffffffffffffffff" }, 
-                { -1L,              "%06x",     "ffffffffffffffff" }, 
-                { -1L,              "%#x",    "0xffffffffffffffff" }, 
-                { -1L,              "%0#12x", "0xffffffffffffffff" }, 
-                { -1L,              "%-#9x",  "0xffffffffffffffff" }, 
+                { (byte) 0xff,      "%x",                "ff" },
+                { (byte) 0xff,      "%-8x",        "ff      " },
+                { (byte) 0xff,      "%06x",          "0000ff" },
+                { (byte) 0xff,      "%#x",             "0xff" },
+                { (byte) 0xff,      "%0#12x",  "0x00000000ff" },
+                { (byte) 0xff,      "%-#9x",      "0xff     " },
+
+                { (short) 0xf123,   "%x",              "f123" },
+                { (short) 0xf123,   "%-8x",        "f123    " },
+                { (short) 0xf123,   "%06x",          "00f123" },
+                { (short) 0xf123,   "%#x",           "0xf123" },
+                { (short) 0xf123,   "%0#12x",  "0x000000f123" },
+                { (short) 0xf123,   "%-#9x",      "0xf123   " },
+
+                {  0x123456,        "%x",            "123456" },
+                {  0x123456,        "%-8x",        "123456  " },
+                {  0x123456,        "%06x",          "123456" },
+                {  0x123456,        "%#x",         "0x123456" },
+                {  0x123456,        "%0#12x",  "0x0000123456" },
+                {  0x123456,        "%-#9x",      "0x123456 " },
+
+                { -3,               "%x",          "fffffffd" },
+                { -3,               "%-8x",        "fffffffd" },
+                { -3,               "%06x",        "fffffffd" },
+                { -3,               "%#x",       "0xfffffffd" },
+                { -3,               "%0#12x",  "0x00fffffffd" },
+                { -3,               "%-#9x",     "0xfffffffd" },
+
+                { 0x7654321L,       "%x",          "7654321" },
+                { 0x7654321L,       "%-8x",       "7654321 " },
+                { 0x7654321L,       "%06x",        "7654321" },
+                { 0x7654321L,       "%#x",       "0x7654321" },
+                { 0x7654321L,       "%0#12x", "0x0007654321" },
+                { 0x7654321L,       "%-#9x",     "0x7654321" },
+
+                { -1L,              "%x",       "ffffffffffffffff" },
+                { -1L,              "%-8x",     "ffffffffffffffff" },
+                { -1L,              "%06x",     "ffffffffffffffff" },
+                { -1L,              "%#x",    "0xffffffffffffffff" },
+                { -1L,              "%0#12x", "0xffffffffffffffff" },
+                { -1L,              "%-#9x",  "0xffffffffffffffff" },
                 };
 
         final int input = 0;
@@ -1781,7 +1701,7 @@ public class FormatterTest extends TestCase {
             assertEquals("triple[" + i + "]:" + triple[i][input] + ",pattern["
                     + i + "]:" + triple[i][pattern], triple[i][output], f
                     .toString());
-            
+
             f = new Formatter(Locale.FRANCE);
             f.format((String) triple[i][pattern],
                     triple[i][input]);
@@ -1790,7 +1710,7 @@ public class FormatterTest extends TestCase {
                     .toString());
         }
     }
-    
+
     /**
      * @tests java.util.Formatter#format(String, Object...) for Date/Time
      *        conversion
@@ -1899,9 +1819,9 @@ public class FormatterTest extends TestCase {
                 {new Date(1147327147578L),  'z', "+0800"}, //$NON-NLS-2$
                 {paris,                     'z', "+0100"}, //$NON-NLS-2$
                 {china,                     'z', "-0800"}, //$NON-NLS-2$
-                
+
         };
-        
+
         final Object[][] lowerCaseFranceTriple = {
                 {0L,                        'a', "jeu."}, //$NON-NLS-2$
                 {Long.MAX_VALUE,            'a', "dim."}, //$NON-NLS-2$
@@ -1993,9 +1913,9 @@ public class FormatterTest extends TestCase {
                 {new Date(1147327147578L),  'z', "+0800"}, //$NON-NLS-2$
                 {paris,                     'z', "+0100"}, //$NON-NLS-2$
                 {china,                     'z', "-0800"}, //$NON-NLS-2$
-                
+
         };
-        
+
         final Object[][] lowerCaseJapanTriple = {
                 {0L,                        'a', "\u6728"}, //$NON-NLS-2$
                 {Long.MAX_VALUE,            'a', "\u65e5"}, //$NON-NLS-2$
@@ -2093,7 +2013,7 @@ public class FormatterTest extends TestCase {
         final int pattern = 1;
         final int output  = 2;
         for (int i = 0; i < 90; i++) {
-            // go through legal conversion 
+            // go through legal conversion
             String formatSpecifier = "%t" + lowerCaseGermanTriple[i][pattern]; //$NON-NLS-2$
             String formatSpecifierUpper = "%T" + lowerCaseGermanTriple[i][pattern]; //$NON-NLS-2$
             // test '%t'
@@ -2149,7 +2069,7 @@ public class FormatterTest extends TestCase {
                 {Long.MAX_VALUE,            'B', "August"}, //$NON-NLS-2$
                 {-1000L,                    'B', "Januar"}, //$NON-NLS-2$
                 {new Date(1147327147578L),  'B', "Mai"}, //$NON-NLS-2$
-                {paris,                     'B', "Mai"}, //$NON-NLS-2$ 
+                {paris,                     'B', "Mai"}, //$NON-NLS-2$
                 {china,                     'B', "Mai"}, //$NON-NLS-2$
                 {0L,                        'C', "19"}, //$NON-NLS-2$
                 {Long.MAX_VALUE,            'C', "2922789"}, //$NON-NLS-2$
@@ -2235,9 +2155,9 @@ public class FormatterTest extends TestCase {
                 {new Date(1147327147578L),  'Z', "CST"}, //$NON-NLS-2$
                 {paris,                     'Z', "CEST"}, //$NON-NLS-2$
                 {china,                     'Z', "GMT-08:00"}, //$NON-NLS-2$
-                
+
         };
-        
+
         final Object[][] upperCaseFranceTriple = {
                 {0L,                        'A', "jeudi"}, //$NON-NLS-2$
                 {Long.MAX_VALUE,            'A', "dimanche"}, //$NON-NLS-2$
@@ -2335,7 +2255,7 @@ public class FormatterTest extends TestCase {
                 {new Date(1147327147578L),  'Z', "CST"}, //$NON-NLS-2$
                 {paris,                     'Z', "CEST"}, //$NON-NLS-2$
                 {china,                     'Z', "GMT-08:00"}, //$NON-NLS-2$
-                
+
         };
 
         final Object[][] upperCaseJapanTriple = {
@@ -2354,7 +2274,7 @@ public class FormatterTest extends TestCase {
                 {0L,                        'C', "19"}, //$NON-NLS-2$
                 {Long.MAX_VALUE,            'C', "2922789"}, //$NON-NLS-2$
                 {-1000L,                    'C', "19"}, //$NON-NLS-2$
-                {new Date(1147327147578L),  'C', "20"}, //$NON-NLS-2$ 
+                {new Date(1147327147578L),  'C', "20"}, //$NON-NLS-2$
                 {paris,                     'C', "20"}, //$NON-NLS-2$
                 {china,                     'C', "20"}, //$NON-NLS-2$
                 {0L,                        'D', "01/01/70"}, //$NON-NLS-2$
@@ -2522,7 +2442,7 @@ public class FormatterTest extends TestCase {
         f.format("%(+,-7d%<( o%<+(x %<( 06X", (BigInteger) null);
         assertEquals("null   nullnull   NULL", f.toString());
     }
-    
+
     /**
      * @tests java.util.Formatter#format(String, Object...) for legal
      *        BigInteger conversion type 'd'
@@ -2550,7 +2470,7 @@ public class FormatterTest extends TestCase {
                 {new BigInteger("-9876543210987654321098765432100000"),     "%-+,(11d", "(9.876.543.210.987.654.321.098.765.432.100.000)"}, //$NON-NLS-2$
                 {new BigInteger("-9876543210987654321098765432100000"),     "%0 ,(11d", "(9.876.543.210.987.654.321.098.765.432.100.000)"}, //$NON-NLS-2$
         };
-        
+
         final int input = 0;
         final int pattern = 1;
         final int output = 2;
@@ -2562,9 +2482,9 @@ public class FormatterTest extends TestCase {
             assertEquals("triple[" + i + "]:" + tripleD[i][input] + ",pattern["
                     + i + "]:" + tripleD[i][pattern], tripleD[i][output], f
                     .toString());
-            
+
         }
-        
+
         final Object[][] tripleO = {
                 {new BigInteger("123456789012345678901234567890"),          "%o",       "143564417755415637016711617605322"}, //$NON-NLS-2$
                 {new BigInteger("123456789012345678901234567890"),          "%-6o",     "143564417755415637016711617605322"}, //$NON-NLS-2$
@@ -2586,9 +2506,9 @@ public class FormatterTest extends TestCase {
             assertEquals("triple[" + i + "]:" + tripleO[i][input] + ",pattern["
                     + i + "]:" + tripleO[i][pattern], tripleO[i][output], f
                     .toString());
-            
+
         }
-        
+
         final Object[][] tripleX = {
                 {new BigInteger("123456789012345678901234567890"),          "%x",       "18ee90ff6c373e0ee4e3f0ad2"}, //$NON-NLS-2$
                 {new BigInteger("123456789012345678901234567890"),          "%-8x",     "18ee90ff6c373e0ee4e3f0ad2"}, //$NON-NLS-2$
@@ -2603,7 +2523,7 @@ public class FormatterTest extends TestCase {
                 {new BigInteger("-9876543210987654321098765432100000"),     "%0#12x",   "-0x1e6f380472bd4bae6eb8259bd94a0"}, //$NON-NLS-2$
                 {new BigInteger("-9876543210987654321098765432100000"),     "%-#9x",    "-0x1e6f380472bd4bae6eb8259bd94a0"}, //$NON-NLS-2$
         };
-        
+
         for (int i = 0; i < tripleX.length; i++) {
             f = new Formatter(Locale.FRANCE);
             f.format((String) tripleX[i][pattern],
@@ -2611,9 +2531,9 @@ public class FormatterTest extends TestCase {
             assertEquals("triple[" + i + "]:" + tripleX[i][input] + ",pattern["
                     + i + "]:" + tripleX[i][pattern], tripleX[i][output], f
                     .toString());
-            
+
         }
-        
+
         f = new Formatter(Locale.GERMAN);
         f.format("%(+,-7d%<( o%<+(x %<( 06X", (BigInteger) null);
         assertEquals("null   nullnull   NULL", f.toString());
@@ -2656,7 +2576,7 @@ public class FormatterTest extends TestCase {
                 "(1.234.567.890.123.456.789.012.345.678.901.234.567.890)     ",
                 f.toString());
     }
-    
+
     /**
      * @tests java.util.Formatter#format(String, Object...) for BigInteger
      *        conversion exception
@@ -2736,7 +2656,7 @@ public class FormatterTest extends TestCase {
             // expected
         }
     }
-    
+
     /**
      * @tests java.util.Formatter#format(String, Object...) for BigInteger
      *        exception throwing order
@@ -2750,7 +2670,7 @@ public class FormatterTest extends TestCase {
          * MissingFormatWidthException > IllegalFormatFlagsException >
          * IllegalFormatPrecisionException > IllegalFormatConversionException >
          * FormatFlagsConversionMismatchException
-         * 
+         *
          */
         f = new Formatter(Locale.US);
         try {
@@ -2788,7 +2708,7 @@ public class FormatterTest extends TestCase {
         } catch (UnknownFormatConversionException expected) {
         }
     }
-    
+
     /**
      * @tests java.util.Formatter#format(String, Object...) for Float/Double
      *        conversion type 'e' and 'E'
@@ -2802,184 +2722,184 @@ public class FormatterTest extends TestCase {
                 {0f, "%#+0(8.4e",   "+0.0000e+00"},
                 {0f, "%-+(1.6e",    "+0.000000e+00"},
                 {0f, "% 0(12e",     " 0.000000e+00"},
-                
+
                 {101f, "%e",          "1.010000e+02"},
                 {101f, "%#.0e",       "1.e+02"},
                 {101f, "%#- (9.8e",   " 1.01000000e+02"},
                 {101f, "%#+0(8.4e",   "+1.0100e+02"},
                 {101f, "%-+(1.6e",    "+1.010000e+02"},
                 {101f, "% 0(12e",     " 1.010000e+02"},
-                
+
                 {1.f, "%e",          "1.000000e+00"},
                 {1.f, "%#.0e",       "1.e+00"},
                 {1.f, "%#- (9.8e",   " 1.00000000e+00"},
                 {1.f, "%#+0(8.4e",   "+1.0000e+00"},
                 {1.f, "%-+(1.6e",    "+1.000000e+00"},
                 {1.f, "% 0(12e",     " 1.000000e+00"},
-                
+
                 {-98f, "%e",          "-9.800000e+01"},
                 {-98f, "%#.0e",       "-1.e+02"},
                 {-98f, "%#- (9.8e",   "(9.80000000e+01)"},
                 {-98f, "%#+0(8.4e",   "(9.8000e+01)"},
                 {-98f, "%-+(1.6e",    "(9.800000e+01)"},
                 {-98f, "% 0(12e",     "(9.800000e+01)"},
-                
+
                 {1.23f, "%e",          "1.230000e+00"},
                 {1.23f, "%#.0e",       "1.e+00"},
                 {1.23f, "%#- (9.8e",   " 1.23000002e+00"},
                 {1.23f, "%#+0(8.4e",   "+1.2300e+00"},
                 {1.23f, "%-+(1.6e",    "+1.230000e+00"},
                 {1.23f, "% 0(12e",     " 1.230000e+00"},
-                
+
                 {34.1234567f, "%e",          "3.412346e+01"},
                 {34.1234567f, "%#.0e",       "3.e+01"},
                 {34.1234567f, "%#- (9.8e",   " 3.41234550e+01"},
                 {34.1234567f, "%#+0(8.4e",   "+3.4123e+01"},
                 {34.1234567f, "%-+(1.6e",    "+3.412346e+01"},
                 {34.1234567f, "% 0(12e",     " 3.412346e+01"},
-                
+
                 {-.12345f, "%e",          "-1.234500e-01"},
                 {-.12345f, "%#.0e",       "-1.e-01"},
                 {-.12345f, "%#- (9.8e",   "(1.23450004e-01)"},
                 {-.12345f, "%#+0(8.4e",   "(1.2345e-01)"},
                 {-.12345f, "%-+(1.6e",    "(1.234500e-01)"},
                 {-.12345f, "% 0(12e",     "(1.234500e-01)"},
-                
+
                 {-9876.1234567f, "%e",          "-9.876123e+03"},
                 {-9876.1234567f, "%#.0e",       "-1.e+04"},
                 {-9876.1234567f, "%#- (9.8e",   "(9.87612305e+03)"},
                 {-9876.1234567f, "%#+0(8.4e",   "(9.8761e+03)"},
                 {-9876.1234567f, "%-+(1.6e",    "(9.876123e+03)"},
                 {-9876.1234567f, "% 0(12e",     "(9.876123e+03)"},
-                
+
                 {Float.MAX_VALUE, "%e",          "3.402823e+38"},
                 {Float.MAX_VALUE, "%#.0e",       "3.e+38"},
                 {Float.MAX_VALUE, "%#- (9.8e",   " 3.40282347e+38"},
                 {Float.MAX_VALUE, "%#+0(8.4e",   "+3.4028e+38"},
                 {Float.MAX_VALUE, "%-+(1.6e",    "+3.402823e+38"},
                 {Float.MAX_VALUE, "% 0(12e",     " 3.402823e+38"},
-                
+
                 {Float.MIN_VALUE, "%e",          "1.401298e-45"},
                 {Float.MIN_VALUE, "%#.0e",       "1.e-45"},
                 {Float.MIN_VALUE, "%#- (9.8e",   " 1.40129846e-45"},
                 {Float.MIN_VALUE, "%#+0(8.4e",   "+1.4013e-45"},
                 {Float.MIN_VALUE, "%-+(1.6e",    "+1.401298e-45"},
                 {Float.MIN_VALUE, "% 0(12e",     " 1.401298e-45"},
-                
+
                 {Float.NaN, "%e",          "NaN"},
                 {Float.NaN, "%#.0e",       "NaN"},
                 {Float.NaN, "%#- (9.8e",   "NaN      "},
                 {Float.NaN, "%#+0(8.4e",   "     NaN"},
                 {Float.NaN, "%-+(1.6e",    "NaN"},
                 {Float.NaN, "% 0(12e",     "         NaN"},
-                
-                
+
+
                 {Float.NEGATIVE_INFINITY, "%e",          "-Infinity"},
                 {Float.NEGATIVE_INFINITY, "%#.0e",       "-Infinity"},
                 {Float.NEGATIVE_INFINITY, "%#- (9.8e",   "(Infinity)"},
                 {Float.NEGATIVE_INFINITY, "%#+0(8.4e",   "(Infinity)"},
                 {Float.NEGATIVE_INFINITY, "%-+(1.6e",    "(Infinity)"},
                 {Float.NEGATIVE_INFINITY, "% 0(12e",     "  (Infinity)"},
-                
+
                 {Float.NEGATIVE_INFINITY, "%e",          "-Infinity"},
                 {Float.NEGATIVE_INFINITY, "%#.0e",       "-Infinity"},
                 {Float.NEGATIVE_INFINITY, "%#- (9.8e",   "(Infinity)"},
                 {Float.NEGATIVE_INFINITY, "%#+0(8.4e",   "(Infinity)"},
                 {Float.NEGATIVE_INFINITY, "%-+(1.6e",    "(Infinity)"},
                 {Float.NEGATIVE_INFINITY, "% 0(12e",     "  (Infinity)"},
-                
+
                 {0d, "%e",          "0.000000e+00"},
                 {0d, "%#.0e",       "0.e+00"},
                 {0d, "%#- (9.8e",   " 0.00000000e+00"},
                 {0d, "%#+0(8.4e",   "+0.0000e+00"},
                 {0d, "%-+(1.6e",    "+0.000000e+00"},
                 {0d, "% 0(12e",     " 0.000000e+00"},
-                
+
                 {1d, "%e",          "1.000000e+00"},
                 {1d, "%#.0e",       "1.e+00"},
                 {1d, "%#- (9.8e",   " 1.00000000e+00"},
                 {1d, "%#+0(8.4e",   "+1.0000e+00"},
                 {1d, "%-+(1.6e",    "+1.000000e+00"},
                 {1d, "% 0(12e",     " 1.000000e+00"},
-                
+
                 {-1d, "%e",          "-1.000000e+00"},
                 {-1d, "%#.0e",       "-1.e+00"},
                 {-1d, "%#- (9.8e",   "(1.00000000e+00)"},
                 {-1d, "%#+0(8.4e",   "(1.0000e+00)"},
                 {-1d, "%-+(1.6e",    "(1.000000e+00)"},
                 {-1d, "% 0(12e",     "(1.000000e+00)"},
-                
-                
+
+
                 {.00000001d, "%e",          "1.000000e-08"},
                 {.00000001d, "%#.0e",       "1.e-08"},
                 {.00000001d, "%#- (9.8e",   " 1.00000000e-08"},
                 {.00000001d, "%#+0(8.4e",   "+1.0000e-08"},
                 {.00000001d, "%-+(1.6e",    "+1.000000e-08"},
                 {.00000001d, "% 0(12e",     " 1.000000e-08"},
-                
+
                 {9122.10d, "%e",          "9.122100e+03"},
                 {9122.10d, "%#.0e",       "9.e+03"},
                 {9122.10d, "%#- (9.8e",   " 9.12210000e+03"},
                 {9122.10d, "%#+0(8.4e",   "+9.1221e+03"},
                 {9122.10d, "%-+(1.6e",    "+9.122100e+03"},
                 {9122.10d, "% 0(12e",     " 9.122100e+03"},
-                
+
                 {0.1d, "%e",          "1.000000e-01"},
                 {0.1d, "%#.0e",       "1.e-01"},
                 {0.1d, "%#- (9.8e",   " 1.00000000e-01"},
                 {0.1d, "%#+0(8.4e",   "+1.0000e-01"},
                 {0.1d, "%-+(1.6e",    "+1.000000e-01"},
                 {0.1d, "% 0(12e",     " 1.000000e-01"},
-                
+
                 {-2.d, "%e",          "-2.000000e+00"},
                 {-2.d, "%#.0e",       "-2.e+00"},
                 {-2.d, "%#- (9.8e",   "(2.00000000e+00)"},
                 {-2.d, "%#+0(8.4e",   "(2.0000e+00)"},
                 {-2.d, "%-+(1.6e",    "(2.000000e+00)"},
                 {-2.d, "% 0(12e",     "(2.000000e+00)"},
-                
+
                 {-.39d, "%e",          "-3.900000e-01"},
                 {-.39d, "%#.0e",       "-4.e-01"},
                 {-.39d, "%#- (9.8e",   "(3.90000000e-01)"},
                 {-.39d, "%#+0(8.4e",   "(3.9000e-01)"},
                 {-.39d, "%-+(1.6e",    "(3.900000e-01)"},
                 {-.39d, "% 0(12e",     "(3.900000e-01)"},
-                
+
                 {-1234567890.012345678d, "%e",          "-1.234568e+09"},
                 {-1234567890.012345678d, "%#.0e",       "-1.e+09"},
                 {-1234567890.012345678d, "%#- (9.8e",   "(1.23456789e+09)"},
                 {-1234567890.012345678d, "%#+0(8.4e",   "(1.2346e+09)"},
                 {-1234567890.012345678d, "%-+(1.6e",    "(1.234568e+09)"},
                 {-1234567890.012345678d, "% 0(12e",     "(1.234568e+09)"},
-                
+
                 {Double.MAX_VALUE, "%e",          "1.797693e+308"},
                 {Double.MAX_VALUE, "%#.0e",       "2.e+308"},
                 {Double.MAX_VALUE, "%#- (9.8e",   " 1.79769313e+308"},
                 {Double.MAX_VALUE, "%#+0(8.4e",   "+1.7977e+308"},
                 {Double.MAX_VALUE, "%-+(1.6e",    "+1.797693e+308"},
                 {Double.MAX_VALUE, "% 0(12e",     " 1.797693e+308"},
-                
+
                 {Double.MIN_VALUE, "%e",          "4.900000e-324"},
                 {Double.MIN_VALUE, "%#.0e",       "5.e-324"},
                 {Double.MIN_VALUE, "%#- (9.8e",   " 4.90000000e-324"},
                 {Double.MIN_VALUE, "%#+0(8.4e",   "+4.9000e-324"},
                 {Double.MIN_VALUE, "%-+(1.6e",    "+4.900000e-324"},
                 {Double.MIN_VALUE, "% 0(12e",     " 4.900000e-324"},
-                
+
                 {Double.NaN, "%e",          "NaN"},
                 {Double.NaN, "%#.0e",       "NaN"},
                 {Double.NaN, "%#- (9.8e",   "NaN      "},
                 {Double.NaN, "%#+0(8.4e",   "     NaN"},
                 {Double.NaN, "%-+(1.6e",    "NaN"},
                 {Double.NaN, "% 0(12e",     "         NaN"},
-                
+
                 {Double.NEGATIVE_INFINITY, "%e",          "-Infinity"},
                 {Double.NEGATIVE_INFINITY, "%#.0e",       "-Infinity"},
                 {Double.NEGATIVE_INFINITY, "%#- (9.8e",   "(Infinity)"},
                 {Double.NEGATIVE_INFINITY, "%#+0(8.4e",   "(Infinity)"},
                 {Double.NEGATIVE_INFINITY, "%-+(1.6e",    "(Infinity)"},
                 {Double.NEGATIVE_INFINITY, "% 0(12e",     "  (Infinity)"},
-                
+
                 {Double.POSITIVE_INFINITY, "%e",          "Infinity"},
                 {Double.POSITIVE_INFINITY, "%#.0e",       "Infinity"},
                 {Double.POSITIVE_INFINITY, "%#- (9.8e",   " Infinity"},
@@ -3028,25 +2948,25 @@ public class FormatterTest extends TestCase {
                 {1001f, "%+0(,8.4g",    "+001,001"},
                 {1001f, "%-+(,1.6g",    "+1,001.00"},
                 {1001f, "% 0(,12.0g",   " 0000001e+03"},
-                
+
                 {1.f, "%g",           "1.00000"},
                 {1.f, "%- (,9.8g",    " 1.0000000"},
                 {1.f, "%+0(,8.4g",    "+001.000"},
                 {1.f, "%-+(,1.6g",    "+1.00000"},
                 {1.f, "% 0(,12.0g",   " 00000000001"},
-                
+
                 {-98f, "%g",           "-98.0000"},
                 {-98f, "%- (,9.8g",    "(98.000000)"},
                 {-98f, "%+0(,8.4g",    "(098.00)"},
                 {-98f, "%-+(,1.6g",    "(98.0000)"},
                 {-98f, "% 0(,12.0g",   "(000001e+02)"},
-                
+
                 {0.000001f, "%g",           "1.00000e-06"},
                 {0.000001f, "%- (,9.8g",    " 1.0000000e-06"},
                 {0.000001f, "%+0(,8.4g",    "+1.000e-06"},
                 {0.000001f, "%-+(,1.6g",    "+1.00000e-06"},
                 {0.000001f, "% 0(,12.0g",   " 0000001e-06"},
-                
+
                 {345.1234567f, "%g",           "345.123"},
                 {345.1234567f, "%- (,9.8g",    " 345.12344"},
                 {345.1234567f, "%+0(,8.4g",    "+00345.1"},
@@ -3058,127 +2978,127 @@ public class FormatterTest extends TestCase {
                 {-.00000012345f, "%+0(,8.4g",    "(1.234e-07)"},
                 {-.00000012345f, "%-+(,1.6g",    "(1.23450e-07)"},
                 {-.00000012345f, "% 0(,12.0g",   "(000001e-07)"},
-                
+
                 {-987.1234567f, "%g",           "-987.123"},
                 {-987.1234567f, "%- (,9.8g",    "(987.12347)"},
                 {-987.1234567f, "%+0(,8.4g",    "(0987.1)"},
                 {-987.1234567f, "%-+(,1.6g",    "(987.123)"},
                 {-987.1234567f, "% 0(,12.0g",   "(000001e+03)"},
-                
+
                 {Float.MAX_VALUE, "%g",           "3.40282e+38"},
                 {Float.MAX_VALUE, "%- (,9.8g",    " 3.4028235e+38"},
                 {Float.MAX_VALUE, "%+0(,8.4g",    "+3.403e+38"},
                 {Float.MAX_VALUE, "%-+(,1.6g",    "+3.40282e+38"},
                 {Float.MAX_VALUE, "% 0(,12.0g",   " 0000003e+38"},
-                
+
                 {Float.MIN_VALUE, "%g",           "1.40130e-45"},
                 {Float.MIN_VALUE, "%- (,9.8g",    " 1.4012985e-45"},
                 {Float.MIN_VALUE, "%+0(,8.4g",    "+1.401e-45"},
                 {Float.MIN_VALUE, "%-+(,1.6g",    "+1.40130e-45"},
                 {Float.MIN_VALUE, "% 0(,12.0g",   " 0000001e-45"},
-                
+
                 {Float.NaN, "%g",           "NaN"},
                 {Float.NaN, "%- (,9.8g",    "NaN      "},
                 {Float.NaN, "%+0(,8.4g",    "     NaN"},
                 {Float.NaN, "%-+(,1.6g",    "NaN"},
                 {Float.NaN, "% 0(,12.0g",   "         NaN"},
-                
+
                 {Float.NEGATIVE_INFINITY, "%g",           "-Infinity"},
                 {Float.NEGATIVE_INFINITY, "%- (,9.8g",    "(Infinity)"},
                 {Float.NEGATIVE_INFINITY, "%+0(,8.4g",    "(Infinity)"},
                 {Float.NEGATIVE_INFINITY, "%-+(,1.6g",    "(Infinity)"},
                 {Float.NEGATIVE_INFINITY, "% 0(,12.0g",   "  (Infinity)"},
-                
+
                 {Float.POSITIVE_INFINITY, "%g",           "Infinity"},
                 {Float.POSITIVE_INFINITY, "%- (,9.8g",    " Infinity"},
                 {Float.POSITIVE_INFINITY, "%+0(,8.4g",    "+Infinity"},
                 {Float.POSITIVE_INFINITY, "%-+(,1.6g",    "+Infinity"},
                 {Float.POSITIVE_INFINITY, "% 0(,12.0g",   "    Infinity"},
-                
+
                 {1d, "%g",           "1.00000"},
                 {1d, "%- (,9.8g",    " 1.0000000"},
                 {1d, "%+0(,8.4g",    "+001.000"},
                 {1d, "%-+(,1.6g",    "+1.00000"},
                 {1d, "% 0(,12.0g",   " 00000000001"},
-                
+
                 {-1d, "%g",           "-1.00000"},
                 {-1d, "%- (,9.8g",    "(1.0000000)"},
                 {-1d, "%+0(,8.4g",    "(01.000)"},
                 {-1d, "%-+(,1.6g",    "(1.00000)"},
                 {-1d, "% 0(,12.0g",   "(0000000001)"},
-                
+
                 {.00000001d, "%g",           "1.00000e-08"},
                 {.00000001d, "%- (,9.8g",    " 1.0000000e-08"},
                 {.00000001d, "%+0(,8.4g",    "+1.000e-08"},
                 {.00000001d, "%-+(,1.6g",    "+1.00000e-08"},
                 {.00000001d, "% 0(,12.0g",   " 0000001e-08"},
-                
+
                 {1912.10d, "%g",           "1912.10"},
                 {1912.10d, "%- (,9.8g",    " 1,912.1000"},
                 {1912.10d, "%+0(,8.4g",    "+001,912"},
                 {1912.10d, "%-+(,1.6g",    "+1,912.10"},
                 {1912.10d, "% 0(,12.0g",   " 0000002e+03"},
-                
+
                 {0.1d, "%g",           "0.100000"},
                 {0.1d, "%- (,9.8g",    " 0.10000000"},
                 {0.1d, "%+0(,8.4g",    "+00.1000"},
                 {0.1d, "%-+(,1.6g",    "+0.100000"},
                 {0.1d, "% 0(,12.0g",   " 000000000.1"},
-                
+
                 {-2.d, "%g",           "-2.00000"},
                 {-2.d, "%- (,9.8g",    "(2.0000000)"},
                 {-2.d, "%+0(,8.4g",    "(02.000)"},
                 {-2.d, "%-+(,1.6g",    "(2.00000)"},
                 {-2.d, "% 0(,12.0g",   "(0000000002)"},
-                
+
                 {-.00039d, "%g",           "-0.000390000"},
                 {-.00039d, "%- (,9.8g",    "(0.00039000000)"},
                 {-.00039d, "%+0(,8.4g",    "(0.0003900)"},
                 {-.00039d, "%-+(,1.6g",    "(0.000390000)"},
                 {-.00039d, "% 0(,12.0g",   "(00000.0004)"},
-                
+
                 {-1234567890.012345678d, "%g",           "-1.23457e+09"},
                 {-1234567890.012345678d, "%- (,9.8g",    "(1.2345679e+09)"},
                 {-1234567890.012345678d, "%+0(,8.4g",    "(1.235e+09)"},
                 {-1234567890.012345678d, "%-+(,1.6g",    "(1.23457e+09)"},
                 {-1234567890.012345678d, "% 0(,12.0g",   "(000001e+09)"},
-                
+
                 {Double.MAX_VALUE, "%g",           "1.79769e+308"},
                 {Double.MAX_VALUE, "%- (,9.8g",    " 1.7976931e+308"},
                 {Double.MAX_VALUE, "%+0(,8.4g",    "+1.798e+308"},
                 {Double.MAX_VALUE, "%-+(,1.6g",    "+1.79769e+308"},
                 {Double.MAX_VALUE, "% 0(,12.0g",   " 000002e+308"},
-                
+
                 {Double.MIN_VALUE, "%g",           "4.90000e-324"},
                 {Double.MIN_VALUE, "%- (,9.8g",    " 4.9000000e-324"},
                 {Double.MIN_VALUE, "%+0(,8.4g",    "+4.900e-324"},
                 {Double.MIN_VALUE, "%-+(,1.6g",    "+4.90000e-324"},
                 {Double.MIN_VALUE, "% 0(,12.0g",   " 000005e-324"},
-                
+
                 {Double.NaN, "%g",           "NaN"},
                 {Double.NaN, "%- (,9.8g",    "NaN      "},
                 {Double.NaN, "%+0(,8.4g",    "     NaN"},
                 {Double.NaN, "%-+(,1.6g",    "NaN"},
                 {Double.NaN, "% 0(,12.0g",   "         NaN"},
-                
+
                 {Double.NEGATIVE_INFINITY, "%g",           "-Infinity"},
                 {Double.NEGATIVE_INFINITY, "%- (,9.8g",    "(Infinity)"},
                 {Double.NEGATIVE_INFINITY, "%+0(,8.4g",    "(Infinity)"},
                 {Double.NEGATIVE_INFINITY, "%-+(,1.6g",    "(Infinity)"},
                 {Double.NEGATIVE_INFINITY, "% 0(,12.0g",   "  (Infinity)"},
-                
+
                 {Double.POSITIVE_INFINITY, "%g",           "Infinity"},
                 {Double.POSITIVE_INFINITY, "%- (,9.8g",    " Infinity"},
                 {Double.POSITIVE_INFINITY, "%+0(,8.4g",    "+Infinity"},
                 {Double.POSITIVE_INFINITY, "%-+(,1.6g",    "+Infinity"},
                 {Double.POSITIVE_INFINITY, "% 0(,12.0g",   "    Infinity"},
-                
+
         };
         final int input   = 0;
         final int pattern = 1;
         final int output  = 2;
             for (int i = 0; i < tripleG.length; i++) {
-                
+
                 f = new Formatter(Locale.US);
                 f.format((String)tripleG[i][pattern], tripleG[i][input]);
                 assertEquals("triple[" + i + "]:" + tripleG[i][input] + ",pattern["
@@ -3269,7 +3189,7 @@ public class FormatterTest extends TestCase {
                 {0f, "%#+0(1.6f",   "+0,000000"},
                 {0f, "%-+(8.4f",    "+0,0000 "},
                 {0f, "% 0#(9.8f",   " 0,00000000"},
-                
+
                 {1234f, "%f",          "1234,000000"},
                 {1234f, "%#.3f",       "1234,000"},
                 {1234f, "%,5f",        "1.234,000000"},
@@ -3277,7 +3197,7 @@ public class FormatterTest extends TestCase {
                 {1234f, "%#+0(1.6f",   "+1234,000000"},
                 {1234f, "%-+(8.4f",    "+1234,0000"},
                 {1234f, "% 0#(9.8f",   " 1234,00000000"},
-                
+
                 {1.f, "%f",          "1,000000"},
                 {1.f, "%#.3f",       "1,000"},
                 {1.f, "%,5f",        "1,000000"},
@@ -3285,7 +3205,7 @@ public class FormatterTest extends TestCase {
                 {1.f, "%#+0(1.6f",   "+1,000000"},
                 {1.f, "%-+(8.4f",    "+1,0000 "},
                 {1.f, "% 0#(9.8f",   " 1,00000000"},
-                
+
                 {-98f, "%f",          "-98,000000"},
                 {-98f, "%#.3f",       "-98,000"},
                 {-98f, "%,5f",        "-98,000000"},
@@ -3293,7 +3213,7 @@ public class FormatterTest extends TestCase {
                 {-98f, "%#+0(1.6f",   "(98,000000)"},
                 {-98f, "%-+(8.4f",    "(98,0000)"},
                 {-98f, "% 0#(9.8f",   "(98,00000000)"},
-                
+
                 {0.000001f, "%f",          "0,000001"},
                 {0.000001f, "%#.3f",       "0,000"},
                 {0.000001f, "%,5f",        "0,000001"},
@@ -3301,7 +3221,7 @@ public class FormatterTest extends TestCase {
                 {0.000001f, "%#+0(1.6f",   "+0,000001"},
                 {0.000001f, "%-+(8.4f",    "+0,0000 "},
                 {0.000001f, "% 0#(9.8f",   " 0,00000100"},
-                
+
                 {345.1234567f, "%f",          "345,123444"},
                 {345.1234567f, "%#.3f",       "345,123"},
                 {345.1234567f, "%,5f",        "345,123444"},
@@ -3309,7 +3229,7 @@ public class FormatterTest extends TestCase {
                 {345.1234567f, "%#+0(1.6f",   "+345,123444"},
                 {345.1234567f, "%-+(8.4f",    "+345,1234"},
                 {345.1234567f, "% 0#(9.8f",   " 345,12344360"},
-                
+
                 {-.00000012345f, "%f",          "-0,000000"},
                 {-.00000012345f, "%#.3f",       "-0,000"},
                 {-.00000012345f, "%,5f",        "-0,000000"},
@@ -3317,7 +3237,7 @@ public class FormatterTest extends TestCase {
                 {-.00000012345f, "%#+0(1.6f",   "(0,000000)"},
                 {-.00000012345f, "%-+(8.4f",    "(0,0000)"},
                 {-.00000012345f, "% 0#(9.8f",   "(0,00000012)"},
-                
+
                 {-987654321.1234567f, "%f",          "-987654336,000000"},
                 {-987654321.1234567f, "%#.3f",       "-987654336,000"},
                 {-987654321.1234567f, "%,5f",        "-987.654.336,000000"},
@@ -3325,7 +3245,7 @@ public class FormatterTest extends TestCase {
                 {-987654321.1234567f, "%#+0(1.6f",   "(987654336,000000)"},
                 {-987654321.1234567f, "%-+(8.4f",    "(987654336,0000)"},
                 {-987654321.1234567f, "% 0#(9.8f",   "(987654336,00000000)"},
-                
+
                 {Float.MAX_VALUE, "%f",          "340282346638528860000000000000000000000,000000"},
                 {Float.MAX_VALUE, "%#.3f",       "340282346638528860000000000000000000000,000"},
                 {Float.MAX_VALUE, "%,5f",        "340.282.346.638.528.860.000.000.000.000.000.000.000,000000"},
@@ -3333,7 +3253,7 @@ public class FormatterTest extends TestCase {
                 {Float.MAX_VALUE, "%#+0(1.6f",   "+340282346638528860000000000000000000000,000000"},
                 {Float.MAX_VALUE, "%-+(8.4f",    "+340282346638528860000000000000000000000,0000"},
                 {Float.MAX_VALUE, "% 0#(9.8f",   " 340282346638528860000000000000000000000,00000000"},
-                
+
                 {Float.MIN_VALUE, "%f",          "0,000000"},
                 {Float.MIN_VALUE, "%#.3f",       "0,000"},
                 {Float.MIN_VALUE, "%,5f",        "0,000000"},
@@ -3341,7 +3261,7 @@ public class FormatterTest extends TestCase {
                 {Float.MIN_VALUE, "%#+0(1.6f",   "+0,000000"},
                 {Float.MIN_VALUE, "%-+(8.4f",    "+0,0000 "},
                 {Float.MIN_VALUE, "% 0#(9.8f",   " 0,00000000"},
-                
+
                 {Float.NaN, "%f",          "NaN"},
                 {Float.NaN, "%#.3f",       "NaN"},
                 {Float.NaN, "%,5f",        "  NaN"},
@@ -3349,7 +3269,7 @@ public class FormatterTest extends TestCase {
                 {Float.NaN, "%#+0(1.6f",   "NaN"},
                 {Float.NaN, "%-+(8.4f",    "NaN     "},
                 {Float.NaN, "% 0#(9.8f",   "      NaN"},
-                
+
                 {Float.NEGATIVE_INFINITY, "%f",          "-Infinity"},
                 {Float.NEGATIVE_INFINITY, "%#.3f",       "-Infinity"},
                 {Float.NEGATIVE_INFINITY, "%,5f",        "-Infinity"},
@@ -3357,7 +3277,7 @@ public class FormatterTest extends TestCase {
                 {Float.NEGATIVE_INFINITY, "%#+0(1.6f",   "(Infinity)"},
                 {Float.NEGATIVE_INFINITY, "%-+(8.4f",    "(Infinity)"},
                 {Float.NEGATIVE_INFINITY, "% 0#(9.8f",   "(Infinity)"},
-                
+
                 {Float.POSITIVE_INFINITY, "%f",          "Infinity"},
                 {Float.POSITIVE_INFINITY, "%#.3f",       "Infinity"},
                 {Float.POSITIVE_INFINITY, "%,5f",        "Infinity"},
@@ -3365,8 +3285,8 @@ public class FormatterTest extends TestCase {
                 {Float.POSITIVE_INFINITY, "%#+0(1.6f",   "+Infinity"},
                 {Float.POSITIVE_INFINITY, "%-+(8.4f",    "+Infinity"},
                 {Float.POSITIVE_INFINITY, "% 0#(9.8f",   " Infinity"},
-                
-                
+
+
                 {0d, "%f",          "0,000000"},
                 {0d, "%#.3f",       "0,000"},
                 {0d, "%,5f",        "0,000000"},
@@ -3374,7 +3294,7 @@ public class FormatterTest extends TestCase {
                 {0d, "%#+0(1.6f",   "+0,000000"},
                 {0d, "%-+(8.4f",    "+0,0000 "},
                 {0d, "% 0#(9.8f",   " 0,00000000"},
-                
+
                 {1d, "%f",          "1,000000"},
                 {1d, "%#.3f",       "1,000"},
                 {1d, "%,5f",        "1,000000"},
@@ -3382,7 +3302,7 @@ public class FormatterTest extends TestCase {
                 {1d, "%#+0(1.6f",   "+1,000000"},
                 {1d, "%-+(8.4f",    "+1,0000 "},
                 {1d, "% 0#(9.8f",   " 1,00000000"},
-                
+
                 {-1d, "%f",          "-1,000000"},
                 {-1d, "%#.3f",       "-1,000"},
                 {-1d, "%,5f",        "-1,000000"},
@@ -3390,7 +3310,7 @@ public class FormatterTest extends TestCase {
                 {-1d, "%#+0(1.6f",   "(1,000000)"},
                 {-1d, "%-+(8.4f",    "(1,0000)"},
                 {-1d, "% 0#(9.8f",   "(1,00000000)"},
-                
+
                 {.00000001d, "%f",          "0,000000"},
                 {.00000001d, "%#.3f",       "0,000"},
                 {.00000001d, "%,5f",        "0,000000"},
@@ -3398,7 +3318,7 @@ public class FormatterTest extends TestCase {
                 {.00000001d, "%#+0(1.6f",   "+0,000000"},
                 {.00000001d, "%-+(8.4f",    "+0,0000 "},
                 {.00000001d, "% 0#(9.8f",   " 0,00000001"},
-                
+
                 {1000.10d, "%f",          "1000,100000"},
                 {1000.10d, "%#.3f",       "1000,100"},
                 {1000.10d, "%,5f",        "1.000,100000"},
@@ -3406,7 +3326,7 @@ public class FormatterTest extends TestCase {
                 {1000.10d, "%#+0(1.6f",   "+1000,100000"},
                 {1000.10d, "%-+(8.4f",    "+1000,1000"},
                 {1000.10d, "% 0#(9.8f",   " 1000,10000000"},
-                
+
                 {0.1d, "%f",          "0,100000"},
                 {0.1d, "%#.3f",       "0,100"},
                 {0.1d, "%,5f",        "0,100000"},
@@ -3414,7 +3334,7 @@ public class FormatterTest extends TestCase {
                 {0.1d, "%#+0(1.6f",   "+0,100000"},
                 {0.1d, "%-+(8.4f",    "+0,1000 "},
                 {0.1d, "% 0#(9.8f",   " 0,10000000"},
-                
+
                 {-2.d, "%f",          "-2,000000"},
                 {-2.d, "%#.3f",       "-2,000"},
                 {-2.d, "%,5f",        "-2,000000"},
@@ -3422,7 +3342,7 @@ public class FormatterTest extends TestCase {
                 {-2.d, "%#+0(1.6f",   "(2,000000)"},
                 {-2.d, "%-+(8.4f",    "(2,0000)"},
                 {-2.d, "% 0#(9.8f",   "(2,00000000)"},
-                
+
                 {-.00009d, "%f",          "-0,000090"},
                 {-.00009d, "%#.3f",       "-0,000"},
                 {-.00009d, "%,5f",        "-0,000090"},
@@ -3430,7 +3350,7 @@ public class FormatterTest extends TestCase {
                 {-.00009d, "%#+0(1.6f",   "(0,000090)"},
                 {-.00009d, "%-+(8.4f",    "(0,0001)"},
                 {-.00009d, "% 0#(9.8f",   "(0,00009000)"},
-                
+
                 {-1234567890.012345678d, "%f",          "-1234567890,012346"},
                 {-1234567890.012345678d, "%#.3f",       "-1234567890,012"},
                 {-1234567890.012345678d, "%,5f",        "-1.234.567.890,012346"},
@@ -3438,7 +3358,7 @@ public class FormatterTest extends TestCase {
                 {-1234567890.012345678d, "%#+0(1.6f",   "(1234567890,012346)"},
                 {-1234567890.012345678d, "%-+(8.4f",    "(1234567890,0123)"},
                 {-1234567890.012345678d, "% 0#(9.8f",   "(1234567890,01234580)"},
-                
+
                 {Double.MAX_VALUE, "%f",          "179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,000000"},
                 {Double.MAX_VALUE, "%#.3f",       "179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,000"},
                 {Double.MAX_VALUE, "%,5f",        "179.769.313.486.231.570.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000,000000"},
@@ -3446,7 +3366,7 @@ public class FormatterTest extends TestCase {
                 {Double.MAX_VALUE, "%#+0(1.6f",   "+179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,000000"},
                 {Double.MAX_VALUE, "%-+(8.4f",    "+179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,0000"},
                 {Double.MAX_VALUE, "% 0#(9.8f",   " 179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000,00000000"},
-                
+
                 {Double.MIN_VALUE, "%f",          "0,000000"},
                 {Double.MIN_VALUE, "%#.3f",       "0,000"},
                 {Double.MIN_VALUE, "%,5f",        "0,000000"},
@@ -3454,7 +3374,7 @@ public class FormatterTest extends TestCase {
                 {Double.MIN_VALUE, "%#+0(1.6f",   "+0,000000"},
                 {Double.MIN_VALUE, "%-+(8.4f",    "+0,0000 "},
                 {Double.MIN_VALUE, "% 0#(9.8f",   " 0,00000000"},
-                
+
                 {Double.NaN, "%f",          "NaN"},
                 {Double.NaN, "%#.3f",       "NaN"},
                 {Double.NaN, "%,5f",        "  NaN"},
@@ -3462,7 +3382,7 @@ public class FormatterTest extends TestCase {
                 {Double.NaN, "%#+0(1.6f",   "NaN"},
                 {Double.NaN, "%-+(8.4f",    "NaN     "},
                 {Double.NaN, "% 0#(9.8f",   "      NaN"},
-                
+
                 {Double.POSITIVE_INFINITY, "%f",          "Infinity"},
                 {Double.POSITIVE_INFINITY, "%#.3f",       "Infinity"},
                 {Double.POSITIVE_INFINITY, "%,5f",        "Infinity"},
@@ -3470,7 +3390,7 @@ public class FormatterTest extends TestCase {
                 {Double.POSITIVE_INFINITY, "%#+0(1.6f",   "+Infinity"},
                 {Double.POSITIVE_INFINITY, "%-+(8.4f",    "+Infinity"},
                 {Double.POSITIVE_INFINITY, "% 0#(9.8f",   " Infinity"},
-                
+
                 {Double.NEGATIVE_INFINITY, "%f",          "-Infinity"},
                 {Double.NEGATIVE_INFINITY, "%#.3f",       "-Infinity"},
                 {Double.NEGATIVE_INFINITY, "%,5f",        "-Infinity"},
@@ -3504,71 +3424,71 @@ public class FormatterTest extends TestCase {
                 {-0f, "%- 12.0a",   "-0x0.0p0    "},
                 {-0f, "%#+01.6a",   "-0x0.000000p0"},
                 {-0f, "%-+8.4a",    "-0x0.0000p0"},
-                
+
                 {0f, "%a",         "0x0.0p0"},
                 {0f, "%#.3a",      "0x0.000p0"},
                 {0f, "%5a",        "0x0.0p0"},
                 {0f, "%- 12.0a",   " 0x0.0p0    "},
                 {0f, "%#+01.6a",   "+0x0.000000p0"},
                 {0f, "%-+8.4a",    "+0x0.0000p0"},
-                
+
                 {1234f, "%a",         "0x1.348p10"},
                 {1234f, "%#.3a",      "0x1.348p10"},
                 {1234f, "%5a",        "0x1.348p10"},
                 {1234f, "%- 12.0a",   " 0x1.3p10   "},
                 {1234f, "%#+01.6a",   "+0x1.348000p10"},
                 {1234f, "%-+8.4a",    "+0x1.3480p10"},
-                
+
                 {1.f, "%a",         "0x1.0p0"},
                 {1.f, "%#.3a",      "0x1.000p0"},
                 {1.f, "%5a",        "0x1.0p0"},
                 {1.f, "%- 12.0a",   " 0x1.0p0    "},
                 {1.f, "%#+01.6a",   "+0x1.000000p0"},
                 {1.f, "%-+8.4a",    "+0x1.0000p0"},
-                
+
                 {-98f, "%a",         "-0x1.88p6"},
                 {-98f, "%#.3a",      "-0x1.880p6"},
                 {-98f, "%5a",        "-0x1.88p6"},
                 {-98f, "%- 12.0a",   "-0x1.8p6    "},
                 {-98f, "%#+01.6a",   "-0x1.880000p6"},
                 {-98f, "%-+8.4a",    "-0x1.8800p6"},
-                
+
                 {345.1234567f, "%a",         "0x1.591f9ap8"},
                 {345.1234567f, "%5a",        "0x1.591f9ap8"},
                 {345.1234567f, "%#+01.6a",   "+0x1.591f9ap8"},
-                
+
                 {-987654321.1234567f, "%a",         "-0x1.d6f346p29"},
                 {-987654321.1234567f, "%#.3a",      "-0x1.d6fp29"},
                 {-987654321.1234567f, "%5a",        "-0x1.d6f346p29"},
                 {-987654321.1234567f, "%- 12.0a",   "-0x1.dp29   "},
                 {-987654321.1234567f, "%#+01.6a",   "-0x1.d6f346p29"},
                 {-987654321.1234567f, "%-+8.4a",    "-0x1.d6f3p29"},
-                
+
                 {Float.MAX_VALUE, "%a",         "0x1.fffffep127"},
                 {Float.MAX_VALUE, "%5a",        "0x1.fffffep127"},
                 {Float.MAX_VALUE, "%#+01.6a",   "+0x1.fffffep127"},
-                
+
                 {Float.NaN, "%a",         "NaN"},
                 {Float.NaN, "%#.3a",      "NaN"},
                 {Float.NaN, "%5a",        "  NaN"},
                 {Float.NaN, "%- 12.0a",   "NaN         "},
                 {Float.NaN, "%#+01.6a",   "NaN"},
                 {Float.NaN, "%-+8.4a",    "NaN     "},
-                
+
                 {Float.NEGATIVE_INFINITY, "%a",         "-Infinity"},
                 {Float.NEGATIVE_INFINITY, "%#.3a",      "-Infinity"},
                 {Float.NEGATIVE_INFINITY, "%5a",        "-Infinity"},
                 {Float.NEGATIVE_INFINITY, "%- 12.0a",   "-Infinity   "},
                 {Float.NEGATIVE_INFINITY, "%#+01.6a",   "-Infinity"},
                 {Float.NEGATIVE_INFINITY, "%-+8.4a",    "-Infinity"},
-                
+
                 {Float.POSITIVE_INFINITY, "%a",         "Infinity"},
                 {Float.POSITIVE_INFINITY, "%#.3a",      "Infinity"},
                 {Float.POSITIVE_INFINITY, "%5a",        "Infinity"},
                 {Float.POSITIVE_INFINITY, "%- 12.0a",   " Infinity   "},
                 {Float.POSITIVE_INFINITY, "%#+01.6a",   "+Infinity"},
                 {Float.POSITIVE_INFINITY, "%-+8.4a",    "+Infinity"},
-                
+
                 {-0d, "%a",         "-0x0.0p0"},
                 {-0d, "%#.3a",      "-0x0.000p0"},
                 {-0d, "%5a",        "-0x0.0p0"},
@@ -3582,76 +3502,76 @@ public class FormatterTest extends TestCase {
                 {0d, "%- 12.0a",   " 0x0.0p0    "},
                 {0d, "%#+01.6a",   "+0x0.000000p0"},
                 {0d, "%-+8.4a",    "+0x0.0000p0"},
-                
+
                 {1d, "%a",         "0x1.0p0"},
                 {1d, "%#.3a",      "0x1.000p0"},
                 {1d, "%5a",        "0x1.0p0"},
                 {1d, "%- 12.0a",   " 0x1.0p0    "},
                 {1d, "%#+01.6a",   "+0x1.000000p0"},
                 {1d, "%-+8.4a",    "+0x1.0000p0"},
-                
+
                 {-1d, "%a",         "-0x1.0p0"},
                 {-1d, "%#.3a",      "-0x1.000p0"},
                 {-1d, "%5a",        "-0x1.0p0"},
                 {-1d, "%- 12.0a",   "-0x1.0p0    "},
                 {-1d, "%#+01.6a",   "-0x1.000000p0"},
                 {-1d, "%-+8.4a",    "-0x1.0000p0"},
-                
+
                 {.00000001d, "%a",         "0x1.5798ee2308c3ap-27"},
                 {.00000001d, "%5a",        "0x1.5798ee2308c3ap-27"},
                 {.00000001d, "%- 12.0a",   " 0x1.5p-27  "},
                 {.00000001d, "%#+01.6a",   "+0x1.5798eep-27"},
-                
+
                 {1000.10d, "%a",         "0x1.f40cccccccccdp9"},
                 {1000.10d, "%5a",        "0x1.f40cccccccccdp9"},
                 {1000.10d, "%- 12.0a",   " 0x1.fp9    "},
-                
+
                 {0.1d, "%a",         "0x1.999999999999ap-4"},
                 {0.1d, "%5a",        "0x1.999999999999ap-4"},
-                
+
                 {-2.d, "%a",         "-0x1.0p1"},
                 {-2.d, "%#.3a",      "-0x1.000p1"},
                 {-2.d, "%5a",        "-0x1.0p1"},
                 {-2.d, "%- 12.0a",   "-0x1.0p1    "},
                 {-2.d, "%#+01.6a",   "-0x1.000000p1"},
                 {-2.d, "%-+8.4a",    "-0x1.0000p1"},
-                
+
                 {-.00009d, "%a",         "-0x1.797cc39ffd60fp-14"},
                 {-.00009d, "%5a",        "-0x1.797cc39ffd60fp-14"},
-                
+
                 {-1234567890.012345678d, "%a",         "-0x1.26580b480ca46p30"},
                 {-1234567890.012345678d, "%5a",        "-0x1.26580b480ca46p30"},
                 {-1234567890.012345678d, "%- 12.0a",   "-0x1.2p30   "},
                 {-1234567890.012345678d, "%#+01.6a",   "-0x1.26580bp30"},
                 {-1234567890.012345678d, "%-+8.4a",    "-0x1.2658p30"},
-                
+
                 {Double.MAX_VALUE, "%a",         "0x1.fffffffffffffp1023"},
                 {Double.MAX_VALUE, "%5a",        "0x1.fffffffffffffp1023"},
-                
+
                 {Double.MIN_VALUE, "%a",         "0x0.0000000000001p-1022"},
                 {Double.MIN_VALUE, "%5a",        "0x0.0000000000001p-1022"},
-                
+
                 {Double.NaN, "%a",         "NaN"},
                 {Double.NaN, "%#.3a",      "NaN"},
                 {Double.NaN, "%5a",        "  NaN"},
                 {Double.NaN, "%- 12.0a",   "NaN         "},
                 {Double.NaN, "%#+01.6a",   "NaN"},
                 {Double.NaN, "%-+8.4a",    "NaN     "},
-                
+
                 {Double.NEGATIVE_INFINITY, "%a",         "-Infinity"},
                 {Double.NEGATIVE_INFINITY, "%#.3a",      "-Infinity"},
                 {Double.NEGATIVE_INFINITY, "%5a",        "-Infinity"},
                 {Double.NEGATIVE_INFINITY, "%- 12.0a",   "-Infinity   "},
                 {Double.NEGATIVE_INFINITY, "%#+01.6a",   "-Infinity"},
                 {Double.NEGATIVE_INFINITY, "%-+8.4a",    "-Infinity"},
-                
+
                 {Double.POSITIVE_INFINITY, "%a",         "Infinity"},
                 {Double.POSITIVE_INFINITY, "%#.3a",      "Infinity"},
                 {Double.POSITIVE_INFINITY, "%5a",        "Infinity"},
                 {Double.POSITIVE_INFINITY, "%- 12.0a",   " Infinity   "},
                 {Double.POSITIVE_INFINITY, "%#+01.6a",   "+Infinity"},
                 {Double.POSITIVE_INFINITY, "%-+8.4a",    "+Infinity"},
-                
+
         };
         final int input   = 0;
         final int pattern = 1;
@@ -3685,35 +3605,35 @@ public class FormatterTest extends TestCase {
                 {BigDecimal.ZERO, "%#+0(8.4e",  "+0.0000e+00"},
                 {BigDecimal.ZERO, "%-+17.6e",   "+0.000000e+00    "},
                 {BigDecimal.ZERO, "% 0(20e",    " 00000000.000000e+00"},
-                
+
                 {BigDecimal.ONE, "%e",         "1.000000e+00"},
                 {BigDecimal.ONE, "%#.0e",      "1.e+00"},
                 {BigDecimal.ONE, "%# 9.8e",    " 1.00000000e+00"},
                 {BigDecimal.ONE, "%#+0(8.4e",  "+1.0000e+00"},
                 {BigDecimal.ONE, "%-+17.6e",   "+1.000000e+00    "},
                 {BigDecimal.ONE, "% 0(20e",    " 00000001.000000e+00"},
-                
+
                 {BigDecimal.TEN, "%e",         "1.000000e+01"},
                 {BigDecimal.TEN, "%#.0e",      "1.e+01"},
                 {BigDecimal.TEN, "%# 9.8e",    " 1.00000000e+01"},
                 {BigDecimal.TEN, "%#+0(8.4e",  "+1.0000e+01"},
                 {BigDecimal.TEN, "%-+17.6e",   "+1.000000e+01    "},
                 {BigDecimal.TEN, "% 0(20e",    " 00000001.000000e+01"},
-                
+
                 {new BigDecimal(-1), "%e",         "-1.000000e+00"},
                 {new BigDecimal(-1), "%#.0e",      "-1.e+00"},
                 {new BigDecimal(-1), "%# 9.8e",    "-1.00000000e+00"},
                 {new BigDecimal(-1), "%#+0(8.4e",  "(1.0000e+00)"},
                 {new BigDecimal(-1), "%-+17.6e",   "-1.000000e+00    "},
                 {new BigDecimal(-1), "% 0(20e",    "(0000001.000000e+00)"},
-                
+
                 {new BigDecimal("5.000E999"), "%e",         "5.000000e+999"},
                 {new BigDecimal("5.000E999"), "%#.0e",      "5.e+999"},
                 {new BigDecimal("5.000E999"), "%# 9.8e",    " 5.00000000e+999"},
                 {new BigDecimal("5.000E999"), "%#+0(8.4e",  "+5.0000e+999"},
                 {new BigDecimal("5.000E999"), "%-+17.6e",   "+5.000000e+999   "},
                 {new BigDecimal("5.000E999"), "% 0(20e",    " 0000005.000000e+999"},
-                
+
                 {new BigDecimal("-5.000E999"), "%e",         "-5.000000e+999"},
                 {new BigDecimal("-5.000E999"), "%#.0e",      "-5.e+999"},
                 {new BigDecimal("-5.000E999"), "%# 9.8e",    "-5.00000000e+999"},
@@ -3759,42 +3679,42 @@ public class FormatterTest extends TestCase {
                 {BigDecimal.ONE, "%+0(,8.4g",   "+001.000"},
                 {BigDecimal.ONE, "%-+10.6g",    "+1.00000  "},
                 {BigDecimal.ONE, "% 0(,12.0g",  " 00000000001"},
-                
+
                 {new BigDecimal(-1), "%g",          "-1.00000"},
                 {new BigDecimal(-1), "%.5g",        "-1.0000"},
                 {new BigDecimal(-1), "%- (,9.8g",   "(1.0000000)"},
                 {new BigDecimal(-1), "%+0(,8.4g",   "(01.000)"},
                 {new BigDecimal(-1), "%-+10.6g",    "-1.00000  "},
                 {new BigDecimal(-1), "% 0(,12.0g",  "(0000000001)"},
-                
+
                 {new BigDecimal(-0.000001), "%g",           "-1.00000e-06"},
                 {new BigDecimal(-0.000001), "%.5g",         "-1.0000e-06"},
                 {new BigDecimal(-0.000001), "%- (,9.8g",    "(1.0000000e-06)"},
                 {new BigDecimal(-0.000001), "%+0(,8.4g",    "(1.000e-06)"},
                 {new BigDecimal(-0.000001), "%-+10.6g",     "-1.00000e-06"},
                 {new BigDecimal(-0.000001), "% 0(,12.0g",   "(000001e-06)"},
-                
+
                 {new BigDecimal(0.0002), "%g",          "0.000200000"},
                 {new BigDecimal(0.0002), "%.5g",        "0.00020000"},
                 {new BigDecimal(0.0002), "%- (,9.8g",   " 0.00020000000"},
                 {new BigDecimal(0.0002), "%+0(,8.4g",   "+0.0002000"},
                 {new BigDecimal(0.0002), "%-+10.6g",    "+0.000200000"},
                 {new BigDecimal(0.0002), "% 0(,12.0g",  " 000000.0002"},
-                
+
                 {new BigDecimal(-0.003), "%g",          "-0.00300000"},
                 {new BigDecimal(-0.003), "%.5g",        "-0.0030000"},
                 {new BigDecimal(-0.003), "%- (,9.8g",   "(0.0030000000)"},
                 {new BigDecimal(-0.003), "%+0(,8.4g",   "(0.003000)"},
                 {new BigDecimal(-0.003), "%-+10.6g",    "-0.00300000"},
                 {new BigDecimal(-0.003), "% 0(,12.0g",  "(000000.003)"},
-                
+
                 {new BigDecimal("5.000E999"), "%g",             "5.00000e+999"},
                 {new BigDecimal("5.000E999"), "%.5g",           "5.0000e+999"},
                 {new BigDecimal("5.000E999"), "%- (,9.8g",      " 5.0000000e+999"},
                 {new BigDecimal("5.000E999"), "%+0(,8.4g",      "+5.000e+999"},
                 {new BigDecimal("5.000E999"), "%-+10.6g",       "+5.00000e+999"},
                 {new BigDecimal("5.000E999"), "% 0(,12.0g",     " 000005e+999"},
-                
+
                 {new BigDecimal("-5.000E999"), "%g",            "-5.00000e+999"},
                 {new BigDecimal("-5.000E999"), "%.5g",          "-5.0000e+999"},
                 {new BigDecimal("-5.000E999"), "%- (,9.8g",     "(5.0000000e+999)"},
@@ -3884,7 +3804,7 @@ public class FormatterTest extends TestCase {
                 {new BigDecimal("-9999999999999999999999999999999999999999999"), "%#+0(1.6f",   "(9999999999999999999999999999999999999999999.000000)"},
                 {new BigDecimal("-9999999999999999999999999999999999999999999"), "%-+(8.4f",    "(9999999999999999999999999999999999999999999.0000)"},
                 {new BigDecimal("-9999999999999999999999999999999999999999999"), "% 0#(9.8f",   "(9999999999999999999999999999999999999999999.00000000)"},
-        }; 
+        };
         for (int i = 0; i < tripleF.length; i++) {
             f = new Formatter(Locale.US);
             f.format((String)tripleF[i][pattern], tripleF[i][input]);
@@ -4021,7 +3941,7 @@ public class FormatterTest extends TestCase {
          * MissingFormatWidthException > IllegalFormatFlagsException >
          * FormatFlagsConversionMismatchException >
          * IllegalFormatConversionException
-         * 
+         *
          */
         try {
             // compare FormatFlagsConversionMismatchException and
@@ -4077,7 +3997,7 @@ public class FormatterTest extends TestCase {
          * MissingFormatWidthException > IllegalFormatFlagsException >
          * FormatFlagsConversionMismatchException >
          * IllegalFormatConversionException
-         * 
+         *
          */
         try {
             // compare FormatFlagsConversionMismatchException and
@@ -4218,7 +4138,7 @@ public class FormatterTest extends TestCase {
         f.format("% .5A", (BigDecimal) null);
         assertEquals("NULL", f.toString());
     }
-    
+
     /**
      * @tests java.util.Formatter.BigDecimalLayoutForm#values()
      */
@@ -4228,7 +4148,7 @@ public class FormatterTest extends TestCase {
         assertEquals("Wrong scientific value in enum", BigDecimalLayoutForm.SCIENTIFIC, vals[0]);
         assertEquals("Wrong dec float value in enum", BigDecimalLayoutForm.DECIMAL_FLOAT, vals[1]);
     }
-    
+
     /**
      * @tests java.util.Formatter.BigDecimalLayoutForm#valueOf(String)
      */
@@ -4239,7 +4159,7 @@ public class FormatterTest extends TestCase {
         BigDecimalLayoutForm decFloat = BigDecimalLayoutForm.valueOf("DECIMAL_FLOAT");
         assertEquals("Wrong dec float value from valueOf ", BigDecimalLayoutForm.DECIMAL_FLOAT, decFloat);
     }
-    
+
     /*
      * Regression test for Harmony-5845
      * test the short name for timezone whether uses DaylightTime or not
@@ -4261,7 +4181,7 @@ public class FormatterTest extends TestCase {
             }
         }
     }
-    
+
     /*
      * Regression test for Harmony-5845
      * test scientific notation to follow RI's behavior
@@ -4277,7 +4197,7 @@ public class FormatterTest extends TestCase {
         assertEquals(expected, result);
     }
 
-    
+
     /**
      * Setup resource files for testing
      */
@@ -4296,7 +4216,7 @@ public class FormatterTest extends TestCase {
         readOnly.setReadOnly();
 
         secret = File.createTempFile("secret", null);
-        
+
         defaultTimeZone = TimeZone.getDefault();
         TimeZone cst = TimeZone.getTimeZone("Asia/Shanghai");
         TimeZone.setDefault(cst);
@@ -4319,7 +4239,7 @@ public class FormatterTest extends TestCase {
         if (secret.exists()) {
             secret.delete();
         }
-        
+
         TimeZone.setDefault(defaultTimeZone);
     }
 }

@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -38,7 +38,7 @@ import tests.util.CallVerificationStack;
 
 /**
  * Test suite for the class java.util.logging.Handler.
- * 
+ *
  */
 public class HandlerTest extends TestCase {
 	private static String className = HandlerTest.class.getName();
@@ -60,7 +60,7 @@ public class HandlerTest extends TestCase {
 
 	/**
 	 * Constructor for HandlerTest.
-	 * 
+	 *
 	 * @param arg0
 	 */
 	public HandlerTest(String arg0) {
@@ -163,35 +163,6 @@ public class HandlerTest extends TestCase {
 	}
 
 	/*
-	 * Test setEncoding with insufficient privilege.
-	 */
-	public void testSetEncoding_InsufficientPrivilege() throws Exception {
-		MockHandler h = new MockHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		// set a normal value
-		try {
-			h.setEncoding("iso-8859-1");
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-		assertNull(h.getEncoding());
-		System.setSecurityManager(new MockSecurityManager());
-		// set an invalid value
-		try {
-
-			h.setEncoding("impossible");
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-		assertNull(h.getEncoding());
-	}
-
-	/*
 	 * Test getErrorManager & setErrorManager methods with non-null value.
 	 */
 	public void testGetSetErrorManager_Normal() throws Exception {
@@ -223,52 +194,6 @@ public class HandlerTest extends TestCase {
 	}
 
 	/*
-	 * Test getErrorManager with insufficient privilege.
-	 */
-	public void testGetErrorManager_InsufficientPrivilege() throws Exception {
-		MockHandler h = new MockHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-
-		try {
-			h.getErrorManager();
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
-	 * Test setErrorManager with insufficient privilege.
-	 */
-	public void testSetErrorManager_InsufficientPrivilege() throws Exception {
-		MockHandler h = new MockHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-
-		// set null
-		try {
-
-			h.setErrorManager(null);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-		// set a normal value
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-
-			h.setErrorManager(new ErrorManager());
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
 	 * Test getFilter & setFilter methods with non-null value.
 	 */
 	public void testGetSetFilter_Normal() throws Exception {
@@ -289,35 +214,6 @@ public class HandlerTest extends TestCase {
 		// test reset null
 		h.setFilter(new MockFilter());
 		h.setFilter(null);
-	}
-
-	/*
-	 * Test setFilter with insufficient privilege.
-	 */
-	public void testSetFilter_InsufficientPrivilege() throws Exception {
-		MockHandler h = new MockHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-
-		// set null
-		try {
-
-			h.setFilter(null);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-		// set a normal value
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-
-			h.setFilter(new MockFilter());
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
 	}
 
 	/*
@@ -352,35 +248,6 @@ public class HandlerTest extends TestCase {
 	}
 
 	/*
-	 * Test setFormatter with insufficient privilege.
-	 */
-	public void testSetFormatter_InsufficientPrivilege() throws Exception {
-		MockHandler h = new MockHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-
-		// set null
-		try {
-
-			h.setFormatter(null);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-		// set a normal value
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-
-			h.setFormatter(new SimpleFormatter());
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
 	 * Test getLevel & setLevel methods with non-null value.
 	 */
 	public void testGetSetLevel_Normal() throws Exception {
@@ -408,35 +275,6 @@ public class HandlerTest extends TestCase {
 			h.setLevel(null);
 			fail("Should throw NullPointerException!");
 		} catch (NullPointerException e) {
-		}
-	}
-
-	/*
-	 * Test setLevel with insufficient privilege.
-	 */
-	public void testSetLevel_InsufficientPrivilege() throws Exception {
-		MockHandler h = new MockHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-
-		// set null
-		try {
-
-			h.setLevel(null);
-			fail("Should throw NullPointerException!");
-		} catch (NullPointerException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-		// set a normal value
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-
-			h.setLevel(Level.CONFIG);
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-		} finally {
-			System.setSecurityManager(oldMan);
 		}
 	}
 
@@ -491,35 +329,6 @@ public class HandlerTest extends TestCase {
 	}
 
 	/*
-	 * Test whether the error manager is actually called with expected
-	 * parameters.
-	 */
-	public void testReportError() {
-		MockHandler h = new MockHandler();
-		h.setErrorManager(new MockErrorManager());
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-
-		try {
-			Exception ex = new Exception("test exception");
-			// with non-null parameters
-			h.reportError("test msg", ex, -1);
-			assertEquals(-1, CallVerificationStack.getInstance().popInt());
-			assertSame(ex, CallVerificationStack.getInstance().pop());
-			assertEquals("test msg", CallVerificationStack.getInstance().pop());
-			// with null parameters
-			h.reportError(null, null, 0);
-			assertEquals(0, CallVerificationStack.getInstance().popInt());
-			assertSame(null, CallVerificationStack.getInstance().pop());
-			assertNull(CallVerificationStack.getInstance().pop());
-		} catch (SecurityException e) {
-			fail("Should not throw SecurityException!");
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
 	 * Used to enable the testing of Handler because Handler is an abstract
 	 * class.
 	 */
@@ -536,29 +345,6 @@ public class HandlerTest extends TestCase {
 
 		public void reportError(String msg, Exception ex, int code) {
 			super.reportError(msg, ex, code);
-		}
-	}
-
-	/*
-	 * Used to grant all permissions except logging control.
-	 */
-	public static class MockSecurityManager extends SecurityManager {
-
-		public MockSecurityManager() {
-		}
-
-		public void checkPermission(Permission perm) {
-			// grant all permissions except logging control
-			if (perm instanceof LoggingPermission) {
-				throw new SecurityException();
-			}
-		}
-
-		public void checkPermission(Permission perm, Object context) {
-			// grant all permissions except logging control
-			if (perm instanceof LoggingPermission) {
-				throw new SecurityException();
-			}
 		}
 	}
 
@@ -585,7 +371,7 @@ public class HandlerTest extends TestCase {
 			CallVerificationStack.getInstance().push(errorCode);
 		}
 	}
-    
+
     public static class NullOutputStream extends OutputStream{
         @Override
         public void write(int arg0) throws IOException {

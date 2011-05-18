@@ -4,9 +4,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -55,11 +55,11 @@ public class ProxySelectorTest extends TestCase {
 	private static URI httpsUri;
 
 	private static URI tcpUri;
-	
+
 	private List proxyList;
-	
+
 	private ProxySelector selector = ProxySelector.getDefault();
-	
+
 	static {
 		try {
 			httpUri = new URI("http://test.com");
@@ -88,28 +88,6 @@ public class ProxySelectorTest extends TestCase {
 	}
 
 	/**
-	 * @tests java.net.ProxySelector#getDefault()
-	 */
-	public void test_getDefault_Security() {
-		SecurityManager originalSecurityManager = System.getSecurityManager();
-		try {
-			System.setSecurityManager(new MockSecurityManager());
-		} catch (SecurityException e) {
-			System.err.println("No setSecurityManager permission.");
-			System.err.println("test_getDefault_Security is not tested");
-			return;
-		}
-		try {
-			ProxySelector.getDefault();
-			fail("should throw SecurityException");
-		} catch (SecurityException e) {
-			// expected
-		} finally {
-			System.setSecurityManager(originalSecurityManager);
-		}
-	}
-
-	/**
 	 * @tests java.net.ProxySelector#setDefault(ProxySelector)}
 	 */
 	public void test_setDefaultLjava_net_ProxySelector() {
@@ -122,31 +100,6 @@ public class ProxySelectorTest extends TestCase {
 			ProxySelector.setDefault(null);
 			assertSame(null, ProxySelector.getDefault());
 		} finally {
-			ProxySelector.setDefault(originalSelector);
-		}
-	}
-
-	/**
-	 * @tests java.net.ProxySelector#setDefault(ProxySelector)}
-	 */
-	public void test_setDefaultLjava_net_ProxySelector_Security() {
-		ProxySelector originalSelector = ProxySelector.getDefault();
-		SecurityManager originalSecurityManager = System.getSecurityManager();
-		try {
-			System.setSecurityManager(new MockSecurityManager());
-		} catch (SecurityException e) {
-			System.err.println("No setSecurityManager permission.");
-			System.err
-					.println("test_setDefaultLjava_net_ProxySelector_Security is not tested");
-			return;
-		}
-		try {
-			ProxySelector.setDefault(new MockProxySelector());
-			fail("should throw SecurityException");
-		} catch (SecurityException e) {
-			// expected
-		} finally {
-			System.setSecurityManager(originalSecurityManager);
 			ProxySelector.setDefault(originalSelector);
 		}
 	}
@@ -178,15 +131,15 @@ public class ProxySelectorTest extends TestCase {
 
 		proxyList = selector.select(httpsUri);
 		assertProxyEquals(proxyList,Proxy.Type.HTTP,HTTPS_PROXY_HOST,HTTPS_PROXY_PORT);
-		
+
 		proxyList = selector.select(ftpUri);
 		assertProxyEquals(proxyList,Proxy.Type.HTTP,FTP_PROXY_HOST,FTP_PROXY_PORT);
-		
+
 		proxyList = selector.select(tcpUri);
 		assertProxyEquals(proxyList,Proxy.Type.SOCKS,SOCKS_PROXY_HOST,SOCKS_PROXY_PORT);
 
 	}
-    
+
     /**
      * @tests java.net.ProxySelector#select(URI)
      */
@@ -200,7 +153,7 @@ public class ProxySelectorTest extends TestCase {
         // no proxy, return a proxyList only contains NO_PROXY
         proxyList = selector.select(httpUri);
         assertProxyEquals(proxyList, Proxy.NO_PROXY);
-        
+
         // set http proxy
         System.setProperty("http.proxyHost", HTTP_PROXY_HOST);
         System.setProperty("http.proxyPort", String.valueOf(HTTP_PROXY_PORT));
@@ -231,7 +184,7 @@ public class ProxySelectorTest extends TestCase {
                 SOCKS_PROXY_PORT);
 
     }
-    
+
     //Regression for HARMONY-4281
     public void test_selectLjava_net_URI_SelectExact_NullHost_withNoProxyHostsProperty(){
         System.setProperty("http.nonProxyHosts", "localhost|127.0.0.1");
@@ -272,10 +225,10 @@ public class ProxySelectorTest extends TestCase {
 
 		proxyList = selector.select(httpsUri);
 		assertProxyEquals(proxyList,Proxy.Type.HTTP,HTTPS_PROXY_HOST,HTTPS_PROXY_PORT);
-		
+
 		proxyList = selector.select(ftpUri);
 		assertProxyEquals(proxyList,Proxy.Type.HTTP,FTP_PROXY_HOST,FTP_PROXY_PORT);
-		
+
 		proxyList = selector.select(tcpUri);
 		assertProxyEquals(proxyList,Proxy.Type.SOCKS,SOCKS_PROXY_HOST,SOCKS_PROXY_PORT);
 
@@ -287,7 +240,7 @@ public class ProxySelectorTest extends TestCase {
 	public void test_selectLjava_net_URI_SelectExact_InvalidPort()
 			throws URISyntaxException {
 		final String INVALID_PORT = "abc";
-		
+
 		// set http proxy
 		System.setProperty("http.proxyHost", HTTP_PROXY_HOST);
 		System.setProperty("http.proxyPort", INVALID_PORT);
@@ -317,19 +270,19 @@ public class ProxySelectorTest extends TestCase {
 	/**
 	 * @tests java.net.ProxySelector#select(URI)
 	 */
-	// RI may fail this test case. 
+	// RI may fail this test case.
 	// Uncomment this test case when regex.jar is ready.
 	/*
 	public void test_selectLjava_net_URI_Select_NonProxyHosts()
 			throws URISyntaxException {
-		// RI's bug. Some RIs may fail this test case. 
+		// RI's bug. Some RIs may fail this test case.
 		URI[] httpUris = { new URI("http://test.com"),
 				new URI("http://10.10.1.2"), new URI("http://a"),
 				new URI("http://def.abc.com") };
 		URI[] ftpUris = { new URI("ftp://test.com"),
 				new URI("ftp://10.10.1.2"), new URI("ftp://a"),
 				new URI("ftp://def.abc.com") };
-		
+
 		// set http proxy
 		System.setProperty("http.proxyHost", HTTP_PROXY_HOST);
 		System.setProperty("http.nonProxyHosts", "a|b|tes*|10.10.*|*.abc.com");
@@ -562,7 +515,7 @@ public class ProxySelectorTest extends TestCase {
 		assertEquals(1, selectedProxyList.size());
 		assertEquals((Proxy) selectedProxyList.get(0), proxy);
 	}
-	
+
 	/*
 	 * asserts whether selectedProxyList contains one and only one element,
 	 * and the element equals proxy which is represented by arguments "type",
@@ -574,7 +527,7 @@ public class ProxySelectorTest extends TestCase {
 		Proxy proxy = new Proxy(type, sa);
 		assertProxyEquals(selectedProxyList, proxy);
 	}
-	
+
 	/*
 	 * Mock selector for setDefault test
 	 */
@@ -586,32 +539,6 @@ public class ProxySelectorTest extends TestCase {
 
 		public List <Proxy> select(URI uri) {
 			return null;
-		}
-	}
-
-	/*
-	 * MockSecurityMaanger. It denies NetPermission("getProxySelector") and
-	 * NetPermission("setProxySelector").
-	 */
-	class MockSecurityManager extends SecurityManager {
-		public void checkPermission(Permission permission) {
-			if (permission instanceof NetPermission) {
-				if ("getProxySelector".equals(permission.getName())) {
-					throw new SecurityException();
-				}
-			}
-
-			if (permission instanceof NetPermission) {
-				if ("setProxySelector".equals(permission.getName())) {
-					throw new SecurityException();
-				}
-			}
-
-			if (permission instanceof RuntimePermission) {
-				if ("setSecurityManager".equals(permission.getName())) {
-					return;
-				}
-			}
 		}
 	}
 

@@ -578,74 +578,6 @@ public class ObjectOutputStreamTest extends TestCase implements Serializable {
     }
 
     /**
-     * @tests java.io.ObjectOutputStream#ObjectOutputStream(java.io.OutputStream)
-     */
-    public void test_ConstructorLjava_io_OutputStream_subtest0()
-            throws IOException {
-
-        // custom security manager
-        SecurityManager sm = new SecurityManager() {
-
-            final SerializablePermission forbidenPermission = new SerializablePermission(
-                    "enableSubclassImplementation");
-
-            public void checkPermission(Permission perm) {
-                if (forbidenPermission.equals(perm)) {
-                    throw new SecurityException();
-                }
-            }
-        };
-
-        SecurityManager oldSm = System.getSecurityManager();
-        System.setSecurityManager(sm);
-        try {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            // should not cause SecurityException
-            new ObjectOutputStream(out);
-            // should not cause SecurityException
-            class SubTest1 extends ObjectOutputStream {
-                SubTest1(OutputStream out) throws IOException {
-                    super(out);
-                }
-            }
-
-            // should not cause SecurityException
-            new SubTest1(out);
-            class SubTest2 extends ObjectOutputStream {
-                SubTest2(OutputStream out) throws IOException {
-                    super(out);
-                }
-
-                public void writeUnshared(Object obj) throws IOException {
-                }
-            }
-
-            try {
-                new SubTest2(out);
-                fail("should throw SecurityException 1");
-            } catch (SecurityException e) {
-            }
-            class SubTest3 extends ObjectOutputStream {
-                SubTest3(OutputStream out) throws IOException {
-                    super(out);
-                }
-
-                public PutField putFields() throws IOException {
-                    return null;
-                }
-            }
-
-            try {
-                new SubTest3(out);
-                fail("should throw SecurityException 2");
-            } catch (SecurityException e) {
-            }
-        } finally {
-            System.setSecurityManager(oldSm);
-        }
-    }
-
-    /**
      * @tests java.io.ObjectOutputStream#close()
      */
     public void test_close() {
@@ -1053,7 +985,7 @@ public class ObjectOutputStreamTest extends TestCase implements Serializable {
             ois.close();
         }
     }
-    
+
     /**
      * @tests {@link java.io.ObjectOutputStream#annotateProxyClass(java.lang.Class<T>)}
      */

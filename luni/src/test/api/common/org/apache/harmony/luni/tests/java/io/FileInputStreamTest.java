@@ -122,7 +122,7 @@ public class FileInputStreamTest extends TestCase {
         } catch (IOException e) {
             // Expected
         }
-        
+
         // Regression test for HARMONY-6642
         FileInputStream fis = new FileInputStream(fileName);
         FileInputStream fis2 = new FileInputStream(fis.getFD());
@@ -137,7 +137,7 @@ public class FileInputStreamTest extends TestCase {
                 fis.close();
             } catch (IOException e) {}
         }
-        
+
         FileInputStream stdin = new FileInputStream(FileDescriptor.in);
         stdin.close();
         stdin = new FileInputStream(FileDescriptor.in);
@@ -386,24 +386,6 @@ public class FileInputStreamTest extends TestCase {
     }
 
     /**
-     * @tests java.io.FileInputStream#FileInputStream(String)
-     */
-    public void test_Constructor_LString_WithSecurityManager()
-            throws IOException {
-        SecurityManager old = System.getSecurityManager();
-        try {
-            MockSecurityManager msm = new MockSecurityManager();
-            System.setSecurityManager(msm);
-            new FileInputStream((String) null);
-            fail("should throw SecurityException");
-        } catch (SecurityException e) {
-            // expected
-        } finally {
-            System.setSecurityManager(old);
-        }
-    }
-
-    /**
      * @tests java.io.FileInputStream#skip(long)
      */
     public void test_skipNegativeArgumentJ() throws IOException {
@@ -427,21 +409,21 @@ public class FileInputStreamTest extends TestCase {
             assertEquals(count++, fis.getChannel().position());
         }
         fis.close();
-        
+
         try {
             fis.getChannel().position();
             fail("should throw ClosedChannelException");
         } catch(java.nio.channels.ClosedChannelException e){
             // Expected
         }
-        
+
         fis = new FileInputStream(fileName);
         assertEquals(0, fis.getChannel().position());
         byte[] bs = new byte[10];
         r = fis.read(bs);
         assertEquals(10, fis.getChannel().position());
         fis.close();
-        
+
         fis = new FileInputStream(fileName);
         assertEquals(0, fis.getChannel().position());
         bs = new byte[10];
@@ -476,21 +458,5 @@ public class FileInputStreamTest extends TestCase {
      */
     protected void tearDown() {
         new File(fileName).delete();
-    }
-}
-
-class MockSecurityManager extends SecurityManager {
-    public void checkPermission(Permission permission) {
-        if (permission instanceof FilePermission) {
-            if (permission.getActions().indexOf("read") == 0)
-                throw new SecurityException();
-        }
-    }
-
-    public void checkRead(String file) {
-        if (null == file) {
-            file = "";
-        }
-        checkPermission(new FilePermission(file, "read"));
     }
 }

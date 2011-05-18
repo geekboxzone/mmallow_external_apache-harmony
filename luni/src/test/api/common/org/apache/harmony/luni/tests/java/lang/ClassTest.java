@@ -46,7 +46,7 @@ import tests.support.resource.Support_Resources;
 public class ClassTest extends junit.framework.TestCase {
 
     public static final String FILENAME = ClassTest.class.getPackage().getName().replace('.', '/')+"/test#.properties";
-    
+
     static class StaticMember$Class {
         class Member2$A {
         }
@@ -152,21 +152,21 @@ public class ClassTest extends junit.framework.TestCase {
             fail();
         } catch (ClassNotFoundException e) {
         }
-        
+
         //regression test for JIRA 2162
         try {
             Class.forName("%");
             fail("should throw ClassNotFoundException.");
         } catch (ClassNotFoundException e) {
         }
-        
+
         //Regression Test for HARMONY-3332
         String securityProviderClassName;
         int count = 1;
         while ((securityProviderClassName = Security
                 .getProperty("security.provider." + count++)) != null) {
             Class.forName(securityProviderClassName);
-        }       
+        }
     }
 
     /**
@@ -212,154 +212,6 @@ public class ClassTest extends junit.framework.TestCase {
                 }
             }
         }
-
-        final MyCombiner combiner = new MyCombiner();
-        class SecurityManagerCheck extends SecurityManager {
-            String reason;
-
-            Class<?> checkClass;
-
-            int checkType;
-
-            int checkPermission;
-
-            int checkMemberAccess;
-
-            int checkPackageAccess;
-
-            public void setExpected(String reason, Class<?> cls, int type) {
-                this.reason = reason;
-                checkClass = cls;
-                checkType = type;
-                checkPermission = 0;
-                checkMemberAccess = 0;
-                checkPackageAccess = 0;
-            }
-
-            @Override
-            public void checkPermission(Permission perm) {
-                if (combiner.isPriviledged())
-                    return;
-                checkPermission++;
-            }
-
-            @Override
-            public void checkMemberAccess(Class<?> cls, int type) {
-                if (combiner.isPriviledged())
-                    return;
-                checkMemberAccess++;
-                assertEquals(reason + " unexpected class", checkClass, cls);
-                assertEquals(reason + "unexpected type", checkType, type);
-            }
-
-            @Override
-            public void checkPackageAccess(String packageName) {
-                if (combiner.isPriviledged())
-                    return;
-                checkPackageAccess++;
-                String name = checkClass.getName();
-                int index = name.lastIndexOf('.');
-                String checkPackage = name.substring(0, index);
-                assertEquals(reason + " unexpected package",
-                             checkPackage,  packageName);
-            }
-
-            public void assertProperCalls() {
-                assertEquals(reason + " unexpected checkPermission count",
-                             0, checkPermission);
-                assertEquals(reason + " unexpected checkMemberAccess count",
-                             1, checkMemberAccess);
-                assertEquals(reason + " unexpected checkPackageAccess count",
-                             1, checkPackageAccess);
-            }
-        }
-
-        AccessControlContext acc = new AccessControlContext(new ProtectionDomain[0]);
-        AccessControlContext acc2 = new AccessControlContext(acc, combiner);
-
-        PrivilegedAction<?> action = new PrivilegedAction<Object>() {
-            public Object run() {
-                File resources = Support_Resources.createTempFolder();
-                try {
-                    Support_Resources.copyFile(resources, null, "hyts_security.jar");
-                    File file = new File(resources.toString() + "/hyts_security.jar");
-                    URL url = new URL("file:" + file.getPath());
-                    ClassLoader loader = new URLClassLoader(new URL[] { url }, null);
-                    Class<?> cls = Class.forName("packB.SecurityTestSub", false, loader);
-                    SecurityManagerCheck sm = new SecurityManagerCheck();
-                    System.setSecurityManager(sm);
-                    try {
-                        sm.setExpected("getClasses", cls, Member.PUBLIC);
-                        cls.getClasses();
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getDeclaredClasses", cls, Member.DECLARED);
-                        cls.getDeclaredClasses();
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getConstructor", cls, Member.PUBLIC);
-                        cls.getConstructor(new Class[0]);
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getConstructors", cls, Member.PUBLIC);
-                        cls.getConstructors();
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getDeclaredConstructor", cls, Member.DECLARED);
-                        cls.getDeclaredConstructor(new Class[0]);
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getDeclaredConstructors", cls, Member.DECLARED);
-                        cls.getDeclaredConstructors();
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getField", cls, Member.PUBLIC);
-                        cls.getField("publicField");
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getFields", cls, Member.PUBLIC);
-                        cls.getFields();
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getDeclaredField", cls, Member.DECLARED);
-                        cls.getDeclaredField("publicField");
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getDeclaredFields", cls, Member.DECLARED);
-                        cls.getDeclaredFields();
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getDeclaredMethod", cls, Member.DECLARED);
-                        cls.getDeclaredMethod("publicMethod", new Class[0]);
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getDeclaredMethods", cls, Member.DECLARED);
-                        cls.getDeclaredMethods();
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getMethod", cls, Member.PUBLIC);
-                        cls.getMethod("publicMethod", new Class[0]);
-                        sm.assertProperCalls();
-
-                        sm.setExpected("getMethods", cls, Member.PUBLIC);
-                        cls.getMethods();
-                        sm.assertProperCalls();
-
-                        sm.setExpected("newInstance", cls, Member.PUBLIC);
-                        cls.newInstance();
-                        sm.assertProperCalls();
-                    } finally {
-                        System.setSecurityManager(null);
-                    }
-                } catch (Exception e) {
-                    if (e instanceof RuntimeException)
-                        throw (RuntimeException) e;
-                    fail("unexpected exception: " + e);
-                }
-                return null;
-            }
-        };
-        AccessController.doPrivileged(action, acc2);
     }
 
     /**
@@ -724,23 +576,23 @@ public class ClassTest extends junit.framework.TestCase {
         assertEquals("Class toString printed wrong value",
                      "class [Ljava.lang.Object;", clazz.toString());
     }
-    
-    
+
+
     // Regression Test for JIRA-2047
 	public void test_getResourceAsStream_withSharpChar() throws Exception{
 		InputStream in = getClass().getResourceAsStream("/"+FILENAME);
 		assertNotNull(in);
 		in.close();
-        
+
         in = getClass().getResourceAsStream(FILENAME);
         assertNull(in);
-		
+
 		in = this.getClass().getClassLoader().getResourceAsStream(
 				FILENAME);
 		assertNotNull(in);
-		in.close();		
+		in.close();
 	}
-        
+
         /*
          * Regression test for HARMONY-2644:
          * Load system and non-system array classes via Class.forName()
@@ -754,7 +606,7 @@ public class ClassTest extends junit.framework.TestCase {
             assertSame(a1, a2.getComponentType());
             Class l4 = Class.forName("[[[[[J");
             assertSame(long[][][][][].class, l4);
-            
+
             try{
                 System.out.println(Class.forName("[;"));
                 fail("1");

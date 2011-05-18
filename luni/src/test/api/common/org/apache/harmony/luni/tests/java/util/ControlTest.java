@@ -48,7 +48,7 @@ import tests.support.resource.Support_Resources;
 
 /**
  * Test cases for java.util.ResourceBundle.Control
- * 
+ *
  * @since 1.6
  */
 public class ControlTest extends TestCase {
@@ -86,7 +86,7 @@ public class ControlTest extends TestCase {
 
     /**
      * Test for all the public constants.
-     * 
+     *
      * @tests {@link java.util.ResourceBundle.Control#FORMAT_CLASS}
      * @tests {@link java.util.ResourceBundle.Control#FORMAT_DEFAULT}
      * @tests {@link java.util.ResourceBundle.Control#FORMAT_PROPERTIES}
@@ -381,26 +381,6 @@ public class ControlTest extends TestCase {
         Locale.setDefault(defaultLocale);
     }
 
-    /**
-     * @throws Exception
-     * @tests {@link java.util.ResourceBundle.Control#newBundle(java.lang.String, java.util.Locale, java.lang.String, java.lang.ClassLoader, boolean)}.
-     */
-    @SuppressWarnings("nls")
-    public void test_newBundle_LStringLLocaleLStringLClassLoaderZ()
-            throws Exception {
-        Locale defLocale = Locale.getDefault();
-        Locale.setDefault(new Locale("en", "US"));
-        SecurityManager sm = System.getSecurityManager();
-        try {
-            newBundleTester();
-            System.setSecurityManager(new CanSetSM());
-            newBundleTester();
-        } finally {
-            System.setSecurityManager(sm);
-            Locale.setDefault(defLocale);
-        }
-    }
-
     @SuppressWarnings("nls")
     private void newBundleTester() throws IllegalAccessException,
             InstantiationException, IOException, FileNotFoundException {
@@ -565,9 +545,6 @@ public class ControlTest extends TestCase {
                 return null;
             }
         }
-        SecurityManager sm = System.getSecurityManager();
-        System.setSecurityManager(new NoCreationSM());
-        control.newBundle(propertiesName, frFR, PROPERTIES, URLLoader, false);
     }
 
     @SuppressWarnings("nls")
@@ -604,27 +581,6 @@ public class ControlTest extends TestCase {
         @Override
         protected Object[][] getContents() {
             return null;
-        }
-    }
-
-    static class CanSetSM extends SecurityManager {
-        @SuppressWarnings("nls")
-        @Override
-        public void checkPermission(Permission permission) {
-            if (permission instanceof RuntimePermission) {
-                if ("setSecurityManager".equals(permission.getName())) {
-                    return;
-                }
-            }
-        }
-    }
-
-    static class NoCreationSM extends CanSetSM {
-        @Override
-        public void checkMemberAccess(Class<?> cls, int type) {
-            if (type == Member.PUBLIC) {
-                throw new SecurityException();
-            }
         }
     }
 

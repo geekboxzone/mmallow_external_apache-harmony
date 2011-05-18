@@ -36,7 +36,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.apache.harmony.luni.net.PlainServerSocketImpl;
+import java.net.PlainServerSocketImpl;
 
 import tests.support.Support_Configuration;
 import tests.support.Support_Exec;
@@ -928,7 +928,7 @@ public class ServerSocketTest extends SocketTestCase {
             // expected
         }
     }
-    
+
     /**
      * Regression for HARMONY-3265
      * @throws Exception

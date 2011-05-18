@@ -74,33 +74,6 @@ public class PermissionTest extends TestCase {
             .toString());
     }
 
-    /**
-     * Test checkGuard() realization: if SecurityManager is installed, it's
-     * checkPermission() should be called with this permission, otherwise
-     * nothing happens
-     */
-    public void testCheckGuard() {
-        final Permission test = new RealPermission("234234");
-        SecurityManager old = System.getSecurityManager();
-        try {
-            System.setSecurityManager(null);
-            test.checkGuard(this);
-            final boolean[] callFlag = new boolean[] { false };
-            System.setSecurityManager(new SecurityManager() {
-
-                public void checkPermission(Permission p) {
-                    if (p == test) {
-                        callFlag[0] = true;
-                    }
-                }
-            });
-            test.checkGuard(null);
-            assertTrue(callFlag[0]);
-        } finally {
-            System.setSecurityManager(old);
-        }
-    }
-
     /** newPermissionCollection() should return null */
     public void testCollection() {
         assertNull(new RealPermission("123").newPermissionCollection());

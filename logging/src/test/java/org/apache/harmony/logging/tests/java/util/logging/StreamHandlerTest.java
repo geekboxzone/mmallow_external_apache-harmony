@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -51,10 +51,10 @@ import tests.util.CallVerificationStack;
 public class StreamHandlerTest extends TestCase {
 
 	private final static String INVALID_LEVEL = "impossible_level";
-    
+
     private final PrintStream err = System.err;
 
-    private OutputStream errSubstituteStream = null;     
+    private OutputStream errSubstituteStream = null;
 
 	private static String className = StreamHandlerTest.class.getName();
 
@@ -72,7 +72,7 @@ public class StreamHandlerTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
         errSubstituteStream = new NullOutputStream();
-        System.setErr(new PrintStream(errSubstituteStream));          
+        System.setErr(new PrintStream(errSubstituteStream));
 	}
 
 	/*
@@ -81,7 +81,7 @@ public class StreamHandlerTest extends TestCase {
 	protected void tearDown() throws Exception {
 		LogManager.getLogManager().reset();
 		CallVerificationStack.getInstance().clear();
-        System.setErr(err);        
+        System.setErr(err);
         super.tearDown();
 	}
 
@@ -104,33 +104,6 @@ public class StreamHandlerTest extends TestCase {
 		assertTrue(h.getFormatter() instanceof SimpleFormatter);
 		assertNull(h.getFilter());
 		assertNull(h.getEncoding());
-	}
-
-	/*
-	 * Test the constructor with insufficient privilege.
-	 */
-	public void testConstructor_NoParameter_InsufficientPrivilege() {
-		assertNull(LogManager.getLogManager().getProperty(
-				"java.util.logging.StreamHandler.level"));
-		assertNull(LogManager.getLogManager().getProperty(
-				"java.util.logging.StreamHandler.filter"));
-		assertNull(LogManager.getLogManager().getProperty(
-				"java.util.logging.StreamHandler.formatter"));
-		assertNull(LogManager.getLogManager().getProperty(
-				"java.util.logging.StreamHandler.encoding"));
-
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		// set a normal value
-		try {
-			StreamHandler h = new StreamHandler();
-			assertSame(Level.INFO, h.getLevel());
-			assertTrue(h.getFormatter() instanceof SimpleFormatter);
-			assertNull(h.getFilter());
-			assertNull(h.getEncoding());
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
 	}
 
 	/*
@@ -207,34 +180,6 @@ public class StreamHandlerTest extends TestCase {
 		assertTrue(h.getFormatter() instanceof MockFormatter2);
 		assertNull(h.getFilter());
 		assertNull(h.getEncoding());
-	}
-
-	/*
-	 * Test the constructor with insufficient privilege.
-	 */
-	public void testConstructor_HasParameter_InsufficientPrivilege() {
-		assertNull(LogManager.getLogManager().getProperty(
-				"java.util.logging.StreamHandler.level"));
-		assertNull(LogManager.getLogManager().getProperty(
-				"java.util.logging.StreamHandler.filter"));
-		assertNull(LogManager.getLogManager().getProperty(
-				"java.util.logging.StreamHandler.formatter"));
-		assertNull(LogManager.getLogManager().getProperty(
-				"java.util.logging.StreamHandler.encoding"));
-
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		// set a normal value
-		try {
-			StreamHandler h = new StreamHandler(new ByteArrayOutputStream(),
-					new MockFormatter2());
-			assertSame(Level.INFO, h.getLevel());
-			assertTrue(h.getFormatter() instanceof MockFormatter2);
-			assertNull(h.getFilter());
-			assertNull(h.getEncoding());
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
 	}
 
 	/*
@@ -396,24 +341,6 @@ public class StreamHandlerTest extends TestCase {
 		CallVerificationStack.getInstance().clear();
 		assertEquals("MockFormatter_HeadMockFormatter_Tail", aos.toString()
 				);
-	}
-
-	/*
-	 * Test close() when having insufficient privilege.
-	 */
-	public void testClose_InsufficientPrivilege() {
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			StreamHandler h = new StreamHandler(new ByteArrayOutputStream(),
-					new MockFormatter());
-			h.close();
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-			// expected
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
 	}
 
 	/*
@@ -760,37 +687,6 @@ public class StreamHandlerTest extends TestCase {
 	}
 
 	/*
-	 * Test setEncoding() with insufficient privilege.
-	 */
-	public void testSetEncoding_InsufficientPrivilege() throws Exception {
-		StreamHandler h = new StreamHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-		// set a normal value
-		try {
-			h.setEncoding("iso-8859-1");
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-			// expected
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-		assertNull(h.getEncoding());
-		System.setSecurityManager(new MockSecurityManager());
-		// set an invalid value
-		try {
-
-			h.setEncoding("impossible");
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-			// expected
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-		assertNull(h.getEncoding());
-	}
-
-	/*
 	 * Test setEncoding() methods will flush a stream before setting.
 	 */
 	public void testSetEncoding_FlushBeforeSetting() throws Exception {
@@ -879,35 +775,6 @@ public class StreamHandlerTest extends TestCase {
 	}
 
 	/*
-	 * Test setOutputStream() when having insufficient privilege.
-	 */
-	public void testSetOutputStream_InsufficientPrivilege() {
-		MockStreamHandler h = new MockStreamHandler();
-		SecurityManager oldMan = System.getSecurityManager();
-		System.setSecurityManager(new MockSecurityManager());
-
-		try {
-			h.setOutputStream(new ByteArrayOutputStream());
-			fail("Should throw SecurityException!");
-		} catch (SecurityException e) {
-			// expected
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-
-		h = new MockStreamHandler();
-		System.setSecurityManager(new MockSecurityManager());
-		try {
-			h.setOutputStream(null);
-			fail("Should throw NullPointerException!");
-		} catch (NullPointerException e) {
-			// expected
-		} finally {
-			System.setSecurityManager(oldMan);
-		}
-	}
-
-	/*
 	 * A mock stream handler, expose setOutputStream.
 	 */
 	public static class MockStreamHandler extends StreamHandler {
@@ -951,7 +818,7 @@ public class StreamHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.util.logging.Formatter#getHead(java.util.logging.Handler)
 		 */
 		public String getHead(Handler h) {
@@ -960,7 +827,7 @@ public class StreamHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.util.logging.Formatter#getTail(java.util.logging.Handler)
 		 */
 		public String getTail(Handler h) {
@@ -985,7 +852,7 @@ public class StreamHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.io.OutputStream#close()
 		 */
 		public void close() throws IOException {
@@ -995,7 +862,7 @@ public class StreamHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.io.OutputStream#flush()
 		 */
 		public void flush() throws IOException {
@@ -1005,7 +872,7 @@ public class StreamHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.io.OutputStream#write(int)
 		 */
 		public void write(int oneByte) {
@@ -1021,7 +888,7 @@ public class StreamHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.io.OutputStream#close()
 		 */
 		public void close() throws IOException {
@@ -1030,7 +897,7 @@ public class StreamHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.io.OutputStream#flush()
 		 */
 		public void flush() throws IOException {
@@ -1039,7 +906,7 @@ public class StreamHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.io.OutputStream#write(byte[], int, int)
 		 */
 		public synchronized void write(byte[] buffer, int offset, int count) {
@@ -1048,35 +915,11 @@ public class StreamHandlerTest extends TestCase {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.io.OutputStream#write(int)
 		 */
 		public synchronized void write(int oneByte) {
 			throw new NullPointerException();
 		}
 	}
-
-	/*
-	 * Used to grant all permissions except logging control.
-	 */
-	public static class MockSecurityManager extends SecurityManager {
-
-		public MockSecurityManager() {
-		}
-
-		public void checkPermission(Permission perm) {
-			// grant all permissions except logging control
-			if (perm instanceof LoggingPermission) {
-				throw new SecurityException();
-			}
-		}
-
-		public void checkPermission(Permission perm, Object context) {
-			// grant all permissions except logging control
-			if (perm instanceof LoggingPermission) {
-				throw new SecurityException();
-			}
-		}
-	}
-
 }

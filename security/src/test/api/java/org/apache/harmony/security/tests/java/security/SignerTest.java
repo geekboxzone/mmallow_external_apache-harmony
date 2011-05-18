@@ -36,13 +36,6 @@ import junit.framework.TestCase;
 
 public class SignerTest extends TestCase {
 
-    public static class MySecurityManager extends SecurityManager {
-        public Permissions denied = new Permissions();
-        public void checkPermission(Permission permission){
-            if (denied!=null && denied.implies(permission)) throw new SecurityException();
-        }
-    }
-
     /**
      * Constructor for SignerTest.
      * @param arg0
@@ -118,26 +111,6 @@ public class SignerTest extends TestCase {
     }
 
     /**
-     * verify Signer.getPrivateKey() throws SecurityException if permission is denied
-     */
-    public void testGetPrivateKey_denied() throws Exception {
-        MySecurityManager sm = new MySecurityManager();
-        sm.denied.add(new SecurityPermission("getSignerPrivateKey"));
-        System.setSecurityManager(sm);
-        try {
-            Signer s = new SignerStub("sss6");
-            s.setKeyPair(new KeyPair(new PublicKeyStub("public", "fff", null), new PrivateKeyStub("private", "fff", null)));
-            try {
-                s.getPrivateKey();
-                fail("SecurityException should be thrown");
-            } catch (SecurityException ok) {}
-        } finally {
-            System.setSecurityManager(null);
-        }
-
-    }
-
-    /**
      * @tests java.security.Signer#setKeyPair(java.security.KeyPair)
      */
     public void test_setKeyPairLjava_security_KeyPair() throws Exception {
@@ -148,23 +121,6 @@ public class SignerTest extends TestCase {
             new SignerStub("name").setKeyPair(null);
             fail("No expected NullPointerException");
         } catch (NullPointerException e) {
-        }
-
-        // test: SecurityException if permission is denied
-        SecurityManager oldSm = System.getSecurityManager();
-        MySecurityManager sm = new MySecurityManager();
-        sm.denied.add(new SecurityPermission("setSignerKeyPair"));
-        System.setSecurityManager(sm);
-        try {
-            Signer s = new SignerStub("sss7");
-            try {
-                s.setKeyPair(new KeyPair(new PublicKeyStub("public", "fff",
-                        null), new PrivateKeyStub("private", "fff", null)));
-                fail("SecurityException should be thrown");
-            } catch (SecurityException ok) {
-            }
-        } finally {
-            System.setSecurityManager(oldSm);
         }
     }
 

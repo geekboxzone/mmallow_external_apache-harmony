@@ -25,7 +25,7 @@ import java.net.URLStreamHandlerFactory;
 
 import junit.framework.TestCase;
 
-import org.apache.harmony.luni.internal.net.www.protocol.jar.Handler;
+import libcore.net.url.JarHandler;
 
 /**
  * Depends on: file://<basedir>/src/test/resources/org/apache/harmony/luni/tests/java/net/lf.jar
@@ -41,10 +41,10 @@ public class URLClassLoaderImplTest extends TestCase {
         class TestFactory implements URLStreamHandlerFactory {
             public URLStreamHandler createURLStreamHandler(String protocol) {
                 if ("jar".equals(protocol)) {
-                    return new Handler();
+                    return new JarHandler();
                 }
 
-                fail("Should be jar Handler. But " + protocol);
+                fail("Should be JarHandler. But " + protocol);
                 return null;
             }
         }

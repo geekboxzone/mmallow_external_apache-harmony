@@ -38,8 +38,6 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.ResourceBundle.Control;
 
-import org.apache.harmony.luni.tests.java.util.ControlTest.CanSetSM;
-
 import tests.support.resource.Support_Resources;
 import org.apache.harmony.luni.tests.support.B;
 
@@ -162,31 +160,6 @@ public class ResourceBundleTest extends junit.framework.TestCase {
             fail("Should throw MissingResourceException");
         } catch (MissingResourceException e) {
             assertNotNull(e.getLocalizedMessage());
-        }
-
-        // Test with a security manager
-        Locale.setDefault(new Locale("en", "US"));
-        System.setSecurityManager(new SecurityManager());
-        try {
-            bundle = ResourceBundle.getBundle(CLASS_NAME, new Locale("fr",
-                    "FR", "VAR"));
-            assertEquals("Security: Wrong bundle fr_FR_VAR", "frFRVARValue4",
-                    bundle.getString("parent4"));
-            bundle = ResourceBundle.getBundle(CLASS_NAME, new Locale("fr",
-                    "FR", "v1"));
-            assertEquals("Security: Wrong bundle fr_FR_v1", "frFRValue4",
-                    bundle.getString("parent4"));
-            bundle = ResourceBundle.getBundle(CLASS_NAME, new Locale("fr",
-                    "US", "VAR"));
-            assertEquals("Security: Wrong bundle fr_US_var", "frValue4", bundle
-                    .getString("parent4"));
-            bundle = ResourceBundle.getBundle(CLASS_NAME, new Locale("de",
-                    "FR", "VAR"));
-            assertTrue("Security: Wrong bundle de_FR_var: "
-                    + bundle.getString("parent4"), bundle.getString("parent4")
-                    .equals("enUSValue4"));
-        } finally {
-            System.setSecurityManager(null);
         }
     }
 
@@ -529,21 +502,6 @@ public class ResourceBundleTest extends junit.framework.TestCase {
     @SuppressWarnings("nls")
     public void test_getBundle_LStringLLocaleLClassLoaderLControl() {
         getBundleWithControlTester();
-    }
-
-    /**
-     * @tests {@link java.util.ResourceBundle#getBundle(String, Locale, ClassLoader, java.util.ResourceBundle.Control)}
-     * @since 1.6
-     */
-    @SuppressWarnings("nls")
-    public void test_getBundle_LStringLLocaleLClassLoaderLControl_WithSecurityManager() {
-        SecurityManager sm = System.getSecurityManager();
-        try {
-            System.setSecurityManager(new CanSetSM());
-            getBundleWithControlTester();
-        } finally {
-            System.setSecurityManager(sm);
-        }
     }
 
     @SuppressWarnings("nls")

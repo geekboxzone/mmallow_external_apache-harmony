@@ -69,8 +69,8 @@ public class URLTest extends TestCase {
     boolean caught = false;
 
     static boolean isSelectCalled;
-    
-    
+
+
     /**
      * Check when the argument in url consists of windows path character back-slash
      * @tests java.net.URL#openConnection(Proxy)
@@ -118,7 +118,7 @@ public class URLTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * @tests java.net.URL#URL(java.lang.String)
      */
@@ -742,11 +742,11 @@ public class URLTest extends TestCase {
         u = new URL("file", null, 0, "/test.txt");
         u1 = new URL("file", null, 0, "/test.txt");
         assertEquals(u, u1);
-        
+
         u = new URL("file", "first.invalid", 0, "/test.txt");
         u1 = new URL("file", "second.invalid", 0, "/test.txt");
         assertFalse(u.equals(u1));
-        
+
         u = new URL("file", "harmony.apache.org", 0, "/test.txt");
         u1 = new URL("file", "www.apache.org", 0, "/test.txt");
         assertEquals(u, u1);
@@ -1150,22 +1150,6 @@ public class URLTest extends TestCase {
     /**
      * @tests java.net.URL#openConnection()
      */
-    public void test_openConnection_Security() throws Exception {
-        // regression test for Harmony-1049
-        System.setSecurityManager(new SecurityManager());
-        try {
-            URL u = new URL("http://anyhost");
-            // openConnection should return successfully, and no exception
-            // should be thrown.
-            u.openConnection();
-        } finally {
-            System.setSecurityManager(null);
-        }
-    }
-    
-    /**
-     * @tests java.net.URL#openConnection()
-     */
     public void test_openConnection_FileProtocal() throws Exception {
         // Regression test for Harmony-5779
         String basedir = new File("temp.java").getAbsolutePath();
@@ -1347,23 +1331,6 @@ public class URLTest extends TestCase {
         }
     }
 
-    static class MockSecurityManager extends SecurityManager {
-
-        public void checkConnect(String host, int port) {
-            if ("127.0.0.1".equals(host)) {
-                throw new SecurityException("permission is not allowed");
-            }
-        }
-
-        public void checkPermission(Permission permission) {
-            if ("setSecurityManager".equals(permission.getName())) {
-                return;
-            }
-            super.checkPermission(permission);
-        }
-
-    }
-
     static class MyURLStreamHandler extends URLStreamHandler {
 
         @Override
@@ -1422,7 +1389,7 @@ public class URLTest extends TestCase {
         } catch (SecurityException e) {
             // expected;
         }
-        
+
         // Regression tests for HARMONY-6499
         try {
             handler.parse(url, "any", 10, Integer.MIN_VALUE);
@@ -1430,35 +1397,35 @@ public class URLTest extends TestCase {
         } catch (StringIndexOutOfBoundsException e) {
             // expected;
         }
-        
+
         try {
             handler.parse(url, "any", 10, Integer.MIN_VALUE+1);
             fail("Should throw StringIndexOutOfBoundsException");
         } catch (StringIndexOutOfBoundsException e) {
             // expected;
         }
-        
+
         try {
             handler.parse(url, "any", Integer.MIN_VALUE, Integer.MIN_VALUE);
             fail("Should throw StringIndexOutOfBoundsException");
         } catch (StringIndexOutOfBoundsException e) {
             // expected;
         }
-        
+
         try {
             handler.parse(url, "any", Integer.MIN_VALUE, 2);
             fail("Should throw StringIndexOutOfBoundsException");
         } catch (StringIndexOutOfBoundsException e) {
             // expected;
         }
-        
+
         try {
             handler.parse(url, "any", -1, 2);
             fail("Should throw StringIndexOutOfBoundsException");
         } catch (StringIndexOutOfBoundsException e) {
             // expected;
         }
-        
+
         try {
             handler.parse(url, "any", -1, -1);
             fail("Should throw SecurityException");

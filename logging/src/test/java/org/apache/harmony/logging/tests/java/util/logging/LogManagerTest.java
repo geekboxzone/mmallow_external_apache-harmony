@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -40,9 +40,9 @@ import org.apache.harmony.logging.tests.java.util.logging.HandlerTest.NullOutput
 import org.apache.harmony.logging.tests.java.util.logging.util.EnvironmentHelper;
 
 /**
- * 
+ *
  * add/get logger(dot)
- * 
+ *
  */
 public class LogManagerTest extends TestCase {
 
@@ -65,8 +65,6 @@ public class LogManagerTest extends TestCase {
 	static final String CONFIG_FILE = "java.util.logging.config.file";
 
 	static final String MANAGER_CLASS = "java.util.logging.config.manager";
-
-	static final SecurityManager securityManager = System.getSecurityManager();
 
 	static final String clearPath = System.getProperty("clearpath");
 
@@ -313,22 +311,6 @@ public class LogManagerTest extends TestCase {
 		assertNotSame(root, manager.getLogger(""));
 	}
 
-	/**
-	 * @tests java.util.logging.LogManager#addLogger(Logger)
-	 */
-	public void test_addLoggerLLogger_Security() throws Exception {
-		// regression test for Harmony-1286
-		SecurityManager originalSecurityManager = System.getSecurityManager();
-		System.setSecurityManager(new SecurityManager());
-		try {
-			LogManager manager = LogManager.getLogManager();
-			manager.addLogger(new MockLogger("mock", null));
-			manager.addLogger(new MockLogger("mock.child", null));
-		} finally {
-			System.setSecurityManager(originalSecurityManager);
-		}
-	}
-	
 	public void testDefaultLoggerProperties() throws Exception{
 		// mock LogManager has no default logger
 		assertNull(mockManager.getLogger(""));
@@ -352,58 +334,6 @@ public class LogManagerTest extends TestCase {
 		assertNull(root.getResourceBundleName());
 		assertTrue(root.getUseParentHandlers());
 
-	}
-
-	public void testLoggingPermission() throws IOException {
-		System.setSecurityManager(new MockSecurityManagerLogPermission());
-		mockManager.addLogger(new MockLogger("abc", null));
-		mockManager.getLogger("");
-		mockManager.getLoggerNames();
-		mockManager.getProperty(".level");
-		LogManager.getLogManager();
-		try {
-			manager.checkAccess();
-			fail("should throw securityException");
-		} catch (SecurityException e) {
-		}
-		try {
-			mockManager.readConfiguration();
-			fail("should throw SecurityException");
-		} catch (SecurityException e) {
-		}
-		try {
-			mockManager.readConfiguration(EnvironmentHelper
-					.PropertiesToInputStream(props));
-			fail("should throw SecurityException");
-		} catch (SecurityException e) {
-		}
-		try {
-			mockManager.readConfiguration(null);
-			fail("should throw SecurityException");
-		} catch (SecurityException e) {
-		}
-		try {
-			mockManager
-					.addPropertyChangeListener(new MockPropertyChangeListener());
-			fail("should throw SecurityException");
-		} catch (SecurityException e) {
-		}
-		try {
-			mockManager.addPropertyChangeListener(null);
-			fail("should throw NPE");
-		} catch (NullPointerException e) {
-		}
-		try {
-			mockManager.removePropertyChangeListener(null);
-			fail("should throw SecurityException");
-		} catch (SecurityException e) {
-		}
-		try {
-			mockManager.reset();
-			fail("should throw SecurityException");
-		} catch (SecurityException e) {
-		}
-		System.setSecurityManager(securityManager);
 	}
 
 	public void testMockGetProperty() throws Exception {
@@ -858,9 +788,9 @@ public class LogManagerTest extends TestCase {
     public void testGetLoggingMXBean() throws Exception{
         assertNotNull(LogManager.getLoggingMXBean());
     }
-    
+
 	/*
-	 * ---------------------------------------------------- 
+	 * ----------------------------------------------------
      * mock classes
 	 * ----------------------------------------------------
 	 */
@@ -869,14 +799,14 @@ public class LogManagerTest extends TestCase {
             LogManager man = LogManager.getLogManager();
             Properties props = LogManagerTest.initProps();
             props.put("testConfigClass.foo.level", "OFF");
-            props.put("testConfigClass.foo.handlers", "java.util.logging.ConsoleHandler");        
+            props.put("testConfigClass.foo.handlers", "java.util.logging.ConsoleHandler");
             props.put(".level", "FINEST");
             props.remove("handlers");
             InputStream in = EnvironmentHelper.PropertiesToInputStream(props);
             man.readConfiguration(in);
         }
     }
-    
+
 	public static class MockInvalidInitClass {
 		public MockInvalidInitClass() {
 			throw new RuntimeException();
@@ -1117,57 +1047,9 @@ public class LogManagerTest extends TestCase {
 
 	}
 
-	public static class MockSecurityManagerLogPermission extends
-			SecurityManager {
-
-		public void checkPermission(Permission permission, Object context) {
-			if (permission instanceof LoggingPermission) {
-				throw new SecurityException();
-			}
-		}
-
-		public void checkPermission(Permission permission) {
-			if (permission instanceof LoggingPermission) {
-				StackTraceElement[] stack = (new Throwable()).getStackTrace();
-				for (int i = 0; i < stack.length; i++) {
-					if (stack[i].getClassName().equals(
-							"java.util.logging.Logger")) {
-						return;
-					}
-				}
-				throw new SecurityException("Found LogManager checkAccess()");
-			}
-		}
-	}
-
-	public static class MockSecurityManagerOtherPermission extends
-			SecurityManager {
-
-		public void checkPermission(Permission permission, Object context) {
-			if (permission instanceof LoggingPermission) {
-				return;
-			}
-			if (permission.getName().equals("setSecurityManager")) {
-				return;
-			}
-			// throw new SecurityException();
-			super.checkPermission(permission, context);
-		}
-
-		public void checkPermission(Permission permission) {
-			if (permission instanceof LoggingPermission) {
-				return;
-			}
-			if (permission.getName().equals("setSecurityManager")) {
-				return;
-			}
-			super.checkPermission(permission);
-		}
-	}
-    
     /*
      * Test config class loading
-     * java -Djava.util.logging.config.class=badConfigClassName ClassLoadingTest 
+     * java -Djava.util.logging.config.class=badConfigClassName ClassLoadingTest
      */
     public static class ClassLoadingTest{
         public static void main(String[] args) {
@@ -1185,6 +1067,6 @@ public class LogManagerTest extends TestCase {
         }
         static class MockError extends Error{
         }
-    }    
-    
+    }
+
 }

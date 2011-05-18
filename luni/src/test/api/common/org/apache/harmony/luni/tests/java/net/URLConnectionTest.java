@@ -46,8 +46,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
-import org.apache.harmony.luni.util.Util;
-
 import tests.support.Support_Configuration;
 import tests.support.Support_HttpServer;
 import tests.support.Support_HttpServerSocket;
@@ -171,7 +169,7 @@ public class URLConnectionTest extends junit.framework.TestCase {
     /**
      * Regression test for HARMONY-6452
      */
-    public void test_RequestProperty_case_insensitivity() 
+    public void test_RequestProperty_case_insensitivity()
             throws MalformedURLException, IOException {
 
         URLConnection u =
@@ -327,10 +325,10 @@ public class URLConnectionTest extends junit.framework.TestCase {
     /**
      * @tests java.net.URLConnection#getContent()
      */
-    public void test_getContent() throws IOException {
+    public void test_getContent() throws Exception {
         byte[] ba = new byte[600];
         ((InputStream) uc.getContent()).read(ba, 0, 600);
-        String s = Util.toUTF8String(ba);
+        String s = new String(ba, 0, ba.length, "UTF-8");
         assertTrue("Incorrect content returned",
                 s.indexOf("Hello OneHandler") > 0);
     }
@@ -737,7 +735,7 @@ public class URLConnectionTest extends junit.framework.TestCase {
         byte[] ba = new byte[600];
         is.read(ba, 0, 600);
         is.close();
-        String s = Util.toUTF8String(ba);
+        String s = new String(ba, 0, ba.length, "UTF-8");
         assertTrue("Incorrect input stream read",
                 s.indexOf("Hello OneHandler") > 0);
 
@@ -1321,7 +1319,7 @@ public class URLConnectionTest extends junit.framework.TestCase {
      * @tests java.net.URLConnection#setRequestProperty(java.lang.String,
      *        java.lang.String)
      */
-    public void test_setRequestPropertyLjava_lang_StringLjava_lang_String() 
+    public void test_setRequestPropertyLjava_lang_StringLjava_lang_String()
                 throws MalformedURLException{
         MockURLConnection u = new MockURLConnection(new URL(
                 "http://www.apache.org"));

@@ -4,9 +4,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,7 @@ import junit.framework.TestCase;
  * Tests for Pipe and its default implementation
  */
 public class PipeTest extends TestCase {
-	
+
 	/**
 	 * @tests java.nio.channels.Pipe#open()
 	 */
@@ -37,22 +37,6 @@ public class PipeTest extends TestCase {
 		Pipe pipe = Pipe.open();
 		assertNotNull(pipe);
 	}
-	
-    /**
-     * @tests java.nio.channels.Pipe#open()
-     */
-    public void test_open_securityManager() throws IOException {
-        SecurityManager old = System.getSecurityManager();
-        SecurityManager sm = new MockSM();
-
-        try {
-            System.setSecurityManager(sm);
-            Pipe pipe = Pipe.open();
-            assertNotNull(pipe);
-        } finally {
-            System.setSecurityManager(old);
-        }
-    }
 
 	/**
 	 * @tests java.nio.channels.Pipe#sink()
@@ -72,18 +56,4 @@ public class PipeTest extends TestCase {
 		assertTrue(source.isBlocking());
 	}
 
-}
-
-class MockSM extends SecurityManager {
-    public void checkPermission(Permission permission) {
-        if (permission instanceof NetPermission) {
-            throw new SecurityException();
-        }
-
-        if (permission instanceof RuntimePermission) {
-            if ("setSecurityManager".equals(permission.getName())) {
-                return;
-            }
-        }
-    }
 }

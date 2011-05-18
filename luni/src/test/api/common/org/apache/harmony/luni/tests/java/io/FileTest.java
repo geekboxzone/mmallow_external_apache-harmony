@@ -46,10 +46,10 @@ import tests.support.Support_Exec;
 import tests.support.Support_PlatformFile;
 
 public class FileTest extends TestCase {
-    
+
     private static String platformId = "JDK"
         + System.getProperty("java.vm.version").replace('.', '-');
-    
+
     private static void deleteTempFolder(File dir) {
         String files[] = dir.list();
         if (files != null) {
@@ -64,19 +64,19 @@ public class FileTest extends TestCase {
         }
         dir.delete();
     }
-    
+
     private static String addTrailingSlash(String path) {
         if (File.separatorChar == path.charAt(path.length() - 1)) {
             return path;
         }
         return path + File.separator;
     }
-    
+
     /** Location to store tests in */
     private File tempDirectory;
 
     public String fileString = "Test_All_Tests\nTest_java_io_BufferedInputStream\nTest_java_io_BufferedOutputStream\nTest_java_io_ByteArrayInputStream\nTest_java_io_ByteArrayOutputStream\nTest_java_io_DataInputStream\nTest_File\nTest_FileDescriptor\nTest_FileInputStream\nTest_FileNotFoundException\nTest_FileOutputStream\nTest_java_io_FilterInputStream\nTest_java_io_FilterOutputStream\nTest_java_io_InputStream\nTest_java_io_IOException\nTest_java_io_OutputStream\nTest_java_io_PrintStream\nTest_java_io_RandomAccessFile\nTest_java_io_SyncFailedException\nTest_java_lang_AbstractMethodError\nTest_java_lang_ArithmeticException\nTest_java_lang_ArrayIndexOutOfBoundsException\nTest_java_lang_ArrayStoreException\nTest_java_lang_Boolean\nTest_java_lang_Byte\nTest_java_lang_Character\nTest_java_lang_Class\nTest_java_lang_ClassCastException\nTest_java_lang_ClassCircularityError\nTest_java_lang_ClassFormatError\nTest_java_lang_ClassLoader\nTest_java_lang_ClassNotFoundException\nTest_java_lang_CloneNotSupportedException\nTest_java_lang_Double\nTest_java_lang_Error\nTest_java_lang_Exception\nTest_java_lang_ExceptionInInitializerError\nTest_java_lang_Float\nTest_java_lang_IllegalAccessError\nTest_java_lang_IllegalAccessException\nTest_java_lang_IllegalArgumentException\nTest_java_lang_IllegalMonitorStateException\nTest_java_lang_IllegalThreadStateException\nTest_java_lang_IncompatibleClassChangeError\nTest_java_lang_IndexOutOfBoundsException\nTest_java_lang_InstantiationError\nTest_java_lang_InstantiationException\nTest_java_lang_Integer\nTest_java_lang_InternalError\nTest_java_lang_InterruptedException\nTest_java_lang_LinkageError\nTest_java_lang_Long\nTest_java_lang_Math\nTest_java_lang_NegativeArraySizeException\nTest_java_lang_NoClassDefFoundError\nTest_java_lang_NoSuchFieldError\nTest_java_lang_NoSuchMethodError\nTest_java_lang_NullPointerException\nTest_java_lang_Number\nTest_java_lang_NumberFormatException\nTest_java_lang_Object\nTest_java_lang_OutOfMemoryError\nTest_java_lang_RuntimeException\nTest_java_lang_SecurityManager\nTest_java_lang_Short\nTest_java_lang_StackOverflowError\nTest_java_lang_String\nTest_java_lang_StringBuffer\nTest_java_lang_StringIndexOutOfBoundsException\nTest_java_lang_System\nTest_java_lang_Thread\nTest_java_lang_ThreadDeath\nTest_java_lang_ThreadGroup\nTest_java_lang_Throwable\nTest_java_lang_UnknownError\nTest_java_lang_UnsatisfiedLinkError\nTest_java_lang_VerifyError\nTest_java_lang_VirtualMachineError\nTest_java_lang_vm_Image\nTest_java_lang_vm_MemorySegment\nTest_java_lang_vm_ROMStoreException\nTest_java_lang_vm_VM\nTest_java_lang_Void\nTest_java_net_BindException\nTest_java_net_ConnectException\nTest_java_net_DatagramPacket\nTest_java_net_DatagramSocket\nTest_java_net_DatagramSocketImpl\nTest_java_net_InetAddress\nTest_java_net_NoRouteToHostException\nTest_java_net_PlainDatagramSocketImpl\nTest_java_net_PlainSocketImpl\nTest_java_net_Socket\nTest_java_net_SocketException\nTest_java_net_SocketImpl\nTest_java_net_SocketInputStream\nTest_java_net_SocketOutputStream\nTest_java_net_UnknownHostException\nTest_java_util_ArrayEnumerator\nTest_java_util_Date\nTest_java_util_EventObject\nTest_java_util_HashEnumerator\nTest_java_util_Hashtable\nTest_java_util_Properties\nTest_java_util_ResourceBundle\nTest_java_util_tm\nTest_java_util_Vector\n";
-    
+
     protected void setUp() throws IOException {
         /** Setup the temporary directory */
         tempDirectory = new File(addTrailingSlash(System.getProperty("java.io.tmpdir")) + "harmony-test-" + getClass().getSimpleName() + File.separator);
@@ -97,7 +97,7 @@ public class FileTest extends TestCase {
         File f = new File(tempDirectory.getPath(), "input.tst");
         assertEquals("Created Incorrect File ", addTrailingSlash(tempDirectory.getPath()) + "input.tst", f.getPath());
     }
-    
+
     public void test_ConstructorLjava_io_FileLjava_lang_String1() {
         try {
             new File(tempDirectory, null);
@@ -105,14 +105,14 @@ public class FileTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     public void test_ConstructorLjava_io_FileLjava_lang_String2() throws IOException {
         File f = new File((File)null, "input.tst");
-        assertEquals("Created Incorrect File", 
-                new File("input.tst").getAbsolutePath(), 
+        assertEquals("Created Incorrect File",
+                new File("input.tst").getAbsolutePath(),
                 f.getAbsolutePath());
     }
-    
+
     public void test_ConstructorLjava_io_FileLjava_lang_String3() {
         // Regression test for HARMONY-382
         File f = new File("/abc");
@@ -120,7 +120,7 @@ public class FileTest extends TestCase {
         assertEquals("Test3: Created Incorrect File",
                      d.getAbsolutePath(), f.getAbsolutePath());
     }
-    
+
     public void test_ConstructorLjava_io_FileLjava_lang_String4() {
         // Regression test for HARMONY-21
         File path = new File("/dir/file");
@@ -136,7 +136,7 @@ public class FileTest extends TestCase {
                        .isAbsolute());
         }
     }
-    
+
     public void test_ConstructorLjava_io_FileLjava_lang_String5() {
         // Test data used in a few places below
         String dirName = tempDirectory.getPath();
@@ -158,7 +158,7 @@ public class FileTest extends TestCase {
             // Expected.
         }
     }
-    
+
     public void test_ConstructorLjava_io_FileLjava_lang_String6() {
         // Regression for HARMONY-46
         File f1 = new File("a");
@@ -192,8 +192,8 @@ public class FileTest extends TestCase {
         String dirName = null;
         String fileName = "input.tst";
         File f = new File(dirName, fileName);
-        assertEquals("Test 1: Created Incorrect File", 
-                new File("input.tst").getAbsolutePath(), 
+        assertEquals("Test 1: Created Incorrect File",
+                new File("input.tst").getAbsolutePath(),
                 f.getAbsolutePath());
 
         dirName = tempDirectory.getPath();
@@ -207,7 +207,7 @@ public class FileTest extends TestCase {
 
         fileName = "input.tst";
         f = new File(dirName, fileName);
-        assertEquals("Test 2: Created Incorrect File", 
+        assertEquals("Test 2: Created Incorrect File",
                 addTrailingSlash(tempDirectory.getPath()) + "input.tst",
                 f.getPath());
 
@@ -465,9 +465,9 @@ public class FileTest extends TestCase {
             f2 = File.createTempFile("harmony-test-FileTest_tempFile_tf", null);
 
             String fileLocation = addTrailingSlash(f1.getParent());
-            
+
             String tempDir = addTrailingSlash(System.getProperty("java.io.tmpdir"));
-            
+
             assertEquals(
                     "File did not save to the default temporary-file location.",
                     tempDir, fileLocation);
@@ -1132,7 +1132,7 @@ public class FileTest extends TestCase {
         String base = tempDirectory.getPath();
         File f = new File(base);
         assertFalse("Directory Returned True As Being A File.", f.isFile());
-        
+
         base = addTrailingSlash(base);
         f = new File(base, platformId + "amiafile");
         assertTrue("Non-existent File Returned True", !f.isFile());
@@ -2262,331 +2262,5 @@ public class FileTest extends TestCase {
     public void test_serialization_compatibility() throws Exception {
         File file = new File("FileTest.golden.ser");
         SerializationTest.verifyGolden(this, file);
-    }
-
-    /**
-     * @tests file methods with a security manager
-     * Regression for HARMONY-6495
-     */
-    public void test_with_security_manager() throws IOException {
-        // create a file
-        File file = new File("fileForSecurityTest");
-        
-        // save old security manager and policy to restore
-        SecurityManager oldManager = System.getSecurityManager();
-        Policy oldPolicy = Policy.getPolicy();
-        
-        // create a policy
-        MockPolicy customPolicy = new MockPolicy();
-        Policy.setPolicy(customPolicy);
-        
-        SecurityManager sm = new SecurityManager();
-        System.setSecurityManager(sm);
-
-        try {
-            
-            // try operations requiring execute permission
-            try {
-                file.canExecute();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            // grant all files execute permission
-            customPolicy.permissions.add(new FilePermission("<<ALL FILES>>", "execute"));
-            file.canExecute();
-            
-            // try operations requiring write permission
-            try {
-                file.canWrite();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.createNewFile();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.mkdir();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.mkdirs();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.renameTo(new File("something"));
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.renameTo(new File("something"));
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.setLastModified(0);
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.setReadOnly();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.setWritable(true);
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.setReadable(true);
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.setExecutable(true);
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                File.createTempFile("abc", "d");
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            // grant all files write permission
-            customPolicy.permissions = new Permissions();
-            customPolicy.permissions.add(new FilePermission("<<ALL FILES>>", "write"));
-            // check canWrite()
-            file.canWrite();
-
-            // try operations requiring read permission
-            try {
-                file.canRead();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.exists();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.isFile();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.isDirectory();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.isHidden();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.lastModified();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.length();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.list();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.listFiles();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.mkdirs();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.getTotalSpace();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.getFreeSpace();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.getUsableSpace();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            // try operations requiring delete permission
-            try {
-                file.delete();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.deleteOnExit();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            // grant all files delete permission
-            customPolicy.permissions = new Permissions();
-            customPolicy.permissions.add(new FilePermission("<<ALL FILES>>", "delete"));
-            // try delete()
-            file.delete();
-            
-            // grant all files read permission
-            customPolicy.permissions = new Permissions();
-            customPolicy.permissions.add(new FilePermission("<<ALL FILES>>", "read"));
-            // check canRead()
-            file.canRead();
-
-            // try operations requiring read and getFileSystemAttributes runtime permission
-            try {
-                file.getTotalSpace();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.getFreeSpace();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.getUsableSpace();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            // grant getFileSystemAttributes
-            customPolicy.permissions.add(new RuntimePermission("getFileSystemAttributes"));
-            file.getTotalSpace();
-            file.getFreeSpace();
-            file.getUsableSpace();
-            
-            // now only grant getFileSystemAttributes
-            // Regression for HARMONY-6496
-            customPolicy.permissions = new Permissions();
-            customPolicy.permissions.add(new RuntimePermission("getFileSystemAttributes"));
-            try {
-                file.getTotalSpace();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.getFreeSpace();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-            try {
-                file.getUsableSpace();
-                fail("Expected security exception");
-            } catch (SecurityException e) {
-                // expected
-            }
-            
-        } finally {
-            // restore security settings
-            System.setSecurityManager(oldManager);
-            Policy.setPolicy(oldPolicy);
-        }
-    }
-    
-    class MockPolicy extends Policy {
-        public Permissions permissions;
-        
-        public MockPolicy() {
-            permissions = new Permissions();
-        }
-        
-        public PermissionCollection getPermissions(CodeSource codesource) {
-            return permissions;
-        }
-        
-        public PermissionCollection getPermissions(ProtectionDomain domain) {
-            return permissions;
-        }
-        
-        public boolean implies(ProtectionDomain domain, Permission permission) {
-            if (permission.equals(new RuntimePermission("setSecurityManager"))) {
-                return true;
-            }
-            return permissions.implies(permission);
-        }
     }
 }

@@ -18,7 +18,6 @@ package org.apache.harmony.luni.tests.java.lang.reflect;
 
 import java.lang.reflect.MalformedParameterizedTypeException;
 import junit.framework.TestCase;
-import org.junit.Test;
 
 public class MalformedParameterizedTypeExceptionTest extends TestCase {
 
@@ -26,7 +25,6 @@ public class MalformedParameterizedTypeExceptionTest extends TestCase {
      * @tests java.lang.reflect.MalformedParameterizedTypeException#
      *        MalformedParameterizedTypeException()
      */
-    @Test
     public void testMalformedParameterizedTypeException() {
         MalformedParameterizedTypeException e = new MalformedParameterizedTypeException();
         assertNotNull(e);

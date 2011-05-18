@@ -120,43 +120,6 @@ public class ThreadTest extends junit.framework.TestCase {
 
 	Thread st, ct, spinner;
 
-	static boolean calledMySecurityManager = false;
-
-	/**
-	 * @tests java.lang.Thread#Thread()
-	 */
-	public void test_Constructor() {
-		// Test for method java.lang.Thread()
-
-		Thread t;
-		SecurityManager m = new SecurityManager() {
-			@Override
-            public ThreadGroup getThreadGroup() {
-				calledMySecurityManager = true;
-				return Thread.currentThread().getThreadGroup();
-			}
-            
-            @Override
-            public void checkPermission(Permission permission) {
-                if (permission.getName().equals("setSecurityManager")) {
-                    return;
-                }
-                super.checkPermission(permission);
-            }
-		};
-		try {
-			// To see if it checks Thread creation with our SecurityManager
-			System.setSecurityManager(m);
-			t = new Thread();
-		} finally {
-			// restore original, no side-effects
-			System.setSecurityManager(null);
-		}
-		assertTrue("Did not call SecurityManager.getThreadGroup ()",
-				calledMySecurityManager);
-		t.start();
-	}
-
 	/**
 	 * @tests java.lang.Thread#Thread(java.lang.Runnable)
 	 */
@@ -184,7 +147,7 @@ public class ThreadTest extends junit.framework.TestCase {
 	public void test_ConstructorLjava_lang_String() {
 		// Test for method java.lang.Thread(java.lang.String)
 		Thread t = new Thread("Testing");
-		assertEquals("Created tread with incorrect name", 
+		assertEquals("Created tread with incorrect name",
 				"Testing", t.getName());
 		t.start();
 	}
@@ -248,7 +211,7 @@ public class ThreadTest extends junit.framework.TestCase {
 		// Test for method java.lang.Thread(java.lang.ThreadGroup,
 		// java.lang.String)
 		st = new Thread(new SimpleThread(1), "SimpleThread4");
-		assertEquals("Returned incorrect thread name", 
+		assertEquals("Returned incorrect thread name",
 				"SimpleThread4", st.getName());
 		st.start();
 	}
@@ -335,7 +298,7 @@ public class ThreadTest extends junit.framework.TestCase {
             MyThread(ThreadGroup tg, String name) {
                 super(tg, name);
             }
-            
+
             boolean failed = false;
             String failMessage = null;
 
@@ -395,7 +358,7 @@ public class ThreadTest extends junit.framework.TestCase {
                 }
             }
         };
-        
+
         ThreadGroup tg = new ThreadGroup("tg");
         MyThread t = new MyThread(tg, "top");
         t.start();
@@ -429,7 +392,7 @@ public class ThreadTest extends junit.framework.TestCase {
 	public void test_getName() {
 		// Test for method java.lang.String java.lang.Thread.getName()
 		st = new Thread(new SimpleThread(1), "SimpleThread6");
-		assertEquals("Returned incorrect thread name", 
+		assertEquals("Returned incorrect thread name",
 				"SimpleThread6", st.getName());
 		st.start();
 	}
@@ -737,7 +700,7 @@ public class ThreadTest extends junit.framework.TestCase {
                         st.start();
                         simple.wait();
                 }
-                
+
                 long firstRead = System.currentTimeMillis();
                 st.join(100, 999999);
                 long secondRead = System.currentTimeMillis();
@@ -745,7 +708,7 @@ public class ThreadTest extends junit.framework.TestCase {
                                 + firstRead + "=" + (secondRead - firstRead), secondRead
                                 - firstRead <= 300);
                 assertTrue("Joined thread is not alive", st.isAlive());
-                st.interrupt();  
+                st.interrupt();
 
 		final Object lock = new Object();
 		final Thread main = Thread.currentThread();
@@ -857,7 +820,7 @@ public class ThreadTest extends junit.framework.TestCase {
 		// Test for method void java.lang.Thread.setName(java.lang.String)
 		st = new Thread(new SimpleThread(1), "SimpleThread15");
 		st.setName("Bogus Name");
-		assertEquals("Failed to set thread name", 
+		assertEquals("Failed to set thread name",
 				"Bogus Name", st.getName());
 		try {
 			st.setName(null);
@@ -971,115 +934,6 @@ public class ThreadTest extends junit.framework.TestCase {
 	}
 
 	/**
-	 * @tests java.lang.Thread#stop()
-	 */
-	@SuppressWarnings("deprecation")
-    public void test_stop_subtest0() {
-		Thread t = new Thread("t");
-		class MySecurityManager extends SecurityManager {
-			public boolean intest = false;
-
-			@Override
-            public void checkAccess(Thread t) {
-				if (intest) {
-					fail("checkAccess called");
-				}
-			}
-            @Override
-            public void checkPermission(Permission permission) {
-                if (permission.getName().equals("setSecurityManager")) {
-                    return;
-                }
-                super.checkPermission(permission);
-            }
-		}
-		MySecurityManager sm = new MySecurityManager();
-		System.setSecurityManager(sm);
-		try {
-			sm.intest = true;
-			try {
-				t.stop();
-				// Ignore any SecurityExceptions, may not have stopThread
-				// permission
-			} catch (SecurityException e) {
-			}
-			sm.intest = false;
-			t.start();
-			try {
-				t.join(2000);
-			} catch (InterruptedException e) {
-			}
-			sm.intest = true;
-			try {
-				t.stop();
-				// Ignore any SecurityExceptions, may not have stopThread
-				// permission
-			} catch (SecurityException e) {
-			}
-			sm.intest = false;
-		} finally {
-			System.setSecurityManager(null);
-		}
-	}
-
-	/**
-	 * @tests java.lang.Thread#stop(java.lang.Throwable)
-	 */
-	@SuppressWarnings("deprecation")
-    public void test_stopLjava_lang_Throwable_subtest0() {
-		Thread t = new Thread("t");
-		class MySecurityManager extends SecurityManager {
-			public boolean intest = false;
-
-			public boolean checkAccess = false;
-
-			@Override
-            public void checkAccess(Thread t) {
-				if (intest) {
-					checkAccess = true;
-				}
-			}
-            @Override
-            public void checkPermission(Permission permission) {
-                if (permission.getName().equals("setSecurityManager")) {
-                    return;
-                }
-                super.checkPermission(permission);
-            }
-		}
-		MySecurityManager sm = new MySecurityManager();
-		System.setSecurityManager(sm);
-		try {
-			sm.intest = true;
-			try {
-				t.stop(new ThreadDeath());
-				// Ignore any SecurityExceptions, may not have stopThread
-				// permission
-			} catch (SecurityException e) {
-			}
-			sm.intest = false;
-			assertTrue("no checkAccess 1", sm.checkAccess);
-			t.start();
-			try {
-				t.join(2000);
-			} catch (InterruptedException e) {
-			}
-			sm.intest = true;
-			sm.checkAccess = false;
-			try {
-				t.stop(new ThreadDeath());
-				// Ignore any SecurityExceptions, may not have stopThread
-				// permission
-			} catch (SecurityException e) {
-			}
-			assertTrue("no checkAccess 2", sm.checkAccess);
-			sm.intest = false;
-		} finally {
-			System.setSecurityManager(null);
-		}
-	}
-
-	/**
 	 * @tests java.lang.Thread#stop(java.lang.Throwable)
 	 */
 	@SuppressWarnings("deprecation")
@@ -1178,7 +1032,7 @@ public class ThreadTest extends junit.framework.TestCase {
 		}
 		tg.destroy();
 	}
-    
+
     /**
      * @tests java.lang.Thread#getAllStackTraces()
      */
@@ -1187,7 +1041,7 @@ public class ThreadTest extends junit.framework.TestCase {
         assertNotNull(stMap);
         //TODO add security-based tests
     }
-    
+
     /**
      * @tests java.lang.Thread#getDefaultUncaughtExceptionHandler
      * @tests java.lang.Thread#setDefaultUncaughtExceptionHandler
@@ -1197,22 +1051,22 @@ public class ThreadTest extends junit.framework.TestCase {
             public void uncaughtException(Thread thread, Throwable ex) {
             }
         }
-        
+
         final Handler handler = new Handler();
         Thread.setDefaultUncaughtExceptionHandler(handler);
         assertSame(handler, Thread.getDefaultUncaughtExceptionHandler());
-        
+
         Thread.setDefaultUncaughtExceptionHandler(null);
         assertNull(Thread.getDefaultUncaughtExceptionHandler());
         //TODO add security-based tests
     }
-    
+
     /**
      * @tests java.lang.Thread#getStackTrace()
      */
     public void test_getStackTrace() {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-        
+
         assertNotNull(stackTrace);
 
         stack_trace_loop: {
@@ -1226,10 +1080,10 @@ public class ThreadTest extends junit.framework.TestCase {
             }
             fail("class and method not found in stack trace");
         }
-        
+
         //TODO add security-based tests
     }
-    
+
     /**
      * @tests java.lang.Thread#getState()
      */
@@ -1239,7 +1093,7 @@ public class ThreadTest extends junit.framework.TestCase {
         assertEquals(Thread.State.RUNNABLE, state);
         //TODO add additional state tests
     }
-    
+
     /**
      * @tests java.lang.Thread#getUncaughtExceptionHandler
      * @tests java.lang.Thread#setUncaughtExceptionHandler
@@ -1249,22 +1103,22 @@ public class ThreadTest extends junit.framework.TestCase {
             public void uncaughtException(Thread thread, Throwable ex) {
             }
         }
-        
+
         final Handler handler = new Handler();
         Thread.currentThread().setUncaughtExceptionHandler(handler);
         assertSame(handler, Thread.currentThread().getUncaughtExceptionHandler());
-        
+
         Thread.currentThread().setUncaughtExceptionHandler(null);
 
         //TODO add security-based tests
     }
-    
+
     /**
      * @tests java.lang.Thread#getId()
      */
     public void test_getId() {
         assertTrue("current thread's ID is not positive", Thread.currentThread().getId() > 0);
-        
+
         //check all the current threads for positive IDs
         Map<Thread, StackTraceElement[]> stMap = Thread.getAllStackTraces();
         for (Thread thread : stMap.keySet()) {
