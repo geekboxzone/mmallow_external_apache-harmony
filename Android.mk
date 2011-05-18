@@ -6,9 +6,30 @@ define all-harmony-test-java-files-under
   $(foreach dir,$(1),$(patsubst ./%,%,$(shell cd $(LOCAL_PATH) && find $(dir)/$(2) -name "*.java" 2> /dev/null)))
 endef
 
-harmony_test_dirs := annotation archive logging math nio nio_char prefs regex support text
+harmony_test_dirs := \
+    annotation \
+    archive \
+    beans \
+    logging \
+    luni \
+    math \
+    nio \
+    nio_char \
+    prefs \
+    regex \
+    support \
+    text \
+
+# TODO: get these working too!
+#    auth \
+#    crypto \
+#    security \
+#    sql \
+#    x-net
+
 harmony_test_src_files := \
     $(call all-harmony-test-java-files-under,$(harmony_test_dirs),src/test/java) \
+    $(call all-harmony-test-java-files-under,$(harmony_test_dirs),src/test/support/java) \
     $(call all-harmony-test-java-files-under,luni,src/test/api/common) \
     $(call all-harmony-test-java-files-under,luni,src/test/api/unix) \
     $(call all-harmony-test-java-files-under,luni,src/test/impl/common) \
