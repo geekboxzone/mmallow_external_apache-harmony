@@ -20,39 +20,26 @@ package org.apache.harmony.luni.tests.java.net;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FilePermission;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.Authenticator;
 import java.net.FileNameMap;
 import java.net.HttpURLConnection;
 import java.net.JarURLConnection;
 import java.net.MalformedURLException;
-import java.net.PasswordAuthentication;
-import java.net.ProtocolException;
 import java.net.SocketPermission;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
 import java.security.Permission;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
-
 import tests.support.Support_Configuration;
-import tests.support.Support_HttpServer;
-import tests.support.Support_HttpServerSocket;
-import tests.support.Support_HttpTests;
-import tests.support.Support_Jetty;
-import tests.support.Support_PortManager;
-import tests.support.Support_URLConnector;
 import tests.support.resource.Support_Resources;
 
 public class URLConnectionTest extends junit.framework.TestCase {
@@ -90,8 +77,6 @@ public class URLConnectionTest extends junit.framework.TestCase {
         }
     }
 
-    private static int port;
-
     static String getContentType(String fileName) throws IOException {
         String resourceName = "org/apache/harmony/luni/tests/" + fileName;
         URL url = ClassLoader.getSystemClassLoader().getResource(resourceName);
@@ -100,13 +85,11 @@ public class URLConnectionTest extends junit.framework.TestCase {
     }
 
     URL url;
-
     URLConnection uc;
 
     protected void setUp() throws Exception {
-        url = new URL("http://localhost:" + port + "/");
-        uc = (HttpURLConnection) url.openConnection();
-        port = Support_Jetty.startDefaultHttpServer();
+        url = new URL("http://localhost/");
+        uc = url.openConnection();
     }
 
     protected void tearDown() {
@@ -167,105 +150,6 @@ public class URLConnectionTest extends junit.framework.TestCase {
     }
 
     /**
-     * Regression test for HARMONY-6452
-     */
-    public void test_RequestProperty_case_insensitivity()
-            throws MalformedURLException, IOException {
-
-        URLConnection u =
-            (URLConnection)(new URL("http://example.org/").openConnection());
-        u.setRequestProperty("KEY", "upper");
-        u.setRequestProperty("key", "lower");
-        assertEquals("set for \"KEY\" is overwritten by set for \"key\"",
-                     "lower", u.getRequestProperty("KEY"));
-        assertEquals("value can be retrieved by either key case",
-                     "lower", u.getRequestProperty("key"));
-        assertEquals("value can be retrieved by arbitrary key case",
-                     "lower", u.getRequestProperty("kEy"));
-
-        Map<String, List<String>> props = u.getRequestProperties();
-        List<String> values = props.get("KEY");
-        assertNotNull("first key does have an entry", values);
-        assertNull("second key does not have an entry", props.get("key"));
-
-        assertEquals("returned value list is correct size", 1, values.size());
-        assertTrue("returned value list contains expected value",
-                   values.contains("lower"));
-
-
-        // repeat the above with the case of keys reversed to confirm
-        // that first key is significant one
-        u = (URLConnection)(new URL("http://example.org/").openConnection());
-        u.setRequestProperty("key", "lower");
-        u.setRequestProperty("KEY", "upper");
-        assertEquals("set for \"key\" is overwritten by set for \"KEY\"",
-                     "upper", u.getRequestProperty("KEY"));
-        assertEquals("value can be retrieved by either key case",
-                     "upper", u.getRequestProperty("key"));
-        assertEquals("value can be retrieved by arbitrary key case",
-                     "upper", u.getRequestProperty("kEy"));
-
-        props = u.getRequestProperties();
-        values = props.get("key");
-        assertNotNull("first key does have an entry", values);
-        assertNull("second key does not have an entry", props.get("KEY"));
-
-        assertEquals("returned value list is correct size", 1, values.size());
-        assertTrue("returned value list contains expected value",
-                   values.contains("upper"));
-
-
-        // repeat the first test with set and add methods
-        u = (URLConnection)(new URL("http://example.org/").openConnection());
-        u.setRequestProperty("KEY", "value1");
-        u.addRequestProperty("key", "value2");
-        assertEquals("value for \"KEY\" is the last one added",
-                     "value2", u.getRequestProperty("KEY"));
-        assertEquals("value can be retrieved by either key case",
-                     "value2", u.getRequestProperty("key"));
-        assertEquals("value can be retrieved by arbitrary key case",
-                     "value2", u.getRequestProperty("kEy"));
-
-        props = u.getRequestProperties();
-        values = props.get("KEY");
-        assertNotNull("first key does have an entry", values);
-        assertNull("second key does not have an entry", props.get("key"));
-
-        assertEquals("returned value list is correct size", 2, values.size());
-        assertTrue("returned value list contains first value",
-                   values.contains("value1"));
-        assertTrue("returned value list contains second value",
-                   values.contains("value2"));
-
-
-        // repeat the previous test with only add methods
-        u = (URLConnection)(new URL("http://example.org/").openConnection());
-        u.addRequestProperty("KEY", "value1");
-        u.addRequestProperty("key", "value2");
-        u.addRequestProperty("Key", "value3");
-        assertEquals("value for \"KEY\" is the last one added",
-                     "value3", u.getRequestProperty("KEY"));
-        assertEquals("value can be retrieved by another key case",
-                     "value3", u.getRequestProperty("key"));
-        assertEquals("value can be retrieved by arbitrary key case",
-                     "value3", u.getRequestProperty("kEy"));
-
-        props = u.getRequestProperties();
-        values = props.get("KEY");
-        assertNotNull("first key does have an entry", values);
-        assertNull("second key does not have an entry", props.get("key"));
-        assertNull("third key does not have an entry", props.get("Key"));
-
-        assertEquals("returned value list is correct size", 3, values.size());
-        assertTrue("returned value list contains first value",
-                   values.contains("value1"));
-        assertTrue("returned value list contains second value",
-                   values.contains("value2"));
-        assertTrue("returned value list contains second value",
-                   values.contains("value3"));
-    }
-
-    /**
      * @tests java.net.URLConnection#addRequestProperty(java.lang.String,java.lang.String)
      */
     public void test_addRequestPropertyLjava_lang_StringLjava_lang_String()
@@ -323,75 +207,12 @@ public class URLConnectionTest extends junit.framework.TestCase {
     }
 
     /**
-     * @tests java.net.URLConnection#getContent()
-     */
-    public void test_getContent() throws Exception {
-        byte[] ba = new byte[600];
-        ((InputStream) uc.getContent()).read(ba, 0, 600);
-        String s = new String(ba, 0, ba.length, "UTF-8");
-        assertTrue("Incorrect content returned",
-                s.indexOf("Hello OneHandler") > 0);
-    }
-
-    /**
-     * @tests java.net.URLConnection#getContent(Class[])
-     */
-    public void test_getContent_LjavalangClass() throws IOException {
-        byte[] ba = new byte[600];
-
-        try {
-            ((InputStream) uc.getContent(null)).read(ba, 0, 600);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
-        }
-
-        try {
-            ((InputStream) uc.getContent(new Class[] {})).read(ba, 0, 600);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
-        }
-
-        try {
-            ((InputStream) uc.getContent(new Class[] { Class.class })).read(ba,
-                    0, 600);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
-        }
-    }
-
-    /**
      * @tests java.net.URLConnection#getContentEncoding()
      */
     public void test_getContentEncoding() {
         // should not be known for a file
         assertNull("getContentEncoding failed: " + uc.getContentEncoding(), uc
                 .getContentEncoding());
-    }
-
-    /**
-     * @tests java.net.URLConnection#getContentLength()
-     */
-    public void test_getContentLength() throws IOException {
-        assertEquals("getContentLength failed: " + uc.getContentLength(), 25,
-                uc.getContentLength());
-    }
-
-    /**
-     * @tests java.net.URLConnection#getContentType()
-     */
-    public void test_getContentType() throws IOException {
-        // should not be known for a file
-        assertTrue("getContentType failed: " + uc.getContentType(), uc
-                .getContentType().contains("text/html"));
-
-        File resources = Support_Resources.createTempFolder();
-        Support_Resources.copyFile(resources, null, "Harmony.GIF");
-        URL url = new URL("file:/" + resources.toString() + "/Harmony.GIF");
-        URLConnection conn = url.openConnection();
-        assertEquals("type not GIF", "image/gif", conn.getContentType());
     }
 
     /**
@@ -566,52 +387,6 @@ public class URLConnectionTest extends junit.framework.TestCase {
     }
 
     /**
-     * @tests java.net.URLConnection#getHeaderField(int)
-     */
-    public void test_getHeaderFieldI() {
-        int i = 0;
-        String hf;
-        boolean foundResponse = false;
-        while ((hf = uc.getHeaderField(i++)) != null) {
-            if (hf.equals(Support_Configuration.HomeAddressSoftware)) {
-                foundResponse = true;
-            }
-        }
-        assertTrue("Could not find header field containing \""
-                + Support_Configuration.HomeAddressSoftware + "\"",
-                foundResponse);
-
-        i = 0;
-        foundResponse = false;
-        while ((hf = uc.getHeaderField(i++)) != null) {
-            if (hf.equals(Support_Configuration.HomeAddressResponse)) {
-                foundResponse = true;
-            }
-        }
-        assertTrue("Could not find header field containing \""
-                + Support_Configuration.HomeAddressResponse + "\"",
-                foundResponse);
-    }
-
-    /**
-     * @tests java.net.URLConnection#getHeaderFieldKey(int)
-     */
-    public void test_getHeaderFieldKeyI() {
-        String hf;
-        boolean foundResponse = false;
-        for (int i = 0; i < 100; i++) {
-            hf = uc.getHeaderFieldKey(i);
-            if (hf != null && hf.toLowerCase().equals("content-type")) {
-                foundResponse = true;
-                break;
-            }
-        }
-        assertTrue(
-                "Could not find header field key containing \"content-type\"",
-                foundResponse);
-    }
-
-    /**
      * @tests java.net.URLConnection#getHeaderField(java.lang.String)
      */
     public void test_getHeaderFieldLjava_lang_String() {
@@ -678,145 +453,12 @@ public class URLConnectionTest extends junit.framework.TestCase {
     }
 
     /**
-     * @tests java.net.URLConnection#getHeaderFields()
-     */
-    public void test_getHeaderFields() throws IOException {
-        try {
-            uc.getInputStream();
-        } catch (IOException e) {
-            fail();
-        }
-
-        Map<String, List<String>> headers = uc.getHeaderFields();
-        assertNotNull(headers);
-
-        // content-length should always appear
-        List<String> list = headers.get("Content-Length");
-        if (list == null) {
-            list = headers.get("content-length");
-        }
-        assertNotNull(list);
-        String contentLength = (String) list.get(0);
-        assertNotNull(contentLength);
-
-        // there should be at least 2 headers
-        assertTrue(headers.size() > 1);
-        File resources = Support_Resources.createTempFolder();
-        Support_Resources.copyFile(resources, null, "hyts_att.jar");
-        URL fUrl1 = new URL("jar:file:" + resources.getPath()
-                + "/hyts_att.jar!/");
-        JarURLConnection con1 = (JarURLConnection) fUrl1.openConnection();
-        headers = con1.getHeaderFields();
-        assertNotNull(headers);
-        assertEquals(0, headers.size());
-        try {
-            // the map should be unmodifiable
-            headers.put("hi", Arrays.asList(new String[] { "bye" }));
-            fail("The map should be unmodifiable");
-        } catch (UnsupportedOperationException e) {
-            // Expected
-        }
-    }
-
-    /**
      * @tests java.net.URLConnection#getIfModifiedSince()
      */
     public void test_getIfModifiedSince() {
         uc.setIfModifiedSince(200);
         assertEquals("Returned wrong ifModifiedSince value", 200, uc
                 .getIfModifiedSince());
-    }
-
-    /**
-     * @tests java.net.URLConnection#getInputStream()
-     */
-    public void test_getInputStream() throws IOException {
-        InputStream is = uc.getInputStream();
-        byte[] ba = new byte[600];
-        is.read(ba, 0, 600);
-        is.close();
-        String s = new String(ba, 0, ba.length, "UTF-8");
-        assertTrue("Incorrect input stream read",
-                s.indexOf("Hello OneHandler") > 0);
-
-        // open an non-existent file
-        URL url = new URL("http://localhost:" + port + "/fred-zz6.txt");
-        is = url.openStream();
-        assertTrue("available() less than 0", is.available() >= 0);
-        is.close();
-
-        // create a server socket
-        Support_HttpServerSocket serversocket = new Support_HttpServerSocket();
-
-        // create a client connector
-        Support_URLConnector client = new Support_URLConnector();
-
-        // pass both to the HttpTest
-        Support_HttpTests test = new Support_HttpTests(serversocket, client);
-
-        // run various tests common to both HttpConnections and
-        // HttpURLConnections
-        test.runTests(this);
-
-        // Authentication test is separate from other tests because it is only
-        // in HttpURLConnection and not supported in HttpConnection
-
-        serversocket = new Support_HttpServerSocket();
-        Support_HttpServer server = new Support_HttpServer(serversocket, this);
-        int p = Support_PortManager.getNextPort();
-        server.startServer(p);
-
-        // it is the Support_HttpServer's responsibility to close this
-        // serversocket
-        serversocket = null;
-
-        final String authTestUrl = "http://localhost:" + server.getPort()
-                + Support_HttpServer.AUTHTEST;
-
-        // Authentication test
-        // set up a very simple authenticator
-        Authenticator.setDefault(new Authenticator() {
-            public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("test", "password"
-                        .toCharArray());
-            }
-        });
-        try {
-            client.open(authTestUrl);
-            is = client.getInputStream();
-            int c = is.read();
-            while (c > 0) {
-                c = is.read();
-            }
-            c = is.read();
-            is.close();
-        } catch (FileNotFoundException e) {
-            fail("Error performing authentication test: " + e);
-        }
-
-        final String invalidLocation = "/missingFile.htm";
-        final String redirectTestUrl = "http://localhost:" + server.getPort()
-                + Support_HttpServer.REDIRECTTEST;
-
-        // test redirecting to a non-existent URL on the same host
-        try {
-            // append the response code for the server to return
-
-            client.open(redirectTestUrl + "/" + Support_HttpServer.MOVED_PERM
-                    + "-" + invalidLocation);
-            is = client.getInputStream();
-
-            int c = is.read();
-            while (c > 0) {
-                c = is.read();
-            }
-            c = is.read();
-            is.close();
-            fail("Incorrect data returned on redirect to non-existent file.");
-        } catch (FileNotFoundException e) {
-        }
-        server.stopServer();
-
     }
 
     /**
@@ -836,112 +478,6 @@ public class URLConnectionTest extends junit.framework.TestCase {
     }
 
     /**
-     * @tests java.net.URLConnection#getOutputStream()
-     */
-    public void test_getOutputStream() throws Exception {
-        int port = Support_Jetty.startDefaultServlet();
-        try {
-            boolean exception = false;
-            URL test;
-            java.net.URLConnection conn2 = null;
-
-            test = new URL("http://localhost:" + port + "/");
-            conn2 = (java.net.URLConnection) test.openConnection();
-
-            try {
-                conn2.getOutputStream();
-                fail("should throw ProtocolException");
-            } catch (java.net.ProtocolException e) {
-                // correct
-            }
-
-            conn2.setDoOutput(true);
-            conn2.getOutputStream();
-            conn2.connect();
-            conn2.getOutputStream();
-
-            try {
-                conn2.getInputStream();
-                conn2.getOutputStream();
-                fail("should throw ProtocolException");
-            } catch (ProtocolException e) {
-                // expected.
-            }
-
-            URL u = new URL("http://localhost:" + port + "/");
-            java.net.HttpURLConnection conn = (java.net.HttpURLConnection) u
-                    .openConnection();
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-            OutputStream out = conn.getOutputStream();
-            String posted = "this is a test";
-            out.write(posted.getBytes());
-            out.close();
-            conn.getResponseCode();
-            InputStream is = conn.getInputStream();
-            String response = "";
-            byte[] b = new byte[1024];
-            int count = 0;
-            while ((count = is.read(b)) > 0) {
-                response += new String(b, 0, count);
-            }
-            assertEquals("Response to POST method invalid 1", posted, response);
-
-            posted = "just a test";
-            u = new URL("http://localhost:" + port + "/");
-            conn = (java.net.HttpURLConnection) u.openConnection();
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-length", String.valueOf(posted
-                    .length()));
-            out = conn.getOutputStream();
-            out.write(posted.getBytes());
-            out.close();
-            conn.getResponseCode();
-            is = conn.getInputStream();
-            response = "";
-            b = new byte[1024];
-            count = 0;
-            while ((count = is.read(b)) > 0) {
-                response += new String(b, 0, count);
-            }
-            assertTrue("Response to POST method invalid 2", response
-                    .equals(posted));
-
-            posted = "just another test";
-            u = new URL("http://localhost:" + port + "/");
-            conn = (java.net.HttpURLConnection) u.openConnection();
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-length", String.valueOf(posted
-                    .length()));
-            out = conn.getOutputStream();
-            out.write(posted.getBytes());
-            // out.close();
-            conn.getResponseCode();
-            is = conn.getInputStream();
-            response = "";
-            b = new byte[1024];
-            count = 0;
-            while ((count = is.read(b)) > 0) {
-                response += new String(b, 0, count);
-            }
-            assertTrue("Response to POST method invalid 3", response
-                    .equals(posted));
-
-            u = new URL("http://localhost:" + port + "/");
-            conn = (java.net.HttpURLConnection) u.openConnection();
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-            int result = conn.getResponseCode();
-            assertTrue("Unexpected response code: " + result, result == 200);
-
-        } finally {
-            Support_Jetty.startDefaultServlet();
-        }
-    }
-
-    /**
      * @tests java.net.URLConnection#getPermission()
      */
     public void test_getPermission() throws Exception {
@@ -949,7 +485,7 @@ public class URLConnectionTest extends junit.framework.TestCase {
         assertTrue("Permission of wrong type: " + p.toString(),
                 p instanceof java.net.SocketPermission);
         assertTrue("Permission has wrong name: " + p.getName(), p.getName()
-                .contains("localhost:" + port));
+                .contains("localhost:80"));
 
         URL fileUrl = new URL("file:myfile");
         Permission perm = new FilePermission("myfile", "read");
@@ -1195,44 +731,6 @@ public class URLConnectionTest extends junit.framework.TestCase {
      */
     public void test_setDefaultUseCachesZ() {
         assertTrue("Used to test", true);
-    }
-
-    /**
-     * @throws IOException
-     * @throws MalformedURLException
-     * @tests java.net.URLConnection#setDoInput(boolean)
-     */
-    public void test_setDoInputZ() throws MalformedURLException, IOException {
-        assertTrue("Used to test", true);
-        HttpURLConnection u = null;
-
-        u = (HttpURLConnection) (new URL("http://localhost:" + port)
-                .openConnection());
-        u.connect();
-
-        try {
-            u.setDoInput(true);
-        } catch (IllegalStateException e) { // expected
-        }
-    }
-
-    /**
-     * @throws IOException
-     * @throws MalformedURLException
-     * @tests java.net.URLConnection#setDoOutput(boolean)
-     */
-    public void test_setDoOutputZ() throws MalformedURLException, IOException {
-        assertTrue("Used to test", true);
-        HttpURLConnection u = null;
-
-        u = (HttpURLConnection) (new URL("http://localhost:" + port)
-                .openConnection());
-        u.connect();
-
-        try {
-            u.setDoOutput(true);
-        } catch (IllegalStateException e) { // expected
-        }
     }
 
     /**

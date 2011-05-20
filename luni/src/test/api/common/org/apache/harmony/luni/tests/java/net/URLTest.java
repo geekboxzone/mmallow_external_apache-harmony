@@ -18,14 +18,13 @@
 package org.apache.harmony.luni.tests.java.net;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Proxy;
+import java.net.Proxy.Type;
 import java.net.ProxySelector;
 import java.net.SocketAddress;
 import java.net.URI;
@@ -33,14 +32,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
 import java.net.URLStreamHandlerFactory;
-import java.net.Proxy.Type;
-import java.security.Permission;
 import java.util.ArrayList;
 import java.util.List;
-
 import junit.framework.TestCase;
 import tests.support.Support_Configuration;
-import tests.support.Support_Jetty;
 import tests.support.resource.Support_Resources;
 
 public class URLTest extends TestCase {
@@ -69,55 +64,6 @@ public class URLTest extends TestCase {
     boolean caught = false;
 
     static boolean isSelectCalled;
-
-
-    /**
-     * Check when the argument in url consists of windows path character back-slash
-     * @tests java.net.URL#openConnection(Proxy)
-     * @throws Exception
-     */
-    public void test_openConnection_windows_path_character() throws Exception {
-        int port = Support_Jetty.startDefaultHttpServer();
-        HttpURLConnection con = null;
-        try {
-            URL url = new URL("http://0.0.0.0:" + port + "/servlet?ResourceName=C:\\temp\\test.txt");
-            con = (HttpURLConnection) url.openConnection();
-            con.setDoInput(true);
-            con.setDoOutput(true);
-            con.setUseCaches(false);
-            con.setRequestMethod("GET");
-            InputStream is = con.getInputStream();
-        } finally {
-            if (con != null) {
-                con.disconnect();
-            }
-        }
-    }
-
-   /**
-     * Check when the argument in url consists of quotation marks character
-     * @tests java.net.URL#openConnection(Proxy)
-     * @throws Exception
-     */
-    public void test_openConnection_quotation_marks_character()
-            throws Exception {
-        int port = Support_Jetty.startDefaultHttpServer();
-        HttpURLConnection con = null;
-        try {
-            URL url = new URL("http://0.0.0.0:" + port
-                    + "/servlet?ResourceName=[\"11111\",\"22222\"]");
-            con = (HttpURLConnection) url.openConnection();
-            con.setDoInput(true);
-            con.setDoOutput(true);
-            con.setUseCaches(false);
-            con.setRequestMethod("GET");
-            InputStream is = con.getInputStream();
-        } finally {
-            if (con != null) {
-                con.disconnect();
-            }
-        }
-    }
 
     /**
      * @tests java.net.URL#URL(java.lang.String)
@@ -876,41 +822,6 @@ public class URLTest extends TestCase {
             exception = true;
         }
         assertTrue("openStream succeeded for non existent resource", exception);
-
-        int port = Support_Jetty
-                .startHttpServerWithDocRoot("resources/org/apache/harmony/luni/tests/java/net/");
-        URL u = new URL("jar:" + "http://localhost:" + port
-                + "/lf.jar!/plus.bmp");
-        InputStream in = u.openStream();
-        byte[] buf = new byte[3];
-        int result = in.read(buf);
-        assertTrue("Incompete read: " + result, result == 3);
-        in.close();
-        assertTrue("Returned incorrect data", buf[0] == 0x42 && buf[1] == 0x4d
-                && buf[2] == (byte) 0xbe);
-
-        // FIXME Lack of FTP server, comment it out temporarily
-        /*
-         * u = new URL("ftp://" + Support_Configuration.FTPTestAddress +
-         * "/nettest.txt"); in = u.openStream(); buf = new byte[3];
-         * assertEquals("Incompete read 2", 3, in.read(buf)); in.close();
-         * assertTrue("Returned incorrect data 2", buf[0] == 0x54 && buf[1] ==
-         * 0x68 && buf[2] == 0x69);
-         */
-
-        File test = new File("hytest.$$$");
-        FileOutputStream out = new FileOutputStream(test);
-        out.write(new byte[] { 0x55, (byte) 0xaa, 0x14 });
-        out.close();
-        u = new URL("file:" + test.getName());
-        in = u.openStream();
-        buf = new byte[3];
-        result = in.read(buf);
-        in.close();
-        test.delete();
-        assertEquals("Incompete read 3", 3, result);
-        assertTrue("Returned incorrect data 3", buf[0] == 0x55
-                && buf[1] == (byte) 0xaa && buf[2] == 0x14);
     }
 
     /**
