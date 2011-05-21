@@ -4,9 +4,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -125,7 +125,7 @@ public class SinkChannelTest extends TestCase {
             thread[i].join();
         }
         ByteBuffer readBuf = ByteBuffer.allocate(THREAD_NUM * BUFFER_SIZE);
-        
+
         long totalCount = 0;
         do {
             long count = source.read(readBuf);
@@ -134,7 +134,7 @@ public class SinkChannelTest extends TestCase {
             }
             totalCount += count;
         } while (totalCount != (THREAD_NUM * BUFFER_SIZE));
-        
+
         StringBuffer buf = new StringBuffer();
         for (int i = 0; i < THREAD_NUM; i++) {
             buf.append("bytes");
@@ -157,36 +157,23 @@ public class SinkChannelTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @tests java.nio.channels.Pipe.SinkChannel#write(ByteBuffer)
-	 */
-	public void test_write_LByteBuffer_SourceClosed() throws IOException {
-		source.close();
-		int written = sink.write(buffer);
-		assertEquals(BUFFER_SIZE, written);
-	}
+    public void test_write_LByteBuffer_SourceClosed() throws IOException {
+        source.close();
+        try {
+            int written = sink.write(buffer);
+            fail();
+        } catch (IOException expected) {
+        }
+    }
 
-	/**
-	 * @tests java.nio.channels.Pipe.SinkChannel#write(ByteBuffer)
-	 */
-	public void test_write_LByteBuffer_SinkClosed() throws IOException {
-		sink.close();
-		try {
-			sink.write(buffer);
-			fail("should throw ClosedChannelException");
-		} catch (ClosedChannelException e) {
-			// expected
-		}
-
-		// write null ByteBuffer
-		ByteBuffer nullBuf = null;
-		try {
-			sink.write(nullBuf);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
-	}
+    public void test_write_LByteBuffer_SinkClosed() throws IOException {
+        sink.close();
+        try {
+            sink.write(buffer);
+            fail("should throw ClosedChannelException");
+        } catch (ClosedChannelException expected) {
+        }
+    }
 
 	/**
 	 * @tests java.nio.channels.Pipe.SinkChannel#write(ByteBuffer[])
@@ -245,15 +232,15 @@ public class SinkChannelTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @tests java.nio.channels.Pipe.SinkChannel#write(ByteBuffer[])
-	 */
-	public void test_write_$LByteBuffer_SourceClosed() throws IOException {
-		ByteBuffer[] bufArray = { buffer };
-		source.close();
-		long written = sink.write(bufArray);
-		assertEquals(BUFFER_SIZE, written);
-	}
+    public void test_write_$LByteBuffer_SourceClosed() throws IOException {
+        ByteBuffer[] bufArray = { buffer };
+        source.close();
+        try {
+            long written = sink.write(bufArray);
+            fail();
+        } catch (IOException expected) {
+        }
+    }
 
 	/**
 	 * @tests java.nio.channels.Pipe.SinkChannel#write(ByteBuffer[])
@@ -316,187 +303,169 @@ public class SinkChannelTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @tests java.nio.channels.Pipe.SinkChannel#write(ByteBuffer[], int, int)
-	 */
-	public void test_write_$LByteBufferII_Exception() throws IOException {
-		// write null ByteBuffer[]
-		ByteBuffer[] nullBufArrayRef = null;
-		try {
-			sink.write(nullBufArrayRef, 0, 1);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
+    public void test_write_$LByteBufferII_Exception() throws IOException {
+        try {
+            sink.write(null, 0, 1);
+            fail();
+        } catch (NullPointerException expected) {
+        }
 
-		try {
-			sink.write(nullBufArrayRef, 0, -1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            sink.write(new ByteBuffer[2], 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
 
-		// write ByteBuffer[] contains null element
-		ByteBuffer nullBuf = null;
-		ByteBuffer[] nullBufArray = { nullBuf };
-		try {
-			sink.write(nullBufArray, 0, 1);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
+        // write ByteBuffer[] contains null element
+        ByteBuffer nullBuf = null;
+        ByteBuffer[] nullBufArray = { nullBuf };
+        try {
+            sink.write(nullBufArray, 0, 1);
+            fail("should throw NullPointerException");
+        } catch (NullPointerException e) {
+            // expected
+        }
 
-		try {
-			sink.write(nullBufArray, 0, -1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            sink.write(nullBufArray, 0, -1);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		ByteBuffer[] bufArray = { buffer, nullBuf };
-		try {
-			sink.write(bufArray, 0, -1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        ByteBuffer[] bufArray = { buffer, nullBuf };
+        try {
+            sink.write(bufArray, 0, -1);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		try {
-			sink.write(bufArray, -1, 0);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            sink.write(bufArray, -1, 0);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		try {
-			sink.write(bufArray, -1, 1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            sink.write(bufArray, -1, 1);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		try {
-			sink.write(bufArray, 0, 3);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            sink.write(bufArray, 0, 3);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		try {
-			sink.write(bufArray, 0, 2);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
-	}
+        try {
+            sink.write(bufArray, 0, 2);
+            fail("should throw NullPointerException");
+        } catch (NullPointerException e) {
+            // expected
+        }
+    }
 
-	/**
-	 * @tests java.nio.channels.Pipe.SinkChannel#write(ByteBuffer[], int, int)
-	 */
-	public void test_write_$LByteBufferII_SourceClosed() throws IOException {
-		ByteBuffer[] bufArray = { buffer };
-		source.close();
-		long written = sink.write(bufArray, 0, 1);
-		assertEquals(BUFFER_SIZE, written);
-	}
+    public void test_write_$LByteBufferII_SourceClosed() throws IOException {
+        ByteBuffer[] bufArray = { buffer };
+        source.close();
 
-	/**
-	 * @tests java.nio.channels.Pipe.SinkChannel#write(ByteBuffer[], int, int)
-	 */
-	public void test_write_$LByteBufferII_SinkClosed() throws IOException {
-		ByteBuffer[] bufArray = { buffer };
-		sink.close();
-		try {
-			sink.write(bufArray, 0, 1);
-			fail("should throw ClosedChannelException");
-		} catch (ClosedChannelException e) {
-			// expected
-		}
+        try {
+            long written = sink.write(bufArray, 0, 1);
+            fail();
+        } catch (IOException expected) {
+        }
+    }
 
-		// write null ByteBuffer[]
-		ByteBuffer[] nullBufArrayRef = null;
-		try {
-			sink.write(nullBufArrayRef, 0, 1);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
-		// illegal array index
-		try {
-			sink.write(nullBufArrayRef, 0, -1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+    public void test_write_$LByteBufferII_SinkClosed() throws IOException {
+        ByteBuffer[] bufArray = { buffer };
+        sink.close();
+        try {
+            sink.write(bufArray, 0, 1);
+            fail();
+        } catch (ClosedChannelException expected) {
+        }
 
-		// write ByteBuffer[] contains null element
-		ByteBuffer nullBuf = null;
-		ByteBuffer[] nullBufArray = { nullBuf };
-		try {
-			sink.write(nullBufArray, 0, 1);
-			fail("should throw ClosedChannelException");
-		} catch (ClosedChannelException e) {
-			// expected
-		}
-		// illegal array index
-		try {
-			sink.write(nullBufArray, 0, -1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            sink.write(null, 0, 1);
+            fail();
+        } catch (NullPointerException expected) {
+        }
+        try {
+            sink.write(new ByteBuffer[2], 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
 
-		ByteBuffer[] bufArray2 = { buffer, nullBuf };
-		// illegal array index
-		try {
-			sink.write(bufArray2, 0, -1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        // write ByteBuffer[] contains null element
+        ByteBuffer nullBuf = null;
+        ByteBuffer[] nullBufArray = { nullBuf };
+        try {
+            sink.write(nullBufArray, 0, 1);
+            fail("should throw ClosedChannelException");
+        } catch (ClosedChannelException e) {
+            // expected
+        }
+        // illegal array index
+        try {
+            sink.write(nullBufArray, 0, -1);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		try {
-			sink.write(bufArray2, -1, 0);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        ByteBuffer[] bufArray2 = { buffer, nullBuf };
+        // illegal array index
+        try {
+            sink.write(bufArray2, 0, -1);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		try {
-			sink.write(bufArray2, -1, 1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            sink.write(bufArray2, -1, 0);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		try {
-			sink.write(bufArray2, 0, 3);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            sink.write(bufArray2, -1, 1);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		try {
-			sink.write(bufArray2, 0, 2);
-			fail("should throw ClosedChannelException");
-		} catch (ClosedChannelException e) {
-			// expected
-		}
-	}
+        try {
+            sink.write(bufArray2, 0, 3);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-	/**
-	 * @tests java.nio.channels.Pipe.SinkChannel#close()
-	 */
-	public void test_close() throws IOException {
-		sink.close();
-		assertFalse(sink.isOpen());
-	}
-    
+        try {
+            sink.write(bufArray2, 0, 2);
+            fail("should throw ClosedChannelException");
+        } catch (ClosedChannelException e) {
+            // expected
+        }
+    }
+
+    public void test_close() throws IOException {
+        sink.close();
+        assertFalse(sink.isOpen());
+    }
+
     public void test_socketChannel_read_close() throws Exception {
         ServerSocketChannel ssc = ServerSocketChannel.open();
         ssc.socket().bind(new InetSocketAddress(InetAddress.getLocalHost(),49999));
         SocketChannel sc = SocketChannel.open();
-        ByteBuffer buf = null;  
+        ByteBuffer buf = null;
         try{
             sc.write(buf);
             fail("should throw NPE");
@@ -504,7 +473,7 @@ public class SinkChannelTest extends TestCase {
             // expected
         }
         sc.connect(new InetSocketAddress(InetAddress.getLocalHost(),49999));
-        SocketChannel sock = ssc.accept();              
+        SocketChannel sock = ssc.accept();
         ssc.close();
         sc.close();
         try{
@@ -522,12 +491,11 @@ public class SinkChannelTest extends TestCase {
         SocketChannel sc = SocketChannel.open();
         sc.connect(new InetSocketAddress(InetAddress.getLocalHost(),49999));
         SocketChannel sock = ssc.accept();
-        ByteBuffer[] buf = {ByteBuffer.allocate(10),null};                
-        try{
+        ByteBuffer[] buf = {ByteBuffer.allocate(10),null};
+        try {
             sc.write(buf,0,2);
             fail("should throw NPE");
-        }catch (NullPointerException e){
-            // expected
+        } catch (NullPointerException expected) {
         }
         ssc.close();
         sc.close();

@@ -105,9 +105,9 @@ public class BufferedWriterTest extends junit.framework.TestCase {
         assertEquals("BufferdWriter do not flush itself before close", "a", mw
                 .getWritten());
     }
-    
+
     /**
-     * @throws IOException 
+     * @throws IOException
      * @tests java.io.BufferedWriter#close()
      *
      */
@@ -167,9 +167,9 @@ public class BufferedWriterTest extends junit.framework.TestCase {
 
         try {
             bWriter.write(nullCharArray, -1, 0);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {

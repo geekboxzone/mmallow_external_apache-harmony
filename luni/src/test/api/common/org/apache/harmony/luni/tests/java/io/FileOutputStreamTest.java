@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -270,7 +270,8 @@ public class FileOutputStreamTest extends TestCase {
         fos.flush();
         fos.close();
         FileOutputStream f = new FileOutputStream(tmpfile, true);
-        assertEquals(10, f.getChannel().position());
+        // Harmony expected 10, but the RI and Android report 0.
+        assertEquals(0, f.getChannel().position());
     }
 
     public void test_getChannel_Append() throws IOException {
@@ -339,7 +340,8 @@ public class FileOutputStreamTest extends TestCase {
         fos.close();
 
         fos = new FileOutputStream(tmpfile, true);
-        assertEquals(10, fos.getChannel().position());
+        // Harmony expected 10, but the RI and Android report 0.
+        assertEquals(0, fos.getChannel().position());
         fos.close();
     }
 
@@ -351,7 +353,7 @@ public class FileOutputStreamTest extends TestCase {
         fos.write(bytes);
         assertEquals(10, fos.getChannel().position());
         fos.close();
-        
+
         fos = new FileOutputStream(tmpfile, false);
         assertEquals(0, fos.getChannel().position());
         fos.close();
@@ -365,9 +367,10 @@ public class FileOutputStreamTest extends TestCase {
         fos.write(bytes);
         assertEquals(10, fos.getChannel().position());
         fos.close();
-        
+
         fos = new FileOutputStream(tmpfile, true);
-        assertEquals(10, fos.getChannel().position());
+        // Harmony expected 10, but the RI and Android report 0.
+        assertEquals(0, fos.getChannel().position());
         fos.close();
     }
 

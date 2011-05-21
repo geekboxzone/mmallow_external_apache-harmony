@@ -4,9 +4,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -51,7 +51,7 @@ public class FileChannelTest extends TestCase {
     private static final int CAPACITY = 100;
 
     private static final int LIMITED_CAPACITY = 2;
-    
+
     private static final int TIME_OUT = 10000;
 
     private static final String CONTENT = "MYTESTSTRING needs to be a little long";
@@ -85,7 +85,7 @@ public class FileChannelTest extends TestCase {
     private File fileOfWriteOnlyFileChannel;
 
     private File fileOfReadWriteFileChannel;
-    
+
     private ReadableByteChannel readByteChannel;
 
     private WritableByteChannel writableByteChannel;
@@ -248,16 +248,14 @@ public class FileChannelTest extends TestCase {
         writeOnlyFileChannel.close();
         try {
             writeOnlyFileChannel.force(true);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
         }
 
         try {
             writeOnlyFileChannel.force(false);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
         }
     }
 
@@ -293,7 +291,7 @@ public class FileChannelTest extends TestCase {
 
     /**
      * Initializes test file.
-     * 
+     *
      * @param file
      * @throws FileNotFoundException
      * @throws IOException
@@ -310,7 +308,7 @@ public class FileChannelTest extends TestCase {
 
     /**
      * Initializes large test file.
-     * 
+     *
      * @param file the file to be written
      * @param size the content size to be written
      * @throws FileNotFoundException
@@ -362,24 +360,21 @@ public class FileChannelTest extends TestCase {
         try {
             readOnlyFileChannel.position();
             fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+        } catch (ClosedChannelException expected) {
         }
 
         writeOnlyFileChannel.close();
         try {
             writeOnlyFileChannel.position();
             fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+        } catch (ClosedChannelException expected) {
         }
 
         readWriteFileChannel.close();
         try {
             readWriteFileChannel.position();
             fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+        } catch (ClosedChannelException expected) {
         }
     }
 
@@ -392,25 +387,22 @@ public class FileChannelTest extends TestCase {
         readOnlyFileChannel.close();
         try {
             readOnlyFileChannel.position(POSITION);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
         }
 
         writeOnlyFileChannel.close();
         try {
             writeOnlyFileChannel.position(POSITION);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
         }
 
         readWriteFileChannel.close();
         try {
             readWriteFileChannel.position(POSITION);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
         }
     }
 
@@ -601,7 +593,7 @@ public class FileChannelTest extends TestCase {
         } catch (IllegalArgumentException e) {
             // expected
         }
-        
+
         try {
             writeOnlyFileChannel.truncate(-1);
             fail("should throw IllegalArgumentException");
@@ -1133,38 +1125,30 @@ public class FileChannelTest extends TestCase {
         readBuffer = null;
         try {
             readWriteFileChannel.read(readBuffer);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
+        } catch (NullPointerException expected) {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#read(ByteBuffer)
-     */
     public void test_readLByteBuffer_WriteOnly() throws Exception {
         ByteBuffer readBuffer = ByteBuffer.allocate(CAPACITY);
 
         try {
             writeOnlyFileChannel.read(readBuffer);
-            fail("should throw NonReadableChannelException");
-        } catch (NonReadableChannelException e) {
-            // expected
+            fail();
+        } catch (NonReadableChannelException expected) {
         }
 
-        // first throws NonReadableChannelException
         readBuffer = null;
         try {
             writeOnlyFileChannel.read(readBuffer);
-            fail("should throw NonReadableChannelException");
-        } catch (NonReadableChannelException e) {
-            // expected
+            fail();
+        } catch (NonReadableChannelException expected) {
+        } catch (NullPointerException expected) {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#read(ByteBuffer)
-     */
     public void test_readLByteBuffer_EmptyFile() throws Exception {
         ByteBuffer readBuffer = ByteBuffer.allocate(CAPACITY);
         int result = readOnlyFileChannel.read(readBuffer);
@@ -1311,32 +1295,24 @@ public class FileChannelTest extends TestCase {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#read(ByteBuffer, long)
-     */
     public void test_readLByteBufferJ_WriteOnly() throws Exception {
         ByteBuffer readBuffer = ByteBuffer.allocate(CAPACITY);
 
         try {
             writeOnlyFileChannel.read(readBuffer, 0);
-            fail("should throw NonReadableChannelException");
-        } catch (NonReadableChannelException e) {
-            // expected
+            fail();
+        } catch (NonReadableChannelException expected) {
         }
 
-        // throws NonReadableChannelException first.
         writeOnlyFileChannel.close();
         try {
             writeOnlyFileChannel.read(readBuffer, 0);
-            fail("should throw NonReadableChannelException");
-        } catch (NonReadableChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
+        } catch (NonReadableChannelException expected) {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#read(ByteBuffer,long)
-     */
     public void test_readLByteBufferJ_Emptyfile() throws Exception {
         ByteBuffer readBuffer = ByteBuffer.allocate(CAPACITY);
         int result = readOnlyFileChannel.read(readBuffer, 0);
@@ -1344,12 +1320,7 @@ public class FileChannelTest extends TestCase {
         assertEquals(0, readBuffer.position());
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#read(ByteBuffer,long)
-     */
-    public void test_readLByteBufferJ_Position_BeyondFileLimit()
-            throws Exception {
-
+    public void test_readLByteBufferJ_Position_BeyondFileLimit() throws Exception {
         writeDataToFile(fileOfReadOnlyFileChannel);
 
         ByteBuffer readBuffer = ByteBuffer.allocate(CAPACITY);
@@ -1359,21 +1330,14 @@ public class FileChannelTest extends TestCase {
         assertEquals(0, readBuffer.position());
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#read(ByteBuffer,long)
-     */
     public void test_readLByteBufferJ_Position_As_Long() throws Exception {
         ByteBuffer readBuffer = ByteBuffer.allocate(CAPACITY);
         try {
             readOnlyFileChannel.read(readBuffer, Long.MAX_VALUE);
-        } catch (IOException e) {
-            // expected
+        } catch (IOException expected) {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#read(ByteBuffer,long)
-     */
     public void test_readLByteBufferJ() throws Exception {
         writeDataToFile(fileOfReadOnlyFileChannel);
         ByteBuffer readBuffer = ByteBuffer.allocate(CAPACITY);
@@ -1392,7 +1356,7 @@ public class FileChannelTest extends TestCase {
             assertEquals(CONTENT_AS_BYTES[i], readBuffer.get());
         }
     }
-    
+
     /**
      * @tests java.nio.channels.FileChannel#read(ByteBuffer[])
      */
@@ -1402,7 +1366,7 @@ public class FileChannelTest extends TestCase {
         ByteBuffer[] readBuffers = new ByteBuffer[2];
         readBuffers[0] = ByteBuffer.allocate(CAPACITY);
         readBuffers[1] = ByteBuffer.allocate(CAPACITY);
-        
+
         long readCount = readOnlyFileChannel.read(readBuffers);
         assertEquals(CONTENT_AS_BYTES_LENGTH, readCount);
         assertEquals(CONTENT_AS_BYTES_LENGTH, readBuffers[0].position());
@@ -1412,7 +1376,7 @@ public class FileChannelTest extends TestCase {
             assertEquals(CONTENT_AS_BYTES[i], readBuffers[0].get());
         }
     }
-    
+
     /**
      * @tests java.nio.channels.FileChannel#read(ByteBuffer[])
      */
@@ -1499,7 +1463,7 @@ public class FileChannelTest extends TestCase {
         } catch (ClosedChannelException e) {
             // expected
         }
-        
+
         // regression test for Harmony-902
         readBuffers[0] = null;
         try {
@@ -1556,39 +1520,34 @@ public class FileChannelTest extends TestCase {
 
         try {
             readOnlyFileChannel.read(readBuffers, 2, 1);
-            fail("should throw IndexOutOfBoundException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
             readWriteFileChannel.read(null, -1, 0);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        } catch (NullPointerException expected) {
         }
 
         try {
             writeOnlyFileChannel.read(readBuffers, 0, 3);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
 
         try {
             readWriteFileChannel.read(readBuffers, -1, 0);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
 
-        // throws IndexOutOfBoundsException first
         readWriteFileChannel.close();
         try {
             readWriteFileChannel.read(readBuffers, 0, 3);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 
@@ -1671,7 +1630,7 @@ public class FileChannelTest extends TestCase {
             assertEquals(CONTENT_AS_BYTES[i], readBuffers[1].get());
         }
     }
-    
+
     /**
      * @tests java.nio.channels.FileChannel#read(ByteBuffer[], int, int)
      */
@@ -1723,11 +1682,11 @@ public class FileChannelTest extends TestCase {
         fos.flush();
         fos.close();
         FileOutputStream f = new FileOutputStream(tmpfile, true);
-        // Below assertion fails on RI. RI behaviour is counter to spec.
-        assertEquals(10, f.getChannel().position());
+        // Harmony expected 10, but the RI and Android report 0.
+        assertEquals(0, f.getChannel().position());
     }
 
-    
+
     /**
      * @tests java.nio.channels.FileChannel#map(MapMode,long,long)
      */
@@ -1785,15 +1744,15 @@ public class FileChannelTest extends TestCase {
 
         try {
             readOnlyFileChannel.map(MapMode.READ_ONLY, 0, CONTENT_LENGTH + 1);
-            fail("should throw IOException.");
-        } catch (IOException ex) {
-            // expected;
+            fail();
+        } catch (NonWritableChannelException expected) {
+        } catch (IOException expected) {
         }
         try {
             readOnlyFileChannel.map(MapMode.READ_ONLY, 2, CONTENT_LENGTH - 1);
-            fail("should throw IOException.");
-        } catch (IOException ex) {
-            // expected;
+            fail();
+        } catch (NonWritableChannelException expected) {
+        } catch (IOException expected) {
         }
 
         readOnlyFileChannel.close();
@@ -1818,7 +1777,7 @@ public class FileChannelTest extends TestCase {
             // expected;
         }
     }
-    
+
     /**
      * @tests java.nio.channels.FileChannel#map(MapMode,long,long)
      */
@@ -2059,18 +2018,16 @@ public class FileChannelTest extends TestCase {
         readWriteFileChannel.close();
         try {
             readWriteFileChannel.write(writeBuffer);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
         }
 
-        // should throw ClosedChannelException first
         writeBuffer = null;
         try {
             readWriteFileChannel.read(writeBuffer);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (ClosedChannelException expected) {
         }
     }
 
@@ -2116,7 +2073,7 @@ public class FileChannelTest extends TestCase {
         fis.read(inputBuffer);
         assertTrue(Arrays.equals(CONTENT_AS_BYTES, inputBuffer));
     }
-    
+
     /**
      * @tests java.nio.channels.FileChannel#write(ByteBuffer)
      */
@@ -2135,7 +2092,7 @@ public class FileChannelTest extends TestCase {
         fis = new FileInputStream(fileOfWriteOnlyFileChannel);
         byte[] inputBuffer = new byte[CONTENT_AS_BYTES_LENGTH - pos];
         fis.read(inputBuffer);
-        String test = CONTENT.substring(pos);        
+        String test = CONTENT.substring(pos);
         assertTrue(Arrays.equals(test.getBytes("iso8859-1"), inputBuffer));
     }
 
@@ -2211,41 +2168,36 @@ public class FileChannelTest extends TestCase {
      * @tests java.nio.channels.FileChannel#write(ByteBuffer, long)
      */
     public void test_writeLByteBufferJ_ReadOnly() throws Exception {
-        ByteBuffer writeBuffer = ByteBuffer.allocate(CAPACITY);
-
+        ByteBuffer writeBuffer = null;
         try {
             readOnlyFileChannel.write(writeBuffer, 10);
-            fail("should throw NonWritableChannelException");
-        } catch (NonWritableChannelException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (NonWritableChannelException expected) {
         }
- 
+
+        writeBuffer = ByteBuffer.allocate(CAPACITY);
+        try {
+            readOnlyFileChannel.write(writeBuffer, 10);
+            fail();
+        } catch (NonWritableChannelException expected) {
+        }
+
+        try {
+            readOnlyFileChannel.write(writeBuffer, -1);
+            fail();
+        } catch (IllegalArgumentException expected) {
+        } catch (NonWritableChannelException expected) {
+        }
+
         // regression test for Harmony-903
-        
-        // read-only file channel never throws ClosedChannelException even if
-        // the channel is closed.
         readOnlyFileChannel.close();
         try {
             readOnlyFileChannel.write(writeBuffer, 10);
-            fail("should throw NonWritableChannelException");
-        } catch (NonWritableChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
+        } catch (NonWritableChannelException expected) {
         }
-
-        try {
-            readOnlyFileChannel.write(writeBuffer, -1);
-            fail("should throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
-
-        writeBuffer = null;
-        try {
-            readOnlyFileChannel.write(writeBuffer, -1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
-        } 
     }
 
     /**
@@ -2412,36 +2364,24 @@ public class FileChannelTest extends TestCase {
 
         try {
             readOnlyFileChannel.write(writeBuffers, 0, 2);
-            fail("should throw NonWritableChannelException");
+            fail();
         } catch (NonWritableChannelException e) {
-            // expected
         }
 
-        // throw NonWritableChannelException first although buffer array is
-        // empty.
-        writeBuffers = new ByteBuffer[2];
-        try {
-            readOnlyFileChannel.write(writeBuffers, 0, 2);
-            fail("should throw NonWritableChannelException");
-        } catch (NonWritableChannelException e) {
-            // expected
-        }
-        
-        readOnlyFileChannel.close();
-        writeBuffers = null;
         try {
             readOnlyFileChannel.write(writeBuffers, 0, -1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
-        
+
+        writeBuffers = null;
         try {
             readOnlyFileChannel.write(writeBuffers, 0, 1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
         }
+
+        readOnlyFileChannel.close();
     }
 
     /**
@@ -2491,7 +2431,7 @@ public class FileChannelTest extends TestCase {
                 CONTENT_AS_BYTES_LENGTH, CONTENT_AS_BYTES_LENGTH);
         assertTrue(Arrays.equals(CONTENT_AS_BYTES, inputBuffer));
     }
-    
+
     /**
      * @tests java.nio.channels.FileChannel#transferFrom(ReadableByteChannel,long,long)
      */
@@ -2679,7 +2619,7 @@ public class FileChannelTest extends TestCase {
                 expectedContent, POSITION, LENGTH);
         assertTrue(Arrays.equals(expectedContent, resultContent));
     }
-    
+
     /**
      * @tests java.nio.channels.FileChannel#transferFrom(ReadableByteChannel,long,long)
      */
@@ -2802,32 +2742,29 @@ public class FileChannelTest extends TestCase {
         writableByteChannel = null;
         try {
             readOnlyFileChannel.transferTo(0, 10, writableByteChannel);
-            fail("should throw NullPointerException.");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
         }
 
         try {
             writeOnlyFileChannel.transferTo(0, 10, writableByteChannel);
-            fail("should throw NullPointerException.");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (NonReadableChannelException expected) {
         }
 
         try {
             readWriteFileChannel.transferTo(0, 10, writableByteChannel);
-            fail("should throw NullPointerException.");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
         }
 
-        // should throw NullPointerException first.
         readOnlyFileChannel.close();
         try {
             writeOnlyFileChannel.transferTo(-1, 0, writableByteChannel);
-            fail("should throw NullPointerException.");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (NonReadableChannelException expected) {
         }
     }
 
@@ -2869,41 +2806,33 @@ public class FileChannelTest extends TestCase {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#transferTo(long,long,WritableByteChannel)
-     */
-    public void test_transferToJJLWritableByteChannel_SourceClosed()
-            throws Exception {
+    public void test_transferToJJLWritableByteChannel_SourceClosed() throws Exception {
         writableByteChannel = DatagramChannel.open();
         writableByteChannel.close();
 
         try {
             readOnlyFileChannel.transferTo(0, 10, writableByteChannel);
-            fail("should throw ClosedChannelException.");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
         }
 
         try {
             writeOnlyFileChannel.transferTo(0, 10, writableByteChannel);
-            fail("should throw ClosedChannelException.");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
+        } catch (NonReadableChannelException expected) {
         }
 
         try {
             readWriteFileChannel.transferTo(0, 10, writableByteChannel);
-            fail("should throw ClosedChannelException.");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
         }
 
-        // should throw ClosedChannelException first.
         try {
             readWriteFileChannel.transferTo(0, -1, writableByteChannel);
-            fail("should throw ClosedChannelException.");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
         }
     }
 
@@ -2928,17 +2857,12 @@ public class FileChannelTest extends TestCase {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#transferTo(long,long,WritableByteChannel)
-     */
-    public void test_transferToJJLWritableByteChannel_NonReadable()
-            throws Exception {
+    public void test_transferToJJLWritableByteChannel_NonReadable() throws Exception {
         writableByteChannel = DatagramChannel.open();
         try {
-            writeOnlyFileChannel.transferTo(-1, 10, writableByteChannel);
-            fail("should throw NonReadableChannelException.");
-        } catch (NonReadableChannelException e) {
-            // expected
+            writeOnlyFileChannel.transferTo(0, 10, writableByteChannel);
+            fail();
+        } catch (NonReadableChannelException expected) {
         }
     }
 
@@ -2962,7 +2886,7 @@ public class FileChannelTest extends TestCase {
         } catch (NonWritableChannelException e) {
             // expected
         }
-        
+
         // regression test for Harmony-941
         // first throws NonWritableChannelException even arguments are illegal.
         try {
@@ -3223,15 +3147,15 @@ public class FileChannelTest extends TestCase {
         assertTrue("File " + readOnlyFileChannel + " exists", rDel);
         assertTrue("File " + writeOnlyFileChannel + " exists", wDel);
     }
-    
+
     private class MockFileChannel extends FileChannel {
-        
+
         private boolean isLockCalled = false;
-        
+
         private boolean isTryLockCalled = false;
-        
+
         private boolean isReadCalled = false;
-        
+
         private boolean isWriteCalled = false;
 
         public void force(boolean arg0) throws IOException {
@@ -3240,7 +3164,7 @@ public class FileChannelTest extends TestCase {
 
         public FileLock lock(long position, long size, boolean shared)
                 throws IOException {
-            // verify that calling lock() leads to the method 
+            // verify that calling lock() leads to the method
             // lock(0, Long.MAX_VALUE, false).
             if (0 == position && Long.MAX_VALUE == size && false == shared) {
                 isLockCalled = true;
@@ -3299,7 +3223,7 @@ public class FileChannelTest extends TestCase {
 
         public FileLock tryLock(long position, long size, boolean shared)
                 throws IOException {
-            // verify that calling tryLock() leads to the method 
+            // verify that calling tryLock() leads to the method
             // tryLock(0, Long.MAX_VALUE, false).
             if (0 == position && Long.MAX_VALUE == size && false == shared) {
                 isTryLockCalled = true;
