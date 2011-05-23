@@ -195,10 +195,8 @@ public class FileInputStreamTest extends TestCase {
                 buf1.length).equals(fileString.substring(3000, 3100)));
 
         // Regression test for HARMONY-285
-        File file = new File("FileInputStream.tmp");
-        file.createNewFile();
-        file.deleteOnExit();
-        FileInputStream in = new FileInputStream(file);
+        File tmpFile = File.createTempFile("FileOutputStream", "tmp");
+        FileInputStream in = new FileInputStream(tmpFile);
         try {
             in.read(null, 0, 0);
             fail("Should throw NullPointerException");
@@ -206,7 +204,7 @@ public class FileInputStreamTest extends TestCase {
             // Expected
         } finally {
             in.close();
-            file.delete();
+            tmpFile.delete();
         }
     }
 
