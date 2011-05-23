@@ -1043,12 +1043,15 @@ public class FileTest extends TestCase {
 
         assertEquals(parent.getPath(), f3.getPath());
 
-        // Regression for HARMONY-3869
-        File file1 = new File("", "");
-        assertEquals(File.separator, file1.getPath());
+        File file0 = new File("");
+        assertEquals("", file0.getPath());
 
-        File file2 = new File(new File(""), "");
-        assertEquals(File.separator, file2.getPath());
+        // Regression for HARMONY-3869
+        // Behavior here is system-dependent according to the RI javadoc.
+        String path1 = new File("", "").getPath();
+        assertTrue(path1.equals(File.separator) || path1.isEmpty());
+        String path2 = new File(new File(""), "").getPath();
+        assertTrue(path2.equals(File.separator) || path2.isEmpty());
     }
 
     /**
@@ -1142,34 +1145,19 @@ public class FileTest extends TestCase {
         f.delete();
     }
 
-    /**
-     * @tests java.io.File#isHidden()
-     */
     public void test_isHidden() throws IOException, InterruptedException {
         boolean onUnix = File.separatorChar == '/';
-        File f = File.createTempFile("harmony-test-FileTest_isHidden_", ".tmp");
+        assertTrue(onUnix);
+
         // On Unix hidden files are marked with a "." at the beginning
         // of the file name.
-        if (onUnix) {
-            File f2 = new File(".test.tst" + platformId);
-            FileOutputStream fos2 = new FileOutputStream(f2);
-            fos2.close();
-            assertTrue("File returned hidden on Unix", !f.isHidden());
-            assertTrue("File returned visible on Unix", f2.isHidden());
-            assertTrue("File did not delete.", f2.delete());
-        } else {
-            // For windows, the file is being set hidden by the attrib
-            // command.
-            Runtime r = Runtime.getRuntime();
-            assertTrue("File returned hidden", !f.isHidden());
-            Process p = r.exec("attrib +h \"" + f.getAbsolutePath() + "\"");
-            p.waitFor();
-            assertTrue("File returned visible", f.isHidden());
-            p = r.exec("attrib -h \"" + f.getAbsolutePath() + "\"");
-            p.waitFor();
-            assertTrue("File returned hidden", !f.isHidden());
-        }
-        f.delete();
+        File f1 = File.createTempFile("harmony-test-FileTest_notHidden_", ".tmp");
+        File f2 = File.createTempFile(".harmony-test-FileTest_isHidden_", ".tmp");
+        assertFalse(f1.isHidden());
+        assertTrue(f2.isHidden());
+        // We can still delete hidden files.
+        assertTrue(f2.delete());
+        f1.delete();
     }
 
     /**
