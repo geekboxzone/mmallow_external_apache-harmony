@@ -63,9 +63,9 @@ public class SocketChannelTest extends TestCase {
     private ServerSocket server1;
 
     private ServerSocket server2;
-    
+
     private final static int TIMEOUT = 60000;
-    
+
     private final static int EOF = -1;
 
     protected void setUp() throws Exception {
@@ -1511,7 +1511,7 @@ public class SocketChannelTest extends TestCase {
     // -------------------------------------------------------------------
 
     /**
-     * 
+     *
      * 'SocketChannelImpl.connect(SocketAddress)'
      */
     public void testCFII_Data_ConnectWithServer() throws Exception {
@@ -1820,7 +1820,7 @@ public class SocketChannelTest extends TestCase {
             serversocket.close();
         }
     }
-    
+
     // -------------------------------------------------------------------
     // End of original tests. Test method for CFII with real data.
     // -------------------------------------------------------------------
@@ -2109,7 +2109,7 @@ public class SocketChannelTest extends TestCase {
             // correct
         }
     }
-    
+
     public void testReadByteBuffer_Direct2() throws IOException {
         byte[] request = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         ByteBuffer buffer = ByteBuffer.allocateDirect(128);
@@ -2216,7 +2216,7 @@ public class SocketChannelTest extends TestCase {
             // correct
         }
     }
-    
+
     /*
      * SocketChannelImpl.read(ByteBuffer[], int, int)'
      */
@@ -2332,7 +2332,7 @@ public class SocketChannelTest extends TestCase {
             // correct
         }
     }
-    
+
     public void testWriteByteBuffer_Direct() throws IOException {
         assertTrue(this.server1.isBound());
         java.nio.ByteBuffer writeBuf = java.nio.ByteBuffer
@@ -2452,7 +2452,7 @@ public class SocketChannelTest extends TestCase {
             // correct
         }
     }
-    
+
     public void testWriteByteBufferArrayIntInt_BufNull() throws IOException {
         java.nio.ByteBuffer[] writeBuf = new java.nio.ByteBuffer[0];
 
@@ -2493,89 +2493,75 @@ public class SocketChannelTest extends TestCase {
     }
 
     public void testWriteByteBufferArrayIntInt_SizeError() throws IOException {
-        java.nio.ByteBuffer[] writeBuf = new java.nio.ByteBuffer[0];
-
+        java.nio.ByteBuffer[] buf = new java.nio.ByteBuffer[1];
         this.channel1.connect(localAddr1);
+        assertEquals(0, this.channel1.write(buf, 0, 0));
         try {
-            this.channel1.write(null, -1, 1);
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
-        }
-        assertEquals(0, this.channel1.write(writeBuf, 0, 0));
-        try {
-            this.channel1.write(writeBuf, 0, -1);
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
-        }
-        writeBuf = new java.nio.ByteBuffer[1];
-        try {
-            this.channel1.write(writeBuf, 2, 1);
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
+            this.channel1.write(buf, -1, 1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            this.channel1.write(writeBuf, 2, -1);
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
+            this.channel1.write(buf, 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            this.channel1.write(buf, 0, 2);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            this.channel1.write(buf, 2, 0);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            this.channel1.write(null, 0, 0);
+            fail();
+        } catch (NullPointerException expected) {
         }
         this.server1.close();
-        try {
-            channel1.read(null, -1, -1);
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
-        }
     }
 
     public void testReadByteBufferArrayIntInt_SizeError() throws IOException {
-        java.nio.ByteBuffer[] readBuf = new java.nio.ByteBuffer[0];
-
+        java.nio.ByteBuffer[] buf = new java.nio.ByteBuffer[1];
         this.channel1.connect(localAddr1);
+        assertEquals(0, this.channel1.read(buf, 0, 0));
         try {
-            this.channel1.read(null, -1, 1);
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
-        }
-        assertEquals(0, this.channel1.read(readBuf, 0, 0));
-        try {
-            this.channel1.read(readBuf, 0, -1);
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
-        }
-        readBuf = new java.nio.ByteBuffer[1];
-        try {
-            this.channel1.read(readBuf, 2, 1);
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
+            this.channel1.read(buf, -1, 1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            this.channel1.read(readBuf, 2, -1);
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
+            this.channel1.read(buf, 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            this.channel1.read(buf, 0, 2);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            this.channel1.read(buf, 2, 0);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            this.channel1.read(null, 0, 0);
+            fail();
+        } catch (NullPointerException expected) {
         }
         this.server1.close();
-        try {
-            assertEquals(CAPACITY_NORMAL, this.channel1.read(null, -1, -1));
-            fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
-        }
     }
-    
-    /* 
+
+    /*
      * ==========================================================================
      * Tests for read/write real data
      * ==========================================================================
-     */ 
-        
+     */
+
 
     /**
      * @tests java.nio.channels.SocketChannel#read(ByteBuffer[])
@@ -2591,14 +2577,14 @@ public class SocketChannelTest extends TestCase {
     }
     /**
      * @tests java.nio.channels.SocketChannel#read(ByteBuffer[],int,int)
-     */  
+     */
     public void test_read$LByteBufferII_blocking() throws Exception {
         assert_read$LByteBuffer(true);
     }
- 
+
     /**
      * @tests java.nio.channels.SocketChannel#read(ByteBuffer[],int,int)
-     */  
+     */
     public void test_read$LByteBufferII_nonblocking() throws Exception {
         assert_read$LByteBuffer(false);
     }
@@ -2642,7 +2628,7 @@ public class SocketChannelTest extends TestCase {
             // blocking read, it possibly returns 0 in some cases.
             assertTimeout(startTime, TIMEOUT);
         }
-        
+
         // assert total bytes read and the position of ByteBuffers
         assertEquals(CAPACITY_NORMAL * 2, totalRead);
         assertEquals(CAPACITY_NORMAL, readContents[0].position());
@@ -2656,15 +2642,15 @@ public class SocketChannelTest extends TestCase {
         for (int i = CAPACITY_NORMAL; i < CAPACITY_NORMAL * 2; i++) {
             assertEquals(writeContent[i], readContents[1].get());
         }
-    } 
- 
+    }
+
     /**
      * @tests java.nio.channels.SocketChannel#write(ByteBuffer[],int,int)
-     */ 
+     */
     public void test_write$LByteBufferII_blocking() throws Exception {
         assert_write$LByteBuffer(true);
     }
- 
+
     /**
      * @tests java.nio.channels.SocketChannel#write(ByteBuffer[],int,int)
      */
@@ -2728,8 +2714,8 @@ public class SocketChannelTest extends TestCase {
         for (int i = CAPACITY_NORMAL; i < CAPACITY_NORMAL * 2; i++) {
             assertEquals(writeContents[1].get(), readContent[i]);
         }
-    } 
-    
+    }
+
     /**
      * @tests java.nio.channels.SocketChannel#write(ByteBuffer[])
      */
@@ -2805,7 +2791,7 @@ public class SocketChannelTest extends TestCase {
 
     /**
      * @tests java.nio.channels.SocketChannel#write(ByteBuffer[])
-     * 
+     *
      * In non-blocking mode, the native system call will return EAGAIN/EWOULDBLOCK error
      * code on Linux/Unix and return WSATRY_AGAIN/WSAEWOULDBLOCK error code on Windows.
      * These error code means try again but not fatal error, so we should not throw exception.
@@ -2901,7 +2887,8 @@ public class SocketChannelTest extends TestCase {
         buffers[2].put(data, 6, data.length - 6);
         buffers[2].flip();
         assertTrue(buffers[2].isDirect());
-        assertFalse(buffers[2].hasArray());
+        // Android's direct buffers do have a backing array.
+        assertTrue(buffers[2].hasArray());
 
         // Write them out, read what we wrote and check it
         client.write(buffers);
@@ -3003,39 +2990,33 @@ public class SocketChannelTest extends TestCase {
             // expected
         }
 
-        ByteBuffer[] buffers = new ByteBuffer[2];
+        ByteBuffer[] buffers = new ByteBuffer[1];
         buffers[0] = ByteBuffer.wrap("Hello ".getBytes("UTF-8"));
-        buffers[1] = ByteBuffer.wrap("world!".getBytes("UTF-8"));
 
         try {
-            client.write((ByteBuffer[]) null, -1, 0);
-            fail("Should throw a IOBE");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            client.write(buffers, -1, 1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            client.write((ByteBuffer[]) null, 0, -1);
-            fail("Should throw a IOBE");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            client.write(buffers, 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            client.write(buffers, 0, 42);
-            fail("Should throw a IOBE");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            client.write(buffers, 0, 2);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            client.write(buffers, 42, 0);
-            fail("Should throw a IOBE");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            client.write(buffers, 2, 0);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            client.write(buffers, 1, 2);
-            fail("Should throw a IOBE");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            client.write(null, 0, 0);
+            fail();
+        } catch (NullPointerException expected) {
         }
 
         // Tidy-up
@@ -3182,7 +3163,7 @@ public class SocketChannelTest extends TestCase {
             assertEquals(read[i], write[i + 2]);
         }
     }
-    
+
     /**
      * @tests SocketChannelImpl#read(ByteBuffer[])
      */
@@ -3210,229 +3191,302 @@ public class SocketChannelTest extends TestCase {
         }
     }
 
-    /**
-     * @tests SocketChannelImpl#socket().getOutputStream().read
-     */
-    public void test_socket_getOutputStream_nonBlocking_read_Exception()
-            throws IOException {
+    public void test_socket_getOutputStream_nonBlocking_read_Exception() throws IOException {
+        byte[] buf = new byte[1];
         channel1.connect(this.localAddr1);
         InputStream is = channel1.socket().getInputStream();
         channel1.configureBlocking(false);
         try {
             is.read();
-            fail("should throw IllegalBlockingModeException");
-        } catch (IllegalBlockingModeException e) {
-            // expected
+            fail();
+        } catch (IllegalBlockingModeException expected) {
         }
-        try {
-            is.read(null, 1, 1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
-        }
-        try {
-            is.read(null, -1, 1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
-        }
-        // closed
-        is.close();
         try {
             is.read(null);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
         }
+        try {
+            is.read(buf, -1, 1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            is.read(buf, 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            is.read(buf, 0, 2);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            is.read(buf, 2, 0);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            is.read(null, 0, 0);
+            fail();
+        } catch (NullPointerException expected) {
+        }
+
+        is.close();
+
         try {
             is.read();
-            fail("should throw IllegalBlockingModeException");
-        } catch (IllegalBlockingModeException e) {
-            // expected
+            fail();
+        } catch (IllegalBlockingModeException expected) {
         }
         try {
-            is.read(null, 1, 1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            is.read(null);
+            fail();
+        } catch (NullPointerException expected) {
         }
         try {
-            is.read(null, -1, 1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            is.read(buf, -1, 1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            is.read(buf, 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            is.read(buf, 0, 2);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            is.read(buf, 2, 0);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            is.read(null, 0, 0);
+            fail();
+        } catch (NullPointerException expected) {
         }
     }
 
-    /**
-     * @tests SocketChannelImpl#socket().getOutputStream().read
-     */
-    public void test_socket_getOutputStream_blocking_read_Exception()
-            throws IOException {
+    public void test_socket_getOutputStream_blocking_read_Exception() throws IOException {
+        byte[] buf = new byte[1];
         channel1.connect(this.localAddr1);
         InputStream is = channel1.socket().getInputStream();
         try {
             is.read(null);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
         }
         try {
-            is.read(null, 1, 1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            is.read(buf, -1, 1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            is.read(null, -1, 1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            is.read(buf, 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
-        // closed
+        try {
+            is.read(buf, 0, 2);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            is.read(buf, 2, 0);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            is.read(null, 0, 0);
+            fail();
+        } catch (NullPointerException expected) {
+        }
+
         is.close();
+
         try {
             is.read(null);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
         }
         try {
-            is.read();
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            is.read(buf, -1, 1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            is.read(null, 1, 1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            is.read(buf, 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            is.read(null, -1, 1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            is.read(buf, 0, 2);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            is.read(buf, 2, 0);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            is.read(null, 0, 0);
+            fail();
+        } catch (NullPointerException expected) {
         }
     }
 
-    /**
-     * @tests SocketChannelImpl#socket().getOutputStream().write
-     */
-    public void test_socket_getOutputStream_nonBlocking_write_Exception()
-            throws IOException {
+    public void test_socket_getOutputStream_nonBlocking_write_Exception() throws IOException {
+        byte[] buf = new byte[1];
         channel1.connect(this.localAddr1);
         OutputStream os = channel1.socket().getOutputStream();
         channel1.configureBlocking(false);
+
+        try {
+            os.write(1);
+            fail();
+        } catch (IllegalBlockingModeException expected) {
+        }
         try {
             os.write(null);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
         }
         try {
-            os.write(1);
-            fail("should throw IllegalBlockingModeException");
-        } catch (IllegalBlockingModeException e) {
-            // expected
+            os.write(buf, -1, 1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            os.write(1);
-            fail("should throw IllegalBlockingModeException");
-        } catch (IllegalBlockingModeException e) {
-            // expected
+            os.write(buf, 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            os.write(null, 1, 1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            os.write(buf, 0, 2);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            os.write(null, -1, 1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            os.write(buf, 2, 0);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
-        // closed
+        try {
+            os.write(null, 0, 0);
+            fail();
+        } catch (NullPointerException expected) {
+        }
+
         os.close();
-        try {
-            os.write(null);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
-        }
+
         try {
             os.write(1);
-            fail("should throw IllegalBlockingModeException");
-        } catch (IllegalBlockingModeException e) {
-            // expected
+            fail();
+        } catch (IllegalBlockingModeException expected) {
         }
         try {
-            os.write(null, 1, 1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            os.write(null);
+            fail();
+        } catch (NullPointerException expected) {
         }
         try {
-            os.write(null, -1, 1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            os.write(buf, -1, 1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            os.write(buf, 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            os.write(buf, 0, 2);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            os.write(buf, 2, 0);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            os.write(null, 0, 0);
+            fail();
+        } catch (NullPointerException expected) {
         }
     }
 
-    /**
-     * @tests SocketChannelImpl#socket().getOutputStream().write
-     */
-    public void test_socket_getOutputStream_blocking_write_Exception()
-            throws IOException {
+    public void test_socket_getOutputStream_blocking_write_Exception() throws IOException {
+        byte[] buf = new byte[1];
         channel1.connect(this.localAddr1);
         OutputStream os = channel1.socket().getOutputStream();
         try {
             os.write(null);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
         }
         try {
-            os.write(null, 1, 1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            os.write(buf, -1, 1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            os.write(null, -1, 1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            os.write(buf, 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
-        // closed
+        try {
+            os.write(buf, 0, 2);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            os.write(buf, 2, 0);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            os.write(null, 0, 0);
+            fail();
+        } catch (NullPointerException expected) {
+        }
+
         os.close();
+
         try {
             os.write(null);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            fail();
+        } catch (NullPointerException expected) {
         }
         try {
-            os.write(1);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            os.write(buf, -1, 1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            os.write(null, 1, 1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            os.write(buf, 0, -1);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            os.write(null, -1, 1);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // expected
+            os.write(buf, 0, 2);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            os.write(buf, 2, 0);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
+        }
+        try {
+            os.write(null, 0, 0);
+            fail();
+        } catch (NullPointerException expected) {
         }
     }
 
@@ -3505,11 +3559,11 @@ public class SocketChannelTest extends TestCase {
     }
 
     class MockSocketChannel extends SocketChannel{
-        
+
         private boolean isWriteCalled = false;
-        
+
         private boolean isReadCalled = false;
-        
+
         public MockSocketChannel(SelectorProvider provider){
             super(provider);
         }
@@ -3567,8 +3621,8 @@ public class SocketChannelTest extends TestCase {
         }
 
         protected void implConfigureBlocking(boolean blockingMode) throws IOException {
-            // empty            
+            // empty
         }
-        
-    }   
+
+    }
 }

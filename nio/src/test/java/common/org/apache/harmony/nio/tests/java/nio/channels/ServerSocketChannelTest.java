@@ -56,7 +56,7 @@ public class ServerSocketChannelTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         this.localAddr1 = new InetSocketAddress(
-                "127.0.0.1", Support_PortManager 
+                "127.0.0.1", Support_PortManager
                         .getNextPort());
         this.serverChannel = ServerSocketChannel.open();
         this.clientChannel = SocketChannel.open();
@@ -183,7 +183,11 @@ public class ServerSocketChannelTest extends TestCase {
         assertNull(s.getInetAddress());
         assertEquals(-1, s.getLocalPort());
         assertNull(s.getLocalSocketAddress());
-        assertEquals(0, s.getSoTimeout());
+        try {
+            assertEquals(0, s.getSoTimeout());
+        } catch (IOException expected) {
+            // Android doesn't cache the timeout, so the getsockopt(2) fails and throws.
+        }
     }
 
     public void testChannelBasicStatus() {
@@ -208,7 +212,7 @@ public class ServerSocketChannelTest extends TestCase {
         assertTrue(this.serverChannel.isBlocking());
         try {
             this.serverChannel.accept();
-            fail("Should throw NotYetBoundException"); 
+            fail("Should throw NotYetBoundException");
         } catch (NotYetBoundException e) {
             // correct
         }
@@ -219,7 +223,7 @@ public class ServerSocketChannelTest extends TestCase {
         this.serverChannel.configureBlocking(false);
         try {
             this.serverChannel.accept();
-            fail("Should throw NotYetBoundException"); 
+            fail("Should throw NotYetBoundException");
         } catch (NotYetBoundException e) {
             // correct
         }
@@ -230,7 +234,7 @@ public class ServerSocketChannelTest extends TestCase {
         assertFalse(this.serverChannel.isOpen());
         try {
             this.serverChannel.accept();
-            fail("Should throw ClosedChannelException"); 
+            fail("Should throw ClosedChannelException");
         } catch (ClosedChannelException e) {
             // OK.
         }
@@ -239,7 +243,7 @@ public class ServerSocketChannelTest extends TestCase {
     public void testAccept_Block_NoConnect() throws IOException {
         assertTrue(this.serverChannel.isBlocking());
         ServerSocket gotSocket = this.serverChannel.socket();
-        gotSocket.bind(localAddr1);         
+        gotSocket.bind(localAddr1);
         // blocking mode , will block and wait for ever...
         // so must close the server channel with another thread.
         new Thread() {
@@ -263,7 +267,7 @@ public class ServerSocketChannelTest extends TestCase {
 
     public void testAccept_NonBlock_NoConnect() throws IOException {
         ServerSocket gotSocket = this.serverChannel.socket();
-        gotSocket.bind(localAddr1); 
+        gotSocket.bind(localAddr1);
         this.serverChannel.configureBlocking(false);
         // non-blocking mode , will immediately return
         assertNull(this.serverChannel.accept());
@@ -279,7 +283,7 @@ public class ServerSocketChannelTest extends TestCase {
         for (int i = 0; i < CAPACITY_NORMAL; i++) {
             buf.put((byte) i);
         }
-        clientChannel.connect(localAddr1); 
+        clientChannel.connect(localAddr1);
         Socket serverSocket = serverChannel.accept().socket();
         InputStream in = serverSocket.getInputStream();
         buf.flip();
@@ -287,12 +291,12 @@ public class ServerSocketChannelTest extends TestCase {
         clientChannel.close();
         assertReadResult(in,CAPACITY_NORMAL);
     }
-    
+
     /**
      * Asserts read content. The read content should contain <code>size</code>
      * bytes, and the value should be a sequence from 0 to size-1
      * ([0,1,...size-1]). Otherwise, the method throws Exception.
-     * 
+     *
      */
     private void assertReadResult(InputStream in, int size) throws IOException{
         byte[] readContent = new byte[size + 1];
@@ -318,14 +322,14 @@ public class ServerSocketChannelTest extends TestCase {
             buf.put((byte) i);
         }
         buf.flip();
-        clientChannel.connect(localAddr1); 
+        clientChannel.connect(localAddr1);
         Socket serverSocket = serverChannel.accept().socket();
         InputStream in = serverSocket.getInputStream();
         clientChannel.write(buf);
         clientChannel.close();
         assertReadResult(in,CAPACITY_NORMAL);
     }
-    
+
     /**
      * @tests ServerSocketChannel#accept().socket()
      */
@@ -337,16 +341,16 @@ public class ServerSocketChannelTest extends TestCase {
         byte[] writeContent = new byte[CAPACITY_NORMAL];
         for (int i = 0; i < writeContent.length; i++) {
             writeContent[i] = (byte) i;
-        }       
-        clientChannel.connect(localAddr1); 
+        }
+        clientChannel.connect(localAddr1);
         Socket socket = serverChannel.accept().socket();
         OutputStream out = socket.getOutputStream();
         out.write(writeContent);
         out.flush();
-        socket.close();    
+        socket.close();
         assertWriteResult(CAPACITY_NORMAL);
     }
-    
+
 
     /**
      * @tests ServerSocketChannel#accept().socket()
@@ -364,12 +368,12 @@ public class ServerSocketChannelTest extends TestCase {
         Socket clientSocket = serverChannel.accept().socket();
         OutputStream out = clientSocket.getOutputStream();
         out.write(writeContent);
-        clientSocket.close();  
+        clientSocket.close();
         assertWriteResult(CAPACITY_NORMAL);
     }
-    
+
     /**
-     * @throws InterruptedException 
+     * @throws InterruptedException
      * @tests ServerSocketChannel#accept().socket()
      */
     public void test_read_LByteBuffer_Blocking_ReadWriteRealLargeData()
@@ -397,12 +401,12 @@ public class ServerSocketChannelTest extends TestCase {
         SocketChannel channel;
         ByteBuffer buffer;
         IOException exception;
-        
+
         public WriteChannelThread(SocketChannel channel, ByteBuffer buffer) {
             this.channel = channel;
             this.buffer = buffer;
         }
-        
+
         public void run() {
             try {
                 channel.write(buffer);
@@ -412,7 +416,7 @@ public class ServerSocketChannelTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * @tests ServerSocketChannel#accept().socket()
      */
@@ -437,7 +441,7 @@ public class ServerSocketChannelTest extends TestCase {
             throw writeThread.exception;
         }
     }
-    
+
     /**
      * @tests ServerSocketChannel#accept().socket()
      */
@@ -449,7 +453,7 @@ public class ServerSocketChannelTest extends TestCase {
         for (int i = 0; i < writeContent.length; i++) {
             writeContent[i] = (byte) i;
         }
-        clientChannel.connect(localAddr1); 
+        clientChannel.connect(localAddr1);
         Socket socket = serverChannel.accept().socket();
         WriteSocketThread writeThread = new WriteSocketThread(socket, writeContent);
         writeThread.start();
@@ -460,17 +464,17 @@ public class ServerSocketChannelTest extends TestCase {
             throw writeThread.exception;
         }
     }
-    
+
     class WriteSocketThread extends Thread {
         Socket socket;
         byte[] buffer;
         IOException exception;
-        
+
         public WriteSocketThread(Socket socket, byte[] buffer) {
             this.socket = socket;
             this.buffer = buffer;
         }
-        
+
         public void run() {
             try {
                 OutputStream out = socket.getOutputStream();
@@ -481,7 +485,7 @@ public class ServerSocketChannelTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * @tests ServerSocketChannel#accept().socket()
      */
@@ -492,7 +496,7 @@ public class ServerSocketChannelTest extends TestCase {
         for (int i = 0; i < writeContent.length; i++) {
             writeContent[i] = (byte) i;
         }
-        clientChannel.connect(localAddr1); 
+        clientChannel.connect(localAddr1);
         Socket socket = serverChannel.accept().socket();
         WriteSocketThread writeThread = new WriteSocketThread(socket, writeContent);
         writeThread.start();
@@ -503,7 +507,7 @@ public class ServerSocketChannelTest extends TestCase {
             throw writeThread.exception;
         }
     }
-    
+
     /**
      * Uses SocketChannel.read(ByteBuffer) to verify write result.
      */
@@ -525,12 +529,12 @@ public class ServerSocketChannelTest extends TestCase {
             assertEquals((byte) i, buf.get(i));
         }
     }
-    
+
     /**
      * @tests ServerSocketChannel#socket().getSoTimeout()
      */
     public void test_accept_SOTIMEOUT() throws IOException {
-        // regression test for Harmony-707        
+        // regression test for Harmony-707
         final int SO_TIMEOUT = 10;
         ServerSocketChannel sc = ServerSocketChannel.open();
         try {
@@ -548,12 +552,12 @@ public class ServerSocketChannelTest extends TestCase {
             sc.close();
         }
     }
-    
+
     /**
      * @tests ServerSocket#socket().accept()
      */
     public void test_socket_accept_Blocking_NotBound() throws IOException {
-        // regression test for Harmony-748       
+        // regression test for Harmony-748
         ServerSocket gotSocket = serverChannel.socket();
         serverChannel.configureBlocking(true);
         try {
@@ -561,21 +565,21 @@ public class ServerSocketChannelTest extends TestCase {
             fail("Should throw an IllegalBlockingModeException");
         } catch (IllegalBlockingModeException e) {
             // expected
-        }        
+        }
         serverChannel.close();
         try {
             gotSocket.accept();
             fail("Should throw an IllegalBlockingModeException");
         } catch (IllegalBlockingModeException e) {
             // expected
-        }     
+        }
     }
 
     /**
      * @tests ServerSocket#socket().accept()
      */
     public void test_socket_accept_Nonblocking_NotBound() throws IOException {
-        // regression test for Harmony-748       
+        // regression test for Harmony-748
         ServerSocket gotSocket = serverChannel.socket();
         serverChannel.configureBlocking(false);
         try {
@@ -583,16 +587,16 @@ public class ServerSocketChannelTest extends TestCase {
             fail("Should throw an IllegalBlockingModeException");
         } catch (IllegalBlockingModeException e) {
             // expected
-        }        
+        }
         serverChannel.close();
         try {
             gotSocket.accept();
             fail("Should throw an IllegalBlockingModeException");
         } catch (IllegalBlockingModeException e) {
             // expected
-        }     
+        }
     }
-    
+
     /**
      * @tests ServerSocket#socket().accept()
      */
@@ -600,7 +604,7 @@ public class ServerSocketChannelTest extends TestCase {
         // regression test for Harmony-748
         serverChannel.configureBlocking(false);
         ServerSocket gotSocket = serverChannel.socket();
-        gotSocket.bind(localAddr1);         
+        gotSocket.bind(localAddr1);
         try {
             gotSocket.accept();
             fail("Should throw an IllegalBlockingModeException");
@@ -615,7 +619,7 @@ public class ServerSocketChannelTest extends TestCase {
             // expected
         }
     }
-    
+
     /**
      * @tests ServerSocket#socket().accept()
      */
@@ -623,7 +627,7 @@ public class ServerSocketChannelTest extends TestCase {
         // regression test for Harmony-748
         serverChannel.configureBlocking(true);
         ServerSocket gotSocket = serverChannel.socket();
-        gotSocket.bind(localAddr1);         
+        gotSocket.bind(localAddr1);
         serverChannel.close();
         try {
             gotSocket.accept();
@@ -637,7 +641,7 @@ public class ServerSocketChannelTest extends TestCase {
      */
     public void test_socket_getLocalPort() throws IOException {
         serverChannel.socket().bind(localAddr1);
-        clientChannel.connect(localAddr1); 
+        clientChannel.connect(localAddr1);
         SocketChannel myChannel = serverChannel.accept();
         int port = myChannel.socket().getLocalPort();
         assertEquals(localAddr1.getPort(), port);
@@ -653,7 +657,7 @@ public class ServerSocketChannelTest extends TestCase {
         InetSocketAddress localAddr = new InetSocketAddress("localhost", 0);
         serverChannel.socket().bind(localAddr);
 
-        // configure the channel non-blocking 
+        // configure the channel non-blocking
         // when it is accepting in main thread
         new Thread() {
             public void run() {
