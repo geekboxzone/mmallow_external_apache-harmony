@@ -1717,21 +1717,18 @@ public class DatagramChannelTest extends TestCase {
         writeBuf[0] = ByteBuffer.allocateDirect(CAPACITY_NORMAL);
         try {
             this.channel1.write(null, 0, 2);
-            fail("should throw NPE");
-        } catch (NullPointerException e) {
-            // correct
+            fail();
+        } catch (NullPointerException expected) {
         }
         try {
-            this.channel1.write(null, -1, 2);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
+            this.channel1.write(writeBuf, -1, 2);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-            this.channel1.write(null, 0, 3);
-            fail("should throw NPE");
-        } catch (NullPointerException e) {
-            // correct
+            this.channel1.write(writeBuf, 0, 3);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 
@@ -1836,24 +1833,24 @@ public class DatagramChannelTest extends TestCase {
         assertEquals(0, this.channel1.read(readBuf, 0, 1));
         assertEquals(0, this.channel1.read(readBuf, 0, 2));
         datagramSocket1.close();
+    }
+
+    public void testReadByteBufferArrayIntInt_exceptions() throws IOException {
         //regression test for HARMONY-932
         try {
-        	DatagramChannel.open().read(new ByteBuffer[] {}, 2, Integer.MAX_VALUE);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
+            DatagramChannel.open().read(new ByteBuffer[] {}, 2, Integer.MAX_VALUE);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-        	DatagramChannel.open().write(new ByteBuffer[] {}, 2, Integer.MAX_VALUE);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
+            DatagramChannel.open().read(new ByteBuffer[] {}, -1, 0);
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
         try {
-        	DatagramChannel.open().write((ByteBuffer[])null, -1, 2);
-            fail("should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
-            // correct
+            DatagramChannel.open().read((ByteBuffer[]) null, 0, 0);
+            fail();
+        } catch (NullPointerException expected) {
         }
     }
 
@@ -2464,6 +2461,7 @@ public class DatagramChannelTest extends TestCase {
             channel.read(c.asReadOnlyBuffer());
             fail("Should throw NotYetConnectedException");
         } catch (NotYetConnectedException e){
+        } catch (IllegalArgumentException e){
             // expected
         }
         channel.connect(localAddr1);
