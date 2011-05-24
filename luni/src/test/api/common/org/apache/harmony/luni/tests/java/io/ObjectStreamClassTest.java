@@ -25,8 +25,8 @@ import java.io.ObjectOutput;
 import java.io.ObjectStreamClass;
 import java.io.ObjectStreamField;
 import java.io.Serializable;
-import java.net.URL;                                                                                                                 
-import java.net.URLClassLoader; 
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.lang.reflect.Proxy;
 
 import junit.framework.TestCase;
@@ -44,7 +44,7 @@ public class ObjectStreamClassTest extends TestCase {
 			return serialVersionUID;
 		}
 	}
-    
+
     /**
      * @tests java.io.ObjectStreamClass#forClass()
      */
@@ -53,7 +53,7 @@ public class ObjectStreamClassTest extends TestCase {
         // returned
         ObjectStreamClass osc = ObjectStreamClass.lookup(DummyClass.class);
         assertEquals("forClass returned an object: " + osc.forClass(),
-                DummyClass.class, osc.forClass()); 
+                DummyClass.class, osc.forClass());
     }
 
     /**
@@ -114,20 +114,12 @@ public class ObjectStreamClassTest extends TestCase {
         }
     }
 
-    /**
-     * @tests java.io.ObjectStreamClass#getSerialVersionUID()
-     */
     public void test_getSerialVersionUID_inner_private_class() {
         ObjectStreamClass osc1 = ObjectStreamClass.lookup(SyntheticTest.class);
-        assertEquals("SyntheticTest unexpected UID: "
-                + osc1.getSerialVersionUID(), -7784078941584535183L, osc1
-                .getSerialVersionUID());
+        assertEquals(-4332969662791850406L, osc1.getSerialVersionUID());
 
-        ObjectStreamClass osc2 = ObjectStreamClass
-                .lookup(SyntheticTest.X.class);
-        assertEquals("SyntheticTest.X unexpected UID: "
-                + osc2.getSerialVersionUID(), -7703000075736397332L, osc2
-                .getSerialVersionUID());
+        ObjectStreamClass osc2 = ObjectStreamClass.lookup(SyntheticTest.X.class);
+        assertEquals(-3926212872029449440L, osc2.getSerialVersionUID());
     }
 
     /**
@@ -204,9 +196,9 @@ public class ObjectStreamClassTest extends TestCase {
         assertEquals("Enum classes should have no serialized fields", 0,
                 enumFields.length);
     }
-    
+
         /**
-     * @since 1.6 
+     * @since 1.6
      */
     static class NonSerialzableClass {
         private static final long serialVersionUID = 1l;
@@ -214,7 +206,7 @@ public class ObjectStreamClassTest extends TestCase {
             return serialVersionUID;
         }
     }
-    
+
     /**
      * @since 1.6
      */
@@ -229,9 +221,9 @@ public class ObjectStreamClassTest extends TestCase {
         public void writeExternal(ObjectOutput output) throws IOException {
             throw new IOException();
         }
-        
+
 	}
-	
+
     /**
      * @tests java.io.ObjectStreamClass#lookupAny(java.lang.Class)
      * @since 1.6
@@ -243,21 +235,21 @@ public class ObjectStreamClassTest extends TestCase {
         assertEquals("lookup returned wrong class: " + osc.getName(),
                 "org.apache.harmony.luni.tests.java.io.ObjectStreamClassTest$DummyClass", osc
                         .getName());
-        
+
         osc = ObjectStreamClass.lookupAny(NonSerialzableClass.class);
         assertEquals("lookup returned wrong class: " + osc.getName(),
                 "org.apache.harmony.luni.tests.java.io.ObjectStreamClassTest$NonSerialzableClass",
                 osc.getName());
-        
-        osc = ObjectStreamClass.lookupAny(ExternalizableClass.class);        
+
+        osc = ObjectStreamClass.lookupAny(ExternalizableClass.class);
         assertEquals("lookup returned wrong class: " + osc.getName(),
                 "org.apache.harmony.luni.tests.java.io.ObjectStreamClassTest$ExternalizableClass",
                 osc.getName());
 
         osc = ObjectStreamClass.lookup(NonSerialzableClass.class);
         assertNull(osc);
-        
+
     }
-    
-    
+
+
 }
