@@ -197,9 +197,6 @@ public class PipedReaderTest extends TestCase {
         }
     }
 
-    /**
-     * @tests java.io.PipedReader#read(char[], int, int)
-     */
     public void test_read$CII_ExceptionPriority() throws IOException {
         // Regression for HARMONY-387
         PipedWriter pw = new PipedWriter();
@@ -207,45 +204,30 @@ public class PipedReaderTest extends TestCase {
         try {
             obj = new PipedReader(pw);
             obj.read(new char[0], (int) 0, (int) -1);
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
-            assertEquals(
-                    "IndexOutOfBoundsException rather than a subclass expected",
-                    IndexOutOfBoundsException.class, t.getClass());
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 
-    /**
-     * @tests java.io.PipedReader#read(char[], int, int)
-     */
     public void test_read$CII_ExceptionPriority2() throws IOException {
         PipedWriter pw = new PipedWriter();
         PipedReader obj = null;
         try {
             obj = new PipedReader(pw);
             obj.read(new char[0], (int) -1, (int) 0);
-            fail("IndexOutOfBoundsException expected");
-        } catch (ArrayIndexOutOfBoundsException t) {
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
-            // Expected
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 
-    /**
-     * @tests java.io.PipedReader#read(char[], int, int)
-     */
     public void test_read$CII_ExceptionPriority3() throws IOException {
         PipedWriter pw = new PipedWriter();
         PipedReader obj = null;
         try {
             obj = new PipedReader(pw);
             obj.read(new char[0], (int) -1, (int) -1);
-            fail("IndexOutOfBoundsException expected");
-        } catch (ArrayIndexOutOfBoundsException t) {
-            fail("IndexOutOfBoundsException expected");
-        } catch (IndexOutOfBoundsException t) {
-            // Expected
+            fail();
+        } catch (IndexOutOfBoundsException expected) {
         }
     }
 
@@ -255,6 +237,7 @@ public class PipedReaderTest extends TestCase {
         try {
             pr.read(null, -1, 1);
             fail();
+        } catch (NullPointerException expected) {
         } catch (IndexOutOfBoundsException expected) {
         }
     }
@@ -262,10 +245,9 @@ public class PipedReaderTest extends TestCase {
     public void test_read_$CII_IOException() throws IOException {
         PipedWriter pw = new PipedWriter();
         PipedReader pr = new PipedReader(pw);
-        char[] buf = null;
         pr.close();
         try {
-            pr.read(buf, 0, 10);
+            pr.read(null, 0, 10);
             fail("Should throws IOException"); //$NON-NLS-1$
         } catch (IOException e) {
             // expected
@@ -275,10 +257,9 @@ public class PipedReaderTest extends TestCase {
         }
 
         pr = new PipedReader();
-        buf = null;
         pr.close();
         try {
-            pr.read(buf, 0, 10);
+            pr.read(null, 0, 10);
             fail("Should throws IOException"); //$NON-NLS-1$
         } catch (IOException e) {
             // expected
@@ -288,24 +269,9 @@ public class PipedReaderTest extends TestCase {
 
         pw = new PipedWriter();
         pr = new PipedReader(pw);
-        buf = new char[10];
         pr.close();
         try {
-            pr.read(buf, -1, 0);
-            fail("Should throws IOException"); //$NON-NLS-1$
-        } catch (IOException e) {
-            // expected
-        } finally {
-            pw = null;
-            pr = null;
-        }
-
-        pw = new PipedWriter();
-        pr = new PipedReader(pw);
-        buf = new char[10];
-        pr.close();
-        try {
-            pr.read(buf, 0, -1);
+            pr.read(new char[10], -1, 0);
             fail("Should throws IOException"); //$NON-NLS-1$
         } catch (IOException e) {
             // expected
@@ -316,10 +282,22 @@ public class PipedReaderTest extends TestCase {
 
         pw = new PipedWriter();
         pr = new PipedReader(pw);
-        buf = new char[10];
         pr.close();
         try {
-            pr.read(buf, 1, 10);
+            pr.read(new char[10], 0, -1);
+            fail("Should throws IOException"); //$NON-NLS-1$
+        } catch (IOException e) {
+            // expected
+        } finally {
+            pw = null;
+            pr = null;
+        }
+
+        pw = new PipedWriter();
+        pr = new PipedReader(pw);
+        pr.close();
+        try {
+            pr.read(new char[10], 1, 10);
             fail("Should throws IOException"); //$NON-NLS-1$
         } catch (IOException e) {
             // expected
