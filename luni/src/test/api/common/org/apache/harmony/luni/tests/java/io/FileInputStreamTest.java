@@ -109,43 +109,39 @@ public class FileInputStreamTest extends TestCase {
         }
     }
 
-    /**
-     * @tests java.io.FileInputStream#close()
-     */
     public void test_close() throws IOException {
         is = new FileInputStream(fileName);
         is.close();
-
         try {
             is.read();
-            fail("Able to read from closed stream");
-        } catch (IOException e) {
-            // Expected
+            fail();
+        } catch (IOException expected) {
         }
+    }
 
+    public void test_close_shared_fd() throws IOException {
         // Regression test for HARMONY-6642
-        FileInputStream fis = new FileInputStream(fileName);
-        FileInputStream fis2 = new FileInputStream(fis.getFD());
+        FileInputStream fis1 = new FileInputStream(fileName);
+        FileInputStream fis2 = new FileInputStream(fis1.getFD());
         try {
             fis2.close();
-            fis.read();
-            fail("Able to read from closed fd");
-        } catch (IOException e) {
-            // Expected
+            fis1.read();
+            fail("fd sharing error");
+        } catch (IOException expected) {
         } finally {
             try {
-                fis.close();
+                fis1.close();
             } catch (IOException e) {}
         }
 
+        // TODO: how does this differ from the test above?
         FileInputStream stdin = new FileInputStream(FileDescriptor.in);
         stdin.close();
         stdin = new FileInputStream(FileDescriptor.in);
         try {
             stdin.read();
-            fail("Able to read from stdin after close");
-        } catch (IOException e) {
-            // Expected
+            fail();
+        } catch (IOException expected) {
         }
     }
 
