@@ -282,7 +282,12 @@ public class String2Test extends junit.framework.TestCase {
         String s2 = "s2";
         String s3 = s1.concat(s2);
         assertEquals(s2, s3);
-        assertNotSame(s2, s3);
+        // The RI returns a new string even when it's the same as the argument string.
+        // assertNotSame(s2, s3);
+        s3 = s2.concat(s1);
+        assertEquals(s2, s3);
+        // Neither Android nor the RI returns a new string when it's the same as *this*.
+        // assertNotSame(s2, s3);
 
         s3 = s2.concat(s1);
         assertSame(s2, s3);
@@ -325,9 +330,9 @@ public class String2Test extends junit.framework.TestCase {
         assertEquals("String not equal", hw1, hw2);
         assertEquals("Empty string equals check", "", "");
         assertEquals("Null string equals check", (String)null, (String)null);
-        
+
         assertFalse("Unequal strings reports as equal", hw1.equals(comp11));
-        assertFalse("Null string comparison failed", hw1.equals((String)null));        
+        assertFalse("Null string comparison failed", hw1.equals((String)null));
     }
 
     /**
@@ -470,7 +475,7 @@ public class String2Test extends junit.framework.TestCase {
         assertEquals(expected[0], bytes[0]);
         assertEquals(expected[1], bytes[1]);
     }
-    
+
     /*
      * @tests java.lang.String#getBytes()
      */
@@ -725,7 +730,7 @@ public class String2Test extends junit.framework.TestCase {
                 && (hw1.substring(5, 10).equals("World")));
         assertTrue("not identical", hw1.substring(0, hw1.length()) == hw1);
     }
-    
+
 	/**
 	 * @tests java.lang.String#substring(int, int)
 	 */
@@ -779,7 +784,7 @@ public class String2Test extends junit.framework.TestCase {
         assertEquals(
                 "b) Sigma has final form lower case value at end of word with Unicode 4.0",
                 "a\u03c2", "a\u03a3".toLowerCase());
-        
+
         assertEquals("toLowerCase case conversion did not succeed",
         		"\uD801\uDC44", "\uD801\uDC1C".toLowerCase());
     }
