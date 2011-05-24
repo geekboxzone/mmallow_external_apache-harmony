@@ -123,7 +123,7 @@ public class FieldTest extends junit.framework.TestCase {
 			f.get(null);
 			fail("No expected IllegalAccessException");
 		} catch (IllegalAccessException ok) {}
-		
+
 		// Try a get on a private field in nested member
         // temporarily commented because it breaks J9 VM
         // Regression for HARMONY-1309
@@ -353,10 +353,8 @@ public class FieldTest extends junit.framework.TestCase {
 					// setting type into field);
 					subclass.setField(type, subclass, field, null, value);
 					subclass.setField(type, otherSubclass, field, null, value);
-					subclass.setField(type, parentClass, field,
-							illegalAccessExceptionClass, value);
-					subclass.setField(type, plainObject, field,
-							illegalArgumentExceptionClass, value);
+					subclass.setField(type, parentClass, field, illegalAccessExceptionClass, value);
+					subclass.setField(type, plainObject, field, illegalAccessExceptionClass, value);
 				}
 			}
 			for (int j = 0; j < i; j++) {
@@ -372,10 +370,8 @@ public class FieldTest extends junit.framework.TestCase {
 		Boolean booleanValue = Boolean.TRUE;
 		subclass.setField('Z', subclass, booleanField, null, booleanValue);
 		subclass.setField('Z', otherSubclass, booleanField, null, booleanValue);
-		subclass.setField('Z', parentClass, booleanField,
-				illegalAccessExceptionClass, booleanValue);
-		subclass.setField('Z', plainObject, booleanField,
-				illegalArgumentExceptionClass, booleanValue);
+		subclass.setField('Z', parentClass, booleanField, illegalAccessExceptionClass, booleanValue);
+		subclass.setField('Z', plainObject, booleanField, illegalAccessExceptionClass, booleanValue);
 		for (int j = 0; j < fields.length; j++) {
 			Field listedField = fields[j];
 			fieldName = listedField.getName();
@@ -416,10 +412,8 @@ public class FieldTest extends junit.framework.TestCase {
 					// getting type from field
 					subclass.getField(type, subclass, field, null);
 					subclass.getField(type, otherSubclass, field, null);
-					subclass.getField(type, parentClass, field,
-							illegalAccessExceptionClass);
-					subclass.getField(type, plainObject, field,
-							illegalArgumentExceptionClass);
+					subclass.getField(type, parentClass, field, illegalAccessExceptionClass);
+					subclass.getField(type, plainObject, field, illegalAccessExceptionClass);
 				}
 			}
 			for (int j = i + 1; j < fields.length; j++) {
@@ -433,10 +427,8 @@ public class FieldTest extends junit.framework.TestCase {
 		// test getBoolean
 		subclass.getField('Z', subclass, booleanField, null);
 		subclass.getField('Z', otherSubclass, booleanField, null);
-		subclass.getField('Z', parentClass, booleanField,
-				illegalAccessExceptionClass);
-		subclass.getField('Z', plainObject, booleanField,
-				illegalArgumentExceptionClass);
+		subclass.getField('Z', parentClass, booleanField, illegalAccessExceptionClass);
+		subclass.getField('Z', plainObject, booleanField, illegalAccessExceptionClass);
 		for (int j = 0; j < fields.length; j++) {
 			Field listedField = fields[j];
 			fieldName = listedField.getName();
@@ -677,7 +669,7 @@ public class FieldTest extends junit.framework.TestCase {
 		Field f = null;
 		f = x.getClass().getDeclaredField("shortField");
 
-                assertEquals("Returned incorrect field name", 
+                assertEquals("Returned incorrect field name",
 				"shortField", f.getName());
 	}
 
