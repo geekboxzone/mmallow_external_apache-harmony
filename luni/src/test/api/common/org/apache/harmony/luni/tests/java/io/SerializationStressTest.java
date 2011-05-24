@@ -679,14 +679,6 @@ public class SerializationStressTest extends junit.framework.TestCase implements
         ois.close();
     }
 
-	public void test_serialVersionUID(Class clazz, long svUID) throws Exception {
-		final String idWrong = "serialVersionUID is wrong for: ";
-		long reflectedSvUID = 0L;
-		reflectedSvUID = clazz.getField("serialVersionUID").getLong(null);
-		assertTrue(idWrong + clazz + ": " + reflectedSvUID + " does not equal "
-				+ svUID, reflectedSvUID == svUID);
-	}
-
 	private static class ResolveObjectTest implements Serializable {
 		Object field1, field2;
 	}
