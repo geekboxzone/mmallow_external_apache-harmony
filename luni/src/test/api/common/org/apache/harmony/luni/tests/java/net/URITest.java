@@ -20,9 +20,7 @@ package org.apache.harmony.luni.tests.java.net;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import junit.framework.TestCase;
-
 import org.apache.harmony.testframework.serialization.SerializationTest;
 
 public class URITest extends TestCase {
@@ -1326,61 +1324,73 @@ public class URITest extends TestCase {
      * @tests java.net.URI#normalize()
      */
     public void test_normalize() throws Exception {
+        // normal
+        testNormalize("/", "/");
+        testNormalize("/a", "/a");
+        testNormalize("/a/b", "/a/b");
+        testNormalize("/a/b/c", "/a/b/c");
+        // single, '.'
+        testNormalize("/.", "/");
+        testNormalize("/./", "/");
+        testNormalize("/./.", "/");
+        testNormalize("/././", "/");
+        testNormalize("/./a", "/a");
+        testNormalize("/./a/", "/a/");
+        testNormalize("/././a", "/a");
+        testNormalize("/././a/", "/a/");
+        testNormalize("/a/.", "/a/");
+        testNormalize("/a/./", "/a/");
+        testNormalize("/a/./.", "/a/");
+        testNormalize("/a/./b", "/a/b");
+        // double, '..'
+        testNormalize("/a/..", "/");
+        testNormalize("/a/../", "/");
+        testNormalize("/a/../b", "/b");
+        testNormalize("/a/../b/..", "/");
+        testNormalize("/a/../b/../", "/");
+        testNormalize("/a/../b/../c", "/c");
+        testNormalize("/..", "/..");
+        testNormalize("/../", "/../");
+        testNormalize("/../..", "/../..");
+        testNormalize("/../../", "/../../");
+        testNormalize("/../a", "/../a");
+        testNormalize("/../a/", "/../a/");
+        testNormalize("/../../a", "/../../a");
+        testNormalize("/../../a/", "/../../a/");
+        testNormalize("/a/b/../../c", "/c");
+        testNormalize("/a/b/../..", "/");
+        testNormalize("/a/b/../../", "/");
+        testNormalize("/a/b/../../c", "/c");
+        testNormalize("/a/b/c/../../../d", "/d");
+        testNormalize("/a/b/..", "/a/");
+        testNormalize("/a/b/../", "/a/");
+        testNormalize("/a/b/../c", "/a/c");
+        // miscellaneous
+        testNormalize("/a/b/.././../../c/./d/../e", "/../c/e");
+        testNormalize("/a/../../.c././../././c/d/../g/..", "/../c/");
+        // '.' in the middle of segments
+        testNormalize("/a./b", "/a./b");
+        testNormalize("/.a/b", "/.a/b");
+        testNormalize("/a.b/c", "/a.b/c");
+        testNormalize("/a/b../c", "/a/b../c");
+        testNormalize("/a/..b/c", "/a/..b/c");
+        testNormalize("/a/b..c/d", "/a/b..c/d");
+        // no leading slash, miscellaneous
+        testNormalize("", "");
+        testNormalize("a", "a");
+        testNormalize("a/b", "a/b");
+        testNormalize("a/b/c", "a/b/c");
+        testNormalize("../", "../");
+        testNormalize(".", "");
+        testNormalize("..", "..");
+        testNormalize("../g", "../g");
+        testNormalize("g/a/../../b/c/./g", "b/c/g");
+        testNormalize("a/b/.././../../c/./d/../e", "../c/e");
+        testNormalize("a/../../.c././../././c/d/../g/..", "../c/");
+    }
 
-        String[] normalizeData = new String[] {
-                // normal
-                "/",
-                "/a",
-                "/a/b",
-                "/a/b/c",
-                // single, '.'
-                "/.", "/./", "/./.", "/././",
-                "/./a",
-                "/./a/",
-                "/././a",
-                "/././a/",
-                "/a/.",
-                "/a/./",
-                "/a/./.",
-                "/a/./b",
-                // double, '..'
-                "/a/..", "/a/../", "/a/../b", "/a/../b/..", "/a/../b/../",
-                "/a/../b/../c", "/..", "/../", "/../..", "/../../", "/../a",
-                "/../a/", "/../../a", "/../../a/", "/a/b/../../c",
-                "/a/b/../..",
-                "/a/b/../../",
-                "/a/b/../../c",
-                "/a/b/c/../../../d",
-                "/a/b/..",
-                "/a/b/../",
-                "/a/b/../c",
-                // miscellaneous
-                "/a/b/.././../../c/./d/../e",
-                "/a/../../.c././../././c/d/../g/..",
-                // '.' in the middle of segments
-                "/a./b", "/.a/b", "/a.b/c", "/a/b../c",
-                "/a/..b/c",
-                "/a/b..c/d",
-                // no leading slash, miscellaneous
-                "", "a", "a/b", "a/b/c", "../", ".", "..", "../g",
-                "g/a/../../b/c/./g", "a/b/.././../../c/./d/../e",
-                "a/../../.c././../././c/d/../g/..", };
-
-        String[] normalizeResults = new String[] { "/", "/a", "/a/b", "/a/b/c",
-                "/", "/", "/", "/", "/a", "/a/", "/a", "/a/", "/a/", "/a/",
-                "/a/", "/a/b", "/", "/", "/b", "/", "/", "/c", "/..", "/../",
-                "/../..", "/../../", "/../a", "/../a/", "/../../a",
-                "/../../a/", "/c", "/", "/", "/c", "/d", "/a/", "/a/", "/a/c",
-                "/../c/e", "/../c/", "/a./b", "/.a/b", "/a.b/c", "/a/b../c",
-                "/a/..b/c", "/a/b..c/d", "", "a", "a/b", "a/b/c", "../", "",
-                "..", "../g", "b/c/g", "../c/e", "../c/", };
-
-        for (int i = 0; i < normalizeData.length; i++) {
-            URI test = new URI(normalizeData[i]);
-            String result = test.normalize().toString();
-            assertEquals("Normalized incorrectly, ", normalizeResults[i],
-                    result.toString());
-        }
+    private void testNormalize(String original, String expected) throws URISyntaxException {
+        assertEquals(expected, new URI(original).normalize().toString());
     }
 
     /**
@@ -1847,7 +1857,7 @@ public class URITest extends TestCase {
             }
         }
     }
-    
+
     /**
      * @tests serialization/deserialization.
      */
