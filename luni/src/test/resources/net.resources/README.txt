@@ -95,9 +95,6 @@ The key properties required by the java.net tests are as follows ...
 
 * WebName : The unqualified name of the host where the HTTP server is running.
 
-* TestResourcesDir : the name of the folder on the HTTP server beneath the
-                     document root where the web resources have been deployed. 
-
 * HomeAddressResponse : the expected response returned from a successful get 
                         from the HTTP server.
 
@@ -114,36 +111,6 @@ The key properties required by the java.net tests are as follows ...
 
 * UnresolvedIP : an IP address that does not resolve to a host name
 
-* InetTestAddress : the string name of a network host with IP address given
-                    in the corresponding "InetTestIP" property.
-
-* InetTestIP : the IP address of a network host whose string name is supplied
-               in the corresponding "InetTestAddress" property.
-
-* NonLocalAddressBytes : the bytes representing the address of any machine which
-                         cannot be bound to during the tests. Used in the socket
-                         tests to verify we get the expected error when trying
-                         to bind to an address that cannot be reached. 
-
-* InetTestAddress2 : the string name of a network host with IP address given
-                    in the corresponding "InetTestIP" property.
-
-* InetTestIP2 : the IP address of a network host whose string name is supplied
-               in the corresponding "InetTestAddress" property.
-
-* InetTestHashcode : the expected hashcode value of the "InetTestAddress".
-
-* SpecialInetTestAddress : An address that resolves to more than one IP address.
-                           The expected number of IP addresses that this address
-                           resolves to should be set in the
-                           "SpecialInetTestAddressNumber" property. Used to test
-                           the java.net.InetAddress.getAllByName() method. 
-
-* SpecialInetTestAddressNumber : The number of IP addresses that resolve to the
-                                 host named in the property
-                                 "SpecialInetTestAddress". Used to test the
-                                 java.net.InetAddress.getAllByName() method. 
-
 * FTPTestAddress : a string of the form "jcltest:jclpass@<server address>" that
                    points to the network location of the FTP resources.
 
@@ -158,23 +125,9 @@ The key properties required by the java.net tests are as follows ...
                               Any changes to the web resources will affect this
                               value. 
 
-* URLConnectionDate : the expected date when the file
-                      "http://<your HTTP host>/testres231/RESOURCE.TXT" was last
-                      modified. Making any changes to the RESOURCE.TXT file will
-                      mean this property value will require updating.
-
-* InetTestIP6 : an IPv6 address to help test out serialization of the type
-                java.net.Inet6Address .
-
 * ResolvedNotExistingHost : an IP address that resolves to a host that is not
                             present on the local network. This allows us to
                             check the timeouts for socket connections.
-
-* InetAlias1 : this property and "InetAlias2" should be different host names
-               that resolve to the same IP address.
-
-* InetAlias2 : this property and "InetAlias1" should be different host names
-               that resolve to the same IP address.
 
 * IPv6GlobalAddressJcl4 : the IPv6 address for a host on the network. 
 

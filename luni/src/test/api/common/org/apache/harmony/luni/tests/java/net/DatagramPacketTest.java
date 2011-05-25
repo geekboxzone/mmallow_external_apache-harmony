@@ -148,8 +148,7 @@ public class DatagramPacketTest extends junit.framework.TestCase {
      * @tests java.net.DatagramPacket#setAddress(java.net.InetAddress)
      */
     public void test_setAddressLjava_net_InetAddress() throws IOException {
-        InetAddress ia = InetAddress
-                .getByName(Support_Configuration.InetTestIP);
+        InetAddress ia = InetAddress.getByName("127.0.0.1");
         DatagramPacket dp = new DatagramPacket("Hello".getBytes(), 5,
                 InetAddress.getLocalHost(), 0);
         dp.setAddress(ia);

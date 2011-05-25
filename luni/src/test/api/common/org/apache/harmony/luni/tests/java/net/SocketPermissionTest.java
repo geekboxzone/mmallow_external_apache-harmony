@@ -97,10 +97,8 @@ public class SocketPermissionTest extends junit.framework.TestCase {
         sp2 = new SocketPermission("test1.com:444", "resolve");
         assertTrue("Different cases should be equal", sp1.equals(sp2));
 
-        sp1 = new SocketPermission(Support_Configuration.InetTestAddress,
-                "resolve,connect");
-        sp2 = new SocketPermission(Support_Configuration.InetTestIP,
-                "resolve,connect");
+        sp1 = new SocketPermission("localhost", "resolve,connect");
+        sp2 = new SocketPermission("127.0.0.1", "resolve,connect");
         assertEquals("Same IP address should be equal", sp1, sp2);
     }
 
@@ -200,7 +198,7 @@ public class SocketPermissionTest extends junit.framework.TestCase {
         assertTrue("A different host should not imply resolve", !pc
                 .implies(star_Resolve));
     }
-    
+
     /**
      * @tests serialization/deserialization.
      */
@@ -209,9 +207,9 @@ public class SocketPermissionTest extends junit.framework.TestCase {
 
         SerializationTest.verifySelf(permission);
     }
-    
+
     public void test_ConstructorLjava_lang_StringLjava_lang_String_subtestIPv6() {
-        String[] goodTestStrings = { 
+        String[] goodTestStrings = {
                 "12334.0.0.01", "[fe80::1]",
                 "[FE80:0000:0000:0000:0000:0000:0000:0001]:80",
                 "[::ffff]:80-82", "[ffff::]:80-82", "[fe80::1]:80",
@@ -221,7 +219,7 @@ public class SocketPermissionTest extends junit.framework.TestCase {
         String[] badTestStrings = {"someName:withColonInit:80", "fg80::1", "[ffff:::80-82]",
                 ":[:fff]:80", "FE80:0000:0000:0000:0000:0000:0000:0001:80:82", "FE80::1"
         };
-        
+
         for (int i=0; i < goodTestStrings.length; i++) {
             try {
                 SocketPermission sp = new SocketPermission(goodTestStrings[i], "connect");
@@ -230,7 +228,7 @@ public class SocketPermissionTest extends junit.framework.TestCase {
                 fail("SocketPermission named: " + goodTestStrings[i] + " failed construction: " + e.getMessage());
             }
         }
-        
+
         for (int i=0; i < badTestStrings.length; i++) {
             try {
                 SocketPermission sp = new SocketPermission(badTestStrings[i], "connect");

@@ -35,7 +35,7 @@ import junit.framework.TestCase;
  * This test is designed for collecting all the testcases which needs a proxy
  * server. They will be moved to corresponding test class when ProxyHandler of
  * Jetty is ready in the future.
- * 
+ *
  */
 
 public class ExcludedProxyTest extends TestCase {
@@ -54,8 +54,7 @@ public class ExcludedProxyTest extends TestCase {
             boolean exception = false;
             try {
                 System.setProperty("http.proxyPort", "81");
-                URL u3 = new URL("http://"
-                        + Support_Configuration.InetTestAddress);
+                URL u3 = new URL("http://localhost");
                 URLConnection conn3 = u3.openConnection();
                 conn3.getInputStream();
                 fail("Should throw IOException");
@@ -112,7 +111,7 @@ public class ExcludedProxyTest extends TestCase {
             System.setProperties(null);
         }
     }
-    
+
     /**
      * @tests java.net.SocketImpl#SocketImpl()
      */
@@ -152,7 +151,7 @@ public class ExcludedProxyTest extends TestCase {
             System.setProperties(null);
         }
     }
-    
+
     /**
      * @tests java.net.URL#openConnection(Proxy)
      */
@@ -189,7 +188,7 @@ public class ExcludedProxyTest extends TestCase {
             assertTrue("Response to POST method invalid", response
                     .equals(posted));
         }
-        
+
         URL httpUrl = new URL("http://abc.com");
         URL jarUrl = new URL("jar:"
                 + Support_Resources.getResourceURL("/JUC/lf.jar!/plus.bmp"));

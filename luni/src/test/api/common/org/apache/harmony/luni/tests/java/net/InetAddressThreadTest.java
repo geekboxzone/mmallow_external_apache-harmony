@@ -22,7 +22,7 @@ import java.net.InetAddress;
 import tests.support.Support_Configuration;
 
 public class InetAddressThreadTest extends junit.framework.TestCase {
-    
+
     private static boolean someoneDone[] = new boolean[2];
 
     protected static boolean threadedTestSucceeded;
@@ -86,8 +86,8 @@ public class InetAddressThreadTest extends junit.framework.TestCase {
                     String hostName = ia.getHostName();
                     String hostAddress = ia.getHostAddress();
 
-                    // Intentionally not looking for exact name match so that 
-                    // the test works across different platforms that may or 
+                    // Intentionally not looking for exact name match so that
+                    // the test works across different platforms that may or
                     // may not include a domain suffix on the hostname
                     if (!hostName.startsWith(correctName)) {
                         threadedTestSucceeded = false;
@@ -117,7 +117,7 @@ public class InetAddressThreadTest extends junit.framework.TestCase {
             }
         }
     }
-    
+
     /**
      * @tests java.net.InetAddress#getHostName()
      */
@@ -131,18 +131,10 @@ public class InetAddressThreadTest extends junit.framework.TestCase {
 
         // Test for threadsafety
         try {
-            InetAddress lookup1 = InetAddress
-                    .getByName(Support_Configuration.InetTestAddress);
-            assertTrue(lookup1 + " expected "
-                    + Support_Configuration.InetTestIP,
-                    Support_Configuration.InetTestIP.equals(lookup1
-                            .getHostAddress()));
-            InetAddress lookup2 = InetAddress
-                    .getByName(Support_Configuration.InetTestAddress2);
-            assertTrue(lookup2 + " expected "
-                    + Support_Configuration.InetTestIP2,
-                    Support_Configuration.InetTestIP2.equals(lookup2
-                            .getHostAddress()));
+            InetAddress lookup1 = InetAddress.getByName("localhost");
+            assertEquals("127.0.0.1", lookup1.getHostAddress());
+            InetAddress lookup2 = InetAddress.getByName("localhost");
+            assertEquals("127.0.0.1", lookup2.getHostAddress());
             threadsafeTestThread thread1 = new threadsafeTestThread("1",
                     lookup1.getHostName(), lookup1, 0);
             threadsafeTestThread thread2 = new threadsafeTestThread("2",

@@ -52,17 +52,10 @@ public class InetAddressTest extends junit.framework.TestCase {
         }
     }
 
-    /**
-     * @tests java.net.InetAddress#equals(java.lang.Object)
-     */
     public void test_equalsLjava_lang_Object() throws Exception {
-        // Test for method boolean java.net.InetAddress.equals(java.lang.Object)
-        InetAddress ia1 = InetAddress
-                .getByName(Support_Configuration.InetTestAddress);
-        InetAddress ia2 = InetAddress
-                .getByName(Support_Configuration.InetTestIP);
-        assertTrue("Equals returned incorrect result - " + ia1 + " != "
-                + ia2, ia1.equals(ia2));
+        InetAddress ia1 = InetAddress.getByName("localhost");
+        InetAddress ia2 = InetAddress.getByName("::1");
+        assertEquals(ia2, ia1);
     }
 
     /**
@@ -71,9 +64,8 @@ public class InetAddressTest extends junit.framework.TestCase {
     public void test_getAddress() throws UnknownHostException {
         // Test for method byte [] java.net.InetAddress.getAddress()
         try {
-            InetAddress ia = InetAddress
-                    .getByName(Support_Configuration.InetTestIP);
-            byte[] caddr = Support_Configuration.InetTestCaddr;
+            InetAddress ia = InetAddress.getByName("127.0.0.1");
+            byte[] caddr = new byte[] { 127, 0, 0, 1 };
             byte[] addr = ia.getAddress();
             for (int i = 0; i < addr.length; i++)
                 assertTrue("Incorrect address returned", caddr[i] == addr[i]);
@@ -94,28 +86,27 @@ public class InetAddressTest extends junit.framework.TestCase {
     public void test_getAllByNameLjava_lang_String() throws Exception {
         // Test for method java.net.InetAddress []
         // java.net.InetAddress.getAllByName(java.lang.String)
-        InetAddress[] all = InetAddress
-                .getAllByName(Support_Configuration.SpecialInetTestAddress);
+        InetAddress[] all = InetAddress.getAllByName("localhost");
         assertNotNull(all);
         // Number of aliases depends on individual test machine
         assertTrue(all.length >= 1);
         for (InetAddress alias : all) {
             // Check that each alias has the same hostname. Intentionally not
             // checking for exact string match.
-            assertTrue(alias.getHostName().startsWith(
-                    Support_Configuration.SpecialInetTestAddress));
+            assertTrue(alias.getHostName().startsWith("localhost"));
         }// end for all aliases
 
         //Regression for HARMONY-56
-        InetAddress[] ia = InetAddress.getAllByName(null);
-        assertEquals("Assert 0: No loopback address", 1, ia.length);
-        assertTrue("Assert 1: getAllByName(null) not loopback",
-                ia[0].isLoopbackAddress());
-
-        ia = InetAddress.getAllByName("");
-        assertEquals("Assert 2: No loopback address", 1, ia.length);
-        assertTrue("Assert 3: getAllByName(\"\") not loopback",
-                ia[0].isLoopbackAddress());
+        InetAddress[] ias = InetAddress.getAllByName(null);
+        assertEquals(2, ias.length);
+        for (InetAddress ia : ias) {
+            assertTrue(ia.isLoopbackAddress());
+        }
+        ias = InetAddress.getAllByName("");
+        assertEquals(2, ias.length);
+        for (InetAddress ia : ias) {
+            assertTrue(ia.isLoopbackAddress());
+        }
 
         // Check that getting addresses by dotted string distinguish
         // IPv4 and IPv6 subtypes.
@@ -132,17 +123,7 @@ public class InetAddressTest extends junit.framework.TestCase {
     public void test_getByNameLjava_lang_String() throws Exception {
         // Test for method java.net.InetAddress
         // java.net.InetAddress.getByName(java.lang.String)
-        InetAddress ia2 = InetAddress
-                .getByName(Support_Configuration.InetTestIP);
-
-        // Intentionally not testing for exact string match
-        /* FIXME: comment the assertion below because it is platform/configuration dependent
-         * Please refer to HARMONY-1664 (https://issues.apache.org/jira/browse/HARMONY-1664)
-         * for details
-         */
-//        assertTrue(
-//      "Expected " + Support_Configuration.InetTestAddress + "*",
-//          ia2.getHostName().startsWith(Support_Configuration.InetTestAddress));
+        InetAddress ia2 = InetAddress.getByName("127.0.0.1");
 
         // TODO : Test to ensure all the address formats are recognized
         InetAddress i = InetAddress.getByName("1.2.3");
@@ -151,41 +132,14 @@ public class InetAddressTest extends junit.framework.TestCase {
         assertEquals("1.0.0.2",i.getHostAddress());
         i = InetAddress.getByName(String.valueOf(0xffffffffL));
         assertEquals("255.255.255.255",i.getHostAddress());
-        String s = "222.222.222.222....";
-        i = InetAddress.getByName(s);
-        assertEquals("222.222.222.222",i.getHostAddress());
     }
 
     /**
      * @tests java.net.InetAddress#getHostAddress()
      */
     public void test_getHostAddress() throws Exception {
-        // Test for method java.lang.String
-        // java.net.InetAddress.getHostAddress()
-        InetAddress ia2 = InetAddress
-                .getByName(Support_Configuration.InetTestAddress);
-        assertTrue("getHostAddress returned incorrect result: "
-                + ia2.getHostAddress() + " != "
-                + Support_Configuration.InetTestIP, ia2.getHostAddress()
-                .equals(Support_Configuration.InetTestIP));
-    }
-
-    /**
-     * @tests java.net.InetAddress#getHostName()
-     */
-    public void test_getHostName() throws Exception {
-        // Test for method java.lang.String java.net.InetAddress.getHostName()
-        InetAddress ia = InetAddress
-                .getByName(Support_Configuration.InetTestIP);
-
-        // Intentionally not testing for exact string match
-        /* FIXME: comment the assertion below because it is platform/configuration dependent
-         * Please refer to HARMONY-1664 (https://issues.apache.org/jira/browse/HARMONY-1664)
-         * for details
-         */
-//        assertTrue(
-//      "Expected " + Support_Configuration.InetTestAddress + "*",
-//      ia.getHostName().startsWith(Support_Configuration.InetTestAddress));
+        assertEquals("1.2.3.4", InetAddress.getByName("1.2.3.4").getHostAddress());
+        assertEquals("::1", InetAddress.getByName("::1").getHostAddress());
     }
 
     /**
@@ -213,22 +167,6 @@ public class InetAddressTest extends junit.framework.TestCase {
         DatagramSocket dg = new DatagramSocket(0, InetAddress.getLocalHost());
         assertEquals("Incorrect host returned", InetAddress.getLocalHost(), dg.getLocalAddress());
         dg.close();
-    }
-
-    /**
-     * @tests java.net.InetAddress#hashCode()
-     */
-    public void test_hashCode() {
-        // Test for method int java.net.InetAddress.hashCode()
-        try {
-            InetAddress host = InetAddress
-                    .getByName(Support_Configuration.InetTestAddress);
-            int hashcode = host.hashCode();
-            assertTrue("Incorrect hash returned: " + hashcode + " from host: "
-                    + host, hashcode == Support_Configuration.InetTestHashcode);
-        } catch (java.net.UnknownHostException e) {
-            fail("Exception during test : " + e.getMessage());
-        }
     }
 
     /**
@@ -324,12 +262,9 @@ public class InetAddressTest extends junit.framework.TestCase {
      */
     public void test_toString() throws Exception {
         // Test for method java.lang.String java.net.InetAddress.toString()
-        InetAddress ia2 = InetAddress
-                .getByName(Support_Configuration.InetTestIP);
-        assertEquals("/" + Support_Configuration.InetTestIP, ia2.toString());
+        InetAddress ia2 = InetAddress.getByName("127.0.0.1");
+        assertEquals("/127.0.0.1", ia2.toString());
         // Regression for HARMONY-84
-        InetAddress addr = InetAddress.getByName("localhost");
-        assertEquals("Assert 0: wrong string from name", "localhost/127.0.0.1", addr.toString());
         InetAddress addr2 = InetAddress.getByAddress(new byte[]{127, 0, 0, 1});
         assertEquals("Assert 1: wrong string from address", "/127.0.0.1", addr2.toString());
     }
@@ -371,19 +306,6 @@ public class InetAddressTest extends junit.framework.TestCase {
                 theAddress.getCanonicalHostName().length() != 0);
         assertTrue("getCanonicalHostName returned an empty string ",
                 !theAddress.equals(""));
-
-        // test against an expected value
-        InetAddress ia = InetAddress
-                .getByName(Support_Configuration.InetTestIP);
-
-        // Intentionally not testing for exact string match
-        /* FIXME: comment the assertion below because it is platform/configuration dependent
-         * Please refer to HARMONY-1664 (https://issues.apache.org/jira/browse/HARMONY-1664)
-         * for details
-         */
-//        assertTrue(
-//           "Expected " + Support_Configuration.InetTestAddress + "*",
-//           ia.getCanonicalHostName().startsWith(Support_Configuration.InetTestAddress));
     }
 
     /**
