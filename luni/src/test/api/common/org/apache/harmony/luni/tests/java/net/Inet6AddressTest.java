@@ -28,14 +28,10 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 import org.apache.harmony.testframework.serialization.SerializationTest.SerializableAssert;
 
 public class Inet6AddressTest extends junit.framework.TestCase {
+    public void test_isMulticastAddress() throws Exception {
 
-	/**
-	 * @tests java.net.Inet6Address#isMulticastAddress()
-	 */
-	public void test_isMulticastAddress() throws Exception {
-
-		String addrName = "";
-		InetAddress addr = null;
+        String addrName = "";
+        InetAddress addr = null;
 
                 // IP V6 regular multicast and non-multicast tests
                 //
@@ -92,9 +88,6 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                 .isMulticastAddress());
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#isAnyLocalAddress()
-	 */
 	public void test_isAnyLocalAddress() throws Exception {
 
 		String addrName = "";
@@ -122,9 +115,6 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                 !addr.isAnyLocalAddress());
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#isLoopbackAddress()
-	 */
 	public void test_isLoopbackAddress() throws Exception {
 
 		String addrName = "";
@@ -157,7 +147,7 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                 // We expect these to be false, as they are not IPv4 addresses
 
                 // a loopback address should be 127.d.d.d
-                addrName = "::127.0.0.0"; 
+                addrName = "::127.0.0.0";
                 addr = InetAddress.getByName(addrName);
                 assertTrue("IPv4-compatible IPv6 address " + addrName
                                 + " detected incorrectly as a loopback.", !addr
@@ -203,9 +193,6 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                 .isLoopbackAddress());
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#isLinkLocalAddress()
-	 */
 	public void test_isLinkLocalAddress() throws Exception {
 
 		String addrName = "";
@@ -245,9 +232,6 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                 .isLinkLocalAddress());
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#isSiteLocalAddress()
-	 */
 	public void test_isSiteLocalAddress() throws Exception {
 		String addrName = "";
 
@@ -281,9 +265,6 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                 .isSiteLocalAddress());
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#isMCGlobal()
-	 */
 	public void test_isMCGlobal() throws Exception {
 		String addrName = "";
                 // IP V6 regular address tests for Mulitcase Global addresses
@@ -358,9 +339,6 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                 .isMCGlobal());
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#isMCNodeLocal()
-	 */
 	public void test_isMCNodeLocal() throws Exception {
 		String addrName = "";
                 // IP V6 regular address tests for Mulitcase node local addresses
@@ -422,9 +400,6 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                 .isMCNodeLocal());
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#isMCLinkLocal()
-	 */
 	public void test_isMCLinkLocal() throws Exception {
 		String addrName = "";
                 // IP V6 regular address tests for Mulitcase link local addresses
@@ -508,9 +483,6 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                 addr.isMCLinkLocal());
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#isMCSiteLocal()
-	 */
 	public void test_isMCSiteLocal() throws Exception {
 		String addrName = "";
                 // IP V6 regular address tests for Multicast site-local addresses
@@ -518,31 +490,31 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                 // Multicast global addresses are FFx5:/112 where x is
                 // a set of flags, and the addition 112 bits make up
                 // the global address space
-    
+
                 addrName = "FF05::0";
                 InetAddress addr = InetAddress.getByName(addrName);
                 assertTrue("IPv6 site-local mutlicast address " + addrName
                                 + " not detected.", addr.isMCSiteLocal());
-    
+
                 addrName = "FF05:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF";
                 addr = InetAddress.getByName(addrName);
                 assertTrue("IPv6 site-local multicast address " + addrName
                                 + " not detected.", addr.isMCSiteLocal());
-    
+
                 // a currently invalid address as the prefix FFxE
                 // is only valid for x = {1,0} as the rest are reserved
                 addrName = "FFF5::0";
                 addr = InetAddress.getByName(addrName);
                 assertTrue("IPv6 site-local mutlicast address " + addrName
                                 + " not detected.", addr.isMCSiteLocal());
-    
+
                 // a currently invalid address as the prefix FFxE
                 // is only valid for x = {1,0} as the rest are reserved
                 addrName = "FFF5:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF";
                 addr = InetAddress.getByName(addrName);
                 assertTrue("IPv6 site-local multicast address " + addrName
                                 + " not detected.", addr.isMCSiteLocal());
-    
+
                 // a sample MC organizational address
                 addrName = "FF08:42:42:42:42:42:42:42";
                 addr = InetAddress.getByName(addrName);
@@ -551,7 +523,7 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                                 + addrName
                                                 + " incorrectly indicated as a site-local mulitcast address.",
                                 !addr.isMCSiteLocal());
-    
+
                 // a sample MC global address
                 addrName = "FF0E:42:42:42:42:42:42:42";
                 addr = InetAddress.getByName(addrName);
@@ -560,7 +532,7 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                                 + addrName
                                                 + " incorrectly indicated as a site-local mulitcast address.",
                                 !addr.isMCSiteLocal());
-    
+
                 // a sample MC link address
                 addrName = "FF02:42:42:42:42:42:42:42";
                 addr = InetAddress.getByName(addrName);
@@ -569,7 +541,7 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                                 + addrName
                                                 + " incorrectly indicated as a site-local mulitcast address.",
                                 !addr.isMCSiteLocal());
-    
+
                 // a sample MC Node
                 addrName = "FF01:42:42:42:42:42:42:42";
                 addr = InetAddress.getByName(addrName);
@@ -578,14 +550,14 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                                 + addrName
                                                 + " incorrectly indicated as a site-local mulitcast address.",
                                 !addr.isMCSiteLocal());
-    
+
                 // IPv4-mapped IPv6 addresses
                 addrName = "::FFFF:239.255.0.0";
                 addr = InetAddress.getByName(addrName);
                 assertTrue("IPv4 site-local multicast address " + addrName
                                 + " not identified as a site-local multicast address.",
                                 addr.isMCSiteLocal());
-    
+
                 addrName = "::FFFF:239.255.255.255";
                 addr = InetAddress.getByName(addrName);
                 assertTrue("IPv4 site-local multicast address " + addrName
@@ -593,9 +565,6 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                 addr.isMCSiteLocal());
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#isMCOrgLocal()
-	 */
 	public void test_isMCOrgLocal() throws Exception {
 		String addrName = "";
                 // IP V6 regular address tests for Mulitcase organization-local
@@ -680,9 +649,6 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                 .isMCOrgLocal());
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#isIPv4CompatibleAddress()
-	 */
 	public void test_isIPv4CompatibleAddress() throws Exception {
 		String addrName = "";
 		Inet6Address addr = null;
@@ -714,16 +680,6 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                                 .isIPv4CompatibleAddress());
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#getAddress()
-	 */
-	public void test_getAddress() {
-		// TODO : Implementation
-	}
-
-	/**
-	 * @tests java.net.Inet6Address#getByName(java.lang.String)
-	 */
 	public void test_getByNameLjava_lang_String() throws Exception {
 		// ones to add "::255.255.255.255", "::FFFF:0.0.0.0",
 		// "0.0.0.0.0.0::255.255.255.255", "F:F:F:F:F:F:F:F",
@@ -756,7 +712,7 @@ public class Inet6AddressTest extends junit.framework.TestCase {
                         + invalidIPAddresses[i]);
             } catch (Exception e) {
             }
-            
+
             //exercise negative cache
             try {
                 InetAddress.getByName(invalidIPAddresses[i]);
@@ -766,39 +722,32 @@ public class Inet6AddressTest extends junit.framework.TestCase {
             }
 		}
 	}
-	
-	/**
-	 * @tests java.net.Inet6Address#getByAddress(String, byte[], int)
-	 */
+
 	public void test_getByAddressLString$BI() throws UnknownHostException{
 		try {
 			Inet6Address.getByAddress("123", null, 0);
 			fail("should throw UnknownHostException");
 		} catch (UnknownHostException uhe) {
-			// expected 
+			// expected
 		}
 		byte[] addr1 = { (byte) 127, 0, 0, 1 };
 		try {
 			Inet6Address.getByAddress("123", addr1, 0);
 			fail("should throw UnknownHostException");
 		} catch (UnknownHostException uhe) {
-			// expected 
+			// expected
 		}
 
 		byte[] addr2 = { (byte) 0xFE, (byte) 0x80, 0, 0, 0, 0, 0, 0, 0x02,
 				0x11, 0x25, (byte) 0xFF, (byte) 0xFE, (byte) 0xF8, (byte) 0x7C,
 				(byte) 0xB2 };
-		
+
 		// should not throw any exception
 		Inet6Address.getByAddress("123", addr2, 3);
 		Inet6Address.getByAddress("123", addr2, 0);
 		Inet6Address.getByAddress("123", addr2, -1);
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#getByAddress(String, byte[],
-	 *        NetworkInterface)
-	 */
 	public void test_getByAddressLString$BLNetworkInterface()
 			throws UnknownHostException {
 		NetworkInterface nif = null;
@@ -826,17 +775,13 @@ public class Inet6AddressTest extends junit.framework.TestCase {
     public void test_getHostAddress_() throws Exception {
         byte[] ipAddress = new byte[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
         InetAddress ia = InetAddress.getByAddress(ipAddress);
-        assertEquals("0:0:0:0:0:0:0:1", ia.getHostAddress().toLowerCase(Locale.US));
+        assertEquals("::1", ia.getHostAddress().toLowerCase(Locale.US));
 
         ipAddress = new byte[] {-2, -128, 0, 0, 0, 0, 0, 0, 2, 17, 37, -1, -2, -8, 124, -79};
         ia = InetAddress.getByAddress(ipAddress);
-        assertEquals("fe80:0:0:0:211:25ff:fef8:7cb1", ia.getHostAddress().toLowerCase(Locale.US));
+        assertEquals("fe80::211:25ff:fef8:7cb1", ia.getHostAddress().toLowerCase(Locale.US));
     }
 
-	/**
-	 * @throws UnknownHostException
-	 * @tests java.net.Inet6Address#getScopeID()
-	 */
 	public void test_getScopeID() throws UnknownHostException {
 		Inet6Address v6ia;
 		byte[] addr = { (byte) 0xFE, (byte) 0x80, 0, 0, 0, 0, 0, 0, 0x02, 0x11,
@@ -853,9 +798,6 @@ public class Inet6AddressTest extends junit.framework.TestCase {
 		assertEquals(0, v6ia.getScopeId());
 	}
 
-	/**
-	 * @tests java.net.Inet6Address#getScopedInterface()
-	 */
 	public void test_getScopedInterface() throws UnknownHostException {
 		byte[] addr = { (byte) 0xFE, (byte) 0x80, (byte) 0x09, (byte) 0xb5,
 				(byte) 0x6b, (byte) 0xa4, 0, 0, 0, 0, 0, 0, (byte) 0x09,
@@ -865,20 +807,17 @@ public class Inet6AddressTest extends junit.framework.TestCase {
 		assertNull(v6Addr.getScopedInterface());
 	}
 
-    /**
-     * @tests {@link java.net.Inet6Address#hashCode()}
-     */
     public void test_hashCode() throws UnknownHostException{
         byte[] addr = { (byte) 0xFE, (byte) 0x80, 0, 0, 0, 0, 0, 0, 0x02, 0x11,
                 0x25, (byte) 0xFF, (byte) 0xFE, (byte) 0xF8, (byte) 0x7C,
                 (byte) 0xB2 };
         Inet6Address address1, address2;
-        
+
         address1 = Inet6Address.getByAddress("123", addr, 0);
         address2 = Inet6Address.getByAddress("1234", addr, 0);
         assertEquals(address1.hashCode(), address2.hashCode());
     }
-	
+
 	int bytesToInt(byte bytes[], int start) {
 
 		int byteMask = 255;
@@ -950,7 +889,7 @@ public class Inet6AddressTest extends junit.framework.TestCase {
     };
 
     /**
-     * @tests serialization/deserialization compatibility.
+     * Tests serialization/deserialization compatibility with ourselves.
      */
     public void testSerializationSelf() throws Exception {
 
@@ -961,7 +900,7 @@ public class Inet6AddressTest extends junit.framework.TestCase {
     }
 
     /**
-     * @tests serialization/deserialization compatibility with RI.
+     * Tests serialization/deserialization compatibility with RI.
      */
     public void testSerializationCompatibility() throws Exception {
 
