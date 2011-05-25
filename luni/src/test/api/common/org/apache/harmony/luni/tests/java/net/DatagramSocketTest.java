@@ -933,33 +933,6 @@ public class DatagramSocketTest extends SocketTestCase {
 
     }
 
-    public void test_set_Datagram_SocketImpl_Factory() throws IOException {
-        DatagramSocketImplFactory factory = new MockDatagramSocketImplFactory();
-        // Should not throw SocketException when set DatagramSocketImplFactory
-        // for the first time.
-        DatagramSocket.setDatagramSocketImplFactory(factory);
-
-        try {
-            DatagramSocket.setDatagramSocketImplFactory(null);
-            fail("Should throw SocketException");
-        } catch (SocketException e) {
-            // Expected
-        }
-
-        try {
-            DatagramSocket.setDatagramSocketImplFactory(factory);
-            fail("Should throw SocketException");
-        } catch (SocketException e) {
-            // Expected
-        }
-    }
-
-    private class MockDatagramSocketImplFactory implements DatagramSocketImplFactory {
-        public DatagramSocketImpl createDatagramSocketImpl() {
-            return null;
-        }
-    }
-
     public void test_setSendBufferSizeI() {
         try {
             int portNumber = Support_PortManager.getNextPortForUDP();
