@@ -42,7 +42,7 @@ import java.net.PlainSocketImpl;
 
 import tests.support.Support_Configuration;
 
-public class SocketTest extends SocketTestCase {
+public class SocketTest extends junit.framework.TestCase {
     private class ClientThread implements Runnable {
 
         public void run() {
@@ -257,34 +257,22 @@ public class SocketTest extends SocketTestCase {
         socket.close();
     }
 
-    /**
-     * @tests java.net.Socket#close()
-     */
     public void test_close() throws IOException {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
 
-        try {
-            client.setSoLinger(false, 100);
-        } catch (IOException e) {
-            handleException(e, SO_LINGER);
-        }
+        client.setSoLinger(false, 100);
 
         client.close();
         try {
             client.getOutputStream();
             fail("Failed to close socket");
-        } catch (IOException e) { // Caught Exception after close.
-            // Expected
+        } catch (IOException expected) {
         }
 
         server.close();
     }
 
-    /**
-     * @tests Socket#connect(SocketAddress) try an unknownhost
-     */
     public void test_connect_unknownhost() throws Exception {
         Socket socket = new Socket();
         try {
@@ -778,35 +766,20 @@ public class SocketTest extends SocketTestCase {
         return true;
     }
 
-    /**
-     * @tests java.net.Socket#getKeepAlive()
-     */
-    public void test_getKeepAlive() {
-        try {
-            ServerSocket server = new ServerSocket(0);
-            Socket client = new Socket(InetAddress.getLocalHost(), server
-                    .getLocalPort(), null, 0);
+    public void test_getKeepAlive() throws Exception {
+        ServerSocket server = new ServerSocket(0);
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort(), null, 0);
 
-            client.setKeepAlive(true);
-            assertTrue("getKeepAlive false when it should be true", client
-                    .getKeepAlive());
+        client.setKeepAlive(true);
+        assertTrue("getKeepAlive false when it should be true", client.getKeepAlive());
 
-            client.setKeepAlive(false);
-            assertFalse("getKeepAlive true when it should be False", client
-                    .getKeepAlive());
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_KEEPALIVE);
-        } catch (Exception e) {
-            handleException(e, SO_KEEPALIVE);
-        }
+        client.setKeepAlive(false);
+        assertFalse("getKeepAlive true when it should be False", client.getKeepAlive());
     }
 
-    /**
-     * @tests java.net.Socket#getLocalAddress()
-     */
     public void test_getLocalAddress() throws IOException {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
 
         assertTrue("Returned incorrect InetAddress", client.getLocalAddress()
                 .equals(InetAddress.getLocalHost()));
@@ -932,28 +905,17 @@ public class SocketTest extends SocketTestCase {
         client.close();
     }
 
-    /**
-     * @tests java.net.Socket#getOOBInline()
-     */
-    public void test_getOOBInline() {
-        try {
-            Socket theSocket = new Socket();
+    public void test_getOOBInline() throws Exception {
+        Socket theSocket = new Socket();
 
-            theSocket.setOOBInline(true);
-            assertTrue("expected OOBIline to be true", theSocket.getOOBInline());
+        theSocket.setOOBInline(true);
+        assertTrue("expected OOBIline to be true", theSocket.getOOBInline());
 
-            theSocket.setOOBInline(false);
-            assertFalse("expected OOBIline to be false", theSocket
-                    .getOOBInline());
+        theSocket.setOOBInline(false);
+        assertFalse("expected OOBIline to be false", theSocket.getOOBInline());
 
-            theSocket.setOOBInline(false);
-            assertFalse("expected OOBIline to be false", theSocket
-                    .getOOBInline());
-
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_OOBINLINE);
-        } catch (Exception e) {
-            handleException(e, SO_OOBINLINE);
-        }
+        theSocket.setOOBInline(false);
+        assertFalse("expected OOBIline to be false", theSocket.getOOBInline());
     }
 
     /**
@@ -1050,9 +1012,6 @@ public class SocketTest extends SocketTestCase {
         }
     }
 
-    /**
-     * @tests java.net.Socket#getPort()
-     */
     public void test_getPort() throws IOException {
         ServerSocket server = new ServerSocket(0);
         int serverPort = server.getLocalPort();
@@ -1064,26 +1023,15 @@ public class SocketTest extends SocketTestCase {
         server.close();
     }
 
-    /**
-     * @tests java.net.Socket#getReceiveBufferSize()
-     */
-    public void test_getReceiveBufferSize() throws IOException {
+    public void test_getReceiveBufferSize() throws Exception {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
+        client.setReceiveBufferSize(130);
 
-        try {
-            client.setReceiveBufferSize(130);
-            assertTrue("Incorrect buffer size",
-                    client.getReceiveBufferSize() >= 130);
+        assertTrue("Incorrect buffer size", client.getReceiveBufferSize() >= 130);
 
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_RCVBUF);
-        } catch (Exception e) {
-            handleException(e, SO_RCVBUF);
-        } finally {
-            client.close();
-            server.close();
-        }
+        client.close();
+        server.close();
     }
 
     /**
@@ -1119,132 +1067,63 @@ public class SocketTest extends SocketTestCase {
         server.close();
     }
 
-    /**
-     * @tests java.net.Socket#getReuseAddress()
-     */
-    public void test_getReuseAddress() {
-        try {
-            Socket theSocket = new Socket();
-            theSocket.setReuseAddress(true);
-            assertTrue("getReuseAddress false when it should be true",
-                    theSocket.getReuseAddress());
-            theSocket.setReuseAddress(false);
-            assertFalse("getReuseAddress true when it should be False",
-                    theSocket.getReuseAddress());
-
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_REUSEADDR);
-        } catch (Exception e) {
-            handleException(e, SO_REUSEADDR);
-        }
+    public void test_getReuseAddress() throws Exception {
+        Socket theSocket = new Socket();
+        theSocket.setReuseAddress(true);
+        assertTrue("getReuseAddress false when it should be true", theSocket.getReuseAddress());
+        theSocket.setReuseAddress(false);
+        assertFalse("getReuseAddress true when it should be False", theSocket.getReuseAddress());
     }
 
-    /**
-     * @tests java.net.Socket#getSendBufferSize()
-     */
-    public void test_getSendBufferSize() throws IOException {
+    public void test_getSendBufferSize() throws Exception {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
-
-        try {
-            client.setSendBufferSize(134);
-            assertTrue("Incorrect buffer size",
-                    client.getSendBufferSize() >= 134);
-
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_SNDBUF);
-        } catch (Exception e) {
-            handleException(e, SO_SNDBUF);
-        } finally {
-            client.close();
-            server.close();
-        }
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
+        client.setSendBufferSize(134);
+        assertTrue("Incorrect buffer size", client.getSendBufferSize() >= 134);
+        client.close();
+        server.close();
     }
 
-    /**
-     * @tests java.net.Socket#getSoLinger()
-     */
-    public void test_getSoLinger() throws IOException {
+    public void test_getSoLinger() throws Exception {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
-
-        try {
-            client.setSoLinger(true, 200);
-            assertEquals("Returned incorrect linger", 200, client.getSoLinger());
-            client.setSoLinger(false, 0);
-
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_LINGER);
-        } catch (Exception e) {
-            handleException(e, SO_LINGER);
-        } finally {
-            client.close();
-            server.close();
-        }
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
+        client.setSoLinger(true, 200);
+        assertEquals("Returned incorrect linger", 200, client.getSoLinger());
+        client.setSoLinger(false, 0);
+        client.close();
+        server.close();
     }
 
-    /**
-     * @tests java.net.Socket#getSoTimeout()
-     */
-    public void test_getSoTimeout() throws IOException {
+    public void test_getSoTimeout() throws Exception {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
-
-        try {
-            client.setSoTimeout(100);
-            assertEquals("Returned incorrect sotimeout", 100, client
-                    .getSoTimeout());
-
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_TIMEOUT);
-        } catch (Exception e) {
-            handleException(e, SO_TIMEOUT);
-        } finally {
-            client.close();
-            server.close();
-        }
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
+        client.setSoTimeout(100);
+        assertEquals("Returned incorrect sotimeout", 100, client.getSoTimeout());
+        client.close();
+        server.close();
     }
 
-    /**
-     * @tests java.net.Socket#getTcpNoDelay()
-     */
-    public void test_getTcpNoDelay() throws IOException {
+    public void test_getTcpNoDelay() throws Exception {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
 
-        try {
-            boolean bool = !client.getTcpNoDelay();
-            client.setTcpNoDelay(bool);
-            assertTrue("Failed to get no delay setting: "
-                    + client.getTcpNoDelay(), client.getTcpNoDelay() == bool);
+        boolean bool = !client.getTcpNoDelay();
+        client.setTcpNoDelay(bool);
+        assertTrue("Failed to get no delay setting: " + client.getTcpNoDelay(), client.getTcpNoDelay() == bool);
 
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(TCP_NODELAY);
-        } catch (Exception e) {
-            handleException(e, TCP_NODELAY);
-        } finally {
-            client.close();
-            server.close();
-        }
+        client.close();
+        server.close();
     }
 
-    /**
-     * @tests java.net.Socket#getTrafficClass()
-     */
-    public void test_getTrafficClass() {
-        try {
-            /*
-             * We cannot actually check that the values are set as if a platform
-             * does not support the option then it may come back unset even
-             * though we set it so just get the value to make sure we can get it
-             */
-            int trafficClass = new Socket().getTrafficClass();
-            assertTrue(0 <= trafficClass);
-            assertTrue(trafficClass <= 255);
-
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(IP_TOS);
-        } catch (Exception e) {
-            handleException(e, IP_TOS);
-        }
+    public void test_getTrafficClass() throws Exception {
+        /*
+         * We cannot actually check that the values are set as if a platform
+         * does not support the option then it may come back unset even
+         * though we set it so just get the value to make sure we can get it
+         */
+        int trafficClass = new Socket().getTrafficClass();
+        assertTrue(0 <= trafficClass);
+        assertTrue(trafficClass <= 255);
     }
 
     /**
@@ -1662,237 +1541,133 @@ public class SocketTest extends SocketTestCase {
         // There is not really a good test for this as it is there to detect
         // crashed machines. Just make sure we can set it
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
 
-        try {
-            client.setKeepAlive(true);
-            client.setKeepAlive(false);
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_KEEPALIVE);
-        } catch (Exception e) {
-            handleException(e, SO_KEEPALIVE);
-        } finally {
-            client.close();
-            server.close();
-        }
+        client.setKeepAlive(true);
+        client.setKeepAlive(false);
+        client.close();
+        server.close();
 
         // Regression test for HARMONY-1136
         new TestSocket((SocketImpl) null).setKeepAlive(true);
     }
 
-    /**
-     * @tests java.net.Socket#setOOBInline(boolean)
-     */
-    public void test_setOOBInlineZ() {
-        try {
-            Socket theSocket = new Socket();
-            theSocket.setOOBInline(true);
-            assertTrue("expected OOBIline to be true", theSocket.getOOBInline());
-
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_OOBINLINE);
-        } catch (Exception e) {
-            handleException(e, SO_OOBINLINE);
-        }
+    public void test_setOOBInlineZ() throws Exception {
+        Socket theSocket = new Socket();
+        theSocket.setOOBInline(true);
+        assertTrue("expected OOBIline to be true", theSocket.getOOBInline());
     }
 
-    /**
-     * @tests java.net.Socket#setPerformancePreference()
-     */
     public void test_setPerformancePreference_Int_Int_Int() throws IOException {
         Socket theSocket = new Socket();
         theSocket.setPerformancePreferences(1, 1, 1);
     }
 
-    /**
-     * @tests java.net.Socket#setReceiveBufferSize(int)
-     */
-    public void test_setReceiveBufferSizeI() throws IOException {
+    public void test_setReceiveBufferSizeI() throws Exception {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
 
-        try {
-            client.setReceiveBufferSize(130);
-            assertTrue("Incorrect buffer size",
-                    client.getReceiveBufferSize() >= 130);
+        client.setReceiveBufferSize(130);
+        assertTrue("Incorrect buffer size", client.getReceiveBufferSize() >= 130);
 
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_RCVBUF);
-        } catch (Exception e) {
-            handleException(e, SO_RCVBUF);
-        } finally {
-            client.close();
-            server.close();
-        }
+        client.close();
+        server.close();
     }
 
-    /**
-     * @tests java.net.Socket#setReuseAddress(boolean)
-     */
-    public void test_setReuseAddressZ() throws UnknownHostException {
+    public void test_setReuseAddressZ() throws Exception {
+        Socket theSocket = new Socket();
+        theSocket.setReuseAddress(false);
+        // Bind to any available port on the given address
+        theSocket.bind(new InetSocketAddress(InetAddress.getLocalHost(), 0));
+        InetSocketAddress localAddress1 = new InetSocketAddress(theSocket.getLocalAddress(), theSocket.getLocalPort());
 
-        try {
-            Socket theSocket = new Socket();
-            theSocket.setReuseAddress(false);
-            // Bind to any available port on the given address
-            theSocket
-                    .bind(new InetSocketAddress(InetAddress.getLocalHost(), 0));
-            InetSocketAddress localAddress1 = new InetSocketAddress(theSocket
-                    .getLocalAddress(), theSocket.getLocalPort());
+        Socket theSocket2 = new Socket();
+        theSocket2.setReuseAddress(false);
 
-            Socket theSocket2 = new Socket();
-            theSocket2.setReuseAddress(false);
+        /*
+         * Try to invoke a bind while the port is busy (TIME_WAIT). Note
+         * that we may not succeed, which will cause the test to pass
+         * without testing the reuseaddr behavior.
+         */
+        theSocket.close();
+        theSocket2.bind(localAddress1);
 
-            /*
-             * Try to invoke a bind while the port is busy (TIME_WAIT). Note
-             * that we may not succeed, which will cause the test to pass
-             * without testing the reuseaddr behavior.
-             */
-            theSocket.close();
-            theSocket2.bind(localAddress1);
-
-            theSocket2.close();
-
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_REUSEADDR);
-        } catch (Exception e) {
-            handleException(e, SO_REUSEADDR);
-        }
+        theSocket2.close();
     }
 
-    /**
-     * @tests java.net.Socket#setSendBufferSize(int)
-     */
-    public void test_setSendBufferSizeI() throws IOException {
+    public void test_setSendBufferSizeI() throws Exception {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
-
-        try {
-            client.setSendBufferSize(134);
-            assertTrue("Incorrect buffer size",
-                    client.getSendBufferSize() >= 134);
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_SNDBUF);
-        } catch (Exception e) {
-            handleException(e, SO_SNDBUF);
-        } finally {
-            client.close();
-            server.close();
-        }
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
+        client.setSendBufferSize(134);
+        assertTrue("Incorrect buffer size", client.getSendBufferSize() >= 134);
+        client.close();
+        server.close();
     }
 
-    /**
-     * @tests java.net.Socket#setSocketImplFactory(java.net.SocketImplFactory)
-     */
     public void test_setSocketImplFactoryLjava_net_SocketImplFactory() {
         // Cannot test as setting will cause the factory to be changed for
         // all subsequent sockets
     }
 
-    /**
-     * @tests java.net.Socket#setSoLinger(boolean, int)
-     */
     public void test_setSoLingerZI() throws IOException {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
-
-        try {
-            client.setSoLinger(true, 500);
-            assertEquals("Set incorrect linger", 500, client.getSoLinger());
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_LINGER);
-            client.setSoLinger(false, 0);
-        } catch (Exception e) {
-            handleException(e, SO_LINGER);
-        } finally {
-            client.close();
-            server.close();
-        }
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
+        client.setSoLinger(true, 500);
+        assertEquals("Set incorrect linger", 500, client.getSoLinger());
+        client.setSoLinger(false, 0);
+        client.close();
+        server.close();
     }
 
-    /**
-     * @tests java.net.Socket#setSoTimeout(int)
-     */
-    public void test_setSoTimeoutI() throws IOException {
+    public void test_setSoTimeoutI() throws Exception {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
-
-        try {
-            client.setSoTimeout(100);
-            assertEquals("Set incorrect sotimeout", 100, client.getSoTimeout());
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_TIMEOUT);
-        } catch (Exception e) {
-            handleException(e, SO_TIMEOUT);
-        } finally {
-            client.close();
-            server.close();
-        }
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
+        client.setSoTimeout(100);
+        assertEquals("Set incorrect sotimeout", 100, client.getSoTimeout());
+        client.close();
+        server.close();
     }
 
-    /**
-     * @tests java.net.Socket#setTcpNoDelay(boolean)
-     */
-    public void test_setTcpNoDelayZ() throws IOException {
+    public void test_setTcpNoDelayZ() throws Exception {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
+        Socket client = new Socket(InetAddress.getLocalHost(), server .getLocalPort());
 
-        try {
-            boolean bool;
-            client.setTcpNoDelay(bool = !client.getTcpNoDelay());
-            assertTrue("Failed to set no delay setting: "
-                    + client.getTcpNoDelay(), client.getTcpNoDelay() == bool);
+        boolean bool;
+        client.setTcpNoDelay(bool = !client.getTcpNoDelay());
+        assertTrue("Failed to set no delay setting: " + client.getTcpNoDelay(), client.getTcpNoDelay() == bool);
 
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(TCP_NODELAY);
-        } catch (Exception e) {
-            handleException(e, TCP_NODELAY);
-        } finally {
-            client.close();
-            server.close();
-        }
+        client.close();
+        server.close();
     }
 
-    /**
-     * @tests java.net.Socket#setTrafficClass(int)
-     */
-    public void test_setTrafficClassI() {
+    public void test_setTrafficClassI() throws Exception {
+        int IPTOS_LOWCOST = 0x2;
+        int IPTOS_RELIABILTY = 0x4;
+        int IPTOS_THROUGHPUT = 0x8;
+        int IPTOS_LOWDELAY = 0x10;
+
+        Socket theSocket = new Socket();
+
+        // validate that value set must be between 0 and 255
         try {
-            int IPTOS_LOWCOST = 0x2;
-            int IPTOS_RELIABILTY = 0x4;
-            int IPTOS_THROUGHPUT = 0x8;
-            int IPTOS_LOWDELAY = 0x10;
-
-            Socket theSocket = new Socket();
-
-            // validate that value set must be between 0 and 255
-            try {
-                theSocket.setTrafficClass(256);
-                fail("No exception was thrown when traffic class set to 256");
-            } catch (IllegalArgumentException e) {
-                // Expected
-            }
-
-            try {
-                theSocket.setTrafficClass(-1);
-                fail("No exception was thrown when traffic class set to -1");
-            } catch (IllegalArgumentException e) {
-                // Expected
-            }
-
-            // now validate that we can set it to some good values
-            theSocket.setTrafficClass(IPTOS_LOWCOST);
-            theSocket.setTrafficClass(IPTOS_RELIABILTY);
-            theSocket.setTrafficClass(IPTOS_THROUGHPUT);
-            theSocket.setTrafficClass(IPTOS_LOWDELAY);
-
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(IP_TOS);
-        } catch (Exception e) {
-            handleException(e, IP_TOS);
+            theSocket.setTrafficClass(256);
+            fail("No exception was thrown when traffic class set to 256");
+        } catch (IllegalArgumentException expected) {
         }
+
+        try {
+            theSocket.setTrafficClass(-1);
+            fail("No exception was thrown when traffic class set to -1");
+        } catch (IllegalArgumentException expected) {
+        }
+
+        // now validate that we can set it to some good values
+        theSocket.setTrafficClass(IPTOS_LOWCOST);
+        theSocket.setTrafficClass(IPTOS_RELIABILTY);
+        theSocket.setTrafficClass(IPTOS_THROUGHPUT);
+        theSocket.setTrafficClass(IPTOS_LOWDELAY);
     }
 
-    /**
-     * @tests java.net.Socket#shutdownInput()
-     */
     @SuppressWarnings("deprecation")
     public void test_shutdownInput() throws IOException {
         ServerSocket server = new ServerSocket(0);

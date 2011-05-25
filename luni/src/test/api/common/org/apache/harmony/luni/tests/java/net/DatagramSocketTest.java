@@ -38,7 +38,7 @@ import java.util.Date;
 import tests.support.Support_Configuration;
 import tests.support.Support_PortManager;
 
-public class DatagramSocketTest extends SocketTestCase {
+public class DatagramSocketTest extends junit.framework.TestCase {
 
     java.net.DatagramSocket ds;
 
@@ -513,53 +513,25 @@ public class DatagramSocketTest extends SocketTestCase {
                 .getPort());
     }
 
-    /**
-     * @tests java.net.DatagramSocket#getReceiveBufferSize()
-     */
-    public void test_getReceiveBufferSize() throws SocketException {
+    public void test_getReceiveBufferSize() throws Exception {
         DatagramSocket ds = new DatagramSocket();
-        try {
-            ds.setReceiveBufferSize(130);
-            assertTrue("Incorrect buffer size",
-                    ds.getReceiveBufferSize() >= 130);
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_RCVBUF);
-        } catch (Exception e) {
-            handleException(e, SO_RCVBUF);
-        }
+        ds.setReceiveBufferSize(130);
+        assertTrue("Incorrect buffer size", ds.getReceiveBufferSize() >= 130);
     }
 
-    /**
-     * @tests java.net.DatagramSocket#getSendBufferSize()
-     */
-    public void test_getSendBufferSize() {
-        try {
-            int portNumber = Support_PortManager.getNextPortForUDP();
-            ds = new java.net.DatagramSocket(portNumber);
-            ds.setSendBufferSize(134);
-            assertTrue("Incorrect buffer size", ds.getSendBufferSize() >= 134);
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_SNDBUF);
-        } catch (Exception e) {
-            handleException(e, SO_SNDBUF);
-        }
+    public void test_getSendBufferSize() throws Exception {
+        int portNumber = Support_PortManager.getNextPortForUDP();
+        ds = new java.net.DatagramSocket(portNumber);
+        ds.setSendBufferSize(134);
+        assertTrue("Incorrect buffer size", ds.getSendBufferSize() >= 134);
     }
 
-    /**
-     * @tests java.net.DatagramSocket#getSoTimeout()
-     */
-    public void test_getSoTimeout() throws SocketException {
+    public void test_getSoTimeout() throws Exception {
         DatagramSocket ds = new DatagramSocket();
-        try {
-            ds.setSoTimeout(100);
-            assertEquals("Returned incorrect timeout", 100, ds.getSoTimeout());
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_TIMEOUT);
-        } catch (Exception e) {
-            handleException(e, SO_TIMEOUT);
-        }
+        ds.setSoTimeout(100);
+        assertEquals("Returned incorrect timeout", 100, ds.getSoTimeout());
     }
 
-    /**
-     * @tests java.net.DatagramSocket#receive(java.net.DatagramPacket)
-     */
     public void test_receiveLjava_net_DatagramPacket() throws IOException {
         // Test for method void
         // java.net.DatagramSocket.receive(java.net.DatagramPacket)
@@ -933,51 +905,26 @@ public class DatagramSocketTest extends SocketTestCase {
 
     }
 
-    public void test_setSendBufferSizeI() {
-        try {
-            int portNumber = Support_PortManager.getNextPortForUDP();
-            ds = new java.net.DatagramSocket(portNumber);
-            ds.setSendBufferSize(134);
-            assertTrue("Incorrect buffer size", ds.getSendBufferSize() >= 134);
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_SNDBUF);
-        } catch (Exception e) {
-            handleException(e, SO_SNDBUF);
-        }
+    public void test_setSendBufferSizeI() throws Exception {
+        int portNumber = Support_PortManager.getNextPortForUDP();
+        ds = new java.net.DatagramSocket(portNumber);
+        ds.setSendBufferSize(134);
+        assertTrue("Incorrect buffer size", ds.getSendBufferSize() >= 134);
     }
 
-    /**
-     * @tests java.net.DatagramSocket#setReceiveBufferSize(int)
-     */
-    public void test_setReceiveBufferSizeI() {
-        try {
-            int portNumber = Support_PortManager.getNextPortForUDP();
-            ds = new java.net.DatagramSocket(portNumber);
-            ds.setReceiveBufferSize(130);
-            assertTrue("Incorrect buffer size",
-                    ds.getReceiveBufferSize() >= 130);
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_RCVBUF);
-        } catch (Exception e) {
-            handleException(e, SO_RCVBUF);
-        }
+    public void test_setReceiveBufferSizeI() throws Exception {
+        int portNumber = Support_PortManager.getNextPortForUDP();
+        ds = new java.net.DatagramSocket(portNumber);
+        ds.setReceiveBufferSize(130);
+        assertTrue("Incorrect buffer size", ds.getReceiveBufferSize() >= 130);
     }
 
-    /**
-     * @tests java.net.DatagramSocket#setSoTimeout(int)
-     */
-    public void test_setSoTimeoutI() throws SocketException {
+    public void test_setSoTimeoutI() throws Exception {
         DatagramSocket ds = new DatagramSocket();
-        try {
-            ds.setSoTimeout(100);
-            assertTrue("Set incorrect timeout", ds.getSoTimeout() >= 100);
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_TIMEOUT);
-        } catch (Exception e) {
-            handleException(e, SO_TIMEOUT);
-        }
+        ds.setSoTimeout(100);
+        assertTrue("Set incorrect timeout", ds.getSoTimeout() >= 100);
     }
 
-    /**
-     * @tests java.net.DatagramSocket#DatagramSocket(java.net.DatagramSocketImpl)
-     */
     public void test_ConstructorLjava_net_DatagramSocketImpl() {
         class SimpleTestDatagramSocket extends DatagramSocket {
             public SimpleTestDatagramSocket(DatagramSocketImpl impl) {
@@ -1506,204 +1453,145 @@ public class DatagramSocketTest extends SocketTestCase {
         }
     }
 
-    /**
-     * @tests java.net.DatagramSocket#setReuseAddress(boolean)
-     */
     public void test_setReuseAddressZ() throws Exception {
+        // test case were we set it to false
+        DatagramSocket theSocket1 = null;
+        DatagramSocket theSocket2 = null;
         try {
-            // test case were we set it to false
-            DatagramSocket theSocket1 = null;
-            DatagramSocket theSocket2 = null;
-            try {
-                InetSocketAddress theAddress = new InetSocketAddress(
-                        InetAddress.getLocalHost(), Support_PortManager
-                                .getNextPortForUDP());
-                theSocket1 = new DatagramSocket(null);
-                theSocket2 = new DatagramSocket(null);
-                theSocket1.setReuseAddress(false);
-                theSocket2.setReuseAddress(false);
-                theSocket1.bind(theAddress);
-                theSocket2.bind(theAddress);
-                fail("No exception when trying to connect to do duplicate socket bind with re-useaddr set to false");
-            } catch (BindException e) {
-
-            }
-            if (theSocket1 != null)
-                theSocket1.close();
-            if (theSocket2 != null)
-                theSocket2.close();
-
-            // test case were we set it to true
-            InetSocketAddress theAddress = new InetSocketAddress(InetAddress
-                    .getLocalHost(), Support_PortManager.getNextPortForUDP());
+            InetSocketAddress theAddress = new InetSocketAddress(InetAddress.getLocalHost(), Support_PortManager.getNextPortForUDP());
             theSocket1 = new DatagramSocket(null);
             theSocket2 = new DatagramSocket(null);
-            theSocket1.setReuseAddress(true);
-            theSocket2.setReuseAddress(true);
+            theSocket1.setReuseAddress(false);
+            theSocket2.setReuseAddress(false);
             theSocket1.bind(theAddress);
             theSocket2.bind(theAddress);
-
-            if (theSocket1 != null)
-                theSocket1.close();
-            if (theSocket2 != null)
-                theSocket2.close();
-
-            // test the default case which we expect to be the same on all
-            // platforms
-            try {
-                theAddress = new InetSocketAddress(InetAddress.getLocalHost(),
-                        Support_PortManager.getNextPortForUDP());
-                theSocket1 = new DatagramSocket(null);
-                theSocket2 = new DatagramSocket(null);
-                theSocket1.bind(theAddress);
-                theSocket2.bind(theAddress);
-                fail("No exception when trying to connect to do duplicate socket bind with re-useaddr left as default");
-            } catch (BindException e) {
-
-            }
-            if (theSocket1 != null)
-                theSocket1.close();
-            if (theSocket2 != null)
-                theSocket2.close();
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_REUSEADDR);
-        } catch (Exception e) {
-            handleException(e, SO_REUSEADDR);
+            fail("No exception when trying to connect to do duplicate socket bind with re-useaddr set to false");
+        } catch (BindException expected) {
         }
-    }
+        if (theSocket1 != null) {
+            theSocket1.close();
+        }
+        if (theSocket2 != null) {
+            theSocket2.close();
+        }
 
-    /**
-     * @tests java.net.DatagramSocket#getReuseAddress()
-     */
-    public void test_getReuseAddress() {
+        // test case were we set it to true
+        InetSocketAddress theAddress = new InetSocketAddress(InetAddress.getLocalHost(), Support_PortManager.getNextPortForUDP());
+        theSocket1 = new DatagramSocket(null);
+        theSocket2 = new DatagramSocket(null);
+        theSocket1.setReuseAddress(true);
+        theSocket2.setReuseAddress(true);
+        theSocket1.bind(theAddress);
+        theSocket2.bind(theAddress);
+
+        if (theSocket1 != null) {
+            theSocket1.close();
+        }
+        if (theSocket2 != null) {
+            theSocket2.close();
+        }
+
+        // test the default case which we expect to be the same on all
+        // platforms
         try {
-            DatagramSocket theSocket = new DatagramSocket();
-            theSocket.setReuseAddress(true);
-            assertTrue("getReuseAddress false when it should be true",
-                    theSocket.getReuseAddress());
-            theSocket.setReuseAddress(false);
-            assertFalse("getReuseAddress true when it should be False",
-                    theSocket.getReuseAddress());
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_REUSEADDR);
-        } catch (Exception e) {
-            handleException(e, SO_REUSEADDR);
+            theAddress = new InetSocketAddress(InetAddress.getLocalHost(),Support_PortManager.getNextPortForUDP());
+            theSocket1 = new DatagramSocket(null);
+            theSocket2 = new DatagramSocket(null);
+            theSocket1.bind(theAddress);
+            theSocket2.bind(theAddress);
+            fail("No exception when trying to connect to do duplicate socket bind with re-useaddr left as default");
+        } catch (BindException expected) {
+        }
+        if (theSocket1 != null) {
+            theSocket1.close();
+        }
+        if (theSocket2 != null) {
+            theSocket2.close();
         }
     }
 
-    /**
-     * @tests java.net.DatagramSocket#setBroadcast(boolean)
-     */
-    public void test_setBroadcastZ() {
+    public void test_getReuseAddress() throws Exception {
+        DatagramSocket theSocket = new DatagramSocket();
+        theSocket.setReuseAddress(true);
+        assertTrue("getReuseAddress false when it should be true", theSocket.getReuseAddress());
+        theSocket.setReuseAddress(false);
+        assertFalse("getReuseAddress true when it should be False", theSocket.getReuseAddress());
+    }
+
+    public void test_setBroadcastZ() throws Exception {
+        int[] ports = Support_PortManager.getNextPortsForUDP(3);
+        DatagramSocket theSocket = new DatagramSocket(ports[0]);
+        theSocket.setBroadcast(false);
+        byte theBytes[] = { -1, -1, -1, -1 };
+
+        // validate we cannot connect to the broadcast address when
+        // setBroadcast is false
+        try {
+            theSocket.connect(new InetSocketAddress(InetAddress.getByAddress(theBytes), ports[1]));
+            assertFalse("No exception when connecting to broadcast address with setBroadcast(false)", theSocket.getBroadcast());
+        } catch (Exception ex) {
+        }
+
+        // now validate that we can connect to the broadcast address when
+        // setBroadcast is true
+        theSocket.setBroadcast(true);
+        theSocket.connect(new InetSocketAddress(InetAddress.getByAddress(theBytes), ports[2]));
+    }
+
+    public void test_getBroadcast() throws Exception {
+        DatagramSocket theSocket = new DatagramSocket();
+        theSocket.setBroadcast(true);
+        assertTrue("getBroadcast false when it should be true", theSocket.getBroadcast());
+        theSocket.setBroadcast(false);
+        assertFalse("getBroadcast true when it should be False", theSocket.getBroadcast());
+    }
+
+    public void test_setTrafficClassI() throws Exception {
+        int IPTOS_LOWCOST = 0x2;
+        int IPTOS_RELIABILTY = 0x4;
+        int IPTOS_THROUGHPUT = 0x8;
+        int IPTOS_LOWDELAY = 0x10;
+        int[] ports = Support_PortManager.getNextPortsForUDP(2);
+
+        new InetSocketAddress(InetAddress.getLocalHost(), ports[0]);
+        DatagramSocket theSocket = new DatagramSocket(ports[1]);
+
+        // validate that value set must be between 0 and 255
+        try {
+            theSocket.setTrafficClass(256);
+            fail("No exception when traffic class set to 256");
+        } catch (IllegalArgumentException e) {
+        }
 
         try {
-            int[] ports = Support_PortManager.getNextPortsForUDP(3);
-            DatagramSocket theSocket = new DatagramSocket(ports[0]);
-            theSocket.setBroadcast(false);
-            byte theBytes[] = { -1, -1, -1, -1 };
-
-            // validate we cannot connect to the broadcast address when
-            // setBroadcast is false
-            try {
-                theSocket.connect(new InetSocketAddress(InetAddress
-                        .getByAddress(theBytes), ports[1]));
-                assertFalse(
-                        "No exception when connecting to broadcast address with setBroadcast(false)",
-                        theSocket.getBroadcast());
-            } catch (Exception ex) {
-            }
-
-            // now validate that we can connect to the broadcast address when
-            // setBroadcast is true
-            theSocket.setBroadcast(true);
-            theSocket.connect(new InetSocketAddress(InetAddress
-                    .getByAddress(theBytes), ports[2]));
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_BROADCAST);
-        } catch (Exception e) {
-            handleException(e, SO_BROADCAST);
+            theSocket.setTrafficClass(-1);
+            fail("No exception when traffic class set to -1");
+        } catch (IllegalArgumentException e) {
         }
+
+        // now validate that we can set it to some good values
+        theSocket.setTrafficClass(IPTOS_LOWCOST);
+        theSocket.setTrafficClass(IPTOS_THROUGHPUT);
     }
 
-    /**
-     * @tests java.net.DatagramSocket#getBroadcast()
-     */
-    public void test_getBroadcast() {
-        try {
-            DatagramSocket theSocket = new DatagramSocket();
-            theSocket.setBroadcast(true);
-            assertTrue("getBroadcast false when it should be true", theSocket
-                    .getBroadcast());
-            theSocket.setBroadcast(false);
-            assertFalse("getBroadcast true when it should be False", theSocket
-                    .getBroadcast());
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_BROADCAST);
-        } catch (Exception e) {
-            handleException(e, SO_BROADCAST);
-        }
+    public void test_getTrafficClass() throws Exception {
+        int IPTOS_LOWCOST = 0x2;
+        int IPTOS_RELIABILTY = 0x4;
+        int IPTOS_THROUGHPUT = 0x8;
+        int IPTOS_LOWDELAY = 0x10;
+        int[] ports = Support_PortManager.getNextPortsForUDP(2);
+
+        new InetSocketAddress(InetAddress.getLocalHost(), ports[0]);
+        DatagramSocket theSocket = new DatagramSocket(ports[1]);
+
+        /*
+         * we cannot actually check that the values are set as if a platform
+         * does not support the option then it may come back unset even
+         * though we set it so just get the value to make sure we can get it
+         */
+        int trafficClass = theSocket.getTrafficClass();
     }
 
-    /**
-     * @tests java.net.DatagramSocket#setTrafficClass(int)
-     */
-    public void test_setTrafficClassI() {
-        try {
-            int IPTOS_LOWCOST = 0x2;
-            int IPTOS_RELIABILTY = 0x4;
-            int IPTOS_THROUGHPUT = 0x8;
-            int IPTOS_LOWDELAY = 0x10;
-            int[] ports = Support_PortManager.getNextPortsForUDP(2);
-
-            new InetSocketAddress(InetAddress.getLocalHost(), ports[0]);
-            DatagramSocket theSocket = new DatagramSocket(ports[1]);
-
-            // validate that value set must be between 0 and 255
-            try {
-                theSocket.setTrafficClass(256);
-                fail("No exception when traffic class set to 256");
-            } catch (IllegalArgumentException e) {
-            }
-
-            try {
-                theSocket.setTrafficClass(-1);
-                fail("No exception when traffic class set to -1");
-            } catch (IllegalArgumentException e) {
-            }
-
-            // now validate that we can set it to some good values
-            theSocket.setTrafficClass(IPTOS_LOWCOST);
-            theSocket.setTrafficClass(IPTOS_THROUGHPUT);
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(IP_TOS);
-        } catch (Exception e) {
-            handleException(e, IP_TOS);
-        }
-    }
-
-    /**
-     * @tests java.net.DatagramSocket#getTrafficClass()
-     */
-    public void test_getTrafficClass() {
-        try {
-            int IPTOS_LOWCOST = 0x2;
-            int IPTOS_RELIABILTY = 0x4;
-            int IPTOS_THROUGHPUT = 0x8;
-            int IPTOS_LOWDELAY = 0x10;
-            int[] ports = Support_PortManager.getNextPortsForUDP(2);
-
-            new InetSocketAddress(InetAddress.getLocalHost(), ports[0]);
-            DatagramSocket theSocket = new DatagramSocket(ports[1]);
-
-            /*
-             * we cannot actually check that the values are set as if a platform
-             * does not support the option then it may come back unset even
-             * though we set it so just get the value to make sure we can get it
-             */
-            int trafficClass = theSocket.getTrafficClass();
-        } catch (Exception e) {
-            handleException(e, IP_TOS);
-        }
-    }
-
-    /**
-     * @tests java.net.DatagramSocket#isClosed()
-     */
     public void test_isClosed() throws Exception {
         DatagramSocket theSocket = new DatagramSocket();
 

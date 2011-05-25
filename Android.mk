@@ -35,8 +35,8 @@ harmony_test_src_files := \
     $(call all-harmony-test-java-files-under,luni,src/test/impl/common) \
     $(call all-harmony-test-java-files-under,luni,src/test/impl/unix)
 
+# We need to use -maxdepth 4 because there's a non-resource directory called "resources" deeper in the tree.
 define harmony-test-resource-dirs
-  # We need to use -maxdepth 4 because there's a non-resource directory called "resources" deeper in the tree.
   $(shell cd $(LOCAL_PATH) && find . -maxdepth 4 -name resources 2> /dev/null)
 endef
 harmony_test_resource_dirs := \

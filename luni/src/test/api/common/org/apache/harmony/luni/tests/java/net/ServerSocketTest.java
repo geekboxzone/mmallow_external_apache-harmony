@@ -41,7 +41,7 @@ import java.net.PlainServerSocketImpl;
 import tests.support.Support_Configuration;
 import tests.support.Support_Exec;
 
-public class ServerSocketTest extends SocketTestCase {
+public class ServerSocketTest extends junit.framework.TestCase {
 
     boolean interrupted;
 
@@ -692,187 +692,134 @@ public class ServerSocketTest extends SocketTestCase {
         }
     }
 
-    /**
-     * @tests java.net.ServerSocket#setReuseAddress(boolean)
-     */
-    public void test_setReuseAddressZ() {
+    public void test_setReuseAddressZ() throws Exception {
+        // set up server and connect
+        InetSocketAddress anyAddress = new InetSocketAddress(InetAddress.getLocalHost(), 0);
+        ServerSocket serverSocket = new ServerSocket();
+        serverSocket.setReuseAddress(false);
+        serverSocket.bind(anyAddress);
+        SocketAddress theAddress = serverSocket.getLocalSocketAddress();
+
+        // make a connection to the server, then close the server
+        Socket theSocket = new Socket();
+        theSocket.connect(theAddress);
+        Socket stillActiveSocket = serverSocket.accept();
+        serverSocket.close();
+
+        // now try to rebind the server which should fail with
+        // setReuseAddress to false. On windows platforms the bind is
+        // allowed even then reUseAddress is false so our test uses
+        // the platform to determine what the expected result is.
+        String platform = System.getProperty("os.name");
         try {
-            // set up server and connect
-            InetSocketAddress anyAddress = new InetSocketAddress(InetAddress
-                    .getLocalHost(), 0);
-            ServerSocket serverSocket = new ServerSocket();
+            serverSocket = new ServerSocket();
             serverSocket.setReuseAddress(false);
-            serverSocket.bind(anyAddress);
-            SocketAddress theAddress = serverSocket.getLocalSocketAddress();
+            serverSocket.bind(theAddress);
+            fail("No exception when setReuseAddress is false and we bind:" + theAddress.toString());
+        } catch (IOException expected) {
+        }
+        stillActiveSocket.close();
+        theSocket.close();
 
-            // make a connection to the server, then close the server
-            Socket theSocket = new Socket();
-            theSocket.connect(theAddress);
-            Socket stillActiveSocket = serverSocket.accept();
-            serverSocket.close();
+        // now test case were we set it to true
+        anyAddress = new InetSocketAddress(InetAddress.getLocalHost(), 0);
+        serverSocket = new ServerSocket();
+        serverSocket.setReuseAddress(true);
+        serverSocket.bind(anyAddress);
+        theAddress = serverSocket.getLocalSocketAddress();
 
-            // now try to rebind the server which should fail with
-            // setReuseAddress to false. On windows platforms the bind is
-            // allowed even then reUseAddress is false so our test uses
-            // the platform to determine what the expected result is.
-            String platform = System.getProperty("os.name");
-            try {
-                serverSocket = new ServerSocket();
-                serverSocket.setReuseAddress(false);
-                serverSocket.bind(theAddress);
-                if ((!platform.startsWith("Windows"))) {
-                    fail("No exception when setReuseAddress is false and we bind:"
-                            + theAddress.toString());
-                }
-            } catch (IOException ex) {
-                if (platform.startsWith("Windows")) {
-                    fail("Got unexpected exception when binding with setReuseAddress false on windows platform:"
-                            + theAddress.toString() + ":" + ex.toString());
-                }
-            }
-            stillActiveSocket.close();
-            theSocket.close();
+        // make a connection to the server, then close the server
+        theSocket = new Socket();
+        theSocket.connect(theAddress);
+        stillActiveSocket = serverSocket.accept();
+        serverSocket.close();
 
-            // now test case were we set it to true
-            anyAddress = new InetSocketAddress(InetAddress.getLocalHost(), 0);
+        // now try to rebind the server which should pass with
+        // setReuseAddress to true
+        try {
             serverSocket = new ServerSocket();
             serverSocket.setReuseAddress(true);
-            serverSocket.bind(anyAddress);
-            theAddress = serverSocket.getLocalSocketAddress();
+            serverSocket.bind(theAddress);
+        } catch (IOException ex) {
+            fail("Unexpected exception when setReuseAddress is true and we bind:"
+                + theAddress.toString() + ":" + ex.toString());
+        }
+        stillActiveSocket.close();
+        theSocket.close();
 
-            // make a connection to the server, then close the server
-            theSocket = new Socket();
-            theSocket.connect(theAddress);
-            stillActiveSocket = serverSocket.accept();
-            serverSocket.close();
+        // now test default case were we expect this to work regardless of
+        // the value set
+        anyAddress = new InetSocketAddress(InetAddress.getLocalHost(), 0);
+        serverSocket = new ServerSocket();
+        serverSocket.bind(anyAddress);
+        theAddress = serverSocket.getLocalSocketAddress();
 
-            // now try to rebind the server which should pass with
-            // setReuseAddress to true
-            try {
-                serverSocket = new ServerSocket();
-                serverSocket.setReuseAddress(true);
-                serverSocket.bind(theAddress);
-            } catch (IOException ex) {
-                fail("Unexpected exception when setReuseAddress is true and we bind:"
-                        + theAddress.toString() + ":" + ex.toString());
-            }
-            stillActiveSocket.close();
-            theSocket.close();
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_REUSEADDR);
+        // make a connection to the server, then close the server
+        theSocket = new Socket();
+        theSocket.connect(theAddress);
+        stillActiveSocket = serverSocket.accept();
+        serverSocket.close();
 
-            // now test default case were we expect this to work regardless of
-            // the value set
-            anyAddress = new InetSocketAddress(InetAddress.getLocalHost(), 0);
+        // now try to rebind the server which should pass
+        try {
             serverSocket = new ServerSocket();
-            serverSocket.bind(anyAddress);
-            theAddress = serverSocket.getLocalSocketAddress();
-
-            // make a connection to the server, then close the server
-            theSocket = new Socket();
-            theSocket.connect(theAddress);
-            stillActiveSocket = serverSocket.accept();
-            serverSocket.close();
-
-            // now try to rebind the server which should pass
-            try {
-                serverSocket = new ServerSocket();
-                serverSocket.bind(theAddress);
-            } catch (IOException ex) {
-                fail("Unexpected exception when setReuseAddress is the default case and we bind:"
-                        + theAddress.toString() + ":" + ex.toString());
-            }
-            stillActiveSocket.close();
-            theSocket.close();
-
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_REUSEADDR);
-        } catch (Exception e) {
-            handleException(e, SO_REUSEADDR);
+            serverSocket.bind(theAddress);
+        } catch (IOException ex) {
+            fail("Unexpected exception when setReuseAddress is the default case and we bind:"
+                + theAddress.toString() + ":" + ex.toString());
         }
+        stillActiveSocket.close();
+        theSocket.close();
     }
 
-    /**
-     * @tests java.net.ServerSocket#getReuseAddress()
-     */
-    public void test_getReuseAddress() {
+    public void test_getReuseAddress() throws Exception {
+        ServerSocket theSocket = new ServerSocket();
+        theSocket.setReuseAddress(true);
+        assertTrue("getReuseAddress false when it should be true", theSocket.getReuseAddress());
+        theSocket.setReuseAddress(false);
+        assertFalse("getReuseAddress true when it should be False", theSocket.getReuseAddress());
+    }
+
+    public void test_setReceiveBufferSizeI() throws Exception {
+        // now validate case where we try to set to 0
+        ServerSocket theSocket = new ServerSocket();
         try {
-            ServerSocket theSocket = new ServerSocket();
-            theSocket.setReuseAddress(true);
-            assertTrue("getReuseAddress false when it should be true",
-                    theSocket.getReuseAddress());
-            theSocket.setReuseAddress(false);
-            assertFalse("getReuseAddress true when it should be False",
-                    theSocket.getReuseAddress());
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_REUSEADDR);
-        } catch (Exception e) {
-            handleException(e, SO_REUSEADDR);
+            theSocket.setReceiveBufferSize(0);
+            fail("No exception when receive buffer size set to 0");
+        } catch (IllegalArgumentException ex) {
         }
-    }
+        theSocket.close();
 
-    /**
-     * @tests java.net.ServerSocket#setReceiveBufferSize(int)
-     */
-    public void test_setReceiveBufferSizeI() {
+        // now validate case where we try to set to a negative value
+        theSocket = new ServerSocket();
         try {
-            // now validate case where we try to set to 0
-            ServerSocket theSocket = new ServerSocket();
-            try {
-                theSocket.setReceiveBufferSize(0);
-                fail("No exception when receive buffer size set to 0");
-            } catch (IllegalArgumentException ex) {
-            }
-            theSocket.close();
-
-            // now validate case where we try to set to a negative value
-            theSocket = new ServerSocket();
-            try {
-                theSocket.setReceiveBufferSize(-1000);
-                fail("No exception when receive buffer size set to -1000");
-            } catch (IllegalArgumentException ex) {
-            }
-            theSocket.close();
-
-            // now just try to set a good value to make sure it is set and there
-            // are not exceptions
-            theSocket = new ServerSocket();
-            theSocket.setReceiveBufferSize(1000);
-            theSocket.close();
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_RCVBUF);
-        } catch (Exception e) {
-            handleException(e, SO_RCVBUF);
+            theSocket.setReceiveBufferSize(-1000);
+            fail("No exception when receive buffer size set to -1000");
+        } catch (IllegalArgumentException ex) {
         }
+        theSocket.close();
 
+        // now just try to set a good value to make sure it is set and there
+        // are not exceptions
+        theSocket = new ServerSocket();
+        theSocket.setReceiveBufferSize(1000);
+        theSocket.close();
     }
 
-    /*
-     * @tests java.net.ServerSocket#getReceiveBufferSize()
-     */
-    public void test_getReceiveBufferSize() {
-        try {
-            ServerSocket theSocket = new ServerSocket();
+    public void test_getReceiveBufferSize() throws Exception {
+        ServerSocket theSocket = new ServerSocket();
 
-            // since the value returned is not necessary what we set we are
-            // limited in what we can test
-            // just validate that it is not 0 or negative
-            assertFalse("get Buffer size returns 0:", 0 == theSocket
-                    .getReceiveBufferSize());
-            assertFalse("get Buffer size returns  a negative value:",
-                    0 > theSocket.getReceiveBufferSize());
-            ensureExceptionThrownIfOptionIsUnsupportedOnOS(SO_RCVBUF);
-        } catch (Exception e) {
-            handleException(e, SO_RCVBUF);
-        }
+        // since the value returned is not necessary what we set we are
+        // limited in what we can test
+        // just validate that it is not 0 or negative
+        assertFalse("get Buffer size returns 0:", 0 == theSocket.getReceiveBufferSize());
+        assertFalse("get Buffer size returns  a negative value:", 0 > theSocket.getReceiveBufferSize());
     }
 
-    /**
-     * @tests java.net.ServerSocket#getChannel()
-     */
     public void test_getChannel() throws Exception {
         assertNull(new ServerSocket().getChannel());
     }
 
-    /*
-     * @tests java.net.ServerSocket#setPerformancePreference()
-     */
     public void test_setPerformancePreference_Int_Int_Int() throws Exception {
         ServerSocket theSocket = new ServerSocket();
         theSocket.setPerformancePreferences(1, 1, 1);
