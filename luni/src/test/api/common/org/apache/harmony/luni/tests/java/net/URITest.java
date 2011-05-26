@@ -1551,60 +1551,33 @@ public class URITest extends TestCase {
      * @tests java.net.URI#relativize(java.net.URI)
      */
     public void test_relativizeLjava_net_URI() throws URISyntaxException {
-        // relativization tests
-        String[][] relativizeData = new String[][] {
-                // first is base, second is the one to relativize
-                { "http://www.google.com/dir1/dir2", "mailto:test" }, // rel =
-                // opaque
-                { "mailto:test", "http://www.google.com" }, // base = opaque
-
-                // different authority
-                { "http://www.eclipse.org/dir1",
-                        "http://www.google.com/dir1/dir2" },
-
-                // different scheme
-                { "http://www.google.com", "ftp://www.google.com" },
-
-                { "http://www.google.com/dir1/dir2/",
-                        "http://www.google.com/dir3/dir4/file.txt" },
-                { "http://www.google.com/dir1/",
-                        "http://www.google.com/dir1/dir2/file.txt" },
-                { "./dir1/", "./dir1/hi" },
-                { "/dir1/./dir2", "/dir1/./dir2/hi" },
-                { "/dir1/dir2/..", "/dir1/dir2/../hi" },
-                { "/dir1/dir2/..", "/dir1/dir2/hi" },
-                { "/dir1/dir2/", "/dir1/dir3/../dir2/text" },
-                { "//www.google.com", "//www.google.com/dir1/file" },
-                { "/dir1", "/dir1/hi" }, { "/dir1/", "/dir1/hi" }, };
-
-        // expected results
-        String[] relativizeResults = new String[] { "mailto:test",
-                "http://www.google.com", "http://www.google.com/dir1/dir2",
-                "ftp://www.google.com",
-                "http://www.google.com/dir3/dir4/file.txt", "dir2/file.txt",
-                "hi", "hi", "hi", "dir2/hi", "text", "dir1/file", "hi", "hi", };
-
-        for (int i = 0; i < relativizeData.length; i++) {
-            try {
-                URI b = new URI(relativizeData[i][0]);
-                URI r = new URI(relativizeData[i][1]);
-                if (!b.relativize(r).toString().equals(relativizeResults[i])) {
-                    fail("Error: relativize, " + relativizeData[i][0] + ", "
-                            + relativizeData[i][1] + " returned: "
-                            + b.relativize(r) + ", expected:"
-                            + relativizeResults[i]);
-                }
-            } catch (URISyntaxException e) {
-                fail("Exception on relativize test on data "
-                        + relativizeData[i][0] + ", " + relativizeData[i][1]
-                        + ": " + e);
-            }
-        }
+        // rel = opaque
+        testRelativize("http://www.google.com/dir1/dir2", "mailto:test", "mailto:test");
+        // base = opaque
+        testRelativize("mailto:test", "http://www.google.com", "http://www.google.com");
+        // different authority
+        testRelativize("http://www.eclipse.org/dir1", "http://www.google.com/dir1/dir2",
+                "http://www.google.com/dir1/dir2");
+        // different scheme
+        testRelativize("http://www.google.com", "ftp://www.google.com", "ftp://www.google.com");
+        testRelativize("http://www.google.com/dir1/dir2/",
+                "http://www.google.com/dir3/dir4/file.txt",
+                "http://www.google.com/dir3/dir4/file.txt");
+        testRelativize("http://www.google.com/dir1/", "http://www.google.com/dir1/dir2/file.txt",
+                "dir2/file.txt");
+        testRelativize("./dir1/", "./dir1/hi", "hi");
+        testRelativize("/dir1/./dir2", "/dir1/./dir2/hi", "dir2/hi");
+        testRelativize("/dir1/dir2/..", "/dir1/dir2/../hi", "hi");
+        testRelativize("/dir1/dir2/..", "/dir1/dir2/hi", "dir2/hi");
+        testRelativize("/dir1/dir2/", "/dir1/dir3/../dir2/text", "text");
+        testRelativize("//www.google.com", "//www.google.com/dir1/file", "/dir1/file");
+        testRelativize("/dir1", "/dir1/hi", "dir1/hi");
+        testRelativize("/dir1/", "/dir1/hi", "hi");
 
         URI a = new URI("http://host/dir");
         URI b = new URI("http://host/dir/file?query");
-        assertEquals("Assert 0: URI relativized incorrectly,", new URI(
-                "file?query"), a.relativize(b));
+        assertEquals("Assert 0: URI relativized incorrectly,",
+                new URI("dir/file?query"), a.relativize(b));
 
         // One URI with empty host
         a = new URI("file:///~/first");
@@ -1616,10 +1589,13 @@ public class URITest extends TestCase {
 
         // Both URIs with empty hosts
         b = new URI("file:///~/second");
-        assertEquals("Assert 3: URI relativized incorrectly,", new URI(
-                "file:///~/second"), a.relativize(b));
-        assertEquals("Assert 4: URI relativized incorrectly,", new URI(
-                "file:///~/first"), b.relativize(a));
+        assertEquals("Assert 3: URI relativized incorrectly,", new URI("second"), a.relativize(b));
+        assertEquals("Assert 4: URI relativized incorrectly,", new URI("first"), b.relativize(a));
+    }
+
+    private void testRelativize(String base, String target, String expected)
+            throws URISyntaxException {
+        assertEquals(expected, new URI(base).relativize(new URI(target)).toString());
     }
 
     // Regression test for HARMONY-6075
@@ -1629,7 +1605,7 @@ public class URITest extends TestCase {
         URI base = new URI("file", null, "/test", null);
 
         URI relative = base.relativize(uri);
-        assertEquals("location", relative.getSchemeSpecificPart());
+        assertEquals("test/location", relative.getSchemeSpecificPart());
         assertNull(relative.getScheme());
     }
 
@@ -1639,8 +1615,7 @@ public class URITest extends TestCase {
     public void test_relativize2() throws URISyntaxException {
         URI a = new URI("http://host/dir");
         URI b = new URI("http://host/dir/file?query");
-        assertEquals("relativized incorrectly,", new URI("file?query"), a
-                .relativize(b));
+        assertEquals("relativized incorrectly,", new URI("dir/file?query"), a.relativize(b));
 
         // one URI with empty host
         a = new URI("file:///~/dictionary");
@@ -1651,11 +1626,9 @@ public class URITest extends TestCase {
                 new URI("file:///~/dictionary"), b.relativize(a));
 
         // two URIs with empty hosts
-        b = new URI("file:///~/therasus");
-        assertEquals("relativized incorrectly,", new URI("file:///~/therasus"),
-                a.relativize(b));
-        assertEquals("relativized incorrectly,",
-                new URI("file:///~/dictionary"), b.relativize(a));
+        b = new URI("file:///~/thesaurus");
+        assertEquals("relativized incorrectly,", new URI("thesaurus"), a.relativize(b));
+        assertEquals("relativized incorrectly,", new URI("dictionary"), b.relativize(a));
 
         URI one = new URI("file:/C:/test/ws");
         URI two = new URI("file:/C:/test/ws");
@@ -1665,11 +1638,10 @@ public class URITest extends TestCase {
 
         one = new URI("file:/C:/test/ws");
         two = new URI("file:/C:/test/ws/p1");
-        URI result = new URI("p1");
-        assertEquals(result, one.relativize(two));
+        assertEquals(new URI("ws/p1"), one.relativize(two));
 
         one = new URI("file:/C:/test/ws/");
-        assertEquals(result, one.relativize(two));
+        assertEquals(new URI("p1"), one.relativize(two));
     }
 
     /**
