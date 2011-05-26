@@ -67,8 +67,6 @@ public class Support_Configuration {
 
 	public static final String HomeAddress6 = "jcltest6.apache.org";
 
-	public static String IPv6GlobalAddressJcl4 = "FE80:0000:0000:0000:020D:60FF:FE0F:A776%4"; // this
-
 	public static String ProxyServerTestHostIPv6 = "jcltest6.apache.org";
 
 	// ip address that resolves to a host that is not present on the local
@@ -215,11 +213,6 @@ public class Support_Configuration {
 		value = props.get("ResolvedNotExistingHost");
 		if (value != null) {
             ResolvedNotExistingHost = value;
-        }
-
-		value = props.get("IPv6GlobalAddressJcl4");
-		if (value != null) {
-            IPv6GlobalAddressJcl4 = value;
         }
 
 	}

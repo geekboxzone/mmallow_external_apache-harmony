@@ -137,9 +137,6 @@ public class DatagramSocketTest extends junit.framework.TestCase {
         }
     }
 
-    /**
-     * @tests java.net.DatagramSocket#connect(java.net.InetAddress, int)
-     */
     public void test_connectLjava_net_InetAddressI() throws Exception {
         DatagramSocket ds = new DatagramSocket();
         InetAddress inetAddress = InetAddress.getLocalHost();
@@ -148,22 +145,13 @@ public class DatagramSocketTest extends junit.framework.TestCase {
         assertEquals("Incorrect Port", 0, ds.getPort());
         ds.disconnect();
 
-        int portNumber;
-        if ("true".equals(System.getProperty("run.ipv6tests"))) {
-            System.out
-                    .println("Running test_connectLjava_net_InetAddressI(DatagramSocketTest) with IPv6GlobalAddressJcl4: "
-                            + Support_Configuration.IPv6GlobalAddressJcl4);
-
-            ds = new java.net.DatagramSocket();
-            inetAddress = InetAddress
-                    .getByName(Support_Configuration.IPv6GlobalAddressJcl4);
-            portNumber = Support_PortManager.getNextPortForUDP();
-            ds.connect(inetAddress, portNumber);
-            assertTrue("Incorrect InetAddress", ds.getInetAddress().equals(
-                    inetAddress));
-            assertTrue("Incorrect Port", ds.getPort() == portNumber);
-            ds.disconnect();
-        }
+        ds = new java.net.DatagramSocket();
+        inetAddress = InetAddress.getByName("FE80:0000:0000:0000:020D:60FF:FE0F:A776%4");
+        int portNumber = Support_PortManager.getNextPortForUDP();
+        ds.connect(inetAddress, portNumber);
+        assertTrue("Incorrect InetAddress", ds.getInetAddress().equals(inetAddress));
+        assertTrue("Incorrect Port", ds.getPort() == portNumber);
+        ds.disconnect();
 
         // Create a connected datagram socket to test
         // PlainDatagramSocketImpl.peek()
@@ -444,9 +432,6 @@ public class DatagramSocketTest extends junit.framework.TestCase {
         }
     }
 
-    /**
-     * @tests java.net.DatagramSocket#disconnect()
-     */
     public void test_disconnect() throws Exception {
         DatagramSocket ds = new DatagramSocket();
         InetAddress inetAddress = InetAddress.getLocalHost();
@@ -455,18 +440,12 @@ public class DatagramSocketTest extends junit.framework.TestCase {
         assertNull("Incorrect InetAddress", ds.getInetAddress());
         assertEquals("Incorrect Port", -1, ds.getPort());
 
-        if ("true".equals(System.getProperty("run.ipv6tests"))) {
-            System.out
-                    .println("Running test_disconnect(DatagramSocketTest) with IPv6GlobalAddressJcl4: "
-                            + Support_Configuration.IPv6GlobalAddressJcl4);
-            ds = new DatagramSocket();
-            inetAddress = InetAddress
-                    .getByName(Support_Configuration.IPv6GlobalAddressJcl4);
-            ds.connect(inetAddress, 0);
-            ds.disconnect();
-            assertNull("Incorrect InetAddress", ds.getInetAddress());
-            assertEquals("Incorrect Port", -1, ds.getPort());
-        }
+        ds = new DatagramSocket();
+        inetAddress = InetAddress.getByName("FE80:0000:0000:0000:020D:60FF:FE0F:A776%4");
+        ds.connect(inetAddress, 0);
+        ds.disconnect();
+        assertNull("Incorrect InetAddress", ds.getInetAddress());
+        assertEquals("Incorrect Port", -1, ds.getPort());
     }
 
     /**
