@@ -129,9 +129,6 @@ The key properties required by the java.net tests are as follows ...
                             present on the local network. This allows us to
                             check the timeouts for socket connections.
 
-* IPv6GlobalAddressJcl4 : the IPv6 address for a host on the network. 
-
-
 
 If any of these properties are not set the *hard coded* defaults in the class 
 tests.support.Support_Configuration will be used (see

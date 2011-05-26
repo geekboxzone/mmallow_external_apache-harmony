@@ -38,8 +38,6 @@ import java.security.Permission;
 import java.util.Arrays;
 import java.util.Locale;
 
-import java.net.PlainSocketImpl;
-
 import tests.support.Support_Configuration;
 
 public class SocketTest extends junit.framework.TestCase {
@@ -277,40 +275,26 @@ public class SocketTest extends junit.framework.TestCase {
         Socket socket = new Socket();
         try {
             socket.connect(new InetSocketAddress("unknownhost.invalid", 12345));
-            fail("Should throw UnknownHostException");
-        } catch (UnknownHostException e) {
-            // expected
+            fail();
+        } catch (UnknownHostException expected) {
         }
     }
 
-    /**
-     * @tests Socket#connect(SocketAddress)
-     */
     public void test_connect_unresolved() throws IOException {
         Socket socket = new Socket();
-
-        // Try a known host created by createUnresolved()
+        InetSocketAddress unresolved = InetSocketAddress.createUnresolved("www.apache.org", 80);
         try {
-            socket.connect(InetSocketAddress.createUnresolved("www.apache.org",
-                    80));
-            fail("Should throw UnknownHostException");
-        } catch (UnknownHostException e) {
-            // expected
+            socket.connect(unresolved);
+            fail();
+        } catch (UnknownHostException expected) {
         }
-
-        // Try an unknown host created by createUnresolved()
         try {
-            socket.connect(InetSocketAddress.createUnresolved(
-                    "unknownhost.invalid", 12345));
-            fail("Should throw UnknownHostException");
-        } catch (UnknownHostException e) {
-            // expected
+            socket.connect(unresolved, 123);
+            fail();
+        } catch (UnknownHostException expected) {
         }
     }
 
-    /**
-     * @tests java.net.Socket#connect(java.net.SocketAddress)
-     */
     public void test_connectLjava_net_SocketAddress() throws Exception {
 
         @SuppressWarnings("serial")
@@ -580,61 +564,6 @@ public class SocketTest extends junit.framework.TestCase {
         server.close();
     }
 
-    /**
-     * @tests java.net.Socket#Socket(java.lang.String, int,
-     *        java.net.InetAddress, int)
-     */
-    public void test_ConstructorLjava_lang_StringILjava_net_InetAddressI_ipv6()
-            throws IOException {
-
-        boolean preferIPv6 = "true".equals(System
-                .getProperty("java.net.preferIPv6Addresses"));
-        boolean preferIPv4 = "true".equals(System
-                .getProperty("java.net.preferIPv4Stack"));
-        boolean runIPv6 = "true".equals(System.getProperty("run.ipv6tests"));
-
-        if (!runIPv6 || !preferIPv6 || preferIPv4) {
-            // This test is not for me
-            return;
-        }
-
-        ServerSocket server = new ServerSocket(0);
-        int serverPort = server.getLocalPort();
-        Socket client = new Socket(InetAddress.getLocalHost().getHostName(),
-                serverPort, InetAddress.getLocalHost(), 0);
-        assertTrue("Failed to create socket", client.getPort() == serverPort);
-        client.close();
-
-        Socket theSocket = null;
-        try {
-            theSocket = new Socket(Support_Configuration.IPv6GlobalAddressJcl4,
-                    serverPort, InetAddress.getLocalHost(), 0);
-        } catch (IOException e) {
-            // check here if InetAddress.getLocalHost() is returning the
-            // loopback address, if so that is likely the cause of the failure
-            assertFalse(
-                    "Misconfiguration - local host is the loopback address",
-                    InetAddress.getLocalHost().isLoopbackAddress());
-            throw e;
-        }
-
-        assertTrue(theSocket.isConnected());
-
-        try {
-            new Socket(Support_Configuration.IPv6GlobalAddressJcl4, serverPort,
-                    theSocket.getLocalAddress(), theSocket.getLocalPort());
-            fail("Was able to create two sockets on same port");
-        } catch (IOException e) {
-            // Expected
-        }
-
-        theSocket.close();
-        server.close();
-    }
-
-    /**
-     * @tests java.net.Socket#Socket(java.lang.String, int, boolean)
-     */
     @SuppressWarnings("deprecation")
     public void test_ConstructorLjava_lang_StringIZ() throws IOException {
         ServerSocket server = new ServerSocket(0);
@@ -784,29 +713,10 @@ public class SocketTest extends junit.framework.TestCase {
         assertTrue("Returned incorrect InetAddress", client.getLocalAddress()
                 .equals(InetAddress.getLocalHost()));
 
-        // now validate that behaviour when the any address is returned
-        String preferIPv4StackValue = System
-                .getProperty("java.net.preferIPv4Stack");
-        String preferIPv6AddressesValue = System
-                .getProperty("java.net.preferIPv6Addresses");
-
         client = new Socket();
         client.bind(new InetSocketAddress(InetAddress.getByName("0.0.0.0"), 0));
+        assertTrue(client.getLocalAddress().isAnyLocalAddress());
 
-        if (((preferIPv4StackValue == null) || preferIPv4StackValue
-                .equalsIgnoreCase("false"))
-                && (preferIPv6AddressesValue != null)
-                && (preferIPv6AddressesValue.equals("true"))) {
-            assertTrue(
-                    "ANY address not returned correctly (getLocalAddress) with preferIPv6Addresses=true, preferIPv4Stack=false "
-                            + client.getLocalSocketAddress(), client
-                            .getLocalAddress() instanceof Inet6Address);
-        } else {
-            assertTrue(
-                    "ANY address not returned correctly (getLocalAddress) with preferIPv6Addresses=true, preferIPv4Stack=true "
-                            + client.getLocalSocketAddress(), client
-                            .getLocalAddress() instanceof Inet4Address);
-        }
         client.close();
         server.close();
     }
@@ -825,9 +735,6 @@ public class SocketTest extends junit.framework.TestCase {
         server.close();
     }
 
-    /**
-     * @tests java.net.Socket#getLocalSocketAddress()
-     */
     public void test_getLocalSocketAddress() throws IOException {
         // set up server connect and then validate that we get the right
         // response for the local address
@@ -860,48 +767,13 @@ public class SocketTest extends junit.framework.TestCase {
         // now validate the behaviour when the any address is returned
         client = new Socket();
         client.bind(new InetSocketAddress(InetAddress.getByName("0.0.0.0"), 0));
-
-        String preferIPv4StackValue = System
-                .getProperty("java.net.preferIPv4Stack");
-        String preferIPv6AddressesValue = System
-                .getProperty("java.net.preferIPv6Addresses");
-        if (((preferIPv4StackValue == null) || preferIPv4StackValue
-                .equalsIgnoreCase("false"))
-                && (preferIPv6AddressesValue != null)
-                && (preferIPv6AddressesValue.equals("true"))) {
-            assertTrue(
-                    "ANY address not returned correctly with preferIPv6Addresses=true, preferIPv4Stack=false "
-                            + client.getLocalSocketAddress(),
-                    ((InetSocketAddress) client.getLocalSocketAddress())
-                            .getAddress() instanceof Inet6Address);
-        } else {
-            assertTrue(
-                    "ANY address not returned correctly with preferIPv6Addresses=true, preferIPv4Stack=true "
-                            + client.getLocalSocketAddress(),
-                    ((InetSocketAddress) client.getLocalSocketAddress())
-                            .getAddress() instanceof Inet4Address);
-        }
+        assertTrue(((InetSocketAddress) client.getLocalSocketAddress()).getAddress().isAnyLocalAddress());
         client.close();
 
         // now validate the same for getLocalAddress
         client = new Socket();
         client.bind(new InetSocketAddress(InetAddress.getByName("0.0.0.0"), 0));
-        if (((preferIPv4StackValue == null) || preferIPv4StackValue
-                .equalsIgnoreCase("false"))
-                && (preferIPv6AddressesValue != null)
-                && (preferIPv6AddressesValue.equals("true"))) {
-            assertTrue(
-                    "ANY address not returned correctly with preferIPv6Addresses=true, preferIPv4Stack=false "
-                            + client.getLocalSocketAddress(),
-                    ((InetSocketAddress) client.getLocalSocketAddress())
-                            .getAddress() instanceof Inet6Address);
-        } else {
-            assertTrue(
-                    "ANY address not returned correctly with preferIPv6Addresses=true, preferIPv4Stack=true "
-                            + client.getLocalSocketAddress(),
-                    ((InetSocketAddress) client.getLocalSocketAddress())
-                            .getAddress() instanceof Inet4Address);
-        }
+        assertTrue(client.getLocalAddress().isAnyLocalAddress());
         client.close();
     }
 
@@ -1750,51 +1622,15 @@ public class SocketTest extends junit.framework.TestCase {
         s.close();
     }
 
-    /**
-     * @tests java.net.Socket#toString()
-     */
     public void test_toString() throws IOException {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server
-                .getLocalPort());
-
-        String expected = "Socket[addr=" + InetAddress.getLocalHost()
-                + ",port=" + client.getPort() + ",localport="
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
+        // RI has "addr" and "localport" instead of "address" and "localPort".
+        String expected = "Socket[address=" + InetAddress.getLocalHost()
+                + ",port=" + client.getPort() + ",localPort="
                 + client.getLocalPort() + "]";
-        assertEquals("Returned incorrect string", expected, client.toString());
+        assertEquals(expected, client.toString());
         client.close();
         server.close();
-    }
-
-    /**
-     * @tests {@link java.net.Socket#setSocketImplFactory(SocketImplFactory)}
-     */
-    public void test_setSocketFactoryLjava_net_SocketImplFactory()
-            throws IOException {
-        SocketImplFactory factory = new MockSocketImplFactory();
-        // Should not throw SocketException when set DatagramSocketImplFactory
-        // for the first time.
-        Socket.setSocketImplFactory(factory);
-
-        try {
-            Socket.setSocketImplFactory(null);
-            fail("Should throw SocketException");
-        } catch (SocketException e) {
-            // Expected
-        }
-
-        try {
-            Socket.setSocketImplFactory(factory);
-            fail("Should throw SocketException");
-        } catch (SocketException e) {
-            // Expected
-        }
-    }
-
-    private class MockSocketImplFactory implements SocketImplFactory {
-
-        public SocketImpl createSocketImpl() {
-            return new PlainSocketImpl();
-        }
     }
 }
