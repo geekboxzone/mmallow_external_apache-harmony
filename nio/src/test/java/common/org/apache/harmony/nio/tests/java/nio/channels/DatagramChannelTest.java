@@ -1483,17 +1483,27 @@ public class DatagramChannelTest extends TestCase {
         this.channel1.connect(localAddr2);
         this.channel2.send(ByteBuffer.wrap(strHello.getBytes()), localAddr1);
         assertEquals(strHello.length(), this.channel1.read(buf));
+        assertAscii(buf, strHello);
     }
 
     public void testReceive_Peek_NoSecurity_Nonblocking() throws Exception {
-        ByteBuffer buf = ByteBuffer.allocate(CAPACITY_NORMAL);
         String strHello = "hello";
         localAddr1 = new InetSocketAddress("127.0.0.1", testPort);
         this.channel1.socket().bind(localAddr1);
         sendByChannel(strHello, localAddr1);
         this.channel1.configureBlocking(false);
         // for accepted addr, no problem.
-        assertNull(this.channel1.receive(buf));
+        ByteBuffer buf = ByteBuffer.allocate(CAPACITY_NORMAL);
+        InetSocketAddress source = (InetSocketAddress) this.channel1.receive(buf);
+        assertEquals(localAddr1.getAddress(), source.getAddress());
+        assertAscii(buf, strHello);
+    }
+
+    private static void assertAscii(ByteBuffer b, String s) {
+        assertEquals(s.length(), b.position());
+        for (int i = 0; i < s.length(); ++i) {
+            assertEquals(s.charAt(i), b.get(i));
+        }
     }
 
     // -------------------------------------------------------------------
