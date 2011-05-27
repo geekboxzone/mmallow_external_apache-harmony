@@ -4,9 +4,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -69,7 +69,7 @@ public class CharsetTest extends TestCase {
 					Charset.forName(name).isRegistered());
 		}
 	}
-	
+
 	/**
 	 * @tests java.nio.charset.Charset#isSupported(String)
 	 */
@@ -82,59 +82,11 @@ public class CharsetTest extends TestCase {
 			// Expected
 		}
 	}
-	
-    /**
-	 * @tests java.nio.charset.Charset#defaultCharset()
-	 */
-	public void test_defaultCharset() {
-		String charsetName = null;
-		String defaultCharsetName = null;
-        String oldDefaultEncoding = System.getProperty("file.encoding");
-		try {
-			// Normal behavior
-			charsetName = "UTF-8"; //$NON-NLS-1$
-			System.setProperty("file.encoding", charsetName);//$NON-NLS-1$
-			defaultCharsetName = Charset.defaultCharset().name();
-			assertEquals(charsetName, defaultCharsetName);
 
-			charsetName = "ISO-8859-1"; //$NON-NLS-1$
-			System.setProperty("file.encoding", charsetName);//$NON-NLS-1$
-			defaultCharsetName = Charset.defaultCharset().name();
-			assertEquals(charsetName, defaultCharsetName);
+    public void test_defaultCharset() {
+        assertEquals("UTF-8", Charset.defaultCharset().name());
+    }
 
-			// Unsupported behavior
-			charsetName = "IMPOSSIBLE-8"; //$NON-NLS-1$
-			System.setProperty("file.encoding", charsetName);//$NON-NLS-1$
-			defaultCharsetName = Charset.defaultCharset().name();
-			assertEquals("UTF-8", defaultCharsetName);
-
-			// Null behavior
-			try {
-				Properties currentProps = System.getProperties();
-				currentProps.remove("file.encoding");//$NON-NLS-1$
-				Charset.defaultCharset().name();
-				fail("Should throw illegal IllegalArgumentException");//$NON-NLS-1$
-			} catch (IllegalArgumentException e) {
-				// expected
-			}
-
-			// IllegalCharsetName behavior
-			try {
-				charsetName = "IMP~~OSSIBLE-8"; //$NON-NLS-1$
-				System.setProperty("file.encoding", charsetName);//$NON-NLS-1$
-				Charset.defaultCharset().name();
-				fail("Should throw IllegalCharsetNameException");//$NON-NLS-1$
-			} catch (IllegalCharsetNameException e) {
-				// expected
-			}
-		} finally {
-            System.setProperty("file.encoding", oldDefaultEncoding);//$NON-NLS-1$
-		}
-	}
-	
-    /**
-	 * @tests java.nio.charset.Charset#forName(java.lang.String)
-	 */
 	public void test_forNameLjava_lang_String() {
 		/*
 		 * invoke forName two times with the same canonical name, it
@@ -152,7 +104,7 @@ public class CharsetTest extends TestCase {
 		Charset cs4 = Charset.forName("US-ASCII");
 		assertSame(cs3, cs4);
 	}
-	
+
 	/*
      * test cached decoder
      */
