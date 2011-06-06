@@ -1055,66 +1055,6 @@ public class SerializationStressTest2 extends SerializationStressTest {
 		}
 	}
 
-	public void test_18_49_writeObject() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.lang.Object)
-
-		Object objToSave = null;
-		Object objLoaded;
-
-		try {
-			java.net.SocketPermission p = new java.net.SocketPermission(
-					"www.yahoo.com", "connect");
-			objToSave = p;
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-			assertTrue("SocketPermissions are not the same: " + p + "\t,\t"
-					+ objLoaded, p.equals(objLoaded));
-
-		} catch (IOException e) {
-			fail("IOException serializing " + objToSave + " : "
-					+ e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type : "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-	}
-
-	public void test_18_50_writeObject() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.lang.Object)
-
-		Object objToSave = null;
-		Object objLoaded;
-
-		try {
-			java.net.SocketPermission p = new java.net.SocketPermission(
-					"www.yahoo.com", "ReSoLVe,  		ConNecT");
-			objToSave = p;
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-			assertTrue("SocketPermissions are not the same: " + p + "\t,\t"
-					+ objLoaded, p.equals(objLoaded));
-
-		} catch (IOException e) {
-			fail("IOException serializing " + objToSave + " : "
-					+ e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type : "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-	}
-
 	public void test_18_51_writeObject() {
 		// Test for method void
 		// java.io.ObjectOutputStream.writeObject(java.lang.Object)

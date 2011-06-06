@@ -18,7 +18,6 @@
 package org.apache.harmony.luni.tests.java.io;
 
 import java.io.File;
-import java.io.FilePermission;
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
@@ -26,8 +25,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.security.AllPermission;
-import java.security.PermissionCollection;
 import java.security.cert.Certificate;
 import java.text.DateFormat;
 import java.text.MessageFormat;
@@ -87,59 +84,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 		}
 	}
 
-	public void test_writeObject_PermissionCollection() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.security.PermissionCollection)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = null;
-			objToSave = new PermissionCollection() {
-				boolean added = false;
-
-				public void add(java.security.Permission p1) {
-					added = true;
-				}
-
-				public Enumeration elements() {
-					return (new Vector()).elements();
-				}
-
-				public boolean implies(java.security.Permission p1) {
-					return added;
-				}
-
-				public boolean equals(Object obj) {
-					if (!(obj instanceof java.security.PermissionCollection))
-						return false;
-					return implies(null) == ((PermissionCollection) obj)
-							.implies(null);
-				}
-			};
-
-			((java.security.PermissionCollection) objToSave).add(null);
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			assertTrue(MSG_TEST_FAILED + objToSave, objToSave.equals(objLoaded));
-		} catch (IOException e) {
-			fail("IOException serializing " + objToSave + " : "
-					+ e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type : "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
 	public void test_writeObject_Collections_EmptySet() {
 		// Test for method void
 		// java.io.ObjectOutputStream.writeObject(java.util.Collections.EmptySet)
@@ -197,84 +141,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 					+ e.getMessage());
 		} catch (ClassNotFoundException e) {
 			fail("ClassNotFoundException reading Object type : "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
-	public void test_writeObject_BasicPermissionCollection() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.security.BasicPermissionCollection)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = (new RuntimePermission("test"))
-					.newPermissionCollection();
-			((java.security.PermissionCollection) objToSave)
-					.add(new RuntimePermission("test"));
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			boolean equals;
-			Enumeration enum1 = ((java.security.PermissionCollection) objToSave)
-					.elements(), enum2 = ((java.security.PermissionCollection) objLoaded)
-					.elements();
-
-			equals = true;
-			while (enum1.hasMoreElements() && equals) {
-				if (enum2.hasMoreElements())
-					equals = enum1.nextElement().equals(enum2.nextElement());
-				else
-					equals = false;
-			}
-
-			if (equals)
-				equals = !enum2.hasMoreElements();
-			assertTrue(MSG_TEST_FAILED + objToSave, equals);
-		} catch (IOException e) {
-			fail("IOException serializing " + objToSave + " : "
-					+ e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type : "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
-	public void test_writeObject_UnresolvedPermission() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.security.UnresolvedPermission)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = new java.security.UnresolvedPermission("type", "name",
-					"actions", null);
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			boolean equals;
-			equals = objToSave.toString().equals(objLoaded.toString());
-			assertTrue(MSG_TEST_FAILED + objToSave, equals);
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
 					+ e.getMessage());
 		} catch (Error err) {
 			System.out.println("Error when obj = " + objToSave);
@@ -422,55 +288,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 			fail("Exception serializing " + objToSave + " : " + e.getMessage());
 		} catch (ClassNotFoundException e) {
 			fail("ClassNotFoundException reading Object type: "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
-	public void test_writeObject_UnresolvedPermissionCollection() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.security.UnresolvedPermissionCollection)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = (new java.security.UnresolvedPermission("type", "name",
-					"actions", null)).newPermissionCollection();
-			((java.security.PermissionCollection) objToSave)
-					.add(new java.security.UnresolvedPermission("type", "name",
-							"actions", null));
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			boolean equals;
-			Enumeration enum1 = ((java.security.PermissionCollection) objToSave)
-					.elements(), enum2 = ((java.security.PermissionCollection) objLoaded)
-					.elements();
-
-			equals = true;
-			while (enum1.hasMoreElements() && equals) {
-				if (enum2.hasMoreElements())
-					equals = enum1.nextElement().toString().equals(
-							enum2.nextElement().toString());
-				else
-					equals = false;
-			}
-
-			if (equals)
-				equals = !enum2.hasMoreElements();
-			assertTrue(MSG_TEST_FAILED + objToSave, equals);
-		} catch (IOException e) {
-			fail("IOException serializing " + objToSave + " : "
-					+ e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type : "
 					+ e.getMessage());
 		} catch (Error err) {
 			System.out.println("Error when obj = " + objToSave);
@@ -670,36 +487,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 
 	}
 
-	public void test_writeObject_ReflectPermission() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.lang.reflect.ReflectPermission)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = new java.lang.reflect.ReflectPermission(
-					"TestSerialization", "test");
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			assertTrue(MSG_TEST_FAILED + objToSave, objToSave.equals(objLoaded));
-		} catch (IOException e) {
-			fail("IOException serializing " + objToSave + " : "
-					+ e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type : "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
 	public void test_writeObject_StringBuffer() {
 		// Test for method void
 		// java.io.ObjectOutputStream.writeObject(java.lang.StringBuffer)
@@ -751,52 +538,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 					+ e.getMessage());
 		} catch (ClassNotFoundException e) {
 			fail("ClassNotFoundException reading Object type : "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
-	public void test_writeObject_AllPermissionCollection() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.security.AllPermissionCollection)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = (new java.security.AllPermission())
-					.newPermissionCollection();
-			((java.security.PermissionCollection) objToSave)
-					.add(new java.security.AllPermission());
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			boolean equals;
-			Enumeration enum1 = ((java.security.PermissionCollection) objToSave)
-					.elements(), enum2 = ((java.security.PermissionCollection) objLoaded)
-					.elements();
-
-			equals = true;
-			while (enum1.hasMoreElements() && equals) {
-				if (enum2.hasMoreElements())
-					equals = enum1.nextElement().equals(enum2.nextElement());
-				else
-					equals = false;
-			}
-
-			if (equals)
-				equals = !enum2.hasMoreElements();
-			assertTrue(MSG_TEST_FAILED + objToSave, equals);
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
 					+ e.getMessage());
 		} catch (Error err) {
 			System.out.println("Error when obj = " + objToSave);
@@ -927,35 +668,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 
 	}
 
-	public void test_writeObject_SerializablePermission() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.io.SerializablePermission)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = new java.io.SerializablePermission("TestSerialization",
-					"Test");
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			assertTrue(MSG_TEST_FAILED + objToSave, objToSave.equals(objLoaded));
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
 	public void test_writeObject_Properties() {
 		// Test for method void
 		// java.io.ObjectOutputStream.writeObject(java.util.Properties)
@@ -1000,38 +712,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 		}
 
 	}
-
-	// TODO : requires working security implementation
-	// public void test_writeObject_BasicPermission() {
-	// // Test for method void
-	// //
-	// java.io.ObjectOutputStream.writeObject(tests.java.security.Test_BasicPermission.BasicPermissionSubclass)
-	//
-	// Object objToSave = null;
-	// Object objLoaded = null;
-	//
-	// try {
-	// objToSave = new
-	// tests.java.security.Test_BasicPermission.BasicPermissionSubclass(
-	// "TestSerialization");
-	// if (DEBUG)
-	// System.out.println("Obj = " + objToSave);
-	// objLoaded = dumpAndReload(objToSave);
-	//
-	// // Has to have worked
-	// assertTrue(MSG_TEST_FAILED + objToSave, objToSave.equals(objLoaded));
-	// } catch (IOException e) {
-	// fail("Exception serializing " + objToSave + " : "
-	// + e.getMessage());
-	// } catch (ClassNotFoundException e) {
-	// fail("ClassNotFoundException reading Object type : " + e.getMessage());
-	// } catch (Error err) {
-	// System.out.println("Error when obj = " + objToSave);
-	// // err.printStackTrace();
-	// throw err;
-	// }
-	//
-	// }
 
 	public void test_writeObject_Collections_UnmodifiableMap_UnmodifiableEntrySet() {
 		// Test for method void
@@ -1273,34 +953,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 
 	}
 
-	public void test_writeObject_AllPermission() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.security.AllPermission)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = new java.security.AllPermission();
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			assertTrue(MSG_TEST_FAILED + objToSave, objToSave.equals(objLoaded));
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
 	public void test_writeObject_Collections_ReverseComparator() {
 		// Test for method void
 		// java.io.ObjectOutputStream.writeObject(java.util.Collections.ReverseComparator)
@@ -1529,54 +1181,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 
 	}
 
-	public void test_writeObject_FilePermission_FilePermissionCollection() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.io.FilePermission.FilePermissionCollection)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = (new java.io.FilePermission("<<ALL FILES>>", "read"))
-					.newPermissionCollection();
-			((java.security.PermissionCollection) objToSave)
-					.add(new FilePermission("<<ALL FILES>>", "read"));
-			((java.security.PermissionCollection) objToSave)
-					.add(new FilePermission("d:\\", "read"));
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			boolean equals;
-			java.util.Enumeration enum1 = ((java.security.PermissionCollection) objToSave)
-					.elements(), enum2 = ((java.security.PermissionCollection) objLoaded)
-					.elements();
-
-			equals = true;
-			while (enum1.hasMoreElements() && equals) {
-				if (enum2.hasMoreElements())
-					equals = enum1.nextElement().equals(enum2.nextElement());
-				else
-					equals = false;
-			}
-
-			if (equals)
-				equals = !enum2.hasMoreElements();
-			assertTrue(MSG_TEST_FAILED + objToSave, equals);
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
 	public void test_writeObject_SecureRandom() {
 		// Test for method void
 		// java.io.ObjectOutputStream.writeObject(java.security.SecureRandom)
@@ -1595,34 +1199,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 			equals = true; // assume fine because of the nature of the class,
 			// it is difficult to determine if they are the same
 			assertTrue(MSG_TEST_FAILED + objToSave, equals);
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
-	public void test_writeObject_FilePermission() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.io.FilePermission)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = new java.io.FilePermission("<<ALL FILES>>", "read");
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			assertTrue(MSG_TEST_FAILED + objToSave, objToSave.equals(objLoaded));
 		} catch (IOException e) {
 			fail("Exception serializing " + objToSave + " : " + e.getMessage());
 		} catch (ClassNotFoundException e) {
@@ -1693,102 +1269,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 
 	}
 
-	public void test_writeObject_RuntimePermission() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.lang.RuntimePermission)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = new java.lang.RuntimePermission("TestSerialization",
-					"Test");
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			assertTrue(MSG_TEST_FAILED + objToSave, objToSave.equals(objLoaded));
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
-	@SuppressWarnings("unchecked")
-    public void test_writeObject_Permissions() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.security.Permissions)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = new java.security.Permissions();
-			((java.security.Permissions) objToSave).add(new AllPermission());
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			boolean equals;
-			Enumeration enum1 = ((java.security.PermissionCollection) objToSave)
-					.elements(), enum2 = ((java.security.PermissionCollection) objLoaded)
-					.elements();
-			java.util.Vector vec1 = new java.util.Vector(), vec2 = new java.util.Vector();
-
-			while (enum1.hasMoreElements())
-				vec1.add(enum1.nextElement());
-			while (enum2.hasMoreElements())
-				vec2.add(enum2.nextElement());
-
-			equals = vec1.size() == vec2.size();
-			if (equals) {
-				int length = vec1.size();
-				Object[] perms1 = new Object[length], perms2 = new Object[length];
-				for (int i = 0; i < length; ++i) {
-					perms1[i] = vec1.elementAt(i);
-					perms2[i] = vec2.elementAt(i);
-				}
-
-				Comparator comparator = new Comparator() {
-					public int compare(Object o1, Object o2) {
-						return o1.toString().compareTo(o2.toString());
-					}
-
-					public boolean equals(Object o1, Object o2) {
-						return o1.toString().equals(o2.toString());
-					}
-				};
-
-				Arrays.sort(perms1, comparator);
-				Arrays.sort(perms2, comparator);
-
-				for (int i = 0; i < length && equals; ++i)
-					equals = perms1[i].equals(perms2[i]);
-			}
-
-			assertTrue(MSG_TEST_FAILED + objToSave, equals);
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
 	public void test_writeObject_Date() {
 		// Test for method void
 		// java.io.ObjectOutputStream.writeObject(java.util.Date)
@@ -1833,82 +1313,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 
 			// Has to have worked
 			assertTrue(MSG_TEST_FAILED + objToSave, objToSave.equals(objLoaded));
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
-	public void test_writeObject_SecurityPermission() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.security.SecurityPermission)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = new java.security.SecurityPermission(
-					"TestSerialization", "Test");
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			assertTrue(MSG_TEST_FAILED + objToSave, objToSave.equals(objLoaded));
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
-	public void test_writeObject_SocketPermission_SocketPermissionCollection() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.net.SocketPermission.SocketPermissionCollection)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = (new java.net.SocketPermission("www.yahoo.com",
-					"connect")).newPermissionCollection();
-			((java.security.PermissionCollection) objToSave)
-					.add(new java.net.SocketPermission("www.yahoo.com",
-							"connect"));
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			boolean equals;
-			Enumeration enum1 = ((java.security.PermissionCollection) objToSave)
-					.elements(), enum2 = ((java.security.PermissionCollection) objLoaded)
-					.elements();
-
-			equals = true;
-			while (enum1.hasMoreElements() && equals) {
-				if (enum2.hasMoreElements())
-					equals = enum1.nextElement().equals(enum2.nextElement());
-				else
-					equals = false;
-			}
-
-			if (equals)
-				equals = !enum2.hasMoreElements();
-			assertTrue(MSG_TEST_FAILED + objToSave, equals);
 		} catch (IOException e) {
 			fail("Exception serializing " + objToSave + " : " + e.getMessage());
 		} catch (ClassNotFoundException e) {
@@ -1992,33 +1396,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 
 	}
 
-	public void test_writeObject_NetPermission() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.net.NetPermission)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = new java.net.NetPermission("TestSerialization", "Test");
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			assertTrue(MSG_TEST_FAILED + objToSave, objToSave.equals(objLoaded));
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-	}
-
 	public void test_writeObject_AttributedCharacterIterator_Attribute() {
 		// Test for method void
 		// java.io.ObjectOutputStream.writeObject(java.text.AttributedCharacterIterator.Attribute)
@@ -2074,38 +1451,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 
 	}
 
-	public void test_writeObject_CodeSource() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.security.CodeSource)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = null;
-			objToSave = new java.security.CodeSource(new java.net.URL(
-					"http://localhost/a.txt"),
-					(Certificate[])null);
-
-                        if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			assertTrue(MSG_TEST_FAILED + objToSave, objToSave.equals(objLoaded));
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
 	public void test_writeObject_Collections_SynchronizedCollection() {
 		// Test for method void
 		// java.io.ObjectOutputStream.writeObject(java.util.Collections.SynchronizedCollection)
@@ -2131,54 +1476,6 @@ public class SerializationStressTest4 extends SerializationStressTest {
 					equals = equals && iter1.next().equals(iter2.next());
 			}
 			assertTrue(MSG_TEST_FAILED + objToSave, equals);
-		} catch (IOException e) {
-			fail("Exception serializing " + objToSave + " : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			fail("ClassNotFoundException reading Object type: "
-					+ e.getMessage());
-		} catch (Error err) {
-			System.out.println("Error when obj = " + objToSave);
-			// err.printStackTrace();
-			throw err;
-		}
-
-	}
-
-	public void test_writeObject_Permission() {
-		// Test for method void
-		// java.io.ObjectOutputStream.writeObject(java.security.Permission)
-
-		Object objToSave = null;
-		Object objLoaded = null;
-
-		try {
-			objToSave = null;
-			objToSave = new java.security.Permission("test") {
-				public boolean equals(Object p1) {
-					if (!(p1 instanceof java.security.Permission))
-						return false;
-					return getName().equals(
-							((java.security.Permission) p1).getName());
-				}
-
-				public int hashCode() {
-					return 0;
-				}
-
-				public String getActions() {
-					return null;
-				}
-
-				public boolean implies(java.security.Permission p1) {
-					return false;
-				}
-			};
-			if (DEBUG)
-				System.out.println("Obj = " + objToSave);
-			objLoaded = dumpAndReload(objToSave);
-
-			// Has to have worked
-			assertTrue(MSG_TEST_FAILED + objToSave, objToSave.equals(objLoaded));
 		} catch (IOException e) {
 			fail("Exception serializing " + objToSave + " : " + e.getMessage());
 		} catch (ClassNotFoundException e) {
