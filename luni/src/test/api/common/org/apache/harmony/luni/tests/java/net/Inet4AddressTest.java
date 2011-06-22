@@ -54,20 +54,11 @@ public class Inet4AddressTest extends junit.framework.TestCase {
 
 	}
 
-	/**
-	 * @tests java.net.Inet4Address#isAnyLocalAddress()
-	 */
-	public void test_isAnyLocalAddress() throws Exception {
-		String addrName = "";
-                addrName = "0.0.0.0";
-                InetAddress addr = InetAddress.getByName(addrName);
-                assertTrue("ANY address " + addrName + " not detected.", addr
-                                .isAnyLocalAddress());
-	}
+    public void test_isAnyLocalAddress() throws Exception {
+        assertTrue(InetAddress.getByName("0.0.0.0").isAnyLocalAddress());
+        assertFalse(InetAddress.getByName("127.0.0.1").isAnyLocalAddress());
+    }
 
-	/**
-	 * @tests java.net.Inet4Address#isLoopbackAddress()
-	 */
 	public void test_isLoopbackAddress() throws Exception {
 		// Create some IP V4 addresses and test if they are local...
 
@@ -316,7 +307,7 @@ public class Inet4AddressTest extends junit.framework.TestCase {
                                 + " not identified as a org-local multicast address.", addr
                                 .isMCOrgLocal());
 	}
-    
+
     // comparator for Inet4Address objects
     private static final SerializableAssert COMPARATOR = new SerializableAssert() {
         public void assertDeserialized(Serializable initial,

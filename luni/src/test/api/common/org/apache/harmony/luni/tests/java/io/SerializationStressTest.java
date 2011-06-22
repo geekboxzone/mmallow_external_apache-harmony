@@ -133,11 +133,6 @@ public class SerializationStressTest extends junit.framework.TestCase implements
 	static final Set<String> SET = new HashSet<String>(Arrays.asList(new String[] { "one",
 			"two", "three" }));
 
-	static final Permission PERM = new PropertyPermission("file.encoding",
-			"write");
-
-	static final PermissionCollection PERMCOL = PERM.newPermissionCollection();
-
 	static final SortedSet<String> SORTSET = new TreeSet<String>(Arrays.asList(new String[] {
 			"one", "two", "three" }));
 
@@ -180,7 +175,6 @@ public class SerializationStressTest extends junit.framework.TestCase implements
 		TREE.put("one", "1");
 		TREE.put("two", "2");
 		TREE.put("three", "3");
-		PERMCOL.add(PERM);
 		// To make sure they all use the same Calendar
 		CALENDAR.setTimeZone(new SimpleTimeZone(0, "GMT"));
 		CALENDAR.set(1999, Calendar.JUNE, 23, 15, 47, 13);

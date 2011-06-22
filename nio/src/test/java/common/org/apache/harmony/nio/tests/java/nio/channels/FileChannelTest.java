@@ -1172,9 +1172,6 @@ public class FileChannelTest extends TestCase {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#read(ByteBuffer)
-     */
     public void test_readLByteBuffer() throws Exception {
         writeDataToFile(fileOfReadOnlyFileChannel);
 
@@ -1188,110 +1185,57 @@ public class FileChannelTest extends TestCase {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#read(ByteBuffer, long)
-     */
     public void test_readLByteBufferJ_Null() throws Exception {
-        ByteBuffer readBuffer = null;
-
         try {
-            readOnlyFileChannel.read(readBuffer, 0);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
-        }
-
-        // first throws NullPointerException
-        try {
-            readOnlyFileChannel.read(readBuffer, -1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
-        }
-
-        // first throws NullPointerException
-        writeOnlyFileChannel.close();
-        try {
-            writeOnlyFileChannel.read(readBuffer, 0);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            readOnlyFileChannel.read(null, 0);
+            fail();
+        } catch (NullPointerException expected) {
         }
 
         try {
-            readWriteFileChannel.read(readBuffer, 0);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
-        }
-
-        // first throws NullPointerException
-        writeOnlyFileChannel.close();
-        try {
-            writeOnlyFileChannel.read(readBuffer, 0);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            readWriteFileChannel.read(null, 0);
+            fail();
+        } catch (NullPointerException expected) {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#read(ByteBuffer, long)
-     */
     public void test_readLByteBufferJ_Closed() throws Exception {
         ByteBuffer readBuffer = ByteBuffer.allocate(CAPACITY);
 
         readOnlyFileChannel.close();
         try {
             readOnlyFileChannel.read(readBuffer, 0);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
         }
 
         readWriteFileChannel.close();
         try {
             readWriteFileChannel.read(readBuffer, 0);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#read(ByteBuffer, long)
-     */
     public void test_readLByteBufferJ_IllegalArgument() throws Exception {
         ByteBuffer readBuffer = ByteBuffer.allocate(CAPACITY);
 
         try {
             readOnlyFileChannel.read(readBuffer, -1);
-            fail("should throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-            // expected
+            fail();
+        } catch (IllegalArgumentException expected) {
         }
 
         try {
             writeOnlyFileChannel.read(readBuffer, -1);
-            fail("should throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-            // expected
+            fail();
+        } catch (IllegalArgumentException expected) {
         }
 
         try {
             readWriteFileChannel.read(readBuffer, -1);
-            fail("should throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
-
-        // throws IllegalArgumentException first.
-        readWriteFileChannel.close();
-        try {
-            readWriteFileChannel.read(readBuffer, -1);
-            fail("should throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-            // expected
+            fail();
+        } catch (IllegalArgumentException expected) {
         }
     }
 
@@ -1301,14 +1245,6 @@ public class FileChannelTest extends TestCase {
         try {
             writeOnlyFileChannel.read(readBuffer, 0);
             fail();
-        } catch (NonReadableChannelException expected) {
-        }
-
-        writeOnlyFileChannel.close();
-        try {
-            writeOnlyFileChannel.read(readBuffer, 0);
-            fail();
-        } catch (ClosedChannelException expected) {
         } catch (NonReadableChannelException expected) {
         }
     }
@@ -2096,144 +2032,73 @@ public class FileChannelTest extends TestCase {
         assertTrue(Arrays.equals(test.getBytes("iso8859-1"), inputBuffer));
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#write(ByteBuffer, long)
-     */
     public void test_writeLByteBufferJ_Null() throws Exception {
-        ByteBuffer writeBuffer = null;
-
         try {
-            readOnlyFileChannel.write(writeBuffer, 0);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            readWriteFileChannel.write(null, 0);
+            fail();
+        } catch (NullPointerException expected) {
+        } catch (NonWritableChannelException expected) {
         }
 
         try {
-            writeOnlyFileChannel.write(writeBuffer, 0);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
-        }
-
-        // first throws NullPointerException
-        try {
-            readOnlyFileChannel.write(writeBuffer, -1);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            writeOnlyFileChannel.write(null, 0);
+            fail();
+        } catch (NullPointerException expected) {
         }
 
         try {
-            readWriteFileChannel.write(writeBuffer, 0);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
-        }
-
-        // first throws NullPointerException
-        readWriteFileChannel.close();
-        try {
-            readWriteFileChannel.write(writeBuffer, 0);
-            fail("should throw NullPointerException");
-        } catch (NullPointerException e) {
-            // expected
+            readWriteFileChannel.write(null, 0);
+            fail();
+        } catch (NullPointerException expected) {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#write(ByteBuffer, long)
-     */
     public void test_writeLByteBufferJ_Closed() throws Exception {
         ByteBuffer writeBuffer = ByteBuffer.allocate(CAPACITY);
 
         writeOnlyFileChannel.close();
         try {
             writeOnlyFileChannel.write(writeBuffer, 0);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
+            fail();
+        } catch (ClosedChannelException expected) {
         }
 
         readWriteFileChannel.close();
         try {
             readWriteFileChannel.write(writeBuffer, 0);
-            fail("should throw ClosedChannelException");
-        } catch (ClosedChannelException e) {
-            // expected
-        }
-    }
-
-    /**
-     * @tests java.nio.channels.FileChannel#write(ByteBuffer, long)
-     */
-    public void test_writeLByteBufferJ_ReadOnly() throws Exception {
-        ByteBuffer writeBuffer = null;
-        try {
-            readOnlyFileChannel.write(writeBuffer, 10);
-            fail();
-        } catch (NullPointerException expected) {
-        } catch (NonWritableChannelException expected) {
-        }
-
-        writeBuffer = ByteBuffer.allocate(CAPACITY);
-        try {
-            readOnlyFileChannel.write(writeBuffer, 10);
-            fail();
-        } catch (NonWritableChannelException expected) {
-        }
-
-        try {
-            readOnlyFileChannel.write(writeBuffer, -1);
-            fail();
-        } catch (IllegalArgumentException expected) {
-        } catch (NonWritableChannelException expected) {
-        }
-
-        // regression test for Harmony-903
-        readOnlyFileChannel.close();
-        try {
-            readOnlyFileChannel.write(writeBuffer, 10);
             fail();
         } catch (ClosedChannelException expected) {
+        }
+    }
+
+    public void test_writeLByteBufferJ_ReadOnly() throws Exception {
+        ByteBuffer writeBuffer = ByteBuffer.allocate(CAPACITY);
+        try {
+            readOnlyFileChannel.write(writeBuffer, 10);
+            fail();
         } catch (NonWritableChannelException expected) {
         }
     }
 
-    /**
-     * @tests java.nio.channels.FileChannel#write(ByteBuffer, long)
-     */
     public void test_writeLByteBufferJ_IllegalArgument() throws Exception {
         ByteBuffer writeBuffer = ByteBuffer.allocate(CAPACITY);
 
         try {
             readOnlyFileChannel.write(writeBuffer, -1);
-            fail("should throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-            // expected
+            fail();
+        } catch (IllegalArgumentException expected) {
         }
 
         try {
             writeOnlyFileChannel.write(writeBuffer, -1);
-            fail("should throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-            // expected
+            fail();
+        } catch (IllegalArgumentException expected) {
         }
 
         try {
             readWriteFileChannel.write(writeBuffer, -1);
-            fail("should throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
-
-        // throws IllegalArgumentException first.
-        readWriteFileChannel.close();
-        try {
-            readWriteFileChannel.write(writeBuffer, -1);
-            fail("should throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-            // expected
+            fail();
+        } catch (IllegalArgumentException expected) {
         }
     }
 
