@@ -28,7 +28,10 @@ import java.util.Vector;
 
 public class GregorianCalendarTest extends junit.framework.TestCase {
 
-	/**
+    private static final TimeZone AMERICA_CHICAGO = TimeZone.getTimeZone("America/Chicago");
+    private static final TimeZone AMERICA_NEW_YORK = TimeZone.getTimeZone("America/New_York");
+
+    /**
 	 * @tests java.util.GregorianCalendar#GregorianCalendar()
 	 */
 	public void test_Constructor() {
@@ -130,17 +133,14 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
 		// Test for method java.util.GregorianCalendar(java.util.TimeZone)
 		Date date = new Date(2008,1,1);
 		TimeZone.getDefault();
-		GregorianCalendar gc1 = new GregorianCalendar(TimeZone
-				.getTimeZone("EST"));
+		GregorianCalendar gc1 = new GregorianCalendar(AMERICA_NEW_YORK);
 		gc1.setTime(date);
-		GregorianCalendar gc2 = new GregorianCalendar(TimeZone
-				.getTimeZone("CST"));
+		GregorianCalendar gc2 = new GregorianCalendar(AMERICA_CHICAGO);
 		gc2.setTime(date);
-		// CST is 1 hour before EST, add 1 to the CST time and convert to 0-12
-		// value
-		assertTrue("Incorrect calendar returned",
-				gc1.get(Calendar.HOUR) == ((gc2.get(Calendar.HOUR) + 1) % 12));
-        
+		// Chicago is 1 hour before New York, add 1 to the Chicago time and convert to 0-12 value
+		assertEquals("Incorrect calendar returned",
+                gc1.get(Calendar.HOUR), ((gc2.get(Calendar.HOUR) + 1) % 12));
+
         // Regression test for HARMONY-2961
         SimpleTimeZone timezone = new SimpleTimeZone(-3600 * 24 * 1000 * 2,
                 "GMT");
@@ -169,19 +169,15 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
 		// java.util.Locale)
 		Date date = new Date(2008,1,1);
 		TimeZone.getDefault();
-		GregorianCalendar gc1 = new GregorianCalendar(TimeZone
-				.getTimeZone("EST"), Locale.JAPAN);
+		GregorianCalendar gc1 = new GregorianCalendar(AMERICA_NEW_YORK, Locale.JAPAN);
 		gc1.setTime(date);
-		GregorianCalendar gc2 = new GregorianCalendar(TimeZone
-				.getTimeZone("EST"), Locale.JAPAN);
+		GregorianCalendar gc2 = new GregorianCalendar(AMERICA_NEW_YORK, Locale.JAPAN);
 		gc2.setTime(date);
-		GregorianCalendar gc3 = new GregorianCalendar(TimeZone
-				.getTimeZone("CST"), Locale.ITALY);
+		GregorianCalendar gc3 = new GregorianCalendar(AMERICA_CHICAGO, Locale.ITALY);
 		gc3.setTime(date);
-		// CST is 1 hour before EST, add 1 to the CST time and convert to 0-12
-		// value
-		assertTrue("Incorrect calendar returned",
-				gc1.get(Calendar.HOUR) == ((gc3.get(Calendar.HOUR) + 1) % 12));
+		// Chicago is 1 hour before New York, add 1 to the Chicago time and convert to 0-12 value
+		assertEquals("Incorrect calendar returned",
+                gc1.get(Calendar.HOUR), ((gc3.get(Calendar.HOUR) + 1) % 12));
 		assertTrue("Locales not created correctly", gc1.equals(gc2)
 				&& !gc1.equals(gc3));
 	}
@@ -209,7 +205,7 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
 				gc1.get(Calendar.MONTH) == Calendar.FEBRUARY);
 		assertEquals("Wrong result date 2", 28, gc1.get(Calendar.DATE));
 
-		gc1 = new GregorianCalendar(TimeZone.getTimeZone("EST"));
+		gc1 = new GregorianCalendar(AMERICA_NEW_YORK);
 		gc1.set(1999, Calendar.APRIL, 3, 16, 0); // day before DST change
 		gc1.add(Calendar.MILLISECOND, 24 * 60 * 60 * 1000);
 		assertEquals("Wrong time after MILLISECOND change", 16, gc1
@@ -315,17 +311,17 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
 				.getActualMaximum(Calendar.HOUR));
 		assertEquals("Wrong actual maximum value for DAY_OF_WEEK_IN_MONTH", 4, gc6
 				.getActualMaximum(Calendar.DAY_OF_WEEK_IN_MONTH));
-        
-        
+
+
         // Regression test for harmony 2954
         Date date = new Date(Date.parse("Jan 15 00:00:01 GMT 2000"));
         GregorianCalendar gc = new GregorianCalendar();
         gc.setTimeInMillis(Date.parse("Dec 15 00:00:01 GMT 1582"));
-        assertEquals(355, gc.getActualMaximum(Calendar.DAY_OF_YEAR)); 
+        assertEquals(355, gc.getActualMaximum(Calendar.DAY_OF_YEAR));
         gc.setGregorianChange(date);
         gc.setTimeInMillis(Date.parse("Jan 16 00:00:01 GMT 2000"));
-        assertEquals(353, gc.getActualMaximum(Calendar.DAY_OF_YEAR)); 
-        
+        assertEquals(353, gc.getActualMaximum(Calendar.DAY_OF_YEAR));
+
         //Regression test for HARMONY-3004
         gc = new GregorianCalendar(1900, 7, 1);
         String[] ids = TimeZone.getAvailableIDs();
@@ -395,8 +391,7 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
 		// Test for method java.util.Date
 		// java.util.GregorianCalendar.getGregorianChange()
 		GregorianCalendar gc = new GregorianCalendar();
-		GregorianCalendar returnedChange = new GregorianCalendar(TimeZone
-				.getTimeZone("EST"));
+		GregorianCalendar returnedChange = new GregorianCalendar(AMERICA_NEW_YORK);
 		returnedChange.setTime(gc.getGregorianChange());
 		assertEquals("Returned incorrect year",
 				1582, returnedChange.get(Calendar.YEAR));
@@ -433,7 +428,7 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
 		}
 		assertTrue("Wrong least max for " + result + " = " + values, result
 				.length() == 0);
-        
+
         // Regression test for harmony-2947
         Date date = new Date(Date.parse("Jan 1 00:00:01 GMT 2000"));
         gc = new GregorianCalendar();
@@ -589,35 +584,35 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
         assertEquals("Wrong month: " + cal.getTime(), Calendar.JANUARY, cal
                 .get(Calendar.MONTH));
         assertEquals("Wrong date: " + cal.getTime(), 7, cal.get(Calendar.DATE));
-        
+
         cal.roll(Calendar.WEEK_OF_YEAR, true);
         assertEquals("Wrong year: " + cal.getTime(), 1994, cal
                 .get(Calendar.YEAR));
         assertEquals("Wrong month: " + cal.getTime(), Calendar.JANUARY, cal
                 .get(Calendar.MONTH));
         assertEquals("Wrong date: " + cal.getTime(), 14, cal.get(Calendar.DATE));
-        
+
         cal.roll(Calendar.WEEK_OF_YEAR, false);
         assertEquals("Wrong year: " + cal.getTime(), 1994, cal
                 .get(Calendar.YEAR));
         assertEquals("Wrong month: " + cal.getTime(), Calendar.JANUARY, cal
                 .get(Calendar.MONTH));
         assertEquals("Wrong date: " + cal.getTime(), 7, cal.get(Calendar.DATE));
-        
+
         cal.roll(Calendar.WEEK_OF_YEAR, false);
         assertEquals("Wrong year: " + cal.getTime(), 1994, cal
                 .get(Calendar.YEAR));
         assertEquals("Wrong month: " + cal.getTime(), Calendar.DECEMBER, cal
                 .get(Calendar.MONTH));
         assertEquals("Wrong date: " + cal.getTime(), 30, cal.get(Calendar.DATE));
-        
+
         cal.roll(Calendar.WEEK_OF_YEAR, false);
         assertEquals("Wrong year: " + cal.getTime(), 1994, cal
                 .get(Calendar.YEAR));
         assertEquals("Wrong month: " + cal.getTime(), Calendar.DECEMBER, cal
                 .get(Calendar.MONTH));
         assertEquals("Wrong date: " + cal.getTime(), 23, cal.get(Calendar.DATE));
-        
+
         // Regression for HARMONY-4510
         cal.set(1999, Calendar.DECEMBER, 31, 23, 59, 59);
         cal.roll(GregorianCalendar.WEEK_OF_YEAR, true);
@@ -653,7 +648,7 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
      * @tests java.util.GregorianCalendar#clone()
      */
     public void test_clone() {
-        
+
         // Regression for HARMONY-498
         GregorianCalendar gCalend = new GregorianCalendar();
 
@@ -663,12 +658,12 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
         // create clone object and change date
         GregorianCalendar gCalendClone = (GregorianCalendar) gCalend.clone();
         gCalendClone.add(Calendar.DATE, 1);
-        
+
         assertEquals("Before", dayOfMonth, gCalend.get(Calendar.DAY_OF_MONTH));
         gCalend.set(Calendar.MILLISECOND, 0);//changes nothing
         assertEquals("After", dayOfMonth, gCalend.get(Calendar.DAY_OF_MONTH));
     }
-    
+
     /**
      * @tests java.util.GregorianCalendar#getMinimalDaysInFirstWeek()
      */
@@ -684,7 +679,7 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
                 new Locale("fr"));
         minimalDaysInFirstWeek = g.getMinimalDaysInFirstWeek();
         assertEquals(4, minimalDaysInFirstWeek);
-        
+
         g = new GregorianCalendar(TimeZone.getTimeZone("Europe/London"),
                 new Locale("fr", "CA"));
         minimalDaysInFirstWeek = g.getMinimalDaysInFirstWeek();
@@ -718,19 +713,19 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
         assertEquals(2, g1.get(Calendar.HOUR_OF_DAY));
         // End of regression test
     }
-    
+
     /**
      * @tests java.util.GregorianCalendar#get(int)
      */
     @SuppressWarnings("deprecation")
-	public void test_getI() { 
+	public void test_getI() {
         // Regression test for HARMONY-2959
-        Date date = new Date(Date.parse("Jan 15 00:00:01 GMT 2000")); 
-        GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("GMT")); 
-        gc.setGregorianChange(date); 
-        gc.setTimeInMillis(Date.parse("Dec 24 00:00:01 GMT 2000")); 
-        assertEquals(346, gc.get(Calendar.DAY_OF_YEAR)); 
-        
+        Date date = new Date(Date.parse("Jan 15 00:00:01 GMT 2000"));
+        GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+        gc.setGregorianChange(date);
+        gc.setTimeInMillis(Date.parse("Dec 24 00:00:01 GMT 2000"));
+        assertEquals(346, gc.get(Calendar.DAY_OF_YEAR));
+
         // Regression test for HARMONY-3003
         date = new Date(Date.parse("Feb 28 00:00:01 GMT 2000"));
         gc = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
@@ -738,13 +733,13 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
         gc.setTimeInMillis(Date.parse("Dec 1 00:00:01 GMT 2000"));
         assertEquals(1, gc.get(Calendar.DAY_OF_MONTH));
         assertEquals(11, gc.get(Calendar.MONTH));
-        
+
         // Regression test for HARMONY-4513
         gc = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
         gc.set(1582, Calendar.OCTOBER, 15, 0, 0, 0);
         // reset millisecond to zero in order to be the same time as cutover
         gc.set(Calendar.MILLISECOND, 0);
-        assertEquals(0, gc.get(Calendar.MILLISECOND)); 
+        assertEquals(0, gc.get(Calendar.MILLISECOND));
         assertEquals(1582, gc.get(Calendar.YEAR));
         assertEquals(Calendar.OCTOBER, gc.get(Calendar.MONTH));
         assertEquals(15, gc.get(Calendar.DAY_OF_MONTH));
@@ -753,7 +748,7 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
         assertEquals(0, gc.get(Calendar.SECOND));
         gc.set(1582, Calendar.OCTOBER, 14, 0, 0, 0);
         assertEquals(24, gc.get(Calendar.DAY_OF_MONTH));
-        
+
         // Regression test for HARMONY-2422
         gc = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
         gc.set(GregorianCalendar.ZONE_OFFSET, -1);

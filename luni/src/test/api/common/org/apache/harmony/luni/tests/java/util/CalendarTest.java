@@ -30,15 +30,17 @@ import java.util.TimeZone;
 import org.apache.harmony.testframework.serialization.SerializationTest;
 
 public class CalendarTest extends junit.framework.TestCase {
-	
+
+    private static final TimeZone AMERICA_NEW_YORK = TimeZone.getTimeZone("America/New_York");
+
 	Locale defaultLocale;
 
-	/**
+    /**
 	 * @tests java.util.Calendar#set(int, int)
 	 */
 	public void test_setII() {
 		// Test for correct result defined by the last set field
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("EST"));
+		Calendar cal = Calendar.getInstance(AMERICA_NEW_YORK);
 
 		cal.clear();
 		cal.set(Calendar.YEAR, 2002);
@@ -157,7 +159,7 @@ public class CalendarTest extends junit.framework.TestCase {
         cal.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
         assertEquals("Incorrect result 1b: " + cal.getTime(), 1015304400000L, cal.getTime()
                 .getTime());
-        
+
 
 		// WEEK_OF_MONTH has priority
 		cal.clear();
@@ -383,7 +385,7 @@ public class CalendarTest extends junit.framework.TestCase {
 				Calendar.PM, cal.get(Calendar.AM_PM));
 		assertEquals(hour, cal.get(Calendar.HOUR));
 		assertEquals(hourOfDay + 12, cal.get(Calendar.HOUR_OF_DAY));
-        
+
         // regression test for Harmony-2122
         cal = Calendar.getInstance();
         int oldValue = cal.get(Calendar.AM_PM);
@@ -401,7 +403,7 @@ public class CalendarTest extends junit.framework.TestCase {
 		// Use millisecond time for testing in Core
 		cal.setTime(new Date(884581200000L)); // (98, Calendar.JANUARY, 12)
 		assertEquals("incorrect millis", 884581200000L, cal.getTime().getTime());
-		cal.setTimeZone(TimeZone.getTimeZone("EST"));
+		cal.setTimeZone(AMERICA_NEW_YORK);
 		cal.setTime(new Date(943506000000L)); // (99, Calendar.NOVEMBER, 25)
 		assertTrue("incorrect fields", cal.get(Calendar.YEAR) == 1999
 				&& cal.get(Calendar.MONTH) == Calendar.NOVEMBER
@@ -665,10 +667,8 @@ public class CalendarTest extends junit.framework.TestCase {
                 .getTimeZone("GMT"), Locale.US);
         assertEquals(TimeZone.getTimeZone("GMT"),
                 gmt_calendar.getTimeZone());
-        Calendar est_calendar = Calendar.getInstance(TimeZone
-                .getTimeZone("EST"), Locale.US);
-        assertEquals(TimeZone.getTimeZone("EST")
-                .getID(), est_calendar.getTimeZone().getID());
+        Calendar est_calendar = Calendar.getInstance(AMERICA_NEW_YORK, Locale.US);
+        assertEquals(AMERICA_NEW_YORK.getID(), est_calendar.getTimeZone().getID());
     }
 
     /**
