@@ -72,3 +72,5 @@ ifeq ($(WITH_HOST_DALVIK),true)
     LOCAL_BUILD_HOST_DEX := true
     include $(BUILD_HOST_JAVA_LIBRARY)
 endif
+
+include $(call all-makefiles-under,$(LOCAL_PATH))
