@@ -66,23 +66,19 @@ public class LengthTest extends JDWPArrayReferenceTestCase {
         int declared = reply.getNextValueAsInt();
         for (int i = 0; i < declared; i++) {
             long fieldID = reply.getNextValueAsFieldID();
-            reply.getNextValueAsString();
+            String fieldName = reply.getNextValueAsString();
             reply.getNextValueAsString();
             reply.getNextValueAsInt();
 
-            switch (i) {
-                case 0:
-                    // int[] intArray = new int[10]
-                    checkArrayLength(classID, fieldID, JDWPConstants.Error.NONE, 10);
-                    break;
-                case 1:
-                    // String[] strArray = new String[8]
-                    checkArrayLength(classID, fieldID, JDWPConstants.Error.NONE, 8);
-                    break;
-                case 2:
-                    // Integer intField = new Integer(-1)
-                    checkArrayLength(classID, fieldID, JDWPConstants.Error.INVALID_ARRAY, 0);
-                    break;
+            if (fieldName.equals("intArray")) {
+                // int[] intArray = new int[10]
+                checkArrayLength(classID, fieldID, JDWPConstants.Error.NONE, 10);
+            } else if (fieldName.equals("strArray")) {
+                // String[] strArray = new String[8]
+                checkArrayLength(classID, fieldID, JDWPConstants.Error.NONE, 8);
+            } else if (fieldName.equals("intField")) {
+                // Integer intField = new Integer(-1)
+                checkArrayLength(classID, fieldID, JDWPConstants.Error.INVALID_ARRAY, 0);
             }
         }
 
