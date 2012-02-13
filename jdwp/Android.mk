@@ -14,8 +14,7 @@ jdwp_tests_jar := $(local_module_name).jar
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(harmony_jdwp_test_src_files)
-LOCAL_NO_STANDARD_LIBRARIES := true
-LOCAL_JAVA_LIBRARIES := core core-junit junit-targetdex
+LOCAL_JAVA_LIBRARIES := junit-targetdex
 LOCAL_MODULE_TAGS := tests
 LOCAL_MODULE := $(local_module_name)
 LOCAL_NO_EMMA_INSTRUMENT := true
@@ -25,12 +24,12 @@ include $(BUILD_JAVA_LIBRARY)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
-jdwp_test_runtime := dalvikvm
+jdwp_test_runtime := oatexecd
 jdwp_test_classpath := /data/$(jdwp_tests_jar):/system/framework/junit-targetdex.jar
 
-
+# If this fails complaining about TestRunner, build "external/junit" manually.
 .PHONY: run-jdwp-tests
-run-jdwp-tests:
+run-jdwp-tests: $(TARGET_OUT_DATA)/$(jdwp_tests_jar) $(TARGET_OUT_JAVA_LIBRARIES)/junit-targetdex.jar
 	adb shell stop
 	adb remount
 	adb sync
