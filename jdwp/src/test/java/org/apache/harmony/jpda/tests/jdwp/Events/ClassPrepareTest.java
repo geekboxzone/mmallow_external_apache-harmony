@@ -82,6 +82,12 @@ public class ClassPrepareTest extends JDWPEventTestCase {
      * expectedSourceNamePattern is used to assign the source name's pattern
      */
     public void testClassPrepareEventWithoutSourceDebugExtension(String expectedSourceNamePattern){
+        debuggeeWrapper.vmMirror.capabilities();
+        if (!debuggeeWrapper.vmMirror.targetVMCapabilities.canUseSourceNameFilters) {
+            logWriter.println("##WARNING: this VM doesn't possess capability: canUseSourceNameFilters");
+            return;
+        }
+
         String expectedClassSignature = "Lorg/apache/harmony/jpda/tests/jdwp/Events/Class2Prepare;";
         logWriter.println("==> testClassPrepareEventForSourceNameMatch started");
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
@@ -139,6 +145,12 @@ public class ClassPrepareTest extends JDWPEventTestCase {
      * expectedSourceNamePattern is used to assign the source name's pattern
      */
     private void testClassPrepareEventWithSourceDebugExtension(String expectedSourceNamePattern){
+        debuggeeWrapper.vmMirror.capabilities();
+        if (!debuggeeWrapper.vmMirror.targetVMCapabilities.canUseSourceNameFilters) {
+            logWriter.println("##WARNING: this VM doesn't possess capability: canUseSourceNameFilters");
+            return;
+        }
+
         String expectedClassSignature = "Lorg/apache/harmony/jpda/tests/jdwp/Events/SourceDebugExtensionMockClass;";
 
         logWriter.println("==> testClassPrepareEventForSourceNameMatch started");
