@@ -52,7 +52,7 @@ public class BreakpointTest extends JDWPEventTestCase {
 
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
 
-        Breakpoint breakpoint = new Breakpoint("Lorg/apache/harmony/jpda/tests/jdwp/Events/BreakpointDebuggee;", "breakpointTest", 1);
+        Breakpoint breakpoint = new Breakpoint("Lorg/apache/harmony/jpda/tests/jdwp/Events/BreakpointDebuggee;", "breakpointTest", 2);
         ReplyPacket reply;
         reply = debuggeeWrapper.vmMirror.setBreakpoint(JDWPConstants.TypeTag.CLASS, breakpoint);
         checkReplyPacket(reply, "Set BREAKPOINT event");
