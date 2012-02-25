@@ -24,6 +24,9 @@
  */
 package org.apache.harmony.jpda.tests.jdwp.StackFrame;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import org.apache.harmony.jpda.tests.framework.LogWriter;
 import org.apache.harmony.jpda.tests.framework.jdwp.CommandPacket;
 import org.apache.harmony.jpda.tests.framework.jdwp.JDWPCommands;
 import org.apache.harmony.jpda.tests.framework.jdwp.JDWPConstants;
@@ -41,7 +44,7 @@ public class GetValuesTest extends JDWPStackFrameTestCase {
 
     VarInfo[] varInfos;
 
-    String varSignature[] = { "Lorg/apache/harmony/jpda/tests/jdwp/StackFrame/StackTraceDebuggee;", "Z",
+    String varSignatures[] = { "Lorg/apache/harmony/jpda/tests/jdwp/StackFrame/StackTraceDebuggee;", "Z",
             "I", "Ljava/lang/String;" };
 
     String varNames[] = { "this", "boolLocalVariable", "intLocalVariable",
@@ -151,7 +154,7 @@ public class GetValuesTest extends JDWPStackFrameTestCase {
         logWriter.println("");
         logWriter.println("=> Getting Variable Table...");
         varInfos = jdwpGetVariableTable(refTypeID, methodID);
-        if (checkVarTable(varInfos)) {
+        if (checkVarTable(logWriter, varInfos, varTags, varSignatures, varNames)) {
             logWriter.println("=> Variable table check passed.");
         } else {
             printErrorAndFail("Variable table check failed.");
@@ -174,8 +177,9 @@ public class GetValuesTest extends JDWPStackFrameTestCase {
             logWriter.println("=> For variable #"+i+":");
             packet.setNextValueAsInt(varInfos[i].getSlot());
             logWriter.println("=> Slot = "+varInfos[i].getSlot());
-            packet.setNextValueAsByte(varTags[i]);
-            logWriter.println("=> Tag = "+JDWPConstants.Tag.getName(varTags[i]));
+            byte tag = varTags[Arrays.asList(varNames).indexOf(varInfos[i].getName())];
+            packet.setNextValueAsByte(tag);
+            logWriter.println("=> Tag = "+JDWPConstants.Tag.getName(tag));
             logWriter.println("");
         }
 
@@ -194,18 +198,7 @@ public class GetValuesTest extends JDWPStackFrameTestCase {
         boolean success = true;
         //print and check values of variables
         logWriter.println("=> Values of variables: ");
-
-        Value val = reply.getNextValueAsValue();
-        if (val.getTag() == JDWPConstants.Tag.OBJECT_TAG) {
-            logWriter.println("=> Tag is correct");
-            logWriter.println("");
-
-        } else {
-            logWriter.printError("Unexpected tag of variable: "
-                    + JDWPConstants.Tag.getName(val.getTag()) + " instead of: CLASS_OBJECT_TAG");
-            logWriter.printError("");
-            success = false;
-        }
+        Value val;
 
         val = reply.getNextValueAsValue();
         if (val.getTag() == JDWPConstants.Tag.BOOLEAN_TAG) {
@@ -273,25 +266,47 @@ public class GetValuesTest extends JDWPStackFrameTestCase {
             logWriter.printError("");
             success = false;
         }
+
+        val = reply.getNextValueAsValue();
+        if (val.getTag() == JDWPConstants.Tag.OBJECT_TAG) {
+            logWriter.println("=> Tag is correct");
+            logWriter.println("");
+
+        } else {
+            logWriter.printError("Unexpected tag of variable: "
+                    + JDWPConstants.Tag.getName(val.getTag()) + " instead of: CLASS_OBJECT_TAG");
+            logWriter.printError("");
+            success = false;
+        }
+
         assertTrue(logWriter.getErrorMessage(), success);
     }
 
     //prints variables info, checks signatures
-    boolean checkVarTable(VarInfo[] varInfos) {
-        boolean success = true;
+    public static boolean checkVarTable(LogWriter logWriter, VarInfo[] varInfos, byte[] varTags, String[] varSignatures, String[] varNames) {
         logWriter.println("==> Number of variables = " + varInfos.length);
         if (varInfos.length != varTags.length) {
 
-            printErrorAndFail("Unexpected number of variables: "
+            logWriter.printError("Unexpected number of variables: "
                     + varInfos.length + " instead of " + varTags.length);
+            return false;
         }
+        boolean success = true;
+        ArrayList<String> remaining = new ArrayList(Arrays.asList(varNames));
         for (int i = 0; i < varInfos.length; i++) {
             logWriter.println("");
             logWriter.println("=> Name = " + varInfos[i].getName());
-            //## take codeIndex and length and check them
             logWriter.println("=> Slot = " + varInfos[i].getSlot());
-            logWriter.println("=> Sign = " + varInfos[i].getSignature());
-            if (!(varSignature[i].equals(varInfos[i].getSignature()))) {
+            logWriter.println("=> Signature = " + varInfos[i].getSignature());
+            // TODO: check codeIndex and length too
+
+            int index = remaining.indexOf(varInfos[i].getName());
+            if (index == -1) {
+                logWriter.printError("unknown variable: " + varInfos[i].getName());
+            }
+            remaining.set(index, null);
+
+            if (!(varSignatures[index].equals(varInfos[i].getSignature()))) {
                 logWriter
                         .printError("Unexpected signature of variable = "
                                 + varInfos[i].getName()
@@ -299,14 +314,14 @@ public class GetValuesTest extends JDWPStackFrameTestCase {
                                 + varInfos[i].getSlot()
                                 + ", with unexpected signature = "
                                 + varInfos[i].getSignature()
-                                + " instead of signature = " + varSignature[i]);
+                                + " instead of signature = " + varSignatures[index]);
                 success = false;
             }
-            if (!(varNames[i].equals(varInfos[i].getName()))) {
+            if (!(varNames[index].equals(varInfos[i].getName()))) {
                 logWriter.printError("Unexpected name of variable  "
                         + varInfos[i].getName() + ", on slot = "
                         + varInfos[i].getSlot() + " instead of name = "
-                        + varNames[i]);
+                        + varNames[index]);
                 success = false;
             }
 

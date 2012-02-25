@@ -24,6 +24,7 @@
  */
 package org.apache.harmony.jpda.tests.jdwp.StackFrame;
 
+import java.util.Arrays;
 import org.apache.harmony.jpda.tests.framework.jdwp.CommandPacket;
 import org.apache.harmony.jpda.tests.framework.jdwp.JDWPCommands;
 import org.apache.harmony.jpda.tests.framework.jdwp.JDWPConstants;
@@ -41,7 +42,7 @@ public class SetValuesTest extends JDWPStackFrameTestCase {
 
     VarInfo[] varInfos;
 
-    String varSignature[] = { "Lorg/apache/harmony/jpda/tests/jdwp/StackFrame/StackTraceDebuggee;", "Z",
+    String varSignatures[] = { "Lorg/apache/harmony/jpda/tests/jdwp/StackFrame/StackTraceDebuggee;", "Z",
             "I", "Ljava/lang/String;" };
 
     String varNames[] = { "this", "boolLocalVariable", "intLocalVariable",
@@ -152,7 +153,7 @@ public class SetValuesTest extends JDWPStackFrameTestCase {
         logWriter.println("");
         logWriter.println("=> Getting Variable Table...");
         varInfos = jdwpGetVariableTable(refTypeID, methodID);
-        if (checkVarTable(varInfos)) {
+        if (GetValuesTest.checkVarTable(logWriter, varInfos, varTags, varSignatures, varNames)) {
             logWriter.println("=> Variable table check passed.");
         } else {
             printErrorAndFail("Variable table check failed.");
@@ -168,9 +169,9 @@ public class SetValuesTest extends JDWPStackFrameTestCase {
         packet.setNextValueAsLong(frameID);
 
         packet.setNextValueAsInt(varTags.length-2);
-        packet.setNextValueAsInt(varInfos[1].getSlot());
+        packet.setNextValueAsInt(varInfoByName("boolLocalVariable").getSlot());
         packet.setNextValueAsValue(new Value(false));
-        packet.setNextValueAsInt(varInfos[2].getSlot());
+        packet.setNextValueAsInt(varInfoByName("intLocalVariable").getSlot());
         packet.setNextValueAsValue(new Value((int)12345));
 
         ReplyPacket reply = debuggeeWrapper.vmMirror.performCommand(packet);
@@ -190,11 +191,12 @@ public class SetValuesTest extends JDWPStackFrameTestCase {
         packet.setNextValueAsInt(varTags.length);
         for (int i = 0; i < varTags.length; i++) {
             logWriter.println("");
-            logWriter.println("=> For variable #"+i+":");
+            logWriter.println("=> For variable #"+i+" " + varInfos[i].getName() + ":");
             packet.setNextValueAsInt(varInfos[i].getSlot());
             logWriter.println("=> Slot = "+varInfos[i].getSlot());
-            packet.setNextValueAsByte(varTags[i]);
-            logWriter.println("=> Tag = "+JDWPConstants.Tag.getName(varTags[i]));
+            byte tag = varTags[Arrays.asList(varNames).indexOf(varInfos[i].getName())];
+            packet.setNextValueAsByte(tag);
+            logWriter.println("=> Tag = "+JDWPConstants.Tag.getName(tag));
             logWriter.println("");
         }
 
@@ -215,16 +217,7 @@ public class SetValuesTest extends JDWPStackFrameTestCase {
         //print and check values of variables
         logWriter.println("=> Values of variables: ");
 
-        Value val = reply.getNextValueAsValue();
-        if (val.getTag() == JDWPConstants.Tag.OBJECT_TAG) {
-            logWriter.println("=> Tag is correct");
-            logWriter.println("");
-        } else {
-            logWriter.printError("Unexpected tag of variable: "
-                    + JDWPConstants.Tag.getName(val.getTag()) + " instead of: CLASS_OBJECT_TAG");
-            logWriter.printError("");
-            success = false;
-        }
+        Value val;
 
         val = reply.getNextValueAsValue();
         if (val.getTag() == JDWPConstants.Tag.BOOLEAN_TAG) {
@@ -292,47 +285,27 @@ public class SetValuesTest extends JDWPStackFrameTestCase {
             logWriter.printError("");
             success = false;
         }
+
+        val = reply.getNextValueAsValue();
+        if (val.getTag() == JDWPConstants.Tag.OBJECT_TAG) {
+            logWriter.println("=> Tag is correct");
+            logWriter.println("");
+        } else {
+            logWriter.printError("Unexpected tag of variable: "
+                    + JDWPConstants.Tag.getName(val.getTag()) + " instead of: CLASS_OBJECT_TAG");
+            logWriter.printError("");
+            success = false;
+        }
+
         assertTrue(logWriter.getErrorMessage(), success);
     }
 
-    //prints variables info, checks signatures
-    boolean checkVarTable(VarInfo[] varInfos) {
-        boolean success = true;
-        logWriter.println("==> Number of variables = " + varInfos.length);
-        if (varInfos.length != varTags.length) {
-
-            printErrorAndFail("Unexpected number of variables: "
-                    + varInfos.length + " instead of " + varTags.length);
+    private VarInfo varInfoByName(String name) {
+      for (int i = 0; i < varInfos.length; ++i) {
+        if (varInfos[i].getName().equals(name)) {
+          return varInfos[i];
         }
-        for (int i = 0; i < varInfos.length; i++) {
-            logWriter.println("");
-            logWriter.println("=> Name = " + varInfos[i].getName());
-            //## take codeIndex and length and check them
-            logWriter.println("=> Slot = " + varInfos[i].getSlot());
-            logWriter.println("=> Sign = " + varInfos[i].getSignature());
-            if (!(varSignature[i].equals(varInfos[i].getSignature()))) {
-                logWriter
-                        .printError("Unexpected signature of variable = "
-                                + varInfos[i].getName()
-                                + ", on slot = "
-                                + varInfos[i].getSlot()
-                                + ", with unexpected signature = "
-                                + varInfos[i].getSignature()
-                                + " instead of signature = " + varSignature[i]);
-                success = false;
-                ;
-            }
-            if (!(varNames[i].equals(varInfos[i].getName()))) {
-                logWriter.println("Unexpected name of variable  "
-                        + varInfos[i].getName() + ", on slot = "
-                        + varInfos[i].getSlot() + " instead of name = "
-                        + varNames[i]);
-                success = false;
-                ;
-            }
-
-            logWriter.println("");
-        }
-        return success;
+      }
+      return null;
     }
 }

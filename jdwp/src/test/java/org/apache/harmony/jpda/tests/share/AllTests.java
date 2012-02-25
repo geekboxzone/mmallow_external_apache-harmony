@@ -27,12 +27,10 @@ public class AllTests {
 
     // This stuff is currently unsupported in our system:
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand.OnthrowDebuggerLaunchTest.class);
+    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.ClassUnloadTest.class);
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.FieldAccessTest.class);
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.FieldModification002Test.class);
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.FieldModificationTest.class);
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MethodEntryTest.class);
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MethodExitTest.class);
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MethodExitWithReturnValueTest.class);
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MonitorContendedEnteredTest.class);
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MonitorContendedEnterTest.class);
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitedTest.class);
@@ -43,18 +41,22 @@ public class AllTests {
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.HoldEventsTest.class);
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ReleaseEventsTest.class);
 
-    // These currently hang, so it's handy to be able to easily skip them all while still running all the other tests.
-    boolean runHangingTests = true;
-    if (runHangingTests) {
-      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.InvokeMethod002Test.class);
-      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.InvokeMethodTest.class);
-      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.NewInstanceTest.class);
-      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.MultiSession.ResumeTest.class);
-      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.MultiSession.SingleStepTest.class);
-      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.MultiSession.ThreadEndTest.class);
-      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.MultiSession.ThreadStartTest.class);
-      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.InvokeMethodTest.class);
-    }
+    // We just disable collection of all objects we've ever told the debugger about, but we could fix these.
+    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.EnableCollectionTest.class);
+    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.DisposeObjectsTest.class);
+
+    // This one we could support, if we dug the return value out of the stack/registers:
+    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MethodExitWithReturnValueTest.class);
+
+    // This special case of Thread interruption could be supported, but isn't currently:
+    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.InterruptTest.class);
+
+    // The RI seems to keep terminated threads that are known to the debugger in a TS_ZOMBIE state
+    // rather than actually allowing them to terminate. We don't yet support this.
+    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.Status006Test.class);
+
+    // We don't implement ThreadGroupReference.Children properly, but could do so.
+    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadGroupReference.ChildrenTest.class);
 
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ArrayReference.GetValuesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ArrayReference.LengthTest.class);
@@ -63,16 +65,20 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ArrayType.NewInstanceTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassLoaderReference.VisibleClassesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassObjectReference.ReflectedTypeTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.InvokeMethodTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.InvokeMethod002Test.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.NewInstanceTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.SetValues002Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.SetValuesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.SuperClassTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.BreakpointTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.ClassPrepareTest.class);
-    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.ClassUnloadTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.CombinedEvents002Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.CombinedEvents003Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.CombinedEventsTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.ExceptionTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MethodEntryTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MethodExitTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.SingleStepTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.ThreadEndTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.ThreadStartTest.class);
@@ -94,12 +100,14 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.MultiSession.ListenConnectorTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.MultiSession.MethodEntryExitTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.MultiSession.RefTypeIDTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.MultiSession.ResumeTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.MultiSession.SingleStepTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.MultiSession.VMDeathTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.DisableCollectionTest.class);
-    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.EnableCollectionTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.GetValues002Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.GetValues003Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.GetValuesTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.InvokeMethodTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.IsCollectedTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.MonitorInfoTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.ReferenceTypeTest.class);
@@ -135,7 +143,6 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StackFrame.SetValuesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StackFrame.ThisObjectTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StringReference.ValueTest.class);
-    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadGroupReference.ChildrenTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadGroupReference.NameTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadGroupReference.ParentTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.CurrentContendedMonitorTest.class);
@@ -147,7 +154,6 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.ForceEarlyReturnTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.FrameCountTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.FramesTest.class);
-    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.InterruptTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.NameTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.OwnedMonitorsStackDepthInfoTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.OwnedMonitorsTest.class);
@@ -156,7 +162,6 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.Status003Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.Status004Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.Status005Test.class);
-    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.Status006Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.StatusTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.SuspendCountTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.SuspendTest.class);
@@ -170,7 +175,6 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ClassesBySignatureTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ClassPathsTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.CreateStringTest.class);
-    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.DisposeObjectsTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.DisposeTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ExitTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.IDSizesTest.class);

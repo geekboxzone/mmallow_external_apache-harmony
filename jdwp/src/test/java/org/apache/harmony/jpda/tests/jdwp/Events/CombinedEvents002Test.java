@@ -226,7 +226,7 @@ public class CombinedEvents002Test extends CombinedEventsTestCase {
         if ( testedMethodEndCodeIndex != eventCodeIndex ) {
             logWriter.println("## FAILURE: Unexpected CodeIndex in event!");
             logWriter.println("##          Expected CodeIndex (testedMethodEndCodeIndex) = "
-                + testedMethodStartCodeIndex );
+                + testedMethodEndCodeIndex );
             testCaseIsOk = false;
         } else {
             logWriter.println("==> OK - it is expected CodeIndex (testedMethodEndCodeIndex)");
