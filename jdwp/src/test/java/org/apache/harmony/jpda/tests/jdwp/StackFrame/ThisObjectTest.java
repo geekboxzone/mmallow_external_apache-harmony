@@ -189,10 +189,6 @@ public class ThisObjectTest extends JDWPStackFrameTestCase {
                 }
 
                 assertAllDataRead(reply);
-                /*if (!reply.isAllDataRead()) {
-                    logWriter.println("## FAILURE: Extra bytes in reply for StackFrame.ThisObject");
-                    success = false;
-                }*/
 
             } else {
                 logWriter.println
