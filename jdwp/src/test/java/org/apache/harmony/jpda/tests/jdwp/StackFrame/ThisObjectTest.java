@@ -91,7 +91,7 @@ public class ThisObjectTest extends JDWPStackFrameTestCase {
         logWriter.println("==> Getting frames");
         FrameInfo[] frameIDs = jdwpGetFrames(mainThread, 0, frameCount);
         logWriter.println("==> frames count = " + frameIDs.length);
-        assertEquals("Invlid number of frames,", frameCount, frameIDs.length);
+        assertEquals("Invalid number of frames,", frameCount, frameIDs.length);
         //assertTrue(frameIDs.length == frameCount);
 
         for (int i = 0; i < frameCount; i++) {

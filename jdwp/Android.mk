@@ -32,6 +32,7 @@ include $(BUILD_HOST_JAVA_LIBRARY)
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
 jdwp_test_runtime := oatexecd
+#jdwp_test_runtime := oatexecd -verbose:jdwp
 jdwp_test_classpath := /data/$(jdwp_tests_jar):/system/framework/junit-targetdex.jar
 
 # If this fails complaining about TestRunner, build "external/junit" manually.
