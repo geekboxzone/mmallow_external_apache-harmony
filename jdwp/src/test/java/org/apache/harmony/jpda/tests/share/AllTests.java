@@ -55,9 +55,6 @@ public class AllTests {
     // rather than actually allowing them to terminate. We don't yet support this.
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.Status006Test.class);
 
-    // We don't implement ThreadGroupReference.Children properly, but could do so.
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadGroupReference.ChildrenTest.class);
-
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ArrayReference.GetValuesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ArrayReference.LengthTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ArrayReference.SetValues002Test.class);
@@ -143,6 +140,7 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StackFrame.SetValuesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StackFrame.ThisObjectTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StringReference.ValueTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadGroupReference.ChildrenTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadGroupReference.NameTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadGroupReference.ParentTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.CurrentContendedMonitorTest.class);
