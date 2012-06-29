@@ -37,7 +37,7 @@ public class Status003Debuggee extends SyncDebuggee {
     static volatile boolean status003DebuggeeThreadStarted = false;
 
     static Object waitTimeObject = new Object();
-    static void waitMlsecsTime(long mlsecsTime) { 
+    static void waitMlsecsTime(long mlsecsTime) {
         synchronized(waitTimeObject) {
             try {
                 waitTimeObject.wait(mlsecsTime);
@@ -46,30 +46,30 @@ public class Status003Debuggee extends SyncDebuggee {
             }
         }
     }
-    
+
     public void run() {
         logWriter.println("--> Debuggee: Status003Debuggee: START");
         status003DebuggeeThis = this;
-        
+
         String status003DebuggeeThreadName = "Status003DebuggeeThread";
         Status003Debuggee_Thread status003DebuggeeThread
-            = new Status003Debuggee_Thread(status003DebuggeeThreadName); 
+            = new Status003Debuggee_Thread(status003DebuggeeThreadName);
 
         status003DebuggeeThread.start();
 
         while ( ! status003DebuggeeThreadStarted ) {
             waitMlsecsTime(1000);
         }
-        logWriter.println("--> Debuggee: Status003Debuggee: will sleep for 10 seconds");
-        waitMlsecsTime(10000); // to make sure that status003DebuggeeThread is sleeping
+        logWriter.println("--> Debuggee: Status003Debuggee: will sleep for 1 second");
+        waitMlsecsTime(1000); // to make sure that status003DebuggeeThread is sleeping
 
         synchronizer.sendMessage(status003DebuggeeThreadName);
-        synchronizer.receiveMessage(); // signal to finish  
- 
+        synchronizer.receiveMessage(); // signal to finish
+
         try {
             status003DebuggeeThread.interrupt();
         } catch (Throwable thrown) {
-            // ignore 
+            // ignore
         }
         while ( status003DebuggeeThread.isAlive() ) {
             waitMlsecsTime(100);
@@ -108,4 +108,3 @@ class Status003Debuggee_Thread extends Thread {
         parent.logWriter.println("--> Thread: " + getName() +  ": is finishibg...");
     }
 }
-

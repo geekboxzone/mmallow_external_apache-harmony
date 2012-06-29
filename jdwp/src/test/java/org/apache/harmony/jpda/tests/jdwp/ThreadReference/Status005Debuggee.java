@@ -39,7 +39,7 @@ public class Status005Debuggee extends SyncDebuggee {
     static Object lockObject = new Object();
 
     static Object waitTimeObject = new Object();
-    static void waitMlsecsTime(long mlsecsTime) { 
+    static void waitMlsecsTime(long mlsecsTime) {
         synchronized(waitTimeObject) {
             try {
                 waitTimeObject.wait(mlsecsTime);
@@ -48,14 +48,14 @@ public class Status005Debuggee extends SyncDebuggee {
             }
         }
     }
-    
+
     public void run() {
         logWriter.println("--> Debuggee: Status005Debuggee: START");
         status005DebuggeeThis = this;
-        
+
         String status005DebuggeeThreadName = "Status005DebuggeeThread";
         Status005Debuggee_Thread status005DebuggeeThread
-            = new Status005Debuggee_Thread(status005DebuggeeThreadName); 
+            = new Status005Debuggee_Thread(status005DebuggeeThreadName);
 
         synchronized(lockObject) {
             logWriter.println
@@ -65,15 +65,15 @@ public class Status005Debuggee extends SyncDebuggee {
             while ( ! status005DebuggeeThreadStarted ) {
                 waitMlsecsTime(1000);
             }
-            logWriter.println("--> Debuggee: Status005Debuggee: will sleep for 10 seconds");
-            waitMlsecsTime(10000); // to make sure that status005DebuggeeThread is sleeping
+            logWriter.println("--> Debuggee: Status005Debuggee: will sleep for 1 second");
+            waitMlsecsTime(1000); // to make sure that status005DebuggeeThread is sleeping
 
             synchronizer.sendMessage(status005DebuggeeThreadName);
             synchronizer.receiveMessage(); // signal to finish
         }
         logWriter.println
         ("--> Debuggee: Status005Debuggee: has exited from synchronized(lockObject) block");
-        
+
         while ( status005DebuggeeThread.isAlive() ) {
             waitMlsecsTime(100);
         }
@@ -106,4 +106,3 @@ class Status005Debuggee_Thread extends Thread {
         parent.logWriter.println("--> Thread: " + getName() +  ": is finishibg...");
     }
 }
-

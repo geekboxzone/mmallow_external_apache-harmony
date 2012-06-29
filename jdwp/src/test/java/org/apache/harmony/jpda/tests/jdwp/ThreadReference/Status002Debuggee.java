@@ -37,7 +37,7 @@ public class Status002Debuggee extends SyncDebuggee {
     static volatile boolean status002DebuggeeThreadStarted = false;
 
     static Object waitTimeObject = new Object();
-    static void waitMlsecsTime(long mlsecsTime) { 
+    static void waitMlsecsTime(long mlsecsTime) {
         synchronized(waitTimeObject) {
             try {
                 waitTimeObject.wait(mlsecsTime);
@@ -46,30 +46,30 @@ public class Status002Debuggee extends SyncDebuggee {
             }
         }
     }
-    
+
     public void run() {
         logWriter.println("--> Debuggee: Status002Debuggee: START");
         status002DebuggeeThis = this;
-        
+
         String status002DebuggeeThreadName = "Status002DebuggeeThread";
         Status002Debuggee_Thread status002DebuggeeThread
-            = new Status002Debuggee_Thread(status002DebuggeeThreadName); 
+            = new Status002Debuggee_Thread(status002DebuggeeThreadName);
 
         status002DebuggeeThread.start();
 
         while ( ! status002DebuggeeThreadStarted ) {
             waitMlsecsTime(1000);
         }
-        logWriter.println("--> Debuggee: Status002Debuggee: will sleep for 10 seconds");
-        waitMlsecsTime(10000); // to make sure that status002DebuggeeThread is sleeping
+        logWriter.println("--> Debuggee: Status002Debuggee: will sleep for 1 second");
+        waitMlsecsTime(1000); // to make sure that status002DebuggeeThread is sleeping
 
         synchronizer.sendMessage(status002DebuggeeThreadName);
         synchronizer.receiveMessage(); // signal to finish
-        
+
         try {
             status002DebuggeeThread.interrupt();
         } catch (Throwable thrown) {
-            // ignore 
+            // ignore
         }
         while ( status002DebuggeeThread.isAlive() ) {
             waitMlsecsTime(100);
@@ -100,9 +100,8 @@ class Status002Debuggee_Thread extends Thread {
         try {
             Thread.sleep(mlsecTimeToSleep);
         } catch (Throwable thrown) {
-            // ignore 
+            // ignore
         }
         parent.logWriter.println("--> Thread: " + getName() +  ": is finishibg...");
     }
 }
-

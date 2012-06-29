@@ -34,6 +34,7 @@ include $(call all-makefiles-under,$(LOCAL_PATH))
 jdwp_test_runtime := oatexecd
 #jdwp_test_runtime := oatexecd -verbose:jdwp
 jdwp_test_classpath := /data/$(jdwp_tests_jar):/system/framework/junit-targetdex.jar
+jdwp_test_timeout_ms := 10000 # 10s.
 
 # If this fails complaining about TestRunner, build "external/junit" manually.
 .PHONY: run-jdwp-tests
@@ -45,6 +46,8 @@ run-jdwp-tests: $(TARGET_OUT_DATA)/$(jdwp_tests_jar) $(TARGET_OUT_JAVA_LIBRARIES
           -Djpda.settings.verbose=true \
           -Djpda.settings.syncPort=34016 \
           -Djpda.settings.debuggeeJavaPath="$(jdwp_test_runtime)" \
+          -Djpda.settings.timeout=$(jdwp_test_timeout_ms) \
+          -Djpda.settings.waitingTime=$(jdwp_test_timeout_ms) \
           org.apache.harmony.jpda.tests.share.AllTests
 
 .PHONY: run-jdwp-tests-ri
