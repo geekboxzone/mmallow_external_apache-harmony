@@ -19,7 +19,7 @@ LOCAL_MODULE_TAGS := tests
 LOCAL_MODULE := $(local_module_name)
 LOCAL_NO_EMMA_INSTRUMENT := true
 LOCAL_NO_EMMA_COMPILE := true
-LOCAL_MODULE_PATH := $(TARGET_OUT_DATA)
+LOCAL_MODULE_PATH := $(TARGET_OUT_DATA)/jdwp
 include $(BUILD_JAVA_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -33,12 +33,12 @@ include $(call all-makefiles-under,$(LOCAL_PATH))
 
 jdwp_test_runtime := oatexecd
 #jdwp_test_runtime := oatexecd -verbose:jdwp
-jdwp_test_classpath := /data/$(jdwp_tests_jar):/system/framework/junit-targetdex.jar
+jdwp_test_classpath := /data/jdwp/$(jdwp_tests_jar):/data/junit/junit-targetdex.jar
 jdwp_test_timeout_ms := 10000 # 10s.
 
 # If this fails complaining about TestRunner, build "external/junit" manually.
 .PHONY: run-jdwp-tests
-run-jdwp-tests: $(TARGET_OUT_DATA)/$(jdwp_tests_jar) $(TARGET_OUT_JAVA_LIBRARIES)/junit-targetdex.jar
+run-jdwp-tests: $(TARGET_OUT_DATA)/jdwp/$(jdwp_tests_jar) $(TARGET_OUT_DATA)/junit/junit-targetdex.jar
 	adb shell stop
 	adb remount
 	adb sync
