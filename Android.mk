@@ -54,8 +54,6 @@ LOCAL_JAVA_LIBRARIES := core core-junit
 LOCAL_JAVACFLAGS := $(harmony_test_javac_flags)
 LOCAL_MODULE_TAGS := tests
 LOCAL_MODULE := apache-harmony-tests
-LOCAL_NO_EMMA_INSTRUMENT := true
-LOCAL_NO_EMMA_COMPILE := true
 include $(BUILD_STATIC_JAVA_LIBRARY)
 
 ifeq ($(WITH_HOST_DALVIK),true)
@@ -65,10 +63,7 @@ ifeq ($(WITH_HOST_DALVIK),true)
     LOCAL_NO_STANDARD_LIBRARIES := true
     LOCAL_JAVA_LIBRARIES := core-hostdex core-junit-hostdex
     LOCAL_JAVACFLAGS := $(harmony_test_javac_flags)
-    LOCAL_MODULE_TAGS := tests
     LOCAL_MODULE := apache-harmony-tests-hostdex
-    LOCAL_NO_EMMA_INSTRUMENT := true
-    LOCAL_NO_EMMA_COMPILE := true
     LOCAL_BUILD_HOST_DEX := true
     include $(BUILD_HOST_JAVA_LIBRARY)
 endif
