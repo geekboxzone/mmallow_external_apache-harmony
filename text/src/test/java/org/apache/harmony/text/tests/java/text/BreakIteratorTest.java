@@ -94,11 +94,7 @@ public class BreakIteratorTest extends TestCase {
             fail("should throw illegal argument exception");
         } catch (IllegalArgumentException e) {
         }
-        try {
-            iterator.following(TEXT.length());
-            fail("should throw illegal argument exception");
-        } catch (IllegalArgumentException e) {
-        }
+        assertEquals(BreakIterator.DONE, iterator.following(TEXT.length()));
     }
 
     public void testIsBoundary() {
@@ -116,11 +112,7 @@ public class BreakIteratorTest extends TestCase {
             fail("should throw illegal argument exception");
         } catch (IllegalArgumentException e) {
         }
-        try {
-            iterator.isBoundary(TEXT.length());
-            fail("should throw illegal argument exception");
-        } catch (IllegalArgumentException e) {
-        }
+        assertTrue(iterator.isBoundary(TEXT.length()));
     }
 
     public void testLast() {
@@ -158,11 +150,8 @@ public class BreakIteratorTest extends TestCase {
             fail("should throw illegal argument exception");
         } catch (IllegalArgumentException e) {
         }
-        try {
-            iterator.preceding(TEXT.length());
-            fail("should throw illegal argument exception");
-        } catch (IllegalArgumentException e) {
-        }
+        assertEquals(TEXT.length() - 1, iterator.preceding(TEXT.length()));
+        assertEquals(BreakIterator.DONE, iterator.preceding(0));
     }
 
     public void testPrevious() {
