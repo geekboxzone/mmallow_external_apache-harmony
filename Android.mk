@@ -37,11 +37,10 @@ harmony_test_src_files := \
 
 # We need to use -maxdepth 4 because there's a non-resource directory called "resources" deeper in the tree.
 define harmony-test-resource-dirs
-  $(shell cd $(LOCAL_PATH) && find . -maxdepth 4 -name resources 2> /dev/null)
+  $(foreach dir,$(1),$(patsubst %,./%,$(shell cd $(LOCAL_PATH) && find $(dir) -maxdepth 4 -name resources 2> /dev/null)))
 endef
-harmony_test_resource_dirs := \
-    $(call harmony-test-resource-dirs,$(harmony_test_dirs)) \
-    $(call harmony-test-resource-dirs,luni)
+
+harmony_test_resource_dirs := $(call harmony-test-resource-dirs,$(harmony_test_dirs))
 
 harmony_test_javac_flags=-encoding UTF-8
 harmony_test_javac_flags+=-Xmaxwarns 9999999
