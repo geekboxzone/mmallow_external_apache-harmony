@@ -53,6 +53,7 @@ LOCAL_JAVA_LIBRARIES := core core-junit
 LOCAL_JAVACFLAGS := $(harmony_test_javac_flags)
 LOCAL_MODULE_TAGS := tests
 LOCAL_MODULE := apache-harmony-tests
+LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
 include $(BUILD_STATIC_JAVA_LIBRARY)
 
 ifeq ($(WITH_HOST_DALVIK),true)
@@ -63,6 +64,7 @@ ifeq ($(WITH_HOST_DALVIK),true)
     LOCAL_JAVA_LIBRARIES := core-hostdex core-junit-hostdex
     LOCAL_JAVACFLAGS := $(harmony_test_javac_flags)
     LOCAL_MODULE := apache-harmony-tests-hostdex
+    LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
     LOCAL_BUILD_HOST_DEX := true
     include $(BUILD_HOST_JAVA_LIBRARY)
 endif
