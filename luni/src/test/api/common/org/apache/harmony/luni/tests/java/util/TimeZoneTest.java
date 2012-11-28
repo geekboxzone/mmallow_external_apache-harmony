@@ -176,13 +176,16 @@ public class TimeZoneTest extends junit.framework.TestCase {
         assertEquals("\u4e2d\u56fd\u6807\u51c6\u65f6\u95f4", timezone
                 .getDisplayName(Locale.CHINA));
     }
-    
+
     /**
      * @tests java.util.TimeZone#getDisplayName(boolean, int, java.util.Locale)
      */
     public void test_getDisplayNameZILjava_util_Locale() {
         TimeZone timezone = TimeZone.getTimeZone("Asia/Shanghai");
-        assertEquals("\u683c\u6797\u5c3c\u6cbb\u6807\u51c6\u65f6\u95f4+0800",
+        /* Time zone data was changed in ICU49.2.  Many common short names were removed. */
+        assertEquals("中国标准时间",
+                timezone.getDisplayName(false, TimeZone.LONG, Locale.CHINA));
+        assertEquals("GMT+0800",
                 timezone.getDisplayName(false, TimeZone.SHORT, Locale.CHINA));
         try {
             timezone.getDisplayName(false, 100, Locale.CHINA);
@@ -191,7 +194,7 @@ public class TimeZoneTest extends junit.framework.TestCase {
             // expected
         }
     }
-    
+
     /*
      * Regression for HARMONY-5860
      */
