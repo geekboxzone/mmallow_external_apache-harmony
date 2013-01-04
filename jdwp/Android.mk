@@ -31,8 +31,8 @@ include $(BUILD_HOST_JAVA_LIBRARY)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
-jdwp_test_runtime := oatexecd
-#jdwp_test_runtime := oatexecd -verbose:jdwp
+#jdwp_test_runtime := oatexec
+jdwp_test_runtime := oatexecd -verbose:jdwp -verbose:threads
 jdwp_test_classpath := /data/jdwp/$(jdwp_tests_jar):/data/junit/junit-targetdex.jar
 jdwp_test_timeout_ms := 10000 # 10s.
 
