@@ -42,6 +42,7 @@ jdwp_test_runtime_host := $(ANDROID_BUILD_TOP)/art/tools/art
 
 jdwp_test_runtime_options :=
 jdwp_test_runtime_options += -verbose:jdwp
+#jdwp_test_runtime_options += -Xint
 #jdwp_test_runtime_options += -verbose:threads
 jdwp_test_timeout_ms := 10000 # 10s.
 
@@ -54,7 +55,7 @@ run-jdwp-tests: $(TARGET_OUT_DATA)/jdwp/apache-harmony-jdwp-tests.jar $(TARGET_O
 	adb shell stop
 	adb remount
 	adb sync
-	adb shell $(jdwp_test_runtime_target) $(jdwp_test_runtime_options) -cp $(jdwp_test_classpath_target) \
+	adb shell $(jdwp_test_runtime_target) -cp $(jdwp_test_classpath_target) \
           -Djpda.settings.verbose=true \
           -Djpda.settings.syncPort=34016 \
           -Djpda.settings.debuggeeJavaPath="$(jdwp_test_runtime_target) $(jdwp_test_runtime_options)" \
