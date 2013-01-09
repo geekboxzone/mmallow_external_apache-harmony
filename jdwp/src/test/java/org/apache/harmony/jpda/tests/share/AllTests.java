@@ -59,10 +59,6 @@ public class AllTests {
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.ThreadGroup002Test.class);
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ExitTest.class);
 
-    // We implement Thread.Sleep as Object.wait, so the thread gets back the wrong state TS_WAIT
-    // instead of the expected TS_SLEEPING.
-    // suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.Status002Test.class);
-
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ArrayReference.GetValuesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ArrayReference.LengthTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ArrayReference.SetValues002Test.class);
@@ -162,6 +158,7 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.OwnedMonitorsStackDepthInfoTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.OwnedMonitorsTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.ResumeTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.Status002Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.Status003Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.Status004Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.Status005Test.class);
