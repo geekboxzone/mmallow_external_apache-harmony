@@ -69,15 +69,15 @@ public class CapabilitiesTest extends JDWPSyncTestCase {
 
         logWriter.println("\tcanWatchFieldModification\t= "
                 + canWatchFieldModification);
-        // TODO: the RI implements this, and we should, but curreently don't. "@KnownFailure".
+        // TODO: the RI implements this, and we should, but currently don't. "@KnownFailure".
         //assertTrue("canWatchFieldModification must be true", canWatchFieldModification);
 
         logWriter.println("\tcanWatchFieldAccess\t\t= " + canWatchFieldAccess);
-        // TODO: the RI implements this, and we should, but curreently don't. "@KnownFailure".
+        // TODO: the RI implements this, and we should, but currently don't. "@KnownFailure".
         //assertTrue("canWatchFieldAccess must be true", canWatchFieldAccess);
 
         logWriter.println("\tcanGetBytecodes\t\t\t= " + canGetBytecodes);
-        // TODO: the RI implements this, and we should, but curreently don't. "@KnownFailure".
+        // TODO: the RI implements this, and we should, but currently don't. "@KnownFailure".
         //assertTrue("canGetBytecodes must be true", canGetBytecodes);
 
         logWriter.println("\tcanGetSyntheticAttribute\t= "
@@ -86,17 +86,16 @@ public class CapabilitiesTest extends JDWPSyncTestCase {
 
         logWriter.println("\tcanGetOwnedMonitorInfo\t\t= "
                 + canGetOwnedMonitorInfo);
-        // TODO: the RI implements this, and we should, but curreently don't. "@KnownFailure".
+        // TODO: the RI implements this, and we should, but currently don't. "@KnownFailure".
         //assertTrue("canGetOwnedMonitorInfo must be true", canGetOwnedMonitorInfo);
 
         logWriter.println("\tcanGetCurrentContendedMonitor\t= "
                 + canGetCurrentContendedMonitor);
-        // TODO: the RI implements this, and we should, but curreently don't. "@KnownFailure".
+        // TODO: the RI implements this, and we should, but currently don't. "@KnownFailure".
         //assertTrue("canGetCurrentContendedMonitor must be true", canGetCurrentContendedMonitor);
 
         logWriter.println("\tcanGetMonitorInfo\t\t= " + canGetMonitorInfo);
-        // TODO: the RI implements this, and we should, but curreently don't. "@KnownFailure".
-        //assertTrue("canGetMonitorInfo must be true", canGetMonitorInfo);
+        assertTrue("canGetMonitorInfo must be true", canGetMonitorInfo);
 
         assertAllDataRead(reply);
 
