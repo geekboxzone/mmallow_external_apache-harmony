@@ -50,8 +50,8 @@ jdwp_test_classpath_host := $(ANDROID_HOST_OUT)/framework/apache-harmony-jdwp-te
 jdwp_test_classpath_target := /data/jdwp/apache-harmony-jdwp-tests.jar:/data/junit/junit-targetdex.jar
 
 # If this fails complaining about TestRunner, build "external/junit" manually.
-.PHONY: run-jdwp-tests
-run-jdwp-tests: $(TARGET_OUT_DATA)/jdwp/apache-harmony-jdwp-tests.jar $(TARGET_OUT_DATA)/junit/junit-targetdex.jar
+.PHONY: run-jdwp-tests-target
+run-jdwp-tests-target: $(TARGET_OUT_DATA)/jdwp/apache-harmony-jdwp-tests.jar $(TARGET_OUT_DATA)/junit/junit-targetdex.jar
 	adb shell stop
 	adb remount
 	adb sync

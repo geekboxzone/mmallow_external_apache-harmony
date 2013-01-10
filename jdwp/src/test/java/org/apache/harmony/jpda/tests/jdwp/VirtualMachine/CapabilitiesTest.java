@@ -86,8 +86,7 @@ public class CapabilitiesTest extends JDWPSyncTestCase {
 
         logWriter.println("\tcanGetOwnedMonitorInfo\t\t= "
                 + canGetOwnedMonitorInfo);
-        // TODO: the RI implements this, and we should, but currently don't. "@KnownFailure".
-        //assertTrue("canGetOwnedMonitorInfo must be true", canGetOwnedMonitorInfo);
+        assertTrue("canGetOwnedMonitorInfo must be true", canGetOwnedMonitorInfo);
 
         logWriter.println("\tcanGetCurrentContendedMonitor\t= "
                 + canGetCurrentContendedMonitor);

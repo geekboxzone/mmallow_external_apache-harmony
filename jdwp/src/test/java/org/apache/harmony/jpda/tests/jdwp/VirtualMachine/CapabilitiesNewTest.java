@@ -42,7 +42,7 @@ public class CapabilitiesNewTest extends JDWPSyncTestCase {
             {"canWatchFieldAccess", null},
             {"canGetBytecodes", null},
             {"canGetSyntheticAttribute", "true"},
-            {"canGetOwnedMonitorInfo", null},
+            {"canGetOwnedMonitorInfo", "true"},
             {"canGetCurrentContendedMonitor", null},
             {"canGetMonitorInfo", "true"},
             {"canRedefineClasses", null},
