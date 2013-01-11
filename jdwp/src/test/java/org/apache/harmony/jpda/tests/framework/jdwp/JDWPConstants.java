@@ -402,6 +402,8 @@ public class JDWPConstants {
 
         public static final int THREAD_SUSPENDED = 14;
 
+        public static final int THREAD_NOT_ALIVE = 15;
+
         public static final int INVALID_OBJECT = 20;
 
         public static final int INVALID_CLASS = 21;
@@ -523,6 +525,8 @@ public class JDWPConstants {
                 return "THREAD_NOT_SUSPENDED";
             case THREAD_SUSPENDED:
                 return "THREAD_SUSPENDED";
+            case THREAD_NOT_ALIVE:
+                return "THREAD_NOT_ALIVE";
             case INVALID_OBJECT:
                 return "INVALID_OBJECT";
             case INVALID_CLASS:
