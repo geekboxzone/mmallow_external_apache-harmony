@@ -55,7 +55,7 @@ public class CapabilitiesNewTest extends JDWPSyncTestCase {
             {"canSetDefaultStratum",             null},
             {"canGetInstanceInfo",               null},
             {"canRequestMonitorEvents",          null},
-            {"canGetMonitorFrameInfo",           null},
+            {"canGetMonitorFrameInfo",           "true"},
             {"canUseSourceNameFilters",          null},
             {"canGetConstantPool",               null},
             {"canForceEarlyReturn",              null},

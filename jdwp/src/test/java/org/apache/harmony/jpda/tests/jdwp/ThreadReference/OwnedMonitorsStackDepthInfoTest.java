@@ -46,6 +46,16 @@ public class OwnedMonitorsStackDepthInfoTest extends JDWPSyncTestCase {
         return isCapability;
     }
 
+    private int jdwpGetFrameCount(long threadID) {
+      CommandPacket packet = new CommandPacket(JDWPCommands.ThreadReferenceCommandSet.CommandSetID,
+                                               JDWPCommands.ThreadReferenceCommandSet.FrameCountCommand);
+      packet.setNextValueAsThreadID(threadID);
+
+      ReplyPacket reply = debuggeeWrapper.vmMirror.performCommand(packet);
+      checkReplyPacket(reply, "ThreadReference::FrameCount command");
+      return reply.getNextValueAsInt();
+    }
+
     /**
      * This testcase exercises ThreadReference.OwnedMonitorsStackDepthInfo
      * command. <BR>
@@ -85,15 +95,16 @@ public class OwnedMonitorsStackDepthInfoTest extends JDWPSyncTestCase {
         logWriter.println("==> suspend testedThread...");
         debuggeeWrapper.vmMirror.suspendThread(testedThreadID);
 
+        // There are three monitors held, two in the outermost frame, and one in the next frame.
+        int frameCount = jdwpGetFrameCount(testedThreadID);
+        int expectedMonitorCount = 3;
+        int[] expectedStackDepth = new int[] { frameCount - 2, frameCount - 1, frameCount - 1 };
+
         // Perform the command and attain the reply package
         ReplyPacket stackDepthReply = debuggeeWrapper.vmMirror
                 .performCommand(stackDepthPacket);
         checkReplyPacket(stackDepthReply,
                 "ThreadReference::OwnedMonitorsStackDepthInfo command");
-
-        // Expected return values, these values is attained from RI behavior
-        int expectedMonitorCount = 3;
-        int[] expectedStackDepth = new int[] { 6, 7, 7 };
 
         // Analyze the reply package
         int owned = stackDepthReply.getNextValueAsInt();
