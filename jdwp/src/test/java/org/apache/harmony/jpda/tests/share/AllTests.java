@@ -48,9 +48,6 @@ public class AllTests {
     // This one we could support, if we dug the return value out of the stack/registers:
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MethodExitWithReturnValueTest.class);
 
-    // This special case of Thread interruption could be supported, but isn't currently:
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.InterruptTest.class);
-
     // Apparently, we exit too abruptly.
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ExitTest.class);
 
@@ -151,6 +148,7 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.ForceEarlyReturnTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.FrameCountTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.FramesTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.InterruptTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.NameTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.OwnedMonitorsStackDepthInfoTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.OwnedMonitorsTest.class);
