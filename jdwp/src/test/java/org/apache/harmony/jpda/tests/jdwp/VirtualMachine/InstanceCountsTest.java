@@ -96,7 +96,7 @@ public class InstanceCountsTest extends JDWPSyncTestCase {
         logWriter.println("=> CHECK: send " + thisCommandName
                 + " and check reply for ERROR...");
 
-        // Compose InstanceCounts commnad
+        // Compose InstanceCounts command
         CommandPacket InstanceCountsCommand = new CommandPacket(
                 JDWPCommands.VirtualMachineCommandSet.CommandSetID,
                 JDWPCommands.VirtualMachineCommandSet.InstanceCountsCommand);
@@ -113,11 +113,7 @@ public class InstanceCountsTest extends JDWPSyncTestCase {
 
         short errorCode = checkedReply.getErrorCode();
         if (errorCode != JDWPConstants.Error.NONE) {
-            if (errorCode == JDWPConstants.Error.NOT_IMPLEMENTED) {
-                logWriter.println("=> CHECK PASSED: Expected error (NOT_IMPLEMENTED) is returned");
-                return;
-            }
-            else if(errorCode == JDWPConstants.Error.ILLEGAL_ARGUMENT) {
+            if(errorCode == JDWPConstants.Error.ILLEGAL_ARGUMENT) {
                 logWriter.println("=> CHECK PASSED: Expected error (ILLEGAL_ARGUMENT) is returned");
                 return;
             }

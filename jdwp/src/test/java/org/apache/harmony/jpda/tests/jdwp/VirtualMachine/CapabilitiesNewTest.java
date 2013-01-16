@@ -53,7 +53,7 @@ public class CapabilitiesNewTest extends JDWPSyncTestCase {
             {"canGetSourceDebugExtension",       null},
             {"canRequestVMDeathEvent",           null},
             {"canSetDefaultStratum",             null},
-            {"canGetInstanceInfo",               null},
+            {"canGetInstanceInfo",               "true"},
             {"canRequestMonitorEvents",          null},
             {"canGetMonitorFrameInfo",           "true"},
             {"canUseSourceNameFilters",          null},
