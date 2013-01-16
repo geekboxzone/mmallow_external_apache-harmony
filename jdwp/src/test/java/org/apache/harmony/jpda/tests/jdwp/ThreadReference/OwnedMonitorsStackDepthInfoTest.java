@@ -73,7 +73,7 @@ public class OwnedMonitorsStackDepthInfoTest extends JDWPSyncTestCase {
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
 
         if (!isCapability()) {
-            logWriter.println("##WARNING: this VM dosn't possess capability: canGetInstanceInfo");
+            logWriter.println("##WARNING: this VM dosn't possess capability: canGetMonitorFrameInfo");
             return;
         }
 
