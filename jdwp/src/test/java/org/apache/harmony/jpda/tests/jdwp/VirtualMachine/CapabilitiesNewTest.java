@@ -40,7 +40,7 @@ public class CapabilitiesNewTest extends JDWPSyncTestCase {
     static Object [][] capabilitiesFlags = {
             {"canWatchFieldModification",        null},
             {"canWatchFieldAccess",              null},
-            {"canGetBytecodes",                  null},
+            {"canGetBytecodes",                  "true"},
             {"canGetSyntheticAttribute",         "true"},
             {"canGetOwnedMonitorInfo",           "true"},
             {"canGetCurrentContendedMonitor",    "true"},

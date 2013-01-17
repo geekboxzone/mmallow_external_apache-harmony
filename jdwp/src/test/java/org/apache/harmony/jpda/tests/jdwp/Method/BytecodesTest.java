@@ -26,6 +26,7 @@
 package org.apache.harmony.jpda.tests.jdwp.Method;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 import org.apache.harmony.jpda.tests.framework.jdwp.CommandPacket;
 import org.apache.harmony.jpda.tests.framework.jdwp.JDWPCommands;
@@ -82,7 +83,7 @@ public class BytecodesTest extends JDWPMethodTestCase {
                 bytecode[j] = reply.getNextValueAsByte();
             }
 
-            logWriter.println("Bytecode=" + new String(bytecode));
+            logWriter.println("Bytecode=" + Arrays.toString(bytecode));
         }
 
         synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);

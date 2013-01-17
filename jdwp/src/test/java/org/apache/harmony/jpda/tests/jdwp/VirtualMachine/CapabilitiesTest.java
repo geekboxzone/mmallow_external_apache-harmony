@@ -77,8 +77,7 @@ public class CapabilitiesTest extends JDWPSyncTestCase {
         //assertTrue("canWatchFieldAccess must be true", canWatchFieldAccess);
 
         logWriter.println("\tcanGetBytecodes\t\t\t= " + canGetBytecodes);
-        // TODO: the RI implements this, and we should, but currently don't. "@KnownFailure".
-        //assertTrue("canGetBytecodes must be true", canGetBytecodes);
+        assertTrue("canGetBytecodes must be true", canGetBytecodes);
 
         logWriter.println("\tcanGetSyntheticAttribute\t= "
                 + canGetSyntheticAttribute);
