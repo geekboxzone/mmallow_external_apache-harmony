@@ -29,15 +29,8 @@ public class AllTests {
     // "TODO".
     //
 
-    // We just disable collection of all objects we've ever told the debugger about, but we could fix these.
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.EnableCollectionTest.class);
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.DisposeObjectsTest.class);
-
     // This one we could support, if we dug the return value out of the stack/registers:
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MethodExitWithReturnValueTest.class);
-
-    // Apparently, we exit too abruptly.
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ExitTest.class);
 
     // These will presumably require interpreting the whole system, but that's no worse than gdb.
     //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.FieldAccessTest.class);
@@ -115,6 +108,7 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.MultiSession.SingleStepTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.MultiSession.VMDeathTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.DisableCollectionTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.EnableCollectionTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.GetValues002Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.GetValues003Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.GetValuesTest.class);
@@ -190,6 +184,8 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ClassPathsTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.CreateStringTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.DisposeTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.DisposeObjectsTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ExitTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.IDSizesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.InstanceCountsTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.RedefineClassesTest.class);

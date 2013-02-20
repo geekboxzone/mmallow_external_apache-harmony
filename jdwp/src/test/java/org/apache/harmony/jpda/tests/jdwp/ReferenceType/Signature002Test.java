@@ -173,10 +173,7 @@ public class Signature002Test extends JDWPSyncTestCase {
         logWriter.println
         ("\n=> CHECK: send " + thisCommandName + " for unknown ID: INVALID_OBJECT is expected...");
 
-        long unknownID = debuggeeRefTypeID + 10;
-        if ( unknownID == checkedFieldID ) {
-            unknownID = unknownID + 100;
-        }
+        long unknownID = debuggeeRefTypeID + 100;
         logWriter.println("=> unknown ID = " + unknownID);
         checkedCommand = new CommandPacket(
                 JDWPCommands.ReferenceTypeCommandSet.CommandSetID,
