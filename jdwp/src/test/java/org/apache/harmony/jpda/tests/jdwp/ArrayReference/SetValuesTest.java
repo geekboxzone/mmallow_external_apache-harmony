@@ -128,7 +128,6 @@ public class SetValuesTest extends JDWPArrayReferenceTestCase {
         for (int i = 0; i < length; i++) {
             packet.setNextValueAsUntaggedValue(valuesRegion.getValue(i));
         }
-        packet.setNextValueAsInt(length);
 
         ReplyPacket reply = debuggeeWrapper.vmMirror.performCommand(packet);
         checkReplyPacket(reply, "ArrayReference::SetValues command");

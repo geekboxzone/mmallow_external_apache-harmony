@@ -203,18 +203,15 @@ public class InstanceCountsTest extends JDWPSyncTestCase {
             return;
         }
 
-        int refTypesCount = 0;
-
         logWriter.println("==> " + thisTestName + " for " + thisCommandName + ": START...");
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
 
-        // Compose InstanceCounts commnad
+        // Compose InstanceCounts command
         CommandPacket InstanceCountsCommand = new CommandPacket(
                 JDWPCommands.VirtualMachineCommandSet.CommandSetID,
                 JDWPCommands.VirtualMachineCommandSet.InstanceCountsCommand);
 
-        InstanceCountsCommand.setNextValueAsInt(refTypesCount);
-        InstanceCountsCommand.setNextValueAsReferenceTypeID(0);
+        InstanceCountsCommand.setNextValueAsInt(0); // count == 0
 
         // Perform InstanceCounts command and attain reply package
         ReplyPacket checkedReply = debuggeeWrapper.vmMirror
@@ -235,7 +232,7 @@ public class InstanceCountsTest extends JDWPSyncTestCase {
 
         int returnedRefTypesCount = checkedReply.getNextValueAsInt();
         assertEquals(thisCommandName + "returned reference types count is wrong.",
-                refTypesCount, returnedRefTypesCount, null, null);
+                0, returnedRefTypesCount, null, null);
 
         logWriter.println("=> CHECK: PASSED: expected reference types count is returned:");
         logWriter.println("=> Returned reference types count is " + returnedRefTypesCount);
