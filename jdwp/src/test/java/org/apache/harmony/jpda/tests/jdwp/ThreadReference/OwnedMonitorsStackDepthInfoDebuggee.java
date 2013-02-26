@@ -33,15 +33,15 @@ import org.apache.harmony.jpda.tests.share.SyncDebuggee;
 public class OwnedMonitorsStackDepthInfoDebuggee extends SyncDebuggee {
 
     public static final String TESTED_THREAD = "TestedThread";
-    
-    // These two objects are used 
+
+    // These two objects are used
     static Object waitForStart = new Object();
     static Object waitForFinish = new Object();
-    
+
     public void run() {
         DebuggeeThread thrd = new DebuggeeThread(TESTED_THREAD,
-                logWriter, synchronizer); 
-        
+                logWriter, synchronizer);
+
         synchronized(waitForStart){
             thrd.start();
             try {
@@ -68,8 +68,25 @@ public class OwnedMonitorsStackDepthInfoDebuggee extends SyncDebuggee {
             this.synchronizer = synchronizer;
         }
 
-        public void run() {
+        // Deliberately make several stack frames with known monitor states.
 
+        // 1. No monitors held in the outermost frame.
+        public void run() {
+            run1();
+        }
+
+        // 2. One monitor ("this") held in the next frame.
+        private synchronized void run1() {
+            run2();
+        }
+
+        // 3. No monitors held in the next frame.
+        private void run2() {
+            run3();
+        }
+
+        // 4. Two monitors held in the frame after that.
+        private void run3() {
             synchronized(OwnedMonitorsStackDepthInfoDebuggee.waitForFinish){
 
                 synchronized(OwnedMonitorsStackDepthInfoDebuggee.waitForStart){
