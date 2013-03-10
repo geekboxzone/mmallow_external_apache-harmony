@@ -51,7 +51,6 @@ LOCAL_JAVA_RESOURCE_DIRS := $(harmony_test_resource_dirs)
 LOCAL_NO_STANDARD_LIBRARIES := true
 LOCAL_JAVA_LIBRARIES := core core-junit
 LOCAL_JAVACFLAGS := $(harmony_test_javac_flags)
-LOCAL_MODULE_TAGS := tests
 LOCAL_MODULE := apache-harmony-tests
 LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
 include $(BUILD_STATIC_JAVA_LIBRARY)
