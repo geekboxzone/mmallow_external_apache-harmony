@@ -26,7 +26,7 @@ include $(BUILD_HOST_JAVA_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(harmony_jdwp_test_src_files)
-LOCAL_JAVA_LIBRARIES := junit
+LOCAL_JAVA_LIBRARIES := junit-hostdex
 LOCAL_MODULE := apache-harmony-jdwp-tests-hostdex
 LOCAL_BUILD_HOST_DEX := true
 include $(BUILD_HOST_JAVA_LIBRARY)
