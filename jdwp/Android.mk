@@ -12,6 +12,7 @@ harmony_jdwp_test_src_files := \
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(harmony_jdwp_test_src_files)
 LOCAL_JAVA_LIBRARIES := junit-targetdex
+LOCAL_MODULE_TAGS := tests
 LOCAL_MODULE := apache-harmony-jdwp-tests
 LOCAL_NO_EMMA_INSTRUMENT := true
 LOCAL_NO_EMMA_COMPILE := true
