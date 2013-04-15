@@ -51,7 +51,7 @@ public class InvokeMethod002Test extends JDWPSyncTestCase {
      * <BR> The testcase expects that returned value is not null object and returned
      * exception object is null;
      */
-    public void testInvokeMethod004() {
+    private void testInvokeMethod(boolean deliberately_screw_up_types) {
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
 
         // Get referenceTypeID
@@ -172,6 +172,11 @@ public class InvokeMethod002Test extends JDWPSyncTestCase {
         long[] fieldIDs = {0,0,0,0,0,0,0,0,0};
         Value[] fieldValues = {null,null,null,null,null,null,null,null,null};
 
+        if (deliberately_screw_up_types) {
+            fieldNames[1] = "checkStringArray";
+            fieldNames[4] = "checkIntArray";
+        }
+
         packet = new CommandPacket(
             JDWPCommands.ReferenceTypeCommandSet.CommandSetID,
             JDWPCommands.ReferenceTypeCommandSet.FieldsCommand);
@@ -241,23 +246,33 @@ public class InvokeMethod002Test extends JDWPSyncTestCase {
         packet.setNextValueAsInt(0);
         logWriter.println(" Send ClassType.InvokeMethod");
         reply = debuggeeWrapper.vmMirror.performCommand(packet);
-        checkReplyPacket(reply, "ClassType::InvokeMethod command");
 
-        Value returnValue = reply.getNextValueAsValue();
-        assertNotNull("Returned value is null", returnValue);
-        logWriter.println(" ClassType.InvokeMethod: returnValue=" + returnValue);
+        if (deliberately_screw_up_types) {
+            checkReplyPacket(reply, "ClassType::InvokeMethod command",
+                             JDWPConstants.Error.ILLEGAL_ARGUMENT);
+        } else {
+            checkReplyPacket(reply, "ClassType::InvokeMethod command");
 
-        TaggedObject exception = reply.getNextValueAsTaggedObject();
-        assertNotNull("ClassType::InvokeMethod returned null exception",
-                exception);
-        assertEquals("ClassType::InvokeMethod returned invalid exception objectID,",
-                0, exception.objectID);
-        assertEquals("ClassType::InvokeMethod returned invalid exception.tag",
-                JDWPConstants.Tag.OBJECT_TAG, exception.tag,
-                JDWPConstants.Tag.getName(JDWPConstants.Tag.OBJECT_TAG),
-                JDWPConstants.Tag.getName(exception.tag));
-        logWriter.println(" ClassType.InvokeMethod: exception.tag="
-            + exception.tag + " exception.objectID=" + exception.objectID);
+            Value returnValue = reply.getNextValueAsValue();
+            logWriter.println(" ClassType.InvokeMethod: returnValue=" + returnValue);
+
+            String returnedString = getStringValue(returnValue.getLongValue());
+            logWriter.println(" ClassType.InvokeMethod: returnedString=" + returnedString);
+            assertEquals("qwerty", returnedString);
+
+            TaggedObject exception = reply.getNextValueAsTaggedObject();
+            assertNotNull("ClassType::InvokeMethod returned null exception",
+                          exception);
+            assertEquals("ClassType::InvokeMethod returned invalid exception objectID,",
+                         0, exception.objectID);
+            assertEquals("ClassType::InvokeMethod returned invalid exception.tag",
+                         JDWPConstants.Tag.OBJECT_TAG, exception.tag,
+                         JDWPConstants.Tag.getName(JDWPConstants.Tag.OBJECT_TAG),
+                         JDWPConstants.Tag.getName(exception.tag));
+            logWriter.println(" ClassType.InvokeMethod: exception.tag=" + exception.tag +
+                              " exception.objectID=" + exception.objectID);
+        }
+
         assertAllDataRead(reply);
 
         //  Let's resume application
@@ -271,4 +286,11 @@ public class InvokeMethod002Test extends JDWPSyncTestCase {
         synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
     }
 
+    public void testInvokeMethod_right_argument_types() {
+        testInvokeMethod(false);
+    }
+
+    public void testInvokeMethod_wrong_argument_types() {
+        testInvokeMethod(true);
+    }
 }
