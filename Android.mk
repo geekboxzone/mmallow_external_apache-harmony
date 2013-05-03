@@ -11,7 +11,6 @@ harmony_test_dirs := \
     beans \
     logging \
     luni \
-    nio_char \
     prefs \
     regex \
     sql \
