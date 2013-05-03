@@ -12,7 +12,6 @@ harmony_test_dirs := \
     logging \
     luni \
     prefs \
-    regex \
     sql \
     support \
     text \
