@@ -34,8 +34,8 @@ include $(BUILD_HOST_JAVA_LIBRARY)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
-#jdwp_test_runtime_target := oatexec
-jdwp_test_runtime_target := oatexecd
+#jdwp_test_runtime_target := dalvikvm -XXlib:libart
+jdwp_test_runtime_target := dalvikvm -XXlib:libartd
 jdwp_test_runtime_host := $(ANDROID_BUILD_TOP)/art/tools/art
 
 jdwp_test_runtime_options :=
