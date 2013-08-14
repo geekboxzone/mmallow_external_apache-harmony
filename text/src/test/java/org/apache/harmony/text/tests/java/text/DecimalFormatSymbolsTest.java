@@ -33,7 +33,6 @@ import java.util.ServiceConfigurationError;
 import junit.framework.TestCase;
 
 import org.apache.harmony.testframework.serialization.SerializationTest;
-import org.apache.harmony.text.tests.java.text.MockedDecimalFormatSymbolsProvider.MockedDecimalFormatSymbols;
 
 public class DecimalFormatSymbolsTest extends TestCase {
 
@@ -74,60 +73,6 @@ public class DecimalFormatSymbolsTest extends TestCase {
             }
         }
         assertTrue(flag);
-    }
-
-    /**
-     * @tests java.text.DecimalFormatSymbols#getAvailableLocales()
-     */
-    public void test_getAvailableLocales_correct_provider() throws Exception {
-        URL path1 = new File("src/test/resources/provider/correct").toURL();
-        URL path2 = new File("resources/provider/correct").toURL();
-        LoadLocaleProviderTestHelper helper = new LoadLocaleProviderTestHelper(
-                new URL[] { path1, path2 }) {
-            @Override
-            public void test() {
-                Locale[] locales = DecimalFormatSymbols.getAvailableLocales();
-                assertNotNull(locales);
-                // must contain mock Locale
-                boolean flag = false;
-                for (Locale locale : locales) {
-                    if (locale.getLanguage().equals("mock")) {
-                        flag = true;
-                        break;
-                    }
-                }
-                assertTrue(flag);
-            }
-
-        };
-
-        if (helper.getThrowable() != null) {
-            throw new Exception(helper.getThrowable());
-        }
-    }
-
-    /**
-     * @tests java.text.DecimalFormatSymbols#getAvailableLocales()
-     */
-    public void test_getAvailableLocales_wrong_provider() throws Exception {
-        URL path1 = new File("src/test/resources/provider/wrong").toURL();
-        URL path2 = new File("resources/provider/wrong").toURL();
-        LoadLocaleProviderTestHelper helper = new LoadLocaleProviderTestHelper(
-                new URL[] { path1, path2 }) {
-            @Override
-            public void test() {
-                try {
-                    DecimalFormatSymbols.getAvailableLocales();
-                    fail("Should throw ServiceConfigurationError");
-                } catch (ServiceConfigurationError e) {
-                    // expected
-                }
-            }
-        };
-
-        if (helper.getThrowable() != null) {
-            throw new Exception(helper.getThrowable());
-        }
     }
 
     /**
@@ -181,55 +126,6 @@ public class DecimalFormatSymbolsTest extends TestCase {
         assertEquals(DecimalFormatSymbols.getInstance(), symbols);
     }
 
-    /**
-     * @tests java.text.DecimalFormatSymbols#getInstance(Locale)
-     */
-    public void test_getInstanceLjava_util_Locale_correct_provider()
-            throws Exception {
-        URL path1 = new File("src/test/resources/provider/correct").toURL();
-        URL path2 = new File("resources/provider/correct").toURL();
-        LoadLocaleProviderTestHelper helper = new LoadLocaleProviderTestHelper(
-                new URL[] { path1, path2 }) {
-            @Override
-            public void test() {
-                DecimalFormatSymbols symbols = DecimalFormatSymbols
-                        .getInstance(new Locale("Mock"));
-                assertTrue(symbols instanceof MockedDecimalFormatSymbols);
-
-            }
-        };
-
-        if (helper.getThrowable() != null) {
-            throw new Exception(helper.getThrowable());
-        }
-    }
-
-    /**
-     * @tests java.text.DecimalFormatSymbols#getInstance(Locale)
-     */
-    public void test_getInstanceLjava_util_Locale_wrong_provider()
-            throws Exception {
-        URL path1 = new File("src/test/resources/provider/wrong").toURL();
-        URL path2 = new File("resources/provider/wrong").toURL();
-        LoadLocaleProviderTestHelper helper = new LoadLocaleProviderTestHelper(
-                new URL[] { path1, path2 }) {
-            @Override
-            public void test() {
-                try {
-                    DecimalFormatSymbols symbols = DecimalFormatSymbols
-                            .getInstance(new Locale("Mock"));
-                    fail("Should throw ServiceConfigurationError");
-                } catch (ServiceConfigurationError e) {
-                    // expected
-                }
-            }
-        };
-
-        if (helper.getThrowable() != null) {
-            throw new Exception(helper.getThrowable());
-        }
-    }
-    
     /**
      * @tests java.text.DecimalFormatSymbols#equals(java.lang.Object)
      */

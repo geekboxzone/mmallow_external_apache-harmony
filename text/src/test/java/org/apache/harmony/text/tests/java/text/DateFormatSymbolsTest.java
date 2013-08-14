@@ -27,8 +27,6 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.ServiceConfigurationError;
 
-import org.apache.harmony.text.tests.java.text.MockedDateFormatSymbolsProvider.MockedDateFormatSymbols;
-
 public class DateFormatSymbolsTest extends junit.framework.TestCase {
 
     private DateFormatSymbols dfs;
@@ -65,60 +63,6 @@ public class DateFormatSymbolsTest extends junit.framework.TestCase {
             }
         }
         assertTrue(flag);
-    }
-
-    /**
-     * @tests java.text.DateFormatSymbols#getAvailableLocales()
-     */
-    public void test_getAvailableLocales_correct_provider() throws Exception {
-        URL path1 = new File("src/test/resources/provider/correct").toURL();
-        URL path2 = new File("resources/provider/correct").toURL();
-        LoadLocaleProviderTestHelper helper = new LoadLocaleProviderTestHelper(
-                new URL[] { path1, path2 }) {
-            @Override
-            public void test() {
-                Locale[] locales = DateFormatSymbols.getAvailableLocales();
-                assertNotNull(locales);
-                // must contain mock Locale
-                boolean flag = false;
-                for (Locale locale : locales) {
-                    if (locale.getLanguage().equals("mock")) {
-                        flag = true;
-                        break;
-                    }
-                }
-                assertTrue(flag);
-            }
-
-        };
-
-        if (helper.getThrowable() != null) {
-            throw new Exception(helper.getThrowable());
-        }
-    }
-
-    /**
-     * @tests java.text.DateFormatSymbols#getAvailableLocales()
-     */
-    public void test_getAvailableLocales_wrong_provider() throws Exception {
-        URL path1 = new File("src/test/resources/provider/wrong").toURL();
-        URL path2 = new File("resources/provider/wrong").toURL();
-        LoadLocaleProviderTestHelper helper = new LoadLocaleProviderTestHelper(
-                new URL[] { path1, path2 }) {
-            @Override
-            public void test() {
-                try {
-                    DateFormatSymbols.getAvailableLocales();
-                    fail("Should throw ServiceConfigurationError");
-                } catch (ServiceConfigurationError e) {
-                    // expected
-                }
-            }
-        };
-
-        if (helper.getThrowable() != null) {
-            throw new Exception(helper.getThrowable());
-        }
     }
 
     /**
@@ -168,54 +112,6 @@ public class DateFormatSymbolsTest extends junit.framework.TestCase {
         DateFormatSymbols symbols = DateFormatSymbols.getInstance(locale);
         assertNotNull(symbols);
         assertEquals(DateFormatSymbols.getInstance(), symbols);
-    }
-
-    /**
-     * @tests java.text.DateFormatSymbols#getInstance(Locale)
-     */
-    public void test_getInstanceLjava_util_Locale_correct_provider()
-            throws Exception {
-        URL path1 = new File("src/test/resources/provider/correct").toURL();
-        URL path2 = new File("resources/provider/correct").toURL();
-        LoadLocaleProviderTestHelper helper = new LoadLocaleProviderTestHelper(
-                new URL[] { path1, path2 }) {
-            @Override
-            public void test() {
-                DateFormatSymbols symbols = DateFormatSymbols
-                        .getInstance(new Locale("Mock"));
-                assertTrue(symbols instanceof MockedDateFormatSymbols);
-
-            }
-        };
-
-        if (helper.getThrowable() != null) {
-            throw new Exception(helper.getThrowable());
-        }
-    }
-
-    /**
-     * @tests java.text.DateFormatSymbols#getInstance(Locale)
-     */
-    public void test_getInstanceLjava_util_Locale_wrong_provider()
-            throws Exception {
-        URL path1 = new File("src/test/resources/provider/wrong").toURL();
-        URL path2 = new File("resources/provider/wrong").toURL();
-        LoadLocaleProviderTestHelper helper = new LoadLocaleProviderTestHelper(
-                new URL[] { path1, path2 }) {
-            @Override
-            public void test() {
-                try {
-                    DateFormatSymbols.getInstance(new Locale("Mock"));
-                    fail("Should throw ServiceConfigurationError");
-                } catch (ServiceConfigurationError e) {
-                    // expected
-                }
-            }
-        };
-
-        if (helper.getThrowable() != null) {
-            throw new Exception(helper.getThrowable());
-        }
     }
 
     /**
