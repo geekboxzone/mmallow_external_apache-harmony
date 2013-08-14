@@ -7,16 +7,11 @@ define all-harmony-test-java-files-under
 endef
 
 harmony_test_dirs := \
-    annotation \
     archive \
     beans \
     logging \
     luni \
-    math \
-    nio \
-    nio_char \
     prefs \
-    regex \
     sql \
     support \
     text \
@@ -53,6 +48,7 @@ LOCAL_JAVA_LIBRARIES := core core-junit
 LOCAL_JAVACFLAGS := $(harmony_test_javac_flags)
 LOCAL_MODULE := apache-harmony-tests
 LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
+LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(BUILD_STATIC_JAVA_LIBRARY)
 
 ifeq ($(WITH_HOST_DALVIK),true)
