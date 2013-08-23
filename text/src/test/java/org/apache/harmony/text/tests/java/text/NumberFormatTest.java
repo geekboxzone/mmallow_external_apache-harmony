@@ -265,9 +265,6 @@ public class NumberFormatTest extends junit.framework.TestCase {
     protected void tearDown() {
     }
     
-    /**
-	 * @test java.text.NumberFormat#setRoundingMode(java.math.RoundingMode)
-	 */
 	public void test_setRoundingMode_NullRoundingMode() {
 		try {
 			// Create a subclass ChoiceFormat which doesn't support
@@ -282,9 +279,6 @@ public class NumberFormatTest extends junit.framework.TestCase {
 		}
 	}
 
-	/**
-	 * @test java.text.NumberFormat#setRoundingMode(java.math.RoundingMode)
-	 */
 	public void test_setRoundingMode_Normal() {
 		try {
 			// Create a subclass ChoiceFormat which doesn't support

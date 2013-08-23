@@ -864,9 +864,6 @@ public class ArrayListTest extends junit.framework.TestCase {
         }
     }
 
-    /**
-     * @test java.util.ArrayList#addAll(int, Collection)
-     */
     public void test_addAll() {
         ArrayList list = new ArrayList();
         list.add("one");
