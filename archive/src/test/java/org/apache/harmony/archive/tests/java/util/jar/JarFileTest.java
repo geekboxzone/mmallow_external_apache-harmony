@@ -611,9 +611,6 @@ public class JarFileTest extends TestCase {
         }
     }
     
-    /*
-     * @test JarFile.getInputStream()
-     */
     public void testGetInputStreamLjava_util_jar_JarEntry() throws IOException {
         Support_Resources.copyFile(resources, null, JAR1);
         JarFile jf = new JarFile(new File(resources, JAR1));
