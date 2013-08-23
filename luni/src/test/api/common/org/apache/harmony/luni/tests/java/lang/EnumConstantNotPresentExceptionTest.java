@@ -24,10 +24,6 @@ public class EnumConstantNotPresentExceptionTest extends TestCase {
         ONE,TWO,THREE
     }
 
-    /**
-     * @test java.lang.EnumConstantNotPresentException#EnumConstantNotPresentException(Class<?
-     * extends Enum>, String)
-     */
     public void test_ConstructorLjava_lang_ClassLjava_lang_String() {
         try {
             new EnumConstantNotPresentException(null, "");
@@ -36,17 +32,11 @@ public class EnumConstantNotPresentExceptionTest extends TestCase {
         }
     }
 
-    /**
-     * @test java.lang.EnumConstantNotPresentException#enumType()
-     */
     public void test_enumType() {
         EnumConstantNotPresentException e = new EnumConstantNotPresentException(Fixture.class, "FOUR");
         assertEquals(Fixture.class, e.enumType());
     }
 
-    /**
-     * @test java.lang.EnumConstantNotPresentException#constantName()
-     */
     public void test_constantName() {
         EnumConstantNotPresentException e = new EnumConstantNotPresentException(Fixture.class, "FOUR");
         assertEquals("FOUR", e.constantName());
