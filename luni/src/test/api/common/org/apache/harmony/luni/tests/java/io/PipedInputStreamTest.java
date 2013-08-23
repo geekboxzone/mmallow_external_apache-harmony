@@ -74,9 +74,6 @@ public class PipedInputStreamTest extends junit.framework.TestCase {
     }
 
 
-    /**
-     * @test java.io.PipedInputStream#read()
-     */
     public void test_readException() throws IOException {
         pis = new PipedInputStream();
         pos = new PipedOutputStream();
