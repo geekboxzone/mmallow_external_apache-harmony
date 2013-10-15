@@ -358,10 +358,10 @@ public abstract class SortedMapTestBase extends TestCase {
     }
     
     public final void testClone() throws Exception {
-        Method refClone = ref.getClass().getMethod("clone", null);
-        Method mapClone = map.getClass().getMethod("clone", null);
-        SortedMap<Integer, Integer> map2 = (SortedMap<Integer, Integer>) mapClone.invoke(map, null);
-        assertEquals(refClone.invoke(ref, null), map2);
+        Method refClone = ref.getClass().getMethod("clone", new Class[0]);
+        Method mapClone = map.getClass().getMethod("clone", new Class[0]);
+        SortedMap<Integer, Integer> map2 = (SortedMap<Integer, Integer>) mapClone.invoke(map, new Object[0]);
+        assertEquals(refClone.invoke(ref, new Object[0]), map2);
         map2.remove(map2.lastKey());
         assertFalse(ref.equals(map2));
     }
