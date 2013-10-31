@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package javax.crypto;
 
@@ -225,7 +225,7 @@ public class SealedObjectTest extends TestCase {
     public void testGetObject4() throws Exception {
         try {
             new SealedObject("secret string",
-                             new NullCipher()).getObject((Key)null);
+                    new NullCipher()).getObject((Key) null);
             fail("NullPointerException should be thrown when key is null");
         } catch (NullPointerException e) {
         }

@@ -24,29 +24,30 @@ import java.util.Set;
 import java.util.Vector;
 
 import tests.resources.subfolder.tests.resources.hyts_resource_fr_FR;
+
 public class ListResourceBundleTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.util.ListResourceBundle#getKeys()
-	 */
-	public void test_getKeys() {
-		ResourceBundle bundle;
-		String name = "tests.support.Support_TestResource";
-		Locale.setDefault(new Locale("en", "US"));
-		bundle = ResourceBundle.getBundle(name, new Locale("fr", "FR", "VAR"));
-		Enumeration<String> keys = bundle.getKeys();
-		Vector<String> result = new Vector<String>();
-		while (keys.hasMoreElements()) {
-			result.addElement(keys.nextElement());
-		}
-		assertTrue("Missing key parent1", result.contains("parent1"));
-		assertTrue("Missing key parent2", result.contains("parent2"));
-		assertTrue("Missing key parent3", result.contains("parent3"));
-		assertTrue("Missing key parent4", result.contains("parent4"));
-		assertTrue("Missing key child1", result.contains("child1"));
-		assertTrue("Missing key child2", result.contains("child2"));
-		assertTrue("Missing key child3", result.contains("child3"));
-	}
+    /**
+     * @tests java.util.ListResourceBundle#getKeys()
+     */
+    public void test_getKeys() {
+        ResourceBundle bundle;
+        String name = "tests.support.Support_TestResource";
+        Locale.setDefault(new Locale("en", "US"));
+        bundle = ResourceBundle.getBundle(name, new Locale("fr", "FR", "VAR"));
+        Enumeration<String> keys = bundle.getKeys();
+        Vector<String> result = new Vector<String>();
+        while (keys.hasMoreElements()) {
+            result.addElement(keys.nextElement());
+        }
+        assertTrue("Missing key parent1", result.contains("parent1"));
+        assertTrue("Missing key parent2", result.contains("parent2"));
+        assertTrue("Missing key parent3", result.contains("parent3"));
+        assertTrue("Missing key parent4", result.contains("parent4"));
+        assertTrue("Missing key child1", result.contains("child1"));
+        assertTrue("Missing key child2", result.contains("child2"));
+        assertTrue("Missing key child3", result.contains("child3"));
+    }
 
     /**
      * @tests {@link java.util.ListResourceBundle#handleKeySet()}
@@ -74,22 +75,23 @@ public class ListResourceBundleTest extends junit.framework.TestCase {
         assertTrue(set.contains("subParent3"));
         assertTrue(set.contains("subParent4"));
     }
-    
-    public void test_handleGetObject(){
+
+    public void test_handleGetObject() {
         ResourceBundle.clearCache();
         hyts_resource_fr_FR bundle = (hyts_resource_fr_FR) ResourceBundle
                 .getBundle(
                         "tests.resources.subfolder.tests.resources.hyts_resource",
                         new Locale("fr", "FR"));
-        try{
+        try {
             bundle.handleGetObject(null);
             fail("Should throw NPE");
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
         }
     }
-	protected void setUp() {
-	}
 
-	protected void tearDown() {
-	}
+    protected void setUp() {
+    }
+
+    protected void tearDown() {
+    }
 }

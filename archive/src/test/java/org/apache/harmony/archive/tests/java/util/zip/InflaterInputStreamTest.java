@@ -32,33 +32,33 @@ import tests.support.resource.Support_Resources;
 
 public class InflaterInputStreamTest extends TestCase {
 
-	// files hyts_construO,hyts_construOD,hyts_construODI needs to be
-	// included as resources
-	byte outPutBuf[] = new byte[500];
+    // files hyts_construO,hyts_construOD,hyts_construODI needs to be
+    // included as resources
+    byte outPutBuf[] = new byte[500];
 
-	class MyInflaterInputStream extends InflaterInputStream {
-		MyInflaterInputStream(InputStream in) {
-			super(in);
-		}
+    class MyInflaterInputStream extends InflaterInputStream {
+        MyInflaterInputStream(InputStream in) {
+            super(in);
+        }
 
-		MyInflaterInputStream(InputStream in, Inflater infl) {
-			super(in, infl);
-		}
+        MyInflaterInputStream(InputStream in, Inflater infl) {
+            super(in, infl);
+        }
 
-		MyInflaterInputStream(InputStream in, Inflater infl, int size) {
-			super(in, infl, size);
-		}
+        MyInflaterInputStream(InputStream in, Inflater infl, int size) {
+            super(in, infl, size);
+        }
 
-		void myFill() throws IOException {
-			fill();
-		}
-	}
+        void myFill() throws IOException {
+            fill();
+        }
+    }
 
-	/**
-	 * @tests java.util.zip.InflaterInputStream#InflaterInputStream(java.io.InputStream)
-	 */
-	public void test_ConstructorLjava_io_InputStream() throws IOException {
-	    //FIXME This test doesn't pass in Harmony classlib or Sun 5.0_7 RI
+    /**
+     * @tests java.util.zip.InflaterInputStream#InflaterInputStream(java.io.InputStream)
+     */
+    public void test_ConstructorLjava_io_InputStream() throws IOException {
+        //FIXME This test doesn't pass in Harmony classlib or Sun 5.0_7 RI
         /*
 		int result = 0;
 		int buffer[] = new int[500];
@@ -74,69 +74,69 @@ public class InflaterInputStreamTest extends TestCase {
 		}
 		inflatIP.close();
         */
-	}
-
-	/**
-	 * @tests java.util.zip.InflaterInputStream#InflaterInputStream(java.io.InputStream,
-	 *        java.util.zip.Inflater)
-	 */
-	public void test_ConstructorLjava_io_InputStreamLjava_util_zip_Inflater() throws IOException {
-		byte byteArray[] = new byte[100];
-		InputStream infile = Support_Resources.getStream("hyts_construOD.bin");
-		Inflater inflate = new Inflater();
-		InflaterInputStream inflatIP = new InflaterInputStream(infile,
-				inflate);
-
-		inflatIP.read(byteArray, 0, 5);// only suppose to read in 5 bytes
-		inflatIP.close();
-	}
-
-	/**
-	 * @tests java.util.zip.InflaterInputStream#InflaterInputStream(java.io.InputStream,
-	 *        java.util.zip.Inflater, int)
-	 */
-	public void test_ConstructorLjava_io_InputStreamLjava_util_zip_InflaterI() throws IOException {
-		int result = 0;
-		int buffer[] = new int[500];
-		InputStream infile = Support_Resources.getStream("hyts_construODI.bin");
-		Inflater inflate = new Inflater();
-		InflaterInputStream inflatIP = new InflaterInputStream(infile,
-				inflate, 1);
-
-		int i = 0;
-		while ((result = inflatIP.read()) != -1) {
-			buffer[i] = result;
-			i++;
-		}
-		inflatIP.close();
-	}
+    }
 
     /**
      * @tests java.util.zip.InflaterInputStream#InflaterInputStream(java.io.InputStream,
-     *        java.util.zip.Inflater, int)
+     *java.util.zip.Inflater)
+     */
+    public void test_ConstructorLjava_io_InputStreamLjava_util_zip_Inflater() throws IOException {
+        byte byteArray[] = new byte[100];
+        InputStream infile = Support_Resources.getStream("hyts_construOD.bin");
+        Inflater inflate = new Inflater();
+        InflaterInputStream inflatIP = new InflaterInputStream(infile,
+                inflate);
+
+        inflatIP.read(byteArray, 0, 5);// only suppose to read in 5 bytes
+        inflatIP.close();
+    }
+
+    /**
+     * @tests java.util.zip.InflaterInputStream#InflaterInputStream(java.io.InputStream,
+     *java.util.zip.Inflater, int)
+     */
+    public void test_ConstructorLjava_io_InputStreamLjava_util_zip_InflaterI() throws IOException {
+        int result = 0;
+        int buffer[] = new int[500];
+        InputStream infile = Support_Resources.getStream("hyts_construODI.bin");
+        Inflater inflate = new Inflater();
+        InflaterInputStream inflatIP = new InflaterInputStream(infile,
+                inflate, 1);
+
+        int i = 0;
+        while ((result = inflatIP.read()) != -1) {
+            buffer[i] = result;
+            i++;
+        }
+        inflatIP.close();
+    }
+
+    /**
+     * @tests java.util.zip.InflaterInputStream#InflaterInputStream(java.io.InputStream,
+     *java.util.zip.Inflater, int)
      */
     public void test_ConstructorLjava_io_InputStreamLjava_util_zip_InflaterI_1() throws IOException {
         InputStream infile = Support_Resources.getStream("hyts_construODI.bin");
         Inflater inflate = new Inflater();
         InflaterInputStream inflatIP = null;
-        try{
+        try {
             inflatIP = new InflaterInputStream(infile, null, 1);
             fail("NullPointerException expected");
-        }catch(NullPointerException NPE){
+        } catch (NullPointerException NPE) {
             //expected
         }
 
-        try{
+        try {
             inflatIP = new InflaterInputStream(null, inflate, 1);
             fail("NullPointerException expected");
-        }catch(NullPointerException NPE){
+        } catch (NullPointerException NPE) {
             //expected
         }
 
-        try{
+        try {
             inflatIP = new InflaterInputStream(infile, inflate, -1);
             fail("IllegalArgumentException expected");
-        }catch(IllegalArgumentException iae){
+        } catch (IllegalArgumentException iae) {
             //expected
         }
     }
@@ -163,32 +163,32 @@ public class InflaterInputStreamTest extends TestCase {
         assertTrue(is.markSupported());
     }
 
-	/**
+    /**
      * @tests java.util.zip.InflaterInputStream#read()
      */
-	public void test_read() throws IOException {
-		int result = 0;
-		int buffer[] = new int[500];
-		byte orgBuffer[] = { 1, 3, 4, 7, 8 };
-		InputStream infile = Support_Resources
-				.getStream("hyts_construOD.bin");
-		Inflater inflate = new Inflater();
-		InflaterInputStream inflatIP = new InflaterInputStream(infile,
-				inflate);
+    public void test_read() throws IOException {
+        int result = 0;
+        int buffer[] = new int[500];
+        byte orgBuffer[] = { 1, 3, 4, 7, 8 };
+        InputStream infile = Support_Resources
+                .getStream("hyts_construOD.bin");
+        Inflater inflate = new Inflater();
+        InflaterInputStream inflatIP = new InflaterInputStream(infile,
+                inflate);
 
-		int i = 0;
-		while ((result = inflatIP.read()) != -1) {
-			buffer[i] = result;
-			i++;
-		}
-		inflatIP.close();
+        int i = 0;
+        while ((result = inflatIP.read()) != -1) {
+            buffer[i] = result;
+            i++;
+        }
+        inflatIP.close();
 
-		for (int j = 0; j < orgBuffer.length; j++) {
-			assertEquals(
-				"original compressed data did not equal decompressed data",
-				orgBuffer[j], buffer[j]);
-		}
-	}
+        for (int j = 0; j < orgBuffer.length; j++) {
+            assertEquals(
+                    "original compressed data did not equal decompressed data",
+                    orgBuffer[j], buffer[j]);
+        }
+    }
 
     /**
      * @tests java.util.zip.InflaterInputStream#read(byte [], int, int)
@@ -200,27 +200,27 @@ public class InflaterInputStreamTest extends TestCase {
         InflaterInputStream inflatIP = new InflaterInputStream(infile, inflate);
 
         byte[] b = new byte[3];
-        try{
+        try {
             result = inflatIP.read(null, 0, 1);
             fail("NullPointerException expected");
-        }catch(NullPointerException npe){
+        } catch (NullPointerException npe) {
             //expected
         }
 
         assertEquals(0, inflatIP.read(b, 0, 0));
 
-        try{
+        try {
             result = inflatIP.read(b, 5, 2); //offset higher
             fail("IndexOutOfBoundsException expected");
-        }catch(IndexOutOfBoundsException iobe){
+        } catch (IndexOutOfBoundsException iobe) {
             //expected
         }
 
-            inflatIP.close();
+        inflatIP.close();
         try {
             inflatIP.read(b, 0, 1); //read after close
             fail("IOException expected");
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             //expected
         }
     }
@@ -261,10 +261,10 @@ public class InflaterInputStreamTest extends TestCase {
         assertEquals(0, in.available());
     }
 
-	/**
-	 * @tests java.util.zip.InflaterInputStream#read(byte[], int, int)
-	 */
-	public void test_read$BII() throws IOException{
+    /**
+     * @tests java.util.zip.InflaterInputStream#read(byte[], int, int)
+     */
+    public void test_read$BII() throws IOException {
         byte[] test = new byte[507];
         for (int i = 0; i < 256; i++) {
             test[i] = (byte) i;
@@ -293,7 +293,7 @@ public class InflaterInputStreamTest extends TestCase {
         } catch (IndexOutOfBoundsException e) {
             // expected;
         }
-	}
+    }
 
     public void test_read$BII2() throws IOException {
         File resources = Support_Resources.createTempFolder();
@@ -342,109 +342,109 @@ public class InflaterInputStreamTest extends TestCase {
         }
     }
 
-	/**
-	 * @tests java.util.zip.InflaterInputStream#skip(long)
-	 */
-	public void test_skipJ() throws IOException {
-		InputStream is = Support_Resources.getStream("hyts_available.tst");
-		InflaterInputStream iis = new InflaterInputStream(is);
+    /**
+     * @tests java.util.zip.InflaterInputStream#skip(long)
+     */
+    public void test_skipJ() throws IOException {
+        InputStream is = Support_Resources.getStream("hyts_available.tst");
+        InflaterInputStream iis = new InflaterInputStream(is);
 
-		// Tests for skipping a negative number of bytes.
-		try {
-			iis.skip(-3);
-			fail("IllegalArgumentException not thrown");
-		} catch (IllegalArgumentException e) {
+        // Tests for skipping a negative number of bytes.
+        try {
+            iis.skip(-3);
+            fail("IllegalArgumentException not thrown");
+        } catch (IllegalArgumentException e) {
             // Expected
-		}
-		assertEquals("Incorrect Byte Returned.", 5, iis.read());
+        }
+        assertEquals("Incorrect Byte Returned.", 5, iis.read());
 
-		try {
-			iis.skip(Integer.MIN_VALUE);
-			fail("IllegalArgumentException not thrown");
-		} catch (IllegalArgumentException e) {
+        try {
+            iis.skip(Integer.MIN_VALUE);
+            fail("IllegalArgumentException not thrown");
+        } catch (IllegalArgumentException e) {
             // Expected
-		}
-		assertEquals("Incorrect Byte Returned.", 4, iis.read());
+        }
+        assertEquals("Incorrect Byte Returned.", 4, iis.read());
 
-		// Test to make sure the correct number of bytes were skipped
-		assertEquals("Incorrect Number Of Bytes Skipped.", 3, iis.skip(3));
+        // Test to make sure the correct number of bytes were skipped
+        assertEquals("Incorrect Number Of Bytes Skipped.", 3, iis.skip(3));
 
-		// Test to see if the number of bytes skipped returned is true.
-		assertEquals("Incorrect Byte Returned.", 7, iis.read());
+        // Test to see if the number of bytes skipped returned is true.
+        assertEquals("Incorrect Byte Returned.", 7, iis.read());
 
-		assertEquals("Incorrect Number Of Bytes Skipped.", 0, iis.skip(0));
-		assertEquals("Incorrect Byte Returned.", 0, iis.read());
+        assertEquals("Incorrect Number Of Bytes Skipped.", 0, iis.skip(0));
+        assertEquals("Incorrect Byte Returned.", 0, iis.read());
 
-		// Test for skipping more bytes than available in the stream
-		assertEquals("Incorrect Number Of Bytes Skipped.", 2, iis.skip(4));
-		assertEquals("Incorrect Byte Returned.", -1, iis.read());
-		iis.close();
-	}
+        // Test for skipping more bytes than available in the stream
+        assertEquals("Incorrect Number Of Bytes Skipped.", 2, iis.skip(4));
+        assertEquals("Incorrect Byte Returned.", -1, iis.read());
+        iis.close();
+    }
 
-	/**
-	 * @tests java.util.zip.InflaterInputStream#skip(long)
-	 */
-	public void test_skipJ2() throws IOException {
-		int result = 0;
-		int buffer[] = new int[100];
-		byte orgBuffer[] = { 1, 3, 4, 7, 8 };
+    /**
+     * @tests java.util.zip.InflaterInputStream#skip(long)
+     */
+    public void test_skipJ2() throws IOException {
+        int result = 0;
+        int buffer[] = new int[100];
+        byte orgBuffer[] = { 1, 3, 4, 7, 8 };
 
         // testing for negative input to skip
-		InputStream infile = Support_Resources
-				.getStream("hyts_construOD.bin");
-		Inflater inflate = new Inflater();
-		InflaterInputStream inflatIP = new InflaterInputStream(infile,
-				inflate, 10);
-		long skip;
-		try {
-			skip = inflatIP.skip(Integer.MIN_VALUE);
-			fail("Expected IllegalArgumentException when skip() is called with negative parameter");
-		} catch (IllegalArgumentException e) {
+        InputStream infile = Support_Resources
+                .getStream("hyts_construOD.bin");
+        Inflater inflate = new Inflater();
+        InflaterInputStream inflatIP = new InflaterInputStream(infile,
+                inflate, 10);
+        long skip;
+        try {
+            skip = inflatIP.skip(Integer.MIN_VALUE);
+            fail("Expected IllegalArgumentException when skip() is called with negative parameter");
+        } catch (IllegalArgumentException e) {
             // Expected
-		}
-		inflatIP.close();
+        }
+        inflatIP.close();
 
-		// testing for number of bytes greater than input.
-		InputStream infile2 = Support_Resources
-				.getStream("hyts_construOD.bin");
-		InflaterInputStream inflatIP2 = new InflaterInputStream(infile2);
+        // testing for number of bytes greater than input.
+        InputStream infile2 = Support_Resources
+                .getStream("hyts_construOD.bin");
+        InflaterInputStream inflatIP2 = new InflaterInputStream(infile2);
 
-		// looked at how many bytes the skip skipped. It is
-		// 5 and its supposed to be the entire input stream.
+        // looked at how many bytes the skip skipped. It is
+        // 5 and its supposed to be the entire input stream.
 
-		skip = inflatIP2.skip(Integer.MAX_VALUE);
-		// System.out.println(skip);
-		assertEquals("method skip() returned wrong number of bytes skipped",
-				5, skip);
+        skip = inflatIP2.skip(Integer.MAX_VALUE);
+        // System.out.println(skip);
+        assertEquals("method skip() returned wrong number of bytes skipped",
+                5, skip);
 
-		// test for skipping of 2 bytes
-		InputStream infile3 = Support_Resources
-				.getStream("hyts_construOD.bin");
-		InflaterInputStream inflatIP3 = new InflaterInputStream(infile3);
-		skip = inflatIP3.skip(2);
-		assertEquals("the number of bytes returned by skip did not correspond with its input parameters",
-				2, skip);
-		int i = 0;
-		result = 0;
-		while ((result = inflatIP3.read()) != -1) {
-			buffer[i] = result;
-			i++;
-		}
-		inflatIP2.close();
+        // test for skipping of 2 bytes
+        InputStream infile3 = Support_Resources
+                .getStream("hyts_construOD.bin");
+        InflaterInputStream inflatIP3 = new InflaterInputStream(infile3);
+        skip = inflatIP3.skip(2);
+        assertEquals("the number of bytes returned by skip did not correspond with its input parameters",
+                2, skip);
+        int i = 0;
+        result = 0;
+        while ((result = inflatIP3.read()) != -1) {
+            buffer[i] = result;
+            i++;
+        }
+        inflatIP2.close();
 
-		for (int j = 2; j < orgBuffer.length; j++) {
-			assertEquals(
-				"original compressed data did not equal decompressed data",
-				orgBuffer[j], buffer[j - 2]);
-		}
-	}
+        for (int j = 2; j < orgBuffer.length; j++) {
+            assertEquals(
+                    "original compressed data did not equal decompressed data",
+                    orgBuffer[j], buffer[j - 2]);
+        }
+    }
 
-	/**
-	 * @tests java.util.zip.InflaterInputStream#available()
-	 */
-	public void test_available() throws IOException {
-		InputStream is = Support_Resources.getStream("hyts_available.tst");
-		InflaterInputStream iis = new InflaterInputStream(is);
+    /**
+     * @tests java.util.zip.InflaterInputStream#available()
+     */
+    public void test_available() throws IOException {
+        InputStream is = Support_Resources.getStream("hyts_available.tst");
+        InflaterInputStream iis = new InflaterInputStream(is);
 
         int available;
         for (int i = 0; i < 11; i++) {
@@ -457,24 +457,24 @@ public class InflaterInputStreamTest extends TestCase {
             }
         }
 
-		iis.close();
-		try {
-			iis.available();
-			fail("available after close should throw IOException.");
-		} catch (IOException e) {
+        iis.close();
+        try {
+            iis.available();
+            fail("available after close should throw IOException.");
+        } catch (IOException e) {
             // Expected
-		}
-	}
+        }
+    }
 
-	/**
-	 * @tests java.util.zip.InflaterInputStream#close()
-	 */
-	public void test_close() throws IOException {
-		InflaterInputStream iin = new InflaterInputStream(
-				new ByteArrayInputStream(new byte[0]));
-		iin.close();
+    /**
+     * @tests java.util.zip.InflaterInputStream#close()
+     */
+    public void test_close() throws IOException {
+        InflaterInputStream iin = new InflaterInputStream(
+                new ByteArrayInputStream(new byte[0]));
+        iin.close();
 
         // test for exception
-		iin.close();
-	}
+        iin.close();
+    }
 }

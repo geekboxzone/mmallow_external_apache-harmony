@@ -109,11 +109,10 @@ public class BufferedWriterTest extends junit.framework.TestCase {
     /**
      * @throws IOException
      * @tests java.io.BufferedWriter#close()
-     *
      */
     public void test_close2() throws IOException {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new ByteArrayOutputStream()));
-            bw.close();
+        bw.close();
     }
 
     /**

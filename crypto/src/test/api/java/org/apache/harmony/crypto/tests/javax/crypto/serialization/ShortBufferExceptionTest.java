@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto.serialization;
 
@@ -28,7 +28,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for ShortBufferException serialization
- *
  */
 
 public class ShortBufferExceptionTest extends SerializationTest {

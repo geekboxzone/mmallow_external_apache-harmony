@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.serialization;
 
@@ -28,7 +28,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for InvalidParameterException serialization
- *
  */
 
 public class InvalidParameterExceptionTest extends SerializationTest {
@@ -42,7 +41,7 @@ public class InvalidParameterExceptionTest extends SerializationTest {
                 new InvalidParameterException(),
                 new InvalidParameterException(null),
                 new InvalidParameterException(msgs[1])
-                };
+        };
     }
 
 }

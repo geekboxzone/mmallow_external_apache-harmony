@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.callback;
 
@@ -34,16 +34,16 @@ import junit.framework.TestCase;
 public class UnsupportedCallbackExceptionTest extends TestCase {
 
     NameCallback nc = new NameCallback("prompt");
-    
+
     /**
-     * Test for UnsupportedCallbackException(Callback c) ctor 
+     * Test for UnsupportedCallbackException(Callback c) ctor
      */
     public final void testUnsupportedCallbackException_01() {
         UnsupportedCallbackException ce = new UnsupportedCallbackException(nc);
         assertEquals(nc, ce.getCallback());
         try {
             throw ce;
-        }catch (Exception e){
+        } catch (Exception e) {
             assertTrue(ce.equals(e));
             assertEquals(nc, ce.getCallback());
         }
@@ -51,15 +51,15 @@ public class UnsupportedCallbackExceptionTest extends TestCase {
     }
 
     /**
-     * Test for UnsupportedCallbackException(Callback c, String msg) ctor 
+     * Test for UnsupportedCallbackException(Callback c, String msg) ctor
      */
     public final void testUnsupportedCallbackException_02() {
         UnsupportedCallbackException ce = new UnsupportedCallbackException(nc, "message");
-        assertEquals ("message", ce.getMessage());
+        assertEquals("message", ce.getMessage());
         assertEquals(nc, ce.getCallback());
         try {
             throw ce;
-        }catch (Exception e){
+        } catch (Exception e) {
             assertTrue(ce.equals(e));
             assertEquals(nc, ce.getCallback());
         }
@@ -67,8 +67,8 @@ public class UnsupportedCallbackExceptionTest extends TestCase {
     }
 
     /**
-     * Test for UnsupportedCallbackException(Callback c, String msg) ctor 
-     * when callback and msg is null 
+     * Test for UnsupportedCallbackException(Callback c, String msg) ctor
+     * when callback and msg is null
      */
     public final void testUnsupportedCallbackException_03() {
         UnsupportedCallbackException ce = new UnsupportedCallbackException(null, null);
@@ -76,7 +76,7 @@ public class UnsupportedCallbackExceptionTest extends TestCase {
         assertNull(ce.getCallback());
         try {
             throw ce;
-        }catch (Exception e){
+        } catch (Exception e) {
             assertTrue(ce.equals(e));
         }
     }

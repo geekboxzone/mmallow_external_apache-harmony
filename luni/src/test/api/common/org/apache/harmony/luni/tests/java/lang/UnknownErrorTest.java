@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class UnknownErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.UnknownError#UnknownError()
-	 */
+    /**
+     * @tests java.lang.UnknownError#UnknownError()
+     */
     public void test_Constructor() {
         UnknownError e = new UnknownError();
         assertNull(e.getMessage());

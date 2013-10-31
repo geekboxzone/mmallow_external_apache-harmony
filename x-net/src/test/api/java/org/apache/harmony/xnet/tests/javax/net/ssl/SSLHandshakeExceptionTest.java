@@ -25,7 +25,6 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>SSLHandshakeException</code> class constructors and
  * methods.
- * 
  */
 public class SSLHandshakeExceptionTest extends TestCase {
 
@@ -34,7 +33,7 @@ public class SSLHandshakeExceptionTest extends TestCase {
 
     /**
      * Constructor for SSLHandshakeExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public SSLHandshakeExceptionTest(String arg0) {

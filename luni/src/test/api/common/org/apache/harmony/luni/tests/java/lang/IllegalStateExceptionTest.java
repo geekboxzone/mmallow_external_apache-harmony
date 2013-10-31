@@ -23,9 +23,9 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 public class IllegalStateExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.IllegalStateException#IllegalStateException()
-	 */
+    /**
+     * @tests java.lang.IllegalStateException#IllegalStateException()
+     */
     public void test_Constructor() {
         IllegalStateException e = new IllegalStateException();
         assertNull(e.getMessage());
@@ -41,7 +41,7 @@ public class IllegalStateExceptionTest extends TestCase {
         assertEquals("fixture", e.getMessage());
         assertNull(e.getCause());
     }
-    
+
     /**
      * @tests {@link java.land.IllegalStateException#IllIllegalStateException(java.lang.Throwable)}
      */

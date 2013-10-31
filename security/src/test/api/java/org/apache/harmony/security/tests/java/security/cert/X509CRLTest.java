@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -84,17 +84,15 @@ public class X509CRLTest extends TestCase {
         }
 
         public void verify(PublicKey key)
-                 throws CRLException, NoSuchAlgorithmException,
-                        InvalidKeyException, NoSuchProviderException,
-                        SignatureException
-        {
+                throws CRLException, NoSuchAlgorithmException,
+                InvalidKeyException, NoSuchProviderException,
+                SignatureException {
         }
 
         public void verify(PublicKey key, String sigProvider)
-                 throws CRLException, NoSuchAlgorithmException,
-                        InvalidKeyException, NoSuchProviderException,
-                        SignatureException
-        {
+                throws CRLException, NoSuchAlgorithmException,
+                InvalidKeyException, NoSuchProviderException,
+                SignatureException {
         }
 
         public int getVersion() {
@@ -146,7 +144,7 @@ public class X509CRLTest extends TestCase {
     public X509CRLTest() {
         tbt_crl = new TBTCRL() {
             public byte[] getEncoded() {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
     }
@@ -157,7 +155,7 @@ public class X509CRLTest extends TestCase {
      */
     public void testGetType() {
         assertEquals("The type of X509CRL should be X.509",
-                                            tbt_crl.getType(), "X.509");
+                tbt_crl.getType(), "X.509");
     }
 
     /**
@@ -168,45 +166,45 @@ public class X509CRLTest extends TestCase {
     public void testEquals() {
         TBTCRL tbt_crl_1 = new TBTCRL() {
             public byte[] getEncoded() {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
 
         TBTCRL tbt_crl_2 = new TBTCRL() {
             public byte[] getEncoded() {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
 
         TBTCRL tbt_crl_3 = new TBTCRL() {
             public byte[] getEncoded() {
-                return new byte[] {3, 2, 1};
+                return new byte[] { 3, 2, 1 };
             }
         };
 
         // checking for reflexive law:
         assertTrue("The equivalence relation should be reflexive.",
-                                                    tbt_crl.equals(tbt_crl));
+                tbt_crl.equals(tbt_crl));
 
         assertEquals("The CRLs with equal encoded form should be equal",
-                                                    tbt_crl, tbt_crl_1);
+                tbt_crl, tbt_crl_1);
         // checking for symmetric law:
         assertTrue("The equivalence relation should be symmetric.",
-                                                    tbt_crl_1.equals(tbt_crl));
+                tbt_crl_1.equals(tbt_crl));
 
         assertEquals("The CRLs with equal encoded form should be equal",
-                                                    tbt_crl_1, tbt_crl_2);
+                tbt_crl_1, tbt_crl_2);
         // checking for transitive law:
         assertTrue("The equivalence relation should be transitive.",
-                                                    tbt_crl.equals(tbt_crl_2));
+                tbt_crl.equals(tbt_crl_2));
 
         assertFalse("Should not be equal to null object.",
-                                                    tbt_crl.equals(null));
+                tbt_crl.equals(null));
 
         assertFalse("The CRLs with differing encoded form should not be equal",
-                                                    tbt_crl.equals(tbt_crl_3));
+                tbt_crl.equals(tbt_crl_3));
         assertFalse("The CRL should not be equals to the object which is not "
-                    + "an instance of X509CRL", tbt_crl.equals(new Object()));
+                + "an instance of X509CRL", tbt_crl.equals(new Object()));
     }
 
     /**
@@ -216,11 +214,11 @@ public class X509CRLTest extends TestCase {
     public void testHashCode() {
         TBTCRL tbt_crl_1 = new TBTCRL() {
             public byte[] getEncoded() {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
         assertTrue("Equal objects should have the same hash codes.",
-                                    tbt_crl.hashCode() == tbt_crl_1.hashCode());
+                tbt_crl.hashCode() == tbt_crl_1.hashCode());
     }
 
     /**
@@ -231,7 +229,9 @@ public class X509CRLTest extends TestCase {
         TBTCRL crl = new TBTCRL() {
             public byte[] getEncoded() {
                 return TestUtils.getX509CRL_v1();
-            };
+            }
+
+            ;
         };
 
         assertEquals(new X500Principal("CN=Z"), crl.getIssuerX500Principal());
@@ -246,7 +246,7 @@ public class X509CRLTest extends TestCase {
         try {
             tbt_crl.getRevokedCertificate((X509Certificate) null);
             fail("NullPointerException should be thrown "
-                        + "in the case of null input data.");
+                    + "in the case of null input data.");
         } catch (NullPointerException e) {
         }
     }

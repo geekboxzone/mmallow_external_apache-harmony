@@ -24,7 +24,6 @@ import junit.framework.TestCase;
 
 /**
  * JUnit Testcase for the java.sql.Time class
- * 
  */
 public class TimeTest extends TestCase {
 
@@ -233,7 +232,7 @@ public class TimeTest extends TestCase {
     } // end method test
 
     /**
-     * @tests java.sql.Time#valueOf(String )
+     * @tests java.sql.Time#valueOf(String)
      */
     public void test_valueOf_IllegalArgumentException() {
         try {
@@ -299,13 +298,13 @@ public class TimeTest extends TestCase {
             // expected
         }
     }
-    
-    
+
+
     // Reset defualt timezone
     static TimeZone defaultTimeZone = TimeZone.getDefault();
-    
-    protected void tearDown(){
-    	TimeZone.setDefault(defaultTimeZone);
+
+    protected void tearDown() {
+        TimeZone.setDefault(defaultTimeZone);
     }
 } // end class TimeTest
 

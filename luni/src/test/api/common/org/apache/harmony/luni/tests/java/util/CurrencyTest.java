@@ -79,21 +79,21 @@ public class CurrencyTest extends junit.framework.TestCase {
         Locale loc = new Locale("", "AQ");
         Currency curr = Currency.getInstance(loc);
         assertNull(curr);
-        
+
         try {
             Currency.getInstance((Locale) null);
             fail("should throw NullPointerException");
         } catch (NullPointerException e) {
             // expected
         }
-        
+
         try {
-            Currency.getInstance(new Locale("ABC","DEF"));
+            Currency.getInstance(new Locale("ABC", "DEF"));
             fail("should throw IllegalArgumentException");
         } catch (IllegalArgumentException e) {
             // expected
         }
-        
+
         // unsupported/legacy iso3 countries
         // RI does not support them.
         loc = new Locale("", "ZR");
@@ -330,7 +330,7 @@ public class CurrencyTest extends junit.framework.TestCase {
 
     /**
      * Helper method to display Currency info
-     * 
+     *
      * @param c
      */
     private void printCurrency(Currency c) {

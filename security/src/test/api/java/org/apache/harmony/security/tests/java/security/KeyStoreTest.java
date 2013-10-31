@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -53,7 +53,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyStore</code> constructor and methods
- * 
  */
 
 public class KeyStoreTest extends TestCase {
@@ -86,7 +85,7 @@ public class KeyStoreTest extends TestCase {
         super.setUp();
         mProv = (new SpiEngUtils()).new MyProvider("MyKSProvider",
                 "Testing provider", KeyStoreTestSupport.srvKeyStore.concat(".")
-                        .concat(defaultType), KeyStoreProviderClass);
+                .concat(defaultType), KeyStoreProviderClass);
         Security.insertProviderAt(mProv, 2);
         defaultProvider = SpiEngUtils.isSupport(defaultType,
                 KeyStoreTestSupport.srvKeyStore);
@@ -103,9 +102,9 @@ public class KeyStoreTest extends TestCase {
     }
 
     /**
-     * Test for <code>load(LoadStoreParameter param)</code> 
+     * Test for <code>load(LoadStoreParameter param)</code>
      * <code>store(LoadStoreParameter param)</code>
-     * methods 
+     * methods
      * Assertions: throw IllegalArgumentException if param is null;
      */
     public void testLoadStore02() throws Exception {
@@ -138,15 +137,15 @@ public class KeyStoreTest extends TestCase {
         }
     }
 
-    
+
     /**
-     * Test for <code>setKeyEntry(String alias, byte[] key, Certificate[] chain)</code> 
-     * method 
+     * Test for <code>setKeyEntry(String alias, byte[] key, Certificate[] chain)</code>
+     * method
      * Assertion: stores KeyEntry.
      */
     public void testSetKeyEntry() throws Exception {
         assertTrue(NotSupportMsg, KSSupported);
-        
+
         KeyStore[] kss = createKS();
         assertNotNull("KeyStore objects were not created", kss);
         byte[] kk = { (byte) 1, (byte) 2, (byte) 127, (byte) 77 };
@@ -194,7 +193,7 @@ public class KeyStoreTest extends TestCase {
         }
         assertNotNull("Default type have not be null", dType);
         assertEquals("Incorrect default type", dType, resType);
-        
+
         if (defKSType == null) {
             Security.setProperty(propName, defaultType);
             dType = KeyStore.getDefaultType();
@@ -206,14 +205,13 @@ public class KeyStoreTest extends TestCase {
     }
 
     /**
-     * Test for <code>getInstance(String type)</code> method 
-     * Assertion: 
-     * throws NullPointerException when type is null 
+     * Test for <code>getInstance(String type)</code> method
+     * Assertion:
+     * throws NullPointerException when type is null
      * throws KeyStoreException when type is not available
-     * 
      */
     public void testKeyStore02() throws KeyStoreException {
-        String[] invalidValues =  SpiEngUtils.invalidValues;
+        String[] invalidValues = SpiEngUtils.invalidValues;
         try {
             KeyStore.getInstance(null);
             fail("NullPointerException must be thrown when type is null");
@@ -233,11 +231,11 @@ public class KeyStoreTest extends TestCase {
         // Regression for HARMONY-1539
         // no exception expected
         assertNull(new KeyStore.PasswordProtection(null).getPassword());
-        char[] password = new char[] {'a', 'b', 'c'};
+        char[] password = new char[] { 'a', 'b', 'c' };
         KeyStore.PasswordProtection pp = new KeyStore.PasswordProtection(password);
         assertNotSame(pp.getPassword(), password);
         assertSame(pp.getPassword(), pp.getPassword());
-        
+
     }
 
 
@@ -273,91 +271,119 @@ public class KeyStoreTest extends TestCase {
      * @tests java.security.KeyStore.TrustedCertificateEntry.toString()
      */
     public void testKeyStoreTCToString() {
-    	   // Regression for HARMONY-1542
-    	   // no exception expected
+        // Regression for HARMONY-1542
+        // no exception expected
         class TestX509Certificate extends X509Certificate {
             private static final long serialVersionUID = 1L;
-            public void checkValidity() throws CertificateExpiredException,CertificateNotYetValidException {}
-            public void checkValidity(Date p) throws CertificateExpiredException, CertificateNotYetValidException {}
+
+            public void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException {
+            }
+
+            public void checkValidity(Date p) throws CertificateExpiredException, CertificateNotYetValidException {
+            }
+
             public int getVersion() {
-                    return 0;
+                return 0;
             }
+
             public BigInteger getSerialNumber() {
-                    return null;
+                return null;
             }
+
             public Principal getIssuerDN() {
-                    return null;
+                return null;
             }
+
             public Principal getSubjectDN() {
-                    return null;
+                return null;
             }
+
             public Date getNotBefore() {
-                    return null;
+                return null;
             }
+
             public Date getNotAfter() {
-                    return null;
+                return null;
             }
+
             public byte[] getTBSCertificate() throws CertificateEncodingException {
-                    return null;
+                return null;
             }
+
             public byte[] getSignature() {
-                    return null;
+                return null;
             }
+
             public String getSigAlgName() {
-                    return null;
+                return null;
             }
+
             public String getSigAlgOID() {
-                    return null;
+                return null;
             }
+
             public byte[] getSigAlgParams() {
-                    return null;
+                return null;
             }
+
             public boolean[] getIssuerUniqueID() {
-                    return null;
+                return null;
             }
+
             public boolean[] getSubjectUniqueID() {
-                    return null;
+                return null;
             }
+
             public boolean[] getKeyUsage() {
-                    return null;
+                return null;
             }
+
             public int getBasicConstraints() {
-                    return 0;
+                return 0;
             }
+
             public byte[] getEncoded() throws CertificateEncodingException {
-                    return null;
+                return null;
             }
+
             public void verify(PublicKey p)
                     throws CertificateException,
                     NoSuchAlgorithmException,
                     InvalidKeyException,
                     NoSuchProviderException,
-                    SignatureException 
-            {}
+                    SignatureException {
+            }
+
             public void verify(PublicKey p0, String p1)
                     throws CertificateException,
                     NoSuchAlgorithmException,
                     InvalidKeyException,
                     NoSuchProviderException,
-                    SignatureException 
-            {}
+                    SignatureException {
+            }
+
             public String toString() {
-                    return null;
+                return null;
             }
+
             public PublicKey getPublicKey() {
-                    return null;
+                return null;
             }
+
             public boolean hasUnsupportedCriticalExtension() {
-                    return false;
+                return false;
             }
+
             public Set getCriticalExtensionOIDs() {
-                    return null;
+                return null;
             }
+
             public Set getNonCriticalExtensionOIDs() {
-                    return null;
+                return null;
             }
+
             public byte[] getExtensionValue(String p) {
-                    return null;
+                return null;
             }
         }
         assertNotNull(new KeyStore.TrustedCertificateEntry(new TestX509Certificate()).toString());

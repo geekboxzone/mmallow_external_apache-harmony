@@ -46,7 +46,7 @@ public class X509CRLEntryImplTest extends TestCase {
     public void testGetExtensionValue() throws Exception {
         // revoked certificate issuer
         X500Principal issuer =
-            new X500Principal("O=Certificate Issuer");
+                new X500Principal("O=Certificate Issuer");
         // revoked certificate serial number
         BigInteger serialNumber = BigInteger.valueOf(555);
         // crl entry extensions
@@ -55,16 +55,16 @@ public class X509CRLEntryImplTest extends TestCase {
         // see RFC 3280 http://www.ietf.org/rfc/rfc3280.txt
         crlEntryExtensions.addExtension(
                 new Extension("2.5.29.21", Extension.NON_CRITICAL,
-                    new ReasonCode(ReasonCode.KEY_COMPROMISE)));
+                        new ReasonCode(ReasonCode.KEY_COMPROMISE)));
         // crl entry
         X509CRLEntryImpl crlEntry = new X509CRLEntryImpl(
                 new TBSCertList.RevokedCertificate(
                         serialNumber,
                         new Date(),
                         crlEntryExtensions
-                    ),
+                ),
                 issuer
-            );
+        );
         assertNotNull(crlEntry.getExtensionValue("2.5.29.21"));
         assertNull("Null value should be returned in the case of "
                 + "nonexisting extension",

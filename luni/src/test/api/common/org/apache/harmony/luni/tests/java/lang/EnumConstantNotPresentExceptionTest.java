@@ -21,7 +21,7 @@ import junit.framework.TestCase;
 public class EnumConstantNotPresentExceptionTest extends TestCase {
 
     public enum Fixture {
-        ONE,TWO,THREE
+        ONE, TWO, THREE
     }
 
     public void test_ConstructorLjava_lang_ClassLjava_lang_String() {

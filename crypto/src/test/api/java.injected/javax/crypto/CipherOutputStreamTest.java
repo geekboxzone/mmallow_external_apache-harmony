@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package javax.crypto;
 
@@ -118,25 +118,25 @@ public class CipherOutputStreamTest extends TestCase {
      * @tests write(byte[] b, int off, int len)
      */
     public void testWrite4() throws Exception {
-	    //Regression for HARMONY-758
-    	try {
-    		new CipherOutputStream(new BufferedOutputStream((OutputStream) null), new NullCipher()).write(new byte[] {0}, 1, Integer.MAX_VALUE);
-    	} catch (IllegalArgumentException e) {
-    	}
+        //Regression for HARMONY-758
+        try {
+            new CipherOutputStream(new BufferedOutputStream((OutputStream) null), new NullCipher()).write(new byte[] { 0 }, 1, Integer.MAX_VALUE);
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     /**
      * @tests write(byte[] b, int off, int len)
      */
     public void testWrite5() throws Exception {
-	    //Regression for HARMONY-758
+        //Regression for HARMONY-758
         Cipher cf = Cipher.getInstance("DES/CBC/PKCS5Padding");
         NullCipher nc = new NullCipher();
         CipherOutputStream stream1 = new CipherOutputStream(new BufferedOutputStream((OutputStream) null), nc);
         CipherOutputStream stream2 = new CipherOutputStream(stream1, cf);
         CipherOutputStream stream3 = new CipherOutputStream(stream2, nc);
-        stream3.write(new byte[] {0}, 0, 0);
-   		//no exception expected
+        stream3.write(new byte[] { 0 }, 0, 0);
+        //no exception expected
     }
 
     /**

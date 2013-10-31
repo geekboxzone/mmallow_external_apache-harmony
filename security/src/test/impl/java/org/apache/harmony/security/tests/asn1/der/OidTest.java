@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Stepan M. Mishura
-*/
+ * @author Stepan M. Mishura
+ */
 
 package org.apache.harmony.security.tests.asn1.der;
 
@@ -146,14 +146,14 @@ public class OidTest extends TestCase {
 
     public void testDecode_Invalid() throws IOException {
         byte[][] invalid = new byte[][] {
-        // wrong tag: tag is not 0x06
+                // wrong tag: tag is not 0x06
                 new byte[] { 0x02, 0x01, 0x00 },
                 // wrong length: length is 0
                 new byte[] { 0x06, 0x00 },
                 // wrong content: bit 8 of the last byte is not 0
                 new byte[] { 0x06, 0x02, (byte) 0x81, (byte) 0x80 },
-        // wrong content: is not encoded in fewest number of bytes
-        //FIXME new byte[] { 0x06, 0x02, (byte) 0x80, (byte) 0x01 }
+                // wrong content: is not encoded in fewest number of bytes
+                //FIXME new byte[] { 0x06, 0x02, (byte) 0x80, (byte) 0x01 }
         };
 
         for (int i = 0; i < invalid.length; i++) {

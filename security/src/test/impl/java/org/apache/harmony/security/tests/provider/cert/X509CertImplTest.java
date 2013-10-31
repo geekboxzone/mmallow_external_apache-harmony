@@ -15,8 +15,8 @@
  *  limitations under the License.
  */
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.security.tests.provider.cert;
 
@@ -86,54 +86,54 @@ public class X509CertImplTest extends TestCase {
     // The values of certificate's fields:
     //
 
-    int         version         = 2; //v3
-    BigInteger  serialNumber    = BigInteger.valueOf(555L);
+    int version = 2; //v3
+    BigInteger serialNumber = BigInteger.valueOf(555L);
 
     // Algorithm name and its OID (http://oid.elibel.tm.fr)
-    String      algOID          = "1.2.840.10040.4.3";
-    String      algName         = "SHA1withDSA";
+    String algOID = "1.2.840.10040.4.3";
+    String algName = "SHA1withDSA";
 
     // DER boolean false encoding (http://asn1.elibel.tm.fr)
     // Makes no sense. For testing purposes we need just provide
     // some ASN.1 structure:
-    byte[]      algParams       = {1, 1, 0};
-    String      issuerName      = "O=Certificate Issuer";
-    long        notBefore       = 1000000000L;
-    long        notAfter        = 2000000000L;
-    String      subjectName     = "O=Subject Organization";
+    byte[] algParams = { 1, 1, 0 };
+    String issuerName = "O=Certificate Issuer";
+    long notBefore = 1000000000L;
+    long notAfter = 2000000000L;
+    String subjectName = "O=Subject Organization";
 
     // keys are using to make signature and to verify it
-    static PublicKey   publicKey;
-    static PrivateKey  privateKey;
-    byte[]      key             = new byte[] {1, 2, 3, 4, 5, 6, 7, 8}; // random value
-    byte[]      keyEncoding     = null;
-    boolean[]   issuerUniqueID  = new boolean[]
-                {true, false, true, false, true, false, true, false}; // random value
-    boolean[]   subjectUniqueID = new boolean[]
-                {false, true, false, true, false, true, false, true}; // random value
+    static PublicKey publicKey;
+    static PrivateKey privateKey;
+    byte[] key = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }; // random value
+    byte[] keyEncoding = null;
+    boolean[] issuerUniqueID = new boolean[]
+            { true, false, true, false, true, false, true, false }; // random value
+    boolean[] subjectUniqueID = new boolean[]
+            { false, true, false, true, false, true, false, true }; // random value
 
     // Extensions' values
-    byte[]      extValEncoding  = new byte[] {1, 1, 1}; // random value
-    boolean[]   extnKeyUsage    = new boolean[]
-                {true, false, true, false, true, false, true, false, true}; // random value
-    List    extnExtendedKeyUsage = Arrays.asList(new int[][] {
+    byte[] extValEncoding = new byte[] { 1, 1, 1 }; // random value
+    boolean[] extnKeyUsage = new boolean[]
+            { true, false, true, false, true, false, true, false, true }; // random value
+    List extnExtendedKeyUsage = Arrays.asList(new int[][] {
 
-        // Extended key usage values as specified in rfc 3280
-        // (http://www.ietf.org/rfc/rfc3280.txt):
-        ObjectIdentifier.toIntArray("2.5.29.37.0"),       // Any extended key usage
-        ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.1"), // TLS Web server authentication
-        ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.1"), // TLS Web server authentication
-        ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.2"), // TLS Web client authentication
-        ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.3"), // Code Signing
-        ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.4"), // E-mail protection
-        ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.5"), // IP security end system
-        ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.6"), // IP security tunnel termination
-        ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.7"), // IP security user
-        ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.8"), // Timestamping
-        ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.9"), // OCSP signing
-        ObjectIdentifier.toIntArray("1.3.6.1.5.5.8.2.2"), // iKEIntermediate
-        ObjectIdentifier.toIntArray("1.3.6.1.4.1.311.10.3.3"), // MS Server Gated Cryptography
-        ObjectIdentifier.toIntArray("2.16.840.1.113730.4.1"), // Netscape Server Gated Cryptography
+            // Extended key usage values as specified in rfc 3280
+            // (http://www.ietf.org/rfc/rfc3280.txt):
+            ObjectIdentifier.toIntArray("2.5.29.37.0"),       // Any extended key usage
+            ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.1"), // TLS Web server authentication
+            ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.1"), // TLS Web server authentication
+            ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.2"), // TLS Web client authentication
+            ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.3"), // Code Signing
+            ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.4"), // E-mail protection
+            ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.5"), // IP security end system
+            ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.6"), // IP security tunnel termination
+            ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.7"), // IP security user
+            ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.8"), // Timestamping
+            ObjectIdentifier.toIntArray("1.3.6.1.5.5.7.3.9"), // OCSP signing
+            ObjectIdentifier.toIntArray("1.3.6.1.5.5.8.2.2"), // iKEIntermediate
+            ObjectIdentifier.toIntArray("1.3.6.1.4.1.311.10.3.3"), // MS Server Gated Cryptography
+            ObjectIdentifier.toIntArray("2.16.840.1.113730.4.1"), // Netscape Server Gated Cryptography
     });
     static NameConstraints nameConstraints;
     int extnBCLen = 5;
@@ -143,14 +143,14 @@ public class X509CertImplTest extends TestCase {
     static {
         try {
             extnSANames = new GeneralNames(
-                Arrays.asList(new GeneralName[] {
-                    new GeneralName(1, "rfc@822.Name"),
-                    new GeneralName(2, "dNSName"),
-                    new GeneralName(4, "O=Organization"),
-                    new GeneralName(6, "http://uniform.Resource.Id"),
-                    new GeneralName(7, "255.255.255.0"),
-                    new GeneralName(8, "1.2.3.4444.55555")
-            }));
+                    Arrays.asList(new GeneralName[] {
+                            new GeneralName(1, "rfc@822.Name"),
+                            new GeneralName(2, "dNSName"),
+                            new GeneralName(4, "O=Organization"),
+                            new GeneralName(6, "http://uniform.Resource.Id"),
+                            new GeneralName(7, "255.255.255.0"),
+                            new GeneralName(8, "1.2.3.4444.55555")
+                    }));
             GeneralSubtrees permittedNames = new GeneralSubtrees()
                     .addSubtree(new GeneralSubtree(
                             new GeneralName(1, "rfc@822.Name"), 1, 2))
@@ -166,7 +166,7 @@ public class X509CertImplTest extends TestCase {
                     .addSubtree(new GeneralSubtree(
                             new GeneralName(8, "2.3.4.4444.222"), 2));
             nameConstraints =
-                new NameConstraints(permittedNames, excludedNames);
+                    new NameConstraints(permittedNames, excludedNames);
         } catch (IOException e) {
             // should not be thrown
             e.printStackTrace();
@@ -187,67 +187,67 @@ public class X509CertImplTest extends TestCase {
     }
 
     // Extensions
-    Extension[] extensions      = new Extension[] {
+    Extension[] extensions = new Extension[] {
 
-        // Supported critical extensions (as specified in rfc 3280
-        // http://www.ietf.org/rfc/rfc3280.txt):
-        // Key Usage
-        new Extension("2.5.29.15", true, new KeyUsage(extnKeyUsage)),
-        // Basic Constraints
-        new Extension("2.5.29.19", true, new BasicConstraints(true, extnBCLen)),
-        // Certificate Policies with ANY policy
-        new Extension("2.5.29.32", true,
-                new CertificatePolicies()
-                .addPolicyInformation(new PolicyInformation("2.5.29.32.0"))),
-        // Subject Alternative Name
-        new Extension("2.5.29.17", true,
-                new AlternativeName(AlternativeName.SUBJECT, extnSANames)),
-        // Name Constraints
-        new Extension("2.5.29.30", true, nameConstraints),
-        // Policy Constraints
-        new Extension("2.5.29.36", true, new PolicyConstraints(1, 2)),
-        // Extended Key Usage
-        new Extension("2.5.29.37", true, new ExtendedKeyUsage(extnExtendedKeyUsage)),
-        // Inhibit Any-Policy
-        new Extension("2.5.29.54", true, new InhibitAnyPolicy(1)),
-
-
-        // Unsupported critical extensions:
-        new Extension("1.2.77.777", true, extValEncoding),
+            // Supported critical extensions (as specified in rfc 3280
+            // http://www.ietf.org/rfc/rfc3280.txt):
+            // Key Usage
+            new Extension("2.5.29.15", true, new KeyUsage(extnKeyUsage)),
+            // Basic Constraints
+            new Extension("2.5.29.19", true, new BasicConstraints(true, extnBCLen)),
+            // Certificate Policies with ANY policy
+            new Extension("2.5.29.32", true,
+                    new CertificatePolicies()
+                            .addPolicyInformation(new PolicyInformation("2.5.29.32.0"))),
+            // Subject Alternative Name
+            new Extension("2.5.29.17", true,
+                    new AlternativeName(AlternativeName.SUBJECT, extnSANames)),
+            // Name Constraints
+            new Extension("2.5.29.30", true, nameConstraints),
+            // Policy Constraints
+            new Extension("2.5.29.36", true, new PolicyConstraints(1, 2)),
+            // Extended Key Usage
+            new Extension("2.5.29.37", true, new ExtendedKeyUsage(extnExtendedKeyUsage)),
+            // Inhibit Any-Policy
+            new Extension("2.5.29.54", true, new InhibitAnyPolicy(1)),
 
 
-        // Non-critical extensions (as specified in rfc 3280
-        // http://www.ietf.org/rfc/rfc3280.txt):
+            // Unsupported critical extensions:
+            new Extension("1.2.77.777", true, extValEncoding),
 
-        // Issuer Alternative Name
-        new Extension("2.5.29.18", false,
-                new AlternativeName(AlternativeName.ISSUER, extnSANames)),
-        // CRL Distribution Points
-        new Extension("2.5.29.31", false,
-                new CRLDistributionPoints(Arrays.asList(new DistributionPoint[] {
-                    new DistributionPoint(
-                        new DistributionPointName(extnSANames),
-                        new ReasonFlags(extnKeyUsage),
-                        extnSANames
-                        ),
-                }))),
-        // Authority Key Identifier
-        new Extension("2.5.29.35", false,
-                new AuthorityKeyIdentifier(
+
+            // Non-critical extensions (as specified in rfc 3280
+            // http://www.ietf.org/rfc/rfc3280.txt):
+
+            // Issuer Alternative Name
+            new Extension("2.5.29.18", false,
+                    new AlternativeName(AlternativeName.ISSUER, extnSANames)),
+            // CRL Distribution Points
+            new Extension("2.5.29.31", false,
+                    new CRLDistributionPoints(Arrays.asList(new DistributionPoint[] {
+                            new DistributionPoint(
+                                    new DistributionPointName(extnSANames),
+                                    new ReasonFlags(extnKeyUsage),
+                                    extnSANames
+                            ),
+                    }))),
+            // Authority Key Identifier
+            new Extension("2.5.29.35", false,
+                    new AuthorityKeyIdentifier(
+                            // random value for key identifier
+                            new byte[] { 1, 2, 3, 4, 5 }, extnSANames, serialNumber)),
+            // Subject Key Identifier
+            new Extension("2.5.29.14", false,
                     // random value for key identifier
-                    new byte[] {1, 2, 3, 4, 5}, extnSANames, serialNumber)),
-        // Subject Key Identifier
-        new Extension("2.5.29.14", false,
-                // random value for key identifier
-                new SubjectKeyIdentifier(new byte[] {1, 2, 3, 4, 5})),
-        // Policy Mappings
-        new Extension("2.5.29.33", false, extValEncoding),
+                    new SubjectKeyIdentifier(new byte[] { 1, 2, 3, 4, 5 })),
+            // Policy Mappings
+            new Extension("2.5.29.33", false, extValEncoding),
     };
-    List allCritical = Arrays.asList(new String[] {"2.5.29.15", "2.5.29.19",
-        "2.5.29.32", "2.5.29.17", "2.5.29.30", "2.5.29.36", "2.5.29.37",
-        "2.5.29.54", "1.2.77.777"});
-    List allNonCritical = Arrays.asList(new String[] {"2.5.29.18", "2.5.29.35",
-        "2.5.29.14", "2.5.29.33", "2.5.29.31"});
+    List allCritical = Arrays.asList(new String[] { "2.5.29.15", "2.5.29.19",
+            "2.5.29.32", "2.5.29.17", "2.5.29.30", "2.5.29.36", "2.5.29.37",
+            "2.5.29.54", "1.2.77.777" });
+    List allNonCritical = Arrays.asList(new String[] { "2.5.29.18", "2.5.29.35",
+            "2.5.29.14", "2.5.29.33", "2.5.29.31" });
 
     public X509Certificate certificate;
     byte[] tbsCertEncoding;
@@ -260,32 +260,33 @@ public class X509CertImplTest extends TestCase {
     /**
      * Creates the master certificate on the base of which
      * all functionality will be tested.
+     *
      * @return
      * @throws java.lang.Exception
      */
     protected void setUp() throws java.lang.Exception {
         AlgorithmIdentifier signature =
-            new AlgorithmIdentifier(algOID, algParams);
+                new AlgorithmIdentifier(algOID, algParams);
         Name issuer = new Name(issuerName);
         Name subject = new Name(subjectName);
         Validity validity =
-            new Validity(new Date(notBefore), new Date(notAfter));
+                new Validity(new Date(notBefore), new Date(notAfter));
 
         SubjectPublicKeyInfo subjectPublicKeyInfo = (SubjectPublicKeyInfo)
-            SubjectPublicKeyInfo.ASN1.decode(publicKey.getEncoded());
+                SubjectPublicKeyInfo.ASN1.decode(publicKey.getEncoded());
         keyEncoding = subjectPublicKeyInfo.getEncoded();
 
         Extensions exts = new Extensions(Arrays.asList(extensions));
 
         TBSCertificate tbsCertificate =
-            new TBSCertificate(version, serialNumber,
-                signature, issuer, validity, subject, subjectPublicKeyInfo,
-                issuerUniqueID, subjectUniqueID, exts);
+                new TBSCertificate(version, serialNumber,
+                        signature, issuer, validity, subject, subjectPublicKeyInfo,
+                        issuerUniqueID, subjectUniqueID, exts);
         tbsCertEncoding = tbsCertificate.getEncoded();
 
         if (signatureValueBytes == null) {
             try {
-                Signature sig= Signature.getInstance("DSA");//new byte[32];
+                Signature sig = Signature.getInstance("DSA");//new byte[32];
                 sig.initSign(privateKey);
                 sig.update(tbsCertEncoding, 0, tbsCertEncoding.length);
                 signatureValueBytes = sig.sign();
@@ -305,7 +306,7 @@ public class X509CertImplTest extends TestCase {
         }
 
         Certificate cert =
-            new Certificate(tbsCertificate, signature, signatureValue);
+                new Certificate(tbsCertificate, signature, signatureValue);
 
         certEncoding = cert.getEncoded();
 
@@ -449,15 +450,15 @@ public class X509CertImplTest extends TestCase {
     }
 
     public static void printAsHex(int perLine, String prefix,
-                                        String delimiter, byte[] data) {
-        for (int i=0; i<data.length; i++) {
+            String delimiter, byte[] data) {
+        for (int i = 0; i < data.length; i++) {
             String tail = Integer.toHexString(0x000000ff & data[i]);
             if (tail.length() == 1) {
                 tail = "0" + tail;
             }
             System.out.print(prefix + "0x" + tail + delimiter);
 
-            if (((i+1)%perLine) == 0) {
+            if (((i + 1) % perLine) == 0) {
                 System.out.println();
             }
         }
@@ -470,7 +471,7 @@ public class X509CertImplTest extends TestCase {
     public void testGetTBSCertificate() {
         try {
             if (!Arrays.equals(
-                        tbsCertEncoding, certificate.getTBSCertificate())) {
+                    tbsCertEncoding, certificate.getTBSCertificate())) {
                 System.out.println("TBSCertificate encoding missmatch:");
                 System.out.println("Expected:");
                 printAsHex(20, "", " ", tbsCertEncoding);
@@ -543,7 +544,7 @@ public class X509CertImplTest extends TestCase {
         if ((ku == null) || (ku.length < extnKeyUsage.length)) {
             fail("Incorrect Key Usage value.");
         }
-        for (int i=0; i<extnKeyUsage.length; i++) {
+        for (int i = 0; i < extnKeyUsage.length; i++) {
             if (extnKeyUsage[i] != ku[i]) {
                 fail("Incorrect Key Usage value.");
             }
@@ -559,7 +560,7 @@ public class X509CertImplTest extends TestCase {
                 || (exku.size() != extnExtendedKeyUsage.size())) {
             fail("Incorrect Extended Key Usage value.");
         }
-        for (int i=0; i<extnExtendedKeyUsage.size(); i++) {
+        for (int i = 0; i < extnExtendedKeyUsage.size(); i++) {
             String ku = ObjectIdentifier
                     .toString((int[]) extnExtendedKeyUsage.get(i));
             if (!exku.contains(ku)) {
@@ -592,7 +593,7 @@ public class X509CertImplTest extends TestCase {
             while (it.hasNext()) {
                 List extnSan = (List) it.next();
                 Integer tag = (Integer) extnSan.get(0);
-                for (int i=0; i< sans.size(); i++) {
+                for (int i = 0; i < sans.size(); i++) {
                     List san = (List) sans.get(i);
                     if (tag.equals(san.get(0))) {
                         assertEquals(
@@ -623,7 +624,7 @@ public class X509CertImplTest extends TestCase {
             while (it.hasNext()) {
                 List extnIan = (List) it.next();
                 Integer tag = (Integer) extnIan.get(0);
-                for (int i=0; i< ians.size(); i++) {
+                for (int i = 0; i < ians.size(); i++) {
                     List ian = (List) ians.get(i);
                     if (tag.equals(ian.get(0))) {
                         assertEquals(
@@ -663,13 +664,13 @@ public class X509CertImplTest extends TestCase {
      * getExtensionValue(String oid) method testing.
      */
     public void testGetExtensionValue() {
-        for (int i=0; i<extensions.length; i++) {
+        for (int i = 0; i < extensions.length; i++) {
             String id = extensions[i].getExtnID();
             byte[] certExtnValue = certificate.getExtensionValue(id);
             byte[] certExtnValue2Check = extensions[i].getRawExtnValue();
-                certificate.getExtensionValue(id);
+            certificate.getExtensionValue(id);
             if (!Arrays.equals(certExtnValue2Check, certExtnValue)) {
-                System.out.println("Extension encoding mismatch for "+id);
+                System.out.println("Extension encoding mismatch for " + id);
                 System.out.println("Expected:");
                 printAsHex(20, "", " ", certExtnValue2Check);
                 System.out.println("But has been got:");
@@ -678,7 +679,7 @@ public class X509CertImplTest extends TestCase {
                 } else {
                     printAsHex(20, "", " ", certExtnValue);
                 }
-                fail("The values for extension "+id+" differ.");
+                fail("The values for extension " + id + " differ.");
             }
         }
         assertNull("Null value should be returned in the case of "
@@ -692,7 +693,7 @@ public class X509CertImplTest extends TestCase {
     public void testGetCriticalExtensionOIDs() {
         Set certCEOids = certificate.getCriticalExtensionOIDs();
         if (!(certCEOids.containsAll(allCritical)
-                    && allCritical.containsAll(certCEOids))) {
+                && allCritical.containsAll(certCEOids))) {
             fail("Incorrect value of Critical Extension OIDs");
         }
     }
@@ -703,7 +704,7 @@ public class X509CertImplTest extends TestCase {
     public void testGetNonCriticalExtensionOIDs() {
         Set certNCEOids = certificate.getNonCriticalExtensionOIDs();
         if (!(certNCEOids.containsAll(allNonCritical)
-                    && allNonCritical.containsAll(certNCEOids))) {
+                && allNonCritical.containsAll(certNCEOids))) {
             fail("Incorrect value of Non Critical Extension OIDs");
         }
     }

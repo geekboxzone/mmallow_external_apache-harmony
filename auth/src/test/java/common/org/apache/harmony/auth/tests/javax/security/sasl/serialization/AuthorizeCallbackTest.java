@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.auth.tests.javax.security.sasl.serialization;
 
@@ -29,7 +29,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for AuthorizeCallback serialization
- * 
  */
 
 public class AuthorizeCallbackTest extends SerializationTest implements

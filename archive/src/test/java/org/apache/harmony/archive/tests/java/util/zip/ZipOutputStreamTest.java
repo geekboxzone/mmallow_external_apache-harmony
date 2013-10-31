@@ -29,18 +29,18 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipOutputStreamTest extends junit.framework.TestCase {
 
-	ZipOutputStream zos;
+    ZipOutputStream zos;
 
-	ByteArrayOutputStream bos;
+    ByteArrayOutputStream bos;
 
-	ZipInputStream zis;
+    ZipInputStream zis;
 
-	static final String data = "HelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorld";
+    static final String data = "HelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorld";
 
-	/**
+    /**
      * @tests java.util.zip.ZipOutputStream#close()
      */
-	public void test_close() throws Exception {
+    public void test_close() throws Exception {
         try {
             zos.close();
             fail("Close on empty stream failed to throw exception");
@@ -222,7 +222,7 @@ public class ZipOutputStreamTest extends junit.framework.TestCase {
         } catch (IndexOutOfBoundsException e) {
             // expected
         }
-        
+
         // Regression for HARMONY-4405
         try {
             zip.write(null, 0, -2);
@@ -259,7 +259,7 @@ public class ZipOutputStreamTest extends junit.framework.TestCase {
         zip1.setMethod(ZipEntry.STORED);
 
         zip1.write(new byte[2]);
-        
+
         try {
             zip1.putNextEntry(new ZipEntry("Second"));
             fail("ZipException expected");
@@ -273,7 +273,7 @@ public class ZipOutputStreamTest extends junit.framework.TestCase {
         } catch (IOException e2) {
             // expected
         }
-        
+
         zip1.close();
     }
 
@@ -292,7 +292,8 @@ public class ZipOutputStreamTest extends junit.framework.TestCase {
             if (zis != null) {
                 zis.close();
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         super.tearDown();
     }
 }

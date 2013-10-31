@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package java.security.cert;
 
@@ -25,9 +25,7 @@ import java.util.*;
 import java.security.cert.CertPath;
 
 /**
- * 
  * Class for CertPath creating
- * 
  */
 public class myCertPath extends CertPath {
 

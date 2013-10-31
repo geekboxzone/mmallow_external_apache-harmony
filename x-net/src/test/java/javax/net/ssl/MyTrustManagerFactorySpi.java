@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package javax.net.ssl;
 
@@ -26,9 +26,8 @@ import java.security.KeyStore;
 import java.security.KeyStoreException;
 
 /**
- * Class for vertifying TrustManagerFactorySpi and TrustManagerFactory 
+ * Class for vertifying TrustManagerFactorySpi and TrustManagerFactory
  * functionality
- * 
  */
 
 public class MyTrustManagerFactorySpi extends TrustManagerFactorySpi {
@@ -47,7 +46,7 @@ public class MyTrustManagerFactorySpi extends TrustManagerFactorySpi {
         }
         if (spec instanceof Parameters) {
             try {
-                engineInit(((Parameters)spec).getKeyStore());
+                engineInit(((Parameters) spec).getKeyStore());
             } catch (KeyStoreException e) {
                 throw new RuntimeException(e);
             }
@@ -60,13 +59,15 @@ public class MyTrustManagerFactorySpi extends TrustManagerFactorySpi {
     protected TrustManager[] engineGetTrustManagers() {
         return null;
     }
-    
-    
+
+
     public static class Parameters implements ManagerFactoryParameters {
         private KeyStore keyStore;
-        public Parameters (KeyStore ks) {
+
+        public Parameters(KeyStore ks) {
             this.keyStore = ks;
         }
+
         public KeyStore getKeyStore() {
             return keyStore;
         }

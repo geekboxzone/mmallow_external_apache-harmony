@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -29,34 +29,34 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>EncodedKeySpec</code> class fields and methods.
- * 
  */
 
 public class EncodedKeySpecTest extends TestCase {
 
     /**
      * Constructor for EncodedKeySpecTest.
+     *
      * @param name
      */
     public EncodedKeySpecTest(String name) {
         super(name);
     }
-    
+
     /**
      * Tests that <code>getEncoded()</code> method
      * returns valid byte array
      */
     public final void testGetEncoded() {
-        
-        byte[] encodedKey = new byte[] {(byte)1,(byte)2,(byte)3,(byte)4};
+
+        byte[] encodedKey = new byte[] { (byte) 1, (byte) 2, (byte) 3, (byte) 4 };
         EncodedKeySpec meks = new MyEncodedKeySpec(encodedKey);
-        
+
         /* Get encoded key */
         byte[] ek = meks.getEncoded();
-        
+
         /* Check returned array */
         boolean result = true;
-        for (int i=0; i<encodedKey.length; i++) {
+        for (int i = 0; i < encodedKey.length; i++) {
             if (encodedKey[i] != ek[i]) {
                 /* indicate failure */
                 result = false;
@@ -65,46 +65,46 @@ public class EncodedKeySpecTest extends TestCase {
         /* passed */
         assertTrue(result);
     }
-    
+
     /**
      * Tests that internal state of the object
      * can not be modified by modifying initial array value
      */
     public final void testIsStatePreserved1() {
         /* Create initial byte array */
-        byte[] encodedKey = new byte[] {(byte)1,(byte)2,(byte)3,(byte)4};
-        
+        byte[] encodedKey = new byte[] { (byte) 1, (byte) 2, (byte) 3, (byte) 4 };
+
         EncodedKeySpec meks = new MyEncodedKeySpec(encodedKey);
-        
+
         /* Modify initial array's value */
-        encodedKey[3] = (byte)5;
-        
+        encodedKey[3] = (byte) 5;
+
         /* Get encoded key */
         byte[] ek = meks.getEncoded();
-        
+
         /* Check that byte value has not been changed */
-        assertTrue(ek[3] == (byte)4);
+        assertTrue(ek[3] == (byte) 4);
     }
-    
+
     /**
      * Tests that internal state of the object
      * can not be modified using returned value
-     * of <code>getEncoded()</code> method 
-    */
+     * of <code>getEncoded()</code> method
+     */
     public final void testIsStatePreserved2() {
-        
-        byte[] encodedKey = new byte[] {(byte)1,(byte)2,(byte)3,(byte)4};
+
+        byte[] encodedKey = new byte[] { (byte) 1, (byte) 2, (byte) 3, (byte) 4 };
         EncodedKeySpec meks = new MyEncodedKeySpec(encodedKey);
-        
+
         /* Get encoded key */
-        byte[] ek = meks.getEncoded();        
+        byte[] ek = meks.getEncoded();
         /* Modify returned value */
-        ek[3] = (byte)5;
+        ek[3] = (byte) 5;
         /* Get encoded key again */
         byte[] ek1 = meks.getEncoded();
-        
+
         /* Check that byte value has not been changed */
-        assertTrue(ek1[3] == (byte)4);
+        assertTrue(ek1[3] == (byte) 4);
     }
- 
+
 }

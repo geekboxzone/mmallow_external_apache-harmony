@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Aleksei Y. Semenov
-*/
+ * @author Aleksei Y. Semenov
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -30,15 +30,15 @@ import java.security.PrivateKey;
 public class PrivateKeyStub implements PrivateKey {
 
     private static final long serialVersionUID = 111111111L;
-    
+
     String algorithm = null;
     String format = null;
-    byte [] encoded = null;
-    
-    
+    byte[] encoded = null;
+
+
     /**
      * Constructor
-     * 
+     *
      * @param algorithm
      * @param format
      * @param encoded
@@ -51,6 +51,7 @@ public class PrivateKeyStub implements PrivateKey {
 
     /**
      * Returns algorithm
+     *
      * @see java.security.Key#getAlgorithm()
      */
     public String getAlgorithm() {
@@ -59,6 +60,7 @@ public class PrivateKeyStub implements PrivateKey {
 
     /**
      * Returns format
+     *
      * @see java.security.Key#getFormat()
      */
     public String getFormat() {
@@ -67,6 +69,7 @@ public class PrivateKeyStub implements PrivateKey {
 
     /**
      * Returns encoded form
+     *
      * @see java.security.Key#getEncoded()
      */
     public byte[] getEncoded() {

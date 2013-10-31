@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -29,12 +29,11 @@ import java.security.spec.AlgorithmParameterSpec;
 /**
  * Additional class for verification AlgorithmParameterGeneratorSpi and
  * AlgorithmParameterGenerator classes
- * 
  */
 
-public class MyAlgorithmParameterGeneratorSpi 
+public class MyAlgorithmParameterGeneratorSpi
         extends AlgorithmParameterGeneratorSpi {
-    
+
     protected void engineInit(int keysize, SecureRandom random) {
         if (keysize < 0) {
             throw new IllegalArgumentException("keysize < 0");
@@ -47,7 +46,7 @@ public class MyAlgorithmParameterGeneratorSpi
             throw new IllegalArgumentException("random is null");
         }
     }
-    
+
     protected AlgorithmParameters engineGenerateParameters() {
         return null;
     }

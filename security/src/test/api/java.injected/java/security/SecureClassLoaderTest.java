@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander V. Astapchuk
-*/
+ * @author Alexander V. Astapchuk
+ */
 
 package java.security;
 
@@ -31,7 +31,6 @@ import junit.framework.TestCase;
 
 /**
  * Unit test for SecureClassLoader.
- *
  */
 
 public class SecureClassLoaderTest extends TestCase {
@@ -44,11 +43,11 @@ public class SecureClassLoaderTest extends TestCase {
     /**
      * Some class presented as bytecode<br>
      * Class src:<br>
-     * <p>
+     * <p/>
      * <code>public class HiWorld {
-     * 	public static void main(String[] args)
-     * 		{System.out.println("Hi, world!"); }
-     *	}
+     * public static void main(String[] args)
+     * {System.out.println("Hi, world!"); }
+     * }
      * </code>
      */
 

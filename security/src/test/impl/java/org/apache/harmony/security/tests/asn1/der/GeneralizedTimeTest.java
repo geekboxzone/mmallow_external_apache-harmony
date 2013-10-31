@@ -133,7 +133,7 @@ public class GeneralizedTimeTest extends TestCase {
     /**
      * Tests milliseconds result of encoding/decoding on the date after 2050.
      */
-    public void test_Milliseconds() throws IOException{
+    public void test_Milliseconds() throws IOException {
         // Regression test for HARMONY-1252
         long old_date = 11431151800000L;
         long new_date = ((Date) gtime.decode(gtime.encode(new Date(old_date))))
@@ -141,7 +141,7 @@ public class GeneralizedTimeTest extends TestCase {
         assertEquals(old_date, new_date);
     }
 
-    public void test_EncodeMilliseconds() throws IOException{
+    public void test_EncodeMilliseconds() throws IOException {
         //cRegression for HARMONY-2302
         long old_date = 1164358741071L;
         long new_date = ((Date) gtime.decode(gtime.encode(new Date(old_date))))

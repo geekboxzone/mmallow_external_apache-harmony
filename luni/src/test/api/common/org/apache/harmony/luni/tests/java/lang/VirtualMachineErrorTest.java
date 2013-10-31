@@ -22,11 +22,12 @@ import junit.framework.TestCase;
 @SuppressWarnings("serial")
 public class VirtualMachineErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.VirtualMachineError#VirtualMachineError()
-	 */
+    /**
+     * @tests java.lang.VirtualMachineError#VirtualMachineError()
+     */
     public void test_Constructor() {
-        VirtualMachineError e = new VirtualMachineError() {};
+        VirtualMachineError e = new VirtualMachineError() {
+        };
         assertNull(e.getMessage());
         assertNull(e.getLocalizedMessage());
         assertNull(e.getCause());
@@ -36,7 +37,8 @@ public class VirtualMachineErrorTest extends TestCase {
      * @tests java.lang.VirtualMachineError#VirtualMachineError(java.lang.String)
      */
     public void test_ConstructorLjava_lang_String() {
-        VirtualMachineError e = new VirtualMachineError("fixture") {};
+        VirtualMachineError e = new VirtualMachineError("fixture") {
+        };
         assertEquals("fixture", e.getMessage());
         assertNull(e.getCause());
     }

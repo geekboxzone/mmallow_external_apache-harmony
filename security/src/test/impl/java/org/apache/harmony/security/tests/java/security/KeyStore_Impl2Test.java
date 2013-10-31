@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -46,13 +46,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyStore</code> constructor and methods
- * 
  */
 
 public class KeyStore_Impl2Test extends TestCase {
 
-    private static final String KeyStoreProviderClass = 
-        "org.apache.harmony.security.tests.support.MyKeyStoreSpi";
+    private static final String KeyStoreProviderClass =
+            "org.apache.harmony.security.tests.support.MyKeyStoreSpi";
 
     private static final String defaultAlg = "KeyStore";
 
@@ -74,7 +73,7 @@ public class KeyStore_Impl2Test extends TestCase {
         super.setUp();
         mProv = (new SpiEngUtils()).new MyProvider("MyKSProvider",
                 "Testing provider", KeyStoreTestSupport.srvKeyStore.concat(".").concat(
-                        defaultAlg), KeyStoreProviderClass);
+                defaultAlg), KeyStoreProviderClass);
         Security.insertProviderAt(mProv, 2);
     }
 
@@ -90,7 +89,7 @@ public class KeyStore_Impl2Test extends TestCase {
             IOException, CertificateException, NoSuchAlgorithmException,
             UnrecoverableKeyException {
         char[] pass = { 'a', 'b', 'c' };
-        String alias = "aaa";        
+        String alias = "aaa";
         keyS.load(null, pass);
         assertNull("getKey must return null", keyS.getKey(alias, pass));
         assertNull("getCertificate must return null", keyS
@@ -138,29 +137,29 @@ public class KeyStore_Impl2Test extends TestCase {
             keyS.store(new ByteArrayOutputStream(), null);
             fail("IOException must be thrown");
         } catch (IOException e) {
-        }        
+        }
         try {
             keyS.store(null, new char[0]);
             fail("IOException or NullPointerException must be thrown for null OutputStream");
         } catch (IOException e) {
-        } catch (NullPointerException e) {            
+        } catch (NullPointerException e) {
         }
         ByteArrayOutputStream ba = new ByteArrayOutputStream();
         try {
             keyS.store(ba, new char[0]);
             fail("IOException must be thrown");
         } catch (IOException e) {
-        }       
+        }
 
         KeyStore.LoadStoreParameter lParam = new MyLoadStoreParams(
-                new KeyStore.PasswordProtection(new char[0]));        
+                new KeyStore.PasswordProtection(new char[0]));
         try {
             keyS.store(null);
             fail("UnsupportedOperationException must be thrown");
         } catch (UnsupportedOperationException e) {
         }
 
-        
+
         //No exception should be thrown out.
         keyS.load(null);
 
@@ -290,12 +289,11 @@ public class KeyStore_Impl2Test extends TestCase {
 
 
     /**
-     * Test for <code>getInstance(String type)</code> method 
+     * Test for <code>getInstance(String type)</code> method
      * Assertions:
      * throws NullPointerException when type is null
-     * throws KeyStoreException when type is  not available; 
+     * throws KeyStoreException when type is  not available;
      * returns KeyStore object
-     * 
      */
     public void testGetInstance01() throws KeyStoreException,
             UnrecoverableKeyException, UnrecoverableEntryException,
@@ -326,11 +324,11 @@ public class KeyStore_Impl2Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String type, String provider)</code> method
-     * Assertions: 
+     * Assertions:
      * throws NullPointerException when type is null
-     * throws KeyStoreException when type is  not available; 
-     * throws IllegalArgumentException when provider is null; 
-     * throws NoSuchProviderException when provider is available; 
+     * throws KeyStoreException when type is  not available;
+     * throws IllegalArgumentException when provider is null;
+     * throws NoSuchProviderException when provider is available;
      * returns KeyStore object
      */
     public void testGetInstance02() throws KeyStoreException,
@@ -384,11 +382,11 @@ public class KeyStore_Impl2Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String type, Provider provider)</code>
-     * method 
-     * Assertions: 
+     * method
+     * Assertions:
      * throws NullPointerException when type is null
-        } catch (KeyStoreException e) {
-     * throws IllegalArgumentException when provider is null; 
+     * } catch (KeyStoreException e) {
+     * throws IllegalArgumentException when provider is null;
      * returns KeyStore object
      */
     public void testGetInstance03() throws KeyStoreException,

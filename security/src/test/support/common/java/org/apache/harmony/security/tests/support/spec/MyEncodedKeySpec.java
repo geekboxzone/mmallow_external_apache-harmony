@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.support.spec;
 
@@ -31,6 +31,7 @@ public class MyEncodedKeySpec extends EncodedKeySpec {
 
     /**
      * Constructor
+     *
      * @param encodedKey
      */
     public MyEncodedKeySpec(byte[] encodedKey) {
@@ -39,6 +40,7 @@ public class MyEncodedKeySpec extends EncodedKeySpec {
 
     /**
      * Returns format - "My"
+     *
      * @see java.security.spec.EncodedKeySpec#getFormat()
      */
     public String getFormat() {

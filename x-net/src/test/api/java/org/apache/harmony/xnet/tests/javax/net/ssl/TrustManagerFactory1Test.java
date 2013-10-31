@@ -36,11 +36,10 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>TrustManagerFactory</code> class constructors and methods.
- * 
  */
 
 public class TrustManagerFactory1Test extends TestCase {
-  
+
     private static final String srvTrustManagerFactory = "TrustManagerFactory";
 
     private static String defaultAlgorithm = null;
@@ -56,6 +55,7 @@ public class TrustManagerFactory1Test extends TestCase {
     private static final String[] invalidValues = SpiEngUtils.invalidValues;
 
     private static String[] validValues = new String[3];
+
     static {
         defaultAlgorithm = Security
                 .getProperty("ssl.TrustManagerFactory.algorithm");
@@ -91,7 +91,7 @@ public class TrustManagerFactory1Test extends TestCase {
     }
 
     /**
-     *  Test for <code>getDefaultAlgorithm()</code> method
+     * Test for <code>getDefaultAlgorithm()</code> method
      * Assertion: returns value which is specifoed in security property
      */
     public void testGetDefaultAlgorithm() {
@@ -107,18 +107,19 @@ public class TrustManagerFactory1Test extends TestCase {
         }
         String defA = "Proba.trustmanagerfactory.defaul.type";
         Security.setProperty("ssl.TrustManagerFactory.algorithm", defA);
-        assertEquals("Incorrect defaultAlgorithm", 
+        assertEquals("Incorrect defaultAlgorithm",
                 TrustManagerFactory.getDefaultAlgorithm(), defA);
         if (def == null) {
             def = "";
         }
-        Security.setProperty("ssl.TrustManagerFactory.algorithm", def); 
-        assertEquals("Incorrect defaultAlgorithm", 
-                TrustManagerFactory.getDefaultAlgorithm(), def);        
+        Security.setProperty("ssl.TrustManagerFactory.algorithm", def);
+        assertEquals("Incorrect defaultAlgorithm",
+                TrustManagerFactory.getDefaultAlgorithm(), def);
     }
+
     /**
-     * Test for <code>getInstance(String algorithm)</code> method 
-     * Assertions: returns security property "ssl.TrustManagerFactory.algorithm"; 
+     * Test for <code>getInstance(String algorithm)</code> method
+     * Assertions: returns security property "ssl.TrustManagerFactory.algorithm";
      * returns instance of TrustManagerFactory
      */
     public void testTrustManagerFactory01() throws NoSuchAlgorithmException {
@@ -137,7 +138,7 @@ public class TrustManagerFactory1Test extends TestCase {
     }
 
     /**
-     * Test for <code>getInstance(String algorithm)</code> method 
+     * Test for <code>getInstance(String algorithm)</code> method
      * Assertion:
      * throws NullPointerException when algorithm is null;
      * throws NoSuchAlgorithmException when algorithm is not correct;
@@ -189,7 +190,7 @@ public class TrustManagerFactory1Test extends TestCase {
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
      * method
-     * Assertion: 
+     * Assertion:
      * throws NullPointerException when algorithm is null;
      * throws NoSuchAlgorithmException when algorithm is not correct;
      */
@@ -287,7 +288,7 @@ public class TrustManagerFactory1Test extends TestCase {
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
      * method
-     * Assertion: 
+     * Assertion:
      * throws NullPointerException when algorithm is null;
      * throws NoSuchAlgorithmException when algorithm is not correct;
      */
@@ -347,7 +348,7 @@ public class TrustManagerFactory1Test extends TestCase {
             fail(NotSupportedMsg);
             return;
         }
-        TrustManagerFactorySpi spi = new MyTrustManagerFactorySpi(); 
+        TrustManagerFactorySpi spi = new MyTrustManagerFactorySpi();
         TrustManagerFactory tmF = new myTrustManagerFactory(spi, defaultProvider,
                 defaultAlgorithm);
         assertTrue("Not CertStore object", tmF instanceof TrustManagerFactory);
@@ -355,7 +356,7 @@ public class TrustManagerFactory1Test extends TestCase {
                 defaultAlgorithm);
         assertEquals("Incorrect provider", tmF.getProvider(), defaultProvider);
         assertNull("Incorrect result", tmF.getTrustManagers());
-        
+
         tmF = new myTrustManagerFactory(null, null, null);
         assertTrue("Not CertStore object", tmF instanceof TrustManagerFactory);
         assertNull("Provider must be null", tmF.getProvider());
@@ -380,15 +381,15 @@ public class TrustManagerFactory1Test extends TestCase {
         KeyStore ks;
         KeyStore ksNull = null;
         ks = KeyStore.getInstance(KeyStore.getDefaultType());
-        ks.load(null, null);            
- 
+        ks.load(null, null);
+
         TrustManager[] tm;
         TrustManagerFactory[] trustMF = createTMFac();
         assertNotNull("TrustManagerFactory objects were not created", trustMF);
         for (int i = 0; i < trustMF.length; i++) {
             try {
                 trustMF[i].init(ksNull);
-            } catch (KeyStoreException e) {              
+            } catch (KeyStoreException e) {
             }
             trustMF[i].init(ks);
             tm = trustMF[i].getTrustManagers();
@@ -404,7 +405,7 @@ public class TrustManagerFactory1Test extends TestCase {
      * throws InvalidAlgorithmParameterException when params is null
      */
     public void testTrustManagerFactory12() throws NoSuchAlgorithmException,
-    KeyStoreException, InvalidAlgorithmParameterException  {
+            KeyStoreException, InvalidAlgorithmParameterException {
         if (!DEFSupported) {
             fail(NotSupportedMsg);
             return;
@@ -424,7 +425,7 @@ public class TrustManagerFactory1Test extends TestCase {
                 fail("InvalidAlgorithmParameterException must be thrown");
             } catch (InvalidAlgorithmParameterException e) {
             }
-        }        
+        }
     }
 
 }
@@ -441,5 +442,5 @@ class myTrustManagerFactory extends TrustManagerFactory {
 }
 
 class myManagerFactoryParam implements ManagerFactoryParameters {
-    
+
 }

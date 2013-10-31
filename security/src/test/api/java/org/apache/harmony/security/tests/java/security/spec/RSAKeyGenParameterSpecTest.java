@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -29,12 +29,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>RSAKeyGenParameterSpec</code> class fields and methods.
- * 
  */
 public class RSAKeyGenParameterSpecTest extends TestCase {
 
     /**
      * Constructor for RSAKeyGenParameterSpecTest.
+     *
      * @param name
      */
     public RSAKeyGenParameterSpecTest(String name) {
@@ -48,7 +48,7 @@ public class RSAKeyGenParameterSpecTest extends TestCase {
      */
     public final void testRSAKeyGenParameterSpec() {
         AlgorithmParameterSpec aps =
-            new RSAKeyGenParameterSpec(512, BigInteger.valueOf(0L));
+                new RSAKeyGenParameterSpec(512, BigInteger.valueOf(0L));
         assertTrue(aps instanceof RSAKeyGenParameterSpec);
     }
 
@@ -58,7 +58,7 @@ public class RSAKeyGenParameterSpecTest extends TestCase {
      */
     public final void testGetKeysize() {
         RSAKeyGenParameterSpec rkgps =
-            new RSAKeyGenParameterSpec(512, BigInteger.valueOf(0L));
+                new RSAKeyGenParameterSpec(512, BigInteger.valueOf(0L));
         assertEquals(512, rkgps.getKeysize());
     }
 
@@ -68,10 +68,10 @@ public class RSAKeyGenParameterSpecTest extends TestCase {
      */
     public final void testGetPublicExponent() {
         RSAKeyGenParameterSpec rkgps =
-            new RSAKeyGenParameterSpec(512, BigInteger.valueOf(0L));
+                new RSAKeyGenParameterSpec(512, BigInteger.valueOf(0L));
         assertEquals(0, rkgps.getPublicExponent().intValue());
     }
-    
+
     /**
      * Test for <code>F0</code> field<br>
      * Assertion: the public exponent value F0 = 3
@@ -79,7 +79,7 @@ public class RSAKeyGenParameterSpecTest extends TestCase {
     public final void testF0Value() {
         assertEquals(3, RSAKeyGenParameterSpec.F0.intValue());
     }
-    
+
     /**
      * Test for <code>F4</code> field<br>
      * Assertion: the public exponent value F0 = 65537

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package javax.crypto;
 
@@ -37,34 +37,33 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>MacSpi</code> class constructors and methods.
- * 
  */
 
 public class MacSpiTest extends TestCase {
 
     /**
      * Constructor for MacSpiTests.
-     * 
+     *
      * @param arg0
      */
     public MacSpiTest(String arg0) {
         super(arg0);
     }
 
-    /** 
-     * Test for <code>MacSpi</code> constructor 
+    /**
+     * Test for <code>MacSpi</code> constructor
      * Assertion: constructs MacSpi
      */
     public void testMacSpiTests01() throws Exception {
         MacSpi mSpi = new MyMacSpi();
-                
-        byte [] bb1 = {(byte)1, (byte)2, (byte)3, (byte)4, (byte)5};
-        SecretKeySpec sks = new SecretKeySpec(bb1, "SHA1");        
-        
+
+        byte[] bb1 = { (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5 };
+        SecretKeySpec sks = new SecretKeySpec(bb1, "SHA1");
+
         assertEquals("Incorrect MacLength", mSpi.engineGetMacLength(), 0);
-        
+
         try {
-            mSpi.engineInit(null, null);            
+            mSpi.engineInit(null, null);
             fail("IllegalArgumentException must be thrown");
         } catch (IllegalArgumentException e) {
         }
@@ -78,13 +77,13 @@ public class MacSpiTest extends TestCase {
             fail("CloneNotSupportedException was not thrown as expected");
         } catch (CloneNotSupportedException e) {
         }
-        
+
         MacSpi mSpi1 = new MyMacSpi1();
         mSpi1.clone();
-        
-        byte [] bbb = new byte[10];
+
+        byte[] bbb = new byte[10];
         for (int i = 0; i < bbb.length; i++) {
-            bbb[i] = (byte)i;
+            bbb[i] = (byte) i;
         }
         try {
             mSpi1.engineInit(null, null);
@@ -92,7 +91,7 @@ public class MacSpiTest extends TestCase {
         } catch (IllegalArgumentException e) {
         }
         mSpi1.engineInit(sks, null);
-        
+
         ByteBuffer byteBuf = ByteBuffer.allocate(10);
         byteBuf.put(bbb);
         byteBuf.position(5);
@@ -100,9 +99,9 @@ public class MacSpiTest extends TestCase {
         mSpi1.engineUpdate(byteBuf);
         bb = mSpi1.engineDoFinal();
         assertEquals("Incorrect result of engineDoFinal", bb.length, beforeUp);
-        
+
         MacSpi mSpi2 = new MyMacSpi2();
-        
+
         mSpi2.engineInit(null, null);
         mSpi2.engineInit(sks, null);
 
@@ -111,8 +110,8 @@ public class MacSpiTest extends TestCase {
         } catch (CloneNotSupportedException e) {
         }
 
-        byte [] bbuf = {(byte)5, (byte)4, (byte)3, (byte)2, (byte)1};
-        byteBuf = ByteBuffer.allocate(5);        
+        byte[] bbuf = { (byte) 5, (byte) 4, (byte) 3, (byte) 2, (byte) 1 };
+        byteBuf = ByteBuffer.allocate(5);
         byteBuf.put(bbuf);
         byteBuf.position(5);
         if (!byteBuf.hasRemaining()) {

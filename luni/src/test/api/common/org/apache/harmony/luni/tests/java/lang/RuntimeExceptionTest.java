@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class RuntimeExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.RuntimeException#RuntimeException()
-	 */
+    /**
+     * @tests java.lang.RuntimeException#RuntimeException()
+     */
     public void test_Constructor() {
         RuntimeException e = new RuntimeException();
         assertNull(e.getMessage());
@@ -39,7 +39,7 @@ public class RuntimeExceptionTest extends TestCase {
         assertEquals("fixture", e.getMessage());
         assertNull(e.getCause());
     }
-    
+
     /**
      * @tests {@link java.lang.RuntimeException#RuntimeException(Throwable)}
      */

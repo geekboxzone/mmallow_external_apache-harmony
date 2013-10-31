@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -35,7 +35,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for KeyAgreement constructor and methods
- * 
  */
 
 public class KeyAgreement_Impl1Test extends TestCase {

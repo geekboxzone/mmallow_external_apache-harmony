@@ -48,8 +48,6 @@ public class AppConfigurationEntryTest extends TestCase {
 
     /**
      * Test for ctor
-     *
-     * 
      */
     public void testCtor_01() {
         entry = new AppConfigurationEntry(loginModule,
@@ -94,7 +92,8 @@ public class AppConfigurationEntryTest extends TestCase {
          fail("Expected IllegalArgumentException");
          } catch (IllegalArgumentException e2) {
          }
-         */try {
+         */
+        try {
             entry = new AppConfigurationEntry(loginModule, null, options);
             fail("Expected IllegalArgumentException");
         } catch (IllegalArgumentException e3) {
@@ -108,7 +107,7 @@ public class AppConfigurationEntryTest extends TestCase {
     }
 
     /**
-     * test for array of the AppConfigurationEntry and for the method getOptions 
+     * test for array of the AppConfigurationEntry and for the method getOptions
      */
     public void testArrayCtor() {
         Map<String, String> options1 = new HashMap<String, String>();
@@ -134,8 +133,7 @@ public class AppConfigurationEntryTest extends TestCase {
     }
 
     /**
-     * test for the AppConfigurationEntry.LoginModuleControlFlag 
-     * 
+     * test for the AppConfigurationEntry.LoginModuleControlFlag
      */
     public void testControlFlags() {
         assertEquals(AppConfigurationEntry.LoginModuleControlFlag.class,
@@ -170,7 +168,7 @@ public class AppConfigurationEntryTest extends TestCase {
         AppConfigurationEntry entry = new AppConfigurationEntry("LoginModule",
                 AppConfigurationEntry.LoginModuleControlFlag.REQUIRED, options);
 
-        Map<String, Object> eOptions = (Map<String, Object>)entry.getOptions();
+        Map<String, Object> eOptions = (Map<String, Object>) entry.getOptions();
 
         try {
             eOptions.put("a", "b");

@@ -334,7 +334,7 @@ public class SQLTimeoutExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLTimeoutException should be equals to cause.toString()",
                 "java.lang.Exception: MYTHROWABLE", sQLTimeoutException
-                        .getMessage());
+                .getMessage());
         assertNull("The SQLState of SQLTimeoutException should be null",
                 sQLTimeoutException.getSQLState());
         assertEquals("The error code of SQLTimeoutException should be 0",

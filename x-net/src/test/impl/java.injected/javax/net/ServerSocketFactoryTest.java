@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package javax.net;
 
@@ -43,7 +43,7 @@ public class ServerSocketFactoryTest extends TestCase {
         try {
             sf.createServerSocket();
             fail("No expected SocketException");
-        } catch (SocketException e) {        
+        } catch (SocketException e) {
         } catch (IOException e) {
             fail(e.toString());
         }
@@ -72,23 +72,24 @@ public class ServerSocketFactoryTest extends TestCase {
             s = sf.createServerSocket(0, 50, InetAddress.getLocalHost());
             s.close();
         } catch (IOException e) {
-        } 
+        }
     }
 }
+
 class MyServerSocketFactory extends ServerSocketFactory {
     @Override
     public ServerSocket createServerSocket(int port) throws IOException, UnknownHostException {
         throw new IOException();
     }
-    
+
     @Override
     public ServerSocket createServerSocket(int port, int backlog)
             throws IOException, UnknownHostException {
         throw new IOException();
     }
-    
+
     @Override
     public ServerSocket createServerSocket(int port, int backlog, InetAddress ifAddress) throws IOException {
         throw new IOException();
-     }
+    }
 }

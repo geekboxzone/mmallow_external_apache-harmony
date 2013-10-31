@@ -21,59 +21,59 @@ import java.lang.reflect.AccessibleObject;
 
 public class AccessibleObjectTest extends junit.framework.TestCase {
 
-	public class TestClass {
-		public Object aField;
-	}
+    public class TestClass {
+        public Object aField;
+    }
 
-	/**
-	 * @tests java.lang.reflect.AccessibleObject#isAccessible()
-	 */
-	public void test_isAccessible() throws Exception {
-		// Test for method boolean
-		// java.lang.reflect.AccessibleObject.isAccessible()
-                AccessibleObject ao = TestClass.class.getField("aField");
-                ao.setAccessible(true);
-                assertTrue("Returned false to isAccessible", ao.isAccessible());
-                ao.setAccessible(false);
-                assertTrue("Returned true to isAccessible", !ao.isAccessible());
-	}
+    /**
+     * @tests java.lang.reflect.AccessibleObject#isAccessible()
+     */
+    public void test_isAccessible() throws Exception {
+        // Test for method boolean
+        // java.lang.reflect.AccessibleObject.isAccessible()
+        AccessibleObject ao = TestClass.class.getField("aField");
+        ao.setAccessible(true);
+        assertTrue("Returned false to isAccessible", ao.isAccessible());
+        ao.setAccessible(false);
+        assertTrue("Returned true to isAccessible", !ao.isAccessible());
+    }
 
-	/**
-	 * @tests java.lang.reflect.AccessibleObject#setAccessible(java.lang.reflect.AccessibleObject[],
-	 *        boolean)
-	 */
-	public void test_setAccessible$Ljava_lang_reflect_AccessibleObjectZ() throws Exception {
-		// Test for method void
-		// java.lang.reflect.AccessibleObject.setAccessible(java.lang.reflect.AccessibleObject
-		// [], boolean)
-                AccessibleObject ao = TestClass.class.getField("aField");
-                AccessibleObject[] aoa = new AccessibleObject[] { ao };
-                AccessibleObject.setAccessible(aoa, true);
-                assertTrue("Returned false to isAccessible", ao.isAccessible());
-                AccessibleObject.setAccessible(aoa, false);
-                assertTrue("Returned true to isAccessible", !ao.isAccessible());
-	}
+    /**
+     * @tests java.lang.reflect.AccessibleObject#setAccessible(java.lang.reflect.AccessibleObject[],
+     *boolean)
+     */
+    public void test_setAccessible$Ljava_lang_reflect_AccessibleObjectZ() throws Exception {
+        // Test for method void
+        // java.lang.reflect.AccessibleObject.setAccessible(java.lang.reflect.AccessibleObject
+        // [], boolean)
+        AccessibleObject ao = TestClass.class.getField("aField");
+        AccessibleObject[] aoa = new AccessibleObject[] { ao };
+        AccessibleObject.setAccessible(aoa, true);
+        assertTrue("Returned false to isAccessible", ao.isAccessible());
+        AccessibleObject.setAccessible(aoa, false);
+        assertTrue("Returned true to isAccessible", !ao.isAccessible());
+    }
 
-	/**
-	 * @tests java.lang.reflect.AccessibleObject#setAccessible(boolean)
-	 */
-	public void test_setAccessibleZ() {
-		// Test for method void
-		// java.lang.reflect.AccessibleObject.setAccessible(boolean)
-		assertTrue("Used to test", true);
-	}
+    /**
+     * @tests java.lang.reflect.AccessibleObject#setAccessible(boolean)
+     */
+    public void test_setAccessibleZ() {
+        // Test for method void
+        // java.lang.reflect.AccessibleObject.setAccessible(boolean)
+        assertTrue("Used to test", true);
+    }
 
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

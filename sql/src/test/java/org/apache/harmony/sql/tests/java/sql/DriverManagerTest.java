@@ -37,7 +37,6 @@ import junit.framework.TestCase;
 
 /**
  * JUnit Testcase for the java.sql.DriverManager class
- *
  */
 public class DriverManagerTest extends TestCase {
 
@@ -498,9 +497,9 @@ public class DriverManagerTest extends TestCase {
 
     /**
      * @tests {@link java.sql.DriverManager#registerDriver(Driver)}
-     *
+     * <p/>
      * Registers a driver for multiple times and deregisters it only once.
-     *
+     * <p/>
      * Regression for HARMONY-4205
      */
     public void test_registerDriver_MultiTimes() throws SQLException {

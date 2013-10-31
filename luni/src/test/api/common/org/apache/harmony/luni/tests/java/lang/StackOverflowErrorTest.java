@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class StackOverflowErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.StackOverflowError#StackOverflowError()
-	 */
+    /**
+     * @tests java.lang.StackOverflowError#StackOverflowError()
+     */
     public void test_Constructor() {
         StackOverflowError e = new StackOverflowError();
         assertNull(e.getMessage());

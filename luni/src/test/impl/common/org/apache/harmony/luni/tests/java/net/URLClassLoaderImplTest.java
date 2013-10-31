@@ -34,7 +34,7 @@ public class URLClassLoaderImplTest extends TestCase {
 
     /**
      * @tests java.net.URLClassLoader#URLClassLoader(java.net.URL[], java.lang.ClassLoader,
-     *        java.net.URLStreamHandlerFactory)
+     *java.net.URLStreamHandlerFactory)
      */
     public void test_Constructor$Ljava_net_URLLjava_lang_ClassLoaderLjava_net_URLStreamHandlerFactory()
             throws Exception {

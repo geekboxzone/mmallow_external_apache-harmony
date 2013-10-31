@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package java.security;
 
@@ -32,14 +32,13 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>AlgorithmParameterGeneratorSpi</code> class constructors
  * and methods.
- * 
  */
 
 public class AlgorithmParameterGeneratorSpiTest extends TestCase {
 
     /**
      * Constructor for CertPathBuilderTests.
-     * 
+     *
      * @param name
      */
     public AlgorithmParameterGeneratorSpiTest(String name) {
@@ -63,8 +62,8 @@ public class AlgorithmParameterGeneratorSpiTest extends TestCase {
         } catch (IllegalArgumentException e) {
         }
         algParGen.engineInit(0, null);
-        algParGen.engineInit(0, new SecureRandom());        
-        
+        algParGen.engineInit(0, new SecureRandom());
+
         try {
             algParGen.engineInit(-10, null);
             fail("IllegalArgumentException must be thrown");
@@ -74,6 +73,6 @@ public class AlgorithmParameterGeneratorSpiTest extends TestCase {
             algParGen.engineInit(-10, new SecureRandom());
             fail("IllegalArgumentException must be thrown");
         } catch (IllegalArgumentException e) {
-        }        
+        }
     }
 }

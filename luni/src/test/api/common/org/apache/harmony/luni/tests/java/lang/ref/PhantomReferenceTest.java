@@ -21,49 +21,49 @@ import java.lang.ref.PhantomReference;
 import java.lang.ref.ReferenceQueue;
 
 public class PhantomReferenceTest extends junit.framework.TestCase {
-	static Boolean bool;
+    static Boolean bool;
 
-	protected void doneSuite() {
-		bool = null;
-	}
+    protected void doneSuite() {
+        bool = null;
+    }
 
-	/**
-	 * @tests java.lang.ref.PhantomReference#get()
-	 */
-	public void test_get() {
-		ReferenceQueue rq = new ReferenceQueue();
-		bool = new Boolean(false);
-		PhantomReference pr = new PhantomReference(bool, rq);
-		assertNull("Same object returned.", pr.get());
-	}
+    /**
+     * @tests java.lang.ref.PhantomReference#get()
+     */
+    public void test_get() {
+        ReferenceQueue rq = new ReferenceQueue();
+        bool = new Boolean(false);
+        PhantomReference pr = new PhantomReference(bool, rq);
+        assertNull("Same object returned.", pr.get());
+    }
 
-	/**
-	 * @tests java.lang.ref.PhantomReference#PhantomReference(java.lang.Object,
-	 *        java.lang.ref.ReferenceQueue)
-	 */
-	public void test_ConstructorLjava_lang_ObjectLjava_lang_ref_ReferenceQueue() throws Exception {
-		ReferenceQueue rq = new ReferenceQueue();
-		bool = new Boolean(true);
-                PhantomReference pr = new PhantomReference(bool, rq);
-                // Allow the finalizer to run to potentially enqueue
-                Thread.sleep(1000);
-                assertTrue("Initialization failed.", !pr.isEnqueued());
+    /**
+     * @tests java.lang.ref.PhantomReference#PhantomReference(java.lang.Object,
+     *java.lang.ref.ReferenceQueue)
+     */
+    public void test_ConstructorLjava_lang_ObjectLjava_lang_ref_ReferenceQueue() throws Exception {
+        ReferenceQueue rq = new ReferenceQueue();
+        bool = new Boolean(true);
+        PhantomReference pr = new PhantomReference(bool, rq);
+        // Allow the finalizer to run to potentially enqueue
+        Thread.sleep(1000);
+        assertTrue("Initialization failed.", !pr.isEnqueued());
 
-                // need a reference to bool so the jit does not optimize it away
-		assertTrue("should always pass", bool.booleanValue());
+        // need a reference to bool so the jit does not optimize it away
+        assertTrue("should always pass", bool.booleanValue());
 
-		boolean exception = false;
-		try {
-			new PhantomReference(bool, null);
-		} catch (NullPointerException e) {
-			exception = true;
-		}
-		assertTrue("Should not throw NullPointerException", !exception);
-	}
+        boolean exception = false;
+        try {
+            new PhantomReference(bool, null);
+        } catch (NullPointerException e) {
+            exception = true;
+        }
+        assertTrue("Should not throw NullPointerException", !exception);
+    }
 
-	protected void setUp() {
-	}
+    protected void setUp() {
+    }
 
-	protected void tearDown() {
-	}
+    protected void tearDown() {
+    }
 }

@@ -67,7 +67,7 @@ public class X509CertSelectorTest extends TestCase {
         new X509CertSelector().addSubjectAlternativeName(2, "3g.example.com");
         new X509CertSelector().addSubjectAlternativeName(2, "*.example.com");
         // Illegal DNS names
-        String[] names = new String[] {"*", "*.", "%anything"};
+        String[] names = new String[] { "*", "*.", "%anything" };
         for (String badName : names) {
             try {
                 new X509CertSelector().addSubjectAlternativeName(2, badName);
@@ -107,7 +107,7 @@ public class X509CertSelectorTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * @tests java.security.cert.X509CertSelector#setSubjectPublicKey(byte[])
      */

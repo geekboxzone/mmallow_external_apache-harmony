@@ -15,8 +15,8 @@
  *  limitations under the License.
  */
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -24,33 +24,32 @@ import java.security.SecureRandomSpi;
 
 /**
  * Test implementation of SecureRandom
- * 
  */
 public class RandomImpl extends SecureRandomSpi {
 
-	public static boolean runEngineGenerateSeed = false;
-	public static boolean runEngineNextBytes = false;
-	public static boolean runEngineSetSeed = false;
-	
-	protected void engineSetSeed(byte[] seed) {
-		runEngineSetSeed = true;
-	}
+    public static boolean runEngineGenerateSeed = false;
+    public static boolean runEngineNextBytes = false;
+    public static boolean runEngineSetSeed = false;
 
-	protected void engineNextBytes(byte[] bytes) {
-		runEngineNextBytes = true;
-		for (int i = 0; i < bytes.length; i++) {
-			bytes[i] = (byte)(i + 0xF1);
-		}
-	}
+    protected void engineSetSeed(byte[] seed) {
+        runEngineSetSeed = true;
+    }
 
-	protected byte[] engineGenerateSeed(int numBytes) {
-		runEngineGenerateSeed = true;
-		byte[] b = new byte[numBytes];
-		for (int i = 0; i < b.length; i++) {
-			b[i] = (byte)i;
-		}
-		return b;
-	}
+    protected void engineNextBytes(byte[] bytes) {
+        runEngineNextBytes = true;
+        for (int i = 0; i < bytes.length; i++) {
+            bytes[i] = (byte) (i + 0xF1);
+        }
+    }
+
+    protected byte[] engineGenerateSeed(int numBytes) {
+        runEngineGenerateSeed = true;
+        byte[] b = new byte[numBytes];
+        for (int i = 0; i < b.length; i++) {
+            b[i] = (byte) i;
+        }
+        return b;
+    }
 
 }
 

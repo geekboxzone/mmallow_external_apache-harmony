@@ -45,18 +45,18 @@ public class KerberosUtilsTest extends TestCase {
                 "krbtgt/EXAMPLE.COM@EXAMPLE.COM");
         KerberosTicket tgt = new KerberosTicket(new byte[0], clientPrincipal,
                 serverPrincipal, new byte[0], 1, new boolean[0],
-                new Date(1000), null, new Date(new Date().getTime() + 1000), null, null);        
+                new Date(1000), null, new Date(new Date().getTime() + 1000), null, null);
         Subject subject = new Subject();
         subject.getPrivateCredentials().add(tgt);
-        KerberosTicket tgtFromContext = (KerberosTicket) Subject.doAs(subject, new PrivilegedAction<KerberosTicket>(){
-            public KerberosTicket run(){
+        KerberosTicket tgtFromContext = (KerberosTicket) Subject.doAs(subject, new PrivilegedAction<KerberosTicket>() {
+            public KerberosTicket run() {
                 return KerberosUtils.getTGT(clientPrincipal);
             }
         });
         assertNotNull(tgtFromContext);
         assertEquals(tgt, tgtFromContext);
     }
-    
+
     public void testGetTGT_fromLoginContext() throws Exception {
         final KerberosPrincipal clientPrincipal = new KerberosPrincipal(
                 "leo@EXAMPLE.COM");

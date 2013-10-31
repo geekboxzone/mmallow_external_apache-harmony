@@ -16,15 +16,14 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.login.serialization;
 
 import javax.security.auth.login.AccountLockedException;
 
 import org.apache.harmony.testframework.serialization.SerializationTest;
-
 
 
 /**
@@ -35,6 +34,6 @@ public class AccountLockedExceptionTest extends SerializationTest {
 
     @Override
     protected Object[] getData() {
-        return new Object[] {new AccountLockedException("message")};
+        return new Object[] { new AccountLockedException("message") };
     }
 }

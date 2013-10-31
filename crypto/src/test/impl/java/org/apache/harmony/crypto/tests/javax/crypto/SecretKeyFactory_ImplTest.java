@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -38,11 +38,10 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SecretKeyFactory</code> class constructors and methods
- * 
  */
 
 public class SecretKeyFactory_ImplTest extends TestCase {
-    
+
     private static final String srvSecretKeyFactory = "SecretKeyFactory";
     private static final String defaultAlg = "MySecretKey";
     private static final String SecretKeyFactoryProviderClass = "org.apache.harmony.crypto.tests.support.MySecretKeyFactorySpi";
@@ -63,15 +62,15 @@ public class SecretKeyFactory_ImplTest extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        mProv = (new SpiEngUtils()).new MyProvider("MySKFProvider", "Testing provider", 
-                srvSecretKeyFactory.concat(".").concat(defaultAlg), 
+        mProv = (new SpiEngUtils()).new MyProvider("MySKFProvider", "Testing provider",
+                srvSecretKeyFactory.concat(".").concat(defaultAlg),
                 SecretKeyFactoryProviderClass);
         Security.insertProviderAt(mProv, 2);
     }
-    
+
     /*
-     * @see TestCase#tearDown()
-     */
+    * @see TestCase#tearDown()
+    */
     protected void tearDown() throws Exception {
         super.tearDown();
         Security.removeProvider(mProv.getName());
@@ -80,7 +79,7 @@ public class SecretKeyFactory_ImplTest extends TestCase {
     private void checkResult(SecretKeyFactory skf) throws InvalidKeyException,
             InvalidKeySpecException {
         SecretKey sk;
-        KeySpec keySpec;        
+        KeySpec keySpec;
         sk = skf.generateSecret(null);
         assertNull("generateSecret method must return null", sk);
         sk = skf.translateKey(null);
@@ -88,6 +87,7 @@ public class SecretKeyFactory_ImplTest extends TestCase {
         keySpec = skf.getKeySpec(null, null);
         assertNull("getKeySpec method must return null", keySpec);
     }
+
     /**
      * Test for <code>getInstance(String algorithm)</code> method
      * Assertions:
@@ -124,7 +124,7 @@ public class SecretKeyFactory_ImplTest extends TestCase {
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
      * method
-     * Assertions: 
+     * Assertions:
      * throws NullPointerException when algorithm is null;
      * throws NoSuchAlgorithmException when algorithm is null or incorrect;
      * throws IllegalArgumentException when provider is null or empty;
@@ -133,7 +133,7 @@ public class SecretKeyFactory_ImplTest extends TestCase {
      */
     public void testGetInstance02() throws NoSuchAlgorithmException,
             NoSuchProviderException, IllegalArgumentException,
-            InvalidKeySpecException, InvalidKeyException {            
+            InvalidKeySpecException, InvalidKeyException {
         try {
             SecretKeyFactory.getInstance(null, mProv.getName());
             fail("NullPointerException or NoSuchAlgorithmException should be thrown if algorithm is null");

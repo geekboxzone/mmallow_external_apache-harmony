@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -43,7 +43,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>CertStore</code> class constructors and methods
- * 
  */
 
 public class CertStore_ImplTest extends TestCase {
@@ -69,8 +68,8 @@ public class CertStore_ImplTest extends TestCase {
         super.setUp();
         mProv = (new SpiEngUtils()).new MyProvider("MyCertStoreProvider",
                 "Provider for testing", srvCertStore
-                        .concat(".").concat(defaultAlg),
-                CertStoreProviderClass);  
+                .concat(".").concat(defaultAlg),
+                CertStoreProviderClass);
         Security.insertProviderAt(mProv, 1);
     }
 
@@ -82,7 +81,7 @@ public class CertStore_ImplTest extends TestCase {
         Security.removeProvider(mProv.getName());
     }
 
-    private void checkResult(CertStore certS)   throws CertStoreException, 
+    private void checkResult(CertStore certS) throws CertStoreException,
             InvalidAlgorithmParameterException {
         CertSelector certSelector = new X509CertSelector();
         CRLSelector crlSelector = new X509CRLSelector();
@@ -93,17 +92,17 @@ public class CertStore_ImplTest extends TestCase {
     }
 
     /**
-     * Test for method  
-     * <code>getInstance(String type, CertStoreParameters params)</code>  
+     * Test for method
+     * <code>getInstance(String type, CertStoreParameters params)</code>
      * Assertions:
      * throws NullPointerException when type is null
-     * throws NoSuchAlgorithmException when type is incorrect; 
-     * throws InvalidAlgorithmParameterException  when params is null 
-     * or has incorrect value; 
+     * throws NoSuchAlgorithmException when type is incorrect;
+     * throws InvalidAlgorithmParameterException  when params is null
+     * or has incorrect value;
      * returns CertStore object
      */
     public void testGetInstance01() throws NoSuchAlgorithmException,
-        InvalidAlgorithmParameterException, CertStoreException {
+            InvalidAlgorithmParameterException, CertStoreException {
         CertStoreParameters p = new MyCertStoreParameters();
         mPar mp = new mPar("CertStore");
         try {
@@ -132,26 +131,26 @@ public class CertStore_ImplTest extends TestCase {
             } catch (InvalidAlgorithmParameterException e) {
             }
         }
-        
+
         CertStore certS;
         for (int i = 0; i < validValues.length; i++) {
-            certS = CertStore.getInstance(validValues[i], p);      
+            certS = CertStore.getInstance(validValues[i], p);
             assertEquals("Incorrect type", certS.getType(), validValues[i]);
             assertEquals("Incorrect provider", certS.getProvider(), mProv);
-            assertTrue("Invalid parameters",certS.getCertStoreParameters() instanceof MyCertStoreParameters);
+            assertTrue("Invalid parameters", certS.getCertStoreParameters() instanceof MyCertStoreParameters);
             checkResult(certS);
-        }        
+        }
     }
 
     /**
      * Test for method
      * <code>getInstance(String type, CertStoreParameters params, String provider)</code>
-     * Assertions: 
+     * Assertions:
      * throws NullPointerException when type is null
-     * throws NoSuchAlgorithmException when type is incorrect; 
-     * throws IllegalArgumentException when provider is null or empty; 
-     * throws NoSuchProviderException when provider is available; 
-     * throws InvalidAlgorithmParameterException  when params is null 
+     * throws NoSuchAlgorithmException when type is incorrect;
+     * throws IllegalArgumentException when provider is null or empty;
+     * throws NoSuchProviderException when provider is available;
+     * throws InvalidAlgorithmParameterException  when params is null
      * returns CertStore object
      */
     public void testGetInstance02() throws NoSuchAlgorithmException,
@@ -192,7 +191,7 @@ public class CertStore_ImplTest extends TestCase {
         for (int i = 0; i < validValues.length; i++) {
             for (int j = 1; j < invalidValues.length; j++) {
                 try {
-                    CertStore.getInstance(validValues[i], p, 
+                    CertStore.getInstance(validValues[i], p,
                             invalidValues[j]);
                     fail("NoSuchProviderException must be thrown (type: "
                             .concat(validValues[i]).concat(" provider: ")
@@ -203,7 +202,7 @@ public class CertStore_ImplTest extends TestCase {
         }
         for (int i = 0; i < validValues.length; i++) {
             try {
-                CertStore.getInstance(validValues[i], null, mProv.getName()); 
+                CertStore.getInstance(validValues[i], null, mProv.getName());
                 fail("InvalidAlgorithmParameterException must be thrown when params is null");
             } catch (InvalidAlgorithmParameterException e) {
             }
@@ -220,7 +219,7 @@ public class CertStore_ImplTest extends TestCase {
             assertEquals("Incorrect type", certS.getType(), validValues[i]);
             assertEquals("Incorrect provider", certS.getProvider().getName(),
                     mProv.getName());
-            assertTrue("Invalid parameters",certS.getCertStoreParameters() instanceof MyCertStoreParameters);
+            assertTrue("Invalid parameters", certS.getCertStoreParameters() instanceof MyCertStoreParameters);
             checkResult(certS);
         }
     }
@@ -228,11 +227,11 @@ public class CertStore_ImplTest extends TestCase {
     /**
      * Test for method
      * <code>getInstance(String type, CertStoreParameters params, Provider provider)</code>
-     * Assertions: 
+     * Assertions:
      * throws NullPointerException when type is null
-     * throws NoSuchAlgorithmException when type is incorrect; 
+     * throws NoSuchAlgorithmException when type is incorrect;
      * throws IllegalArgumentException when provider is null;
-     * throws InvalidAlgorithmParameterException when params is null or has incorrect value 
+     * throws InvalidAlgorithmParameterException when params is null or has incorrect value
      * returns CertStore object
      */
     public void testGetInstance03() throws NoSuchAlgorithmException,
@@ -265,7 +264,7 @@ public class CertStore_ImplTest extends TestCase {
         }
         for (int i = 0; i < validValues.length; i++) {
             try {
-                CertStore.getInstance(validValues[i], null, mProv); 
+                CertStore.getInstance(validValues[i], null, mProv);
                 fail("InvalidAlgorithmParameterException must be thrown when params is null");
             } catch (InvalidAlgorithmParameterException e) {
             }
@@ -280,21 +279,24 @@ public class CertStore_ImplTest extends TestCase {
             certS = CertStore.getInstance(validValues[i], p, mProv);
             assertEquals("Incorrect type", certS.getType(), validValues[i]);
             assertEquals("Incorrect provider", certS.getProvider(), mProv);
-            assertTrue("Invalid parameters",certS.getCertStoreParameters() instanceof MyCertStoreParameters);
+            assertTrue("Invalid parameters", certS.getCertStoreParameters() instanceof MyCertStoreParameters);
             checkResult(certS);
         }
     }
 }
+
 class mPar implements CertStoreParameters {
     String par = "";
+
     public mPar() {
         super();
     }
+
     public mPar(String s) {
         super();
         par = s;
     }
-    
+
     public Object clone() {
         if (par == "") {
             return null;

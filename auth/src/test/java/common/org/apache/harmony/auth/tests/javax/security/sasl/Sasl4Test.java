@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.auth.tests.javax.security.sasl;
 
@@ -46,7 +46,7 @@ public class Sasl4Test extends TestCase {
 
     private static final String fServerClass = mySaslServerFactory.class.getName();
 
-    private Provider [] provs;
+    private Provider[] provs;
     private boolean initProvs;
 
     @Override
@@ -84,30 +84,31 @@ public class Sasl4Test extends TestCase {
         }
         if (provs != null) {
             for (int i = 0; i < provs.length; i++) {
-                Security.insertProviderAt(provs[i], (i+1));
+                Security.insertProviderAt(provs[i], (i + 1));
             }
-        }    }
+        }
+    }
 
     /**
-     * Test for <code>createSaslServer(String mechanism, 
-     *      String protocol, String serverName,
-     *      Map prop, CallbackHandler cbh))</code> method 
+     * Test for <code>createSaslServer(String mechanism,
+     * String protocol, String serverName,
+     * Map prop, CallbackHandler cbh))</code> method
      * Assertions:
      * throws NullPointerException when mechanism is null;
      * throws SaslException when parameters (protocol, cbh,
      * mechanism) are wrong.
-     * 
-     * All providers are previously removed and 
+     * <p/>
+     * All providers are previously removed and
      * 2 new providers were added.
      */
     public void testCreateServer01() throws SaslException {
         mProv = new Provider[] {
                 (new SpiEngUtils()).new MyProvider("MySaslServerProvider1",
                         "Testing provider SaslServerFactory - 1", SRVSSRV
-                                .concat("MECH-1"), fServerClass),
+                        .concat("MECH-1"), fServerClass),
                 (new SpiEngUtils()).new MyProvider("MySaslServerProvider2",
                         "Testing provider SaslServerFactory - 2", SRVSSRV
-                                .concat("MECH-2"), fServerClass) };
+                        .concat("MECH-2"), fServerClass) };
         addProviders();
 
         CallbackHandler cbH = new Sasl3Test.cbHand();
@@ -135,12 +136,12 @@ public class Sasl4Test extends TestCase {
     }
 
     /**
-     * Test for <code>createSaslServer(String mechanism, 
-     *      String protocol, String serverName,
-     *      Map prop, CallbackHandler cbh))</code>
+     * Test for <code>createSaslServer(String mechanism,
+     * String protocol, String serverName,
+     * Map prop, CallbackHandler cbh))</code>
      * method Assertions: throws NullPointerException when mechanisms is null;
      * returns null SaslServer.
-     * 
+     * <p/>
      * All providers are previously removed.
      */
     public void testCreateServer02() throws SaslException {
@@ -152,27 +153,27 @@ public class Sasl4Test extends TestCase {
         assertNull("Not null result", Sasl.createSaslServer("MECH-999", null,
                 null, null, null));
     }
-    
+
     /**
-     * Test for <code>createSaslServer(String mechanism, 
-     *      String protocol, String serverName,
-     *      Map prop, CallbackHandler cbh))</code> method
-     *  
-     * Assertions: 
+     * Test for <code>createSaslServer(String mechanism,
+     * String protocol, String serverName,
+     * Map prop, CallbackHandler cbh))</code> method
+     * <p/>
+     * Assertions:
      * returns SaslServer;
      * throws SaslServer for MECH-1 mechanism
-     * 
-     * All providers are previously removed and 
+     * <p/>
+     * All providers are previously removed and
      * 2 new providers were added.
      */
     public void testCreateServer03() throws SaslException {
         mProv = new Provider[] {
                 (new SpiEngUtils()).new MyProvider("MySaslServerProvider1",
                         "Testing provider SaslServerFactory - 1", SRVSSRV
-                                .concat("MECH-1"), fServerClass),
+                        .concat("MECH-1"), fServerClass),
                 (new SpiEngUtils()).new MyProvider("MySaslServerProvider2",
                         "Testing provider SaslServerFactory - 2", SRVSSRV
-                                .concat("MECH-2"), fServerClass) };
+                        .concat("MECH-2"), fServerClass) };
         addProviders();
 
         CallbackHandler cbH = new Sasl3Test.cbHandN();
@@ -193,24 +194,24 @@ public class Sasl4Test extends TestCase {
         } catch (SaslException e) {
         }
     }
-    
+
     /**
-     * Test for <code>createSaslServer(String mechanism, 
-     *      String protocol, String serverName,
-     *      Map prop, CallbackHandler cbh))</code> method
-     *  
-     * Assertions: 
+     * Test for <code>createSaslServer(String mechanism,
+     * String protocol, String serverName,
+     * Map prop, CallbackHandler cbh))</code> method
+     * <p/>
+     * Assertions:
      * returns SaslServer;
      * throws SaslServer for MECH-1 mechanism
-     * 
-     * All providers are previously removed and 
+     * <p/>
+     * All providers are previously removed and
      * 1 new provider was added.
      */
     public void testCreateServer04() throws SaslException {
         mProv = new Provider[] { (new SpiEngUtils()).new MyProvider(
                 "MySaslServerProvider1",
                 "Testing provider SaslServerFactory - 1", SRVSSRV
-                        .concat("MECH-1"), fServerClass) };
+                .concat("MECH-1"), fServerClass) };
         mProv[0].put(SRVSSRV.concat("MECH-2"), fServerClass);
         addProviders();
         CallbackHandler cbH = new Sasl3Test.cbHandN();
@@ -228,28 +229,28 @@ public class Sasl4Test extends TestCase {
     }
 
     /**
-     * Test for <code>createSaslServer(String mechanism, 
-     *      String protocol, String serverName,
-     *      Map prop, CallbackHandler cbh))</code> method
-     *  
-     * Assertions: 
+     * Test for <code>createSaslServer(String mechanism,
+     * String protocol, String serverName,
+     * Map prop, CallbackHandler cbh))</code> method
+     * <p/>
+     * Assertions:
      * return null Server when there is no provider supported some mechanism
      * returns SaslServer when incorrect mechanism is used
-     * 
-     * All providers are previously removed and 
+     * <p/>
+     * All providers are previously removed and
      * 2 new providers were added.
      */
     public void testCreateServer05() throws SaslException {
         mProv = new Provider[] {
                 (new SpiEngUtils()).new MyProvider("MySaslServerProvider1",
                         "Testing provider SaslServerFactory - 1", SRVSSRV
-                                .concat("MECH-2"), fServerClass.concat("Ext")),
+                        .concat("MECH-2"), fServerClass.concat("Ext")),
                 (new SpiEngUtils()).new MyProvider("MySaslServerProvider2",
                         "Testing provider SaslServerFactory - 2", SRVSSRV
-                                .concat("MECH-1"), fServerClass),
+                        .concat("MECH-1"), fServerClass),
                 (new SpiEngUtils()).new MyProvider("MySaslServerProvider3",
                         "Testing provider SaslServerFactory - 3", SRVSSRV
-                                .concat("MECH-6"), fServerClass) };
+                        .concat("MECH-6"), fServerClass) };
         mProv[2].put(SRVSSRV.concat("MECH-5"), fServerClass);
         addProviders();
 

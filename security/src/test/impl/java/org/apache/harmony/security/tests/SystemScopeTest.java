@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Aleksei Y. Semenov
-*/
+ * @author Aleksei Y. Semenov
+ */
 
 package org.apache.harmony.security.tests;
 
@@ -35,7 +35,6 @@ import junit.framework.TestCase;
 
 /**
  * Unit test for class org.apache.harmony.security.SystemScope
- *
  */
 
 public class SystemScopeTest extends TestCase {
@@ -52,12 +51,14 @@ public class SystemScopeTest extends TestCase {
         else {
             ss = IdentityScope.getSystemScope();
             Enumeration e = ss.identities();
-            while (e.hasMoreElements()) ss.removeIdentity((Identity)e.nextElement());
+            while (e.hasMoreElements())
+                ss.removeIdentity((Identity) e.nextElement());
         }
     }
 
     /**
      * Constructor for SystemScopeTest.
+     *
      * @param arg0
      */
     public SystemScopeTest(String arg0) {
@@ -120,24 +121,27 @@ public class SystemScopeTest extends TestCase {
         try {
             ss.addIdentity(bbb);
             fail("KeyManagementException should be thrown for already used name");
-        } catch (KeyManagementException ok) {}
+        } catch (KeyManagementException ok) {
+        }
 
         java.security.Identity ccc = new IdentityScopeStub("ccc");
         ccc.setPublicKey(kkk);
         try {
             ss.addIdentity(ccc);
             fail("KeyManagementException should be thrown for already used key");
-        } catch (KeyManagementException ok) {}
+        } catch (KeyManagementException ok) {
+        }
 
 
     }
 
     /**
      * verify that identities are removed
+     *
      * @throws Exception
      */
 
-    public void testRemoveIdentity() throws Exception{
+    public void testRemoveIdentity() throws Exception {
 //        SystemScope ss = new SystemScope("SystemScope");
         java.security.Identity aaa = new IdentityScopeStub("aaa");
         ss.addIdentity(aaa);
@@ -155,10 +159,10 @@ public class SystemScopeTest extends TestCase {
 
         boolean hasAaa = false, hasBbb = false;
         Enumeration e = ss.identities();
-        while (e.hasMoreElements()){
+        while (e.hasMoreElements()) {
             Object i = e.nextElement();
-            if (!hasAaa) hasAaa = (i==aaa);
-            if (!hasBbb) hasBbb = (i==bbb);
+            if (!hasAaa) hasAaa = (i == aaa);
+            if (!hasBbb) hasBbb = (i == bbb);
         }
         assertTrue(hasAaa && hasBbb);
     }

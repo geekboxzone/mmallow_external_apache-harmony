@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -39,7 +39,6 @@ import junit.framework.TestSuite;
 
 /**
  * Tests for <code>CertStoreSpi</code> class constructors and methods.
- *
  */
 
 public class CertStoreSpiTest extends TestCase {
@@ -61,7 +60,7 @@ public class CertStoreSpiTest extends TestCase {
             CertStoreException {
         CertStoreSpi certStoreSpi = null;
         CertSelector certSelector = new tmpCertSelector();//new
-                                                          // X509CertSelector();
+        // X509CertSelector();
         CRLSelector crlSelector = new tmpCRLSelector();//new X509CRLSelector();
         try {
             certStoreSpi = new MyCertStoreSpi(null);
@@ -86,15 +85,18 @@ public class CertStoreSpiTest extends TestCase {
         public Object clone() {
             return null;
         }
-        public boolean match (CRL crl) {
+
+        public boolean match(CRL crl) {
             return false;
         }
     }
+
     public static class tmpCertSelector implements CertSelector {
         public Object clone() {
             return null;
         }
-        public boolean match (Certificate crl) {
+
+        public boolean match(Certificate crl) {
             return true;
         }
     }

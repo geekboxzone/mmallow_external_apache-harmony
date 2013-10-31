@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class LinkageErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.LinkageError#LinkageError()
-	 */
+    /**
+     * @tests java.lang.LinkageError#LinkageError()
+     */
     public void test_Constructor() {
         LinkageError e = new LinkageError();
         assertNull(e.getMessage());

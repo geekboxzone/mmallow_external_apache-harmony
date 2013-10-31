@@ -60,7 +60,6 @@ public class WriterTest extends TestCase {
     }
 
 
-
     /**
      * @tests java.io.Writer#write(String)
      */
@@ -96,7 +95,7 @@ public class WriterTest extends TestCase {
         }
     }
 
-    
+
     class MockWriter extends Writer {
         private char[] contents;
 

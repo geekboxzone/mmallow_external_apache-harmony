@@ -40,7 +40,6 @@ public class CertificationRequestInfoTest extends TestCase {
      * Test method for CertificationRequestInfo. Creates
      * CertificationRequestInfo, gets its values, encodes and decodes the
      * encoded form.
-     * 
      */
     public void testCertificationRequestInfo() throws IOException {
         int version = 2;// X.509 v3
@@ -65,7 +64,7 @@ public class CertificationRequestInfoTest extends TestCase {
 
         // decode the encoded CertificationRequestInfo 
         byte[] encoding = certReqInfo.getEncoded();
-        CertificationRequestInfo decoded = 
+        CertificationRequestInfo decoded =
                 (CertificationRequestInfo) CertificationRequestInfo.ASN1
                         .decode(encoding);
 
@@ -75,9 +74,9 @@ public class CertificationRequestInfoTest extends TestCase {
                 decoded.getSubject().getName(X500Principal.CANONICAL));
         assertTrue(Arrays.equals(certReqInfo.getSubjectPublicKeyInfo()
                 .getEncoded(), decoded.getSubjectPublicKeyInfo().getEncoded()));
-        
+
         AttributeTypeAndValue certReqInfoATaV = (AttributeTypeAndValue) certReqInfo
-                .getAttributes().get(0); 
+                .getAttributes().get(0);
         AttributeTypeAndValue decodedATaV = (AttributeTypeAndValue) decoded
                 .getAttributes().get(0);
         assertEquals(certReqInfoATaV.getType(), decodedATaV.getType());

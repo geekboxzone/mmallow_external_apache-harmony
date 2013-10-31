@@ -34,7 +34,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for TrustManagerFactory class constructors and methods
- * 
  */
 
 public class TrustManagerFactory2Test extends TestCase {
@@ -61,7 +60,7 @@ public class TrustManagerFactory2Test extends TestCase {
         super.setUp();
         mProv = (new SpiEngUtils()).new MyProvider("MyTMFProvider",
                 "Provider for testing", srvTrustManagerFactory.concat(".")
-                        .concat(defaultAlg), TrustManagerFactoryProviderClass);
+                .concat(defaultAlg), TrustManagerFactoryProviderClass);
         Security.insertProviderAt(mProv, 1);
     }
 
@@ -77,7 +76,7 @@ public class TrustManagerFactory2Test extends TestCase {
     private void checkResult(TrustManagerFactory tmf) throws Exception {
         KeyStore kStore = null;
         ManagerFactoryParameters mfp = null;
-        
+
         try {
             tmf.init(kStore);
             fail("KeyStoreException must be thrown");
@@ -89,11 +88,11 @@ public class TrustManagerFactory2Test extends TestCase {
         } catch (InvalidAlgorithmParameterException e) {
         }
         assertNull("getTrustManagers() should return null object", tmf
-                .getTrustManagers());     
-        
+                .getTrustManagers());
+
         try {
             kStore = KeyStore.getInstance(KeyStore.getDefaultType());
-            kStore.load(null, null);            
+            kStore.load(null, null);
         } catch (KeyStoreException e) {
             fail("default keystore is not supported");
             return;
@@ -109,7 +108,7 @@ public class TrustManagerFactory2Test extends TestCase {
         mfp = (ManagerFactoryParameters) new MyTrustManagerFactorySpi.Parameters(kStore);
         tmf.init(mfp);
     }
-    
+
     /**
      * Test for <code>getInstance(String algorithm)</code> method
      * Assertions:
@@ -147,7 +146,7 @@ public class TrustManagerFactory2Test extends TestCase {
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
      * method
-     * Assertions: 
+     * Assertions:
      * throws NullPointerException when algorithm is null;
      * throws NoSuchAlgorithmException when algorithm is not correct;
      * throws IllegalArgumentException when provider is null or empty;

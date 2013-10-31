@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.PrivateKey;
 
 import junit.framework.TestCase;
@@ -27,14 +28,13 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>PrivateKey</code> class field
- * 
  */
 
 public class PrivateKeyTest extends TestCase {
 
     /**
      * Constructor for PrivateKeyTest.
-     * 
+     *
      * @param arg0
      */
     public PrivateKeyTest(String arg0) {
@@ -45,7 +45,7 @@ public class PrivateKeyTest extends TestCase {
      * Test for <code>serialVersionUID</code> field
      */
     public void testField() {
-        checkPrivateKey cPrKey = new checkPrivateKey(); 
+        checkPrivateKey cPrKey = new checkPrivateKey();
         assertEquals("Incorrect serialVersionUID", cPrKey.getSerVerUID(), //PrivateKey.serialVersionUID,
                 6034044314589513430L);
     }

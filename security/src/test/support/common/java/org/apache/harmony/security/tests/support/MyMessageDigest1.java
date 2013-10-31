@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -25,54 +25,52 @@ import java.security.MessageDigest;
 
 /**
  * Tests implementation of MessageDigest
- * 
  */
 public class MyMessageDigest1 extends MessageDigest {
 
-	public boolean runEngineReset = false;
-	public boolean runEngineDigest = false;
-	public boolean runEngineUpdate1 = false;
-	public boolean runEngineUpdate2 = false;	
-	
-	public MyMessageDigest1() {
-		super(null);
-	}
-	
-	/**
-	 * 
-	 * @param algorithm
-	 */
-	public MyMessageDigest1(String algorithm) {
-		super(algorithm);
-	}
-	
-	/**
-	 * 
-	 */
-	public void engineReset() {
-		runEngineReset = true;
-	}
+    public boolean runEngineReset = false;
+    public boolean runEngineDigest = false;
+    public boolean runEngineUpdate1 = false;
+    public boolean runEngineUpdate2 = false;
 
-	/**
-	 * 
-	 */
-	public byte[] engineDigest() {
-		runEngineDigest = true;
-		return new byte[0];
-	}
+    public MyMessageDigest1() {
+        super(null);
+    }
 
-	/**
-	 * 
-	 */
-	public void engineUpdate(byte arg0) {
-		runEngineUpdate1 = true;
-	}
+    /**
+     * @param algorithm
+     */
+    public MyMessageDigest1(String algorithm) {
+        super(algorithm);
+    }
 
-	/**
-	 * 
-	 */
-	public void engineUpdate(byte[] arg0, int arg1, int arg2) {
-		runEngineUpdate2 = true;
-	}
+    /**
+     *
+     */
+    public void engineReset() {
+        runEngineReset = true;
+    }
+
+    /**
+     *
+     */
+    public byte[] engineDigest() {
+        runEngineDigest = true;
+        return new byte[0];
+    }
+
+    /**
+     *
+     */
+    public void engineUpdate(byte arg0) {
+        runEngineUpdate1 = true;
+    }
+
+    /**
+     *
+     */
+    public void engineUpdate(byte[] arg0, int arg1, int arg2) {
+        runEngineUpdate2 = true;
+    }
 
 }

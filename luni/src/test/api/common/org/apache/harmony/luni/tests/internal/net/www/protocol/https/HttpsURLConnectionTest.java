@@ -281,7 +281,7 @@ public class HttpsURLConnectionTest extends TestCase {
         // check the used SSLSocketFactory
         assertSame("Default SSLSocketFactory should be used",
                 HttpsURLConnection.getDefaultSSLSocketFactory(), connection
-                        .getSSLSocketFactory());
+                .getSSLSocketFactory());
 
         // should silently exit
         connection.connect();
@@ -326,7 +326,7 @@ public class HttpsURLConnectionTest extends TestCase {
         // check the used SSLSocketFactory
         assertNotSame("Default SSLSocketFactory should not be used",
                 HttpsURLConnection.getDefaultSSLSocketFactory(), connection
-                        .getSSLSocketFactory());
+                .getSSLSocketFactory());
         assertSame("Result differs from expected", socketFactory, connection
                 .getSSLSocketFactory());
 
@@ -637,7 +637,7 @@ public class HttpsURLConnectionTest extends TestCase {
 
             connection = (HttpsURLConnection) url.openConnection(new Proxy(
                     Proxy.Type.HTTP, new InetSocketAddress("localhost", ss
-                            .getLocalPort())));
+                    .getLocalPort())));
 
             // perform the interaction between the peers and check the results
             peerSocket = (SSLSocket) doInteraction(connection, ss);
@@ -822,8 +822,7 @@ public class HttpsURLConnectionTest extends TestCase {
      * as "key_store." + extension equals to the default KeyStore type installed
      * in the system in lower case) is searched in classpath.
      *
-     * @throws AssertionFailedError
-     *             if property was not set or file does not exist.
+     * @throws AssertionFailedError if property was not set or file does not exist.
      */
     private static String getKeyStoreFileName() throws Exception {
         String ksFileName = "org/apache/harmony/luni/tests/key_store."
@@ -985,8 +984,7 @@ public class HttpsURLConnectionTest extends TestCase {
      * Performs interaction between client's HttpURLConnection and servers side
      * (ServerSocket). Server will response with specified response code.
      *
-     * @param doAuthentication
-     *            specifies if the server needs client authentication.
+     * @param doAuthentication specifies if the server needs client authentication.
      */
     public static Socket doInteraction(
             final HttpURLConnection clientConnection,
@@ -1178,12 +1176,9 @@ public class HttpsURLConnectionTest extends TestCase {
         /**
          * Creates the thread acting as a server side.
          *
-         * @param serverSocket
-         *            the server socket to be used during connection
-         * @param responseCode
-         *            the response code to be sent to the client
-         * @param needProxyAuthentication
-         *            indicates if the server needs proxy authentication
+         * @param serverSocket            the server socket to be used during connection
+         * @param responseCode            the response code to be sent to the client
+         * @param needProxyAuthentication indicates if the server needs proxy authentication
          */
         public ServerWork(ServerSocket serverSocket, int responseCode,
                 boolean needProxyAuthentication, boolean checkPersistence) {
@@ -1325,14 +1320,14 @@ public class HttpsURLConnectionTest extends TestCase {
                     }
 
                     if (message.startsWith("CONNECT")) { // request for SSL
-                                                            // tunnel
+                        // tunnel
                         log("Perform SSL Handshake...");
                         // create sslSocket acting as a remote server peer
                         SSLSocket sslSocket = (SSLSocket) getContext()
                                 .getSocketFactory()
                                 .createSocket(peerSocket, "localhost",
                                         peerSocket.getPort(), true); // do
-                                                                        // autoclose
+                        // autoclose
                         sslSocket.setUseClientMode(false);
                         // demand client authentication
                         sslSocket.setNeedClientAuth(true);
@@ -1396,8 +1391,7 @@ public class HttpsURLConnectionTest extends TestCase {
         /**
          * Creates the thread acting as a client side.
          *
-         * @param connection
-         *            connection to be used to contact the server side
+         * @param connection connection to be used to contact the server side
          */
         public ClientConnectionWork(HttpURLConnection connection) {
             this.connection = connection;

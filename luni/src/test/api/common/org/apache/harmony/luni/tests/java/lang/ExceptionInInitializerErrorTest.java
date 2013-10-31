@@ -19,9 +19,9 @@ package org.apache.harmony.luni.tests.java.lang;
 
 public class ExceptionInInitializerErrorTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.lang.ExceptionInInitializerError#ExceptionInInitializerError()
-	 */
+    /**
+     * @tests java.lang.ExceptionInInitializerError#ExceptionInInitializerError()
+     */
     public void test_Constructor() {
         ExceptionInInitializerError e = new ExceptionInInitializerError();
         assertNull(e.getMessage());
@@ -38,16 +38,16 @@ public class ExceptionInInitializerErrorTest extends junit.framework.TestCase {
         assertNull(e.getCause());
     }
 
-	/**
-	 * @tests java.lang.ExceptionInInitializerExceptionInInitializerError#ExceptionInInitializerError(java.lang.Throwable)
-	 */
-	public void test_ConstructorLjava_lang_Throwable() {
-	    NullPointerException npe = new NullPointerException("fixture");
+    /**
+     * @tests java.lang.ExceptionInInitializerExceptionInInitializerError#ExceptionInInitializerError(java.lang.Throwable)
+     */
+    public void test_ConstructorLjava_lang_Throwable() {
+        NullPointerException npe = new NullPointerException("fixture");
         ExceptionInInitializerError e = new ExceptionInInitializerError(npe);
         assertNull(e.getMessage());
         assertNull(e.getLocalizedMessage());
         assertSame(npe, e.getException());
         assertSame(npe, e.getCause());
-	}
+    }
 
 }

@@ -32,7 +32,7 @@ public class AssertionErrorTest extends TestCase {
         AssertionError e = new AssertionError(obj);
         assertEquals("toString", e.getMessage());
         assertNull(e.getCause());
-        
+
         NullPointerException npe = new NullPointerException("null value");
         e = new AssertionError(npe);
         assertEquals(npe.toString(), e.getMessage());

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -45,7 +45,7 @@ public class SecurityTest extends TestCase {
 
         TestKeyPair tkp = null;
         try {
-            tkp = new TestKeyPair("DSA"); 
+            tkp = new TestKeyPair("DSA");
         } catch (NoSuchAlgorithmException e1) {
             e1.printStackTrace();
             return;
@@ -54,15 +54,15 @@ public class SecurityTest extends TestCase {
         try {
             MessageDigest.getInstance("SHA-1");
             KeyFactory.getInstance("DSA");
-            Signature ss =Signature.getInstance("DSA");
+            Signature ss = Signature.getInstance("DSA");
             ss.initSign(tkp.getPrivate());
             Signature.getInstance("aaaaaaaaaaaa");
         } catch (Exception e) {
             // ignore
-        }    
+        }
 
     }
-  
+
     /**
      * @tests java.security.Security#insertProviderAt(Provider, int)
      */
@@ -135,7 +135,7 @@ public class SecurityTest extends TestCase {
     public final void testRemoveProvider() {
         Provider[] providers;
         Provider[] providers1;
-        
+
         providers = Security.getProviders();
 
         try {
@@ -300,11 +300,11 @@ public class SecurityTest extends TestCase {
             m.clear();
             m.put("MyService.NoKeySize KeySize", "512");
             assertNull("No KeySize attribute", Security.getProviders(m));
-            
+
             m.clear();
             m.put("MyService.NoImplementedIn ImplementedIn", "Software");
             assertNull("No ImplementedIn attribute", Security.getProviders(m));
-            
+
             m.clear();
             m.put("ABCService.NoAttribute Attribute", "ABC");
             assertNull(Security.getProviders(m));
@@ -323,13 +323,13 @@ public class SecurityTest extends TestCase {
             fail("No expected NullPointerException.");
         } catch (NullPointerException e) {
         }
-        
-        Security.setProperty("myprop","test white space    ");
+
+        Security.setProperty("myprop", "test white space    ");
         assertEquals("test white space", Security.getProperty("myprop"));
     }
 
     /**
-     * @tests java.security.Security#setProperty(String,String)
+     * @tests java.security.Security#setProperty(String, String)
      */
     public void test_setPropertyLjava_lang_StringLjava_lang_String() {
 
@@ -352,7 +352,7 @@ public class SecurityTest extends TestCase {
         assertEquals("My property value", Security
                 .getProperty("My Test Property"));
     }
-    
+
     @SuppressWarnings("serial")
     class MyProvider extends Provider {
         MyProvider() {

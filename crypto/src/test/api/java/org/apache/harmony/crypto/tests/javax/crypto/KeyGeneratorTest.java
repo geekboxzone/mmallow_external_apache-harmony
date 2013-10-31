@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -41,22 +41,21 @@ import junit.framework.TestCase;
 
 /**
  * Tests for KeyGenerator constructor and methods
- * 
  */
 
 public class KeyGeneratorTest extends TestCase {
-    
+
     public static final String srvKeyGenerator = "KeyGenerator";
-    
-    public static final String validAlgorithmsKeyGenerator [] =
-        {"DESede", "DES", "Blowfish", "AES", "HmacMD5"};
-    
-    private static final int [] validKeySizes = { 168, 56, 56, 256, 56};
+
+    public static final String validAlgorithmsKeyGenerator[] =
+            { "DESede", "DES", "Blowfish", "AES", "HmacMD5" };
+
+    private static final int[] validKeySizes = { 168, 56, 56, 256, 56 };
 
     private static int defaultKeySize = -1;
-    
+
     private static String defaultAlgorithm = null;
-    
+
     private static String defaultProviderName = null;
 
     private static Provider defaultProvider = null;
@@ -72,12 +71,12 @@ public class KeyGeneratorTest extends TestCase {
     static {
         for (int i = 0; i < validAlgorithmsKeyGenerator.length; i++) {
             defaultProvider = SpiEngUtils.isSupport(validAlgorithmsKeyGenerator[i],
-                srvKeyGenerator);
+                    srvKeyGenerator);
             DEFSupported = (defaultProvider != null);
             if (DEFSupported) {
                 defaultAlgorithm = validAlgorithmsKeyGenerator[i];
                 defaultKeySize = validKeySizes[i];
-                defaultProviderName = defaultProvider.getName();                
+                defaultProviderName = defaultProvider.getName();
                 validValues[0] = defaultAlgorithm;
                 validValues[1] = defaultAlgorithm.toUpperCase();
                 validValues[2] = defaultAlgorithm.toLowerCase();
@@ -85,13 +84,13 @@ public class KeyGeneratorTest extends TestCase {
             }
         }
     }
-    
+
     private KeyGenerator[] createKGs() throws Exception {
         if (!DEFSupported) {
             fail(NotSupportMsg);
         }
 
-        KeyGenerator [] kg = new KeyGenerator[3];
+        KeyGenerator[] kg = new KeyGenerator[3];
         kg[0] = KeyGenerator.getInstance(defaultAlgorithm);
         kg[1] = KeyGenerator.getInstance(defaultAlgorithm, defaultProvider);
         kg[2] = KeyGenerator.getInstance(defaultAlgorithm, defaultProviderName);
@@ -188,7 +187,7 @@ public class KeyGeneratorTest extends TestCase {
      * throws NoSuchAlgorithmException when algorithm isnot available
      */
     public void testGetInstanceStringString01() throws
-            NoSuchAlgorithmException, IllegalArgumentException, 
+            NoSuchAlgorithmException, IllegalArgumentException,
             NoSuchProviderException {
         if (!DEFSupported) {
             fail(NotSupportMsg);
@@ -269,7 +268,7 @@ public class KeyGeneratorTest extends TestCase {
      * throws NullPointerException when algorithm is null
      * throws NoSuchAlgorithmException when algorithm isnot available
      */
-    public void testGetInstanceStringProvider01() throws NoSuchAlgorithmException, 
+    public void testGetInstanceStringProvider01() throws NoSuchAlgorithmException,
             IllegalArgumentException {
         if (!DEFSupported) {
             fail(NotSupportMsg);
@@ -289,12 +288,13 @@ public class KeyGeneratorTest extends TestCase {
             }
         }
     }
+
     /*
-     * Test for <code> getInstance(String algorithm, Provider provider)</code> method 
-     * Assertions:
-     * throws IllegalArgumentException when provider is null
-     */
-    public void testGetInstanceStringProvider02() throws NoSuchAlgorithmException, 
+    * Test for <code> getInstance(String algorithm, Provider provider)</code> method
+    * Assertions:
+    * throws IllegalArgumentException when provider is null
+    */
+    public void testGetInstanceStringProvider02() throws NoSuchAlgorithmException,
             IllegalArgumentException {
         if (!DEFSupported) {
             fail(NotSupportMsg);
@@ -309,11 +309,11 @@ public class KeyGeneratorTest extends TestCase {
             }
         }
     }
-    
+
     /*
-     * Test for <code> getInstance(String algorithm, Provider provider)</code> method 
-     * Assertions: returns KeyGenerator object
-     */
+    * Test for <code> getInstance(String algorithm, Provider provider)</code> method
+    * Assertions: returns KeyGenerator object
+    */
     public void testGetInstanceStringProvider03() throws IllegalArgumentException,
             NoSuchAlgorithmException {
         if (!DEFSupported) {
@@ -333,7 +333,7 @@ public class KeyGeneratorTest extends TestCase {
      * <code>init(int keysize, SecureRandom random)</code> methods 
      * Assertion: throws InvalidParameterException if keysize is wrong
      * 
-     */    
+     */
     public void testInitKey() throws Exception {
         if (!DEFSupported) {
             fail(NotSupportMsg);
@@ -372,7 +372,7 @@ public class KeyGeneratorTest extends TestCase {
             fail(NotSupportMsg);
             return;
         }
-        KeyGenerator [] kgs = createKGs();
+        KeyGenerator[] kgs = createKGs();
         AlgorithmParameterSpec aps = null;
 
         for (int i = 0; i < kgs.length; i++) {
@@ -400,7 +400,7 @@ public class KeyGeneratorTest extends TestCase {
      * initializes KeyGenerator; 
      * returns SecretKey object
      * 
-     */ 
+     */
     public void testGenerateKey() throws Exception {
         if (!DEFSupported) {
             fail(NotSupportMsg);
@@ -429,7 +429,7 @@ public class KeyGeneratorTest extends TestCase {
                     .toUpperCase(), dAl);
         }
     }
-    
+
 }
 
 /**

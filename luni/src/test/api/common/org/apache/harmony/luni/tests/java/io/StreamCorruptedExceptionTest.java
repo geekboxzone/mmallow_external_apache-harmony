@@ -23,56 +23,56 @@ import java.io.StreamCorruptedException;
 
 public class StreamCorruptedExceptionTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.io.StreamCorruptedException#StreamCorruptedException()
-	 */
-	public void test_Constructor() throws Exception {
-		// Test for method java.io.StreamCorruptedException()
+    /**
+     * @tests java.io.StreamCorruptedException#StreamCorruptedException()
+     */
+    public void test_Constructor() throws Exception {
+        // Test for method java.io.StreamCorruptedException()
 
-		try {
-			ObjectInputStream ois = new ObjectInputStream(
-					new ByteArrayInputStream(
-							"kLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLl"
-									.getBytes()));
-			ois.readObject();
-		} catch (StreamCorruptedException e) {
-			// Correct
-			return;
-		}
+        try {
+            ObjectInputStream ois = new ObjectInputStream(
+                    new ByteArrayInputStream(
+                            "kLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLl"
+                                    .getBytes()));
+            ois.readObject();
+        } catch (StreamCorruptedException e) {
+            // Correct
+            return;
+        }
 
-		fail("Failed to throw StreamCorruptedException for non serialized stream");
-	}
+        fail("Failed to throw StreamCorruptedException for non serialized stream");
+    }
 
-	/**
-	 * @tests java.io.StreamCorruptedException#StreamCorruptedException(java.lang.String)
-	 */
-	public void test_ConstructorLjava_lang_String() throws Exception {
-		// Test for method java.io.StreamCorruptedException(java.lang.String)
-		try {
-			ObjectInputStream ois = new ObjectInputStream(
-					new ByteArrayInputStream(
-							"kLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLl"
-									.getBytes()));
-			ois.readObject();
-		} catch (StreamCorruptedException e) {
-			// Correct
-			return;
-		} 
+    /**
+     * @tests java.io.StreamCorruptedException#StreamCorruptedException(java.lang.String)
+     */
+    public void test_ConstructorLjava_lang_String() throws Exception {
+        // Test for method java.io.StreamCorruptedException(java.lang.String)
+        try {
+            ObjectInputStream ois = new ObjectInputStream(
+                    new ByteArrayInputStream(
+                            "kLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLl"
+                                    .getBytes()));
+            ois.readObject();
+        } catch (StreamCorruptedException e) {
+            // Correct
+            return;
+        }
 
-		fail("Failed to throw StreamCorruptedException for non serialized stream");
-	}
+        fail("Failed to throw StreamCorruptedException for non serialized stream");
+    }
 
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

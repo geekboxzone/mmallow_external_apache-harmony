@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.interfaces;
 
@@ -29,13 +29,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>RSAPublicKey</code> class field
- * 
  */
 public class RSAPublicKeyTest extends TestCase {
 
     /**
      * Constructor for RSAPublicKeyTest.
-     * 
+     *
      * @param arg0
      */
     public RSAPublicKeyTest(String arg0) {
@@ -51,23 +50,28 @@ public class RSAPublicKeyTest extends TestCase {
                 key.getSerVerUID(), //RSAPublicKey.serialVersionUID
                 -8727434096241101194L);
     }
-    
+
     public class checkRSAPublicKey implements RSAPublicKey {
         public String getAlgorithm() {
             return "RSAPublicKey";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return new byte[0];
         }
+
         public long getSerVerUID() {
             return serialVersionUID;
         }
+
         public BigInteger getModulus() {
             return null;
         }
+
         public BigInteger getPublicExponent() {
             return null;
         }

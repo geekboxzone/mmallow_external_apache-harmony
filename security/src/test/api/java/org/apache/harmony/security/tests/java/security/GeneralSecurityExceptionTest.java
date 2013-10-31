@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.GeneralSecurityException;
 
 import junit.framework.TestCase;
@@ -28,7 +29,6 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>GeneralSecurityException</code> class constructors and
  * methods.
- * 
  */
 public class GeneralSecurityExceptionTest extends TestCase {
 
@@ -37,7 +37,7 @@ public class GeneralSecurityExceptionTest extends TestCase {
 
     /**
      * Constructor for GeneralSecurityExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public GeneralSecurityExceptionTest(String arg0) {

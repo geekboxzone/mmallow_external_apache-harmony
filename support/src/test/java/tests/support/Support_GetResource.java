@@ -19,7 +19,7 @@ package tests.support;
 
 public class Support_GetResource {
 
-	public static String getResourceURL(String resource) {
-		return "http://" + Support_Configuration.TestResources + resource;
-	}
+    public static String getResourceURL(String resource) {
+        return "http://" + Support_Configuration.TestResources + resource;
+    }
 }

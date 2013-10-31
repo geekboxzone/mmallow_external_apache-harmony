@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Stepan M. Mishura
-*/
+ * @author Stepan M. Mishura
+ */
 
 package org.apache.harmony.security.tests.asn1.der;
 
@@ -50,7 +50,7 @@ public class ImplicitTest extends TestCase {
             .getInstance());
 
     private static Object[][] taggedType = {
-    // format: object to encode / ASN.1 tagged type / byte array
+            // format: object to encode / ASN.1 tagged type / byte array
 
             //
             // Boolean = false
@@ -184,7 +184,7 @@ public class ImplicitTest extends TestCase {
 
     /**
      * Tests 2 consecutive implicit string type tagging
-     *
+     * <p/>
      * TYPE1 = [1] IMPLICIT OCTET STRING
      * TYPE2 = [2] IMPLICIT TYPE1
      */
@@ -194,7 +194,7 @@ public class ImplicitTest extends TestCase {
         ASN1Implicit type2 = new ASN1Implicit(2, type1);
 
         byte[] primitiveEncoding = new byte[] {
-        // tag: class(CONTEXT SPECIFIC) + number (2)
+                // tag: class(CONTEXT SPECIFIC) + number (2)
                 (byte) 0x82,
                 // length
                 0x03,
@@ -202,7 +202,7 @@ public class ImplicitTest extends TestCase {
                 0x00, 0x01, 0x02 };
 
         byte[] constructedEncoding = new byte[] {
-        // tag: class(CONTEXT SPECIFIC) + constructed +number (2)
+                // tag: class(CONTEXT SPECIFIC) + constructed +number (2)
                 (byte) 0xA2,
                 // length
                 0x00 };

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -27,7 +27,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>CRLException</code> class constructors and methods.
- * 
  */
 public class CRLExceptionTest extends TestCase {
 
@@ -36,7 +35,7 @@ public class CRLExceptionTest extends TestCase {
 
     /**
      * Constructor for CRLExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public CRLExceptionTest(String arg0) {

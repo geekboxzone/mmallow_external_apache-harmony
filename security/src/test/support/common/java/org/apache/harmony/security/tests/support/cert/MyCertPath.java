@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.support.cert;
 
@@ -31,7 +31,6 @@ import java.util.Vector;
 
 /**
  * Stub class for <code>java.security.cert.CertPath</code> tests
- * 
  */
 public class MyCertPath extends CertPath {
     /**
@@ -49,7 +48,7 @@ public class MyCertPath extends CertPath {
 
     /**
      * Constructs new instance of <code>MyCertPath</code>
-     * 
+     *
      * @param type
      * @param encoding
      */
@@ -80,9 +79,9 @@ public class MyCertPath extends CertPath {
 
     /**
      * @return encoded form of this cert path as specified by
-     * <code>encoding</code> parameter
+     *         <code>encoding</code> parameter
      * @throws CertificateEncodingException if <code>encoding</code>
-     * not equals "MyEncoding" 
+     *                                      not equals "MyEncoding"
      * @see java.security.cert.CertPath#getEncoded(java.lang.String)
      */
     public byte[] getEncoded(String encoding)

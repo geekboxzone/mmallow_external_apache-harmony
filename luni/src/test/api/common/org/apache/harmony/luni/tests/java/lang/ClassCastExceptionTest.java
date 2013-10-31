@@ -21,22 +21,22 @@ import junit.framework.TestCase;
 
 public class ClassCastExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.ClassCastException#ClassCastException()
-	 */
-	public void test_Constructor() {
+    /**
+     * @tests java.lang.ClassCastException#ClassCastException()
+     */
+    public void test_Constructor() {
         ClassCastException e = new ClassCastException();
         assertNull(e.getMessage());
         assertNull(e.getLocalizedMessage());
         assertNull(e.getCause());
-	}
+    }
 
-	/**
-	 * @tests java.lang.ClassCastException#ClassCastException(java.lang.String)
-	 */
-	public void test_ConstructorLjava_lang_String() {
+    /**
+     * @tests java.lang.ClassCastException#ClassCastException(java.lang.String)
+     */
+    public void test_ConstructorLjava_lang_String() {
         ClassCastException e = new ClassCastException("fixture");
         assertEquals("fixture", e.getMessage());
         assertNull(e.getCause());
-	}
+    }
 }

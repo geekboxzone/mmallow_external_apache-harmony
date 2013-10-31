@@ -108,7 +108,8 @@ public class MulticastSocketTest extends junit.framework.TestCase {
                 } else if (groupSockAddr != null) {
                     ms.leaveGroup(groupSockAddr, groupNI);
                 }
-            } catch (IOException e) {}
+            } catch (IOException e) {
+            }
         }
 
         public MulticastServer(InetAddress anAddress, int aPort) throws java.io.IOException {
@@ -364,13 +365,13 @@ public class MulticastSocketTest extends junit.framework.TestCase {
         NetworkInterface loopbackInterface = NetworkInterface.getByInetAddress(InetAddress.getByName("127.0.0.1"));
 
         boolean anyLoop = networkInterface1.equals(loopbackInterface) || networkInterface2.equals(loopbackInterface);
-        System.err.println("anyLoop="+anyLoop);
+        System.err.println("anyLoop=" + anyLoop);
 
         ArrayList<NetworkInterface> realInterfaces = new ArrayList<NetworkInterface>();
         Enumeration<NetworkInterface> theInterfaces = NetworkInterface.getNetworkInterfaces();
         while (theInterfaces.hasMoreElements()) {
             NetworkInterface thisInterface = (NetworkInterface) theInterfaces.nextElement();
-            if (thisInterface.getInetAddresses().hasMoreElements()){
+            if (thisInterface.getInetAddresses().hasMoreElements()) {
                 realInterfaces.add(thisInterface);
             }
         }
@@ -397,7 +398,7 @@ public class MulticastSocketTest extends junit.framework.TestCase {
                             sendingInterface = networkInterface1;
                         }
                     } else {
-                        if (i == 1){
+                        if (i == 1) {
                             sendingInterface = networkInterface2;
                         } else {
                             sendingInterface = networkInterface1;
@@ -430,10 +431,10 @@ public class MulticastSocketTest extends junit.framework.TestCase {
             Thread.sleep(1000);
             if (thisInterface.equals(sendingInterface)) {
                 assertEquals("Group member did not recv data when bound on specific interface",
-                msg, new String(server.rdp.getData(), 0, server.rdp.getLength()));
+                        msg, new String(server.rdp.getData(), 0, server.rdp.getLength()));
             } else {
                 assertFalse("Group member received data on other interface when only asked for it on one interface: ",
-                new String(server.rdp.getData(), 0, server.rdp.getLength()).equals(msg));
+                        new String(server.rdp.getData(), 0, server.rdp.getLength()).equals(msg));
             }
 
             server.stopServer();
@@ -762,7 +763,7 @@ public class MulticastSocketTest extends junit.framework.TestCase {
         test_setLoopbackModeSendReceive(GOOD_IPv6);
     }
 
-    private void test_setLoopbackModeSendReceive(InetAddress group) throws IOException{
+    private void test_setLoopbackModeSendReceive(InetAddress group) throws IOException {
         final int PORT = Support_PortManager.getNextPortForUDP();
         final String message = "Hello, world!";
 
@@ -839,7 +840,8 @@ public class MulticastSocketTest extends junit.framework.TestCase {
         }
     }
 
-    @Override protected void setUp() {
+    @Override
+    protected void setUp() {
         Enumeration theInterfaces = null;
         try {
             theInterfaces = NetworkInterface.getNetworkInterfaces();

@@ -28,7 +28,7 @@ public class IllegalFormatConversionExceptionTest extends TestCase {
 
     /**
      * @tests java.util.IllegalFormatConversionException#IllegalFormatConversionException(char,
-     *        Class)
+     *Class)
      */
     public void test_illegalFormatConversionException() {
         try {

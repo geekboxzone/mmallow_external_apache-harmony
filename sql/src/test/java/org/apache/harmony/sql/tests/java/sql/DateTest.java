@@ -25,7 +25,6 @@ import junit.framework.TestCase;
 
 /**
  * JUnit Testcase for the java.sql.Date class
- * 
  */
 public class DateTest extends TestCase {
 
@@ -234,12 +233,12 @@ public class DateTest extends TestCase {
      * toString() method.
      */
     public void testToString() {
-		// Loop through the timezones testing the String conversion for each
-		for (int i = 0; i < TIMEZONES.length; i++) {
-			testToString(TIMEZONES[i], TIME_ARRAY, SQL_TZ_DATEARRAYS[i]);
-		} // end for
+        // Loop through the timezones testing the String conversion for each
+        for (int i = 0; i < TIMEZONES.length; i++) {
+            testToString(TIMEZONES[i], TIME_ARRAY, SQL_TZ_DATEARRAYS[i]);
+        } // end for
 
-	} // end method testToString()
+    } // end method testToString()
 
     private void testToString(String timeZone, long[] theDates, String[] theDateStrings) {
         // Set the timezone
@@ -318,7 +317,7 @@ public class DateTest extends TestCase {
     } // end method testValueOf()
 
     /**
-     * @tests java.sql.Date#valueOf(String )
+     * @tests java.sql.Date#valueOf(String)
      */
     public void test_valueOf_IllegalArgumentException() {
         try {
@@ -384,12 +383,12 @@ public class DateTest extends TestCase {
             // expected
         }
     }
-    
+
     // Reset defualt timezone
     static TimeZone defaultTimeZone = TimeZone.getDefault();
-    
-    protected void tearDown(){
-    	TimeZone.setDefault(defaultTimeZone);
+
+    protected void tearDown() {
+        TimeZone.setDefault(defaultTimeZone);
     }
 
 } // end class DateTest

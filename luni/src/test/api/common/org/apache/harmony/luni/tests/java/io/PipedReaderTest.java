@@ -75,7 +75,7 @@ public class PipedReaderTest extends TestCase {
 
     /**
      * @tests java.io.PipedReader#PipedReader(java.io.PipedWriter,
-     *        int)
+     *int)
      * @since 1.6
      */
     public void test_Constructor_LPipedWriter_I() throws Exception {

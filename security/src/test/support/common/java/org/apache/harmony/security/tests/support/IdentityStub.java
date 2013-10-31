@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Aleksei Y. Semenov
-*/
+ * @author Aleksei Y. Semenov
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -28,30 +28,29 @@ import java.security.PublicKey;
 
 /**
  * Stub for abstract class Identity
- * 
  */
 
 public class IdentityStub extends Identity {
 
     /**
-     *  Default constructor
+     * Default constructor
      */
     public IdentityStub() {
-        super();        
+        super();
     }
 
     /**
      * TODO Put ctor description here
-     * 
+     *
      * @param name
      */
     public IdentityStub(String name) {
-        super(name);        
+        super(name);
     }
 
     /**
      * TODO Put ctor description here
-     * 
+     *
      * @param name
      * @param scope
      * @throws KeyManagementException
@@ -62,15 +61,16 @@ public class IdentityStub extends Identity {
     }
 
     /**
-     * Auxiliary constructor 
+     * Auxiliary constructor
+     *
      * @param name
      * @param key
      * @throws KeyManagementException
      */
-    
-    public IdentityStub(String name, PublicKey key) throws KeyManagementException{
+
+    public IdentityStub(String name, PublicKey key) throws KeyManagementException {
         this(name);
         setPublicKey(key);
     }
-    
+
 }

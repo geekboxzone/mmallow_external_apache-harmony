@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class IllegalAccessErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.IllegalAccessError#IllegalAccessError()
-	 */
+    /**
+     * @tests java.lang.IllegalAccessError#IllegalAccessError()
+     */
     public void test_Constructor() {
         IllegalAccessError e = new IllegalAccessError();
         assertNull(e.getMessage());

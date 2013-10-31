@@ -31,97 +31,97 @@ import java.util.zip.GZIPOutputStream;
 import tests.support.resource.Support_Resources;
 
 public class GZIPInputStreamTest extends junit.framework.TestCase {
-	File resources;
+    File resources;
 
-	class TestGZIPInputStream extends GZIPInputStream {
-		TestGZIPInputStream(InputStream in) throws IOException {
-			super(in);
-		}
+    class TestGZIPInputStream extends GZIPInputStream {
+        TestGZIPInputStream(InputStream in) throws IOException {
+            super(in);
+        }
 
-		TestGZIPInputStream(InputStream in, int size) throws IOException {
-			super(in, size);
-		}
+        TestGZIPInputStream(InputStream in, int size) throws IOException {
+            super(in, size);
+        }
 
-		Checksum getChecksum() {
-			return crc;
-		}
+        Checksum getChecksum() {
+            return crc;
+        }
 
-		boolean endofInput() {
-			return eos;
-		}
-	}
+        boolean endofInput() {
+            return eos;
+        }
+    }
 
-	/**
-	 * @tests java.util.zip.GZIPInputStream#GZIPInputStream(java.io.InputStream)
-	 */
-	public void test_ConstructorLjava_io_InputStream() {
-		// test method java.util.zip.GZIPInputStream.constructor
-		try {
-			Support_Resources.copyFile(resources, "GZIPInputStream",
-					"hyts_gInput.txt.gz");
-			final URL gInput = new File(resources.toString()
-					+ "/GZIPInputStream/hyts_gInput.txt.gz").toURL();
-			TestGZIPInputStream inGZIP = new TestGZIPInputStream(gInput
-					.openConnection().getInputStream());
-			assertNotNull("the constructor for GZIPInputStream is null",
-					inGZIP);
-			assertEquals("the CRC value of the inputStream is not zero", 0, inGZIP
-					.getChecksum().getValue());
-			inGZIP.close();
-		} catch (IOException e) {
-			fail(
-					"an IO error occured while trying to open the input file");
-		}
-	}
+    /**
+     * @tests java.util.zip.GZIPInputStream#GZIPInputStream(java.io.InputStream)
+     */
+    public void test_ConstructorLjava_io_InputStream() {
+        // test method java.util.zip.GZIPInputStream.constructor
+        try {
+            Support_Resources.copyFile(resources, "GZIPInputStream",
+                    "hyts_gInput.txt.gz");
+            final URL gInput = new File(resources.toString()
+                    + "/GZIPInputStream/hyts_gInput.txt.gz").toURL();
+            TestGZIPInputStream inGZIP = new TestGZIPInputStream(gInput
+                    .openConnection().getInputStream());
+            assertNotNull("the constructor for GZIPInputStream is null",
+                    inGZIP);
+            assertEquals("the CRC value of the inputStream is not zero", 0, inGZIP
+                    .getChecksum().getValue());
+            inGZIP.close();
+        } catch (IOException e) {
+            fail(
+                    "an IO error occured while trying to open the input file");
+        }
+    }
 
-	/**
-	 * @tests java.util.zip.GZIPInputStream#GZIPInputStream(java.io.InputStream,
-	 *        int)
-	 */
-	public void test_ConstructorLjava_io_InputStreamI() {
-		// test method java.util.zip.GZIPInputStream.constructorI
-		try {
-			Support_Resources.copyFile(resources, "GZIPInputStream",
-					"hyts_gInput.txt.gz");
-			final URL gInput = new File(resources.toString()
-					+ "/GZIPInputStream/hyts_gInput.txt.gz").toURL();
-			TestGZIPInputStream inGZIP = new TestGZIPInputStream(gInput
-					.openConnection().getInputStream(), 200);
-			assertNotNull("the constructor for GZIPInputStream is null",
-					inGZIP);
-			assertEquals("the CRC value of the inputStream is not zero", 0, inGZIP
-					.getChecksum().getValue());
-			inGZIP.close();
+    /**
+     * @tests java.util.zip.GZIPInputStream#GZIPInputStream(java.io.InputStream,
+     *int)
+     */
+    public void test_ConstructorLjava_io_InputStreamI() {
+        // test method java.util.zip.GZIPInputStream.constructorI
+        try {
+            Support_Resources.copyFile(resources, "GZIPInputStream",
+                    "hyts_gInput.txt.gz");
+            final URL gInput = new File(resources.toString()
+                    + "/GZIPInputStream/hyts_gInput.txt.gz").toURL();
+            TestGZIPInputStream inGZIP = new TestGZIPInputStream(gInput
+                    .openConnection().getInputStream(), 200);
+            assertNotNull("the constructor for GZIPInputStream is null",
+                    inGZIP);
+            assertEquals("the CRC value of the inputStream is not zero", 0, inGZIP
+                    .getChecksum().getValue());
+            inGZIP.close();
 
-            try{
+            try {
                 TestGZIPInputStream inGZIP1 = new TestGZIPInputStream(gInput
-                        .openConnection().getInputStream(), 0);   
+                        .openConnection().getInputStream(), 0);
                 fail("IllegalArgumentException expected");
-            }catch(IllegalArgumentException ioe){
+            } catch (IllegalArgumentException ioe) {
                 //expected
             }
-            
+
             Support_Resources.copyFile(resources, null, "hyts_checkInput.txt");
-            final URL jarInput = new File(resources.toString()+ "/hyts_checkInput.txt").toURL();
-            try{
+            final URL jarInput = new File(resources.toString() + "/hyts_checkInput.txt").toURL();
+            try {
                 TestGZIPInputStream inGZIP1 = new TestGZIPInputStream(jarInput
                         .openConnection().getInputStream(), 200);
                 fail("IOException expected");
-            }catch(IOException ex){
+            } catch (IOException ex) {
                 //expected
             }
-            
-		} catch (IOException e) {
-			fail(
-					"an IO error occured while trying to open the input file");
-		}
-	}
 
-	/**
-	 * @tests java.util.zip.GZIPInputStream#read(byte[], int, int)
-	 */
-	public void test_read$BII() throws IOException {
-		// test method java.util.zip.GZIPInputStream.readBII
+        } catch (IOException e) {
+            fail(
+                    "an IO error occured while trying to open the input file");
+        }
+    }
+
+    /**
+     * @tests java.util.zip.GZIPInputStream#read(byte[], int, int)
+     */
+    public void test_read$BII() throws IOException {
+        // test method java.util.zip.GZIPInputStream.readBII
         byte orgBuf[] = { '3', '5', '2', 'r', 'g', 'e', 'f', 'd', 'e', 'w' };
         byte outBuf[] = new byte[100];
         int result = 0;
@@ -211,13 +211,13 @@ public class GZIPInputStreamTest extends junit.framework.TestCase {
             exception = true;
         }
         assertTrue("Exception expected", exception);
-        
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         GZIPOutputStream zipout = new GZIPOutputStream(baos);
         zipout.write(test);
         zipout.close();
         outBuf = new byte[530];
-        GZIPInputStream in= new GZIPInputStream(new ByteArrayInputStream(baos.toByteArray()));
+        GZIPInputStream in = new GZIPInputStream(new ByteArrayInputStream(baos.toByteArray()));
         try {
             in.read(outBuf, 530, 1);
             fail("Test failed IOOBE was not thrown");
@@ -234,60 +234,61 @@ public class GZIPInputStreamTest extends junit.framework.TestCase {
         result = in.read(null, 100, 1);
         result = in.read(outBuf, -100, 1);
         result = in.read(outBuf, -1, 1);// 100, 1);
-	}
+    }
 
-	/**
-	 * @tests java.util.zip.GZIPInputStream#close()
-	 */
-	public void test_close() {
-		// test method java.util.zip.GZIPInputStream.close
-		byte outBuf[] = new byte[100];
-		try {
-			int result = 0;
-			Support_Resources.copyFile(resources, "GZIPInputStream",
-					"hyts_gInput.txt.gz");
-			String resPath = resources.toString();
-			if (resPath.charAt(0) == '/' || resPath.charAt(0) == '\\') {
+    /**
+     * @tests java.util.zip.GZIPInputStream#close()
+     */
+    public void test_close() {
+        // test method java.util.zip.GZIPInputStream.close
+        byte outBuf[] = new byte[100];
+        try {
+            int result = 0;
+            Support_Resources.copyFile(resources, "GZIPInputStream",
+                    "hyts_gInput.txt.gz");
+            String resPath = resources.toString();
+            if (resPath.charAt(0) == '/' || resPath.charAt(0) == '\\') {
                 resPath = resPath.substring(1);
             }
-			final URL gInput = new URL("file:/" + resPath
-					+ "/GZIPInputStream/hyts_gInput.txt.gz");
-			TestGZIPInputStream inGZIP = new TestGZIPInputStream(gInput
-					.openConnection().getInputStream());
-			while (!(inGZIP.endofInput())) {
-				result += inGZIP.read(outBuf, result, outBuf.length - result);
-			}
-			assertEquals("the checkSum value of the compressed and decompressed data does not equal",
-					2074883667L, inGZIP.getChecksum().getValue());
-			inGZIP.close();
-			int r = 0;
-			try {
-				inGZIP.read(outBuf, 0, 1);
-			} catch (IOException e) {
-				r = 1;
-			}
-			assertEquals("GZIPInputStream can still be used after close is called",
-					1, r);
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail("unexpected: " + e);
-		}
-	}
+            final URL gInput = new URL("file:/" + resPath
+                    + "/GZIPInputStream/hyts_gInput.txt.gz");
+            TestGZIPInputStream inGZIP = new TestGZIPInputStream(gInput
+                    .openConnection().getInputStream());
+            while (!(inGZIP.endofInput())) {
+                result += inGZIP.read(outBuf, result, outBuf.length - result);
+            }
+            assertEquals("the checkSum value of the compressed and decompressed data does not equal",
+                    2074883667L, inGZIP.getChecksum().getValue());
+            inGZIP.close();
+            int r = 0;
+            try {
+                inGZIP.read(outBuf, 0, 1);
+            } catch (IOException e) {
+                r = 1;
+            }
+            assertEquals("GZIPInputStream can still be used after close is called",
+                    1, r);
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail("unexpected: " + e);
+        }
+    }
 
     /**
      * Regression test for HARMONY-3703.
+     *
      * @tests java.util.zip.GZIPInputStream#read()
      */
     public void test_read() throws IOException {
         GZIPInputStream gis = null;
         int result = 0;
-        byte[] buffer = new byte[] {1,2,3,4,5,6,7,8,9,10};
+        byte[] buffer = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         File f = new File(resources.getAbsolutePath() + "test.gz");
         FileOutputStream out = new FileOutputStream(f);
         GZIPOutputStream gout = new GZIPOutputStream(out);
 
         // write 100 bytes to the stream
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             gout.write(buffer);
         }
         gout.finish();
@@ -304,13 +305,13 @@ public class GZIPInputStreamTest extends junit.framework.TestCase {
         assertEquals("Incorrect value returned at the end of the file", -1, result);
     }
 
-	@Override
+    @Override
     protected void setUp() {
-		resources = Support_Resources.createTempFolder();
-	}
+        resources = Support_Resources.createTempFolder();
+    }
 
-	@Override
+    @Override
     protected void tearDown() {
-	}
+    }
 
 }

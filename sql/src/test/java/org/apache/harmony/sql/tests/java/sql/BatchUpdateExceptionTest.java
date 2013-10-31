@@ -125,7 +125,7 @@ public class BatchUpdateExceptionTest extends TestCase {
 
         String[] init1 = { "a", "1", "valid1", "----", "&valid*", null, "",
                 ".", "a" };
-        int[][] init2 = { { 1, 2, 3 }, {}, { 3 }, null, { 5, 5 }, { 6 },
+        int[][] init2 = { { 1, 2, 3 }, { }, { 3 }, null, { 5, 5 }, { 6 },
                 { 121, 2, 1 }, { 1 }, { 1, 2 } };
 
         int[] theFinalStates1 = { 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // Error Code
@@ -182,7 +182,7 @@ public class BatchUpdateExceptionTest extends TestCase {
                 ".", "a", "a" };
         String[] init2 = { "a", "1", "valid1", "----", "&valid*", "a", null,
                 "", ".", "a" };
-        int[][] init3 = { { 1, 2, 3 }, {}, { 3 }, { 5, 5 }, { 6 },
+        int[][] init3 = { { 1, 2, 3 }, { }, { 3 }, { 5, 5 }, { 6 },
                 { 121, 2, 1 }, { 1 }, { 1, 2 }, { 1 }, { 2 }, null };
 
         int[] theFinalStates1 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // Error
@@ -242,7 +242,7 @@ public class BatchUpdateExceptionTest extends TestCase {
         int[] init3 = { -2147483648, 2147483647, 0, -492417162, -156220255,
                 -173012890, -631026360, -2147483648, -2147483648, -2147483648,
                 -2147483648 };
-        int[][] init4 = { { 1, 2, 3 }, {}, { 3 }, { 5, 5 }, { 6 },
+        int[][] init4 = { { 1, 2, 3 }, { }, { 3 }, { 5, 5 }, { 6 },
                 { 121, 2, 1 }, { 1 }, { 1, 2 }, { 1 }, { 2 }, null };
 
         int[] theFinalStates1 = init3; // Error Code state
@@ -290,7 +290,6 @@ public class BatchUpdateExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.sql.BatchUpdateException#BatchUpdateException(Throwable)}
-     * 
      * @since 1.6
      */
     public void testBatchUpdateExceptionLThrowable() {
@@ -307,7 +306,6 @@ public class BatchUpdateExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.sql.BatchUpdateException#BatchUpdateException(int[], Throwable)}
-     * 
      * @since 1.6
      */
     public void testBatchUpdateException$ILThrowable() {
@@ -327,7 +325,6 @@ public class BatchUpdateExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.sql.BatchUpdateException#BatchUpdateException(String, int[], Throwable)}
-     * 
      * @since 1.6
      */
     public void testBatchUpdateExceptionLString$ILThrowable() {
@@ -348,7 +345,6 @@ public class BatchUpdateExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.sql.BatchUpdateException#BatchUpdateException(String, String, int[], Throwable)}
-     * 
      * @since 1.6
      */
     public void testBatchUpdateExceptionLStringLStringILThrowable() {
@@ -364,7 +360,6 @@ public class BatchUpdateExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.sql.BatchUpdateException#BatchUpdateException(String, String, int, int[], Throwable)}
-     * 
      * @since 1.6
      */
     public void testBatchUpdateExceptionLStringLStringI$ILThrowable() {
@@ -383,7 +378,7 @@ public class BatchUpdateExceptionTest extends TestCase {
     public void testGetUpdateCounts() {
 
         BatchUpdateException aBatchUpdateException;
-        int[][] init1 = { { 1, 2, 3 }, {}, null };
+        int[][] init1 = { { 1, 2, 3 }, { }, null };
 
         int[] theReturn;
         int[][] theReturns = init1;

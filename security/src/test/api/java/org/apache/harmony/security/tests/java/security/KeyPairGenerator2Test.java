@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.*;
 import java.security.spec.AlgorithmParameterSpec;
 
@@ -32,7 +33,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyPairGenerator</code> class constructors and methods.
- *
  */
 
 public class KeyPairGenerator2Test extends TestCase {
@@ -73,7 +73,7 @@ public class KeyPairGenerator2Test extends TestCase {
     protected void setProv() {
         mProv = (new SpiEngUtils()).new MyProvider("MyKPGenProvider".concat(post),
                 "Testing provider", KeyPairGenerator1Test.srvKeyPairGenerator.concat(".")
-                        .concat(defaultAlg.concat(post)),
+                .concat(defaultAlg.concat(post)),
                 KeyPairGeneratorProviderClass);
         Security.insertProviderAt(mProv, 1);
     }
@@ -86,87 +86,87 @@ public class KeyPairGenerator2Test extends TestCase {
             throws InvalidAlgorithmParameterException {
         AlgorithmParameterSpec pp = null;
         switch (mode) {
-        case 1:
-            try {
-                keyPairGen.initialize(pp, new SecureRandom());
-                fail("InvalidAlgorithmParameterException must be thrown");
-            } catch (InvalidAlgorithmParameterException e) {
-            }
-            keyPairGen.initialize(1000, new SecureRandom());
-            try {
-                keyPairGen.initialize(-1024, new SecureRandom());
-                fail("InvalidParameterException must be thrown");
-            } catch (InvalidParameterException e) {
-                assertEquals("Incorrect exception", e.getMessage(),
-                        "Incorrect keysize parameter");
-            }
-            try {
+            case 1:
+                try {
+                    keyPairGen.initialize(pp, new SecureRandom());
+                    fail("InvalidAlgorithmParameterException must be thrown");
+                } catch (InvalidAlgorithmParameterException e) {
+                }
+                keyPairGen.initialize(1000, new SecureRandom());
+                try {
+                    keyPairGen.initialize(-1024, new SecureRandom());
+                    fail("InvalidParameterException must be thrown");
+                } catch (InvalidParameterException e) {
+                    assertEquals("Incorrect exception", e.getMessage(),
+                            "Incorrect keysize parameter");
+                }
+                try {
+                    keyPairGen.initialize(100, null);
+                    fail("InvalidParameterException must be thrown");
+                } catch (InvalidParameterException e) {
+                    assertEquals("Incorrect exception", e.getMessage(),
+                            "Incorrect random");
+                }
+                keyPairGen.generateKeyPair();
+                keyPairGen.genKeyPair();
+                break;
+            case 2:
+                try {
+                    keyPairGen.initialize(pp, new SecureRandom());
+                } catch (UnsupportedOperationException e) {
+                    // js2e does not throw this exception
+                }
+                keyPairGen.initialize(1000, new SecureRandom());
+                try {
+                    keyPairGen.initialize(63, new SecureRandom());
+                    fail("InvalidParameterException must be thrown");
+                } catch (InvalidParameterException e) {
+                }
                 keyPairGen.initialize(100, null);
-                fail("InvalidParameterException must be thrown");
-            } catch (InvalidParameterException e) {
-                assertEquals("Incorrect exception", e.getMessage(),
-                        "Incorrect random");
-            }
-            keyPairGen.generateKeyPair();
-            keyPairGen.genKeyPair();
-            break;
-        case 2:
-            try {
+                assertNull("Not null KeyPair", keyPairGen.generateKeyPair());
+                assertNull("Not null KeyPair", keyPairGen.genKeyPair());
+                break;
+            case 3:
                 keyPairGen.initialize(pp, new SecureRandom());
-            } catch (UnsupportedOperationException e) {
-                // js2e does not throw this exception
-            }
-            keyPairGen.initialize(1000, new SecureRandom());
-            try {
-                keyPairGen.initialize(63, new SecureRandom());
-                fail("InvalidParameterException must be thrown");
-            } catch (InvalidParameterException e) {
-            }
-            keyPairGen.initialize(100, null);
-            assertNull("Not null KeyPair", keyPairGen.generateKeyPair());
-            assertNull("Not null KeyPair", keyPairGen.genKeyPair());
-            break;
-        case 3:
-            keyPairGen.initialize(pp, new SecureRandom());
-            keyPairGen.initialize(pp);
-            keyPairGen.initialize(1000, new SecureRandom());
-            keyPairGen.initialize(100);
+                keyPairGen.initialize(pp);
+                keyPairGen.initialize(1000, new SecureRandom());
+                keyPairGen.initialize(100);
 
-            assertNotNull("Null KeyPair", keyPairGen.generateKeyPair());
-            assertNotNull("Null KeyPair", keyPairGen.genKeyPair());
-            break;
-        case 4:
-            try {
-                keyPairGen.initialize(pp, null);
-                fail("UnsupportedOperationException must be thrown");
-            } catch (UnsupportedOperationException e) {
-            }
-            keyPairGen.initialize(pp, new SecureRandom());
-            keyPairGen.initialize(101, new SecureRandom());
-            keyPairGen.initialize(10000);
-            try {
-                keyPairGen.initialize(101, null);
-                fail("IllegalArgumentException must be thrown for null random");
-            } catch (IllegalArgumentException e) {
-            }
-            try {
-                keyPairGen.initialize(99, new SecureRandom());
-                fail("InvalidParameterException must be thrown for invalid key");
-            } catch (InvalidParameterException e) {
-            }
-            try {
-                keyPairGen.initialize(99);
-                fail("InvalidParameterException must be thrown for invalid key");
-            } catch (InvalidParameterException e) {
-            }
-            try {
-                keyPairGen.initialize(199, null);
-                fail("IllegalArgumentException must be thrown for null random");
-            } catch (IllegalArgumentException e) {
-            }
-            assertNull("Not null KeyPair", keyPairGen.generateKeyPair());
-            assertNull("Not null KeyPair", keyPairGen.genKeyPair());
-            break;
+                assertNotNull("Null KeyPair", keyPairGen.generateKeyPair());
+                assertNotNull("Null KeyPair", keyPairGen.genKeyPair());
+                break;
+            case 4:
+                try {
+                    keyPairGen.initialize(pp, null);
+                    fail("UnsupportedOperationException must be thrown");
+                } catch (UnsupportedOperationException e) {
+                }
+                keyPairGen.initialize(pp, new SecureRandom());
+                keyPairGen.initialize(101, new SecureRandom());
+                keyPairGen.initialize(10000);
+                try {
+                    keyPairGen.initialize(101, null);
+                    fail("IllegalArgumentException must be thrown for null random");
+                } catch (IllegalArgumentException e) {
+                }
+                try {
+                    keyPairGen.initialize(99, new SecureRandom());
+                    fail("InvalidParameterException must be thrown for invalid key");
+                } catch (InvalidParameterException e) {
+                }
+                try {
+                    keyPairGen.initialize(99);
+                    fail("InvalidParameterException must be thrown for invalid key");
+                } catch (InvalidParameterException e) {
+                }
+                try {
+                    keyPairGen.initialize(199, null);
+                    fail("IllegalArgumentException must be thrown for null random");
+                } catch (IllegalArgumentException e) {
+                }
+                assertNull("Not null KeyPair", keyPairGen.generateKeyPair());
+                assertNull("Not null KeyPair", keyPairGen.genKeyPair());
+                break;
         }
 
     }
@@ -176,7 +176,6 @@ public class KeyPairGenerator2Test extends TestCase {
      * throws NullPointerException when algorithm is null throws
      * NoSuchAlgorithmException when algorithm is incorrect; returns
      * KeyPairGenerator object
-     *
      */
     private void GetInstance01(int mode) throws NoSuchAlgorithmException,
             InvalidAlgorithmParameterException {

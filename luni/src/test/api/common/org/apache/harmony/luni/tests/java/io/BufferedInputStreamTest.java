@@ -340,7 +340,9 @@ public class BufferedInputStreamTest extends TestCase {
                 buf1.length).equals(fileString.substring(3000, 3100)));
 
         BufferedInputStream bufin = new BufferedInputStream(new InputStream() {
-            int size = 2, pos = 0;
+            int size = 2
+                    ,
+                    pos = 0;
 
             byte[] contents = new byte[size];
 

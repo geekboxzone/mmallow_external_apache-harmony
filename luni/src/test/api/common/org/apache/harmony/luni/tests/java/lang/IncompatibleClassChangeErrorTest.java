@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class IncompatibleClassChangeErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.IncompatibleClassChangeError#IncompatibleClassChangeError()
-	 */
+    /**
+     * @tests java.lang.IncompatibleClassChangeError#IncompatibleClassChangeError()
+     */
     public void test_Constructor() {
         IncompatibleClassChangeError e = new IncompatibleClassChangeError();
         assertNull(e.getMessage());

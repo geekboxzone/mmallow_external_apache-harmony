@@ -46,7 +46,8 @@ public class ConsoleTest extends TestCase {
     private OutputStream out = new ByteArrayOutputStream();
     private Console console = null;
 
-    @Override protected void setUp() throws Exception {
+    @Override
+    protected void setUp() throws Exception {
         super.setUp();
         Constructor<Console> constructor =
                 Console.class.getDeclaredConstructor(InputStream.class, OutputStream.class);
@@ -54,7 +55,8 @@ public class ConsoleTest extends TestCase {
         console = constructor.newInstance(in, out);
     }
 
-    @Override protected void tearDown() throws Exception {
+    @Override
+    protected void tearDown() throws Exception {
         console = null;
         super.tearDown();
     }
@@ -70,14 +72,14 @@ public class ConsoleTest extends TestCase {
 
     public void test_format_LString_LObject() {
         assertSame(console, console.format("%d %s", 1, "hello"));
-        String prompt = new String(((ByteArrayOutputStream)out).toByteArray());
+        String prompt = new String(((ByteArrayOutputStream) out).toByteArray());
         assertEquals("1 hello", prompt);
     }
 
     public void test_printf_LString_LObject() {
         Calendar c = new GregorianCalendar(1983, 2, 21);
         assertSame(console, console.printf("%1$tm %1$te,%1$tY", c));
-        String prompt = new String(((ByteArrayOutputStream)out).toByteArray());
+        String prompt = new String(((ByteArrayOutputStream) out).toByteArray());
         assertEquals("03 21,1983", prompt);
     }
 
@@ -96,7 +98,7 @@ public class ConsoleTest extends TestCase {
     public void test_readLine_LString_LObject() {
         String line = console.readLine("%d %s", 2, "Please input a line of string to test:");
         assertEquals("hello world", line);
-        String prompt = new String(((ByteArrayOutputStream)out).toByteArray());
+        String prompt = new String(((ByteArrayOutputStream) out).toByteArray());
         assertEquals("2 Please input a line of string to test:", prompt);
     }
 
@@ -114,9 +116,9 @@ public class ConsoleTest extends TestCase {
         try {
             console.readPassword("%d", 3);
             fail();
-        } catch (IOError expected){
+        } catch (IOError expected) {
         }
-        String prompt = new String(((ByteArrayOutputStream)out).toByteArray());
+        String prompt = new String(((ByteArrayOutputStream) out).toByteArray());
         assertEquals("3", prompt);
     }
 

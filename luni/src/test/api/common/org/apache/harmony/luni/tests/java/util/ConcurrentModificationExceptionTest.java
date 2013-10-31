@@ -23,85 +23,85 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class ConcurrentModificationExceptionTest extends
-		junit.framework.TestCase {
+        junit.framework.TestCase {
 
-	static public class CollectionModifier implements Runnable {
-		Collection col;
+    static public class CollectionModifier implements Runnable {
+        Collection col;
 
-		boolean keepGoing = true;
+        boolean keepGoing = true;
 
-		public CollectionModifier(Collection c) {
-			col = c;
-		}
+        public CollectionModifier(Collection c) {
+            col = c;
+        }
 
-		public void stopNow() {
-			keepGoing = false;
-		}
+        public void stopNow() {
+            keepGoing = false;
+        }
 
-		public void run() {
-			Object someItem = new Integer(-1);
-			while (keepGoing) {
-				col.add(someItem);
-				col.remove(someItem);
-			}
-		}
-	}
+        public void run() {
+            Object someItem = new Integer(-1);
+            while (keepGoing) {
+                col.add(someItem);
+                col.remove(someItem);
+            }
+        }
+    }
 
-	/**
-	 * @tests java.util.ConcurrentModificationException#ConcurrentModificationException()
-	 */
-	public void test_Constructor() {
-		// Test for method java.util.ConcurrentModificationException()
-		Collection myCollection = new LinkedList();
-		Iterator myIterator = myCollection.iterator();
-		for (int counter = 0; counter < 50; counter++)
-			myCollection.add(new Integer(counter));
-		CollectionModifier cm = new CollectionModifier(myCollection);
-		Thread collectionSlapper = new Thread(cm);
-		try {
-			collectionSlapper.start();
-			while (myIterator.hasNext())
-				myIterator.next();
-		} catch (ConcurrentModificationException e) {
-			cm.stopNow();
-			return;
-		}
-		cm.stopNow();
-		// The exception should have been thrown--if the code flow makes it here
-		// the test has failed
-		fail("Failed to throw expected ConcurrentModificationException");
-	}
+    /**
+     * @tests java.util.ConcurrentModificationException#ConcurrentModificationException()
+     */
+    public void test_Constructor() {
+        // Test for method java.util.ConcurrentModificationException()
+        Collection myCollection = new LinkedList();
+        Iterator myIterator = myCollection.iterator();
+        for (int counter = 0; counter < 50; counter++)
+            myCollection.add(new Integer(counter));
+        CollectionModifier cm = new CollectionModifier(myCollection);
+        Thread collectionSlapper = new Thread(cm);
+        try {
+            collectionSlapper.start();
+            while (myIterator.hasNext())
+                myIterator.next();
+        } catch (ConcurrentModificationException e) {
+            cm.stopNow();
+            return;
+        }
+        cm.stopNow();
+        // The exception should have been thrown--if the code flow makes it here
+        // the test has failed
+        fail("Failed to throw expected ConcurrentModificationException");
+    }
 
-	/**
-	 * @tests java.util.ConcurrentModificationException#ConcurrentModificationException(java.lang.String)
-	 */
-	public void test_ConstructorLjava_lang_String() {
-		// Test for method
-		// java.util.ConcurrentModificationException(java.lang.String)
-		String errorMessage = "This is an error message";
-		try {
-			// This is here to stop "unreachable code" unresolved problem
-			if (true)
-				throw new ConcurrentModificationException(errorMessage);
-		} catch (ConcurrentModificationException e) {
-			assertTrue("Exception thrown without error message", e.getMessage()
-					.equals(errorMessage));
-			return;
-		}
-		fail("Failed to throw expected ConcurrentModificationException");
-	}
+    /**
+     * @tests java.util.ConcurrentModificationException#ConcurrentModificationException(java.lang.String)
+     */
+    public void test_ConstructorLjava_lang_String() {
+        // Test for method
+        // java.util.ConcurrentModificationException(java.lang.String)
+        String errorMessage = "This is an error message";
+        try {
+            // This is here to stop "unreachable code" unresolved problem
+            if (true)
+                throw new ConcurrentModificationException(errorMessage);
+        } catch (ConcurrentModificationException e) {
+            assertTrue("Exception thrown without error message", e.getMessage()
+                    .equals(errorMessage));
+            return;
+        }
+        fail("Failed to throw expected ConcurrentModificationException");
+    }
 
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

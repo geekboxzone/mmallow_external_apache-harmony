@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto.spec;
 
@@ -41,11 +41,11 @@ public class SecretKeySpecTest extends TestCase {
      * copied to protect against subsequent modification.
      */
     public void testSecretKeySpec1() {
-        byte[] key = new byte[] {1, 2, 3, 4, 5};
+        byte[] key = new byte[] { 1, 2, 3, 4, 5 };
         String algorithm = "Algorithm";
 
         try {
-            new SecretKeySpec(new byte[] {}, algorithm);
+            new SecretKeySpec(new byte[] { }, algorithm);
             fail("An IllegalArgumentException should be thrown "
                     + "in the case of empty key.");
         } catch (IllegalArgumentException e) {
@@ -66,10 +66,10 @@ public class SecretKeySpecTest extends TestCase {
         }
 
         SecretKeySpec ks = new SecretKeySpec(key, algorithm);
-        key[0] ++;
+        key[0]++;
         assertFalse("The change of key specified in the constructor "
-                    + "should not cause the change of internal array.",
-                    key[0] == ks.getEncoded()[0]);
+                + "should not cause the change of internal array.",
+                key[0] == ks.getEncoded()[0]);
     }
 
     /**
@@ -79,13 +79,13 @@ public class SecretKeySpecTest extends TestCase {
      * is copied to protect against subsequent modification.
      */
     public void testSecretKeySpec2() {
-        byte[] key = new byte[] {1, 2, 3, 4, 5};
+        byte[] key = new byte[] { 1, 2, 3, 4, 5 };
         int offset = 1;
         int len = 4;
         String algorithm = "Algorithm";
 
         try {
-            new SecretKeySpec(new byte[] {}, 0, 0, algorithm);
+            new SecretKeySpec(new byte[] { }, 0, 0, algorithm);
             fail("An IllegalArgumentException should be thrown "
                     + "in the case of empty key.");
         } catch (IllegalArgumentException e) {
@@ -123,7 +123,7 @@ public class SecretKeySpecTest extends TestCase {
 
         // Regression test for HARMONY-6347
         try {
-            new SecretKeySpec(key, -1, key.length+2, algorithm);
+            new SecretKeySpec(key, -1, key.length + 2, algorithm);
             fail("An ArrayIndexOutOfBoundsException should be thrown "
                     + "in the case of negative offset.");
         } catch (IllegalArgumentException e) {
@@ -139,10 +139,10 @@ public class SecretKeySpecTest extends TestCase {
         }
 
         SecretKeySpec ks = new SecretKeySpec(key, algorithm);
-        key[offset] ++;
+        key[offset]++;
         assertFalse("The change of key specified in the constructor "
-                    + "should not cause the change of internal array.",
-                    key[offset] == ks.getEncoded()[0]);
+                + "should not cause the change of internal array.",
+                key[offset] == ks.getEncoded()[0]);
 
         // Regression test for HARMONY-1077
         try {
@@ -158,7 +158,7 @@ public class SecretKeySpecTest extends TestCase {
      * equal to the value specified in the constructor.
      */
     public void testGetAlgorithm() {
-        byte[] key = new byte[] {1, 2, 3, 4, 5};
+        byte[] key = new byte[] { 1, 2, 3, 4, 5 };
         String algorithm = "Algorithm";
 
         SecretKeySpec ks = new SecretKeySpec(key, algorithm);
@@ -171,7 +171,7 @@ public class SecretKeySpecTest extends TestCase {
      * getFormat() method testing. Tests that returned value is "RAW".
      */
     public void testGetFormat() {
-        byte[] key = new byte[] {1, 2, 3, 4, 5};
+        byte[] key = new byte[] { 1, 2, 3, 4, 5 };
         String algorithm = "Algorithm";
 
         SecretKeySpec ks = new SecretKeySpec(key, algorithm);
@@ -185,25 +185,25 @@ public class SecretKeySpecTest extends TestCase {
      * of returned array does not affect the internal array.
      */
     public void testGetEncoded() {
-        byte[] key = new byte[] {1, 2, 3, 4, 5};
+        byte[] key = new byte[] { 1, 2, 3, 4, 5 };
         String algorithm = "Algorithm";
 
         SecretKeySpec ks = new SecretKeySpec(key, algorithm);
         byte[] result = ks.getEncoded();
-        if (! Arrays.equals(key, result)) {
+        if (!Arrays.equals(key, result)) {
             fail("The returned key does not equal to the specified "
                     + "in the constructor.");
         }
-        result[0] ++;
+        result[0]++;
         assertFalse("The change of returned by getEncoded() method key "
-                    + "should not cause the change of internal array.",
-                    result[0] == ks.getEncoded()[0]);
+                + "should not cause the change of internal array.",
+                result[0] == ks.getEncoded()[0]);
 
-		// Regression for HARMONY-78
-		int offset = 1;
-		int len = 4;
-		SecretKeySpec sks = new SecretKeySpec(key, offset, len, algorithm);
-		assertEquals("Key length is incorrect", len, sks.getEncoded().length);
+        // Regression for HARMONY-78
+        int offset = 1;
+        int len = 4;
+        SecretKeySpec sks = new SecretKeySpec(key, offset, len, algorithm);
+        assertEquals("Key length is incorrect", len, sks.getEncoded().length);
     }
 
     /**
@@ -211,13 +211,13 @@ public class SecretKeySpecTest extends TestCase {
      * are equal.
      */
     public void testHashCode() {
-        byte[] key = new byte[] {1, 2, 3, 4, 5};
+        byte[] key = new byte[] { 1, 2, 3, 4, 5 };
         String algorithm = "Algorithm";
 
         SecretKeySpec ks1 = new SecretKeySpec(key, algorithm);
         SecretKeySpec ks2 = new SecretKeySpec(key, algorithm);
         assertTrue("Equal objects should have the same hash codes.",
-                                            ks1.hashCode() == ks2.hashCode());
+                ks1.hashCode() == ks2.hashCode());
     }
 
     /**
@@ -226,7 +226,7 @@ public class SecretKeySpecTest extends TestCase {
      * and should be false on null object.
      */
     public void testEquals() {
-        byte[] key = new byte[] {1, 2, 3, 4, 5};
+        byte[] key = new byte[] { 1, 2, 3, 4, 5 };
         String algorithm = "Algorithm";
 
         SecretKeySpec ks1 = new SecretKeySpec(key, algorithm);
@@ -235,24 +235,24 @@ public class SecretKeySpecTest extends TestCase {
 
         // checking for reflexive law:
         assertTrue("The equivalence relation should be reflexive.",
-                                                        ks1.equals(ks1));
+                ks1.equals(ks1));
 
         assertTrue("Objects built on the same parameters should be equal.",
-                                                        ks1.equals(ks2));
+                ks1.equals(ks2));
         // checking for symmetric law:
         assertTrue("The equivalence relation should be symmetric.",
-                                                        ks2.equals(ks1));
+                ks2.equals(ks1));
 
         assertTrue("Objects built on the equal parameters should be equal.",
-                                                        ks2.equals(ks3));
+                ks2.equals(ks3));
         // checking for transitive law:
         assertTrue("The equivalence relation should be transitive.",
-                                                        ks1.equals(ks3));
+                ks1.equals(ks3));
 
         assertFalse("Should not be equal to null object.",
-                                                        ks1.equals(null));
+                ks1.equals(null));
 
-        ks2 = new SecretKeySpec(new byte[] {1}, algorithm);
+        ks2 = new SecretKeySpec(new byte[] { 1 }, algorithm);
         assertFalse("Objects should not be equal.", ks1.equals(ks2));
 
         ks2 = new SecretKeySpec(key, "Another Algorithm");

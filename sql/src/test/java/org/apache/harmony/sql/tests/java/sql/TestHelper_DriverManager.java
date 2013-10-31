@@ -27,7 +27,6 @@ import junit.framework.TestCase;
  * Helper class for the Driver manager tes - it allows the test code to be
  * loaded under a different classloader, necessary for testing the
  * DeregisterDriver function of DriverManager
- * 
  */
 public class TestHelper_DriverManager extends TestCase {
 

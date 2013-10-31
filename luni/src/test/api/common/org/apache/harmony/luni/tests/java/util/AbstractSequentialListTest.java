@@ -35,7 +35,7 @@ public class AbstractSequentialListTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
     }
-    
+
     class ASLT<E> extends AbstractSequentialList<E> {
 
         LinkedList<E> l = new LinkedList<E>();
@@ -50,7 +50,7 @@ public class AbstractSequentialListTest extends TestCase {
             return l.size();
         }
     }
-    
+
     /**
      * @tests java.util.AbstractSequentialList#addAll(int, java.util.Collection)
      */
@@ -64,7 +64,7 @@ public class AbstractSequentialListTest extends TestCase {
         al.addAll(c);
         assertTrue("Should return true", al.addAll(2, c)); //$NON-NLS-1$
     }
-    
+
 
     /**
      * @tests java.util.AbstractSequentialList#get(int)
@@ -128,32 +128,32 @@ public class AbstractSequentialListTest extends TestCase {
             // expected
         }
     }
-    
+
     public void test_set() throws Exception {
-		MyAbstractSequentialList list = new MyAbstractSequentialList();
-		try {
-			list.set(0, new Object());
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
-	}
+        MyAbstractSequentialList list = new MyAbstractSequentialList();
+        try {
+            list.set(0, new Object());
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
+    }
 
-	static class MyAbstractSequentialList extends AbstractSequentialList {
+    static class MyAbstractSequentialList extends AbstractSequentialList {
 
-		private LinkedList list = new LinkedList();
+        private LinkedList list = new LinkedList();
 
-		public ListIterator listIterator(int index) {
-			ListIterator iter = list.listIterator(index);
-			return iter;
-		}
+        public ListIterator listIterator(int index) {
+            ListIterator iter = list.listIterator(index);
+            return iter;
+        }
 
-		@Override
-		public int size() {
-			return list.size();
-		}
-	}
-    
+        @Override
+        public int size() {
+            return list.size();
+        }
+    }
+
     static class MockAbstractSequentialList<E> extends AbstractSequentialList {
 
         public ListIterator listIterator(int index) {
@@ -165,8 +165,8 @@ public class AbstractSequentialListTest extends TestCase {
             return 0;
         }
     }
-    
-    static class MockListIterator implements ListIterator{
+
+    static class MockListIterator implements ListIterator {
 
         public void add(Object object) {
             throw new UnsupportedOperationException();
@@ -203,6 +203,6 @@ public class AbstractSequentialListTest extends TestCase {
         public void set(Object object) {
             throw new UnsupportedOperationException();
         }
-        
+
     }
 }

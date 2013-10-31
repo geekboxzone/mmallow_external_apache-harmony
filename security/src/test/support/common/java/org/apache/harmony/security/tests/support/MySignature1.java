@@ -15,8 +15,8 @@
  *  limitations under the License.
  */
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -29,76 +29,74 @@ import java.security.SignatureException;
 
 /**
  * Tests implementation of Signature
- * 
  */
 public class MySignature1 extends Signature {
 
-	public boolean runEngineInitVerify = false;
-	public boolean runEngineInitSign = false;
-	public boolean runEngineUpdate1 = false;
-	public boolean runEngineUpdate2 = false;	
-	public boolean runEngineSign = false;
-	public boolean runEngineVerify = false;
-	public boolean runEngineSetParameter = false;	
-	public boolean runEngineGetParameter = false;
-	
-	/**
-	 * 
-	 *
-	 */
-	public MySignature1() {
-		super(null);
-	}
-	
-	/**
-	 * 
-	 * @param algorithm
-	 */
-	public MySignature1(String algorithm) {
-		super(algorithm);
-	}
-	
-	protected void engineInitVerify(PublicKey publicKey)
-			throws InvalidKeyException {
-		runEngineInitVerify = true;
-	}
+    public boolean runEngineInitVerify = false;
+    public boolean runEngineInitSign = false;
+    public boolean runEngineUpdate1 = false;
+    public boolean runEngineUpdate2 = false;
+    public boolean runEngineSign = false;
+    public boolean runEngineVerify = false;
+    public boolean runEngineSetParameter = false;
+    public boolean runEngineGetParameter = false;
 
-	protected void engineInitSign(PrivateKey privateKey)
-			throws InvalidKeyException {
-		runEngineInitSign = true;
-	}
+    /**
+     *
+     *
+     */
+    public MySignature1() {
+        super(null);
+    }
 
-	protected void engineUpdate(byte b) throws SignatureException {
-		runEngineUpdate1 = true;
-	}
+    /**
+     * @param algorithm
+     */
+    public MySignature1(String algorithm) {
+        super(algorithm);
+    }
 
-	protected void engineUpdate(byte[] b, int off, int len)
-			throws SignatureException {
-		runEngineUpdate2 = true;
-	}
+    protected void engineInitVerify(PublicKey publicKey)
+            throws InvalidKeyException {
+        runEngineInitVerify = true;
+    }
 
-	protected byte[] engineSign() throws SignatureException {
-		runEngineSign = true;
-		return null;
-	}
+    protected void engineInitSign(PrivateKey privateKey)
+            throws InvalidKeyException {
+        runEngineInitSign = true;
+    }
 
-	protected boolean engineVerify(byte[] sigBytes) throws SignatureException {
-		runEngineVerify = true;
-		return false;
-	}
+    protected void engineUpdate(byte b) throws SignatureException {
+        runEngineUpdate1 = true;
+    }
 
-	protected void engineSetParameter(String param, Object value)
-			throws InvalidParameterException {
-		runEngineSetParameter = true;
-	}
+    protected void engineUpdate(byte[] b, int off, int len)
+            throws SignatureException {
+        runEngineUpdate2 = true;
+    }
 
-	protected Object engineGetParameter(String param)
-			throws InvalidParameterException {
-		runEngineGetParameter = true;
-		return null;
-	}
-	
-	public int getState() {
-		return state;
-	}
+    protected byte[] engineSign() throws SignatureException {
+        runEngineSign = true;
+        return null;
+    }
+
+    protected boolean engineVerify(byte[] sigBytes) throws SignatureException {
+        runEngineVerify = true;
+        return false;
+    }
+
+    protected void engineSetParameter(String param, Object value)
+            throws InvalidParameterException {
+        runEngineSetParameter = true;
+    }
+
+    protected Object engineGetParameter(String param)
+            throws InvalidParameterException {
+        runEngineGetParameter = true;
+        return null;
+    }
+
+    public int getState() {
+        return state;
+    }
 }

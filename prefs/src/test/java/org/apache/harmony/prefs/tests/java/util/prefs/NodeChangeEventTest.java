@@ -25,7 +25,7 @@ import junit.framework.TestCase;
 import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
- * 
+ *
  */
 public class NodeChangeEventTest extends TestCase {
 

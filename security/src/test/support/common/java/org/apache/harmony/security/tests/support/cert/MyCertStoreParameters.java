@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.support.cert;
 
@@ -25,13 +25,13 @@ import java.security.cert.CertStoreParameters;
 
 /**
  * Class for verification of CertStore and CertStoreSpi
- * 
  */
 
 public class MyCertStoreParameters implements CertStoreParameters {
     public MyCertStoreParameters() {
         super();
     }
+
     public Object clone() {
         try {
             return super.clone();

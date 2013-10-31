@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -29,7 +29,6 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>ExemptionMechanismException</code> class constructors and
  * methods.
- * 
  */
 public class ExemptionMechanismExceptionTest extends TestCase {
 
@@ -38,7 +37,7 @@ public class ExemptionMechanismExceptionTest extends TestCase {
 
     /**
      * Constructor for ExemptionMechanismExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public ExemptionMechanismExceptionTest(String arg0) {

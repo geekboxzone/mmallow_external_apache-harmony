@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package javax.net.ssl;
 
@@ -30,26 +30,25 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SSLSocketFactory</code> class methods.
- * 
  */
 public class SSLServerSocketFactoryTest extends TestCase {
 
-     private SSLServerSocketFactory customServerSocketFactory;
-    
+    private SSLServerSocketFactory customServerSocketFactory;
+
     /*
-     * @see TestCase#setUp()
-     */
+    * @see TestCase#setUp()
+    */
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         String defaultName = Security.getProperty("ssl.ServerSocketFactory.provider");
-        if (defaultName != null) {    
+        if (defaultName != null) {
             try {
                 customServerSocketFactory = (SSLServerSocketFactory) Class.forName(
                         defaultName, true, ClassLoader.getSystemClassLoader())
                         .newInstance();
-             } catch (Exception e) {
-             }
+            } catch (Exception e) {
+            }
         }
         if (customServerSocketFactory == null) {
             SSLContext context = DefaultSSLContext.getContext();
@@ -66,12 +65,12 @@ public class SSLServerSocketFactoryTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
     }
-    
+
     public final void testGetDefault() {
-        SSLServerSocketFactory factory = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
+        SSLServerSocketFactory factory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
         if (customServerSocketFactory != null) {
             if (!factory.getClass().getName().equals(customServerSocketFactory.getClass().getName())) {
-                fail("incorrect instance: " + factory.getClass()+
+                fail("incorrect instance: " + factory.getClass() +
                         " expected: " + customServerSocketFactory.getClass().getName());
             }
         } else {
@@ -90,7 +89,7 @@ public class SSLServerSocketFactoryTest extends TestCase {
             } catch (SocketException e) {
             } catch (IOException e) {
                 fail(e.toString());
-            }              
+            }
         }
     }
 

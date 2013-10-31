@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander V. Astapchuk
-*/
+ * @author Alexander V. Astapchuk
+ */
 
 package org.apache.harmony.security.tests.java.security.serialization;
 
@@ -32,7 +32,6 @@ import org.apache.harmony.security.tests.support.TestCertUtils;
 
 /**
  * Serialization tests for <code>CodeSigner</code>
- *
  */
 
 public class CodeSignerTest extends SerializationTest {

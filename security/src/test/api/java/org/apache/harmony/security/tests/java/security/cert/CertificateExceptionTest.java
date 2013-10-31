@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -28,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>CertificateException</code> class constructors and methods.
- * 
  */
 public class CertificateExceptionTest extends TestCase {
 
@@ -37,7 +36,7 @@ public class CertificateExceptionTest extends TestCase {
 
     /**
      * Constructor for CertificateExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public CertificateExceptionTest(String arg0) {

@@ -20,9 +20,9 @@ import junit.framework.TestCase;
 
 public class NullPointerExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.NullPointerException#NullPointerException()
-	 */
+    /**
+     * @tests java.lang.NullPointerException#NullPointerException()
+     */
     public void test_Constructor() {
         NullPointerException e = new NullPointerException();
         assertNull(e.getMessage());

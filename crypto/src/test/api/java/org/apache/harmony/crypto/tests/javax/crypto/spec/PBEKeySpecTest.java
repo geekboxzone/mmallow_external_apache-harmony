@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto.spec;
 
@@ -43,17 +43,17 @@ public class PBEKeySpecTest extends TestCase {
         try {
             PBEKeySpec pbeks = new PBEKeySpec(null);
             assertTrue("An empty char[] should be used in case of null "
-                        + "char array.", pbeks.getPassword().length == 0);
+                    + "char array.", pbeks.getPassword().length == 0);
         } catch (NullPointerException e) {
             fail("Unexpected NullPointerException was thrown.");
         }
 
-        char[] password = new char[] {'1', '2', '3', '4', '5'};
+        char[] password = new char[] { '1', '2', '3', '4', '5' };
         PBEKeySpec pbeks = new PBEKeySpec(password);
-        password[0] ++;
+        password[0]++;
         assertFalse("The change of password specified in the constructor "
-                    + "should not cause the change of internal array.",
-                    password[0] == pbeks.getPassword()[0]);
+                + "should not cause the change of internal array.",
+                password[0] == pbeks.getPassword()[0]);
     }
 
     /**
@@ -63,16 +63,16 @@ public class PBEKeySpecTest extends TestCase {
      * a parameters are copied during the object initialization.
      */
     public void testPBEKeySpec2() {
-        char[] password = new char[] {'1', '2', '3', '4', '5'};
-        byte[] salt = new byte[] {1, 2, 3, 4, 5};
+        char[] password = new char[] { '1', '2', '3', '4', '5' };
+        byte[] salt = new byte[] { 1, 2, 3, 4, 5 };
         int iterationCount = 10;
         int keyLength = 10;
 
         try {
             PBEKeySpec pbeks = new PBEKeySpec(null, salt,
-                                                iterationCount, keyLength);
+                    iterationCount, keyLength);
             assertTrue("An empty char[] should be used in case of null input "
-                        + "char array.", pbeks.getPassword().length == 0);
+                    + "char array.", pbeks.getPassword().length == 0);
         } catch (IllegalArgumentException e) {
             fail("Unexpected IllegalArgumentException was thrown.");
         } catch (NullPointerException e) {
@@ -89,7 +89,7 @@ public class PBEKeySpecTest extends TestCase {
         }
 
         try {
-            new PBEKeySpec(password, new byte [0], iterationCount, keyLength);
+            new PBEKeySpec(password, new byte[0], iterationCount, keyLength);
             fail("An IllegalArgumentException should be thrown "
                     + "in the case of empty salt.");
         } catch (IllegalArgumentException e) {
@@ -124,15 +124,15 @@ public class PBEKeySpecTest extends TestCase {
         }
 
         PBEKeySpec pbeks = new PBEKeySpec(password, salt,
-                                                iterationCount, keyLength);
-        password[0] ++;
+                iterationCount, keyLength);
+        password[0]++;
         assertFalse("The change of password specified in the constructor "
-                    + "should not cause the change of internal array.",
-                    password[0] == pbeks.getPassword()[0]);
-        salt[0] ++;
+                + "should not cause the change of internal array.",
+                password[0] == pbeks.getPassword()[0]);
+        salt[0]++;
         assertFalse("The change of salt specified in the constructor "
-                    + " should not cause the change of internal array.",
-                    salt[0] == pbeks.getSalt()[0]);
+                + " should not cause the change of internal array.",
+                salt[0] == pbeks.getSalt()[0]);
     }
 
     /**
@@ -142,14 +142,14 @@ public class PBEKeySpecTest extends TestCase {
      * a parameters are copied during the object initialization.
      */
     public void testPBEKeySpec3() {
-        char[] password = new char[] {'1', '2', '3', '4', '5'};
-        byte[] salt = new byte[] {1, 2, 3, 4, 5};
+        char[] password = new char[] { '1', '2', '3', '4', '5' };
+        byte[] salt = new byte[] { 1, 2, 3, 4, 5 };
         int iterationCount = 10;
 
         try {
             PBEKeySpec pbeks = new PBEKeySpec(null, salt, iterationCount);
             assertTrue("An empty char[] should be used in case of null input "
-                        + "char array.", pbeks.getPassword().length == 0);
+                    + "char array.", pbeks.getPassword().length == 0);
         } catch (IllegalArgumentException e) {
             fail("Unexpected IllegalArgumentException was thrown.");
         } catch (NullPointerException e) {
@@ -166,8 +166,8 @@ public class PBEKeySpecTest extends TestCase {
         }
 
         try {
-            new PBEKeySpec(password, new byte [0],
-                                                iterationCount);
+            new PBEKeySpec(password, new byte[0],
+                    iterationCount);
             fail("An IllegalArgumentException should be thrown "
                     + "in the case of empty salt.");
         } catch (IllegalArgumentException e) {
@@ -188,14 +188,14 @@ public class PBEKeySpecTest extends TestCase {
         }
 
         PBEKeySpec pbeks = new PBEKeySpec(password, salt, iterationCount);
-        password[0] ++;
+        password[0]++;
         assertFalse("The change of password specified in the constructor "
-                    + "should not cause the change of internal array.",
-                    password[0] == pbeks.getPassword()[0]);
-        salt[0] ++;
+                + "should not cause the change of internal array.",
+                password[0] == pbeks.getPassword()[0]);
+        salt[0]++;
         assertFalse("The change of salt specified in the constructor "
-                    + " should not cause the change of internal array.",
-                    salt[0] == pbeks.getSalt()[0]);
+                + " should not cause the change of internal array.",
+                salt[0] == pbeks.getSalt()[0]);
     }
 
     /**
@@ -203,7 +203,7 @@ public class PBEKeySpecTest extends TestCase {
      * is cleared after the method call.
      */
     public void testClearPassword() {
-        char[] password = new char[] {'1', '2', '3', '4', '5'};
+        char[] password = new char[] { '1', '2', '3', '4', '5' };
         PBEKeySpec pbeks = new PBEKeySpec(password);
         pbeks.clearPassword();
         try {
@@ -220,17 +220,17 @@ public class PBEKeySpecTest extends TestCase {
      * returned array does not cause the change of internal array.
      */
     public void testGetPassword() {
-        char[] password = new char[] {'1', '2', '3', '4', '5'};
+        char[] password = new char[] { '1', '2', '3', '4', '5' };
         PBEKeySpec pbeks = new PBEKeySpec(password);
         char[] result = pbeks.getPassword();
-        if (! Arrays.equals(password, result)) {
+        if (!Arrays.equals(password, result)) {
             fail("The returned password is not equal to the specified "
                     + "in the constructor.");
         }
-        result[0] ++;
+        result[0]++;
         assertFalse("The change of returned by getPassword() method password "
-                    + "should not cause the change of internal array.",
-                    result[0] == pbeks.getPassword()[0]);
+                + "should not cause the change of internal array.",
+                result[0] == pbeks.getPassword()[0]);
     }
 
     /**
@@ -241,22 +241,22 @@ public class PBEKeySpecTest extends TestCase {
      * specified.
      */
     public void testGetSalt() {
-        char[] password = new char[] {'1', '2', '3', '4', '5'};
-        byte[] salt = new byte[] {1, 2, 3, 4, 5};
+        char[] password = new char[] { '1', '2', '3', '4', '5' };
+        byte[] salt = new byte[] { 1, 2, 3, 4, 5 };
         int iterationCount = 10;
         PBEKeySpec pbeks = new PBEKeySpec(password, salt, iterationCount);
         byte[] result = pbeks.getSalt();
-        if (! Arrays.equals(salt, result)) {
+        if (!Arrays.equals(salt, result)) {
             fail("The returned salt is not equal to the specified "
                     + "in the constructor.");
         }
-        result[0] ++;
+        result[0]++;
         assertFalse("The change of returned by getSalt() method salt"
-                    + "should not cause the change of internal array.",
-                    result[0] == pbeks.getSalt()[0]);
+                + "should not cause the change of internal array.",
+                result[0] == pbeks.getSalt()[0]);
         pbeks = new PBEKeySpec(password);
         assertNull("The getSalt() method should return null if the salt "
-                    + "is not specified.", pbeks.getSalt());
+                + "is not specified.", pbeks.getSalt());
     }
 
     /**
@@ -266,8 +266,8 @@ public class PBEKeySpecTest extends TestCase {
      * specified.
      */
     public void testGetIterationCount() {
-        char[] password = new char[] {'1', '2', '3', '4', '5'};
-        byte[] salt = new byte[] {1, 2, 3, 4, 5};
+        char[] password = new char[] { '1', '2', '3', '4', '5' };
+        byte[] salt = new byte[] { 1, 2, 3, 4, 5 };
         int iterationCount = 10;
         PBEKeySpec pbeks = new PBEKeySpec(password, salt, iterationCount);
         assertTrue("The returned iterationCount is not equal to the specified "
@@ -275,27 +275,27 @@ public class PBEKeySpecTest extends TestCase {
                 pbeks.getIterationCount() == iterationCount);
         pbeks = new PBEKeySpec(password);
         assertTrue("The getIterationCount() method should return 0 "
-                    + "if the iterationCount is not specified.",
-                    pbeks.getIterationCount() == 0);
+                + "if the iterationCount is not specified.",
+                pbeks.getIterationCount() == 0);
     }
 
     /**
      * getKeyLength() method testing.
      */
     public void testGetKeyLength() {
-        char[] password = new char[] {'1', '2', '3', '4', '5'};
-        byte[] salt = new byte[] {1, 2, 3, 4, 5};
+        char[] password = new char[] { '1', '2', '3', '4', '5' };
+        byte[] salt = new byte[] { 1, 2, 3, 4, 5 };
         int iterationCount = 10;
         int keyLength = 10;
         PBEKeySpec pbeks = new PBEKeySpec(password, salt,
-                                                iterationCount, keyLength);
+                iterationCount, keyLength);
         assertTrue("The returned keyLength is not equal to the value specified "
                 + "in the constructor.",
                 pbeks.getKeyLength() == keyLength);
         pbeks = new PBEKeySpec(password);
         assertTrue("The getKeyLength() method should return 0 "
-                    + "if the keyLength is not specified.",
-                    pbeks.getKeyLength() == 0);
+                + "if the keyLength is not specified.",
+                pbeks.getKeyLength() == 0);
     }
 
     public static Test suite() {

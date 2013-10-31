@@ -30,151 +30,151 @@ import java.util.RandomAccess;
 
 public class AbstractListTest extends junit.framework.TestCase {
 
-	static class SimpleList extends AbstractList {
-		ArrayList arrayList;
+    static class SimpleList extends AbstractList {
+        ArrayList arrayList;
 
-		SimpleList() {
-			this.arrayList = new ArrayList();
-		}
+        SimpleList() {
+            this.arrayList = new ArrayList();
+        }
 
-		public Object get(int index) {
-			return this.arrayList.get(index);
-		}
+        public Object get(int index) {
+            return this.arrayList.get(index);
+        }
 
-		public void add(int i, Object o) {
-			this.arrayList.add(i, o);
-		}
+        public void add(int i, Object o) {
+            this.arrayList.add(i, o);
+        }
 
-		public Object remove(int i) {
-			return this.arrayList.remove(i);
-		}
+        public Object remove(int i) {
+            return this.arrayList.remove(i);
+        }
 
-		public int size() {
-			return this.arrayList.size();
-		}
-	}
+        public int size() {
+            return this.arrayList.size();
+        }
+    }
 
-	/**
-	 * @tests java.util.AbstractList#hashCode()
-	 */
-	public void test_hashCode() {
-		List list = new ArrayList();
-		list.add(new Integer(3));
-		list.add(new Integer(15));
-		list.add(new Integer(5));
-		list.add(new Integer(1));
-		list.add(new Integer(7));
-		int hashCode = 1;
-		Iterator i = list.iterator();
-		while (i.hasNext()) {
-			Object obj = i.next();
-			hashCode = 31 * hashCode + (obj == null ? 0 : obj.hashCode());
-		}
-		assertTrue("Incorrect hashCode returned.  Wanted: " + hashCode
-				+ " got: " + list.hashCode(), hashCode == list.hashCode());
-	}
+    /**
+     * @tests java.util.AbstractList#hashCode()
+     */
+    public void test_hashCode() {
+        List list = new ArrayList();
+        list.add(new Integer(3));
+        list.add(new Integer(15));
+        list.add(new Integer(5));
+        list.add(new Integer(1));
+        list.add(new Integer(7));
+        int hashCode = 1;
+        Iterator i = list.iterator();
+        while (i.hasNext()) {
+            Object obj = i.next();
+            hashCode = 31 * hashCode + (obj == null ? 0 : obj.hashCode());
+        }
+        assertTrue("Incorrect hashCode returned.  Wanted: " + hashCode
+                + " got: " + list.hashCode(), hashCode == list.hashCode());
+    }
 
-	/**
-	 * @tests java.util.AbstractList#iterator()
-	 */
-	public void test_iterator() {
-		SimpleList list = new SimpleList();
-		list.add(new Object());
-		list.add(new Object());
-		Iterator it = list.iterator();
-		it.next();
-		it.remove();
-		it.next();
-	}
+    /**
+     * @tests java.util.AbstractList#iterator()
+     */
+    public void test_iterator() {
+        SimpleList list = new SimpleList();
+        list.add(new Object());
+        list.add(new Object());
+        Iterator it = list.iterator();
+        it.next();
+        it.remove();
+        it.next();
+    }
 
-	/**
-	 * @tests java.util.AbstractList#listIterator()
-	 */
-	public void test_listIterator() {
-		Integer tempValue;
-		List list = new ArrayList();
-		list.add(new Integer(3));
-		list.add(new Integer(15));
-		list.add(new Integer(5));
-		list.add(new Integer(1));
-		list.add(new Integer(7));
-		ListIterator lit = list.listIterator();
-		assertTrue("Should not have previous", !lit.hasPrevious());
-		assertTrue("Should have next", lit.hasNext());
-		tempValue = (Integer) lit.next();
-		assertTrue("next returned wrong value.  Wanted 3, got: " + tempValue,
-				tempValue.intValue() == 3);
-		tempValue = (Integer) lit.previous();
+    /**
+     * @tests java.util.AbstractList#listIterator()
+     */
+    public void test_listIterator() {
+        Integer tempValue;
+        List list = new ArrayList();
+        list.add(new Integer(3));
+        list.add(new Integer(15));
+        list.add(new Integer(5));
+        list.add(new Integer(1));
+        list.add(new Integer(7));
+        ListIterator lit = list.listIterator();
+        assertTrue("Should not have previous", !lit.hasPrevious());
+        assertTrue("Should have next", lit.hasNext());
+        tempValue = (Integer) lit.next();
+        assertTrue("next returned wrong value.  Wanted 3, got: " + tempValue,
+                tempValue.intValue() == 3);
+        tempValue = (Integer) lit.previous();
 
-		SimpleList list2 = new SimpleList();
-		list2.add(new Object());
-		ListIterator lit2 = list2.listIterator();
-		lit2.add(new Object());
-		lit2.next();
-        
+        SimpleList list2 = new SimpleList();
+        list2.add(new Object());
+        ListIterator lit2 = list2.listIterator();
+        lit2.add(new Object());
+        lit2.next();
+
         //Regression test for Harmony-5808
         list = new MockArrayList();
         ListIterator it = list.listIterator();
         it.add("one");
         it.add("two");
-        assertEquals(2,list.size());
-	}
+        assertEquals(2, list.size());
+    }
 
-	/**
-	 * @tests java.util.AbstractList#subList(int, int)
-	 */
-	public void test_subListII() {
-		// Test each of the SubList operations to ensure a
-		// ConcurrentModificationException does not occur on an AbstractList
-		// which does not update modCount
-		SimpleList mList = new SimpleList();
-		mList.add(new Object());
-		mList.add(new Object());
-		List sList = mList.subList(0, 2);
-		sList.add(new Object()); // calls add(int, Object)
-		sList.get(0);
+    /**
+     * @tests java.util.AbstractList#subList(int, int)
+     */
+    public void test_subListII() {
+        // Test each of the SubList operations to ensure a
+        // ConcurrentModificationException does not occur on an AbstractList
+        // which does not update modCount
+        SimpleList mList = new SimpleList();
+        mList.add(new Object());
+        mList.add(new Object());
+        List sList = mList.subList(0, 2);
+        sList.add(new Object()); // calls add(int, Object)
+        sList.get(0);
 
-		sList.add(0, new Object());
-		sList.get(0);
+        sList.add(0, new Object());
+        sList.get(0);
 
-		sList.addAll(Arrays.asList(new String[] { "1", "2" }));
-		sList.get(0);
+        sList.addAll(Arrays.asList(new String[] { "1", "2" }));
+        sList.get(0);
 
-		sList.addAll(0, Arrays.asList(new String[] { "3", "4" }));
-		sList.get(0);
+        sList.addAll(0, Arrays.asList(new String[] { "3", "4" }));
+        sList.get(0);
 
-		sList.remove(0);
-		sList.get(0);
+        sList.remove(0);
+        sList.get(0);
 
-		ListIterator lit = sList.listIterator();
-		lit.add(new Object());
-		lit.next();
-		lit.remove();
-		lit.next();
+        ListIterator lit = sList.listIterator();
+        lit.add(new Object());
+        lit.next();
+        lit.remove();
+        lit.next();
 
-		sList.clear(); // calls removeRange()
-		sList.add(new Object());
+        sList.clear(); // calls removeRange()
+        sList.add(new Object());
 
-		// test the type of sublist that is returned
-		List al = new ArrayList();
-		for (int i = 0; i < 10; i++) {
-			al.add(new Integer(i));
-		}
-		assertTrue(
-				"Sublist returned should have implemented Random Access interface",
-				al.subList(3, 7) instanceof RandomAccess);
-
-		List ll = new LinkedList();
-		for (int i = 0; i < 10; i++) {
-			ll.add(new Integer(i));
-		}
-		assertTrue(
-				"Sublist returned should not have implemented Random Access interface",
-				!(ll.subList(3, 7) instanceof RandomAccess));
-
+        // test the type of sublist that is returned
+        List al = new ArrayList();
+        for (int i = 0; i < 10; i++) {
+            al.add(new Integer(i));
         }
+        assertTrue(
+                "Sublist returned should have implemented Random Access interface",
+                al.subList(3, 7) instanceof RandomAccess);
 
-	/**
+        List ll = new LinkedList();
+        for (int i = 0; i < 10; i++) {
+            ll.add(new Integer(i));
+        }
+        assertTrue(
+                "Sublist returned should not have implemented Random Access interface",
+                !(ll.subList(3, 7) instanceof RandomAccess));
+
+    }
+
+    /**
      * @tests java.util.AbstractList#subList(int, int)
      */
     public void test_subList_empty() {
@@ -206,48 +206,48 @@ public class AbstractListTest extends junit.framework.TestCase {
     }
 
     class MockArrayList<E> extends AbstractList<E> {
-    	/**
-    	 * 
-    	 */
-    	private static final long serialVersionUID = 1L;
-    	
-    	ArrayList<E> list = new ArrayList<E>();
-    	
-    	public E remove(int idx) {
-    		modCount++;
-    		return list.remove(idx);
-    	}
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
 
-    	@Override
-    	public E get(int index) {
-    		return list.get(index);
-    	}
+        ArrayList<E> list = new ArrayList<E>();
 
-    	@Override
-    	public int size() {
-    		return list.size();
-    	}
-    	
-    	public void add(int idx, E o) {
-    		modCount += 10;
-    		list.add(idx, o);
-    	}
+        public E remove(int idx) {
+            modCount++;
+            return list.remove(idx);
+        }
+
+        @Override
+        public E get(int index) {
+            return list.get(index);
+        }
+
+        @Override
+        public int size() {
+            return list.size();
+        }
+
+        public void add(int idx, E o) {
+            modCount += 10;
+            list.add(idx, o);
+        }
     }
-    
+
     /*
-     * Regression test for HY-4398
-     */
+    * Regression test for HY-4398
+    */
     public void test_iterator_next() {
-		MockArrayList<String> t = new MockArrayList<String>();
-		t.list.add("a");
-		t.list.add("b");
-		
-		Iterator it = t.iterator();
-		
-		while (it.hasNext()) {
-			it.next();
-		}
-		try {
+        MockArrayList<String> t = new MockArrayList<String>();
+        t.list.add("a");
+        t.list.add("b");
+
+        Iterator it = t.iterator();
+
+        while (it.hasNext()) {
+            it.next();
+        }
+        try {
             it.next();
             fail("Should throw NoSuchElementException");
         } catch (NoSuchElementException cme) {
@@ -260,19 +260,19 @@ public class AbstractListTest extends junit.framework.TestCase {
             fail("Should throw NoSuchElementException");
         } catch (ConcurrentModificationException cme) {
             // expected
-		}
-		
-		it = t.iterator();
-		try {
-			it.remove();
-			fail("Should throw IllegalStateException");
-		} catch (IllegalStateException ise) {
-			// expected
-		}
+        }
 
-		Object value = it.next();
-		assertEquals("a", value);
-	}
+        it = t.iterator();
+        try {
+            it.remove();
+            fail("Should throw IllegalStateException");
+        } catch (IllegalStateException ise) {
+            // expected
+        }
+
+        Object value = it.next();
+        assertEquals("a", value);
+    }
 
     /**
      * @tests java.util.AbstractList#subList(int, int)
@@ -303,52 +303,51 @@ public class AbstractListTest extends junit.framework.TestCase {
         }
     }
 
-    protected void doneSuite() {}
-    
+    protected void doneSuite() {
+    }
+
     class MockRemoveFailureArrayList<E> extends AbstractList<E> {
 
-		@Override
-		public E get(int location) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+        @Override
+        public E get(int location) {
+            // TODO Auto-generated method stub
+            return null;
+        }
 
-		@Override
-		public int size() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-		
-		public E remove(int idx) {
-    		modCount+=2;
-    		return null;
-    	}
-		
-		public int getModCount(){
-			return modCount;
-		}
+        @Override
+        public int size() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        public E remove(int idx) {
+            modCount += 2;
+            return null;
+        }
+
+        public int getModCount() {
+            return modCount;
+        }
     }
-    
+
     //test remove for failure by inconsistency of modCount and expectedModCount 
-    public void test_remove(){
-    	MockRemoveFailureArrayList<String> mrfal = new MockRemoveFailureArrayList<String>();
-    	Iterator<String> imrfal= mrfal.iterator();
-    	imrfal.next();
-    	imrfal.remove();
-    	try{
-    		imrfal.remove();
-    	}
-    	catch(ConcurrentModificationException e){
-    		fail("Excepted to catch IllegalStateException not ConcurrentModificationException");
-    	}
-    	catch(IllegalStateException e){
-    		//Excepted to catch IllegalStateException here
-    	}
+    public void test_remove() {
+        MockRemoveFailureArrayList<String> mrfal = new MockRemoveFailureArrayList<String>();
+        Iterator<String> imrfal = mrfal.iterator();
+        imrfal.next();
+        imrfal.remove();
+        try {
+            imrfal.remove();
+        } catch (ConcurrentModificationException e) {
+            fail("Excepted to catch IllegalStateException not ConcurrentModificationException");
+        } catch (IllegalStateException e) {
+            //Excepted to catch IllegalStateException here
+        }
     }
 
     public void test_subListII2() {
         List<Integer> holder = new ArrayList<Integer>(16);
-        for (int i=0; i<10; i++) {
+        for (int i = 0; i < 10; i++) {
             holder.add(i);
         }
 
@@ -358,75 +357,93 @@ public class AbstractListTest extends junit.framework.TestCase {
         try {
             sub.size();
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.add(12);
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.add(0, 11);
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.clear();
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.contains(11);
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.get(9);
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.indexOf(10);
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.isEmpty();
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.iterator();
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.lastIndexOf(10);
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.listIterator();
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.listIterator(0);
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.remove(0);
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.remove(9);
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.set(0, 0);
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.size();
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.toArray();
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
         try {
             sub.toString();
             fail("Should throw ConcurrentModificationException.");
-        } catch (ConcurrentModificationException e) {}
+        } catch (ConcurrentModificationException e) {
+        }
 
         holder.clear();
     }

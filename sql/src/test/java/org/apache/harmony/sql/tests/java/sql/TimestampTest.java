@@ -27,22 +27,21 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * JUnit Testcase for the java.sql.Timestamp class
- * 
  */
 
 public class TimestampTest extends TestCase {
-    
-    static class MockTimestamp extends Timestamp{
+
+    static class MockTimestamp extends Timestamp {
         private String holiday;
 
         public MockTimestamp(long theTime) {
             super(theTime);
             holiday = "Christmas";
         }
-        
+
         // Constructor should not call this public API,
         // since it may be overrided to use variables uninitialized.
-        public void setTime(long theTime){
+        public void setTime(long theTime) {
             super.setTime(theTime);
             holiday.hashCode();
         }
@@ -127,20 +126,20 @@ public class TimestampTest extends TestCase {
             STRING_JP_ARRAY };
 
     // Test ToString
-	static String[][] STRING_TIMESTAMP_ARRAYS = {
-			STRING_GMT_ARRAY,
-			new String[] { "1970-01-01 02:45:20.231", "1970-01-01 14:17:59.0",
-					"1969-12-31 05:14:39.309" },
-			new String[]{"1970-01-01 19:45:20.231","1970-01-02 07:17:59.0","1969-12-31 22:14:39.309"} };
-    
+    static String[][] STRING_TIMESTAMP_ARRAYS = {
+            STRING_GMT_ARRAY,
+            new String[] { "1970-01-01 02:45:20.231", "1970-01-01 14:17:59.0",
+                    "1969-12-31 05:14:39.309" },
+            new String[] { "1970-01-01 19:45:20.231", "1970-01-02 07:17:59.0", "1969-12-31 22:14:39.309" } };
+
     /*
-     * Constructor test
-     */
+    * Constructor test
+    */
     public void testTimestamplong() {
         Timestamp theTimestamp = new Timestamp(TIME_TEST1);
         // The Timestamp should have been created
         assertNotNull(theTimestamp);
-        
+
         Timestamp mockTimestamp = new MockTimestamp(TIME_TEST1);
         assertNotNull(theTimestamp);
     } // end method testTimestamplong
@@ -170,7 +169,7 @@ public class TimestampTest extends TestCase {
                 { 106, -1, 31, 23, 59, 59, 999999999 }, // 14 Months out of
                 // range
                 { -10, 11, 31, 23, 59, 59, 999999999 }, // 15 valid - Years
-        // negative
+                // negative
         };
 
         for (int[] element : valid) {
@@ -254,7 +253,7 @@ public class TimestampTest extends TestCase {
      */
     @SuppressWarnings("deprecation")
     public void testGetDate() {
-    	TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
         for (int i = 0; i < TIME_ARRAY.length; i++) {
             Timestamp theTimestamp = new Timestamp(TIME_ARRAY[i]);
             assertEquals(DATE_ARRAY[i], theTimestamp.getDate());
@@ -267,7 +266,7 @@ public class TimestampTest extends TestCase {
      */
     @SuppressWarnings("deprecation")
     public void testGetHours() {
-    	TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
         for (int i = 0; i < TIME_ARRAY.length; i++) {
             Timestamp theTimestamp = new Timestamp(TIME_ARRAY[i]);
             assertEquals(HOURS_ARRAY[i], theTimestamp.getHours());
@@ -307,7 +306,7 @@ public class TimestampTest extends TestCase {
     static String theExceptionMessage = "Timestamp format must be yyyy-mm-dd hh:mm:ss.fffffffff";
 
     public void testValueOfString() {
-    	TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
         for (int i = 0; i < TIME_ARRAY.length; i++) {
             Timestamp theTimestamp = new Timestamp(TIME_ARRAY[i]);
             Timestamp theTimestamp2 = Timestamp.valueOf(STRING_GMT_ARRAY[i]);
@@ -339,8 +338,8 @@ public class TimestampTest extends TestCase {
      * Method test for valueOf
      */
     public void testValueOfString1() {
-    	TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
-    	
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+
         Timestamp theReturn;
         long[] theReturnTime = { 38720231, 38720231, 80279000, -38720691,
                 38720000 };
@@ -374,7 +373,7 @@ public class TimestampTest extends TestCase {
         // Regression test for HARMONY-5506
         String date = "1970-01-01 22:17:59.0                 ";
         Timestamp t = Timestamp.valueOf(date);
-        assertEquals(80279000,t.getTime());
+        assertEquals(80279000, t.getTime());
 
     } // end method testValueOfString
 
@@ -406,37 +405,37 @@ public class TimestampTest extends TestCase {
      * Method test for toString
      */
     public void testToString() {
-		for (int i = 0; i < TIME_ARRAY.length; i++) {
-			testToString(TIMEZONES[i], TIME_ARRAY, STRING_TIMESTAMP_ARRAYS[i]);
-		} // end for
-		
-		TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+        for (int i = 0; i < TIME_ARRAY.length; i++) {
+            testToString(TIMEZONES[i], TIME_ARRAY, STRING_TIMESTAMP_ARRAYS[i]);
+        } // end for
 
-		Timestamp t1 = new Timestamp(Long.MIN_VALUE);
-		assertEquals("292278994-08-17 07:12:55.192", t1.toString()); //$NON-NLS-1$
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
 
-		Timestamp t2 = new Timestamp(Long.MIN_VALUE + 1);
-		assertEquals("292278994-08-17 07:12:55.193", t2.toString()); //$NON-NLS-1$
+        Timestamp t1 = new Timestamp(Long.MIN_VALUE);
+        assertEquals("292278994-08-17 07:12:55.192", t1.toString()); //$NON-NLS-1$
 
-		Timestamp t3 = new Timestamp(Long.MIN_VALUE + 807);
-		assertEquals("292278994-08-17 07:12:55.999", t3.toString()); //$NON-NLS-1$
+        Timestamp t2 = new Timestamp(Long.MIN_VALUE + 1);
+        assertEquals("292278994-08-17 07:12:55.193", t2.toString()); //$NON-NLS-1$
 
-		Timestamp t4 = new Timestamp(Long.MIN_VALUE + 808);
-		assertEquals("292269055-12-02 16:47:05.0", t4.toString()); //$NON-NLS-1$
-	} // end method testtoString
+        Timestamp t3 = new Timestamp(Long.MIN_VALUE + 807);
+        assertEquals("292278994-08-17 07:12:55.999", t3.toString()); //$NON-NLS-1$
+
+        Timestamp t4 = new Timestamp(Long.MIN_VALUE + 808);
+        assertEquals("292269055-12-02 16:47:05.0", t4.toString()); //$NON-NLS-1$
+    } // end method testtoString
 
     private void testToString(String timeZone, long[] theTimeStamps, String[] theTimeStampStrings) {
-    	TimeZone.setDefault(TimeZone.getTimeZone(timeZone));
+        TimeZone.setDefault(TimeZone.getTimeZone(timeZone));
         for (int i = 0; i < TIME_ARRAY.length; i++) {
             Timestamp theTimestamp = new Timestamp(theTimeStamps[i]);
             assertEquals(theTimeStampStrings[i], theTimestamp.toString());
         } // end for
-    	
+
     }
-    
+
     /*
-     * Method test for getNanos
-     */
+    * Method test for getNanos
+    */
     public void testGetNanos() {
         for (int i = 0; i < TIME_ARRAY.length; i++) {
             Timestamp theTimestamp = new Timestamp(TIME_ARRAY[i]);
@@ -449,8 +448,8 @@ public class TimestampTest extends TestCase {
      * Method test for setNanos
      */
     public void testSetNanosint() {
-    	TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
-    	
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+
         int[] NANOS_INVALID = { -137891990, 1635665198, -1 };
         for (int i = 0; i < TIME_ARRAY.length; i++) {
             Timestamp theTimestamp = new Timestamp(TIME_ARRAY[i]);
@@ -646,11 +645,11 @@ public class TimestampTest extends TestCase {
 
         Timestamp timestamp = new Timestamp(1000000);
         Date date = new Date(1000000);
-        
+
         assertEquals(0, timestamp.compareTo(date));
         timestamp.setNanos(10);
         assertEquals(1, timestamp.compareTo(date));
-        
+
         long time = System.currentTimeMillis();
         Date date2 = new Date(time);
         Timestamp timestamp2 = new Timestamp(date2.getTime());
@@ -675,16 +674,16 @@ public class TimestampTest extends TestCase {
 
     // Reset defualt timezone
     TimeZone defaultTimeZone = TimeZone.getDefault();
-    
-    protected void tearDown(){
-    	TimeZone.setDefault(defaultTimeZone);
+
+    protected void tearDown() {
+        TimeZone.setDefault(defaultTimeZone);
     }
 
     /**
      * @tests overriding Timestamp to create an immutable class.
      */
     public void testOverridingTimestamp() {
-        Timestamp ts = new Timestamp(8392418){
+        Timestamp ts = new Timestamp(8392418) {
             @Override
             public void setNanos(int n) {
                 throw new RuntimeException("Overridden method shouldn't be called");

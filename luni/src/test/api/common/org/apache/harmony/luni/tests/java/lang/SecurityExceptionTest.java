@@ -22,10 +22,10 @@ import junit.framework.TestCase;
 import org.apache.harmony.testframework.serialization.SerializationTest;
 
 public class SecurityExceptionTest extends TestCase {
-	
-	/**
-	 * @tests java.lang.SecurityException#SecurityException()
-	 */
+
+    /**
+     * @tests java.lang.SecurityException#SecurityException()
+     */
     public void test_Constructor() {
         SecurityException e = new SecurityException();
         assertNull(e.getMessage());
@@ -41,7 +41,7 @@ public class SecurityExceptionTest extends TestCase {
         assertEquals("fixture", e.getMessage());
         assertNull(e.getCause());
     }
-    
+
     /**
      * @tests java.lang.SecurityException#SecurityException(String, Throwable)
      */

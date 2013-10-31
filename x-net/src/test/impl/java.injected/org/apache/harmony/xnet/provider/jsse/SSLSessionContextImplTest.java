@@ -26,7 +26,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SSLSessionContextImp</code> constructor and methods
- *  
  */
 public class SSLSessionContextImplTest extends TestCase {
 
@@ -43,10 +42,10 @@ public class SSLSessionContextImplTest extends TestCase {
         context.putSession(ses1);
         context.putSession(ses2);
         context.putSession(ses3);
-        
-        for (Enumeration en = context.getIds(); en.hasMoreElements();) {
-            byte[] id = (byte[])en.nextElement();
-            assertTrue(context.getSession(id) != null);            
+
+        for (Enumeration en = context.getIds(); en.hasMoreElements(); ) {
+            byte[] id = (byte[]) en.nextElement();
+            assertTrue(context.getSession(id) != null);
         }
 
         SSLSession ses = context.getSession(ses1.getId());
@@ -62,7 +61,7 @@ public class SSLSessionContextImplTest extends TestCase {
 
         context.setSessionCacheSize(100);
         assertEquals(100, context.getSessionCacheSize());
-        
+
         try {
             context.setSessionCacheSize(-1);
             fail("No expected IllegalArgumentException");
@@ -76,7 +75,7 @@ public class SSLSessionContextImplTest extends TestCase {
 
         context.setSessionTimeout(1000);
         assertEquals(1000, context.getSessionTimeout());
-        
+
         try {
             context.setSessionTimeout(-1);
             fail("No expected IllegalArgumentException");

@@ -15,8 +15,8 @@
  *  limitations under the License.
  */
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.crypto.tests.support;
 
@@ -35,87 +35,86 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.ShortBufferException;
 
 /**
- *
  * Cipher implementation for testing
  */
 public class MyCipher extends CipherSpi {
 
-	public MyCipher() {
-		super();
-	}
+    public MyCipher() {
+        super();
+    }
 
-	@Override
+    @Override
     protected void engineSetMode(String mode) throws NoSuchAlgorithmException {
-	}
+    }
 
-	@Override
+    @Override
     protected void engineSetPadding(String padding)
-			throws NoSuchPaddingException {
-		if (!"PKCS5Padding".equals(padding)) {
-			throw new  NoSuchPaddingException(padding);
-		}
-	}
+            throws NoSuchPaddingException {
+        if (!"PKCS5Padding".equals(padding)) {
+            throw new NoSuchPaddingException(padding);
+        }
+    }
 
-	@Override
+    @Override
     protected int engineGetBlockSize() {
-		return 111;
-	}
+        return 111;
+    }
 
-	@Override
+    @Override
     protected int engineGetOutputSize(int inputLen) {
-		return inputLen + 10;
-	}
+        return inputLen + 10;
+    }
 
-	@Override
+    @Override
     protected byte[] engineGetIV() {
-		byte[] b = {1,2,3};
-		return b;
-	}
+        byte[] b = { 1, 2, 3 };
+        return b;
+    }
 
-	@Override
+    @Override
     protected AlgorithmParameters engineGetParameters() {
-		return null;
-	}
+        return null;
+    }
 
-	@Override
+    @Override
     protected void engineInit(int opmode, Key key, SecureRandom random)
-			throws InvalidKeyException {
-	}
+            throws InvalidKeyException {
+    }
 
-	@Override
+    @Override
     protected void engineInit(int opmode, Key key,
-			AlgorithmParameterSpec params, SecureRandom random)
-			throws InvalidKeyException, InvalidAlgorithmParameterException {
-	}
+            AlgorithmParameterSpec params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
+    }
 
-	@Override
+    @Override
     protected void engineInit(int opmode, Key key, AlgorithmParameters params,
-			SecureRandom random) throws InvalidKeyException,
-			InvalidAlgorithmParameterException {
-	}
+            SecureRandom random) throws InvalidKeyException,
+            InvalidAlgorithmParameterException {
+    }
 
-	@Override
+    @Override
     protected byte[] engineUpdate(byte[] input, int inputOffset, int inputLen) {
-		return null;
-	}
+        return null;
+    }
 
-	@Override
+    @Override
     protected int engineUpdate(byte[] input, int inputOffset, int inputLen,
-			byte[] output, int outputOffset) throws ShortBufferException {
-		return 0;
-	}
+            byte[] output, int outputOffset) throws ShortBufferException {
+        return 0;
+    }
 
-	@Override
+    @Override
     protected byte[] engineDoFinal(byte[] input, int inputOffset, int inputLen)
-			throws IllegalBlockSizeException, BadPaddingException {
-		return null;
-	}
+            throws IllegalBlockSizeException, BadPaddingException {
+        return null;
+    }
 
-	@Override
+    @Override
     protected int engineDoFinal(byte[] input, int inputOffset, int inputLen,
-			byte[] output, int outputOffset) throws ShortBufferException,
-			IllegalBlockSizeException, BadPaddingException {
-		return 0;
-	}
+            byte[] output, int outputOffset) throws ShortBufferException,
+            IllegalBlockSizeException, BadPaddingException {
+        return 0;
+    }
 
 }

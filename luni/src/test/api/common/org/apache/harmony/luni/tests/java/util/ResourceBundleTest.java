@@ -121,7 +121,7 @@ public class ResourceBundleTest extends junit.framework.TestCase {
 
     /**
      * @tests java.util.ResourceBundle#getBundle(java.lang.String,
-     *        java.util.Locale)
+     *java.util.Locale)
      */
     @SuppressWarnings("nls")
     public void test_getBundleLjava_lang_StringLjava_util_Locale() {
@@ -165,7 +165,7 @@ public class ResourceBundleTest extends junit.framework.TestCase {
 
     /**
      * @tests java.util.ResourceBundle#getBundle(java.lang.String,
-     *        java.util.Locale, java.lang.ClassLoader)
+     *java.util.Locale, java.lang.ClassLoader)
      */
     @SuppressWarnings("nls")
     public void test_getBundleLjava_lang_StringLjava_util_LocaleLjava_lang_ClassLoader() {
@@ -348,11 +348,12 @@ public class ResourceBundleTest extends junit.framework.TestCase {
         }
     }
 
-	/**
+    /**
      * The control with given formats.
      */
     static class GivenFormatsControl extends Control {
         List<String> formats;
+
         GivenFormatsControl(List<String> theFormats) {
             super();
             formats = theFormats;

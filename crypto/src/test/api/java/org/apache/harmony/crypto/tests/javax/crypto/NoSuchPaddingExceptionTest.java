@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -29,7 +29,6 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>NoSuchPaddingException</code> class constructors and
  * methods.
- * 
  */
 public class NoSuchPaddingExceptionTest extends TestCase {
 
@@ -38,7 +37,7 @@ public class NoSuchPaddingExceptionTest extends TestCase {
 
     /**
      * Constructor for NoSuchPaddingExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public NoSuchPaddingExceptionTest(String arg0) {

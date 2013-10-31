@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 
 /**
  * Unit test for NotOwnerException.
- *
  */
 
 public class NotOwnerExceptionTest extends TestCase {

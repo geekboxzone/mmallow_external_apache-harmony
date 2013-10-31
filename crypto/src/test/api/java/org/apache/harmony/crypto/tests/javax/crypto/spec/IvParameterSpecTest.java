@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto.spec;
 
@@ -46,14 +46,14 @@ public class IvParameterSpecTest extends TestCase {
             new IvParameterSpec(null);
             fail("Should raise an NullPointerException "
                     + "in the case of null byte array.");
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
         }
 
-        byte[] iv = new byte[] {1, 2, 3, 4, 5};
+        byte[] iv = new byte[] { 1, 2, 3, 4, 5 };
         IvParameterSpec ivps = new IvParameterSpec(iv);
-        iv[0] ++;
+        iv[0]++;
         assertFalse("The change of input array's content should not cause "
-                    + "the change of internal array", iv[0] == ivps.getIV()[0]);
+                + "the change of internal array", iv[0] == ivps.getIV()[0]);
     }
 
     /**
@@ -66,32 +66,32 @@ public class IvParameterSpecTest extends TestCase {
             new IvParameterSpec(null, 1, 1);
             fail("Should raise an IllegalArgumentException "
                     + "in the case of null byte array.");
-        } catch(ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             fail("Unexpected ArrayIndexOutOfBoundsException was thrown");
-        } catch(IllegalArgumentException e) {
-        } catch(NullPointerException e) {
+        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             fail("Unexpected NullPointerException was thrown");
         }
 
         try {
-            new IvParameterSpec(new byte[] {1, 2, 3}, 2, 2);
+            new IvParameterSpec(new byte[] { 1, 2, 3 }, 2, 2);
             fail("Should raise an IllegalArgumentException "
                     + "if (iv.length - offset < len).");
-        } catch(ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             fail("Unexpected ArrayIndexOutOfBoundsException was thrown");
-        } catch(IllegalArgumentException e) {
-        } catch(NullPointerException e) {
+        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             fail("Unexpected NullPointerException was thrown");
         }
 
         try {
-            new IvParameterSpec(new byte[] {1, 2, 3}, -1, 1);
+            new IvParameterSpec(new byte[] { 1, 2, 3 }, -1, 1);
             fail("Should raise an ArrayIndexOutOfBoundsException "
                     + "if offset index bytes outside the iv.");
-        } catch(ArrayIndexOutOfBoundsException e) {
-        } catch(IllegalArgumentException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IllegalArgumentException e) {
             fail("Unexpected IllegalArgumentException was thrown");
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             fail("Unexpected NullPointerException was thrown");
         }
 
@@ -108,15 +108,15 @@ public class IvParameterSpecTest extends TestCase {
         }
         */
 
-        byte[] iv = new byte[] {1, 2, 3, 4, 5};
+        byte[] iv = new byte[] { 1, 2, 3, 4, 5 };
         IvParameterSpec ivps = new IvParameterSpec(iv, 0, iv.length);
-        iv[0] ++;
+        iv[0]++;
         assertFalse("The change of input array's content should not cause "
-                    + "the change of internal array", iv[0] == ivps.getIV()[0]);
+                + "the change of internal array", iv[0] == ivps.getIV()[0]);
 
         //Regression for HARMONY-1089
         try {
-            new IvParameterSpec(new byte[2], 2,  -1);
+            new IvParameterSpec(new byte[2], 2, -1);
             fail("ArrayIndexOutOfBoundsException expected");
         } catch (ArrayIndexOutOfBoundsException e) {
             //expected
@@ -124,12 +124,12 @@ public class IvParameterSpecTest extends TestCase {
     }
 
     public void testGetIV() {
-        byte[] iv = new byte[] {1, 2, 3, 4, 5};
+        byte[] iv = new byte[] { 1, 2, 3, 4, 5 };
         IvParameterSpec ivps = new IvParameterSpec(iv);
         iv = ivps.getIV();
-        iv[0] ++;
+        iv[0]++;
         assertFalse("The change of returned array should not cause "
-                    + "the change of internal array", iv[0] == ivps.getIV()[0]);
+                + "the change of internal array", iv[0] == ivps.getIV()[0]);
     }
 
     public static Test suite() {

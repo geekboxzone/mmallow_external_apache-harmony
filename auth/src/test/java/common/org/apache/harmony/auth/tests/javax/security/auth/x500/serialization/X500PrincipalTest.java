@@ -16,13 +16,13 @@
  */
 
 /**
-* @author Alexander V. Esin
-*/
+ * @author Alexander V. Esin
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.x500.serialization;
 
 
-import javax.security.auth.x500.X500Principal; 
+import javax.security.auth.x500.X500Principal;
 
 import org.apache.harmony.testframework.serialization.SerializationTest;
 
@@ -33,8 +33,8 @@ public class X500PrincipalTest extends SerializationTest {
 
     @Override
     protected Object[] getData() {
-        return new Object[] {new X500Principal("CN=A"),
+        return new Object[] { new X500Principal("CN=A"),
                 new X500Principal("CN=A, C=B"),
-                new X500Principal("CN=A, CN=B + C=C")};
+                new X500Principal("CN=A, CN=B + C=C") };
     }
 }

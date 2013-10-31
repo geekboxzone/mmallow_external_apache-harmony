@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander V. Astapchuk
-*/
+ * @author Alexander V. Astapchuk
+ */
 
 package org.apache.harmony.security.tests.java.security.serialization;
 
@@ -31,7 +31,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Serialization tests for <code>AccessControlException</code>
- *
  */
 
 public class AccessControlExceptionTest extends SerializationTest implements

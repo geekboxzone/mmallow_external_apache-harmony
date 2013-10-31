@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.callback;
 
@@ -65,9 +65,9 @@ public class ChoiceCallbackTest extends TestCase {
         cb.setSelectedIndex(1);
         assertEquals(1, cb.getSelectedIndexes()[0]);
     }
-    
+
     public final void testChoiceCallback_03() {
-        
+
         try {
             cb = new ChoiceCallback(prompt, null, defaultChoice, true);
             fail("should be throw IllegalArgumentException");
@@ -110,24 +110,25 @@ public class ChoiceCallbackTest extends TestCase {
     }
 
     public final void testChoiceCallback_04() {
-        String[] ch = {null};
+        String[] ch = { null };
 
         try {
             cb = new ChoiceCallback(prompt, ch, 5, true);
             fail("should be throw IllegalArgumentException");
         } catch (IllegalArgumentException e) {
         }
-        
-        String[] ch1 = {""};
+
+        String[] ch1 = { "" };
 
         try {
             cb = new ChoiceCallback(prompt, ch1, 5, true);
             fail("should be throw IllegalArgumentException");
         } catch (IllegalArgumentException e) {
         }
-        
+
 
     }
+
     /**
      * test whether implementation is mutable
      */

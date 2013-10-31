@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.interfaces;
 
@@ -30,13 +30,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>RSAMultiPrimePrivateCrtKey</code> class field
- * 
  */
 public class RSAMultiPrimePrivateCrtKeyTest extends TestCase {
 
     /**
      * Constructor for RSAMultiPrimePrivateCrtKeyTest.
-     * 
+     *
      * @param arg0
      */
     public RSAMultiPrimePrivateCrtKeyTest(String arg0) {
@@ -52,46 +51,58 @@ public class RSAMultiPrimePrivateCrtKeyTest extends TestCase {
                 k.getSerVerUID(), //RSAMultiPrimePrivateCrtKey.serialVersionUID
                 618058533534628008L);
     }
-    
-    public class checkCrtKey  implements RSAMultiPrimePrivateCrtKey {
+
+    public class checkCrtKey implements RSAMultiPrimePrivateCrtKey {
         public BigInteger getModulus() {
             return null;
         }
+
         public BigInteger getPrivateExponent() {
             return null;
         }
+
         public BigInteger getCrtCoefficient() {
             return null;
         }
+
         public RSAOtherPrimeInfo[] getOtherPrimeInfo() {
             return null;
         }
+
         public BigInteger getPrimeP() {
             return null;
         }
+
         public BigInteger getPrimeQ() {
             return null;
         }
+
         public BigInteger getPrimeExponentP() {
             return null;
         }
+
         public BigInteger getPrimeExponentQ() {
             return null;
         }
+
         public BigInteger getPublicExponent() {
             return null;
         }
+
         public String getAlgorithm() {
             return "ECPublicKey";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return new byte[0];
-        }        
+        }
+
         public long getSerVerUID() {
             return serialVersionUID;
-        }        
+        }
     }
 }

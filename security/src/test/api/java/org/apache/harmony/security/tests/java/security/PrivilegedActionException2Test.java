@@ -22,28 +22,28 @@ import java.security.PrivilegedActionException;
 
 public class PrivilegedActionException2Test extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.security.PrivilegedActionException#PrivilegedActionException(java.lang.Exception)
-	 */
-	public void test_ConstructorLjava_lang_Exception() {
-		Exception e = new Exception("test exception");
-		PrivilegedActionException pe = new PrivilegedActionException(e);
-		assertEquals("Did not encapsulate test exception!", e, pe
-				.getException());
+    /**
+     * @tests java.security.PrivilegedActionException#PrivilegedActionException(java.lang.Exception)
+     */
+    public void test_ConstructorLjava_lang_Exception() {
+        Exception e = new Exception("test exception");
+        PrivilegedActionException pe = new PrivilegedActionException(e);
+        assertEquals("Did not encapsulate test exception!", e, pe
+                .getException());
 
-		// try it with a null exception
-		pe = new PrivilegedActionException(null);
-		assertNull("Did not encapsulate null test exception properly!", pe
-				.getException());
-	}
+        // try it with a null exception
+        pe = new PrivilegedActionException(null);
+        assertNull("Did not encapsulate null test exception properly!", pe
+                .getException());
+    }
 
-	/**
-	 * @tests java.security.PrivilegedActionException#getException()
-	 */
-	public void test_getException() {
-		Exception e = new IOException("test IOException");
-		PrivilegedActionException pe = new PrivilegedActionException(e);
-		assertEquals("Did not encapsulate test IOException!", e, pe
-				.getException());
-	}
+    /**
+     * @tests java.security.PrivilegedActionException#getException()
+     */
+    public void test_getException() {
+        Exception e = new IOException("test IOException");
+        PrivilegedActionException pe = new PrivilegedActionException(e);
+        assertEquals("Did not encapsulate test IOException!", e, pe
+                .getException());
+    }
 }

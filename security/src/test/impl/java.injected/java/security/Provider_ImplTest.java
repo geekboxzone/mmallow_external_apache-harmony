@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package java.security;
 
@@ -27,15 +27,14 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>Provider</code> constructor and methods
- * 
  */
 public class Provider_ImplTest extends TestCase {
 
     Provider p;
-    
+
     /*
-     * @see TestCase#setUp()
-     */
+    * @see TestCase#setUp()
+    */
     protected void setUp() throws Exception {
         super.setUp();
         p = new MyProvider();
@@ -48,7 +47,7 @@ public class Provider_ImplTest extends TestCase {
         assertEquals("Incorrect provider.toString()", "MyProvider version 1.0",
                 p.toString());
     }
- 
+
     public final void testImplementsAlg() {
         HashMap hm = new HashMap();
         hm.put("KeySize", "1024");
@@ -68,7 +67,7 @@ public class Provider_ImplTest extends TestCase {
         }
         if (!p.implementsAlg("Type", "Algorithm", "AAA", "BBB")) {
             fail("Case 3. implementsAlg failed");
-        }    
+        }
     }
 
     public final void testSetProviderNumber() {
@@ -78,7 +77,7 @@ public class Provider_ImplTest extends TestCase {
 
     public final void testGetProviderNumber() {
         assertEquals("Incorrect ProviderNumber", -1, p.getProviderNumber());
-        
+
         int i = Security.addProvider(p);
         assertEquals("Incorrect ProviderNumber", i, p.getProviderNumber());
         Security.removeProvider(p.getName());    // clean up
@@ -91,7 +90,7 @@ public class Provider_ImplTest extends TestCase {
             put("MessageDigest.abc", "SomeClassName");
             put("Alg.Alias.MessageDigest.SHA1", "SHA-1");
         }
-        
+
         MyProvider(String name, double version, String info) {
             super(name, version, info);
         }

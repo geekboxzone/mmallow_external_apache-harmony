@@ -23,7 +23,7 @@ public class URISyntaxExceptionTest extends junit.framework.TestCase {
 
     /**
      * @tests java.net.URISyntaxException#URISyntaxException(java.lang.String,
-     *        java.lang.String, int)
+     *java.lang.String, int)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_StringI() {
         try {
@@ -55,7 +55,7 @@ public class URISyntaxExceptionTest extends junit.framework.TestCase {
 
     /**
      * @tests java.net.URISyntaxException#URISyntaxException(java.lang.String,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_String() {
         try {

@@ -23,7 +23,7 @@ import java.util.prefs.Preferences;
 import junit.framework.TestCase;
 
 /**
- * 
+ *
  */
 public class PreferenceChangeListenerTest extends TestCase {
 
@@ -44,7 +44,7 @@ public class PreferenceChangeListenerTest extends TestCase {
     }
 
     public static class PreferenceChangeListenerImpl implements
-    PreferenceChangeListener {
+            PreferenceChangeListener {
         public void preferenceChange(PreferenceChangeEvent pce) {
         }
 

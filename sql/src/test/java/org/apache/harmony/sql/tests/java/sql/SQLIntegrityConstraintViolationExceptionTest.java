@@ -49,7 +49,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -83,11 +83,11 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING2", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING1", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -107,7 +107,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -123,7 +123,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getMessage());
@@ -152,7 +152,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int)
+     *int)
      */
     public void test_Constructor_LStringLStringI() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -161,11 +161,11 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING2", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING1", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 1",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 1);
@@ -173,7 +173,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int)
+     *int)
      */
     public void test_Constructor_LStringLStringI_1() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -182,11 +182,11 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING2", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING1", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -194,7 +194,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int)
+     *int)
      */
     public void test_Constructor_LStringLStringI_2() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -203,11 +203,11 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING2", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING1", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be -1",
                 sQLIntegrityConstraintViolationException.getErrorCode(), -1);
@@ -215,7 +215,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int)
+     *int)
      */
     public void test_Constructor_LStringLStringI_3() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -227,7 +227,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 1",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 1);
@@ -235,7 +235,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int)
+     *int)
      */
     public void test_Constructor_LStringLStringI_4() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -247,7 +247,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -255,7 +255,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int)
+     *int)
      */
     public void test_Constructor_LStringLStringI_5() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -267,7 +267,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be -1",
                 sQLIntegrityConstraintViolationException.getErrorCode(), -1);
@@ -275,7 +275,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int)
+     *int)
      */
     public void test_Constructor_LStringLStringI_6() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -284,7 +284,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getMessage());
@@ -295,7 +295,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int)
+     *int)
      */
     public void test_Constructor_LStringLStringI_7() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -304,7 +304,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getMessage());
@@ -315,7 +315,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int)
+     *int)
      */
     public void test_Constructor_LStringLStringI_8() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -324,7 +324,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getMessage());
@@ -335,7 +335,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int)
+     *int)
      */
     public void test_Constructor_LStringLStringI_9() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -354,7 +354,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int)
+     *int)
      */
     public void test_Constructor_LStringLStringI_10() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -373,7 +373,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int)
+     *int)
      */
     public void test_Constructor_LStringLStringI_11() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -436,7 +436,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLThrowable() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -446,7 +446,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertNull(
                 "The SQLState of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getSQLState());
@@ -460,7 +460,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLThrowable_1() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -469,7 +469,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertNull(
                 "The SQLState of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getSQLState());
@@ -483,7 +483,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLThrowable_2() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -503,7 +503,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLThrowable_3() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -525,7 +525,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -535,11 +535,11 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING2", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING1", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -550,7 +550,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_1() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -559,11 +559,11 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING2", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING1", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -574,7 +574,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_2() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -587,7 +587,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -598,7 +598,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_3() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -610,7 +610,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -621,7 +621,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_4() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -631,7 +631,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getMessage());
@@ -645,7 +645,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_5() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -654,7 +654,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getMessage());
@@ -668,7 +668,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_6() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -691,7 +691,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_7() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -713,7 +713,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -723,11 +723,11 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING2", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING1", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 1",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 1);
@@ -738,7 +738,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_1() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -747,11 +747,11 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING2", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING1", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 1",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 1);
@@ -762,7 +762,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_2() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -772,11 +772,11 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING2", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING1", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -787,7 +787,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_3() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -796,11 +796,11 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING2", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING1", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -811,7 +811,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_4() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -821,11 +821,11 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING2", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING1", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be -1",
                 sQLIntegrityConstraintViolationException.getErrorCode(), -1);
@@ -836,7 +836,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_5() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -845,11 +845,11 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING2", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING1", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be -1",
                 sQLIntegrityConstraintViolationException.getErrorCode(), -1);
@@ -861,7 +861,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_6() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -874,7 +874,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 1",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 1);
@@ -885,7 +885,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_7() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -898,7 +898,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 1",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 1);
@@ -909,7 +909,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_8() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -922,7 +922,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -933,7 +933,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_9() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -945,7 +945,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be 0",
                 sQLIntegrityConstraintViolationException.getErrorCode(), 0);
@@ -956,7 +956,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_10() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -969,7 +969,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be -1",
                 sQLIntegrityConstraintViolationException.getErrorCode(), -1);
@@ -980,7 +980,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_11() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -992,7 +992,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLIntegrityConstraintViolationException should be -1",
                 sQLIntegrityConstraintViolationException.getErrorCode(), -1);
@@ -1003,7 +1003,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_12() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1013,7 +1013,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getMessage());
@@ -1027,7 +1027,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_13() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -1036,7 +1036,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getMessage());
@@ -1050,7 +1050,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_14() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1060,7 +1060,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getMessage());
@@ -1074,7 +1074,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_15() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -1083,7 +1083,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getMessage());
@@ -1098,7 +1098,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_16() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1108,7 +1108,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getMessage());
@@ -1122,7 +1122,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_17() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -1131,7 +1131,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLIntegrityConstraintViolationException set and get should be equivalent",
                 "MYTESTSTRING", sQLIntegrityConstraintViolationException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLIntegrityConstraintViolationException should be null",
                 sQLIntegrityConstraintViolationException.getMessage());
@@ -1145,7 +1145,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_18() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1168,7 +1168,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_19() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -1190,7 +1190,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_20() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1213,7 +1213,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_21() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(
@@ -1235,7 +1235,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_22() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1258,7 +1258,7 @@ public class SQLIntegrityConstraintViolationExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLIntegrityConstraintViolationException(String, String,
-     *       int, Throwable)
+     *int, Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_23() {
         SQLIntegrityConstraintViolationException sQLIntegrityConstraintViolationException = new SQLIntegrityConstraintViolationException(

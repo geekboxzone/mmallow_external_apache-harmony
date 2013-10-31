@@ -177,7 +177,7 @@ public class ConstructorTest extends junit.framework.TestCase {
 
         assertEquals("improper instance created", 99, test.check());
     }
-    
+
     /**
      * @tests java.lang.reflect.Constructor#newInstance(java.lang.Object[])
      */
@@ -192,7 +192,7 @@ public class ConstructorTest extends junit.framework.TestCase {
             // Expected
         }
     }
-    
+
     public void test_newInstance_InvocationTargetException() throws Exception {
         Constructor constructor = MockObject.class.getConstructor(Class.class);
 
@@ -223,7 +223,7 @@ public class ConstructorTest extends junit.framework.TestCase {
         } catch (InvocationTargetException e) {
             // Expected
         }
-        
+
         try {
             constructor.newInstance(Throwable.class);
             fail("should throw InvocationTargetException");

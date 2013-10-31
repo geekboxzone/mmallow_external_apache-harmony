@@ -72,10 +72,12 @@ public class CertificateFactory4Test extends TestCase {
         try {
             fact.generateCertificate(is);
             fail("Test2: CertificateException not thrown");
-        } catch (CertificateException e) {} finally {
+        } catch (CertificateException e) {
+        } finally {
             try {
                 is.close();
-            } catch (IOException ignore) {}
+            } catch (IOException ignore) {
+            }
         }
     }
 
@@ -154,7 +156,7 @@ public class CertificateFactory4Test extends TestCase {
 
     /**
      * @tests java.security.cert.CertificateFactory#getInstance(java.lang.String,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_getInstanceLjava_lang_StringLjava_lang_String()
             throws Exception {
@@ -195,7 +197,7 @@ public class CertificateFactory4Test extends TestCase {
 
     /**
      * @tests java.security.cert.CertificateFactory#generateCRLs(InputStream
-     *        inStream)
+     *inStream)
      */
     public void testGenerateCRLs2() throws Exception {
         // Regression for HARMONY-814
@@ -203,36 +205,39 @@ public class CertificateFactory4Test extends TestCase {
             CertificateFactory.getInstance("X.509").generateCRL(
                     (InputStream) null);
             fail("CRLException was not thrown");
-        } catch (CRLException e) {}
+        } catch (CRLException e) {
+        }
     }
 
     /**
      * @tests java.security.cert.CertificateFactory#generateCertificate(InputStream
-     *        inStream)
+     *inStream)
      */
     public void testGenerateCertificate() throws Exception {
         // Regression for HARMONY-814
         try {
             CertificateFactory.getInstance("X.509").generateCertificate(null);
             fail("CertificateException was not thrown");
-        } catch (CertificateException e) {}
+        } catch (CertificateException e) {
+        }
     }
 
     /**
      * @tests java.security.cert.CertificateFactory#generateCertificates(InputStream
-     *        inStream)
+     *inStream)
      */
     public void testGenerateCertificates2() throws Exception {
         // Regression for HARMONY-814
         try {
             CertificateFactory.getInstance("X.509").generateCertificates(null);
             fail("CertificateException was not thrown");
-        } catch (CertificateException e) {}
+        } catch (CertificateException e) {
+        }
     }
 
     /**
      * @tests java.security.cert.CertificateFactory#generateCertPath(InputStream
-     *        inStream, String encoding)
+     *inStream, String encoding)
      */
     public void testGenerateCertPath1() throws Exception {
         // Regression for HARMONY-814
@@ -240,12 +245,13 @@ public class CertificateFactory4Test extends TestCase {
             CertificateFactory.getInstance("X.509").generateCertPath(
                     (InputStream) null, "PkiPath");
             fail("CertificateException was not thrown");
-        } catch (CertificateException e) {}
+        } catch (CertificateException e) {
+        }
     }
 
     /**
      * @tests java.security.cert.CertificateFactory#generateCertPath(List<?
-     *        extends Certificate> certificates)
+     * extends Certificate> certificates)
      */
     public void testGenerateCertPath2() throws Exception {
         // Regression for HARMONY-814
@@ -253,12 +259,13 @@ public class CertificateFactory4Test extends TestCase {
             CertificateFactory.getInstance("X.509").generateCertPath(
                     (List) null);
             fail("NullPointerException was not thrown");
-        } catch (NullPointerException e) {}
+        } catch (NullPointerException e) {
+        }
     }
 
     /**
      * @tests java.security.cert.CertificateFactory#generateCertPath(InputStream
-     *        inStream)
+     *inStream)
      */
     public void testGenerateCertPath3() throws Exception {
         // Regression for HARMONY-814
@@ -266,12 +273,13 @@ public class CertificateFactory4Test extends TestCase {
             CertificateFactory.getInstance("X.509").generateCertPath(
                     (InputStream) null);
             fail("CertificateException was not thrown");
-        } catch (CertificateException e) {}
+        } catch (CertificateException e) {
+        }
     }
 
     /**
      * @tests java.security.cert.CertificateFactory#generateCRL(InputStream
-     *        inStream)
+     *inStream)
      */
     public void testGenerateCRL() throws Exception {
         // Regression for HARMONY-814
@@ -279,7 +287,8 @@ public class CertificateFactory4Test extends TestCase {
             CertificateFactory.getInstance("X.509").generateCRL(
                     (InputStream) null);
             fail("CRLException was not thrown");
-        } catch (CRLException e) {}
+        } catch (CRLException e) {
+        }
     }
 
     private static final String[] CERTIFICATES_ENCODED_X509 = {

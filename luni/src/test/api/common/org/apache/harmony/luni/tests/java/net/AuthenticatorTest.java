@@ -49,7 +49,7 @@ public class AuthenticatorTest extends TestCase {
             // correct
         }
         // Some old RIs throw IllegalArgumentException 
-		// Latest RIs throw NullPointerException.
+        // Latest RIs throw NullPointerException.
         try {
             Authenticator.RequestorType.valueOf(null);
             fail("Must throw an exception");
@@ -63,7 +63,7 @@ public class AuthenticatorTest extends TestCase {
     /**
      * @tests java.net.Authenticator.RequestorType#values()
      */
-    public void test_RequestorType_values() throws Exception {        
+    public void test_RequestorType_values() throws Exception {
         RequestorType[] rt = RequestorType.values();
         assertEquals(RequestorType.PROXY, rt[0]);
         assertEquals(RequestorType.SERVER, rt[1]);
@@ -94,9 +94,8 @@ public class AuthenticatorTest extends TestCase {
     }
 
     /**
-     * 
      * @tests java.net.Authenticator#
-     * 		requestPasswordAuthentication_String_InetAddress_int_String_String_String_URL_Authenticator_RequestorType()
+     * requestPasswordAuthentication_String_InetAddress_int_String_String_String_URL_Authenticator_RequestorType()
      */
     public void test_requestPasswordAuthentication_String_InetAddress_int_String_String_String_URL_Authenticator_RequestorType()
             throws UnknownHostException, MalformedURLException {
@@ -110,7 +109,6 @@ public class AuthenticatorTest extends TestCase {
     }
 
     /**
-     * 
      * @tests java.net.Authenticator#getRequestingURL()
      */
     public void test_getRequestingURL() throws Exception {
@@ -119,7 +117,6 @@ public class AuthenticatorTest extends TestCase {
     }
 
     /**
-     * 
      * @tests java.net.Authenticator#getRequestorType()
      */
     public void test_getRequestorType() throws Exception {

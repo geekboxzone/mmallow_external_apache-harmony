@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.support;
 
@@ -35,11 +35,10 @@ import javax.crypto.ShortBufferException;
 /**
  * Additional class for verification of KeyAgreementSpi
  * and KeyAgreement functionality
- * 
  */
 
 public class MyKeyAgreementSpi extends KeyAgreementSpi {
-    
+
     @Override
     protected Key engineDoPhase(Key key, boolean lastPhase)
             throws InvalidKeyException, IllegalStateException {

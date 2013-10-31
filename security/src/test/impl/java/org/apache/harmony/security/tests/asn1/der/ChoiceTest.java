@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Stepan M. Mishura
-*/
+ * @author Stepan M. Mishura
+ */
 
 package org.apache.harmony.security.tests.asn1.der;
 
@@ -96,7 +96,7 @@ public class ChoiceTest extends TestCase {
             // choice = SequenceOf (empty)
             { new ArrayList(), new byte[] { 0x30, 0x00 } },
 
-    //TODO add testcase for another ASN.1 type`
+            //TODO add testcase for another ASN.1 type`
 
     };
 
@@ -144,7 +144,7 @@ public class ChoiceTest extends TestCase {
         list.add(new byte[] { 0x09 });
 
         byte[] encoded = new byte[] {
-        // Sequence Of
+                // Sequence Of
                 0x30, 0x06,
                 // Boolean
                 0x01, 0x01, 0x00,
@@ -201,7 +201,7 @@ public class ChoiceTest extends TestCase {
                 ASN1Oid.getInstance(), // first
                 ASN1Boolean.getInstance(),// second: decoded component
                 ASN1Integer.getInstance() // third
-                }) {
+        }) {
 
             public Object getDecodedObject(BerInputStream in)
                     throws IOException {
@@ -222,7 +222,7 @@ public class ChoiceTest extends TestCase {
 
         ASN1Choice choice2 = new ASN1Choice(new ASN1Type[] { choice1, // first: decoded component
                 ASN1BitString.getInstance() // second
-                }) {
+        }) {
 
             public Object getDecodedObject(BerInputStream in)
                     throws IOException {
@@ -268,7 +268,7 @@ public class ChoiceTest extends TestCase {
         try {
             new ASN1Choice(new ASN1Type[] { choice1, //
                     ASN1Boolean.getInstance() // component to be checked
-                    }) {
+            }) {
 
                 public Object getObjectToEncode(Object obj) {
                     return obj;
@@ -286,7 +286,7 @@ public class ChoiceTest extends TestCase {
         try {
             new ASN1Choice(new ASN1Type[] { choice1,//
                     ASN1Any.getInstance() // component to be checked
-                    }) {
+            }) {
 
                 public Object getObjectToEncode(Object obj) {
                     return obj;
@@ -304,7 +304,7 @@ public class ChoiceTest extends TestCase {
         ASN1Choice choice2 = new ASN1Choice(new ASN1Type[] {
                 ASN1BitString.getInstance(), //
                 ASN1Boolean.getInstance() //component to be checked
-                }) {
+        }) {
 
             public Object getObjectToEncode(Object obj) {
                 return obj;

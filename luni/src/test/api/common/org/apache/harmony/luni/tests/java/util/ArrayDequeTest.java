@@ -608,7 +608,7 @@ public class ArrayDequeTest extends TestCase {
             fail("should throw ConcurrentModificationException");
         } catch (ConcurrentModificationException e) {
             // expected
-        }        
+        }
         result = testQue.iterator();
         assertEquals(testObjOne, result.next());
         assertEquals(testObjTwo, result.next());
@@ -642,15 +642,15 @@ public class ArrayDequeTest extends TestCase {
         ad = new ArrayDeque<Object>();
         // fill the array
         for (int i = 0; i < 5; ++i) {
-                ad.addLast(new Object());
+            ad.addLast(new Object());
         }
         iter = ad.iterator();
         for (int i = 0; i < 5; ++i) {
-                assertTrue(iter.hasNext());
-                iter.next();
+            assertTrue(iter.hasNext());
+            iter.next();
         }
         iter.remove();
-        
+
         ad = new ArrayDeque<Object>();
         // fill the array
         for (int i = 0; i < 16; ++i) {
@@ -686,13 +686,13 @@ public class ArrayDequeTest extends TestCase {
             // expected
         }
         assertTrue(testQue.add(testObjFour));
-        
+
         // a strange behavior here, RI's descendingIterator() and iterator() is
         // properly different. Notice spec: "The iterators returned by this
         // class's iterator method are fail-fast". RI shows descendingIterator()
         // is not an iterator method.
-        assertEquals(testObjLast,result.next());
-        
+        assertEquals(testObjLast, result.next());
+
         result = testQue.descendingIterator();
         assertEquals(testObjFour, result.next());
         assertEquals(testObjLast, result.next());
@@ -726,15 +726,15 @@ public class ArrayDequeTest extends TestCase {
         ad = new ArrayDeque<Object>();
         // fill the array
         for (int i = 0; i < 5; ++i) {
-                ad.addLast(new Object());
+            ad.addLast(new Object());
         }
         iter = ad.descendingIterator();
         for (int i = 0; i < 5; ++i) {
-                assertTrue(iter.hasNext());
-                iter.next();
+            assertTrue(iter.hasNext());
+            iter.next();
         }
         iter.remove();
-        
+
         ad = new ArrayDeque<Object>();
         // fill the array
         for (int i = 0; i < 16; ++i) {
@@ -868,7 +868,7 @@ public class ArrayDequeTest extends TestCase {
         } catch (NullPointerException e) {
             // expected
         }
-        
+
     }
 
     /**
@@ -890,7 +890,7 @@ public class ArrayDequeTest extends TestCase {
             assertEquals(testQue.remove(), cloned.remove());
         }
     }
-    
+
     /**
      * @tests java.util.ArrayDeque#Serialization()
      */
@@ -903,29 +903,29 @@ public class ArrayDequeTest extends TestCase {
         SerializationTest.verifySelf(testQue, new SerializableAssert() {
             public void assertDeserialized(Serializable initial,
                     Serializable deserialized) {
-                ArrayDeque<Object> formerQue = (ArrayDeque)initial;
-                ArrayDeque<Object> deserializedQue = (ArrayDeque)deserialized;
-                assertEquals(formerQue.remove(),deserializedQue.remove());
+                ArrayDeque<Object> formerQue = (ArrayDeque) initial;
+                ArrayDeque<Object> deserializedQue = (ArrayDeque) deserialized;
+                assertEquals(formerQue.remove(), deserializedQue.remove());
             }
         });
     }
-    
+
     /**
      * @tests serialization/deserialization compatibility with RI.
      */
-    @SuppressWarnings( { "unchecked", "boxing" })
+    @SuppressWarnings({ "unchecked", "boxing" })
     public void testSerializationCompatibility() throws Exception {
         assertTrue(testQue.add(new Integer(1)));
         assertTrue(testQue.add(new Integer(2)));
         assertTrue(testQue.add(new Integer(3)));
         assertTrue(testQue.add(new Integer(4)));
-        assertTrue(testQue.add(new Integer(5)));        
-        SerializationTest.verifyGolden(this,testQue, new SerializableAssert() {
+        assertTrue(testQue.add(new Integer(5)));
+        SerializationTest.verifyGolden(this, testQue, new SerializableAssert() {
             public void assertDeserialized(Serializable initial,
                     Serializable deserialized) {
-                ArrayDeque<Object> formerQue = (ArrayDeque)initial;
-                ArrayDeque<Object> deserializedQue = (ArrayDeque)deserialized;
-                assertEquals(formerQue.remove(),deserializedQue.remove());
+                ArrayDeque<Object> formerQue = (ArrayDeque) initial;
+                ArrayDeque<Object> deserializedQue = (ArrayDeque) deserialized;
+                assertEquals(formerQue.remove(), deserializedQue.remove());
             }
         });
     }

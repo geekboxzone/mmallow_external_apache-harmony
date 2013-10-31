@@ -38,16 +38,16 @@ public class GSSManagerTest extends TestCase {
         String oldProvider = Security.getProperty(GSSManager.MANAGER);
         try {
             Security.setProperty(GSSManager.MANAGER, TestManager.class
-                .getName());
+                    .getName());
             GSSManager m = GSSManager.getInstance();
             assertNotNull(m);
             assertEquals(TestManager.class.getName(), m.getClass().getName());
         } finally {
             Security.setProperty(GSSManager.MANAGER, (oldProvider == null) ? ""
-                : oldProvider);
+                    : oldProvider);
         }
     }
-    
+
     /**
      * Tests loading of a default provider with invalid class references.
      */
@@ -68,7 +68,7 @@ public class GSSManagerTest extends TestCase {
             }
         } finally {
             Security.setProperty(GSSManager.MANAGER, (oldProvider == null) ? ""
-                : oldProvider);
+                    : oldProvider);
         }
     }
 
@@ -80,39 +80,39 @@ public class GSSManagerTest extends TestCase {
 
         @Override
         public void addProviderAtFront(Provider p, Oid mech)
-            throws GSSException {
+                throws GSSException {
         }
 
         @Override
         public GSSContext createContext(byte[] interProcessToken)
-            throws GSSException {
+                throws GSSException {
             return null;
         }
 
         @Override
         public GSSContext createContext(GSSCredential myCred)
-            throws GSSException {
+                throws GSSException {
             return null;
         }
 
         @Override
         public GSSContext createContext(GSSName peer, Oid mech,
-                                        GSSCredential myCred, int lifetime)
-            throws GSSException {
+                GSSCredential myCred, int lifetime)
+                throws GSSException {
             return null;
         }
 
         @Override
         public GSSCredential createCredential(GSSName name, int lifetime,
-                                              Oid mech, int usage)
-            throws GSSException {
+                Oid mech, int usage)
+                throws GSSException {
             return null;
         }
 
         @Override
         public GSSCredential createCredential(GSSName name, int lifetime,
-                                              Oid[] mechs, int usage)
-            throws GSSException {
+                Oid[] mechs, int usage)
+                throws GSSException {
             return null;
         }
 
@@ -123,25 +123,25 @@ public class GSSManagerTest extends TestCase {
 
         @Override
         public GSSName createName(byte[] name, Oid nameType, Oid mech)
-            throws GSSException {
+                throws GSSException {
             return null;
         }
 
         @Override
         public GSSName createName(byte[] name, Oid nameType)
-            throws GSSException {
+                throws GSSException {
             return null;
         }
 
         @Override
         public GSSName createName(String nameStr, Oid nameType, Oid mech)
-            throws GSSException {
+                throws GSSException {
             return null;
         }
 
         @Override
         public GSSName createName(String nameStr, Oid nameType)
-            throws GSSException {
+                throws GSSException {
             return null;
         }
 

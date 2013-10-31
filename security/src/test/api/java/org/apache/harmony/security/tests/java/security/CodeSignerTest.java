@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Alexander V. Astapchuk
-*/
+ * @author Alexander V. Astapchuk
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.*;
 import java.security.cert.CertPath;
 import java.util.Date;
@@ -78,10 +79,10 @@ public class CodeSignerTest extends TestCase {
         assertFalse(three.equals(one));
         assertTrue(three.equals(three));
         // different CertPaths
-        assertFalse( three.equals(four));
+        assertFalse(three.equals(four));
         // special cases
-        assertFalse( one.equals(null) );
-        assertFalse( one.equals(new Object()) );
+        assertFalse(one.equals(null));
+        assertFalse(one.equals(new Object()));
     }
 
     /**

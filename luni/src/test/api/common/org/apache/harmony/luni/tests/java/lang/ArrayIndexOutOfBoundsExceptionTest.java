@@ -21,7 +21,7 @@ import junit.framework.TestCase;
 
 public class ArrayIndexOutOfBoundsExceptionTest extends TestCase {
 
-	/**
+    /**
      * @tests java.lang.ArrayIndexOutOfBoundsException#ArrayIndexOutOfBoundsException(int)
      */
     public void test_ConstructorI() {

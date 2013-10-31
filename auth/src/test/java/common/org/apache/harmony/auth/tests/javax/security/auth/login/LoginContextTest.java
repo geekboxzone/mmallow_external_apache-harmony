@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Stepan M. Mishura
-*/
+ * @author Stepan M. Mishura
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.login;
 
@@ -68,9 +68,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(java.lang.String)
-     * 
+     * <p/>
      * Parameters: valid app. name
-     * 
+     * <p/>
      * Expected: no exceptions
      */
     public final void testLC_String() throws Exception {
@@ -86,9 +86,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(java.lang.String)
-     * 
+     * <p/>
      * Parameters: invalid (null app. name)
-     * 
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_String_NullApp() {
@@ -102,9 +102,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(java.lang.String)
-     * 
+     * <p/>
      * Precondition: app. name absent in the current configuration
-     * 
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_String_NoApp() {
@@ -122,11 +122,11 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(java.lang.String)
-     * 
+     * <p/>
      * Precondition: configuration contains requested login module and
-     *             default callback handler is specified via security
-     *             property but its class is not accessible
-     * 
+     * default callback handler is specified via security
+     * property but its class is not accessible
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_String_InaccessibleCallbackHandler() {
@@ -148,12 +148,12 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(java.lang.String)
-     * 
+     * <p/>
      * Precondition: configuration contains requested login module and
-     *             default callback handler is specified via security
-     *             property but its class doesn't implement
-     *             CallbackHandler interface
-     * 
+     * default callback handler is specified via security
+     * property but its class doesn't implement
+     * CallbackHandler interface
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_String_InvalidCallbackHandler() throws Exception {
@@ -173,7 +173,7 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(java.lang.String)
-     * 
+     * <p/>
      * Expected: creation of default callback handler
      */
     public final void testLC_String_InitCallbackHandler() throws Exception {
@@ -196,13 +196,13 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(java.lang.String)
-     * 
+     * <p/>
      * Precondition: parameters for login module initialization
-     *               are created in the constructor above
-     * 
+     * are created in the constructor above
+     * <p/>
      * Expected: not null subject, null callback handler or
-     *           wrapped default callback handler, not null shared
-     *           state and not null options.
+     * wrapped default callback handler, not null shared
+     * state and not null options.
      */
     public final void testLC_String_LoginModuleInitialize() throws Exception {
 
@@ -261,9 +261,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, CallbackHandler)
-     * 
+     * <p/>
      * Parameters: are valid
-     * 
+     * <p/>
      * Expected: no exceptions
      */
     public final void testLC_StringCallbackHandler() throws Exception {
@@ -278,9 +278,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, CallbackHandler)
-     * 
+     * <p/>
      * Parameters: invalid (null app. name)
-     * 
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_StringCallbackHandler_NullApp() {
@@ -294,9 +294,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, CallbackHandler)
-     * 
+     * <p/>
      * Parameters: invalid (null callback handler)
-     * 
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_StringCallbackHandler_NullCallbackHandler() {
@@ -310,9 +310,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, CallbackHandler)
-     * 
+     * <p/>
      * Precondition: app. name absent in the current configuration
-     * 
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_StringCallbackHandler_NoApp() {
@@ -330,10 +330,10 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, CallbackHandler)
-     * 
+     * <p/>
      * Precondition: configuration contains requested login module and
-     *             default callback handler is specified via security property
-     *
+     * default callback handler is specified via security property
+     * <p/>
      * Expected: no default callback handler initialization
      */
     public final void testLC_StringCallbackHandler_NoInit() throws Exception {
@@ -356,12 +356,12 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, CallbackHandler)
-     * 
+     * <p/>
      * Precondition: parameters for login module initialization
-     *               are created in the constructor above
-     * 
+     * are created in the constructor above
+     * <p/>
      * Expected: not null subject, wrapped provided callback handler,
-     *           not null shared state and not null options.
+     * not null shared state and not null options.
      */
     public final void testLC_StringCallbackHandler_LoginModuleInitialize()
             throws Exception {
@@ -403,9 +403,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject)
-     * 
+     * <p/>
      * Parameters: are valid
-     * 
+     * <p/>
      * Expected: no exceptions
      */
     public final void testLC_StringSubject() throws Exception {
@@ -418,9 +418,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject)
-     * 
+     * <p/>
      * Parameters: invalid (null app. name)
-     * 
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_StringSubject_NullApp() {
@@ -434,9 +434,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject)
-     * 
+     * <p/>
      * Parameters: invalid (null subject)
-     * 
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_StringSubject_NullSubject() {
@@ -450,9 +450,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject)
-     * 
+     * <p/>
      * Precondition: app. name absent in the current configuration
-     * 
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_StringSubject_NoApp() throws Exception {
@@ -468,11 +468,11 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject)
-     * 
+     * <p/>
      * Precondition: configuration contains requested login module and
-     *             default callback handler is specified via security
-     *             property but its class is not accessible
-     * 
+     * default callback handler is specified via security
+     * property but its class is not accessible
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_StringSubject_InaccessibleCallbackHandler() {
@@ -494,7 +494,7 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject)
-     * 
+     * <p/>
      * Expected: creation of default callback handler
      */
     public final void testLC_StringSubject_InitCallbackHandler()
@@ -518,13 +518,13 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject)
-     * 
+     * <p/>
      * Precondition: parameters for login module initialization
-     *               are created in the constructor above
-     * 
+     * are created in the constructor above
+     * <p/>
      * Expected: provided subject, null callback handler or
-     *           wrapped default callback handler, not null shared
-     *           state and not null options.
+     * wrapped default callback handler, not null shared
+     * state and not null options.
      */
     public final void testLC_StringSubject_LoginModuleInitialize()
             throws Exception {
@@ -583,9 +583,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject, CallbackHandler)
-     * 
+     * <p/>
      * Parameters: are valid
-     * 
+     * <p/>
      * Expected: no exceptions
      */
     public final void testLC_StringSubjectCallbackHandler() throws Exception {
@@ -598,9 +598,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject, CallbackHandler)
-     * 
+     * <p/>
      * Parameters: invalid (null app. name)
-     * 
+     * <p/>
      * Expected: LoginException
      */
 
@@ -614,9 +614,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject, CallbackHandler)
-     * 
+     * <p/>
      * Parameters: invalid (null subject)
-     * 
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_StringSubjectCallbackHandler_NullSubject() {
@@ -629,9 +629,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject, CallbackHandler)
-     * 
+     * <p/>
      * Parameters: invalid (null callback handler)
-     * 
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_StringSubjectCallbackHandler_NullCallbackHandler() {
@@ -644,9 +644,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject, CallbackHandler)
-     * 
+     * <p/>
      * Precondition: app. name absent in the current configuration
-     * 
+     * <p/>
      * Expected: LoginException
      */
     public final void testLC_StringSubjectCallbackHandler_NoApp() {
@@ -664,12 +664,12 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Constructor: LoginContext(String, Subject, CallbackHandler)
-     * 
+     * <p/>
      * Precondition: parameters for login module initialization
-     *               are created in the constructor above
-     * 
+     * are created in the constructor above
+     * <p/>
      * Expected: provided subject, wrapped default callback handler,
-     *           not null shared state and not null options.
+     * not null shared state and not null options.
      */
 
     public final void testLC_StringSubjectCallbackHandler_LoginModuleInitialize()
@@ -712,9 +712,9 @@ public class LoginContextTest extends TestCase {
 
     /**
      * Method: LoginContext.login()
-     * 
-     * Precondition: returned list of login modules is empty  
-     * 
+     * <p/>
+     * Precondition: returned list of login modules is empty
+     * <p/>
      * Expected: LoginException
      */
     public final void testLogin_EmptyModulesList() throws Exception {
@@ -800,12 +800,13 @@ public class LoginContextTest extends TestCase {
             Configuration.setConfiguration(null); // reset default config
             try {
                 // Regression for HARMONY-771
-                new LoginContext("0"); 
+                new LoginContext("0");
                 fail("No expected SecurityException");
             } catch (SecurityException e) {
             }
         }
     }
+
     /**
      * @tests javax.security.auth.login.LoginContext.login()
      */
@@ -908,7 +909,7 @@ public class LoginContextTest extends TestCase {
 
         /**
          * Reset configuration.
-         * 
+         * <p/>
          * After invocation the configuration doesn't have login modules
          * and the method Configuration.getAppConfigurationEntry(String)
          * always returns null;

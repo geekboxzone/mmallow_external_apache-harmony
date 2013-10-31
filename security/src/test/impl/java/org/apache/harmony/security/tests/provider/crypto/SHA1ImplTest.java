@@ -63,60 +63,58 @@ public class SHA1ImplTest extends TestCase {
      */
     public final void testOneBlockMessage() {
 
-        int[] words = new int[INDEX +6];	// working array to compute hash
+        int[] words = new int[INDEX + 6];    // working array to compute hash
 
         // values defined in examples in Secure Hash Standard
-        int[] hash1 = {0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0 };
-        int[] hash  = {0xA9993E36, 0x4706816A, 0xBA3E2571, 0x7850C26C, 0x9CD0D89D };
+        int[] hash1 = { 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0 };
+        int[] hash = { 0xA9993E36, 0x4706816A, 0xBA3E2571, 0x7850C26C, 0x9CD0D89D };
 
-        for (int i = 0; i < words.length; i++ ) {
+        for (int i = 0; i < words.length; i++) {
             words[i] = 0;
         }
-        words[0]  = 0x61626380;    // constants from Secure Hash Standard
+        words[0] = 0x61626380;    // constants from Secure Hash Standard
         words[15] = 0x00000018;
 
         alternateHash(words, hash1);
 
 
-        md.update(new byte[]{0x61,0x62,0x63});
+        md.update(new byte[] { 0x61, 0x62, 0x63 });
         byte[] dgst = md.digest();
 
-        for ( int k = 0; k < 5; k++ ) {
-            int i = k*4;
+        for (int k = 0; k < 5; k++) {
+            int i = k * 4;
 
-            int j = ((dgst[i  ]&0xff)<<24) | ((dgst[i+1]&0xff)<<16) |
-                    ((dgst[i+2]&0xff)<<8 ) | (dgst[i+3]&0xff)  ;
+            int j = ((dgst[i] & 0xff) << 24) | ((dgst[i + 1] & 0xff) << 16) |
+                    ((dgst[i + 2] & 0xff) << 8) | (dgst[i + 3] & 0xff);
 
             assertTrue("false1: k=" + k + " hash1[k]=" + Integer.toHexString(hash1[k]),
-                       hash[k] == hash1[k] );
+                    hash[k] == hash1[k]);
 
-            assertTrue("false2: k=" + k + " j=" + Integer.toHexString(j), hash[k] == j );
+            assertTrue("false2: k=" + k + " j=" + Integer.toHexString(j), hash[k] == j);
         }
     }
 
 
-
-
     /*
-     * The test checks out that SHA1Impl computes correct value
-     * if data supplied takes exactly fourteen words of sixteen word buffer.
-     */
+    * The test checks out that SHA1Impl computes correct value
+    * if data supplied takes exactly fourteen words of sixteen word buffer.
+    */
     public final void testMultiBlockMessage() throws UnsupportedEncodingException {
 
         // values defined in examples in Secure Hash Standard
-        int[] hash  = {0x84983e44, 0x1c3bd26e, 0xbaae4aa1, 0xf95129e5, 0xe54670f1 };
+        int[] hash = { 0x84983e44, 0x1c3bd26e, 0xbaae4aa1, 0xf95129e5, 0xe54670f1 };
 
         // string defined in examples in Secure Hash Standard
         md.update("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq".getBytes("UTF-8"));
         byte[] dgst = md.digest();
 
-        for ( int k = 0; k < 5; k++ ) {
-            int i = k*4;
+        for (int k = 0; k < 5; k++) {
+            int i = k * 4;
 
-                int j = ((dgst[i  ]&0xff)<<24) | ((dgst[i+1]&0xff)<<16) |
-                        ((dgst[i+2]&0xff)<<8 ) | (dgst[i+3]&0xff)  ;
+            int j = ((dgst[i] & 0xff) << 24) | ((dgst[i + 1] & 0xff) << 16) |
+                    ((dgst[i + 2] & 0xff) << 8) | (dgst[i + 3] & 0xff);
 
-            assertTrue("false: k=" + k + " j=" + Integer.toHexString(j), hash[k] == j );
+            assertTrue("false: k=" + k + " j=" + Integer.toHexString(j), hash[k] == j);
         }
     }
 
@@ -128,33 +126,33 @@ public class SHA1ImplTest extends TestCase {
     public final void testLongMessage() {
 
         // values defined in examples in Secure Hash Standard
-        int[] hash  = {0x34aa973c, 0xd4c4daa4, 0xf61eeb2b, 0xdbad2731, 0x6534016f };
+        int[] hash = { 0x34aa973c, 0xd4c4daa4, 0xf61eeb2b, 0xdbad2731, 0x6534016f };
 
-        byte msgs[][] = new byte[][] { {0x61},
-                                       {0x61, 0x61},
-                                       {0x61, 0x61, 0x61},
-                                       {0x61, 0x61, 0x61, 0x61} };
+        byte msgs[][] = new byte[][] { { 0x61 },
+                { 0x61, 0x61 },
+                { 0x61, 0x61, 0x61 },
+                { 0x61, 0x61, 0x61, 0x61 } };
 
-        int lngs[] = new int[]{1000000, 500000, 333333, 250000};
+        int lngs[] = new int[] { 1000000, 500000, 333333, 250000 };
 
-        for ( int n = 0; n < 4; n++ ) {
+        for (int n = 0; n < 4; n++) {
 
-            for ( int i = 0; i < lngs[n]; i++) {
+            for (int i = 0; i < lngs[n]; i++) {
                 md.update(msgs[n]);
             }
-            if ( n == 2 ) {
+            if (n == 2) {
                 md.update(msgs[0]);
             }
 
             byte[] dgst = md.digest();
-            for ( int k = 0; k < 5; k++ ) {
-                int i = k*4;
+            for (int k = 0; k < 5; k++) {
+                int i = k * 4;
 
-                int j = ((dgst[i  ]&0xff)<<24) | ((dgst[i+1]&0xff)<<16) |
-                        ((dgst[i+2]&0xff)<<8 ) | (dgst[i+3]&0xff)  ;
+                int j = ((dgst[i] & 0xff) << 24) | ((dgst[i + 1] & 0xff) << 16) |
+                        ((dgst[i + 2] & 0xff) << 8) | (dgst[i + 3] & 0xff);
 
                 assertTrue("false: n =" + n + "  k=" + k + " j" + Integer.toHexString(j),
-                            hash[k] == j );
+                        hash[k] == j);
             }
         }
     }
@@ -168,36 +166,36 @@ public class SHA1ImplTest extends TestCase {
         // constants defined in Secure Hash Standard
         final int[] K = {
 
-            0x5A827999, 0x5A827999, 0x5A827999, 0x5A827999,
-            0x5A827999, 0x5A827999, 0x5A827999, 0x5A827999,
-            0x5A827999, 0x5A827999, 0x5A827999, 0x5A827999,
-            0x5A827999, 0x5A827999, 0x5A827999, 0x5A827999,
-            0x5A827999, 0x5A827999, 0x5A827999, 0x5A827999,
+                0x5A827999, 0x5A827999, 0x5A827999, 0x5A827999,
+                0x5A827999, 0x5A827999, 0x5A827999, 0x5A827999,
+                0x5A827999, 0x5A827999, 0x5A827999, 0x5A827999,
+                0x5A827999, 0x5A827999, 0x5A827999, 0x5A827999,
+                0x5A827999, 0x5A827999, 0x5A827999, 0x5A827999,
 
-            0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1,
-            0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1,
-            0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1,
-            0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1,
-            0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1,
+                0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1,
+                0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1,
+                0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1,
+                0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1,
+                0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1, 0x6ED9EBA1,
 
-            0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC,
-            0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC,
-            0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC,
-            0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC,
-            0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC,
+                0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC,
+                0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC,
+                0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC,
+                0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC,
+                0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC, 0x8F1BBCDC,
 
-            0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6,
-            0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6,
-            0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6,
-            0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6,
-            0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6
+                0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6,
+                0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6,
+                0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6,
+                0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6,
+                0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6, 0xCA62C1D6
         };
 
-        int  a = hash[0]; //0x67452301 ;
-        int  b = hash[1]; //0xEFCDAB89 ;
-        int  c = hash[2]; //0x98BADCFE ;
-        int  d = hash[3]; //0x10325476 ;
-        int  e = hash[4]; //0xC3D2E1F0 ;
+        int a = hash[0]; //0x67452301 ;
+        int b = hash[1]; //0xEFCDAB89 ;
+        int c = hash[2]; //0x98BADCFE ;
+        int d = hash[3]; //0x10325476 ;
+        int e = hash[4]; //0xC3D2E1F0 ;
 
         // implementation constant and variables
 
@@ -207,32 +205,32 @@ public class SHA1ImplTest extends TestCase {
         int tmp;
 
         // computation defined in Secure Hash Standard
-        for ( int t = 0 ; t < 80 ; t++ ) {
+        for (int t = 0; t < 80; t++) {
 
             s = t & MASK;
 
-            if ( t >= 16) {
+            if (t >= 16) {
 
-                tmp = bufW[ (s+13)&MASK ] ^ bufW[(s+8)&MASK ] ^ bufW[ (s+2)&MASK ] ^ bufW[s];
-                bufW[s] = ( tmp<<1 ) | ( tmp>>>31 );
+                tmp = bufW[(s + 13) & MASK] ^ bufW[(s + 8) & MASK] ^ bufW[(s + 2) & MASK] ^ bufW[s];
+                bufW[s] = (tmp << 1) | (tmp >>> 31);
             }
 
-            temp = ( a << 5 ) | ( a >>> 27 );
+            temp = (a << 5) | (a >>> 27);
 
-            if ( t < 20 ) {
-                temp += ( b & c ) | ( (~b) & d ) ;
-            } else if ( t < 40 ) {
-                temp += b ^ c ^ d ;
-            } else if ( t < 60 ) {
-                temp += ( b & c ) | ( b & d ) | ( c & d ) ;
+            if (t < 20) {
+                temp += (b & c) | ((~b) & d);
+            } else if (t < 40) {
+                temp += b ^ c ^ d;
+            } else if (t < 60) {
+                temp += (b & c) | (b & d) | (c & d);
             } else {
-                temp += b ^ c ^ d ;
+                temp += b ^ c ^ d;
             }
 
-            temp += e + bufW[s] + K[t] ;
+            temp += e + bufW[s] + K[t];
             e = d;
             d = c;
-            c = ( b<<30 ) | ( b>>>2 ) ;
+            c = (b << 30) | (b >>> 2);
             b = a;
             a = temp;
         }
@@ -248,4 +246,4 @@ public class SHA1ImplTest extends TestCase {
         return new TestSuite(SHA1ImplTest.class);
     }
 
- }
+}

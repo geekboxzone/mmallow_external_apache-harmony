@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -51,12 +51,12 @@ import org.apache.harmony.security.tests.support.tmpCallbackHandler;
  */
 public class KSBuilder_ImplTest extends TestCase {
 
-    private static char[] pass =  {'s','t','o','r','e','p','w','d'};
-    
+    private static char[] pass = { 's', 't', 'o', 'r', 'e', 'p', 'w', 'd' };
+
     private KeyStore.PasswordProtection protPass = new KeyStore.PasswordProtection(pass);
     private tmpCallbackHandler tmpCall = new tmpCallbackHandler();
     private KeyStore.CallbackHandlerProtection callbackHand = new KeyStore.CallbackHandlerProtection(tmpCall);
-    private myProtectionParameter myProtParam = new myProtectionParameter(new byte[5]);  
+    private myProtectionParameter myProtParam = new myProtectionParameter(new byte[5]);
     public static String[] validValues = KeyStoreTestSupport.validValues;
 
     private static String defaultType = KeyStoreTestSupport.defaultType;
@@ -64,7 +64,7 @@ public class KSBuilder_ImplTest extends TestCase {
     private static boolean JKSSupported = false;
 
     private static Provider defaultProvider = null;
-    
+
     static {
         defaultProvider = SpiEngUtils.isSupport(
                 KeyStoreTestSupport.defaultType, KeyStoreTestSupport.srvKeyStore);
@@ -133,7 +133,7 @@ public class KSBuilder_ImplTest extends TestCase {
 
         KeyStore.PasswordProtection protPass1 = new KeyStore.PasswordProtection(
                 pass);
-        KeyStore.ProtectionParameter [] pp = { protPass, protPass1,
+        KeyStore.ProtectionParameter[] pp = { protPass, protPass1,
                 callbackHand, myProtParam };
         TestKeyPair tkp = new TestKeyPair("DSA");
         Certificate certs[] = {
@@ -191,45 +191,45 @@ public class KSBuilder_ImplTest extends TestCase {
                     .getProtectionParameter("aaa");
 
             switch (i) {
-            case 0:
-                assertTrue(pPar instanceof KeyStore.PasswordProtection);
-                break;
-            case 1:
-                assertTrue(pPar instanceof KeyStore.PasswordProtection);
-                break;
-            case 2:
-                assertTrue(pPar instanceof KeyStore.CallbackHandlerProtection);
-                break;
-            case 3:
-                assertTrue(pPar instanceof myProtectionParameter);
-                break;
-            default:
-                fail("Incorrect protection parameter");
+                case 0:
+                    assertTrue(pPar instanceof KeyStore.PasswordProtection);
+                    break;
+                case 1:
+                    assertTrue(pPar instanceof KeyStore.PasswordProtection);
+                    break;
+                case 2:
+                    assertTrue(pPar instanceof KeyStore.CallbackHandlerProtection);
+                    break;
+                case 3:
+                    assertTrue(pPar instanceof myProtectionParameter);
+                    break;
+                default:
+                    fail("Incorrect protection parameter");
             }
             assertEquals(pPar, pp[i]);
         }
     }
-    
+
     /*
-     * Test for methods:
-     * <code>newInstance(String type, Provider provider, File file, 
-     * ProtectionParameter protectionParameter)</code>
-     * <code>getKeyStore()</code>
-     * <code>getProtectionParameter(String alias)</code>
-     * Assertions:
-     * throws NullPointerException if type, file or protectionParameter is null;
-     * throws IllegalArgumentException if file does not exist or is not file;
-     * throws IllegalArgumentException if ProtectionParameter is not
-     * PasswordProtection or CallbackHandlerProtection;
-     * returns new object
-     * 
-     * getKeyStore() returns specified keystore;
-     * getProtectionParameter(String alias) 
-     * throws NullPointerException when alias is null;
-     * throws KeyStoreException when alias is not available;
-     * returns ProtectionParameter which is used in newInstance(...) 
-     * 
-     */
+    * Test for methods:
+    * <code>newInstance(String type, Provider provider, File file,
+    * ProtectionParameter protectionParameter)</code>
+    * <code>getKeyStore()</code>
+    * <code>getProtectionParameter(String alias)</code>
+    * Assertions:
+    * throws NullPointerException if type, file or protectionParameter is null;
+    * throws IllegalArgumentException if file does not exist or is not file;
+    * throws IllegalArgumentException if ProtectionParameter is not
+    * PasswordProtection or CallbackHandlerProtection;
+    * returns new object
+    *
+    * getKeyStore() returns specified keystore;
+    * getProtectionParameter(String alias)
+    * throws NullPointerException when alias is null;
+    * throws KeyStoreException when alias is not available;
+    * returns ProtectionParameter which is used in newInstance(...)
+    *
+    */
     public void testNewInstanceStringProviderFileProtectionParameter()
             throws Exception {
         if (!JKSSupported) {
@@ -292,7 +292,7 @@ public class KSBuilder_ImplTest extends TestCase {
         }
 
         fl = createKS();
-        KeyStore.ProtectionParameter [] pp = { myPP, protPass, callbackHand };
+        KeyStore.ProtectionParameter[] pp = { myPP, protPass, callbackHand };
         for (int i = 0; i < pp.length; i++) {
             if (i == 0) {
                 try {
@@ -365,23 +365,23 @@ public class KSBuilder_ImplTest extends TestCase {
             }
         }
     }
-    
+
     /*
-     * Test for method:
-     * <code>newInstance(String type, Provider provider,  
-     * ProtectionParameter protectionParameter)</code>
-     * <code>getKeyStore()</code>
-     * <code>getProtectionParameter(String alias)</code>
-     * Assertions:
-     * throws NullPointerException if type, or protectionParameter is null;
-     * returns new object
-     * 
-     * getKeyStore() returns empty keystore
-     * getProtectionParameter(String alias) 
-     * throws NullPointerException when alias is null;
-     * throws KeyStoreException when alias is not available
-     * 
-     */
+    * Test for method:
+    * <code>newInstance(String type, Provider provider,
+    * ProtectionParameter protectionParameter)</code>
+    * <code>getKeyStore()</code>
+    * <code>getProtectionParameter(String alias)</code>
+    * Assertions:
+    * throws NullPointerException if type, or protectionParameter is null;
+    * returns new object
+    *
+    * getKeyStore() returns empty keystore
+    * getProtectionParameter(String alias)
+    * throws NullPointerException when alias is null;
+    * throws KeyStoreException when alias is not available
+    *
+    */
     public void testNewInstanceStringProviderProtectionParameter()
             throws KeyStoreException {
         if (!JKSSupported) {
@@ -401,7 +401,7 @@ public class KSBuilder_ImplTest extends TestCase {
         } catch (NullPointerException e) {
         }
         myProtectionParameter myPP = new myProtectionParameter(new byte[5]);
-        KeyStore.ProtectionParameter [] pp = { protPass, myPP, callbackHand };
+        KeyStore.ProtectionParameter[] pp = { protPass, myPP, callbackHand };
         KeyStore.Builder ksB, ksB1;
         KeyStore ks = null;
         for (int i = 0; i < pp.length; i++) {
@@ -409,86 +409,86 @@ public class KSBuilder_ImplTest extends TestCase {
                     pp[i]);
             ksB1 = KeyStore.Builder.newInstance(defaultType, null, pp[i]);
             switch (i) {
-            case 0:
-                try {
-                    ks = ksB.getKeyStore();
-                    assertNotNull("KeyStore is null", ks);
-                    try {
-                        assertEquals(ksB.getProtectionParameter("Bad alias"),
-                                pp[i]);
-                    } catch (KeyStoreException e) {
-                        // KeyStoreException might be thrown because there is no entry with such alias
-                    }
-
-                    ks = ksB1.getKeyStore();
-                    assertNotNull("KeyStore is null", ks);
-
-                    try {
-                        assertEquals(ksB1.getProtectionParameter("Bad alias"),
-                                pp[i]);
-                    } catch (KeyStoreException e) {
-                        // KeyStoreException might be thrown because there is no entry with such alias
-                    }
-                } catch (KeyStoreException e) {
+                case 0:
                     try {
                         ks = ksB.getKeyStore();
-                    } catch (KeyStoreException e1) {
-                        assertEquals("Incorrect exception", e.getMessage(), e1
-                                .getMessage());
+                        assertNotNull("KeyStore is null", ks);
+                        try {
+                            assertEquals(ksB.getProtectionParameter("Bad alias"),
+                                    pp[i]);
+                        } catch (KeyStoreException e) {
+                            // KeyStoreException might be thrown because there is no entry with such alias
+                        }
+
+                        ks = ksB1.getKeyStore();
+                        assertNotNull("KeyStore is null", ks);
+
+                        try {
+                            assertEquals(ksB1.getProtectionParameter("Bad alias"),
+                                    pp[i]);
+                        } catch (KeyStoreException e) {
+                            // KeyStoreException might be thrown because there is no entry with such alias
+                        }
+                    } catch (KeyStoreException e) {
+                        try {
+                            ks = ksB.getKeyStore();
+                        } catch (KeyStoreException e1) {
+                            assertEquals("Incorrect exception", e.getMessage(), e1
+                                    .getMessage());
+                        }
                     }
-                }
-                break;
-            case 1:
-            case 2:
-                Exception ex1 = null;
-                Exception ex2 = null;
-                try {
-                    ks = ksB.getKeyStore();
-                } catch (KeyStoreException e) {
-                    ex1 = e;
-                }
-                try {
-                    ks = ksB.getKeyStore();
-                } catch (KeyStoreException e) {
-                    ex2 = e;
-                }
-                assertEquals("Incorrect exception", ex1.getMessage(), ex2
-                        .getMessage());
+                    break;
+                case 1:
+                case 2:
+                    Exception ex1 = null;
+                    Exception ex2 = null;
+                    try {
+                        ks = ksB.getKeyStore();
+                    } catch (KeyStoreException e) {
+                        ex1 = e;
+                    }
+                    try {
+                        ks = ksB.getKeyStore();
+                    } catch (KeyStoreException e) {
+                        ex2 = e;
+                    }
+                    assertEquals("Incorrect exception", ex1.getMessage(), ex2
+                            .getMessage());
 
 
-                try {
-                    ksB.getProtectionParameter("aaa");
-                    fail("IllegalStateException must be thrown because getKeyStore() was not invoked");
-                } catch (IllegalStateException e) {
-                }
+                    try {
+                        ksB.getProtectionParameter("aaa");
+                        fail("IllegalStateException must be thrown because getKeyStore() was not invoked");
+                    } catch (IllegalStateException e) {
+                    }
 
-                try {
-                    ks = ksB1.getKeyStore();
-                } catch (KeyStoreException e) {
-                    ex1 = e;
-                }
-                try {
-                    ks = ksB1.getKeyStore();
-                } catch (KeyStoreException e) {
-                    ex2 = e;
-                }
-                assertEquals("Incorrect exception", ex1.getMessage(), ex2
-                        .getMessage());
+                    try {
+                        ks = ksB1.getKeyStore();
+                    } catch (KeyStoreException e) {
+                        ex1 = e;
+                    }
+                    try {
+                        ks = ksB1.getKeyStore();
+                    } catch (KeyStoreException e) {
+                        ex2 = e;
+                    }
+                    assertEquals("Incorrect exception", ex1.getMessage(), ex2
+                            .getMessage());
 
 
-                try {
-                    ksB1.getProtectionParameter("aaa");
-                    fail("IllegalStateException must be thrown because getKeyStore() was not invoked");
-                } catch (IllegalStateException e) {
-                }
-                break;
+                    try {
+                        ksB1.getProtectionParameter("aaa");
+                        fail("IllegalStateException must be thrown because getKeyStore() was not invoked");
+                    } catch (IllegalStateException e) {
+                    }
+                    break;
 
             }
         }
     }
 
     /**
-     * Additional class for creation Certificate object 
+     * Additional class for creation Certificate object
      */
     public class MCertificate extends Certificate {
         private final byte[] encoding;
@@ -541,9 +541,9 @@ public class KSBuilder_ImplTest extends TestCase {
  * Additional class for creating KeyStoreBuilder
  */
 class myProtectionParameter implements KeyStore.ProtectionParameter {
-    public myProtectionParameter(byte [] param) {
+    public myProtectionParameter(byte[] param) {
         if (param == null) {
             throw new NullPointerException("param is null");
         }
-    }    
+    }
 }

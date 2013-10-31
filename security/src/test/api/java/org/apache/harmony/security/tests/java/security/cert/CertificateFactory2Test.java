@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -44,13 +44,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for CertificateFactory class constructors and methods
- * 
  */
 
 public class CertificateFactory2Test extends TestCase {
     private static final String defaultAlg = "CertFac";
     private static final String CertificateFactoryProviderClass = "org.apache.harmony.security.tests.support.cert.MyCertificateFactorySpi";
-    
+
     private static final String[] invalidValues = SpiEngUtils.invalidValues;
 
     private static final String[] validValues;
@@ -69,7 +68,7 @@ public class CertificateFactory2Test extends TestCase {
         super.setUp();
         mProv = (new SpiEngUtils()).new MyProvider("MyCFProvider",
                 "Provider for testing", CertificateFactory1Test.srvCertificateFactory
-                        .concat(".").concat(defaultAlg),
+                .concat(".").concat(defaultAlg),
                 CertificateFactoryProviderClass);
         Security.insertProviderAt(mProv, 1);
     }
@@ -84,7 +83,7 @@ public class CertificateFactory2Test extends TestCase {
 
     /**
      * Constructor for CertificateFactory2Test.
-     * 
+     *
      * @param arg0
      */
     public CertificateFactory2Test(String arg0) {
@@ -109,7 +108,7 @@ public class CertificateFactory2Test extends TestCase {
             }
         } catch (CertificateException e) {
             if (mode) {
-                fail("Unexpected CertificateFactoryException was thrown");                
+                fail("Unexpected CertificateFactoryException was thrown");
             }
         }
         try {
@@ -166,7 +165,7 @@ public class CertificateFactory2Test extends TestCase {
             if (mode) {
                 fail("NullPointerException must be thrown");
             } else {
-                assertNull("Must be null", cp);                
+                assertNull("Must be null", cp);
             }
         } catch (NullPointerException e) {
             if (!mode) {
@@ -177,14 +176,14 @@ public class CertificateFactory2Test extends TestCase {
         if (mode) {
             assertTrue(it.hasNext());
         } else {
-            assertFalse(it.hasNext());            
+            assertFalse(it.hasNext());
         }
     }
 
     /**
-     * Test for <code>getInstance(String type)</code> method 
+     * Test for <code>getInstance(String type)</code> method
      * Assertions:
-     * throws NullPointerException when type is null 
+     * throws NullPointerException when type is null
      * throws CertificateException when type is not available
      * returns CertificateFactory object
      */
@@ -214,11 +213,11 @@ public class CertificateFactory2Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String type, String provider)</code> method
-     * Assertions: 
-     * throws NullPointerException when type is null 
+     * Assertions:
+     * throws NullPointerException when type is null
      * throws CertificateException when type is not available
-     * throws IllegalArgumentException when provider is null or empty; 
-     * throws NoSuchProviderException when provider is available; 
+     * throws IllegalArgumentException when provider is null or empty;
+     * throws NoSuchProviderException when provider is available;
      * returns CertificateFactory object
      */
     public void GetInstance02(boolean mode) throws CertificateException,
@@ -278,11 +277,11 @@ public class CertificateFactory2Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String type, Provider provider)</code>
-     * method 
-     * Assertions: 
-     * throws NullPointerException when type is null 
+     * method
+     * Assertions:
+     * throws NullPointerException when type is null
      * throws CertificateException when type is not available
-     * throws IllegalArgumentException when provider is null; 
+     * throws IllegalArgumentException when provider is null;
      * returns CertificateFactory object
      */
     public void GetInstance03(boolean mode) throws CertificateException,
@@ -314,31 +313,36 @@ public class CertificateFactory2Test extends TestCase {
         for (int i = 0; i < validValues.length; i++) {
             cerF = CertificateFactory.getInstance(validValues[i], mProv);
             assertEquals("Incorrect type", cerF.getType(), validValues[i]);
-            assertEquals("Incorrect provider", cerF.getProvider(), mProv);            
-            checkResult(cerF,  mode);
+            assertEquals("Incorrect provider", cerF.getProvider(), mProv);
+            checkResult(cerF, mode);
         }
     }
-    
+
     public void testGetInstance01() throws CertificateException, CRLException {
-        GetInstance01(true);   
+        GetInstance01(true);
     }
+
     public void testGetInstance02() throws CertificateException,
-        NoSuchProviderException, IllegalArgumentException, CRLException {
-        GetInstance02(true);   
+            NoSuchProviderException, IllegalArgumentException, CRLException {
+        GetInstance02(true);
     }
+
     public void testGetInstance03() throws CertificateException,
-        IllegalArgumentException, CRLException {
-        GetInstance03(true);   
+            IllegalArgumentException, CRLException {
+        GetInstance03(true);
     }
+
     public void testGetInstance04() throws CertificateException, CRLException {
-        GetInstance01(false);   
+        GetInstance01(false);
     }
+
     public void testGetInstance05() throws CertificateException,
-        NoSuchProviderException, IllegalArgumentException, CRLException {
-        GetInstance02(false);   
+            NoSuchProviderException, IllegalArgumentException, CRLException {
+        GetInstance02(false);
     }
+
     public void testGetInstance06() throws CertificateException,
-        IllegalArgumentException, CRLException {
-        GetInstance03(false);   
+            IllegalArgumentException, CRLException {
+        GetInstance03(false);
     }
 }

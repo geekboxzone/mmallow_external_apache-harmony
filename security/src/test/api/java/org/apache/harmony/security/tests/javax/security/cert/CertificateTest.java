@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.security.tests.javax.security.cert;
 
@@ -51,14 +51,14 @@ public class CertificateTest extends TestCase {
 
         public void verify(PublicKey key)
                 throws CertificateException, NoSuchAlgorithmException,
-                       InvalidKeyException, NoSuchProviderException,
-                       SignatureException {
+                InvalidKeyException, NoSuchProviderException,
+                SignatureException {
         }
 
         public void verify(PublicKey key, String sigProvider)
                 throws CertificateException, NoSuchAlgorithmException,
-                       InvalidKeyException, NoSuchProviderException,
-                       SignatureException {
+                InvalidKeyException, NoSuchProviderException,
+                SignatureException {
         }
 
         public String toString() {
@@ -78,52 +78,52 @@ public class CertificateTest extends TestCase {
     public void testEquals() {
         TBTCert tbt_cert = new TBTCert() {
             public byte[] getEncoded() {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
 
         TBTCert tbt_cert_1 = new TBTCert() {
             public byte[] getEncoded() {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
 
         TBTCert tbt_cert_2 = new TBTCert() {
             public byte[] getEncoded() {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
 
         TBTCert tbt_cert_3 = new TBTCert() {
             public byte[] getEncoded() {
-                return new byte[] {3, 2, 1};
+                return new byte[] { 3, 2, 1 };
             }
         };
 
         // checking for reflexive law:
         assertTrue("The equivalence relation should be reflexive.",
-                                                tbt_cert.equals(tbt_cert));
+                tbt_cert.equals(tbt_cert));
 
         assertEquals("The Certificates with equal encoded form should be equal",
-                                                tbt_cert, tbt_cert_1);
+                tbt_cert, tbt_cert_1);
         // checking for symmetric law:
         assertTrue("The equivalence relation should be symmetric.",
-                                                tbt_cert_1.equals(tbt_cert));
+                tbt_cert_1.equals(tbt_cert));
 
         assertEquals("The Certificates with equal encoded form should be equal",
-                                                tbt_cert_1, tbt_cert_2);
+                tbt_cert_1, tbt_cert_2);
         // checking for transitive law:
         assertTrue("The equivalence relation should be transitive.",
-                                                tbt_cert.equals(tbt_cert_2));
+                tbt_cert.equals(tbt_cert_2));
 
         assertFalse("Should not be equal to null object.",
-                                                tbt_cert.equals(null));
+                tbt_cert.equals(null));
 
         assertFalse("The Certificates with differing encoded form "
-                    + "should not be equal", tbt_cert.equals(tbt_cert_3));
+                + "should not be equal", tbt_cert.equals(tbt_cert_3));
         assertFalse("The Certificates should not be equals to the object "
-                    + "which is not an instance of Certificate",
-                                                tbt_cert.equals(new Object()));
+                + "which is not an instance of Certificate",
+                tbt_cert.equals(new Object()));
     }
 
     /**
@@ -132,17 +132,17 @@ public class CertificateTest extends TestCase {
     public void testHashCode() {
         TBTCert tbt_cert = new TBTCert() {
             public byte[] getEncoded() {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
         TBTCert tbt_cert_1 = new TBTCert() {
             public byte[] getEncoded() {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
 
         assertTrue("Equal objects should have the same hash codes.",
-                                    tbt_cert.hashCode() == tbt_cert_1.hashCode());
+                tbt_cert.hashCode() == tbt_cert_1.hashCode());
     }
 
     public static Test suite() {

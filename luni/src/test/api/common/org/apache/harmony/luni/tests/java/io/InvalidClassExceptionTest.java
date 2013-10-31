@@ -41,7 +41,7 @@ public class InvalidClassExceptionTest extends TestCase {
 
     /**
      * @tests java.io.InvalidClassException#InvalidClassException(java.lang.String,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_String() {
         final String message = "A message";

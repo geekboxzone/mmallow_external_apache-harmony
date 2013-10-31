@@ -26,13 +26,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>DigitalSignature</code> constructor and methods
- *  
  */
 public class DigitalSignatureTest extends TestCase {
-    
+
     private PrivateKey key;
     private Certificate cert;
-    
+
     @Override
     public void setUp() throws Exception {
 
@@ -62,7 +61,7 @@ public class DigitalSignatureTest extends TestCase {
         byte[] pivateKeyEncoding = key.getEncoded();
         ds_sign.update(pivateKeyEncoding);
         byte[] hash = ds_sign.sign();
-        
+
         // verify
         byte[] md5_hash = new byte[16];
         byte[] sha_hash = new byte[20];
@@ -75,25 +74,25 @@ public class DigitalSignatureTest extends TestCase {
         ds_verify.init(cert);
         ds_verify.setMD5(md5_hash);
         ds_verify.setSHA(sha_hash);
-        
+
         assertTrue(ds_verify.verifySignature(hash));
     }
 
-    public void testDigitalSignature_2() throws Exception {      
+    public void testDigitalSignature_2() throws Exception {
 
         DigitalSignature ds_sign = new DigitalSignature(
                 CipherSuite.KeyExchange_RSA_EXPORT);
         DigitalSignature ds_verify = new DigitalSignature(
                 CipherSuite.KeyExchange_RSA_EXPORT);
         ds_sign.init(key);
-        
+
         byte[] md5_hash = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
                 14, 15, 16 };
         byte[] sha_hash = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
                 14, 15, 16, 17, 18, 19, 20 };
         ds_sign.setMD5(md5_hash);
-        ds_sign.setSHA(sha_hash);      
-        byte[] hash = ds_sign.sign();      
+        ds_sign.setSHA(sha_hash);
+        byte[] hash = ds_sign.sign();
 
         // verify
         ds_verify.init(cert);

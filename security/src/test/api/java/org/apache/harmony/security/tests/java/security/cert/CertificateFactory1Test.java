@@ -15,8 +15,8 @@
  *  limitations under the License.
  */
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -49,7 +49,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>CertificateFactory</code> class methods and constructor
- *
  */
 
 public class CertificateFactory1Test extends TestCase {
@@ -85,7 +84,8 @@ public class CertificateFactory1Test extends TestCase {
                 srvCertificateFactory);
         X509Support = (defaultProvider != null);
         defaultProviderName = (X509Support ? defaultProvider.getName() : null);
-        NotSupportMsg = defaultType.concat(" is not supported");    }
+        NotSupportMsg = defaultType.concat(" is not supported");
+    }
 
     private static CertificateFactory[] initCertFs() {
         if (!X509Support) {
@@ -359,7 +359,7 @@ public class CertificateFactory1Test extends TestCase {
         }
         CertificateFactory[] certFs = initCertFs();
         assertNotNull("CertificateFactory objects were not created", certFs);
-        byte [] bb = {};
+        byte[] bb = { };
         InputStream is = new ByteArrayInputStream(bb);
         Collection colCer;
         Collection colCrl;
@@ -407,7 +407,7 @@ public class CertificateFactory1Test extends TestCase {
             }
             is = new ByteArrayInputStream(bb);
             try {
-                 certFs[i].generateCRL(is);
+                certFs[i].generateCRL(is);
             } catch (CRLException e) {
             }
             is = new ByteArrayInputStream(bb);
@@ -679,6 +679,7 @@ public class CertificateFactory1Test extends TestCase {
     }
 
 }
+
 /**
  * Additional class to verify CertificateFactory constructor
  */

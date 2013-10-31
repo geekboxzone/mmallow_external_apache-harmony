@@ -55,7 +55,7 @@ public class KeyPairGenerator4Test extends junit.framework.TestCase {
 
     /**
      * @tests java.security.KeyPairGenerator#getInstance(java.lang.String,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_getInstanceLjava_lang_StringLjava_lang_String()
             throws Exception {
@@ -95,7 +95,7 @@ public class KeyPairGenerator4Test extends junit.framework.TestCase {
 
     /**
      * @tests java.security.KeyPairGenerator#initialize(int,
-     *        java.security.SecureRandom)
+     *java.security.SecureRandom)
      */
     public void test_initializeILjava_security_SecureRandom() throws Exception {
         KeyPairGenerator keyPair = KeyPairGenerator.getInstance("DSA");
@@ -122,7 +122,7 @@ public class KeyPairGenerator4Test extends junit.framework.TestCase {
 
     /**
      * @tests java.security.KeyPairGenerator#initialize(java.security.spec.AlgorithmParameterSpec,
-     *        java.security.SecureRandom)
+     *java.security.SecureRandom)
      */
     public void test_initializeLjava_security_spec_AlgorithmParameterSpecLjava_security_SecureRandom()
             throws Exception {

@@ -25,12 +25,11 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>HttpsURLConnection</code> class constructors and methods.
- * 
  */
 public class HttpsURLConnection_ImplTest extends TestCase {
 
     public final void testGetDefaultHostnameVerifier() {
-        
+
         HostnameVerifier ver = HttpsURLConnection.getDefaultHostnameVerifier();
         if (!(ver instanceof DefaultHostnameVerifier)) {
             fail("Incorrect instance");
@@ -41,7 +40,7 @@ public class HttpsURLConnection_ImplTest extends TestCase {
     }
 
     public final void testGetHostnameVerifier() {
-        
+
         HttpsURLConnection con = new MyHttpsURLConnection(null);
         HostnameVerifier ver = con.getHostnameVerifier();
         if (!(ver instanceof DefaultHostnameVerifier)) {

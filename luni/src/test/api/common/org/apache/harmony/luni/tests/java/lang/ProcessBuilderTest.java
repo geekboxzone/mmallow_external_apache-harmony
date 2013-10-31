@@ -47,12 +47,12 @@ public class ProcessBuilderTest extends TestCase {
 
         // Regression for HARMONY-2675
         pb = new ProcessBuilder("AAA");
-        pb.command("BBB","CCC");
+        pb.command("BBB", "CCC");
         List<String> list = pb.command();
         list.add("DDD");
         String[] command = new String[3];
         list.toArray(command);
-        assertTrue(Arrays.equals(new String[]{"BBB","CCC","DDD"}, command));
+        assertTrue(Arrays.equals(new String[] { "BBB", "CCC", "DDD" }, command));
     }
 
     public void testCommandStringArray() {
@@ -62,7 +62,7 @@ public class ProcessBuilderTest extends TestCase {
         assertEquals(1, pb.command().size());
         assertEquals("cmd", pb.command().get(0));
     }
-    
+
     public void testCommandListOfString() {
         ProcessBuilder pb = new ProcessBuilder("command");
         List<String> newCmd = new ArrayList<String>();
@@ -71,7 +71,7 @@ public class ProcessBuilderTest extends TestCase {
         assertSame(pb, pbReturn);
         assertEquals(1, pb.command().size());
         assertEquals("cmd", pb.command().get(0));
-        
+
         newCmd.add("arg");
         assertEquals(2, pb.command().size());
         assertEquals("cmd", pb.command().get(0));
@@ -89,7 +89,7 @@ public class ProcessBuilderTest extends TestCase {
         ProcessBuilder pbReturn = pb.directory(dir);
         assertSame(pb, pbReturn);
         assertEquals(dir, pb.directory());
-        
+
         pbReturn = pb.directory(null);
         assertSame(pb, pbReturn);
         assertNull(pb.directory());
@@ -103,13 +103,13 @@ public class ProcessBuilderTest extends TestCase {
         env = pb.environment();
         assertTrue(env.isEmpty());
         try {
-            env.put(null,"");
+            env.put(null, "");
             fail("should throw NPE.");
         } catch (NullPointerException e) {
             // expected;
         }
         try {
-            env.put("",null);
+            env.put("", null);
             fail("should throw NPE.");
         } catch (NullPointerException e) {
             // expected;

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.login;
 
@@ -40,7 +40,7 @@ public class CredentialExpiredExceptionTest extends TestCase {
 
     /**
      * @tests javax.security.auth.login.CredentialExpiredException#CredentialExpiredException(
-     *        java.lang.String)
+     *java.lang.String)
      */
     public final void testCtor2() {
         assertNull(new CredentialExpiredException(null).getMessage());

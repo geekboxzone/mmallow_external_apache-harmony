@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -29,7 +29,6 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>InvalidAlgorithmParameterException</code> class
  * constructors and methods.
- * 
  */
 public class InvalidAlgorithmParameterExceptionTest extends TestCase {
 
@@ -38,7 +37,7 @@ public class InvalidAlgorithmParameterExceptionTest extends TestCase {
 
     /**
      * Constructor for InvalidAlgorithmParameterExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public InvalidAlgorithmParameterExceptionTest(String arg0) {

@@ -21,28 +21,28 @@ import java.net.NetworkInterface;
 
 public class Support_NetworkInterface {
 
-	/**
-	 * On windows platforms with IPV6 enabled there are a number of pseudo
-	 * interfaces which don't work with our tests. This function is called to
-	 * make sure we only use the non-pseudo interfaces
-	 */
-	public static boolean useInterface(NetworkInterface theInterface) {
-		boolean result = true;
-		String platform = System.getProperty("os.name");
-		// only use these on windows platforms
-		if (platform.startsWith("Windows")) {
-			if ((theInterface.getDisplayName()
-					.equals("Teredo Tunneling Pseudo-Interface"))
-					|| (theInterface.getDisplayName()
-							.equals("6to4 Tunneling Pseudo-Interface"))
-					|| (theInterface.getDisplayName()
-							.equals("Automatic Tunneling Pseudo-Interface"))
-					|| (theInterface.getDisplayName()
-							.equals("Loopback Pseudo-Interface"))
-					|| (theInterface.getDisplayName().equals("MS TCP Loopback interface"))) {
-				result = false;
-			}
-		}
+    /**
+     * On windows platforms with IPV6 enabled there are a number of pseudo
+     * interfaces which don't work with our tests. This function is called to
+     * make sure we only use the non-pseudo interfaces
+     */
+    public static boolean useInterface(NetworkInterface theInterface) {
+        boolean result = true;
+        String platform = System.getProperty("os.name");
+        // only use these on windows platforms
+        if (platform.startsWith("Windows")) {
+            if ((theInterface.getDisplayName()
+                    .equals("Teredo Tunneling Pseudo-Interface"))
+                    || (theInterface.getDisplayName()
+                    .equals("6to4 Tunneling Pseudo-Interface"))
+                    || (theInterface.getDisplayName()
+                    .equals("Automatic Tunneling Pseudo-Interface"))
+                    || (theInterface.getDisplayName()
+                    .equals("Loopback Pseudo-Interface"))
+                    || (theInterface.getDisplayName().equals("MS TCP Loopback interface"))) {
+                result = false;
+            }
+        }
 
         if (platform.startsWith("Linux")) {
             if ((theInterface.getDisplayName().equals("lo"))
@@ -51,5 +51,5 @@ public class Support_NetworkInterface {
             }
         }
         return result;
-	}
+    }
 }

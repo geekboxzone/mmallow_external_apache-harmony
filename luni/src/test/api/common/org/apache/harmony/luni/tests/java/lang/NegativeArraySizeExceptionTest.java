@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class NegativeArraySizeExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.NegativeArraySizeException#NegativeArraySizeException()
-	 */
+    /**
+     * @tests java.lang.NegativeArraySizeException#NegativeArraySizeException()
+     */
     public void test_Constructor() {
         NegativeArraySizeException e = new NegativeArraySizeException();
         assertNull(e.getMessage());

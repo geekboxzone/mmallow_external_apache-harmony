@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.Key;
 
 import junit.framework.TestCase;
@@ -27,14 +28,13 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>Key</code> class field
- * 
  */
 
 public class KeyTest extends TestCase {
 
     /**
      * Constructor for KeyTest.
-     * 
+     *
      * @param arg0
      */
     public KeyTest(String arg0) {
@@ -49,17 +49,20 @@ public class KeyTest extends TestCase {
         assertEquals("Incorrect serialVersionUID", mk.getSerVerUID(), //Key.serialVersionUID,
                 6603384152749567654L);
     }
-    
+
     public class checkKey implements Key {
         public String getAlgorithm() {
             return "Key";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return new byte[0];
         }
+
         public long getSerVerUID() {
             return serialVersionUID;
         }

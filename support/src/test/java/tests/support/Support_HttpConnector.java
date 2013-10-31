@@ -24,24 +24,23 @@ import java.io.OutputStream;
 /**
  * This interface contains the basic methods necessary to open and use a
  * connection to an HTTP server.
- * 
  */
 public interface Support_HttpConnector {
 
-	public void open(String address) throws IOException;
+    public void open(String address) throws IOException;
 
-	public void close() throws IOException;
+    public void close() throws IOException;
 
-	public InputStream getInputStream() throws IOException;
+    public InputStream getInputStream() throws IOException;
 
-	public OutputStream getOutputStream() throws IOException;
+    public OutputStream getOutputStream() throws IOException;
 
-	public boolean isChunkedOnFlush();
+    public boolean isChunkedOnFlush();
 
-	public void setRequestProperty(String key, String value) throws IOException;
+    public void setRequestProperty(String key, String value) throws IOException;
 
-	public String getHeaderField(int index) throws IOException;
+    public String getHeaderField(int index) throws IOException;
 
-	public String getHeaderFieldKey(int index) throws IOException;
+    public String getHeaderFieldKey(int index) throws IOException;
 
 }

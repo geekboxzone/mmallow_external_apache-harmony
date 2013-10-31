@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -29,12 +29,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>DSAPublicKeySpec</code>
- * 
  */
 public class DSAPublicKeySpecTest extends TestCase {
 
     /**
      * Constructor for DSAPublicKeySpecTest.
+     *
      * @param name
      */
     public DSAPublicKeySpecTest(String name) {
@@ -50,12 +50,12 @@ public class DSAPublicKeySpecTest extends TestCase {
                 new BigInteger("2"), // p
                 new BigInteger("3"), // q
                 new BigInteger("4"));// g
-        
+
         assertTrue(ks instanceof DSAPublicKeySpec);
     }
 
     /**
-     * Test for <code>getG</code> method 
+     * Test for <code>getG</code> method
      */
     public final void testGetG() {
         DSAPublicKeySpec dpks = new DSAPublicKeySpec(
@@ -63,12 +63,12 @@ public class DSAPublicKeySpecTest extends TestCase {
                 new BigInteger("2"), // p
                 new BigInteger("3"), // q
                 new BigInteger("4"));// g
-        
+
         assertEquals(4, dpks.getG().intValue());
     }
 
     /**
-     * Test for <code>getP</code> method 
+     * Test for <code>getP</code> method
      */
     public final void testGetP() {
         DSAPublicKeySpec dpks = new DSAPublicKeySpec(
@@ -76,12 +76,12 @@ public class DSAPublicKeySpecTest extends TestCase {
                 new BigInteger("2"), // p
                 new BigInteger("3"), // q
                 new BigInteger("4"));// g
-        
+
         assertEquals(2, dpks.getP().intValue());
     }
 
     /**
-     * Test for <code>getQ</code> method 
+     * Test for <code>getQ</code> method
      */
     public final void testGetQ() {
         DSAPublicKeySpec dpks = new DSAPublicKeySpec(
@@ -89,12 +89,12 @@ public class DSAPublicKeySpecTest extends TestCase {
                 new BigInteger("2"), // p
                 new BigInteger("3"), // q
                 new BigInteger("4"));// g
-        
+
         assertEquals(3, dpks.getQ().intValue());
     }
 
     /**
-     * Test for <code>getY</code> method 
+     * Test for <code>getY</code> method
      */
     public final void testGetY() {
         DSAPublicKeySpec dpks = new DSAPublicKeySpec(
@@ -102,7 +102,7 @@ public class DSAPublicKeySpecTest extends TestCase {
                 new BigInteger("2"), // p
                 new BigInteger("3"), // q
                 new BigInteger("4"));// g
-        
+
         assertEquals(1, dpks.getY().intValue());
     }
 }

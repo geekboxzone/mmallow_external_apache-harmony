@@ -31,7 +31,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for SSLEngine class
- *
  */
 
 public class SSLEngineTest extends TestCase {
@@ -84,7 +83,7 @@ public class SSLEngineTest extends TestCase {
      * Assertions:
      * throws IllegalArgumentException when src or dst is null
      * throws ReadOnlyBufferException when dst is ReadOnly byte buffer
-     *
+     * <p/>
      * Check that implementation behavior follows RI:
      * jdk 1.5 does not throw IllegalArgumentException when parameters are null
      * and does not throw ReadOnlyBufferException if dst is read only byte buffer
@@ -107,11 +106,11 @@ public class SSLEngineTest extends TestCase {
 
     /**
      * Test for <code>wrap(ByteBuffer[] srcs, ByteBuffer dst)</code> method
-     *
+     * <p/>
      * Assertions: throws IllegalArgumentException when srcs or dst is null or
      * srcs contains null byte buffer; throws ReadOnlyBufferException when dst
      * is read only byte buffer
-     *
+     * <p/>
      * Check that implementation behavior follows RI:
      * jdk 1.5 does not throw IllegalArgumentException when dst is null or
      * if srcs contains null elements It does not throw ReadOnlyBufferException
@@ -147,7 +146,7 @@ public class SSLEngineTest extends TestCase {
     /**
      * Test for <code>wrap(ByteBuffer src, ByteBuffer dst)</code> and
      * <code>wrap(ByteBuffer[] srcs, ByteBuffer dst)</code> methods
-     *
+     * <p/>
      * Assertion: these methods throw SSLException
      */
     public void testWrap03() throws SSLException {
@@ -177,9 +176,8 @@ public class SSLEngineTest extends TestCase {
 
     /**
      * Test for <code>wrap(ByteBuffer src, ByteBuffer dst)</code> method
-     *
+     * <p/>
      * Assertion: encodes a buffer data into network data.
-     *
      */
     public void testWrap04() throws SSLException {
         String host = "new host";
@@ -194,7 +192,7 @@ public class SSLEngineTest extends TestCase {
 
     /**
      * Test for <code>wrap(ByteBuffer[] srcs, ByteBuffer dst)</code> method
-     *
+     * <p/>
      * Assertion: encodes datas from buffers into network data.
      */
     public void testWrap05() throws SSLException {
@@ -213,11 +211,11 @@ public class SSLEngineTest extends TestCase {
 
     /**
      * Test for <code>unwrap(ByteBuffer src, ByteBuffer dst)</code> method
-     *
+     * <p/>
      * Assertions:
      * throws IllegalArgumentException when src or dst is null
      * throws ReadOnlyBufferException when dst is read only byte buffer
-     *
+     * <p/>
      * Check that implementation behavior follows RI:
      * jdk 1.5 does not throw IllegalArgumentException when parameters are null
      * and does not throw ReadOnlyBufferException if dst is read only byte buffer
@@ -240,11 +238,11 @@ public class SSLEngineTest extends TestCase {
 
     /**
      * Test for <code>unwrap(ByteBuffer src, ByteBuffer[] dsts)</code> method
-     *
+     * <p/>
      * Assertions: throws IllegalArgumentException if parameters are null or
      * when dsts contains null elements throws ReadOnlyBufferException when dsts
      * contains read only elements
-     *
+     * <p/>
      * Check that implementation behavior follows RI:
      * jdk 1.5 does not throw IllegalArgumentException when src is null or
      * if dsts contains null elements It does not throw ReadOnlyBufferException
@@ -281,7 +279,7 @@ public class SSLEngineTest extends TestCase {
     /**
      * Test for <code>unwrap(ByteBuffersrc, ByteBuffer dst)</code> and
      * <code>unwrap(ByteBuffer src, ByteBuffer[] dsts)</code> methods
-     *
+     * <p/>
      * Assertion: these methods throw SSLException
      */
     public void testUnwrap03() throws SSLException {
@@ -309,7 +307,7 @@ public class SSLEngineTest extends TestCase {
 
     /**
      * Test for <code>unwrap(ByteBuffer src, ByteBuffer dst)</code> method
-     *
+     * <p/>
      * Assertion: decodes  network data into a data buffer.
      */
     public void testUnwrap04() throws SSLException {
@@ -325,7 +323,7 @@ public class SSLEngineTest extends TestCase {
 
     /**
      * Test for <code>unwrap(ByteBuffer src, ByteBuffer[] dsts)</code> method
-     *
+     * <p/>
      * Assertion:
      * decode network data into data buffers.
      */

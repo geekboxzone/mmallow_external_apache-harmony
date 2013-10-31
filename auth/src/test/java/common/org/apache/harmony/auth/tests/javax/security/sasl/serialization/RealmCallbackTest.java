@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.auth.tests.javax.security.sasl.serialization;
 
@@ -29,7 +29,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for RealmCallback serialization
- * 
  */
 
 public class RealmCallbackTest extends SerializationTest implements
@@ -40,16 +39,16 @@ public class RealmCallbackTest extends SerializationTest implements
             "Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string." };
 
     public static String addText = "This text was set to RealmCallback";
-    
+
     @Override
     protected Object[] getData() {
-        Object [] oo = {
+        Object[] oo = {
                 new RealmCallback(msgs[0], msgs[1]),
                 new RealmCallback(msgs[1], msgs[0]),
                 new RealmCallback(msgs[1], msgs[1])
         };
         for (Object element : oo) {
-            ((RealmCallback)element).setText(addText);
+            ((RealmCallback) element).setText(addText);
         }
         return oo;
     }

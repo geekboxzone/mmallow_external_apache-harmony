@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -33,7 +33,7 @@ import junit.framework.TestCase;
 
 /**
  * Test for EncryptedPrivateKeyInfo class.
- * 
+ * <p/>
  * All binary data for this test were generated using
  * BEA JRockit j2sdk1.4.2_04 (http://www.bea.com) with
  * security providers list extended by Bouncy Castle's one
@@ -47,7 +47,7 @@ public class EncryptedPrivateKeyInfo_ImplTest extends TestCase {
      * Test preconditions: test object created using ctor which takes encoded
      * form as the only parameter <br>
      * Expected: corresponding algorithm name must be returned
-     * 
+     *
      * @throws IOException
      */
     public final void testGetAlgName01() throws IOException {
@@ -73,7 +73,7 @@ public class EncryptedPrivateKeyInfo_ImplTest extends TestCase {
      * Test preconditions: test object created using ctor which takes algorithm
      * name and encrypted data as a parameters <br>
      * Expected: corresponding algorithm name must be returned
-     * 
+     *
      * @throws IOException
      */
     public final void testGetAlgName02() {
@@ -98,7 +98,7 @@ public class EncryptedPrivateKeyInfo_ImplTest extends TestCase {
      * Test preconditions: test object created using ctor which takes
      * AlgorithmParameters and encrypted data as a parameters <br>
      * Expected: corresponding algorithm name must be returned
-     * 
+     *
      * @throws IOException
      */
     public final void testGetAlgName03() throws IOException {

@@ -28,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>EllipticCurve</code> class fields and methods.
- * 
  */
 public class EllipticCurveTest extends TestCase {
 
@@ -84,7 +83,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b, seed);
             fail("#1: Expected NPE not thrown");
-        } catch (NullPointerException ok) {}
+        } catch (NullPointerException ok) {
+        }
 
         // test case 2 parameters set,
         f = new ECFieldFp(BigInteger.valueOf(23L));
@@ -95,7 +95,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b, seed);
             fail("#2: Expected NPE not thrown");
-        } catch (NullPointerException ok) {}
+        } catch (NullPointerException ok) {
+        }
 
         // test case 3 parameters set,
         f = new ECFieldFp(BigInteger.valueOf(23L));
@@ -106,7 +107,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b, seed);
             fail("#3: Expected NPE not thrown");
-        } catch (NullPointerException ok) {}
+        } catch (NullPointerException ok) {
+        }
     }
 
     /**
@@ -131,7 +133,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b, seed);
             fail("#1: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
 
         // test case 1.1 parameters set,
         // b is not in field
@@ -143,7 +146,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b, seed);
             fail("#1.1: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
 
         // test case 2 parameters set,
         // b is not in field
@@ -155,7 +159,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b, seed);
             fail("#2: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
 
         // test case 3 parameters set,
         // both a and b are not in field
@@ -167,7 +172,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b, seed);
             fail("#3: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
     }
 
     /**
@@ -192,7 +198,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b, seed);
             fail("#1: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
 
         // test case 2 parameters set,
         // b is not in field
@@ -204,7 +211,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b, seed);
             fail("#2: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
 
         // test case 3 parameters set,
         // both a and b are not in field
@@ -216,7 +224,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b, seed);
             fail("#3: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
     }
 
     /**
@@ -289,7 +298,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b);
             fail("#1: Expected NPE not thrown");
-        } catch (NullPointerException ok) {}
+        } catch (NullPointerException ok) {
+        }
 
         // test case 2 parameters set,
         f = new ECFieldFp(BigInteger.valueOf(23L));
@@ -299,7 +309,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b);
             fail("#2: Expected NPE not thrown");
-        } catch (NullPointerException ok) {}
+        } catch (NullPointerException ok) {
+        }
 
         // test case 3 parameters set,
         f = new ECFieldFp(BigInteger.valueOf(23L));
@@ -309,7 +320,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b);
             fail("#3: Expected NPE not thrown");
-        } catch (NullPointerException ok) {}
+        } catch (NullPointerException ok) {
+        }
     }
 
     /**
@@ -333,7 +345,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b);
             fail("#1: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
 
         // test case 1.1 parameters set,
         // a is not in field
@@ -344,7 +357,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b);
             fail("#1.1: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
 
         // test case 2 parameters set,
         // b is not in field
@@ -355,7 +369,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b);
             fail("#2: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
 
         // test case 3 parameters set,
         // both a and b are not in field
@@ -366,7 +381,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b);
             fail("#3: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
     }
 
     /**
@@ -389,7 +405,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b);
             fail("#1: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
 
         // test case 2 parameters set,
         // b is not in field
@@ -400,7 +417,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b);
             fail("#2: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
 
         // test case 3 parameters set,
         // both a and b are not in field
@@ -411,7 +429,8 @@ public class EllipticCurveTest extends TestCase {
         try {
             new EllipticCurve(f, a, b);
             fail("#3: Expected IAE not thrown");
-        } catch (IllegalArgumentException ok) {}
+        } catch (IllegalArgumentException ok) {
+        }
     }
 
     /**
@@ -594,9 +613,9 @@ public class EllipticCurveTest extends TestCase {
 
     /**
      * Test #1 for <code>hashCode()</code> method.<br>
-     *
+     * <p/>
      * Assertion: must return the same value if invoked
-     * repeatedly on the same object. 
+     * repeatedly on the same object.
      */
     public final void testHashCode01() {
         int hc = 0;
@@ -612,9 +631,9 @@ public class EllipticCurveTest extends TestCase {
 
     /**
      * Test #2 for <code>hashCode()</code> method.<br>
-     *
+     * <p/>
      * Assertion: must return the same value if invoked
-     * on equal (according to the <code>equals(Object)</code> method) objects. 
+     * on equal (according to the <code>equals(Object)</code> method) objects.
      */
     public final void testHashCode02() {
         assertEquals(new EllipticCurve(new ECFieldFp(BigInteger.valueOf(23L)),
@@ -637,7 +656,6 @@ public class EllipticCurveTest extends TestCase {
 
     /**
      * EllipticCurve subclass for testing purposes
-     * 
      */
     private static class MyEllipticCurve extends EllipticCurve {
 
