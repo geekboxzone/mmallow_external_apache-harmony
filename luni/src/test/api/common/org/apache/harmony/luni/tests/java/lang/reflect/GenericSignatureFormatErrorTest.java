@@ -23,7 +23,7 @@ public class GenericSignatureFormatErrorTest extends TestCase {
 
     /**
      * @tests java.lang.reflect.GenericSignatureFormatError#
-     *        GenericSignatureFormatError()
+     * GenericSignatureFormatError()
      */
     public void test_GenericSignatureFormatError() {
         GenericSignatureFormatError e = new GenericSignatureFormatError();

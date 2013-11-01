@@ -45,7 +45,7 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
 
     /**
      * @tests java.io.RandomAccessFile#RandomAccessFile(java.io.File,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_ConstructorLjava_io_FileLjava_lang_String()
             throws Exception {
@@ -83,7 +83,7 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
 
     /**
      * @tests java.io.RandomAccessFile#RandomAccessFile(java.lang.String,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_String()
             throws IOException {
@@ -104,7 +104,7 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
 
     /**
      * @tests java.io.RandomAccessFile#RandomAccessFile(java.lang.String,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_String_I()
             throws IOException {
@@ -155,7 +155,8 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
             raf.close();
             raf.write("Test".getBytes(), 0, 4);
             fail("Failed to close file properly");
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
     }
 
     /**
@@ -337,7 +338,8 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
         try {
             raf.readFully(buf, 0, buf.length);
             fail("Reading past end of buffer did not throw EOFException");
-        } catch (EOFException e) {}
+        } catch (EOFException e) {
+        }
         raf.close();
     }
 
@@ -471,10 +473,10 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
 
         byte[] nullByteArray = null;
         try {
-        	raf.write(nullByteArray);
-        	fail("should throw NullPointerException");
+            raf.write(nullByteArray);
+            fail("should throw NullPointerException");
         } catch (NullPointerException e) {
-        	//expected
+            //expected
         }
 
         byte[] rbuf = new byte[4000];
@@ -482,20 +484,20 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
         raf.close();
 
         try {
-        	raf.write(nullByteArray);
-        	fail("should throw NullPointerException");
+            raf.write(nullByteArray);
+            fail("should throw NullPointerException");
         } catch (NullPointerException e) {
-        	//expected
+            //expected
         }
 
         //will not throw IOException if array's length is 0
         raf.write(new byte[0]);
 
         try {
-        	raf.write(fileString.getBytes());
-        	fail("should throw IOException");
+            raf.write(fileString.getBytes());
+            fail("should throw IOException");
         } catch (IOException e) {
-        	//expected
+            //expected
         }
 
         FileInputStream fis = new java.io.FileInputStream(fileName);
@@ -526,139 +528,139 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
      * @tests java.io.RandomAccessFile#write(byte[], int, int)
      */
     public void test_write_$BII_Exception() throws IOException {
-    	raf = new java.io.RandomAccessFile(f, "rw");
-		byte[] nullByteArray = null;
-		byte[] byteArray = new byte[10];
+        raf = new java.io.RandomAccessFile(f, "rw");
+        byte[] nullByteArray = null;
+        byte[] byteArray = new byte[10];
 
-		try {
-			raf.write(nullByteArray, -1, -1);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
+        try {
+            raf.write(nullByteArray, -1, -1);
+            fail("should throw NullPointerException");
+        } catch (NullPointerException e) {
+            // expected
+        }
 
-		try {
-			raf.write(nullByteArray, 0, 0);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
+        try {
+            raf.write(nullByteArray, 0, 0);
+            fail("should throw NullPointerException");
+        } catch (NullPointerException e) {
+            // expected
+        }
 
-		try {
-			raf.write(nullByteArray, 1, -1);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
+        try {
+            raf.write(nullByteArray, 1, -1);
+            fail("should throw NullPointerException");
+        } catch (NullPointerException e) {
+            // expected
+        }
 
-		try {
-			raf.write(nullByteArray, 1, 0);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
+        try {
+            raf.write(nullByteArray, 1, 0);
+            fail("should throw NullPointerException");
+        } catch (NullPointerException e) {
+            // expected
+        }
 
-		try {
-			raf.write(nullByteArray, 1, 1);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
+        try {
+            raf.write(nullByteArray, 1, 1);
+            fail("should throw NullPointerException");
+        } catch (NullPointerException e) {
+            // expected
+        }
 
-		try {
-			raf.write(byteArray, -1, -1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            raf.write(byteArray, -1, -1);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		try {
-			raf.write(byteArray, -1, 0);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            raf.write(byteArray, -1, 0);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		try {
-			raf.write(byteArray, -1, 1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            raf.write(byteArray, -1, 1);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		try {
-			raf.write(byteArray, 0, -1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            raf.write(byteArray, 0, -1);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		raf.write(byteArray, 0, 0);
+        raf.write(byteArray, 0, 0);
         raf.write(byteArray, 0, byteArray.length);
-		raf.write(byteArray, 1, 0);
+        raf.write(byteArray, 1, 0);
         raf.write(byteArray, byteArray.length, 0);
 
-		try {
-			raf.write(byteArray, byteArray.length + 1, 0);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			//expected
-		}
+        try {
+            raf.write(byteArray, byteArray.length + 1, 0);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            //expected
+        }
 
-		try {
-			raf.write(byteArray, byteArray.length + 1, 1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			//expected
-		}
+        try {
+            raf.write(byteArray, byteArray.length + 1, 1);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            //expected
+        }
 
-		raf.close();
+        raf.close();
 
-		try {
-			raf.write(nullByteArray, -1, -1);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
+        try {
+            raf.write(nullByteArray, -1, -1);
+            fail("should throw NullPointerException");
+        } catch (NullPointerException e) {
+            // expected
+        }
 
-		try {
-			raf.write(byteArray, -1, -1);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			// expected
-		}
+        try {
+            raf.write(byteArray, -1, -1);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
 
-		try {
-	        raf.write(byteArray, 0, 1);
-	        fail("should throw IOException");
-		} catch (IOException e) {
-			//expected
-		}
+        try {
+            raf.write(byteArray, 0, 1);
+            fail("should throw IOException");
+        } catch (IOException e) {
+            //expected
+        }
 
-		try {
-	        raf.write(byteArray, 0, byteArray.length);
-	        fail("should throw IOException");
-		} catch (IOException e) {
-			//expected
-		}
+        try {
+            raf.write(byteArray, 0, byteArray.length);
+            fail("should throw IOException");
+        } catch (IOException e) {
+            //expected
+        }
 
-		try {
-			raf.write(byteArray, 1, 1);
-	        fail("should throw IOException");
-		} catch (IOException e) {
-			//expected
-		}
+        try {
+            raf.write(byteArray, 1, 1);
+            fail("should throw IOException");
+        } catch (IOException e) {
+            //expected
+        }
 
-		try {
-			raf.write(byteArray, byteArray.length + 1, 0);
-			fail("should throw IndexOutOfBoundsException");
-		} catch (IndexOutOfBoundsException e) {
-			//expected
-		}
+        try {
+            raf.write(byteArray, byteArray.length + 1, 0);
+            fail("should throw IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            //expected
+        }
 
-		// will not throw IOException if count = 0
-		raf.write(byteArray, 0, 0);
-		raf.write(byteArray, byteArray.length, 0);
+        // will not throw IOException if count = 0
+        raf.write(byteArray, 0, 0);
+        raf.write(byteArray, byteArray.length, 0);
     }
 
 
@@ -826,7 +828,7 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
 
     /**
      * @tests java.io.RandomAccessFile#seek(long)
-     *
+     * <p/>
      * Regression for HARMONY-374
      */
     public void test_seekI() throws IOException {
@@ -841,7 +843,7 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
 
     /**
      * @tests java.io.RandomAccessFile#read(byte[], int, int)
-     *
+     * <p/>
      * Regression for HARMONY-377
      */
     public void test_readBII() throws IOException {
@@ -880,7 +882,7 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
     }
 
     /**
-     * @tests java.io.RandomAccessFile#read(byte[],int,int)
+     * @tests java.io.RandomAccessFile#read(byte[], int, int)
      */
     public void test_read_$BII_IndexOutOfBoundsException() throws IOException {
         FileOutputStream fos = new java.io.FileOutputStream(fileName);
@@ -891,15 +893,15 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
         byte[] rbuf = new byte[100];
         raf.close();
         try {
-            raf.read(rbuf,-1,0);
+            raf.read(rbuf, -1, 0);
             fail("should throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
-          //expected
+            //expected
         }
     }
 
     /**
-     * @tests java.io.RandomAccessFile#read(byte[],int,int)
+     * @tests java.io.RandomAccessFile#read(byte[], int, int)
      */
     public void test_read_$BII_IOException() throws IOException {
         FileOutputStream fos = new java.io.FileOutputStream(fileName);
@@ -909,8 +911,8 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
         RandomAccessFile raf = new java.io.RandomAccessFile(fileName, "r");
         byte[] rbuf = new byte[100];
         raf.close();
-        int read = raf.read(rbuf,0,0);
-        assertEquals(0,read);
+        int read = raf.read(rbuf, 0, 0);
+        assertEquals(0, read);
     }
 
     /**
@@ -925,11 +927,11 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
         byte[] rbuf = new byte[0];
         raf.close();
         int read = raf.read(rbuf);
-        assertEquals(0,read);
+        assertEquals(0, read);
     }
 
     /**
-     * @tests java.io.RandomAccessFile#read(byte[],int,int)
+     * @tests java.io.RandomAccessFile#read(byte[], int, int)
      */
     public void test_read_$BII_NullPointerException() throws IOException {
         File f = File.createTempFile("tmp", "tmp");
@@ -947,7 +949,7 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
 
     /**
      * @tests java.io.RandomAccessFile#write(byte[], int, int)
-     *
+     * <p/>
      * Regression for HARMONY-377
      */
     public void test_writeBII() throws IOException {
@@ -995,7 +997,8 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
         try {
             fcr.lock(0L, Long.MAX_VALUE, false);
             fail("NonWritableChannelException expected!");
-        } catch (NonWritableChannelException e) {}
+        } catch (NonWritableChannelException e) {
+        }
         raf.close();
     }
 
@@ -1043,6 +1046,7 @@ public class RandomAccessFileTest extends junit.framework.TestCase {
     /**
      * Tears down the fixture, for example, close a network connection. This
      * method is called after a test is executed.
+     *
      * @throws Exception
      */
     protected void tearDown() throws Exception {

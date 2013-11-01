@@ -36,7 +36,7 @@ public class FileURLConnectionTest extends TestCase {
         return new FileURLConnection(url).getContentType();
     }
 
-    public void testGetContentType() throws IOException  {
+    public void testGetContentType() throws IOException {
         // Regression for HARMONY-4699
         assertEquals("application/rtf", getContentType("test.rtf"));
         assertEquals("text/plain", getContentType("test.java"));
@@ -51,7 +51,7 @@ public class FileURLConnectionTest extends TestCase {
         // Regression for Harmony-5737
         String resourceName = "org/apache/harmony/luni/tests/" + "test.rtf";
         URL url = ClassLoader.getSystemClassLoader().getResource(resourceName);
-        URL anchorUrl = new URL(url,"#anchor");
+        URL anchorUrl = new URL(url, "#anchor");
         assertNotNull("Cannot find test resource " + resourceName, anchorUrl);
 
         FileURLConnection conn = new FileURLConnection(anchorUrl);
@@ -62,7 +62,7 @@ public class FileURLConnectionTest extends TestCase {
         URL localURL = new URL(localURLString);
         conn = new FileURLConnection(localURL);
         assertNotNull(conn.getInputStream());
-        assertEquals("file",conn.getURL().getProtocol());
+        assertEquals("file", conn.getURL().getProtocol());
     }
 
     public void testHeaderFunctions() throws IOException {
@@ -70,14 +70,15 @@ public class FileURLConnectionTest extends TestCase {
         URL url = ClassLoader.getSystemClassLoader().getResource(resourceName);
         FileURLConnection conn = new FileURLConnection(url);
         assertNotNull(conn.getInputStream());
-        assertEquals(conn.getContentType(),  conn.getHeaderField("content-type")) ;
+        assertEquals(conn.getContentType(), conn.getHeaderField("content-type"));
 
-        resourceName = "org/apache/harmony/luni/tests/" +  "test.rtf";;  //folder name
+        resourceName = "org/apache/harmony/luni/tests/" + "test.rtf";
+        ;  //folder name
         url = ClassLoader.getSystemClassLoader().getResource(resourceName);
         conn = new FileURLConnection(url);
         assertNotNull(conn.getInputStream());
-        assertEquals(conn.getContentType(),  conn.getHeaderField("content-type")) ;
-        assertEquals(Integer.toString(conn.getContentLength()),  conn.getHeaderField("content-length")) ;
+        assertEquals(conn.getContentType(), conn.getHeaderField("content-type"));
+        assertEquals(Integer.toString(conn.getContentLength()), conn.getHeaderField("content-length"));
         assertEquals(conn.getHeaderField(0), conn.getHeaderField("content-type"));
         assertEquals(conn.getHeaderField(1), conn.getHeaderField("content-length"));
         assertEquals(conn.getHeaderField(2), conn.getHeaderField("last-modified"));

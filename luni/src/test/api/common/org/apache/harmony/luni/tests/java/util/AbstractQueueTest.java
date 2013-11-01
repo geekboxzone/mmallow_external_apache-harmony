@@ -121,7 +121,7 @@ public class AbstractQueueTest extends TestCase {
     public void test_addLE_Full() {
         Object o = new Object();
 
-        for(int i = 0; i < MockAbstractQueue.CAPACITY; i++ ) {
+        for (int i = 0; i < MockAbstractQueue.CAPACITY; i++) {
             queue.add(o);
         }
 

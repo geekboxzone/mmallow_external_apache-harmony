@@ -27,55 +27,55 @@ import java.net.Socket;
  */
 
 public class Support_HttpServerSocket implements Support_ServerSocket {
-	private ServerSocket instance = null;
+    private ServerSocket instance = null;
 
-	private int port = -1;
+    private int port = -1;
 
-	private int timeout = 8000;
+    private int timeout = 8000;
 
-	/**
-	 * Blocks until a connection is made, or the socket times out.
-	 * 
-	 * @see tests.support.Support_ServerSocket#accept()
-	 */
-	public Support_Socket accept() throws IOException {
-		if (port == -1) {
+    /**
+     * Blocks until a connection is made, or the socket times out.
+     *
+     * @see tests.support.Support_ServerSocket#accept()
+     */
+    public Support_Socket accept() throws IOException {
+        if (port == -1) {
             return null;
         }
-		if (instance == null) {
+        if (instance == null) {
             return null;
         }
-		instance.setSoTimeout(timeout);
-		Socket s = instance.accept();
-		return new Support_HttpSocket(s);
-	}
+        instance.setSoTimeout(timeout);
+        Socket s = instance.accept();
+        return new Support_HttpSocket(s);
+    }
 
-	/**
-	 * @see tests.support.Support_ServerSocket#setTimeout(int) Sets the
-	 *      timeout for the server.
-	 */
-	public void setTimeout(int timeout) {
-		this.timeout = timeout;
-	}
+    /**
+     * @see tests.support.Support_ServerSocket#setTimeout(int) Sets the
+     *      timeout for the server.
+     */
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
 
-	/**
-	 * @see tests.support.Support_ServerSocket#setPort(int)
-	 */
-	public void setPort(int port) {
-		this.port = port;
-	}
+    /**
+     * @see tests.support.Support_ServerSocket#setPort(int)
+     */
+    public void setPort(int port) {
+        this.port = port;
+    }
 
-	public void open() throws IOException {
-		instance = new ServerSocket(port);
-	}
+    public void open() throws IOException {
+        instance = new ServerSocket(port);
+    }
 
-	/**
-	 * @see tests.support.Support_ServerSocket#close()
-	 */
-	public void close() throws IOException {
-		if (instance != null) {
+    /**
+     * @see tests.support.Support_ServerSocket#close()
+     */
+    public void close() throws IOException {
+        if (instance != null) {
             instance.close();
         }
-	}
+    }
 
 }

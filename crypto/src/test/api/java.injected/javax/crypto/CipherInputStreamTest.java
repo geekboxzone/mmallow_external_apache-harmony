@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package javax.crypto;
 
@@ -232,7 +232,7 @@ public class CipherInputStreamTest extends TestCase {
      * markSupported() method testing. Tests that mark is not supported.
      */
     public void testMarkSupported() {
-        byte[] data = new byte[] {-127, -100, -50, -10, -1, 0, 1, 10, 50, 127};
+        byte[] data = new byte[] { -127, -100, -50, -10, -1, 0, 1, 10, 50, 127 };
         TestInputStream tis = new TestInputStream(data);
         CipherInputStream cis = new CipherInputStream(tis, new NullCipher());
         assertFalse("The returned by markSupported() method value "

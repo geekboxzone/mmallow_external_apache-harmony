@@ -32,11 +32,11 @@ import junit.framework.TestCase;
 import tests.support.resource.Support_Resources;
 
 public class ZipInputStreamTest extends TestCase {
-	// the file hyts_zipFile.zip used in setup needs to included as a resource
-	private ZipEntry zentry;
+    // the file hyts_zipFile.zip used in setup needs to included as a resource
+    private ZipEntry zentry;
 
-	private ZipInputStream zis;
-    
+    private ZipInputStream zis;
+
     private byte[] zipBytes;
 
     private byte[] dataBytes = "Some data in my file".getBytes();
@@ -74,29 +74,29 @@ public class ZipInputStreamTest extends TestCase {
         }
     }
 
-	/**
+    /**
      * @tests java.util.zip.ZipInputStream#ZipInputStream(java.io.InputStream)
      */
-	public void test_ConstructorLjava_io_InputStream() throws Exception {
-	    zentry = zis.getNextEntry();
-	    zis.closeEntry();
-	}
+    public void test_ConstructorLjava_io_InputStream() throws Exception {
+        zentry = zis.getNextEntry();
+        zis.closeEntry();
+    }
 
-	/**
-	 * @tests java.util.zip.ZipInputStream#close()
-	 */
-	public void test_close() {
-		try {
-			zis.close();
-			byte[] rbuf = new byte[10];
-			zis.read(rbuf, 0, 1);
-		} catch (IOException e) {
-			return;
-		}
-		fail("Read data after stream was closed");
-	}
+    /**
+     * @tests java.util.zip.ZipInputStream#close()
+     */
+    public void test_close() {
+        try {
+            zis.close();
+            byte[] rbuf = new byte[10];
+            zis.read(rbuf, 0, 1);
+        } catch (IOException e) {
+            return;
+        }
+        fail("Read data after stream was closed");
+    }
 
-	/**
+    /**
      * @tests java.util.zip.ZipInputStream#close()
      */
     public void test_close2() throws Exception {
@@ -106,13 +106,13 @@ public class ZipInputStreamTest extends TestCase {
         zis.close();
     }
 
-	/**
-	 * @tests java.util.zip.ZipInputStream#closeEntry()
-	 */
-	public void test_closeEntry() throws Exception {
-	    zentry = zis.getNextEntry();
-	    zis.closeEntry();
-	}
+    /**
+     * @tests java.util.zip.ZipInputStream#closeEntry()
+     */
+    public void test_closeEntry() throws Exception {
+        zentry = zis.getNextEntry();
+        zis.closeEntry();
+    }
 
     public void test_closeAfterException() throws Exception {
         File resources = Support_Resources.createTempFolder();
@@ -140,23 +140,23 @@ public class ZipInputStreamTest extends TestCase {
         }
     }
 
-	/**
-	 * @tests java.util.zip.ZipInputStream#getNextEntry()
-	 */
-	public void test_getNextEntry() throws Exception {
-	    assertNotNull("getNextEntry failed", zis.getNextEntry());
-	}
+    /**
+     * @tests java.util.zip.ZipInputStream#getNextEntry()
+     */
+    public void test_getNextEntry() throws Exception {
+        assertNotNull("getNextEntry failed", zis.getNextEntry());
+    }
 
-	/**
-	 * @tests java.util.zip.ZipInputStream#read(byte[], int, int)
-	 */
-	public void test_read$BII() throws Exception {
-	    zentry = zis.getNextEntry();
-	    byte[] rbuf = new byte[(int) zentry.getSize()];
-	    int r = zis.read(rbuf, 0, rbuf.length);
-	    new String(rbuf, 0, r);
-	    assertEquals("Failed to read entry", 12, r);
-	}
+    /**
+     * @tests java.util.zip.ZipInputStream#read(byte[], int, int)
+     */
+    public void test_read$BII() throws Exception {
+        zentry = zis.getNextEntry();
+        byte[] rbuf = new byte[(int) zentry.getSize()];
+        int r = zis.read(rbuf, 0, rbuf.length);
+        new String(rbuf, 0, r);
+        assertEquals("Failed to read entry", 12, r);
+    }
 
     public void testReadOneByteAtATime() throws IOException {
         InputStream in = new FilterInputStream(Support_Resources.getStream("hyts_ZipFile.zip")) {
@@ -178,10 +178,10 @@ public class ZipInputStreamTest extends TestCase {
         zis.close();
     }
 
-	/**
-	 * @tests java.util.zip.ZipInputStream#skip(long)
-	 */
-	public void test_skipJ() throws Exception {
+    /**
+     * @tests java.util.zip.ZipInputStream#skip(long)
+     */
+    public void test_skipJ() throws Exception {
         zentry = zis.getNextEntry();
         byte[] rbuf = new byte[(int) zentry.getSize()];
         zis.skip(2);

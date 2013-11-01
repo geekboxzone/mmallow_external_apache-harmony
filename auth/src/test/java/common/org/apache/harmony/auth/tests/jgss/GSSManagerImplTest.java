@@ -27,95 +27,95 @@ import org.ietf.jgss.Oid;
 import junit.framework.TestCase;
 
 public class GSSManagerImplTest extends TestCase {
-	
-	private GSSManager gssManager;
-	
-	public void testGetMechs() throws Exception{
-		Oid[] mechs = gssManager.getMechs();
-		Oid kerberosMech = new Oid("1.2.840.113554.1.2.2");
-		Oid[] expectedMechs = new Oid[]{kerberosMech};
-		assertTrue(Arrays.equals(expectedMechs, mechs));
-	}
-	
-	public void testGetMechsForName() throws Exception {
-		Oid nameType = GSSName.NT_ANONYMOUS;
-		Oid[] mechs = gssManager.getMechsForName(nameType);
-		assertEquals(0, mechs.length);
 
-		nameType = GSSName.NT_MACHINE_UID_NAME;
-		mechs = gssManager.getMechsForName(nameType);
-		assertEquals(0, mechs.length);
+    private GSSManager gssManager;
 
-		nameType = GSSName.NT_STRING_UID_NAME;
-		mechs = gssManager.getMechsForName(nameType);
-		assertEquals(0, mechs.length);
+    public void testGetMechs() throws Exception {
+        Oid[] mechs = gssManager.getMechs();
+        Oid kerberosMech = new Oid("1.2.840.113554.1.2.2");
+        Oid[] expectedMechs = new Oid[] { kerberosMech };
+        assertTrue(Arrays.equals(expectedMechs, mechs));
+    }
 
-		nameType = GSSName.NT_USER_NAME;
-		mechs = gssManager.getMechsForName(nameType);
-		Oid kerberosMech = new Oid("1.2.840.113554.1.2.2");
-		Oid[] expectedMechs = new Oid[] { kerberosMech };
-		assertTrue(Arrays.equals(expectedMechs, mechs));
+    public void testGetMechsForName() throws Exception {
+        Oid nameType = GSSName.NT_ANONYMOUS;
+        Oid[] mechs = gssManager.getMechsForName(nameType);
+        assertEquals(0, mechs.length);
 
-		nameType = GSSName.NT_HOSTBASED_SERVICE;
-		mechs = gssManager.getMechsForName(nameType);
-		assertTrue(Arrays.equals(expectedMechs, mechs));
+        nameType = GSSName.NT_MACHINE_UID_NAME;
+        mechs = gssManager.getMechsForName(nameType);
+        assertEquals(0, mechs.length);
 
-		nameType = GSSName.NT_EXPORT_NAME;
-		mechs = gssManager.getMechsForName(nameType);
-		assertTrue(Arrays.equals(expectedMechs, mechs));
+        nameType = GSSName.NT_STRING_UID_NAME;
+        mechs = gssManager.getMechsForName(nameType);
+        assertEquals(0, mechs.length);
 
-		nameType = KerberosUtils.KRB5_PRINCIPAL_NAMETYPE;
-		mechs = gssManager.getMechsForName(nameType);
-		assertTrue(Arrays.equals(expectedMechs, mechs));
-	}
-	
-	public void testGetNamesForMech() throws Exception {
-		Oid kerberosMech = new Oid("1.2.840.113554.1.2.2");
-		Oid[] nameTypes = gssManager.getNamesForMech(kerberosMech);
-		Oid[] expectedNameTypes = new Oid[] { GSSName.NT_USER_NAME,
-				GSSName.NT_HOSTBASED_SERVICE, GSSName.NT_EXPORT_NAME,
-				KerberosUtils.KRB5_PRINCIPAL_NAMETYPE };
-		assertEquals(expectedNameTypes.length, nameTypes.length);
-		for (Oid expectedNameType : expectedNameTypes) {
-			boolean got = false;
-			for (Oid nameType : nameTypes) {
-				if (nameType.equals(expectedNameType)) {
-					got = true;
-					break;
-				}
-			}
-			if (!got) {
-				fail("Missing expected NameType " + expectedNameType);
-			}
-		}
-	}
-	
-	public void testCreateName() throws Exception {
+        nameType = GSSName.NT_USER_NAME;
+        mechs = gssManager.getMechsForName(nameType);
+        Oid kerberosMech = new Oid("1.2.840.113554.1.2.2");
+        Oid[] expectedMechs = new Oid[] { kerberosMech };
+        assertTrue(Arrays.equals(expectedMechs, mechs));
 
-		GSSName gssName = gssManager.createName("username",
-				GSSName.NT_USER_NAME);
-		assertEquals(GSSName.NT_USER_NAME, gssName.getStringNameType());
+        nameType = GSSName.NT_HOSTBASED_SERVICE;
+        mechs = gssManager.getMechsForName(nameType);
+        assertTrue(Arrays.equals(expectedMechs, mechs));
 
-		gssName = gssManager.createName("service@host",
-				GSSName.NT_HOSTBASED_SERVICE);
-		assertEquals(GSSName.NT_HOSTBASED_SERVICE, gssName.getStringNameType());
+        nameType = GSSName.NT_EXPORT_NAME;
+        mechs = gssManager.getMechsForName(nameType);
+        assertTrue(Arrays.equals(expectedMechs, mechs));
 
-		final Oid kerberosPrincipalOid = new Oid("1.2.840.113554.1.2.2.1");
-		gssName = gssManager.createName("kerberosPrincipal",
-				kerberosPrincipalOid);
-		assertEquals(kerberosPrincipalOid, gssName.getStringNameType());
+        nameType = KerberosUtils.KRB5_PRINCIPAL_NAMETYPE;
+        mechs = gssManager.getMechsForName(nameType);
+        assertTrue(Arrays.equals(expectedMechs, mechs));
+    }
 
-		byte[] encoded = new byte[] { 4, 1, 0, 11, 6, 9, 42, -122, 72, -122,
-				-9, 18, 1, 2, 2, 0, 0, 0, 17, 115, 101, 114, 118, 105, 99, 101,
-				47, 108, 111, 99, 97, 108, 104, 111, 115, 116 };
-		gssName = gssManager.createName(encoded, GSSName.NT_EXPORT_NAME);
-		assertEquals(kerberosPrincipalOid, gssName.getStringNameType());
-		GSSName expectedGSSName = gssManager.createName("service/localhost", kerberosPrincipalOid);		
-		assertEquals(expectedGSSName, gssName);		
-	}
-	
-	public void setUp() throws Exception{		
-		gssManager = GSSManager.getInstance();		
-	}
+    public void testGetNamesForMech() throws Exception {
+        Oid kerberosMech = new Oid("1.2.840.113554.1.2.2");
+        Oid[] nameTypes = gssManager.getNamesForMech(kerberosMech);
+        Oid[] expectedNameTypes = new Oid[] { GSSName.NT_USER_NAME,
+                GSSName.NT_HOSTBASED_SERVICE, GSSName.NT_EXPORT_NAME,
+                KerberosUtils.KRB5_PRINCIPAL_NAMETYPE };
+        assertEquals(expectedNameTypes.length, nameTypes.length);
+        for (Oid expectedNameType : expectedNameTypes) {
+            boolean got = false;
+            for (Oid nameType : nameTypes) {
+                if (nameType.equals(expectedNameType)) {
+                    got = true;
+                    break;
+                }
+            }
+            if (!got) {
+                fail("Missing expected NameType " + expectedNameType);
+            }
+        }
+    }
+
+    public void testCreateName() throws Exception {
+
+        GSSName gssName = gssManager.createName("username",
+                GSSName.NT_USER_NAME);
+        assertEquals(GSSName.NT_USER_NAME, gssName.getStringNameType());
+
+        gssName = gssManager.createName("service@host",
+                GSSName.NT_HOSTBASED_SERVICE);
+        assertEquals(GSSName.NT_HOSTBASED_SERVICE, gssName.getStringNameType());
+
+        final Oid kerberosPrincipalOid = new Oid("1.2.840.113554.1.2.2.1");
+        gssName = gssManager.createName("kerberosPrincipal",
+                kerberosPrincipalOid);
+        assertEquals(kerberosPrincipalOid, gssName.getStringNameType());
+
+        byte[] encoded = new byte[] { 4, 1, 0, 11, 6, 9, 42, -122, 72, -122,
+                -9, 18, 1, 2, 2, 0, 0, 0, 17, 115, 101, 114, 118, 105, 99, 101,
+                47, 108, 111, 99, 97, 108, 104, 111, 115, 116 };
+        gssName = gssManager.createName(encoded, GSSName.NT_EXPORT_NAME);
+        assertEquals(kerberosPrincipalOid, gssName.getStringNameType());
+        GSSName expectedGSSName = gssManager.createName("service/localhost", kerberosPrincipalOid);
+        assertEquals(expectedGSSName, gssName);
+    }
+
+    public void setUp() throws Exception {
+        gssManager = GSSManager.getInstance();
+    }
 
 }

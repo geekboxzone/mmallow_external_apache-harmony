@@ -19,9 +19,9 @@ package tests.support;
 
 public interface Support_Proxy_I2 {
 
-	int[] array(long[] f);
+    int[] array(long[] f);
 
-	void foo(boolean b, int i);
+    void foo(boolean b, int i);
 
-	String string(String s) throws Support_Proxy_SubException, Error;
+    String string(String s) throws Support_Proxy_SubException, Error;
 }

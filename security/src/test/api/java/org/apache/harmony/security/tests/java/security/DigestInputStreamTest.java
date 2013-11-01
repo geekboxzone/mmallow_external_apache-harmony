@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -35,7 +35,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for fields and methods of class <code>DigestInputStream</code>
- * 
  */
 public class DigestInputStreamTest extends TestCase {
 
@@ -66,6 +65,7 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Constructor for DigestInputStreamTest.
+     *
      * @param name
      */
     public DigestInputStreamTest(String name) {
@@ -78,14 +78,14 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Test #1 for <code>DigestInputStream</code> constructor<br>
-     * 
+     * <p/>
      * Assertion: creates new <code>DigestInputStream</code> instance
      * using valid parameters (both non <code>null</code>)
      *
      * @throws NoSuchAlgorithmException
      */
-    public final void testDigestInputStream01()  {
-        for (int i=0; i<algorithmName.length; i++) {
+    public final void testDigestInputStream01() {
+        for (int i = 0; i < algorithmName.length; i++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[i]);
                 InputStream is = new ByteArrayInputStream(myMessage);
@@ -101,7 +101,7 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Test #2 for <code>DigestInputStream</code> constructor<br>
-     * 
+     * <p/>
      * Assertion: creates new <code>DigestInputStream</code> instance
      * using valid parameters (both <code>null</code>)
      */
@@ -112,20 +112,20 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Test #1 for <code>read()</code> method<br>
-     * 
+     * <p/>
      * Assertion: returns the byte read<br>
      * Assertion: updates associated digest<br>
      */
     public final void testRead01()
-        throws IOException {
-        for (int ii=0; ii<algorithmName.length; ii++) {
+            throws IOException {
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 InputStream is = new ByteArrayInputStream(myMessage);
                 DigestInputStream dis = new DigestInputStream(is, md);
-                for (int i=0; i<MY_MESSAGE_LEN; i++) {
+                for (int i = 0; i < MY_MESSAGE_LEN; i++) {
                     // check that read() returns valid values
-                    assertTrue("retval", ((byte)dis.read() == myMessage[i]));
+                    assertTrue("retval", ((byte) dis.read() == myMessage[i]));
                 }
                 // check that associated digest has been updated properly
                 assertTrue("update",
@@ -142,21 +142,21 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Test #2 for <code>read()</code> method<br>
-     * 
+     * <p/>
      * Assertion: returns -1 if EOS had been
      * reached but not read before method call<br>
-     * 
+     * <p/>
      * Assertion: must not update digest if EOS had been
      * reached but not read before method call<br>
      */
     public final void testRead02()
-        throws IOException {
-        for (int ii=0; ii<algorithmName.length; ii++) {
+            throws IOException {
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 InputStream is = new ByteArrayInputStream(myMessage);
                 DigestInputStream dis = new DigestInputStream(is, md);
-                for (int i=0; i<MY_MESSAGE_LEN; i++) {
+                for (int i = 0; i < MY_MESSAGE_LEN; i++) {
                     dis.read();
                 }
                 // check that subsequent read() calls return -1 (eos)
@@ -178,30 +178,30 @@ public class DigestInputStreamTest extends TestCase {
     /**
      * Test #3 for <code>read()</code> method<br>
      * Test #1 for <code>on(boolean)</code> method<br>
-     * 
+     * <p/>
      * Assertion: <code>read()</code> must not update digest if it is off<br>
      * Assertion: <code>on(boolean)</code> turns digest functionality on
      * (if <code>true</code> passed as a parameter) or off (if <code>false</code>
-     *  passed)
+     * passed)
      */
     public final void testRead03()
-        throws IOException {
-        for (int ii=0; ii<algorithmName.length; ii++) {
+            throws IOException {
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 InputStream is = new ByteArrayInputStream(myMessage);
                 DigestInputStream dis = new DigestInputStream(is, md);
-                
+
                 // turn digest off
                 dis.on(false);
-                
-                for (int i=0; i<MY_MESSAGE_LEN; i++) {
+
+                for (int i = 0; i < MY_MESSAGE_LEN; i++) {
                     dis.read();
                 }
-                
+
                 // check that digest value has not been updated by read()
                 assertTrue(Arrays.equals(dis.getMessageDigest().digest(),
-                        MDGoldenData.getDigest(algorithmName[ii]+"_NU")));
+                        MDGoldenData.getDigest(algorithmName[ii] + "_NU")));
                 return;
             } catch (NoSuchAlgorithmException e) {
                 // allowed failure
@@ -212,19 +212,19 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Test #4 for <code>read()</code> method<br>
-     * 
-     * Assertion: broken <code>DigestInputStream</code>instance: 
+     * <p/>
+     * Assertion: broken <code>DigestInputStream</code>instance:
      * <code>InputStream</code> not set. <code>read()</code> must
      * not work
      */
     public final void testRead04() throws IOException {
-        for (int ii=0; ii<algorithmName.length; ii++) {
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 DigestInputStream dis = new DigestInputStream(null, md);
                 // must result in an exception
                 try {
-                    for (int i=0; i<MY_MESSAGE_LEN; i++) {
+                    for (int i = 0; i < MY_MESSAGE_LEN; i++) {
                         dis.read();
                     }
                 } catch (Exception e) {
@@ -242,8 +242,8 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Test #5 for <code>read()</code> method<br>
-     * 
-     * Assertion: broken <code>DigestInputStream</code>instance: 
+     * <p/>
+     * Assertion: broken <code>DigestInputStream</code>instance:
      * associated <code>MessageDigest</code> not set.
      * <code>read()</code> must not work when digest
      * functionality is on
@@ -254,7 +254,7 @@ public class DigestInputStreamTest extends TestCase {
 
         // must result in an exception
         try {
-            for (int i=0; i<MY_MESSAGE_LEN; i++) {
+            for (int i = 0; i < MY_MESSAGE_LEN; i++) {
                 dis.read();
             }
             fail("read() must not work when digest functionality is on");
@@ -265,43 +265,43 @@ public class DigestInputStreamTest extends TestCase {
     /**
      * Test #6 for <code>read()</code> method<br>
      * Test #2 for <code>on(boolean)</code> method<br>
-     * 
+     * <p/>
      * Assertion: broken <code>DigestInputStream</code>instance:
      * associated <code>MessageDigest</code> not set.
      * <code>read()</code> must work when digest
      * functionality is off
      */
     public final void testRead06()
-        throws IOException {
+            throws IOException {
         InputStream is = new ByteArrayInputStream(myMessage);
         // construct object without digest
         DigestInputStream dis = new DigestInputStream(is, null);
         // set digest functionality to off
         dis.on(false);
         // the following must pass without any exception
-        for (int i=0; i<MY_MESSAGE_LEN; i++) {
-            assertTrue((byte)dis.read() == myMessage[i]);
+        for (int i = 0; i < MY_MESSAGE_LEN; i++) {
+            assertTrue((byte) dis.read() == myMessage[i]);
         }
     }
 
     /**
      * Test #1 for <code>read(byte[],int,int)</code> method<br>
-     * 
+     * <p/>
      * Assertion: returns the number of bytes read<br>
-     * 
+     * <p/>
      * Assertion: put bytes read into specified array at specified offset<br>
-     * 
+     * <p/>
      * Assertion: updates associated digest<br>
      */
     public final void testReadbyteArrayintint01()
-        throws IOException {        
-        for (int ii=0; ii<algorithmName.length; ii++) {
+            throws IOException {
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 InputStream is = new ByteArrayInputStream(myMessage);
                 DigestInputStream dis = new DigestInputStream(is, md);
                 byte[] bArray = new byte[MY_MESSAGE_LEN];
-                
+
                 // check that read(byte[],int,int) returns valid value
                 assertTrue("retval",
                         dis.read(bArray, 0, bArray.length) == MY_MESSAGE_LEN);
@@ -320,29 +320,29 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Test #2 for <code>read(byte[],int,int)</code> method<br>
-     * 
+     * <p/>
      * Assertion: returns the number of bytes read<br>
-     * 
+     * <p/>
      * Assertion: put bytes read into specified array at specified offset<br>
-     * 
+     * <p/>
      * Assertion: updates associated digest<br>
      */
     public final void testReadbyteArrayintint02()
-        throws IOException {
+            throws IOException {
         // check precondition
         assertEquals(0, MY_MESSAGE_LEN % CHUNK_SIZE);
-        
-        for (int ii=0; ii<algorithmName.length; ii++) {
+
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 InputStream is = new ByteArrayInputStream(myMessage);
                 DigestInputStream dis = new DigestInputStream(is, md);
                 byte[] bArray = new byte[MY_MESSAGE_LEN];
-                
-                for (int i=0; i<MY_MESSAGE_LEN/CHUNK_SIZE; i++) {
+
+                for (int i = 0; i < MY_MESSAGE_LEN / CHUNK_SIZE; i++) {
                     // check that read(byte[],int,int) returns valid value
                     assertTrue("retval",
-                            dis.read(bArray, i*CHUNK_SIZE, CHUNK_SIZE) == CHUNK_SIZE);
+                            dis.read(bArray, i * CHUNK_SIZE, CHUNK_SIZE) == CHUNK_SIZE);
                 }
                 // check that bArray has been filled properly
                 assertTrue("bArray", Arrays.equals(myMessage, bArray));
@@ -360,40 +360,40 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Test #3 for <code>read(byte[],int,int)</code> method<br>
-     * 
+     * <p/>
      * Assertion: returns the number of bytes read<br>
-     * 
+     * <p/>
      * Assertion: put bytes read into specified array at specified offset<br>
-     * 
+     * <p/>
      * Assertion: updates associated digest<br>
      */
     public final void testReadbyteArrayintint03()
-        throws IOException {
+            throws IOException {
         // check precondition
-        assertTrue(MY_MESSAGE_LEN % (CHUNK_SIZE+1) != 0);
-        
-        for (int ii=0; ii<algorithmName.length; ii++) {
+        assertTrue(MY_MESSAGE_LEN % (CHUNK_SIZE + 1) != 0);
+
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 InputStream is = new ByteArrayInputStream(myMessage);
                 DigestInputStream dis = new DigestInputStream(is, md);
                 byte[] bArray = new byte[MY_MESSAGE_LEN];
-                
-                for (int i=0; i<MY_MESSAGE_LEN/(CHUNK_SIZE+1); i++) {
+
+                for (int i = 0; i < MY_MESSAGE_LEN / (CHUNK_SIZE + 1); i++) {
                     // check that read(byte[],int,int) returns valid value
                     assertTrue("retval1",
-                            dis.read(bArray, i*(CHUNK_SIZE+1), CHUNK_SIZE+1) ==
-                                CHUNK_SIZE + 1);
+                            dis.read(bArray, i * (CHUNK_SIZE + 1), CHUNK_SIZE + 1) ==
+                                    CHUNK_SIZE + 1);
                 }
-                
+
                 // check that last call returns right
                 // number of remaining bytes
                 assertTrue("retval2",
                         dis.read(bArray,
-                                MY_MESSAGE_LEN/(CHUNK_SIZE+1)*(CHUNK_SIZE+1),
-                                MY_MESSAGE_LEN % (CHUNK_SIZE+1)) ==
-                                    (MY_MESSAGE_LEN % (CHUNK_SIZE+1)));
-                
+                                MY_MESSAGE_LEN / (CHUNK_SIZE + 1) * (CHUNK_SIZE + 1),
+                                MY_MESSAGE_LEN % (CHUNK_SIZE + 1)) ==
+                                (MY_MESSAGE_LEN % (CHUNK_SIZE + 1)));
+
                 // check that bArray has been filled properly
                 assertTrue("bArray", Arrays.equals(myMessage, bArray));
                 // check that associated digest has been updated properly
@@ -409,14 +409,14 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Test #4 for <code>read(byte[],int,int)</code> method<br>
-     * 
+     * <p/>
      * Assertion: returns the number of bytes read<br>
-     * 
+     * <p/>
      * Assertion: updates associated digest<br>
      */
     public final void testReadbyteArrayintint04()
-        throws IOException {        
-        for (int ii=0; ii<algorithmName.length; ii++) {
+            throws IOException {
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 InputStream is = new ByteArrayInputStream(myMessage);
@@ -442,35 +442,35 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Test #5 for <code>read(byte[],int,int)</code> method<br>
-     * 
+     * <p/>
      * Assertion: returns the number of bytes read<br>
-     * 
+     * <p/>
      * Assertion: put bytes read into specified array at specified offset<br>
-     * 
+     * <p/>
      * Assertion: does not update associated digest if
      * digest functionality is off<br>
      */
     public final void testReadbyteArrayintint05()
-        throws IOException {
+            throws IOException {
         // check precondition
         assertEquals(0, MY_MESSAGE_LEN % CHUNK_SIZE);
-        
-        for (int ii=0; ii<algorithmName.length; ii++) {
+
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 InputStream is = new ByteArrayInputStream(myMessage);
                 DigestInputStream dis = new DigestInputStream(is, md);
                 byte[] bArray = new byte[MY_MESSAGE_LEN];
-                
+
                 // turn digest off
                 dis.on(false);
-                
-                for (int i=0; i<MY_MESSAGE_LEN/CHUNK_SIZE; i++) {
-                    dis.read(bArray, i*CHUNK_SIZE, CHUNK_SIZE);
+
+                for (int i = 0; i < MY_MESSAGE_LEN / CHUNK_SIZE; i++) {
+                    dis.read(bArray, i * CHUNK_SIZE, CHUNK_SIZE);
                 }
                 // check that digest has not been updated
                 assertTrue(Arrays.equals(dis.getMessageDigest().digest(),
-                        MDGoldenData.getDigest(algorithmName[ii]+"_NU")));
+                        MDGoldenData.getDigest(algorithmName[ii] + "_NU")));
                 return;
             } catch (NoSuchAlgorithmException e) {
                 // allowed failure
@@ -481,15 +481,15 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Test for <code>getMessageDigest()</code> method<br>
-     * 
+     * <p/>
      * Assertion: returns associated message digest<br>
      */
     public final void testGetMessageDigest() {
-        for (int ii=0; ii<algorithmName.length; ii++) {
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 DigestInputStream dis = new DigestInputStream(null, md);
-                
+
                 assertTrue(dis.getMessageDigest() == md);
                 return;
             } catch (NoSuchAlgorithmException e) {
@@ -502,16 +502,16 @@ public class DigestInputStreamTest extends TestCase {
 
     /**
      * Test for <code>setMessageDigest()</code> method<br>
-     * 
+     * <p/>
      * Assertion: set associated message digest<br>
      */
     public final void testSetMessageDigest() {
-        for (int ii=0; ii<algorithmName.length; ii++) {
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 DigestInputStream dis = new DigestInputStream(null, null);
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 dis.setMessageDigest(md);
-                
+
                 assertTrue(dis.getMessageDigest() == md);
                 return;
             } catch (NoSuchAlgorithmException e) {
@@ -526,32 +526,32 @@ public class DigestInputStreamTest extends TestCase {
      * Assertion: turns digest functionality on or off
      */
     public final void testOn() throws IOException {
-        for (int ii=0; ii<algorithmName.length; ii++) {
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 InputStream is = new ByteArrayInputStream(myMessage);
                 DigestInputStream dis = new DigestInputStream(is, md);
-                
+
                 // turn digest off
                 dis.on(false);
-                
-                for (int i=0; i<MY_MESSAGE_LEN-1; i++) {
+
+                for (int i = 0; i < MY_MESSAGE_LEN - 1; i++) {
                     dis.read();
                 }
-                
+
                 // turn digest on
                 dis.on(true);
-                
+
                 // read remaining byte
                 dis.read();
-                
+
                 byte[] digest = dis.getMessageDigest().digest();
-                
+
                 // check that digest value has been
                 // updated by the last read() call
                 assertFalse(
-                        Arrays.equals(digest,MDGoldenData.getDigest(algorithmName[ii])) ||
-                        Arrays.equals(digest,MDGoldenData.getDigest(algorithmName[ii]+"_NU")));
+                        Arrays.equals(digest, MDGoldenData.getDigest(algorithmName[ii])) ||
+                                Arrays.equals(digest, MDGoldenData.getDigest(algorithmName[ii] + "_NU")));
                 return;
             } catch (NoSuchAlgorithmException e) {
                 // allowed failure
@@ -565,7 +565,7 @@ public class DigestInputStreamTest extends TestCase {
      * Assertion: returns <code>String</code> representation of this object
      */
     public final void testToString() {
-        for (int ii=0; ii<algorithmName.length; ii++) {
+        for (int ii = 0; ii < algorithmName.length; ii++) {
             try {
                 MessageDigest md = MessageDigest.getInstance(algorithmName[ii]);
                 InputStream is = new ByteArrayInputStream(myMessage);

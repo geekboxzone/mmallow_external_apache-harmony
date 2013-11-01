@@ -21,14 +21,14 @@ import junit.framework.TestCase;
 
 public class InheritableThreadLocalTest extends TestCase {
 
-	/**
-	 * @tests java.lang.InheritableThreadLocal#InheritableThreadLocal()
-	 */
-	public void test_Constructor() {
-	    InheritableThreadLocal<String> itl = new InheritableThreadLocal<String>();
+    /**
+     * @tests java.lang.InheritableThreadLocal#InheritableThreadLocal()
+     */
+    public void test_Constructor() {
+        InheritableThreadLocal<String> itl = new InheritableThreadLocal<String>();
         assertNull(itl.get());
-	}
-    
+    }
+
     public void test_initialValue() {
         InheritableThreadLocal<String> itl = new InheritableThreadLocal<String>() {
             @Override

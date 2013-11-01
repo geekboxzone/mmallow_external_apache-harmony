@@ -40,6 +40,7 @@ public class ObjectOutputStream2Test extends TestCase {
             public void anything() {
             }
         };
+
         public abstract void anything();
     }
 

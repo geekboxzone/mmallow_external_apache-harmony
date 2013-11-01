@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -28,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>BadPaddingException</code> class constructors and methods.
- * 
  */
 public class BadPaddingExceptionTest extends TestCase {
 
@@ -37,7 +36,7 @@ public class BadPaddingExceptionTest extends TestCase {
 
     /**
      * Constructor for BadPaddingExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public BadPaddingExceptionTest(String arg0) {

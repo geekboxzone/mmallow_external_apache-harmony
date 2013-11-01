@@ -61,7 +61,7 @@ public class ObjectStreamFieldTest extends junit.framework.TestCase {
 
     /**
      * @tests java.io.ObjectStreamField#ObjectStreamField(java.lang.String,
-     *        java.lang.Class)
+     *java.lang.Class)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_Class() {
         assertTrue("Used to test", true);
@@ -222,13 +222,13 @@ public class ObjectStreamFieldTest extends junit.framework.TestCase {
         assertEquals(1, objectStreamClass.getField("i").getOffset());
         assertEquals(2, objectStreamClass.getField("s").getOffset());
     }
-    
+
 
     /**
      * Write/serialize and read/de-serialize an object with primitive field
-     */ 
+     */
     public void test_ObjectWithPrimitiveField()
-        throws IOException, ClassNotFoundException {
+            throws IOException, ClassNotFoundException {
 
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final MyObjectOutputStream oos = new MyObjectOutputStream(baos);
@@ -362,15 +362,15 @@ class MyObjectOutputStream extends ObjectOutputStream {
 
     // record the only ObjectStreamClass
     static ObjectStreamClass descs;
-    
+
     MyObjectOutputStream(OutputStream out)
-        throws IOException {
+            throws IOException {
         super(out);
     }
 
     @Override
     protected void writeClassDescriptor(ObjectStreamClass desc)
-        throws IOException {
+            throws IOException {
         descs = desc;
         // Write a int
         writeInt(1);
@@ -381,13 +381,13 @@ class MyObjectOutputStream extends ObjectOutputStream {
 class MyObjectInputStream extends ObjectInputStream {
 
     MyObjectInputStream(InputStream in)
-        throws IOException {
+            throws IOException {
         super(in);
     }
 
     @Override
     protected ObjectStreamClass readClassDescriptor()
-        throws IOException, ClassNotFoundException {
+            throws IOException, ClassNotFoundException {
         // Read a integer and get the only ObjectStreamClass for the test
         final int id = readInt();
         return MyObjectOutputStream.descs;

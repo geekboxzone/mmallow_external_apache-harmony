@@ -329,10 +329,10 @@ public class String2Test extends junit.framework.TestCase {
     public void test_equalsLjava_lang_Object() {
         assertEquals("String not equal", hw1, hw2);
         assertEquals("Empty string equals check", "", "");
-        assertEquals("Null string equals check", (String)null, (String)null);
+        assertEquals("Null string equals check", (String) null, (String) null);
 
         assertFalse("Unequal strings reports as equal", hw1.equals(comp11));
-        assertFalse("Null string comparison failed", hw1.equals((String)null));
+        assertFalse("Null string comparison failed", hw1.equals((String) null));
     }
 
     /**
@@ -387,11 +387,11 @@ public class String2Test extends junit.framework.TestCase {
                         "Wrong bytes UTF8: " + Integer.toHexString(i),
                         (i < 0x80 && result[0] == i)
                                 || (i >= 0x80
-                                        && i < 0x800
-                                        && result[0] == (byte) (0xc0 | ((i & 0x7c0) >> 6)) && result[1] == (byte) (0x80 | (i & 0x3f)))
+                                && i < 0x800
+                                && result[0] == (byte) (0xc0 | ((i & 0x7c0) >> 6)) && result[1] == (byte) (0x80 | (i & 0x3f)))
                                 || (i >= 0x800
-                                        && result[0] == (byte) (0xe0 | (i >> 12))
-                                        && result[1] == (byte) (0x80 | ((i & 0xfc0) >> 6)) && result[2] == (byte) (0x80 | (i & 0x3f))));
+                                && result[0] == (byte) (0xe0 | (i >> 12))
+                                && result[1] == (byte) (0x80 | ((i & 0xfc0) >> 6)) && result[2] == (byte) (0x80 | (i & 0x3f))));
             } catch (java.io.UnsupportedEncodingException e) {
             }
 
@@ -648,7 +648,7 @@ public class String2Test extends junit.framework.TestCase {
 
     /**
      * @tests java.lang.String#regionMatches(boolean, int, java.lang.String,
-     *        int, int)
+     *int, int)
      */
     public void test_regionMatchesZILjava_lang_StringII() {
         // Test for method boolean java.lang.String.regionMatches(boolean, int,
@@ -731,32 +731,32 @@ public class String2Test extends junit.framework.TestCase {
         assertTrue("not identical", hw1.substring(0, hw1.length()) == hw1);
     }
 
-	/**
-	 * @tests java.lang.String#substring(int, int)
-	 */
-	public void test_substringErrorMessage() {
-		try {
-			hw1.substring(-1, 1);
-		} catch (StringIndexOutOfBoundsException ex) {
-			String msg = ex.getMessage();
-			assertTrue("Expected message to contain -1: " + msg, msg
-			        .indexOf("-1") != -1);
-		}
-		try {
-			hw1.substring(4, 1);
-		} catch (StringIndexOutOfBoundsException ex) {
-			String msg = ex.getMessage();
-			assertTrue("Expected message to contain -3: " + msg, msg
-			        .indexOf("-3") != -1);
-		}
-		try {
-			hw1.substring(0, 100);
-		} catch (StringIndexOutOfBoundsException ex) {
-			String msg = ex.getMessage();
-			assertTrue("Expected message to contain 100: " + msg, msg
-			        .indexOf("100") != -1);
-		}
-	}
+    /**
+     * @tests java.lang.String#substring(int, int)
+     */
+    public void test_substringErrorMessage() {
+        try {
+            hw1.substring(-1, 1);
+        } catch (StringIndexOutOfBoundsException ex) {
+            String msg = ex.getMessage();
+            assertTrue("Expected message to contain -1: " + msg, msg
+                    .indexOf("-1") != -1);
+        }
+        try {
+            hw1.substring(4, 1);
+        } catch (StringIndexOutOfBoundsException ex) {
+            String msg = ex.getMessage();
+            assertTrue("Expected message to contain -3: " + msg, msg
+                    .indexOf("-3") != -1);
+        }
+        try {
+            hw1.substring(0, 100);
+        } catch (StringIndexOutOfBoundsException ex) {
+            String msg = ex.getMessage();
+            assertTrue("Expected message to contain 100: " + msg, msg
+                    .indexOf("100") != -1);
+        }
+    }
 
     /**
      * @tests java.lang.String#toCharArray()
@@ -786,7 +786,7 @@ public class String2Test extends junit.framework.TestCase {
                 "a\u03c2", "a\u03a3".toLowerCase());
 
         assertEquals("toLowerCase case conversion did not succeed",
-        		"\uD801\uDC44", "\uD801\uDC1C".toLowerCase());
+                "\uD801\uDC44", "\uD801\uDC1C".toLowerCase());
     }
 
     /**
@@ -825,7 +825,7 @@ public class String2Test extends junit.framework.TestCase {
         assertTrue("Invalid conversion", !s.toUpperCase().equals(s));
 
         assertEquals("toUpperCase case conversion did not succeed",
-        		"\uD801\uDC1C", "\uD801\uDC44".toUpperCase());
+                "\uD801\uDC1C", "\uD801\uDC44".toUpperCase());
     }
 
     /**

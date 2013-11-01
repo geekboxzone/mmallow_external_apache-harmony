@@ -49,7 +49,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -83,11 +83,11 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING2", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING1", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -107,7 +107,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -123,7 +123,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getMessage());
@@ -160,11 +160,11 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING2", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING1", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 1",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 1);
@@ -180,11 +180,11 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING2", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING1", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -200,11 +200,11 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING2", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING1", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be -1",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), -1);
@@ -223,7 +223,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 1",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 1);
@@ -242,7 +242,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -261,7 +261,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be -1",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), -1);
@@ -277,7 +277,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getMessage());
@@ -296,7 +296,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getMessage());
@@ -315,7 +315,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getMessage());
@@ -433,7 +433,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertNull(
                 "The SQLState of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getSQLState());
@@ -455,7 +455,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertNull(
                 "The SQLState of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getSQLState());
@@ -509,7 +509,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -519,11 +519,11 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING2", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING1", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -534,7 +534,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_1() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -543,11 +543,11 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING2", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING1", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -558,7 +558,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_2() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -571,7 +571,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -582,7 +582,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_3() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -594,7 +594,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -605,7 +605,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_4() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -615,7 +615,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getMessage());
@@ -629,7 +629,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_5() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -638,7 +638,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getMessage());
@@ -652,7 +652,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_6() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -675,7 +675,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_7() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -697,7 +697,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -707,11 +707,11 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING2", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING1", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 1",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 1);
@@ -722,7 +722,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_1() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -731,11 +731,11 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING2", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING1", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 1",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 1);
@@ -746,7 +746,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_2() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -756,11 +756,11 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING2", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING1", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -771,7 +771,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_3() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -780,11 +780,11 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING2", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING1", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -795,7 +795,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_4() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -805,11 +805,11 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING2", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING1", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be -1",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), -1);
@@ -820,7 +820,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_5() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -829,11 +829,11 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING2", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING1", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be -1",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), -1);
@@ -845,7 +845,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_6() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -858,7 +858,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 1",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 1);
@@ -869,7 +869,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_7() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -882,7 +882,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 1",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 1);
@@ -893,7 +893,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_8() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -906,7 +906,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -917,7 +917,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_9() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -929,7 +929,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be 0",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), 0);
@@ -940,7 +940,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_10() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -953,7 +953,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be -1",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), -1);
@@ -964,7 +964,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_11() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -976,7 +976,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLInvalidAuthorizationSpecException should be -1",
                 sQLInvalidAuthorizationSpecException.getErrorCode(), -1);
@@ -987,7 +987,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_12() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -997,7 +997,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getMessage());
@@ -1011,7 +1011,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_13() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -1020,7 +1020,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getMessage());
@@ -1034,7 +1034,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_14() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1044,7 +1044,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getMessage());
@@ -1058,7 +1058,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_15() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -1067,7 +1067,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getMessage());
@@ -1082,7 +1082,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_16() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1092,7 +1092,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getMessage());
@@ -1106,7 +1106,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_17() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -1115,7 +1115,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLInvalidAuthorizationSpecException set and get should be equivalent",
                 "MYTESTSTRING", sQLInvalidAuthorizationSpecException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLInvalidAuthorizationSpecException should be null",
                 sQLInvalidAuthorizationSpecException.getMessage());
@@ -1129,7 +1129,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_18() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1152,7 +1152,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_19() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -1174,7 +1174,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_20() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1197,7 +1197,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_21() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(
@@ -1219,7 +1219,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_22() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1242,7 +1242,7 @@ public class SQLInvalidAuthorizationSpecExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLInvalidAuthorizationSpecException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_23() {
         SQLInvalidAuthorizationSpecException sQLInvalidAuthorizationSpecException = new SQLInvalidAuthorizationSpecException(

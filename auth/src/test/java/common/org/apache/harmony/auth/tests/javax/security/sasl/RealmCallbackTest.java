@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.auth.tests.javax.security.sasl;
 
@@ -27,7 +27,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for constructors and methods of RealmCallback class
- * 
  */
 
 public class RealmCallbackTest extends TestCase {
@@ -39,7 +38,7 @@ public class RealmCallbackTest extends TestCase {
     /**
      * Test for
      * <code>RealmCallback(String prompt, String defaultRealmInfo)</code>
-     * constructor 
+     * constructor
      * Assertion: throws IllegalArgumentException if parameters are
      * null or empty String
      */
@@ -136,5 +135,5 @@ public class RealmCallbackTest extends TestCase {
             rCB.setText(null);
             assertNull("Not null text", rCB.getText());
         }
-        }
+    }
 }

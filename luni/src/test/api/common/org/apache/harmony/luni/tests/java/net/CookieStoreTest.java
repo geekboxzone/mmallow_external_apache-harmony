@@ -34,7 +34,6 @@ public class CookieStoreTest extends TestCase {
 
     /**
      * @tests java.net.CookieStore#add(URI, HttpCookie)
-     * 
      * @since 1.6
      */
     public void test_add_LURI_LHttpCookie() throws URISyntaxException {
@@ -61,7 +60,7 @@ public class CookieStoreTest extends TestCase {
         } catch (NullPointerException e) {
             // expected
         }
-        
+
         cookieStore.add(uri, cookie);
         List<HttpCookie> list = cookieStore.get(uri);
         assertEquals(1, list.size());
@@ -72,12 +71,12 @@ public class CookieStoreTest extends TestCase {
         list = cookieStore.get(uri);
         assertEquals(1, list.size());
         assertEquals("  TESTVALUE1   ", list.get(0).getValue());
-        assertTrue(list.contains(cookie2));        
-        
+        assertTrue(list.contains(cookie2));
+
         // domain and path attributes works
         HttpCookie anotherCookie = new HttpCookie("name1", "value1");
         anotherCookie.setDomain("domain");
-        anotherCookie.setPath("Path"); 
+        anotherCookie.setPath("Path");
         cookieStore.add(uri, anotherCookie);
         list = cookieStore.get(uri);
         assertEquals(2, list.size());
@@ -93,7 +92,7 @@ public class CookieStoreTest extends TestCase {
         assertEquals("VALUE2", list.get(0).getValue());
         list = cookieStore.getCookies();
         assertEquals(3, list.size());
-        
+
         // expired cookie won't be selected.
         HttpCookie cookie4 = new HttpCookie("cookie4", "value4");
         cookie4.setMaxAge(-2);
@@ -109,7 +108,7 @@ public class CookieStoreTest extends TestCase {
         cookieStore.add(uri2, cookie4);
         list = cookieStore.get(uri2);
         assertEquals(2, list.size());
-        
+
         cookieStore.add(uri, cookie4);
         list = cookieStore.get(uri);
         assertEquals(3, list.size());
@@ -117,7 +116,7 @@ public class CookieStoreTest extends TestCase {
         assertEquals(2, list.size());
         list = cookieStore.getCookies();
         assertEquals(4, list.size());
-                
+
         URI baduri = new URI("bad_url");
         HttpCookie cookie6 = new HttpCookie("cookie5", "value5");
         cookieStore.add(baduri, cookie6);
@@ -127,7 +126,6 @@ public class CookieStoreTest extends TestCase {
 
     /**
      * @tests java.net.CookieStore#get(URI)
-     * 
      * @since 1.6
      */
     public void test_get_LURI() throws URISyntaxException {
@@ -153,7 +151,7 @@ public class CookieStoreTest extends TestCase {
         list = cookieStore.get(uri1);
         assertEquals(2, list.size());
         list = cookieStore.get(uri2);
-        assertEquals(1, list.size());        
+        assertEquals(1, list.size());
 
         // domain-match cookies also be selected.
         HttpCookie cookie4 = new HttpCookie("cookie_name4", "cookie_value4");
@@ -161,7 +159,7 @@ public class CookieStoreTest extends TestCase {
         cookieStore.add(uri2, cookie4);
         list = cookieStore.get(uri1);
         assertEquals(3, list.size());
-        
+
         cookieStore.add(uri1, cookie4);
         list = cookieStore.get(uri1);
         assertEquals(3, list.size());
@@ -178,7 +176,7 @@ public class CookieStoreTest extends TestCase {
         assertFalse(cookieStore.remove(uri1, cookie5));
         list = cookieStore.getCookies();
         assertEquals(4, list.size());
-        
+
         cookie4.setMaxAge(-123);
         list = cookieStore.get(uri1);
         assertEquals(2, list.size());
@@ -201,7 +199,6 @@ public class CookieStoreTest extends TestCase {
 
     /**
      * @tests java.net.CookieStore#getCookies()
-     * 
      * @since 1.6
      */
     public void test_getCookies() throws URISyntaxException {
@@ -251,7 +248,6 @@ public class CookieStoreTest extends TestCase {
 
     /**
      * @tests java.net.CookieStore#getURIs()
-     * 
      * @since 1.6
      */
     public void test_getURIs() throws URISyntaxException {
@@ -280,7 +276,6 @@ public class CookieStoreTest extends TestCase {
 
     /**
      * @tests java.net.CookieStore#remove(URI, HttpCookie)
-     * 
      * @since 1.6
      */
     public void test_remove_LURI_LHttpCookie() throws URISyntaxException {
@@ -307,7 +302,7 @@ public class CookieStoreTest extends TestCase {
         assertFalse(cookieStore.remove(uri2, cookie2));
         assertEquals(2, cookieStore.getURIs().size());
         assertEquals(0, cookieStore.getCookies().size());
-        
+
         assertTrue(cookieStore.removeAll());
         cookieStore.add(uri1, cookie1);
         cookieStore.add(uri2, cookie2);
@@ -350,7 +345,7 @@ public class CookieStoreTest extends TestCase {
         assertEquals(2, cookieStore.getURIs().size());
         assertEquals(1, cookieStore.getCookies().size());
         assertTrue(cookieStore.getCookies().contains(cookie2));
-        
+
         cookieStore.removeAll();
         URI uri3 = new URI("http://remove3.test.com");
         URI uri4 = new URI("http://test.com");
@@ -371,7 +366,6 @@ public class CookieStoreTest extends TestCase {
 
     /**
      * @tests java.net.CookieStore#test_removeAll()
-     * 
      * @since 1.6
      */
     public void test_removeAll() throws URISyntaxException {

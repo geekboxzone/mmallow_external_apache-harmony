@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -43,36 +43,37 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>CertStore</code> class constructors and
  * methods.
- * 
  */
 
 public class CertStore1Test extends TestCase {
 
     /**
      * Constructor for CertStoreTests.
+     *
      * @param arg0
      */
     public CertStore1Test(String arg0) {
         super(arg0);
     }
+
     public static final String srvCertStore = "CertStore";
 
-    private static final String defaultType = "LDAP";  
-    public static final String [] validValues =  {
+    private static final String defaultType = "LDAP";
+    public static final String[] validValues = {
             "LDAP", "ldap", "Ldap", "lDAP", "lDaP" };
-    public static  String [] validValuesC = null;
-     
-    private static String [] invalidValues = SpiEngUtils.invalidValues;
-    
+    public static String[] validValuesC = null;
+
+    private static String[] invalidValues = SpiEngUtils.invalidValues;
+
     private static boolean LDAPSupport = false;
     private static final String CollectionType = "Collection";
     private static boolean CollectionSupport = false;
-    
+
     private static Provider defaultProvider;
     private static String defaultProviderName;
     private static Provider defaultProviderCol;
     private static String defaultProviderColName;
-    
+
     private static String NotSupportMsg = "";
 
     static {
@@ -81,7 +82,7 @@ public class CertStore1Test extends TestCase {
         LDAPSupport = (defaultProvider != null);
         defaultProviderName = (LDAPSupport ? defaultProvider.getName() : null);
         NotSupportMsg = "LDAP and Collection algorithm are not supported";
-        
+
         defaultProviderCol = SpiEngUtils.isSupport(CollectionType,
                 srvCertStore);
         CollectionSupport = (defaultProviderCol != null);
@@ -93,33 +94,34 @@ public class CertStore1Test extends TestCase {
             validValuesC[2] = CollectionType.toLowerCase();
         }
     }
-    
+
     private Provider dProv = null;
     private String dName = null;
     private String dType = null;
     private CertStoreParameters dParams = null;
     private String[] dValid;
-    
+
     private boolean initParams() {
         if (!LDAPSupport && !CollectionSupport) {
             fail(NotSupportMsg);
             return false;
-        } 
-        dParams = (CollectionSupport ? (CertStoreParameters)new CollectionCertStoreParameters() :
-            (CertStoreParameters)new LDAPCertStoreParameters());
-        dType = (CollectionSupport ? CollectionType : defaultType );
-        dProv = (CollectionSupport ? defaultProviderCol : defaultProvider );
-        dName = (CollectionSupport ? defaultProviderColName : defaultProviderName );
-        dValid = (CollectionSupport ? validValuesC : validValues );
+        }
+        dParams = (CollectionSupport ? (CertStoreParameters) new CollectionCertStoreParameters() :
+                (CertStoreParameters) new LDAPCertStoreParameters());
+        dType = (CollectionSupport ? CollectionType : defaultType);
+        dProv = (CollectionSupport ? defaultProviderCol : defaultProvider);
+        dName = (CollectionSupport ? defaultProviderColName : defaultProviderName);
+        dValid = (CollectionSupport ? validValuesC : validValues);
         return true;
     }
-    private CertStore [] createCS() {
+
+    private CertStore[] createCS() {
         if (!LDAPSupport && !CollectionSupport) {
             fail(NotSupportMsg);
             return null;
         }
         try {
-            CertStore [] ss = new CertStore[3];
+            CertStore[] ss = new CertStore[3];
             ss[0] = CertStore.getInstance(dType, dParams);
             ss[1] = CertStore.getInstance(dType, dParams, dProv);
             ss[2] = CertStore.getInstance(dType, dParams, dName);
@@ -128,12 +130,12 @@ public class CertStore1Test extends TestCase {
             return null;
         }
     }
-    
+
 
     /**
      * Test for <code>getDefaultType()</code> method
-	 * Assertion: returns security property "certstore.type" or "LDAP"
-     */    
+     * Assertion: returns security property "certstore.type" or "LDAP"
+     */
     public void testCertStore01() {
         if (!LDAPSupport) {
             return;
@@ -146,21 +148,22 @@ public class CertStore1Test extends TestCase {
         }
         assertNotNull("Default type have not be null", dt);
         assertEquals("Incorrect default type", dt, sn);
-        
+
         Security.setProperty("certstore.type", def);
         dt = CertStore.getDefaultType();
         assertEquals("Incorrect default type", dt, def);
-        Security.setProperty("certstore.type", sn);        
-        assertEquals("Incorrect default type", Security.getProperty("certstore.type"), sn );
+        Security.setProperty("certstore.type", sn);
+        assertEquals("Incorrect default type", Security.getProperty("certstore.type"), sn);
     }
+
     /**
-     * Test for 
+     * Test for
      * <code>CertStore</code> constructor
      * Assertion: returns CertStore object
      */
-    
+
     public void testCertStore02() throws NoSuchAlgorithmException,
-            InvalidAlgorithmParameterException, CertStoreException {        
+            InvalidAlgorithmParameterException, CertStoreException {
         if (!initParams()) {
             return;
         }
@@ -168,7 +171,7 @@ public class CertStore1Test extends TestCase {
         CertStoreSpi spi = new MyCertStoreSpi(pp);
         CertStore certS = new myCertStore(spi, dProv, dType, pp);
         assertEquals("Incorrect algorithm", certS.getType(), dType);
-        assertEquals("Incorrect provider", certS.getProvider(), dProv); 
+        assertEquals("Incorrect provider", certS.getProvider(), dProv);
         assertTrue("Incorrect parameters", certS.getCertStoreParameters()
                 instanceof MyCertStoreParameters);
         try {
@@ -178,32 +181,32 @@ public class CertStore1Test extends TestCase {
         }
         certS = new myCertStore(null, null, null, null);
         assertNull("Incorrect algorithm", certS.getType());
-        assertNull("Incorrect provider", certS.getProvider()); 
-        assertNull("Incorrect parameters", certS.getCertStoreParameters());         
+        assertNull("Incorrect provider", certS.getProvider());
+        assertNull("Incorrect parameters", certS.getCertStoreParameters());
         try {
             certS.getCertificates(null);
             fail("NullPointerException must be thrown");
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test for <code>getInstance(String type, CertStoreParameters params)</code> method
-	 * Assertion: 
+     * Assertion:
      * throws NullPointerException when type is null
-     * throws NoSuchAlgorithmException when type is incorrect; 
+     * throws NoSuchAlgorithmException when type is incorrect;
      */
     public void testCertStore03() throws InvalidAlgorithmParameterException {
         if (!initParams()) {
             return;
-        } 
-        try {            
+        }
+        try {
             CertStore.getInstance(null, dParams);
             fail("NullPointerException or NoSuchAlgorithmException must be thrown when type is null");
         } catch (NullPointerException e) {
         } catch (NoSuchAlgorithmException e) {
         }
-        for (int i = 0; i < invalidValues.length; i++ ) { 
+        for (int i = 0; i < invalidValues.length; i++) {
             try {
                 CertStore.getInstance(invalidValues[i], dParams);
                 fail("NoSuchAlgorithmException must be thrown");
@@ -214,13 +217,13 @@ public class CertStore1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String type, CertStoreParameters params)</code> method
-	 * Assertion: return CertStore object
+     * Assertion: return CertStore object
      */
-    public void testCertStore05() 
+    public void testCertStore05()
             throws InvalidAlgorithmParameterException, NoSuchAlgorithmException {
         if (!initParams()) {
             return;
-        } 
+        }
         CertStore certS;
         for (int i = 0; i < dValid.length; i++) {
             certS = CertStore.getInstance(dValid[i], dParams);
@@ -228,19 +231,20 @@ public class CertStore1Test extends TestCase {
             certS.getCertStoreParameters();
         }
     }
+
     /**
      * Test for method
      * <code>getInstance(String type, CertStoreParameters params, String provider)</code>
-	 * Assertion: throws IllegalArgumentException when provider is null or empty
-	 * 
-	 * FIXME: verify IllegalArgumentException when provider is empty
+     * Assertion: throws IllegalArgumentException when provider is null or empty
+     * <p/>
+     * FIXME: verify IllegalArgumentException when provider is empty
      */
-    public void testCertStore06() 
+    public void testCertStore06()
             throws InvalidAlgorithmParameterException, NoSuchAlgorithmException,
-                NoSuchProviderException {
+            NoSuchProviderException {
         if (!initParams()) {
             return;
-        } 
+        }
         String provider = null;
         for (int i = 0; i < dValid.length; i++) {
             try {
@@ -255,18 +259,19 @@ public class CertStore1Test extends TestCase {
             }
         }
     }
+
     /**
      * Test for method
      * <code>getInstance(String type, CertStoreParameters params, String provider)</code>
-	 * Assertion: throws NoSuchProviderException when provider has invalid value
+     * Assertion: throws NoSuchProviderException when provider has invalid value
      */
-    public void testCertStore07() 
+    public void testCertStore07()
             throws InvalidAlgorithmParameterException, NoSuchAlgorithmException {
         if (!initParams()) {
             return;
-        } 
+        }
         for (int i = 0; i < dValid.length; i++) {
-            for (int j = 1; j < invalidValues.length; j++ ) {
+            for (int j = 1; j < invalidValues.length; j++) {
                 try {
                     CertStore.getInstance(dValid[i], dParams, invalidValues[j]);
                     fail("NoSuchProviderException must be thrown");
@@ -275,24 +280,25 @@ public class CertStore1Test extends TestCase {
             }
         }
     }
+
     /**
-     * Test for method 
+     * Test for method
      * <code>getInstance(String type, CertStoreParameters params, String provider)</code>
-	 * Assertion: 
+     * Assertion:
      * throws NullPointerException when type is null
-     * throws NoSuchAlgorithmException when type is incorrect; 
+     * throws NoSuchAlgorithmException when type is incorrect;
      */
-    public void testCertStore08() 
+    public void testCertStore08()
             throws InvalidAlgorithmParameterException, NoSuchProviderException,
-                NoSuchAlgorithmException {
+            NoSuchAlgorithmException {
         if (!initParams()) {
             return;
-        } 
+        }
         for (int i = 0; i < invalidValues.length; i++) {
             try {
                 CertStore.getInstance(invalidValues[i], dParams, dName);
                 fail("NoSuchAlgorithmException must be thrown");
-            } catch (NoSuchAlgorithmException e){
+            } catch (NoSuchAlgorithmException e) {
             }
         }
         try {
@@ -302,17 +308,17 @@ public class CertStore1Test extends TestCase {
         } catch (NoSuchAlgorithmException e) {
         }
     }
- 
+
     /**
      * Test for method
      * <code>getInstance(String type, CertStoreParameters params, String provider)</code>
-	 * Assertion: return CertStore object
+     * Assertion: return CertStore object
      */
-    public void testCertStore10() 
+    public void testCertStore10()
             throws InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
         if (!initParams()) {
             return;
-        } 
+        }
         CertStore certS;
         for (int i = 0; i < dValid.length; i++) {
             certS = CertStore.getInstance(dValid[i], dParams, dName);
@@ -324,42 +330,43 @@ public class CertStore1Test extends TestCase {
     /**
      * Test for method
      * <code>getInstance(String type, CertStoreParameters params, Provider provider)</code>
-	 * Assertion: throws IllegalArgumentException when provider is null
+     * Assertion: throws IllegalArgumentException when provider is null
      */
-    public void testCertStore11() 
+    public void testCertStore11()
             throws InvalidAlgorithmParameterException, NoSuchAlgorithmException,
-                NoSuchProviderException {
+            NoSuchProviderException {
         if (!initParams()) {
             return;
-        } 
+        }
         Provider provider = null;
         for (int i = 0; i < dValid.length; i++) {
-            try { 
+            try {
                 CertStore.getInstance(dValid[i], dParams, provider);
                 fail("IllegalArgumentException must be thrown");
             } catch (IllegalArgumentException e) {
             }
         }
     }
+
     /**
      * Test for <code>getInstance(String type, CertStoreParameters params, Provider provider)</code> method
-	 * Assertion: 
+     * Assertion:
      * throws NullPointerException when type is null
-     * throws NoSuchAlgorithmException when type is incorrect; 
+     * throws NoSuchAlgorithmException when type is incorrect;
      */
-    public void testCertStore12() 
+    public void testCertStore12()
             throws InvalidAlgorithmParameterException,
-                NoSuchAlgorithmException {
+            NoSuchAlgorithmException {
         if (!initParams()) {
             return;
-        } 
+        }
         try {
             CertStore.getInstance(null, dParams, dProv);
             fail("NullPointerException or NoSuchAlgorithmException must be thrown when type is null");
         } catch (NullPointerException e) {
         } catch (NoSuchAlgorithmException e) {
         }
-        for (int i = 0; i < invalidValues.length; i++ ) {
+        for (int i = 0; i < invalidValues.length; i++) {
             try {
                 CertStore.getInstance(invalidValues[i], dParams, dProv);
                 fail("NoSuchAlgorithmException must be thrown");
@@ -369,15 +376,15 @@ public class CertStore1Test extends TestCase {
     }
 
     /**
-     * Test for method 
+     * Test for method
      * <code>getInstance(String type, CertStoreParameters params, Provider provider)</code>
-	 * Assertion: return CertStore object
+     * Assertion: return CertStore object
      */
-    public void testCertStore14() 
+    public void testCertStore14()
             throws InvalidAlgorithmParameterException, NoSuchAlgorithmException {
         if (!initParams()) {
             return;
-        } 
+        }
         CertStore certS;
         for (int i = 0; i < dValid.length; i++) {
             certS = CertStore.getInstance(dValid[i], dParams, dProv);
@@ -385,29 +392,31 @@ public class CertStore1Test extends TestCase {
             certS.getCertStoreParameters();
         }
     }
+
     /**
-     * Test for methods 
-     * <code>getCertificates(CertSelector selector)</code> 
+     * Test for methods
+     * <code>getCertificates(CertSelector selector)</code>
      * <code>getCRLs(CRLSelector selector)</code>
-	 * Assertion: returns empty Collection when selector is null 
+     * Assertion: returns empty Collection when selector is null
      */
-    public void testCertStore15() 
+    public void testCertStore15()
             throws NoSuchAlgorithmException, InvalidAlgorithmParameterException,
-                    CertStoreException {
+            CertStoreException {
         if (!initParams()) {
             return;
-        } 
-        CertStore [] certS = createCS();
+        }
+        CertStore[] certS = createCS();
         assertNotNull("CertStore object were not created", certS);
         Collection coll;
         for (int i = 0; i < certS.length; i++) {
             coll = certS[i].getCertificates(null);
-            assertTrue("Result collection not empty",coll.isEmpty());
+            assertTrue("Result collection not empty", coll.isEmpty());
             coll = certS[i].getCRLs(null);
-            assertTrue("Result collection not empty",coll.isEmpty());
+            assertTrue("Result collection not empty", coll.isEmpty());
         }
     }
 }
+
 /**
  * Additional class to verify CertStore constructor
  */

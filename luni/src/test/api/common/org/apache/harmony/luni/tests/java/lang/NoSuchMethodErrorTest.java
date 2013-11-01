@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class NoSuchMethodErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.NoSuchMethodError#NoSuchMethodError()
-	 */
+    /**
+     * @tests java.lang.NoSuchMethodError#NoSuchMethodError()
+     */
     public void test_Constructor() {
         NoSuchMethodError e = new NoSuchMethodError();
         assertNull(e.getMessage());

@@ -335,7 +335,7 @@ public class SQLRecoverableExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLRecoverableException should be equals to cause.toString()",
                 "java.lang.Exception: MYTHROWABLE", sQLRecoverableException
-                        .getMessage());
+                .getMessage());
         assertNull("The SQLState of SQLRecoverableException should be null",
                 sQLRecoverableException.getSQLState());
         assertEquals("The error code of SQLRecoverableException should be 0",

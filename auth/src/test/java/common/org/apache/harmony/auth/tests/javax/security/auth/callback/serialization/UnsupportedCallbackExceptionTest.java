@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.callback.serialization;
 
@@ -36,6 +36,6 @@ public class UnsupportedCallbackExceptionTest extends SerializationTest {
 
     @Override
     protected Object[] getData() {
-        return new Object[] {new UnsupportedCallbackException(nc)};
+        return new Object[] { new UnsupportedCallbackException(nc) };
     }
 }

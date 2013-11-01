@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.auth.tests.javax.security.sasl;
 
@@ -36,7 +36,7 @@ import junit.framework.TestCase;
  */
 public class Sasl1Test extends TestCase {
 
-    private Provider [] provs;
+    private Provider[] provs;
     private boolean initProvs;
 
 
@@ -53,26 +53,26 @@ public class Sasl1Test extends TestCase {
             }
         }
     }
-    
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
         if (provs != null) {
             for (int i = 0; i < provs.length; i++) {
-                Security.insertProviderAt(provs[i], (i+1));
+                Security.insertProviderAt(provs[i], (i + 1));
             }
         }
     }
 
     /**
-     * Test for <code>getSaslClientFactories()</code> method 
-     * 
+     * Test for <code>getSaslClientFactories()</code> method
+     * <p/>
      * Assertion:
      * returns enumeration without any element
-     * 
+     * <p/>
      * All providers are previously removed.
      */
-    public void testGetClient() {    
+    public void testGetClient() {
         Enumeration<SaslClientFactory> en = Sasl.getSaslClientFactories();
         assertNotNull("List of SaslClientFactories should not be null", en);
         assertFalse("List of SaslClientFactories should not haves elements", en
@@ -80,11 +80,11 @@ public class Sasl1Test extends TestCase {
     }
 
     /**
-     * Test for <code>getSaslServerFactories()</code> method 
-     * 
+     * Test for <code>getSaslServerFactories()</code> method
+     * <p/>
      * Assertion:
      * returns enumeration without any element
-     * 
+     * <p/>
      * All providers are previously removed.
      */
     public void testGetSertver() {

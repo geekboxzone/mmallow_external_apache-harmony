@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -39,15 +39,14 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyGenerator</code> class constructors and methods
- * 
  */
 
 public class KeyGenerator_ImplTest extends TestCase {
-    
+
     private static final String srvKeyGenerator = "KeyGenerator";
 
     private static final String defaultAlg = "MyKeyGen";
-    
+
     private static final String KeyGeneratorProviderClass = "org.apache.harmony.crypto.tests.support.MyKeyGeneratorSpi";
 
     private static final String[] invalidValues = SpiEngUtils.invalidValues;
@@ -66,15 +65,15 @@ public class KeyGenerator_ImplTest extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        mProv = (new SpiEngUtils()).new MyProvider("MyKGProvider", "Testing provider", 
-                srvKeyGenerator.concat(".").concat(defaultAlg), 
+        mProv = (new SpiEngUtils()).new MyProvider("MyKGProvider", "Testing provider",
+                srvKeyGenerator.concat(".").concat(defaultAlg),
                 KeyGeneratorProviderClass);
         Security.insertProviderAt(mProv, 1);
     }
-    
+
     /*
-     * @see TestCase#tearDown()
-     */
+    * @see TestCase#tearDown()
+    */
     protected void tearDown() throws Exception {
         super.tearDown();
         Security.removeProvider(mProv.getName());
@@ -96,7 +95,7 @@ public class KeyGenerator_ImplTest extends TestCase {
         keyGen.init(78, new SecureRandom());
         try {
             keyGen.init(new SecureRandom());
-            fail("IllegalArgumentException must be thrown");                
+            fail("IllegalArgumentException must be thrown");
         } catch (IllegalArgumentException e) {
         }
         assertNull("generateKey must return null", keyGen.generateKey());
@@ -106,7 +105,7 @@ public class KeyGenerator_ImplTest extends TestCase {
         } catch (InvalidAlgorithmParameterException e) {
         }
         try {
-            keyGen.init(params, new SecureRandom());                
+            keyGen.init(params, new SecureRandom());
         } catch (Exception e) {
             fail("Unexpected: " + e.toString() + " was thrown");
         }
@@ -116,12 +115,12 @@ public class KeyGenerator_ImplTest extends TestCase {
         } catch (InvalidAlgorithmParameterException e) {
         }
         try {
-            keyGen.init(params);                
+            keyGen.init(params);
         } catch (Exception e) {
             fail("Unexpected: " + e.toString() + " was thrown");
         }
     }
-    
+
     /**
      * Test for <code>getInstance(String algorithm)</code> method
      * Assertions:
@@ -158,7 +157,7 @@ public class KeyGenerator_ImplTest extends TestCase {
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
      * method
-     * Assertions: 
+     * Assertions:
      * throws NullPointerException when algorithm is null;
      * throws NoSuchAlgorithmException when algorithm is null or incorrect;
      * throws IllegalArgumentException when provider is null or empty;
@@ -167,7 +166,7 @@ public class KeyGenerator_ImplTest extends TestCase {
      */
     public void testGetInstance02() throws NoSuchAlgorithmException,
             NoSuchProviderException, IllegalArgumentException,
-            InvalidKeySpecException, InvalidKeyException {            
+            InvalidKeySpecException, InvalidKeyException {
         try {
             KeyGenerator.getInstance(null, mProv.getName());
             fail("NullPointerException or NoSuchAlgorithmException should be thrown if algorithm is null");
@@ -267,5 +266,5 @@ public class KeyGenerator_ImplTest extends TestCase {
 }
 
 class APSpec implements AlgorithmParameterSpec {
-    
+
 }

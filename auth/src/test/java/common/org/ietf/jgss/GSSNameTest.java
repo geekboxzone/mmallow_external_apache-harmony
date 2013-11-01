@@ -28,32 +28,32 @@ import junit.framework.TestCase;
 public class GSSNameTest extends TestCase {
 
     public void testNT_ANONYMOUS() throws Exception {
-        Oid oid= new Oid("1.3.6.1.5.6.3");
+        Oid oid = new Oid("1.3.6.1.5.6.3");
         assertTrue(oid.equals(GSSName.NT_ANONYMOUS));
     }
-    
+
     public void testNT_EXPORT_NAME() throws Exception {
-        Oid oid= new Oid("1.3.6.1.5.6.4");
+        Oid oid = new Oid("1.3.6.1.5.6.4");
         assertTrue(oid.equals(GSSName.NT_EXPORT_NAME));
     }
-    
+
     public void testNT_HOSTBASED_SERVICE() throws Exception {
-        Oid oid= new Oid("1.3.6.1.5.6.2");
+        Oid oid = new Oid("1.3.6.1.5.6.2");
         assertTrue(oid.equals(GSSName.NT_HOSTBASED_SERVICE));
     }
-    
+
     public void testNT_MACHINE_UID_NAME() throws Exception {
-        Oid oid= new Oid("1.2.840.113554.1.2.1.2");
+        Oid oid = new Oid("1.2.840.113554.1.2.1.2");
         assertTrue(oid.equals(GSSName.NT_MACHINE_UID_NAME));
     }
-    
+
     public void testNT_STRING_UID_NAME() throws Exception {
-        Oid oid= new Oid("1.2.840.113554.1.2.1.3");
+        Oid oid = new Oid("1.2.840.113554.1.2.1.3");
         assertTrue(oid.equals(GSSName.NT_STRING_UID_NAME));
     }
-    
+
     public void testNT_USER_NAME() throws Exception {
-        Oid oid= new Oid("1.2.840.113554.1.2.1.1");
+        Oid oid = new Oid("1.2.840.113554.1.2.1.1");
         assertTrue(oid.equals(GSSName.NT_USER_NAME));
     }
 }

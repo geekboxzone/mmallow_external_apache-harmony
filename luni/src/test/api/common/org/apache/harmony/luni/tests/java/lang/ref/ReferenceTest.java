@@ -22,144 +22,144 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
 public class ReferenceTest extends junit.framework.TestCase {
-	Object tmpA, tmpB, obj;
+    Object tmpA, tmpB, obj;
 
-	volatile WeakReference wr;
+    volatile WeakReference wr;
 
-	protected void doneSuite() {
-		tmpA = tmpB = obj = null;
-	}
+    protected void doneSuite() {
+        tmpA = tmpB = obj = null;
+    }
 
-	/**
-	 * @tests java.lang.ref.Reference#clear()
-	 */
-	public void test_clear() {
-		tmpA = new Object();
-		tmpB = new Object();
-		SoftReference sr = new SoftReference(tmpA, new ReferenceQueue());
-		WeakReference wr = new WeakReference(tmpB, new ReferenceQueue());
-		assertTrue("Start: Object not cleared.", (sr.get() != null)
-				&& (wr.get() != null));
-		sr.clear();
-		wr.clear();
-		assertTrue("End: Object cleared.", (sr.get() == null)
-				&& (wr.get() == null));
-		// Must reference tmpA and tmpB so the jit does not optimize them away
-		assertTrue("should always pass", tmpA != sr.get() && tmpB != wr.get());
-	}
+    /**
+     * @tests java.lang.ref.Reference#clear()
+     */
+    public void test_clear() {
+        tmpA = new Object();
+        tmpB = new Object();
+        SoftReference sr = new SoftReference(tmpA, new ReferenceQueue());
+        WeakReference wr = new WeakReference(tmpB, new ReferenceQueue());
+        assertTrue("Start: Object not cleared.", (sr.get() != null)
+                && (wr.get() != null));
+        sr.clear();
+        wr.clear();
+        assertTrue("End: Object cleared.", (sr.get() == null)
+                && (wr.get() == null));
+        // Must reference tmpA and tmpB so the jit does not optimize them away
+        assertTrue("should always pass", tmpA != sr.get() && tmpB != wr.get());
+    }
 
-	/**
-	 * @tests java.lang.ref.Reference#enqueue()
-	 */
-	public void test_enqueue() {
-		ReferenceQueue rq = new ReferenceQueue();
-		obj = new Object();
-		Reference ref = new SoftReference(obj, rq);
-		assertTrue("Enqueue failed.", (!ref.isEnqueued())
-				&& ((ref.enqueue()) && (ref.isEnqueued())));
-		assertTrue("Not properly enqueued.", rq.poll().get() == obj);
-		// This fails...
-		assertTrue("Should remain enqueued.", !ref.isEnqueued());
-		assertTrue("Can not enqueue twice.", (!ref.enqueue())
-				&& (rq.poll() == null));
+    /**
+     * @tests java.lang.ref.Reference#enqueue()
+     */
+    public void test_enqueue() {
+        ReferenceQueue rq = new ReferenceQueue();
+        obj = new Object();
+        Reference ref = new SoftReference(obj, rq);
+        assertTrue("Enqueue failed.", (!ref.isEnqueued())
+                && ((ref.enqueue()) && (ref.isEnqueued())));
+        assertTrue("Not properly enqueued.", rq.poll().get() == obj);
+        // This fails...
+        assertTrue("Should remain enqueued.", !ref.isEnqueued());
+        assertTrue("Can not enqueue twice.", (!ref.enqueue())
+                && (rq.poll() == null));
 
-		rq = new ReferenceQueue();
-		obj = new Object();
-		ref = new WeakReference(obj, rq);
-		assertTrue("Enqueue failed2.", (!ref.isEnqueued())
-				&& ((ref.enqueue()) && (ref.isEnqueued())));
-		assertTrue("Not properly enqueued2.", rq.poll().get() == obj);
-		assertTrue("Should remain enqueued2.", !ref.isEnqueued()); // This
-		// fails.
-		assertTrue("Can not enqueue twice2.", (!ref.enqueue())
-				&& (rq.poll() == null));
-	}
+        rq = new ReferenceQueue();
+        obj = new Object();
+        ref = new WeakReference(obj, rq);
+        assertTrue("Enqueue failed2.", (!ref.isEnqueued())
+                && ((ref.enqueue()) && (ref.isEnqueued())));
+        assertTrue("Not properly enqueued2.", rq.poll().get() == obj);
+        assertTrue("Should remain enqueued2.", !ref.isEnqueued()); // This
+        // fails.
+        assertTrue("Can not enqueue twice2.", (!ref.enqueue())
+                && (rq.poll() == null));
+    }
 
-	/**
-	 * @tests java.lang.ref.Reference#enqueue()
-	 */
-	public void test_general() throws Exception {
-		// Test the general/overall functionality of Reference.
+    /**
+     * @tests java.lang.ref.Reference#enqueue()
+     */
+    public void test_general() throws Exception {
+        // Test the general/overall functionality of Reference.
 
-		class TestObject {
-			public boolean finalized;
+        class TestObject {
+            public boolean finalized;
 
-			public TestObject() {
-				finalized = false;
-			}
+            public TestObject() {
+                finalized = false;
+            }
 
-			protected void finalize() {
-				finalized = true;
-			}
-		}
+            protected void finalize() {
+                finalized = true;
+            }
+        }
 
-		final ReferenceQueue rq = new ReferenceQueue();
+        final ReferenceQueue rq = new ReferenceQueue();
 
-		class TestThread extends Thread {
-			public void run() {
-				// Create the object in a separate thread to ensure it will be
-				// gc'ed
-				Object testObj = new TestObject();
-				wr = new WeakReference(testObj, rq);
-				testObj = null;
-			}
-		}
+        class TestThread extends Thread {
+            public void run() {
+                // Create the object in a separate thread to ensure it will be
+                // gc'ed
+                Object testObj = new TestObject();
+                wr = new WeakReference(testObj, rq);
+                testObj = null;
+            }
+        }
 
-		Reference ref;
+        Reference ref;
 
-                Thread t = new TestThread();
-                t.start();
-                t.join();
-                System.gc();
-                System.runFinalization();
-                ref = rq.remove();
-                assertTrue("Unexpected ref1", ref == wr);
-                assertNotNull("Object not garbage collected1.", ref);
-                assertNull("Object could not be reclaimed1.", wr.get());
+        Thread t = new TestThread();
+        t.start();
+        t.join();
+        System.gc();
+        System.runFinalization();
+        ref = rq.remove();
+        assertTrue("Unexpected ref1", ref == wr);
+        assertNotNull("Object not garbage collected1.", ref);
+        assertNull("Object could not be reclaimed1.", wr.get());
 
-                t = new TestThread();
-                t.start();
-                t.join();
-                System.gc();
-                System.runFinalization();
-                ref = rq.poll();
-                assertTrue("Unexpected ref2", ref == wr);
-                assertNotNull("Object not garbage collected.", ref);
-                assertNull("Object could not be reclaimed.", ref.get());
-                // Reference wr so it does not get collected
-                assertNull("Object could not be reclaimed.", wr.get());
-	}
+        t = new TestThread();
+        t.start();
+        t.join();
+        System.gc();
+        System.runFinalization();
+        ref = rq.poll();
+        assertTrue("Unexpected ref2", ref == wr);
+        assertNotNull("Object not garbage collected.", ref);
+        assertNull("Object could not be reclaimed.", ref.get());
+        // Reference wr so it does not get collected
+        assertNull("Object could not be reclaimed.", wr.get());
+    }
 
-	/**
-	 * @tests java.lang.ref.Reference#get()
-	 */
-	public void test_get() {
-		// SM.
-		obj = new Object();
-		Reference ref = new WeakReference(obj, new ReferenceQueue());
-		assertTrue("Get succeeded.", ref.get() == obj);
-	}
+    /**
+     * @tests java.lang.ref.Reference#get()
+     */
+    public void test_get() {
+        // SM.
+        obj = new Object();
+        Reference ref = new WeakReference(obj, new ReferenceQueue());
+        assertTrue("Get succeeded.", ref.get() == obj);
+    }
 
-	/**
-	 * @tests java.lang.ref.Reference#isEnqueued()
-	 */
-	public void test_isEnqueued() {
-		ReferenceQueue rq = new ReferenceQueue();
-		obj = new Object();
-		Reference ref = new SoftReference(obj, rq);
-		assertTrue("Should start off not enqueued.", !ref.isEnqueued());
-		ref.enqueue();
-		assertTrue("Should now be enqueued.", ref.isEnqueued());
-		ref.enqueue();
-		assertTrue("Should still be enqueued.", ref.isEnqueued());
-		rq.poll();
-		// This fails ...
-		assertTrue("Should now be not enqueued.", !ref.isEnqueued());
-	}
+    /**
+     * @tests java.lang.ref.Reference#isEnqueued()
+     */
+    public void test_isEnqueued() {
+        ReferenceQueue rq = new ReferenceQueue();
+        obj = new Object();
+        Reference ref = new SoftReference(obj, rq);
+        assertTrue("Should start off not enqueued.", !ref.isEnqueued());
+        ref.enqueue();
+        assertTrue("Should now be enqueued.", ref.isEnqueued());
+        ref.enqueue();
+        assertTrue("Should still be enqueued.", ref.isEnqueued());
+        rq.poll();
+        // This fails ...
+        assertTrue("Should now be not enqueued.", !ref.isEnqueued());
+    }
 
-	protected void setUp() {
-	}
+    protected void setUp() {
+    }
 
-	protected void tearDown() {
-	}
+    protected void tearDown() {
+    }
 }

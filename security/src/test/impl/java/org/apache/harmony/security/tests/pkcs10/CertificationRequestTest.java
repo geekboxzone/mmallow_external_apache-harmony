@@ -33,14 +33,12 @@ import org.apache.harmony.security.x509.AlgorithmIdentifier;
 import org.apache.harmony.security.x509.SubjectPublicKeyInfo;
 
 
-
 public class CertificationRequestTest extends TestCase {
 
     /**
      * Test method for 'com.openintel.drl.security.pkcs10.CertificationRequest'.
      * Creates CertificationRequest, gets its values, encodes and decodes the
      * encoded form.
-     * 
      */
     public void testCertificationRequest() throws IOException {
         int version = 2;// v3
@@ -73,13 +71,13 @@ public class CertificationRequestTest extends TestCase {
 
         // check what was decoded
         CertificationRequestInfo decodedCRinfo = certReq.getInfo();
-        
+
         assertEquals(certReqInfo.getSubject(), decodedCRinfo.getSubject());
         assertEquals(certReqInfo.getSubjectPublicKeyInfo(), decodedCRinfo
                 .getSubjectPublicKeyInfo());
         assertEquals(certReqInfo.getVersion(), decodedCRinfo.getVersion());
         assertEquals(certReqInfo.getAttributes(), decodedCRinfo.getAttributes());
-        
+
         assertEquals(certReq.getAlgId(), decoded.getAlgId());
         assertTrue(Arrays.equals(certReq.getSignature(), decoded.getSignature()));
     }

@@ -42,7 +42,7 @@ public class LdapLoginModuleTest extends TestCase {
     private HashMap<String, String> options = new HashMap<String, String>();
 
     private final String USER_PROVIDER_URL = "ldap://9.181.106.121:389/ou=People,o=JNDITutorial,dc=my-domain,dc=com";
-    
+
     protected void setUp() throws Exception {
         options.put("userProvider", USER_PROVIDER_URL);
         options.put("useSSL", "false");
@@ -56,7 +56,7 @@ public class LdapLoginModuleTest extends TestCase {
     /**
      * Test method for {@link org.apache.harmony.auth.module.LdapLoginModule#abort()}.
      */
-    public void test_abort() throws LoginException{
+    public void test_abort() throws LoginException {
         LdapLoginModule jlm = new LdapLoginModule();
         try {
             assertFalse("Should return false if login failed or no login", jlm
@@ -83,7 +83,7 @@ public class LdapLoginModuleTest extends TestCase {
                     .abort());
         }
         subject = new Subject();
-        options.put("authIdentity","cn=Manager,dc=my-domain,dc=com");
+        options.put("authIdentity", "cn=Manager,dc=my-domain,dc=com");
         jlm.initialize(subject, new MockCallbackHandler(), null, options);
         jlm.login();
         assertTrue("Should return true if login was successful", jlm
@@ -96,7 +96,7 @@ public class LdapLoginModuleTest extends TestCase {
     public void test_commit() {
         LdapLoginModule module = new LdapLoginModule();
         Subject subject = new Subject();
-        options.put("authIdentity","cn=Manager,dc=my-domain,dc=com");
+        options.put("authIdentity", "cn=Manager,dc=my-domain,dc=com");
         module.initialize(subject, new MockCallbackHandler(), null, options);
         try {
             assertTrue("Login should be successful", module.login());
@@ -144,7 +144,7 @@ public class LdapLoginModuleTest extends TestCase {
             // expected LoginException
         }
 
-        options.put("authIdentity","cn=Manager,dc=my-domain,dc=com");
+        options.put("authIdentity", "cn=Manager,dc=my-domain,dc=com");
         Subject subject = new Subject();
         module.initialize(subject, new MockCallbackHandler(), null, options);
         try {
@@ -167,7 +167,7 @@ public class LdapLoginModuleTest extends TestCase {
     public void test_logout() {
         LdapLoginModule module = new LdapLoginModule();
         Subject subject = new Subject();
-        options.put("authIdentity","cn=Manager,dc=my-domain,dc=com");
+        options.put("authIdentity", "cn=Manager,dc=my-domain,dc=com");
         module.initialize(subject, new MockCallbackHandler(), null, options);
         try {
             assertTrue("Login should be successful", module.login());
@@ -185,28 +185,26 @@ public class LdapLoginModuleTest extends TestCase {
         principals = subject.getPrincipals();
         assertTrue("Principals should be cleared", principals.isEmpty());
     }
-    
-    public void test_optionsAndSharedStatus() throws LoginException{
-        options.put("authIdentity","cn=Manager,dc=my-domain,dc=com");
-        options.put("authzIdentity","testAuthzIdentityOption");
+
+    public void test_optionsAndSharedStatus() throws LoginException {
+        options.put("authIdentity", "cn=Manager,dc=my-domain,dc=com");
+        options.put("authzIdentity", "testAuthzIdentityOption");
         LdapLoginModule module = new LdapLoginModule();
         Subject subject = new Subject();
         module.initialize(subject, new MockCallbackHandler(), null, options);
         try {
             module.login();
             module.commit();
-            assertTrue("Should get a principal from authzIdentity option",subject.getPrincipals().contains(new UserPrincipal("testAuthzIdentityOption")));
-        }
-        catch(LoginException e){
+            assertTrue("Should get a principal from authzIdentity option", subject.getPrincipals().contains(new UserPrincipal("testAuthzIdentityOption")));
+        } catch (LoginException e) {
             fail("Login failed");
-        }
-        finally{
+        } finally {
             module.logout();
         }
-        
+
         options.put("debug", "true");
         options.put("useFirstPass", "true");
-        HashMap<String, Object> status = new HashMap<String,Object>();
+        HashMap<String, Object> status = new HashMap<String, Object>();
         status.put("javax.security.auth.login.name", "leo");
         status.put("javax.security.auth.login.password", "faultPass".toCharArray());
         subject = new Subject();
@@ -214,25 +212,22 @@ public class LdapLoginModuleTest extends TestCase {
         try {
             module.login();
             fail("Should be failed for using password from shared state");
-        }
-        catch(LoginException e){
+        } catch (LoginException e) {
             //expected LoginException here 
         }
-        
+
         options.remove("useFirstPass");
         options.put("tryFirstPass", "true");
         module.initialize(subject, new MockCallbackHandler(), status, options);
         try {
             module.login();
             module.commit();
-        }
-        catch(LoginException e){
-            fail("Login should be failed"); 
-        }
-        finally{
+        } catch (LoginException e) {
+            fail("Login should be failed");
+        } finally {
             module.logout();
         }
-        
+
         options.remove("tryFirstPass");
         options.put("clearPass", "true");
         status.put("javax.security.auth.login.name", "leo");
@@ -241,96 +236,86 @@ public class LdapLoginModuleTest extends TestCase {
         try {
             module.login();
             module.commit();
-            assertNull("javax.security.auth.login.name in shared state should be null when clearPass switch on",status.get("javax.security.auth.login.name"));
-            assertNull("javax.security.auth.login.password in shared state should be null when clearPass switch on",status.get("javax.security.auth.login.password"));
+            assertNull("javax.security.auth.login.name in shared state should be null when clearPass switch on", status.get("javax.security.auth.login.name"));
+            assertNull("javax.security.auth.login.password in shared state should be null when clearPass switch on", status.get("javax.security.auth.login.password"));
         } catch (LoginException e) {
             fail("Login shouldn't fail");
-        }
-        finally{
+        } finally {
             module.logout();
         }
-        
-        status = new HashMap<String,Object>();
+
+        status = new HashMap<String, Object>();
         options.remove("clearPass");
         options.put("storePass", "true");
         module.initialize(subject, new FaultCallbackHandler(), status, options);
         try {
             module.login();
-            module.commit();        
+            module.commit();
         } catch (LoginException e) {
-            assertNull("javax.security.auth.login.name in shared state should be null when login failed",status.get("javax.security.auth.login.name"));
-            assertNull("javax.security.auth.login.password in shared state should be null when login failed",status.get("javax.security.auth.login.password"));
-        }
-        finally{
+            assertNull("javax.security.auth.login.name in shared state should be null when login failed", status.get("javax.security.auth.login.name"));
+            assertNull("javax.security.auth.login.password in shared state should be null when login failed", status.get("javax.security.auth.login.password"));
+        } finally {
             module.logout();
         }
-        
+
         module.initialize(subject, new MockCallbackHandler(), status, options);
         try {
             module.login();
-            module.commit();        
+            module.commit();
         } catch (LoginException e) {
             fail("Login failed");
-        }
-        finally{
+        } finally {
             module.logout();
         }
-        assertNotNull("javax.security.auth.login.name should be stored in shared state when storePass switch on",status.get("javax.security.auth.login.name"));
-        assertNotNull("javax.security.auth.login.password should be stored in shared state when storePass switch on",status.get("javax.security.auth.login.password"));
-        
+        assertNotNull("javax.security.auth.login.name should be stored in shared state when storePass switch on", status.get("javax.security.auth.login.name"));
+        assertNotNull("javax.security.auth.login.password should be stored in shared state when storePass switch on", status.get("javax.security.auth.login.password"));
+
         status.put("javax.security.auth.login.name", "tester");
         status.put("javax.security.auth.login.password", "testerPass");
         module.initialize(subject, new MockCallbackHandler(), status, options);
         try {
             module.login();
-            module.commit();        
+            module.commit();
         } catch (LoginException e) {
             fail("Login failed");
-        }
-        finally{
+        } finally {
             module.logout();
         }
-        assertEquals("Should't override the username value in sharedState",status.get("javax.security.auth.login.name"),"tester");
-        assertEquals("Should't override the password value in sharedState",status.get("javax.security.auth.login.password"),"testerPass");     
+        assertEquals("Should't override the username value in sharedState", status.get("javax.security.auth.login.name"), "tester");
+        assertEquals("Should't override the password value in sharedState", status.get("javax.security.auth.login.password"), "testerPass");
     }
-    
-    static private class MockCallbackHandler implements CallbackHandler{
+
+    static private class MockCallbackHandler implements CallbackHandler {
 
         public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
-            for(int i=0;i<callbacks.length;i++){
-                if(callbacks[i] instanceof NameCallback){
-                    NameCallback nc = (NameCallback)callbacks[i];
+            for (int i = 0; i < callbacks.length; i++) {
+                if (callbacks[i] instanceof NameCallback) {
+                    NameCallback nc = (NameCallback) callbacks[i];
                     nc.setName("leo");
-                }
-                else if(callbacks[i] instanceof PasswordCallback){
-                    PasswordCallback pc = (PasswordCallback)callbacks[i];
+                } else if (callbacks[i] instanceof PasswordCallback) {
+                    PasswordCallback pc = (PasswordCallback) callbacks[i];
                     pc.setPassword("secret".toCharArray());
-                }
-                else
-                {
+                } else {
                     throw new Error(callbacks[i].getClass().toString());
                 }
-            }        
-        }        
+            }
+        }
     }
-    
-    static private class FaultCallbackHandler implements CallbackHandler{
+
+    static private class FaultCallbackHandler implements CallbackHandler {
 
         public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
-            for(int i=0;i<callbacks.length;i++){
-                if(callbacks[i] instanceof NameCallback){
-                    NameCallback nc = (NameCallback)callbacks[i];
+            for (int i = 0; i < callbacks.length; i++) {
+                if (callbacks[i] instanceof NameCallback) {
+                    NameCallback nc = (NameCallback) callbacks[i];
                     nc.setName("leo");
-                }
-                else if(callbacks[i] instanceof PasswordCallback){
-                    PasswordCallback pc = (PasswordCallback)callbacks[i];
+                } else if (callbacks[i] instanceof PasswordCallback) {
+                    PasswordCallback pc = (PasswordCallback) callbacks[i];
                     pc.setPassword("password".toCharArray());
-                }
-                else
-                {
+                } else {
                     throw new Error(callbacks[i].getClass().toString());
                 }
-            }        
-        }        
+            }
+        }
     }
 }

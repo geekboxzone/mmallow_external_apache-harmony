@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexey V. Varlamov
-*/
+ * @author Alexey V. Varlamov
+ */
 
 package org.apache.harmony.testframework.serialization;
 
@@ -56,11 +56,10 @@ import junit.framework.TestCase;
  * To turn on the <b>reference generation mode </b>, the test.mode property
  * should be set to value &quot;serial.reference&quot;. In this mode, no testing
  * is performed but golden files are produced, which contain reference
- * serialized objects. This mode should be run on a pure 
+ * serialized objects. This mode should be run on a pure
  * Implementation classes, which are targeted for compartibility. <br>
  * The location of golden files (in both modes) is controlled via
  * <b>&quot;RESOURCE_DIR&quot; </b> system property.
- * 
  */
 public abstract class SerializationTest extends TestCase {
 
@@ -118,7 +117,7 @@ public abstract class SerializationTest extends TestCase {
     /**
      * This is the main working method of this framework. Subclasses must
      * override it to provide actual objects for testing.
-     * 
+     *
      * @return array of objects to be de/serialized in tests.
      */
     protected abstract Object[] getData();
@@ -143,15 +142,15 @@ public abstract class SerializationTest extends TestCase {
      * compartibility with Reference Implementation.
      */
     public void testGolden() throws Throwable {
-        
+
         verifyGolden(this, getData());
     }
 
     /**
      * Returns golden file for an object being tested.
-     * 
+     *
      * @param index array index of tested data (as returned by
-     *        {@link #getData() getData()})
+     *              {@link #getData() getData()})
      * @return corresponding golden file
      */
     protected File getDataFile(int index) {
@@ -169,7 +168,7 @@ public abstract class SerializationTest extends TestCase {
      * Working method for files generation mode. Serializes test objects
      * returned by {@link #getData() getData()}to golden files, each object to
      * a separate file.
-     * 
+     *
      * @throws IOException
      */
     protected void produceGoldenFiles() throws IOException {
@@ -193,7 +192,7 @@ public abstract class SerializationTest extends TestCase {
      * Serializes specified object to an output stream.
      */
     public static void putObjectToStream(Object obj, OutputStream os)
-        throws IOException {
+            throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(os);
         oos.writeObject(obj);
         oos.flush();
@@ -204,16 +203,16 @@ public abstract class SerializationTest extends TestCase {
      * Deserializes single object from an input stream.
      */
     public static Serializable getObjectFromStream(InputStream is) throws IOException,
-        ClassNotFoundException {
+            ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(is);
         Object result = ois.readObject();
         ois.close();
-        return (Serializable)result;
+        return (Serializable) result;
     }
-    
+
     /**
      * Interface to compare (de)serialized objects
-     * 
+     * <p/>
      * Should be implemented if a class under test does not provide specific
      * equals() method and it's instances should to be compared manually.
      */
@@ -221,11 +220,11 @@ public abstract class SerializationTest extends TestCase {
 
         /**
          * Compares deserialized and reference objects.
-         * 
-         * @param initial -
-         *            initial object used for creating serialized form
+         *
+         * @param initial      -
+         *                     initial object used for creating serialized form
          * @param deserialized -
-         *            deserialized object
+         *                     deserialized object
          */
         void assertDeserialized(Serializable initial, Serializable deserialized);
     }
@@ -301,88 +300,88 @@ public abstract class SerializationTest extends TestCase {
             Assert.assertEquals(refCollection.size(), tstCollection.size());
             int size = refCollection.size();
             if (size > 0) {
-				ArrayList<Permission> refList = Collections.list(initPC
-						.elements());
-				ArrayList<Permission> tstList = Collections.list(dserPC
-						.elements());
-				if (refList.get(0) instanceof UnresolvedPermission
-						&& tstList.get(0) instanceof UnresolvedPermission) {
-					boolean found;
-					UnresolvedPermission refPerm, tstPerm;
-					for (int i = 0; i < size; i++) {
-						found = false;
-						refPerm = (UnresolvedPermission) refList.get(i);
-						for (int j = 0; j < size; j++) {
-							tstPerm = (UnresolvedPermission) tstList.get(i);
-							if (equalsUnresolvedPermission(refPerm, tstPerm)) {
-								found = true;
-								break;
-							}
-						}
+                ArrayList<Permission> refList = Collections.list(initPC
+                        .elements());
+                ArrayList<Permission> tstList = Collections.list(dserPC
+                        .elements());
+                if (refList.get(0) instanceof UnresolvedPermission
+                        && tstList.get(0) instanceof UnresolvedPermission) {
+                    boolean found;
+                    UnresolvedPermission refPerm, tstPerm;
+                    for (int i = 0; i < size; i++) {
+                        found = false;
+                        refPerm = (UnresolvedPermission) refList.get(i);
+                        for (int j = 0; j < size; j++) {
+                            tstPerm = (UnresolvedPermission) tstList.get(i);
+                            if (equalsUnresolvedPermission(refPerm, tstPerm)) {
+                                found = true;
+                                break;
+                            }
+                        }
 
-						Assert.assertTrue(found);
-					}
-				} else {
-					Assert.assertEquals(refCollection, tstCollection);
-				}
-			}
+                        Assert.assertTrue(found);
+                    }
+                } else {
+                    Assert.assertEquals(refCollection, tstCollection);
+                }
+            }
         }
-    
+
         /*
-		 * check whether the given two UnresolvedPermission objects equal to
-		 * each other
-		 */
-		private boolean equalsUnresolvedPermission(UnresolvedPermission up1,
-				UnresolvedPermission up2) {
-			java.security.cert.Certificate[] certs = up1.getUnresolvedCerts();
-			if (certs != null && certs.length == 0) {
-				if (null == up2.getUnresolvedCerts()) {
-					if (up1.getName().equals(up2.getName())) {
-						String up1Name = up1.getUnresolvedName();
-						String up2Name = up2.getUnresolvedName();
-						if (up1Name == null ? up2Name == null : up1Name
-								.equals(up2Name)) {
-							String up1Actions = up1.getUnresolvedActions();
-							String up2Actions = up2.getUnresolvedActions();
-							return up1Actions == null ? up2Actions == null
-									: up1Actions.equals(up2Actions);
-						}
-					}
-				}
-				return false;
-			}
-			return up1.equals(up2);
-		}
+           * check whether the given two UnresolvedPermission objects equal to
+           * each other
+           */
+        private boolean equalsUnresolvedPermission(UnresolvedPermission up1,
+                UnresolvedPermission up2) {
+            java.security.cert.Certificate[] certs = up1.getUnresolvedCerts();
+            if (certs != null && certs.length == 0) {
+                if (null == up2.getUnresolvedCerts()) {
+                    if (up1.getName().equals(up2.getName())) {
+                        String up1Name = up1.getUnresolvedName();
+                        String up2Name = up2.getUnresolvedName();
+                        if (up1Name == null ? up2Name == null : up1Name
+                                .equals(up2Name)) {
+                            String up1Actions = up1.getUnresolvedActions();
+                            String up2Actions = up2.getUnresolvedActions();
+                            return up1Actions == null ? up2Actions == null
+                                    : up1Actions.equals(up2Actions);
+                        }
+                    }
+                }
+                return false;
+            }
+            return up1.equals(up2);
+        }
     };
 
     /**
-	 * Comparator for java.security.UnresolvedPermission objects
-	 */
-	public final static SerializableAssert UNRESOLVED_PERMISSION_COMPARATOR = new SerializableAssert() {
-		public void assertDeserialized(Serializable initial,
-				Serializable deserialized) {
-			UnresolvedPermission initPerm = (UnresolvedPermission) initial;
-			UnresolvedPermission dserPerm = (UnresolvedPermission) deserialized;
-			java.security.cert.Certificate[] certs = initPerm
-					.getUnresolvedCerts();
-			if (certs != null && certs.length == 0) {
-				Assert.assertEquals(initPerm.getUnresolvedType(), dserPerm
-						.getUnresolvedType());
-				Assert.assertEquals(initPerm.getUnresolvedName(), dserPerm
-						.getUnresolvedName());
-				Assert.assertEquals(initPerm.getUnresolvedActions(), dserPerm
-						.getUnresolvedActions());
-				Assert.assertNull(dserPerm.getUnresolvedCerts());
-			} else {
-				Assert.assertEquals(initPerm, dserPerm);
-			}
-		}
-	};
-    
+     * Comparator for java.security.UnresolvedPermission objects
+     */
+    public final static SerializableAssert UNRESOLVED_PERMISSION_COMPARATOR = new SerializableAssert() {
+        public void assertDeserialized(Serializable initial,
+                Serializable deserialized) {
+            UnresolvedPermission initPerm = (UnresolvedPermission) initial;
+            UnresolvedPermission dserPerm = (UnresolvedPermission) deserialized;
+            java.security.cert.Certificate[] certs = initPerm
+                    .getUnresolvedCerts();
+            if (certs != null && certs.length == 0) {
+                Assert.assertEquals(initPerm.getUnresolvedType(), dserPerm
+                        .getUnresolvedType());
+                Assert.assertEquals(initPerm.getUnresolvedName(), dserPerm
+                        .getUnresolvedName());
+                Assert.assertEquals(initPerm.getUnresolvedActions(), dserPerm
+                        .getUnresolvedActions());
+                Assert.assertNull(dserPerm.getUnresolvedCerts());
+            } else {
+                Assert.assertEquals(initPerm, dserPerm);
+            }
+        }
+    };
+
     /**
      * Returns <code>comparator</code> for provided serializable
      * <code>object</code>.
-     * 
+     * <p/>
      * The <code>comparator</code> is searched in the following order: <br>-
      * if <code>test</code> implements SerializableAssert interface then it is
      * selected as </code>comparator</code>.<br>- if passed <code>object</code>
@@ -392,11 +391,11 @@ public abstract class SerializationTest extends TestCase {
      * class,for example, if passed <code>object</code> is instance of
      * java.lang.Throwable then <code>THROWABLE_COMPARATOR</code> is used.<br>-
      * otherwise RuntimeException is thrown
-     * 
-     * @param test -
-     *            test case
+     *
+     * @param test   -
+     *               test case
      * @param object -
-     *            object to be compared
+     *               object to be compared
      * @return object's comparator
      */
     public static SerializableAssert defineComparator(TestCase test,
@@ -410,11 +409,11 @@ public abstract class SerializationTest extends TestCase {
                 new Class[] { Object.class });
 
         if (m.getDeclaringClass() != Object.class) {
-        	if (object instanceof UnresolvedPermission) {
-				// object is an instance of UnresolvedPermission, use
-				// UNRESOLVED_PERMISSION_COMPARATOR
-				return UNRESOLVED_PERMISSION_COMPARATOR;
-			}
+            if (object instanceof UnresolvedPermission) {
+                // object is an instance of UnresolvedPermission, use
+                // UNRESOLVED_PERMISSION_COMPARATOR
+                return UNRESOLVED_PERMISSION_COMPARATOR;
+            }
             // one of classes overrides Object.equals(Object) method
             // use default comparator
             return DEFAULT_COMPARATOR;
@@ -430,17 +429,17 @@ public abstract class SerializationTest extends TestCase {
 
         throw new RuntimeException("Failed to detect comparator");
     }
-    
+
     /**
      * Verifies that object deserialized from golden file correctly.
-     * 
+     * <p/>
      * The method invokes <br>
      * verifyGolden(test, object, defineComparator(test, object));
-     * 
-     * @param test -
-     *            test case
+     *
+     * @param test   -
+     *               test case
      * @param object -
-     *            to be compared
+     *               to be compared
      */
     public static void verifyGolden(TestCase test, Object object)
             throws Exception {
@@ -450,18 +449,16 @@ public abstract class SerializationTest extends TestCase {
 
     /**
      * Verifies that object deserialized from golden file correctly.
-     * 
+     * <p/>
      * The method loads "<code>testName</code>.golden.ser" resource file
      * from "<module root>/src/test/resources/serialization/<code>testPackage</code>"
      * folder, reads an object from the loaded file and compares it with
      * <code>object</code> using specified <code>comparator</code>.
-     * 
-     * @param test-
-     *            test case
-     * @param object-
-     *            to be compared
+     *
+     * @param test-      test case
+     * @param object-    to be compared
      * @param comparator -
-     *            for comparing (de)serialized objects
+     *                   for comparing (de)serialized objects
      */
     public static void verifyGolden(TestCase test, Object object,
             SerializableAssert comparator) throws Exception {
@@ -476,14 +473,14 @@ public abstract class SerializationTest extends TestCase {
     /**
      * Verifies that objects from array deserialized from golden files
      * correctly.
-     * 
+     * <p/>
      * The method invokes <br>
      * verifyGolden(test, objects, defineComparator(test, object[0]));
-     * 
-     * @param test -
-     *            test case
+     *
+     * @param test    -
+     *                test case
      * @param objects -
-     *            array of objects to be compared
+     *                array of objects to be compared
      */
     public static void verifyGolden(TestCase test, Object[] objects)
             throws Exception {
@@ -495,20 +492,19 @@ public abstract class SerializationTest extends TestCase {
     /**
      * Verifies that objects from array deserialized from golden files
      * correctly.
-     * 
+     * <p/>
      * The method loads "<code>testName</code>.golden.<code>N</code>.ser"
      * resource files from "<module root>/src/test/resources/serialization/<code>testPackage</code>"
      * folder, from each loaded file it reads an object from and compares it
      * with corresponding object in provided array (i.e. <code>objects[N]</code>)
      * using specified <code>comparator</code>. (<code>N</code> is index
      * in object's array.)
-     * 
-     * @param test-
-     *            test case
-     * @param objects -
-     *            array of objects to be compared
+     *
+     * @param test-      test case
+     * @param objects    -
+     *                   array of objects to be compared
      * @param comparator -
-     *            for comparing (de)serialized objects
+     *                   for comparing (de)serialized objects
      */
     public static void verifyGolden(TestCase test, Object[] objects,
             SerializableAssert comparator) throws Exception {
@@ -520,33 +516,33 @@ public abstract class SerializationTest extends TestCase {
                     deserialized);
         }
     }
-    
+
     /**
      * Verifies that object can be smoothly serialized/deserialized.
-     * 
+     * <p/>
      * The method invokes <br>
      * verifySelf(object, defineComparator(null, object));
-     * 
+     *
      * @param object -
-     *            to be serialized/deserialized
+     *               to be serialized/deserialized
      */
     public static void verifySelf(Object object)
             throws Exception {
 
         verifySelf(object, defineComparator(null, object));
     }
-    
+
     /**
      * Verifies that object can be smoothly serialized/deserialized.
-     * 
+     * <p/>
      * The method serialize/deserialize <code>object</code> and compare it
      * with initial <code>object</code>.
-     * 
-     * @param object -
-     *            object to be serialized/deserialized
+     *
+     * @param object     -
+     *                   object to be serialized/deserialized
      * @param comparator -
-     *            for comparing serialized/deserialized object with initial
-     *            object
+     *                   for comparing serialized/deserialized object with initial
+     *                   object
      */
     public static void verifySelf(Object object, SerializableAssert comparator)
             throws Exception {
@@ -559,12 +555,12 @@ public abstract class SerializationTest extends TestCase {
     /**
      * Verifies that that objects from array can be smoothly
      * serialized/deserialized.
-     * 
+     * <p/>
      * The method invokes <br>
      * verifySelf(objects, defineComparator(null, object[0]));
-     * 
+     *
      * @param objects -
-     *            array of objects to be serialized/deserialized
+     *                array of objects to be serialized/deserialized
      */
     public static void verifySelf(Object[] objects)
             throws Exception {
@@ -572,25 +568,25 @@ public abstract class SerializationTest extends TestCase {
         Assert.assertFalse("Empty array", objects.length == 0);
         verifySelf(objects, defineComparator(null, objects[0]));
     }
-    
+
     /**
      * Verifies that that objects from array can be smoothly
      * serialized/deserialized.
-     * 
+     * <p/>
      * The method serialize/deserialize each object in <code>objects</code>
      * array and compare it with initial object.
-     * 
-     * @param objects -
-     *            array of objects to be serialized/deserialized
+     *
+     * @param objects    -
+     *                   array of objects to be serialized/deserialized
      * @param comparator -
-     *            for comparing serialized/deserialized object with initial
-     *            object
+     *                   for comparing serialized/deserialized object with initial
+     *                   object
      */
     public static void verifySelf(Object[] objects, SerializableAssert comparator)
             throws Exception {
 
         Assert.assertFalse("Empty array", objects.length == 0);
-        for(Object entry: objects){
+        for (Object entry : objects) {
             verifySelf(entry, comparator);
         }
     }
@@ -612,21 +608,21 @@ public abstract class SerializationTest extends TestCase {
 
         return getObjectFromStream(in);
     }
-    
+
     /**
      * Creates golden file.
-     * 
+     * <p/>
      * The folder for created file is: <code>root + test's package name</code>.
      * The file name is: <code>test's name + "golden.ser"</code>
-     * 
-     * @param root -
-     *            root directory for serialization resource files
-     * @param test -
-     *            test case
+     *
+     * @param root   -
+     *               root directory for serialization resource files
+     * @param test   -
+     *               test case
      * @param object -
-     *            object to be serialized
+     *               object to be serialized
      * @throws IOException -
-     *             if I/O error
+     *                     if I/O error
      */
     public static void createGoldenFile(String root, TestCase test,
             Object object) throws IOException {
@@ -650,12 +646,12 @@ public abstract class SerializationTest extends TestCase {
         Assert.fail("Generating golden file.\nGolden file name:"
                 + goldenFile.getAbsolutePath());
     }
-    
+
     /**
      * Copies an object by serializing/deserializing it.
-     * 
+     *
      * @param initial -
-     *            an object to be copied
+     *                an object to be copied
      * @return copy of provided object
      */
     public static Serializable copySerializable(Serializable initial)

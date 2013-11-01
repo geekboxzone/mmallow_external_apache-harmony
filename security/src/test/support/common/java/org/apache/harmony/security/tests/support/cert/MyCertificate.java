@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.support.cert;
 
@@ -40,7 +40,7 @@ public class MyCertificate extends Certificate {
 
     /**
      * Constructs new object of class <code>MyCertificate</code>
-     * 
+     *
      * @param type
      * @param encoding
      */
@@ -90,9 +90,11 @@ public class MyCertificate extends Certificate {
             public String getAlgorithm() {
                 return "TEST";
             }
+
             public byte[] getEncoded() {
-                return new byte[] {(byte)1, (byte)2, (byte)3};
+                return new byte[] { (byte) 1, (byte) 2, (byte) 3 };
             }
+
             public String getFormat() {
                 return "TEST_FORMAT";
             }

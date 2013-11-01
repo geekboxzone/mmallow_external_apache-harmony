@@ -23,29 +23,27 @@ import junit.framework.TestCase;
 
 /**
  * Tests for SSLEngineResult class
- * 
  */
 public class SSLEngineResultTest extends TestCase {
 
     /**
      * Test for <code>SSLEngineResult(SSLEngineResult.Status status,
-     *              SSLEngineResult.HandshakeStatus handshakeStatus,
-     *              int bytesConsumed,
-     *              int bytesProduced) </code> constructor and 
+     * SSLEngineResult.HandshakeStatus handshakeStatus,
+     * int bytesConsumed,
+     * int bytesProduced) </code> constructor and
      * <code>getHandshakeStatus()</code>
      * <code>getStatus()</code>
      * <code>bytesConsumed()</code>
      * <code>bytesProduced()</code>
      * <code>toString()</code>
      * methods
-     * Assertions: 
+     * Assertions:
      * constructor throws IllegalArgumentException when bytesConsumed
      * or bytesProduced is negative or when status or handshakeStatus
-     * is null  
-     *
+     * is null
      */
     public void testSSLEngineResultConstructor() {
-    
+
         int[] neg = { -1, -10, -1000, Integer.MIN_VALUE,
                 (Integer.MIN_VALUE + 1) };
         int[] pos = { 0, 1, 1000, Integer.MAX_VALUE, (Integer.MAX_VALUE - 1) };
@@ -77,8 +75,8 @@ public class SSLEngineResultTest extends TestCase {
             } catch (IllegalArgumentException e) {
             }
         }
-        SSLEngineResult.Status [] enS = SSLEngineResult.Status.values();
-        SSLEngineResult.HandshakeStatus [] enHS = SSLEngineResult.HandshakeStatus
+        SSLEngineResult.Status[] enS = SSLEngineResult.Status.values();
+        SSLEngineResult.HandshakeStatus[] enHS = SSLEngineResult.HandshakeStatus
                 .values();
         SSLEngineResult res;
         String toS;
@@ -103,14 +101,15 @@ public class SSLEngineResultTest extends TestCase {
                 }
             }
         }
-        
+
     }
+
     /**
      * Test for <code>SSLEngineResult.Status.values()</code> method
      */
 
     public void testStatus01() {
-        SSLEngineResult.Status [] enS = SSLEngineResult.Status.values();
+        SSLEngineResult.Status[] enS = SSLEngineResult.Status.values();
         assertTrue("Incorrect array of Status objects", enS.length > 0);
         assertTrue("OK object does not define", findEl(enS,
                 SSLEngineResult.Status.OK));
@@ -121,16 +120,16 @@ public class SSLEngineResultTest extends TestCase {
         assertTrue("BUFFER_UNDERFLOW object does not define", findEl(enS,
                 SSLEngineResult.Status.BUFFER_UNDERFLOW));
     }
-    
+
     /**
      * Test for <code>SSLEngineResult.Status.valueOf(String name)</code> method
-     * Assertion: 
+     * Assertion:
      * throws IllegalArgumentException when there is no constan with specified
-     * name 
+     * name
      */
 
     public void testStatus02() {
-        String [] invalid = {"", "OK1", "BUFFER_overflow", "BUFFER_UND",
+        String[] invalid = { "", "OK1", "BUFFER_overflow", "BUFFER_UND",
                 "CLOSED_CLOSED", "Bad string for verification valueOf method"
         };
         assertEquals(SSLEngineResult.Status.valueOf("BUFFER_OVERFLOW"),
@@ -145,17 +144,17 @@ public class SSLEngineResultTest extends TestCase {
             try {
                 SSLEngineResult.Status.valueOf(invalid[i]);
                 fail("IllegalArgumentException must be thrown for name: " + invalid[i]);
-            } catch (IllegalArgumentException e) {                
+            } catch (IllegalArgumentException e) {
             }
-        }                 
+        }
     }
-    
+
     /**
      * Test for <code>SSLEngineResult.HandshakeStatus.values()</code> method
      */
 
     public void testHandshakeStatus01() {
-        SSLEngineResult.HandshakeStatus [] enHS = SSLEngineResult.HandshakeStatus
+        SSLEngineResult.HandshakeStatus[] enHS = SSLEngineResult.HandshakeStatus
                 .values();
         assertTrue("Incorrect array of HandshakeStatus objects",
                 enHS.length > 0);
@@ -170,16 +169,16 @@ public class SSLEngineResultTest extends TestCase {
         assertTrue("NOT_HANDSHAKING object does not define", findEl(enHS,
                 SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING));
     }
-    
+
     /**
      * Test for <code>SSLEngineResult.HandshakeStatus.valueOf(String name)</code> method
-     * Assertion: 
+     * Assertion:
      * throws IllegalArgumentException when there is no constan with specified
-     * name 
+     * name
      */
 
     public void testHandshakeStatus02() {
-        String [] invalid = {"", "FINISHED1", "NEED_task", "NEED_UN",
+        String[] invalid = { "", "FINISHED1", "NEED_task", "NEED_UN",
                 "NEED_WRAP_WRAP", "not_HANDSHAKING", "Bad string for verification valueOf method"
         };
         assertEquals(SSLEngineResult.HandshakeStatus.valueOf("NOT_HANDSHAKING"),
@@ -196,11 +195,11 @@ public class SSLEngineResultTest extends TestCase {
             try {
                 SSLEngineResult.HandshakeStatus.valueOf(invalid[i]);
                 fail("IllegalArgumentException must be thrown for name: " + invalid[i]);
-            } catch (IllegalArgumentException e) {                
+            } catch (IllegalArgumentException e) {
             }
         }
-    } 
-    
+    }
+
     private boolean findEl(Object[] arr, Object el) {
         boolean ok = false;
         for (int i = 0; i < arr.length; i++) {

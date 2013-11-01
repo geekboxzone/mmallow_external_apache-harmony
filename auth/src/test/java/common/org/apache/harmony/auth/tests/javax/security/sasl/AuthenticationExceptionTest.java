@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.auth.tests.javax.security.sasl;
 
@@ -27,12 +27,11 @@ import junit.framework.TestCase;
 
 /**
  * Tests for constructors and methods of AuthenticationException class
- * 
  */
 public class AuthenticationExceptionTest extends TestCase {
     /**
      * Constructor for AuthenticationExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public AuthenticationExceptionTest(String arg0) {
@@ -47,9 +46,9 @@ public class AuthenticationExceptionTest extends TestCase {
     static Throwable tCause = new Throwable("Throwable for exception");
 
     /**
-     * Test for <code>AuthenticationException()</code> constructor 
-     * Assertion: constructs AuthenticationException with null message and 
-     * null root exception. 
+     * Test for <code>AuthenticationException()</code> constructor
+     * Assertion: constructs AuthenticationException with null message and
+     * null root exception.
      */
     public void testAuthenticationException01() {
         AuthenticationException tE;
@@ -59,9 +58,9 @@ public class AuthenticationExceptionTest extends TestCase {
     }
 
     /**
-     * Test for <code>AuthenticationException(String detail)</code> constructor 
+     * Test for <code>AuthenticationException(String detail)</code> constructor
      * Assertion:
-     * constructs AuthenticationException with defined detail message. 
+     * constructs AuthenticationException with defined detail message.
      * Parameter <code>detail</code> is not null.
      */
     public void testAuthenticationException02() {
@@ -75,7 +74,7 @@ public class AuthenticationExceptionTest extends TestCase {
     }
 
     /**
-     * Test for <code>AuthenticationException(String detail)</code> constructor 
+     * Test for <code>AuthenticationException(String detail)</code> constructor
      * Assertion: constructs AuthenticationException when <code>detail</code> is null
      */
     public void testAuthenticationException03() {
@@ -116,7 +115,7 @@ public class AuthenticationExceptionTest extends TestCase {
      * Assertion: constructs AuthenticationException when <code>ex</code> is not null
      * <code>detail</code> is null
      */
-    public void testAuthenticationException06() {        
+    public void testAuthenticationException06() {
         AuthenticationException tE = new AuthenticationException(null, tCause);
         if (tE.getMessage() != null) {
             String toS = tCause.toString();
@@ -148,10 +147,10 @@ public class AuthenticationExceptionTest extends TestCase {
                 }
             }
             assertEquals("getCause() must return "
-                        .concat(tCause.toString()), tE.getCause(), tCause);
+                    .concat(tCause.toString()), tE.getCause(), tCause);
         }
     }
-    
+
     /**
      * Test for <code>toString()</code> method
      * Assertion: returns not null string

@@ -30,7 +30,7 @@ import junit.framework.TestCase;
 public class PKIStatusInfoTest extends TestCase {
 
     /**
-     * @throws IOException 
+     * @throws IOException
      * @tests 'org.apache.harmony.security.x509.tsp.PKIStatusInfo.getEncoded()'
      */
     public void testGetEncoded() throws IOException {
@@ -39,10 +39,10 @@ public class PKIStatusInfoTest extends TestCase {
         statusStr.add("two");
         PKIStatusInfo info = new PKIStatusInfo(PKIStatus.REJECTION, statusStr,
                 PKIFailureInfo.BAD_DATA_FORMAT);
-        byte [] encoding = PKIStatusInfo.ASN1.encode(info);
+        byte[] encoding = PKIStatusInfo.ASN1.encode(info);
         PKIStatusInfo decoded = (PKIStatusInfo) PKIStatusInfo.ASN1
                 .decode(encoding);
-        
+
         assertEquals(info.getStatus(), decoded.getStatus());
         List decodedStString = decoded.getStatusString();
         assertNotNull(decodedStString);

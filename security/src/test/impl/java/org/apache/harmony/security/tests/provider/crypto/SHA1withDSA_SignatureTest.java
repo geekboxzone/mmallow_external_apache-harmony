@@ -297,11 +297,13 @@ public class SHA1withDSA_SignatureTest extends TestCase {
             try {
                 signs[i].initSign(null);
                 fail("case1: no InvalidKeyException : i=" + i);
-            } catch (InvalidKeyException e) {}
+            } catch (InvalidKeyException e) {
+            }
             try {
                 signs[i].initSign(myRSAPrivateKey);
                 fail("case: no InvalidKeyException : i=" + i);
-            } catch (InvalidKeyException e) {}
+            } catch (InvalidKeyException e) {
+            }
         }
     }
 
@@ -320,7 +322,8 @@ public class SHA1withDSA_SignatureTest extends TestCase {
                     signs[i].initSign(getDSAPrivateKey(params[j][0],
                             params[j][1], params[j][2], BigInteger.ZERO));
                     fail("no InvalidKeyException : i =" + i + " j=" + j);
-                } catch (InvalidKeyException e) {}
+                } catch (InvalidKeyException e) {
+                }
             }
         }
     }
@@ -329,7 +332,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
      * The test against the "initSign(PrivateKey)" method.
      * It checks out that the method negates the effect of previous call
      * if it is invoked with a different argument.
-     *
+     * <p/>
      * Note.
      * In RI, negating effect of previous call includes
      * discarding updates done before calling the method.
@@ -362,16 +365,16 @@ public class SHA1withDSA_SignatureTest extends TestCase {
      * The test against the "initSign(PrivateKey)" method.
      * It checks out that the method negates the effect of previous call
      * if it is invoked with the same argument.
-     *
+     * <p/>
      * Notes.
      * 1. In RI, negating effect of previous call includes
-     *    discarding updates done before calling the method.
+     * discarding updates done before calling the method.
      * 2.
      * The specification for the method contains the following clause:
-     *     "If this method is called again with a different argument,
-     *     it negates the effect of this call."
+     * "If this method is called again with a different argument,
+     * it negates the effect of this call."
      * which meaning requires certainty in case of sequence
-     *    initSign - update - initSign
+     * initSign - update - initSign
      * RI behavior is such that with respect to "update"
      * it doesn't matter whether argument is the same or different.
      */
@@ -408,11 +411,13 @@ public class SHA1withDSA_SignatureTest extends TestCase {
             try {
                 signs[i].initVerify(pk);
                 fail("case1 : no InvalidKeyException i=" + i);
-            } catch (InvalidKeyException e) {}
+            } catch (InvalidKeyException e) {
+            }
             try {
                 signs[i].initVerify(myRSAPublicKey);
                 fail("case2 : no InvalidKeyException i=" + i);
-            } catch (InvalidKeyException e) {}
+            } catch (InvalidKeyException e) {
+            }
         }
     }
 
@@ -431,7 +436,8 @@ public class SHA1withDSA_SignatureTest extends TestCase {
                     signs[i].initVerify(getDSAPublicKey(params[j][0],
                             params[j][1], params[j][2], BigInteger.ZERO));
                     fail("no InvalidKeyException : i=" + i + " j=" + j);
-                } catch (InvalidKeyException e) {}
+                } catch (InvalidKeyException e) {
+                }
             }
         }
     }
@@ -459,7 +465,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
      * if it is invoked with the same argument.
      * Like it is for "initSign", RI behavior is such that with respect to "update"
      * it doesn't matter whether argument is the same or different.
-     *
+     * <p/>
      * Note.
      * In RI negating effect of previous call includes
      * discarding updates done before calling the method.
@@ -557,9 +563,9 @@ public class SHA1withDSA_SignatureTest extends TestCase {
      * The test agains the "sign(byte[], int, int)" method.
      * It checks out that if a Signature object's state is SIGN
      * passing to the object "offset" and "len" arguments that satisfy the condition:
-     *     "offset + len <= outbuf.length"
+     * "offset + len <= outbuf.length"
      * but "len" < actual length of signature results in throwing SignatureException.
-     *
+     * <p/>
      * Note.
      * As signature's length varies we use length value of 44 which is certainly less than signature's length,
      */
@@ -574,7 +580,8 @@ public class SHA1withDSA_SignatureTest extends TestCase {
             try {
                 signingSigns[i].sign(sig, 0, 44);
                 fail("case1 : no SignatureException : i=" + i);
-            } catch (SignatureException e) {}
+            } catch (SignatureException e) {
+            }
         }
     }
 
@@ -739,10 +746,10 @@ public class SHA1withDSA_SignatureTest extends TestCase {
      * The test against the "verify(byte[], int, int)" method.
      * It checks out that if Signature object's state is VERIFY
      * the method throws IllegalArgumentException in case of the following arguments :
-     *       outbufs == null or
-     *       offset < 0      or
-     *       length < 0      or
-     *       offset+length > outbuf.length
+     * outbufs == null or
+     * offset < 0      or
+     * length < 0      or
+     * offset+length > outbuf.length
      */
     public final void testVerifybyteArrayintint01() throws Exception {
 
@@ -752,26 +759,30 @@ public class SHA1withDSA_SignatureTest extends TestCase {
         try {
             verifyingSign.verify(null, 0, 48);
             fail("case1 : no IllegalArgumentException");
-        } catch (IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+        }
 
         // case2 : len < 0
         try {
             verifyingSign.verify(bArray, 0, -1);
             fail("case2 : no IllegalArgumentException");
-        } catch (IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+        }
 
         // case3 : offset < 0
         try {
             verifyingSign.verify(bArray, -1, 48);
             fail("case3: no IllegalArgumentException");
-        } catch (IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+        }
 
         // case4 : offset+len > outbuf.length
         try {
             int k = bArray.length / 2;
             verifyingSign.verify(bArray, k, bArray.length - k + 1);
             fail("case4: no IllegalArgumentException");
-        } catch (IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     /**
@@ -781,7 +792,7 @@ public class SHA1withDSA_SignatureTest extends TestCase {
      * (1) offset+length < 0
      * (2) offset > signature.length
      * (3) SignatureException if outbuf's lentgh is correct
-     *     whereas a signature doesn't meet ASN1 syntax.
+     * whereas a signature doesn't meet ASN1 syntax.
      */
     public final void testVerifybyteArrayintint02() throws Exception {
 
@@ -790,18 +801,21 @@ public class SHA1withDSA_SignatureTest extends TestCase {
         try {
             verifyingSign.verify(sigBytes, Integer.MAX_VALUE, 2);
             fail("testcase1 : no SignatureException");
-        } catch (SignatureException e) {}
+        } catch (SignatureException e) {
+        }
 
         try {
             verifyingSign.verify(sigBytes, 2, Integer.MAX_VALUE);
             fail("testcase2 : no SignatureException");
-        } catch (SignatureException e) {}
+        } catch (SignatureException e) {
+        }
 
         verifyingSign.update(message);
         try {
             verifyingSign.verify(sigBytes, 0, 50);
             fail("testcase3 : SignatureException");
-        } catch (SignatureException e) {}
+        } catch (SignatureException e) {
+        }
     }
 
     /**
@@ -894,27 +908,33 @@ public class SHA1withDSA_SignatureTest extends TestCase {
 
         try {
             verifyingSign.verify(null, 0, n);
-        } catch (IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+        }
 
         try {
             verifyingSign.verify(sigBytes, -1, n);
-        } catch (IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+        }
 
         try {
             verifyingSign.verify(sigBytes, 0, -1);
-        } catch (IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+        }
 
         try {
             verifyingSign.verify(sigBytes, sigBytes.length - 10, 30);
-        } catch (IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+        }
 
         try {
             verifyingSign.verify(sigBytes, Integer.MAX_VALUE, n);
-        } catch (SignatureException e) {}
+        } catch (SignatureException e) {
+        }
 
         try {
             verifyingSign.verify(sig, 0, n);
-        } catch (SignatureException e) {}
+        } catch (SignatureException e) {
+        }
 
         // if the method doesn't reset the expected result of verificaton is "true"
 

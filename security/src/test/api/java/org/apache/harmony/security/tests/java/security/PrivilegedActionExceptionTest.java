@@ -16,16 +16,16 @@
  */
 
 /**
-* @author Alexander V. Astapchuk
-*/
+ * @author Alexander V. Astapchuk
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.*;
 import junit.framework.TestCase;
 
 /**
  * Unit test for java.security.PrivilegedActionException.
- *
  */
 
 public class PrivilegedActionExceptionTest extends TestCase {

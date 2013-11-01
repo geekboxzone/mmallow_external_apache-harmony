@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.login.serialization;
 
@@ -34,6 +34,6 @@ public class AccountNotFoundExceptionTest extends SerializationTest {
 
     @Override
     protected Object[] getData() {
-        return new Object[] {new AccountNotFoundException("message")};
+        return new Object[] { new AccountNotFoundException("message") };
     }
 }

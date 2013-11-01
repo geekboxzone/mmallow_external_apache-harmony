@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -29,37 +29,36 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>Provider.Service</code> constructor and methods
- * 
  */
 public class ProviderService_ImplTest extends TestCase {
 
-	/*
-	 * Class under test for String toString()
-	 */
-	public void testToString() {
-		Provider p = new MyProvider();
-		Provider.Service s = new Provider.Service(p, "type", "algorithm",
+    /*
+      * Class under test for String toString()
+      */
+    public void testToString() {
+        Provider p = new MyProvider();
+        Provider.Service s = new Provider.Service(p, "type", "algorithm",
                 "className", null, null);
         assertEquals("first toString() failed",
-                "Provider MyProvider Service type.algorithm className", 
+                "Provider MyProvider Service type.algorithm className",
                 s.toString());
-		
-		HashMap hm = new HashMap();
-		hm.put("attribute", "value");
-		hm.put("KeySize", "1024");
-		hm.put("AAA", "BBB");	
-		
-		s = new Provider.Service(p, "type", "algorithm", "className", 
-		 		null, hm);
+
+        HashMap hm = new HashMap();
+        hm.put("attribute", "value");
+        hm.put("KeySize", "1024");
+        hm.put("AAA", "BBB");
+
+        s = new Provider.Service(p, "type", "algorithm", "className",
+                null, hm);
         assertTrue("second toString() failed", s.toString().startsWith(
                 "Provider MyProvider Service type.algorithm className\n"
                         + "Attributes "));
-	}
-	
-	class MyProvider extends Provider {
-		MyProvider() {
-			super("MyProvider", 1.0, "Provider for testing");
-			put("MessageDigest.SHA-1", "SomeClassName");
-		}
-	}
+    }
+
+    class MyProvider extends Provider {
+        MyProvider() {
+            super("MyProvider", 1.0, "Provider for testing");
+            put("MessageDigest.SHA-1", "SomeClassName");
+        }
+    }
 }

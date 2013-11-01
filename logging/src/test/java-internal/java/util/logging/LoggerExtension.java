@@ -24,8 +24,8 @@ import java.util.ResourceBundle;
  */
 public class LoggerExtension {
 
-	public static ResourceBundle loadResourceBundle(String resourceBundleName) {
-		return Logger.loadResourceBundle(resourceBundleName);
-	}
+    public static ResourceBundle loadResourceBundle(String resourceBundleName) {
+        return Logger.loadResourceBundle(resourceBundleName);
+    }
 
 }

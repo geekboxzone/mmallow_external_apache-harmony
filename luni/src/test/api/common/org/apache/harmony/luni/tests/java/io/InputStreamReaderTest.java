@@ -46,16 +46,16 @@ public class InputStreamReaderTest extends TestCase {
         public LimitedByteArrayInputStream(int type) {
             super(new byte[0]);
             switch (type) {
-            case 0:
-                bytes = new byte[] { 0x61, 0x72 };
-                break;
-            case 1:
-                bytes = new byte[] { (byte) 0xff, (byte) 0xfe, 0x61, 0x72 };
-                break;
-            case 2:
-                bytes = new byte[] { '\u001b', '$', 'B', '6', 'e', 'B', 'h',
-                        '\u001b', '(', 'B' };
-                break;
+                case 0:
+                    bytes = new byte[] { 0x61, 0x72 };
+                    break;
+                case 1:
+                    bytes = new byte[] { (byte) 0xff, (byte) 0xfe, 0x61, 0x72 };
+                    break;
+                case 2:
+                    bytes = new byte[] { '\u001b', '$', 'B', '6', 'e', 'B', 'h',
+                            '\u001b', '(', 'B' };
+                    break;
             }
             count = bytes.length;
         }
@@ -202,7 +202,7 @@ public class InputStreamReaderTest extends TestCase {
 
     /**
      * @tests java.io.InputStreamReader#InputStreamReader(java.io.InputStream,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_ConstructorLjava_io_InputStreamLjava_lang_String()
             throws IOException {
@@ -251,7 +251,7 @@ public class InputStreamReaderTest extends TestCase {
 
     /**
      * @tests java.io.InputStreamReader(java.io.InputStream,
-     *        java.nio.charset.Charset)
+     *java.nio.charset.Charset)
      */
     public void test_ConstructorLjava_io_InputStreamLjava_nio_charset_Charset()
             throws IOException {
@@ -275,7 +275,7 @@ public class InputStreamReaderTest extends TestCase {
 
     /**
      * @tests java.io.InputStreamReader(java.io.InputStream,
-     *        java.nio.charset.CharsetDecoder)
+     *java.nio.charset.CharsetDecoder)
      */
     public void test_ConstructorLjava_io_InputStreamLjava_nio_charset_CharsetDecoder()
             throws IOException {
@@ -377,7 +377,7 @@ public class InputStreamReaderTest extends TestCase {
 
         InputStreamReader isr2 = new InputStreamReader(
                 new ByteArrayInputStream(new byte[] { -32, -96 }), Charset
-                        .forName("UTF-8"));
+                .forName("UTF-8"));
         assertEquals("read() return incorrect value", 65533, isr2.read());
 
         // if the decoder is passed in, keep its status intact

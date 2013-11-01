@@ -82,11 +82,11 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING2", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING1", sQLNonTransientConnectionException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLNonTransientConnectionException should be 0",
                 sQLNonTransientConnectionException.getErrorCode(), 0);
@@ -121,7 +121,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLNonTransientConnectionException should be null",
                 sQLNonTransientConnectionException.getMessage());
@@ -158,11 +158,11 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING2", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING1", sQLNonTransientConnectionException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLNonTransientConnectionException should be 1",
                 sQLNonTransientConnectionException.getErrorCode(), 1);
@@ -178,11 +178,11 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING2", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING1", sQLNonTransientConnectionException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLNonTransientConnectionException should be 0",
                 sQLNonTransientConnectionException.getErrorCode(), 0);
@@ -198,11 +198,11 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING2", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING1", sQLNonTransientConnectionException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLNonTransientConnectionException should be -1",
                 sQLNonTransientConnectionException.getErrorCode(), -1);
@@ -272,7 +272,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLNonTransientConnectionException should be null",
                 sQLNonTransientConnectionException.getMessage());
@@ -291,7 +291,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLNonTransientConnectionException should be null",
                 sQLNonTransientConnectionException.getMessage());
@@ -310,7 +310,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLNonTransientConnectionException should be null",
                 sQLNonTransientConnectionException.getMessage());
@@ -502,7 +502,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -512,11 +512,11 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING2", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING1", sQLNonTransientConnectionException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLNonTransientConnectionException should be 0",
                 sQLNonTransientConnectionException.getErrorCode(), 0);
@@ -527,7 +527,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_1() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -536,11 +536,11 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING2", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING1", sQLNonTransientConnectionException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLNonTransientConnectionException should be 0",
                 sQLNonTransientConnectionException.getErrorCode(), 0);
@@ -551,7 +551,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_2() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -574,7 +574,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_3() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -596,7 +596,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_4() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -606,7 +606,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLNonTransientConnectionException should be null",
                 sQLNonTransientConnectionException.getMessage());
@@ -620,7 +620,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_5() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -629,7 +629,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLNonTransientConnectionException should be null",
                 sQLNonTransientConnectionException.getMessage());
@@ -643,7 +643,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_6() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -666,7 +666,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringLThrowable_7() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -688,7 +688,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -698,11 +698,11 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING2", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING1", sQLNonTransientConnectionException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLNonTransientConnectionException should be 1",
                 sQLNonTransientConnectionException.getErrorCode(), 1);
@@ -713,7 +713,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_1() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -722,11 +722,11 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING2", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING1", sQLNonTransientConnectionException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLNonTransientConnectionException should be 1",
                 sQLNonTransientConnectionException.getErrorCode(), 1);
@@ -737,7 +737,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_2() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -747,11 +747,11 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING2", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING1", sQLNonTransientConnectionException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLNonTransientConnectionException should be 0",
                 sQLNonTransientConnectionException.getErrorCode(), 0);
@@ -762,7 +762,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_3() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -771,11 +771,11 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING2", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING1", sQLNonTransientConnectionException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLNonTransientConnectionException should be 0",
                 sQLNonTransientConnectionException.getErrorCode(), 0);
@@ -786,7 +786,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_4() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -796,11 +796,11 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING2", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING1", sQLNonTransientConnectionException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLNonTransientConnectionException should be -1",
                 sQLNonTransientConnectionException.getErrorCode(), -1);
@@ -811,7 +811,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_5() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -820,11 +820,11 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING2", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertEquals(
                 "The reason of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING1", sQLNonTransientConnectionException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The error code of SQLNonTransientConnectionException should be -1",
                 sQLNonTransientConnectionException.getErrorCode(), -1);
@@ -836,7 +836,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_6() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -859,7 +859,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_7() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -882,7 +882,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_8() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -905,7 +905,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_9() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -927,7 +927,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_10() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -950,7 +950,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_11() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -972,7 +972,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_12() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -982,7 +982,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLNonTransientConnectionException should be null",
                 sQLNonTransientConnectionException.getMessage());
@@ -996,7 +996,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_13() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -1005,7 +1005,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLNonTransientConnectionException should be null",
                 sQLNonTransientConnectionException.getMessage());
@@ -1019,7 +1019,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_14() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1029,7 +1029,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLNonTransientConnectionException should be null",
                 sQLNonTransientConnectionException.getMessage());
@@ -1043,7 +1043,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_15() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -1052,7 +1052,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLNonTransientConnectionException should be null",
                 sQLNonTransientConnectionException.getMessage());
@@ -1067,7 +1067,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_16() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1077,7 +1077,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLNonTransientConnectionException should be null",
                 sQLNonTransientConnectionException.getMessage());
@@ -1091,7 +1091,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_17() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -1100,7 +1100,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
         assertEquals(
                 "The SQLState of SQLNonTransientConnectionException set and get should be equivalent",
                 "MYTESTSTRING", sQLNonTransientConnectionException
-                        .getSQLState());
+                .getSQLState());
         assertNull(
                 "The reason of SQLNonTransientConnectionException should be null",
                 sQLNonTransientConnectionException.getMessage());
@@ -1114,7 +1114,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_18() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1137,7 +1137,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_19() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -1159,7 +1159,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_20() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1182,7 +1182,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_21() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(
@@ -1204,7 +1204,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_22() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1227,7 +1227,7 @@ public class SQLNonTransientConnectionExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLNonTransientConnectionException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_23() {
         SQLNonTransientConnectionException sQLNonTransientConnectionException = new SQLNonTransientConnectionException(

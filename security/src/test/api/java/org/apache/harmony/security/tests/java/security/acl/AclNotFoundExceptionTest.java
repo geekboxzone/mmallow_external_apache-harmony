@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Aleksei Y. Semenov
-*/
+ * @author Aleksei Y. Semenov
+ */
 
 package org.apache.harmony.security.tests.java.security.acl;
 
@@ -27,7 +27,6 @@ import junit.framework.TestCase;
 
 /**
  * Unit test for AclNotFoundException.
- *
  */
 
 public class AclNotFoundExceptionTest extends TestCase {

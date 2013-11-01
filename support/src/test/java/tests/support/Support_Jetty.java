@@ -95,7 +95,7 @@ public class Support_Jetty {
         }
     }
 */
-    public static int startDefaultHttpServer() throws Exception{
+    public static int startDefaultHttpServer() throws Exception {
         /*
         if (DEFAULT_SERVER != null){
             return DEFAULT_PORT;
@@ -111,7 +111,7 @@ public class Support_Jetty {
         return -1;
     }
 
-    public static int startDefaultServlet() throws Exception{
+    public static int startDefaultServlet() throws Exception {
         /*
         if (DEFAULT_SERVLET != null){
             return DEFAULT_SERVLET_PORT;

@@ -22,52 +22,52 @@ import java.io.PipedOutputStream;
 
 public class PipedInputStreamTest extends junit.framework.TestCase {
 
-	static class PWriter implements Runnable {
-		PipedOutputStream pos;
+    static class PWriter implements Runnable {
+        PipedOutputStream pos;
 
-		public byte bytes[];
+        public byte bytes[];
 
-		public void run() {
-			try {
-				pos.write(bytes);
-				synchronized (this) {
-					notify();
-				}
-			} catch (IOException e) {
-				e.printStackTrace(System.out);
-				System.out.println("Could not write bytes");
-			}
-		}
+        public void run() {
+            try {
+                pos.write(bytes);
+                synchronized (this) {
+                    notify();
+                }
+            } catch (IOException e) {
+                e.printStackTrace(System.out);
+                System.out.println("Could not write bytes");
+            }
+        }
 
-		public PWriter(PipedOutputStream pout, int nbytes) {
-			pos = pout;
-			bytes = new byte[nbytes];
-			for (int i = 0; i < bytes.length; i++) {
-				bytes[i] = (byte) (System.currentTimeMillis() % 9);
-		    }
-		}
-	}
+        public PWriter(PipedOutputStream pout, int nbytes) {
+            pos = pout;
+            bytes = new byte[nbytes];
+            for (int i = 0; i < bytes.length; i++) {
+                bytes[i] = (byte) (System.currentTimeMillis() % 9);
+            }
+        }
+    }
 
-	Thread t;
+    Thread t;
 
-	PWriter pw;
+    PWriter pw;
 
-	PipedInputStream pis;
+    PipedInputStream pis;
 
-	PipedOutputStream pos;
+    PipedOutputStream pos;
 
-	/**
-	 * @tests java.io.PipedInputStream#PipedInputStream()
-	 */
-	public void test_Constructor() {
-		// Test for method java.io.PipedInputStream()
-		// Used in tests
-	}
+    /**
+     * @tests java.io.PipedInputStream#PipedInputStream()
+     */
+    public void test_Constructor() {
+        // Test for method java.io.PipedInputStream()
+        // Used in tests
+    }
 
-	/**
-	 * @tests java.io.PipedInputStream#PipedInputStream(java.io.PipedOutputStream)
-	 */
-	public void test_ConstructorLjava_io_PipedOutputStream() throws Exception {
+    /**
+     * @tests java.io.PipedInputStream#PipedInputStream(java.io.PipedOutputStream)
+     */
+    public void test_ConstructorLjava_io_PipedOutputStream() throws Exception {
         // Test for method java.io.PipedInputStream(java.io.PipedOutputStream)
         pis = new PipedInputStream(new PipedOutputStream());
         pis.available();
@@ -91,7 +91,8 @@ public class PipedInputStreamTest extends junit.framework.TestCase {
             try {
                 pis.close();
                 pos.close();
-            } catch (IOException ee) {}
+            } catch (IOException ee) {
+            }
         }
     }
 
@@ -120,34 +121,34 @@ public class PipedInputStreamTest extends junit.framework.TestCase {
         for (int i = 0; i < 1024; i++) {
             pout.write(i);
         }
-        assertEquals("Incorrect available count", 1024 , pin.available());
+        assertEquals("Incorrect available count", 1024, pin.available());
     }
 
-	/**
-	 * @tests java.io.PipedInputStream#close()
-	 */
-	public void test_close() throws IOException {
-		// Test for method void java.io.PipedInputStream.close()
-		pis = new PipedInputStream();
-		pos = new PipedOutputStream();
+    /**
+     * @tests java.io.PipedInputStream#close()
+     */
+    public void test_close() throws IOException {
+        // Test for method void java.io.PipedInputStream.close()
+        pis = new PipedInputStream();
+        pos = new PipedOutputStream();
         pis.connect(pos);
         pis.close();
-		try {
-			pos.write((byte) 127);
+        try {
+            pos.write((byte) 127);
             fail("Failed to throw expected exception");
-		} catch (IOException e) {
-			// The spec for PipedInput saya an exception should be thrown if
-			// a write is attempted to a closed input. The PipedOuput spec
-			// indicates that an exception should be thrown only when the
-			// piped input thread is terminated without closing
-			return;
-		}
-	}
+        } catch (IOException e) {
+            // The spec for PipedInput saya an exception should be thrown if
+            // a write is attempted to a closed input. The PipedOuput spec
+            // indicates that an exception should be thrown only when the
+            // piped input thread is terminated without closing
+            return;
+        }
+    }
 
-	/**
-	 * @tests java.io.PipedInputStream#connect(java.io.PipedOutputStream)
-	 */
-	public void test_connectLjava_io_PipedOutputStream() throws Exception {
+    /**
+     * @tests java.io.PipedInputStream#connect(java.io.PipedOutputStream)
+     */
+    public void test_connectLjava_io_PipedOutputStream() throws Exception {
         pis = new PipedInputStream();
         pos = new PipedOutputStream();
         assertEquals("Non-conected pipe returned non-zero available bytes", 0,
@@ -164,10 +165,10 @@ public class PipedInputStreamTest extends junit.framework.TestCase {
                 .available());
     }
 
-	/**
-	 * @tests java.io.PipedInputStream#read()
-	 */
-	public void test_read() throws Exception {
+    /**
+     * @tests java.io.PipedInputStream#read()
+     */
+    public void test_read() throws Exception {
         pis = new PipedInputStream();
         pos = new PipedOutputStream();
 
@@ -184,10 +185,10 @@ public class PipedInputStreamTest extends junit.framework.TestCase {
                 .read());
     }
 
-	/**
-	 * @tests java.io.PipedInputStream#read(byte[], int, int)
-	 */
-	public void test_read$BII() throws Exception {
+    /**
+     * @tests java.io.PipedInputStream#read(byte[], int, int)
+     */
+    public void test_read$BII() throws Exception {
         pis = new PipedInputStream();
         pos = new PipedOutputStream();
 
@@ -366,7 +367,7 @@ public class PipedInputStreamTest extends junit.framework.TestCase {
         }
     }
 
-    public void test_read_after_write_close() throws Exception{
+    public void test_read_after_write_close() throws Exception {
         PipedInputStream in = new PipedInputStream();
         PipedOutputStream out = new PipedOutputStream();
         in.connect(out);
@@ -383,24 +384,24 @@ public class PipedInputStreamTest extends junit.framework.TestCase {
         out.close();
     }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() throws Exception {
-		try {
-			if (t != null) {
-				t.interrupt();
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() throws Exception {
+        try {
+            if (t != null) {
+                t.interrupt();
             }
-		} catch (Exception ignore) {
-		}
+        } catch (Exception ignore) {
+        }
         super.tearDown();
-	}
+    }
 
 
-     /**
+    /**
      * @tests java.io.PipedInputStream#PipedInputStream(java.io.PipedOutputStream,
-     *        int)
+     *int)
      * @since 1.6
      */
     public void test_Constructor_LPipedOutputStream_I() throws Exception {

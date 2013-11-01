@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyStore;
@@ -41,7 +42,6 @@ import org.apache.harmony.security.tests.support.cert.MyCertificate;
 
 /**
  * Tests for <code>KeyStoreSpi</code> constructor and methods
- *
  */
 
 public class KeyStoreSpiTest extends TestCase {
@@ -192,10 +192,12 @@ public class KeyStoreSpiTest extends TestCase {
     }
 
 }
+
 /**
  * Additional class implements KeyStore.Entry interface
  */
-class tmpEntry  implements KeyStore.Entry {
+class tmpEntry implements KeyStore.Entry {
 }
+
 class tmpProtection implements KeyStore.ProtectionParameter {
 }

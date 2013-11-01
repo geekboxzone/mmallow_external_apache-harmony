@@ -195,7 +195,7 @@ public class URLTest extends TestCase {
         assertTrue("u10 returns a wrong port " + u10.getPort(),
                 u10.getPort() == -1);
 
-		URL u11 = new URL("file:////file.txt");
+        URL u11 = new URL("file:////file.txt");
         assertNull("u11 returns a wrong authority " + u11.getAuthority(), u11
                 .getAuthority());
         assertTrue("u11 returns a wrong file " + u11.getFile(), u11.getFile()
@@ -525,7 +525,7 @@ public class URLTest extends TestCase {
 
     /**
      * @tests java.net.URL#URL(java.net.URL, java.lang.String,
-     *        java.net.URLStreamHandler)
+     *java.net.URLStreamHandler)
      */
     public void test_ConstructorLjava_net_URLLjava_lang_StringLjava_net_URLStreamHandler()
             throws Exception {
@@ -597,7 +597,7 @@ public class URLTest extends TestCase {
 
     /**
      * @tests java.net.URL#URL(java.lang.String, java.lang.String,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_StringLjava_lang_String()
             throws MalformedURLException {
@@ -621,7 +621,7 @@ public class URLTest extends TestCase {
 
     /**
      * @tests java.net.URL#URL(java.lang.String, java.lang.String, int,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_StringILjava_lang_String()
             throws MalformedURLException {
@@ -646,7 +646,7 @@ public class URLTest extends TestCase {
 
     /**
      * @tests java.net.URL#URL(java.lang.String, java.lang.String, int,
-     *        java.lang.String, java.net.URLStreamHandler)
+     *java.lang.String, java.net.URLStreamHandler)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_StringILjava_lang_StringLjava_net_URLStreamHandler()
             throws Exception {
@@ -1065,14 +1065,14 @@ public class URLTest extends TestCase {
         // Regression test for Harmony-5779
         String basedir = new File("temp.java").getAbsolutePath();
         String fileUrlString = "file://localhost/" + basedir;
-        URLConnection conn  = new URL(fileUrlString).openConnection();
-        assertEquals("file",conn.getURL().getProtocol());
-        assertEquals(new File(basedir),new File(conn.getURL().getFile()));
+        URLConnection conn = new URL(fileUrlString).openConnection();
+        assertEquals("file", conn.getURL().getProtocol());
+        assertEquals(new File(basedir), new File(conn.getURL().getFile()));
 
         String nonLocalUrlString = "file://anything/" + basedir;
-        conn  = new URL(nonLocalUrlString).openConnection();
-        assertEquals("ftp",conn.getURL().getProtocol());
-        assertEquals(new File(basedir),new File(conn.getURL().getFile()));
+        conn = new URL(nonLocalUrlString).openConnection();
+        assertEquals("ftp", conn.getURL().getProtocol());
+        assertEquals(new File(basedir), new File(conn.getURL().getFile()));
     }
 
     /**
@@ -1310,7 +1310,7 @@ public class URLTest extends TestCase {
         }
 
         try {
-            handler.parse(url, "any", 10, Integer.MIN_VALUE+1);
+            handler.parse(url, "any", 10, Integer.MIN_VALUE + 1);
             fail("Should throw StringIndexOutOfBoundsException");
         } catch (StringIndexOutOfBoundsException e) {
             // expected;

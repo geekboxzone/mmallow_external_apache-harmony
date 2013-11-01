@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class InterruptedExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.InterruptedException#InterruptedException()
-	 */
+    /**
+     * @tests java.lang.InterruptedException#InterruptedException()
+     */
     public void test_Constructor() {
         InterruptedException e = new InterruptedException();
         assertNull(e.getMessage());

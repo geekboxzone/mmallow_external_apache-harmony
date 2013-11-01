@@ -63,7 +63,7 @@ public class DatagramPacketTest extends junit.framework.TestCase {
 
     /**
      * @tests java.net.DatagramPacket#DatagramPacket(byte[], int, int,
-     *        java.net.InetAddress, int)
+     *java.net.InetAddress, int)
      */
     public void test_Constructor$BIILjava_net_InetAddressI() throws IOException {
         DatagramPacket dp = new DatagramPacket("Hello".getBytes(), 2, 3,
@@ -76,7 +76,7 @@ public class DatagramPacketTest extends junit.framework.TestCase {
 
     /**
      * @tests java.net.DatagramPacket#DatagramPacket(byte[], int,
-     *        java.net.InetAddress, int)
+     *java.net.InetAddress, int)
      */
     public void test_Constructor$BILjava_net_InetAddressI() throws IOException {
         DatagramPacket dp = new DatagramPacket("Hello".getBytes(), 5,
@@ -196,7 +196,7 @@ public class DatagramPacketTest extends junit.framework.TestCase {
 
     /**
      * @tests java.net.DatagramPacket#DatagramPacket(byte[], int,
-     *        java.net.SocketAddress)
+     *java.net.SocketAddress)
      */
     public void test_Constructor$BILjava_net_SocketAddress() throws IOException {
         @SuppressWarnings("serial")
@@ -236,7 +236,7 @@ public class DatagramPacketTest extends junit.framework.TestCase {
 
     /**
      * @tests java.net.DatagramPacket#DatagramPacket(byte[], int, int,
-     *        java.net.SocketAddress)
+     *java.net.SocketAddress)
      */
     public void test_Constructor$BIILjava_net_SocketAddress()
             throws IOException {

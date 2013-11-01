@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.support.cert;
 
@@ -38,7 +38,6 @@ import java.util.Set;
 /**
  * Additional class for verification CertificateFactorySpi and
  * CertificateFactory classes
- * 
  */
 
 public class MyCertificateFactorySpi extends CertificateFactorySpi {

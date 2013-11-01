@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -28,12 +28,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ECFieldFp</code> class fields and methods.
- * 
  */
 public class ECFieldFpTest extends TestCase {
 
     /**
      * Constructor for ECFieldFpTest.
+     *
      * @param name
      */
     public ECFieldFpTest(String name) {
@@ -46,7 +46,7 @@ public class ECFieldFpTest extends TestCase {
 
     /**
      * Test #1 for <code>ECFieldFp</code> constructor
-     *
+     * <p/>
      * Assertion: creates new object of <code>ECFieldFp</code> class
      * using valid <code>p</code> (odd prime)
      */
@@ -56,7 +56,7 @@ public class ECFieldFpTest extends TestCase {
 
     /**
      * Test #2 for <code>ECFieldFp</code> constructor
-     * 
+     * <p/>
      * Assertion: creates new object of <code>ECFieldFp</code> class
      * using valid <code>p</code> (odd but not prime)
      */
@@ -66,12 +66,12 @@ public class ECFieldFpTest extends TestCase {
 
     /**
      * Test #3 for <code>ECFieldFp</code> constructor
-     * 
+     * <p/>
      * Assertion: IllegalArgumentException if <code>p</code> is not positive
      */
     public final void testECFieldFp03() {
         try {
-            new ECFieldFp(BigInteger.valueOf(-1L)); 
+            new ECFieldFp(BigInteger.valueOf(-1L));
             fail(getName() +
                     " FAILED: expected exception has not been thrown");
         } catch (IllegalArgumentException e) {
@@ -80,7 +80,7 @@ public class ECFieldFpTest extends TestCase {
 
     /**
      * Test #4 for <code>ECFieldFp</code> constructor
-     * 
+     * <p/>
      * Assertion: IllegalArgumentException if <code>p</code> is not positive
      */
     public final void testECFieldFp04() {
@@ -94,7 +94,7 @@ public class ECFieldFpTest extends TestCase {
 
     /**
      * Test #4 for <code>ECFieldFp</code> constructor
-     * 
+     * <p/>
      * Assertion: NullPointerException if <code>p</code> is null
      */
     public final void testECFieldFp05() {
@@ -108,37 +108,37 @@ public class ECFieldFpTest extends TestCase {
 
     /**
      * Test #1 for <code>hashCode()</code> method.<br>
-     *
+     * <p/>
      * Assertion: must return the same value if invoked
-     * repeatedly on the same object. 
+     * repeatedly on the same object.
      */
     public final void testHashCode01() {
         ECFieldFp f = new ECFieldFp(BigInteger.valueOf(23L));
         int hc = f.hashCode();
         assertTrue(hc == f.hashCode() &&
-                   hc == f.hashCode() &&
-                   hc == f.hashCode() &&
-                   hc == f.hashCode() &&
-                   hc == f.hashCode() &&
-                   hc == f.hashCode() &&
-                   hc == f.hashCode() &&
-                   hc == f.hashCode());
+                hc == f.hashCode() &&
+                hc == f.hashCode() &&
+                hc == f.hashCode() &&
+                hc == f.hashCode() &&
+                hc == f.hashCode() &&
+                hc == f.hashCode() &&
+                hc == f.hashCode());
     }
 
     /**
      * Test #2 for <code>hashCode()</code> method.<br>
-     *
+     * <p/>
      * Assertion: must return the same value if invoked
-     * on equal (according to the <code>equals(Object)</code> method) objects. 
+     * on equal (according to the <code>equals(Object)</code> method) objects.
      */
     public final void testHashCode02() {
         assertTrue(new ECFieldFp(BigInteger.valueOf(23L)).hashCode() ==
-                   new ECFieldFp(BigInteger.valueOf(23L)).hashCode());
+                new ECFieldFp(BigInteger.valueOf(23L)).hashCode());
     }
 
     /**
      * Test for <code>getFieldSize()()</code> method.<br>
-     *
+     * <p/>
      * Assertion: returns field size in bits which is prime size
      */
     public final void testGetFieldSize() {
@@ -147,8 +147,8 @@ public class ECFieldFpTest extends TestCase {
 
     /**
      * Test for <code>getP()</code> method.<br>
-     *
-     * Assertion: returns prime 
+     * <p/>
+     * Assertion: returns prime
      */
     public final void testGetP() {
         BigInteger p = BigInteger.valueOf(23L);
@@ -157,8 +157,8 @@ public class ECFieldFpTest extends TestCase {
 
     /**
      * Test #1 for <code>equals()</code> method.<br>
-     *
-     * Assertion: object equals to itself. 
+     * <p/>
+     * Assertion: object equals to itself.
      */
     public final void testEqualsObject01() {
         ECFieldFp obj = new ECFieldFp(BigInteger.valueOf(23L));
@@ -167,7 +167,7 @@ public class ECFieldFpTest extends TestCase {
 
     /**
      * Test #2 for <code>equals(Object obj)</code> method.<br>
-     *
+     * <p/>
      * Assertion: returns false if <code>obj</code> is <code>null</code>
      */
     public final void testEqualsObject02() {
@@ -176,7 +176,7 @@ public class ECFieldFpTest extends TestCase {
 
     /**
      * Test #3 for <code>equals(Object obj)</code> method.<br>
-     *
+     * <p/>
      * Assertion: returns false if <code>obj</code>
      * is not instance of <code>ECFieldFp</code>
      */
@@ -186,12 +186,12 @@ public class ECFieldFpTest extends TestCase {
 
     /**
      * Test #4 for <code>equals()</code> method.<br>
-     *
-     * Assertion: true if prime values match. 
+     * <p/>
+     * Assertion: true if prime values match.
      */
     public final void testEqualsObject04() {
         assertTrue(new ECFieldFp(BigInteger.valueOf(23L)).equals(
-                   new ECFieldFp(BigInteger.valueOf(23L))));
+                new ECFieldFp(BigInteger.valueOf(23L))));
     }
 
 }

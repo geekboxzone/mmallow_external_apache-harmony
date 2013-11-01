@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.auth.tests.javax.security.sasl;
 
@@ -27,7 +27,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for constructor and methods of AuthorizeCallback class
- * 
  */
 
 public class AuthorizeCallbackTest extends TestCase {

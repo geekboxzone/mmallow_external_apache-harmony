@@ -26,9 +26,9 @@ import java.io.OutputStream;
  */
 public interface Support_Socket {
 
-	public InputStream getInputStream() throws IOException;
+    public InputStream getInputStream() throws IOException;
 
-	public OutputStream getOutputStream() throws IOException;
+    public OutputStream getOutputStream() throws IOException;
 
-	public void close() throws IOException;
+    public void close() throws IOException;
 }

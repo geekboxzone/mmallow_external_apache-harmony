@@ -82,7 +82,8 @@ public class SSLSocketImplTest extends TestCase {
                 public void run() {
                     try {
                         s.startHandshake();
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
                 }
             };
 
@@ -93,15 +94,18 @@ public class SSLSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     try {
                         server.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     try {
                         socket.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     fail("Handshake was not started");
                 }
             }
@@ -109,12 +113,14 @@ public class SSLSocketImplTest extends TestCase {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -140,7 +146,8 @@ public class SSLSocketImplTest extends TestCase {
                 public void run() {
                     try {
                         s.startHandshake();
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
                 }
             };
 
@@ -151,15 +158,18 @@ public class SSLSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     try {
                         server.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     try {
                         socket.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     fail("Handshake was not started");
                 }
             }
@@ -167,12 +177,14 @@ public class SSLSocketImplTest extends TestCase {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -201,7 +213,8 @@ public class SSLSocketImplTest extends TestCase {
                 public void run() {
                     try {
                         s.startHandshake();
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
                 }
             };
 
@@ -212,15 +225,18 @@ public class SSLSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     try {
                         server.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     try {
                         socket.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     fail("Handshake was not started");
                 }
             }
@@ -228,12 +244,14 @@ public class SSLSocketImplTest extends TestCase {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -261,7 +279,8 @@ public class SSLSocketImplTest extends TestCase {
                 public void run() {
                     try {
                         s.startHandshake();
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
                 }
             };
 
@@ -272,15 +291,18 @@ public class SSLSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     try {
                         server.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     try {
                         socket.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     fail("Handshake was not started");
                 }
             }
@@ -288,12 +310,14 @@ public class SSLSocketImplTest extends TestCase {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -322,7 +346,8 @@ public class SSLSocketImplTest extends TestCase {
                 public void run() {
                     try {
                         s.startHandshake();
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
                 }
             };
 
@@ -333,15 +358,18 @@ public class SSLSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     try {
                         server.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     try {
                         socket.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     fail("Handshake was not started");
                 }
             }
@@ -349,12 +377,14 @@ public class SSLSocketImplTest extends TestCase {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -368,7 +398,7 @@ public class SSLSocketImplTest extends TestCase {
         assertNotNull(supported);
         supported[0] = "NOT_SUPPORTED_CIPHER_SUITE";
         supported = socket.getEnabledCipherSuites();
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             if ("NOT_SUPPORTED_CIPHER_SUITE".equals(supported[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -384,9 +414,10 @@ public class SSLSocketImplTest extends TestCase {
         String[] enabled = socket.getEnabledCipherSuites();
         assertNotNull(enabled);
         String[] supported = socket.getSupportedCipherSuites();
-        for (int i=0; i<enabled.length; i++) {
-            found: {
-                for (int j=0; j<supported.length; j++) {
+        for (int i = 0; i < enabled.length; i++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (enabled[i].equals(supported[j])) {
                         break found;
                     }
@@ -396,18 +427,19 @@ public class SSLSocketImplTest extends TestCase {
             }
         }
         socket.setEnabledCipherSuites(supported);
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             enabled = new String[supported.length - i];
             System.arraycopy(supported, 0,
-                    enabled, 0, supported.length-i);
+                    enabled, 0, supported.length - i);
             socket.setEnabledCipherSuites(enabled);
             String[] result = socket.getEnabledCipherSuites();
             if (result.length != enabled.length) {
                 fail("Returned result does not correspond to expected.");
             }
-            for (int k=0; k<result.length; k++) {
-                found: {
-                    for (int n=0; n<enabled.length; n++) {
+            for (int k = 0; k < result.length; k++) {
+                found:
+                {
+                    for (int n = 0; n < enabled.length; n++) {
                         if (result[k].equals(enabled[n])) {
                             break found;
                         }
@@ -429,9 +461,10 @@ public class SSLSocketImplTest extends TestCase {
         String[] enabled = socket.getEnabledCipherSuites();
         assertNotNull(enabled);
         String[] supported = socket.getSupportedCipherSuites();
-        for (int i=0; i<enabled.length; i++) {
-            found: {
-                for (int j=0; j<supported.length; j++) {
+        for (int i = 0; i < enabled.length; i++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (enabled[i].equals(supported[j])) {
                         break found;
                     }
@@ -443,23 +476,24 @@ public class SSLSocketImplTest extends TestCase {
         socket.setEnabledCipherSuites(supported);
         socket.setEnabledCipherSuites(enabled);
         socket.setEnabledCipherSuites(supported);
-        String[] more_than_supported = new String[supported.length+1];
-        for (int i=0; i<supported.length+1; i++) {
+        String[] more_than_supported = new String[supported.length + 1];
+        for (int i = 0; i < supported.length + 1; i++) {
             more_than_supported[i]
-                = "NOT_SUPPORTED_CIPHER_SUITE";
+                    = "NOT_SUPPORTED_CIPHER_SUITE";
             System.arraycopy(supported, 0,
                     more_than_supported, 0, i);
             System.arraycopy(supported, i,
-                    more_than_supported, i+1, supported.length-i);
+                    more_than_supported, i + 1, supported.length - i);
             try {
                 socket.setEnabledCipherSuites(more_than_supported);
                 fail("Expected IllegalArgumentException was not thrown");
-            } catch (IllegalArgumentException e) { }
+            } catch (IllegalArgumentException e) {
+            }
         }
         enabled = socket.getEnabledCipherSuites();
         enabled[0] = "NOT_SUPPORTED_CIPHER_SUITE";
         enabled = socket.getEnabledCipherSuites();
-        for (int i=0; i<enabled.length; i++) {
+        for (int i = 0; i < enabled.length; i++) {
             if ("NOT_SUPPORTED_CIPHER_SUITE".equals(enabled[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -477,7 +511,7 @@ public class SSLSocketImplTest extends TestCase {
         assertFalse(supported.length == 0);
         supported[0] = "NOT_SUPPORTED_PROTOCOL";
         supported = socket.getSupportedProtocols();
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             if ("NOT_SUPPORTED_PROTOCOL".equals(supported[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -493,9 +527,10 @@ public class SSLSocketImplTest extends TestCase {
         String[] enabled = socket.getEnabledProtocols();
         assertNotNull(enabled);
         String[] supported = socket.getSupportedProtocols();
-        for (int i=0; i<enabled.length; i++) {
-            found: {
-                for (int j=0; j<supported.length; j++) {
+        for (int i = 0; i < enabled.length; i++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (enabled[i].equals(supported[j])) {
                         break found;
                     }
@@ -505,18 +540,19 @@ public class SSLSocketImplTest extends TestCase {
             }
         }
         socket.setEnabledProtocols(supported);
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             enabled = new String[supported.length - i];
             System.arraycopy(supported, i,
-                    enabled, 0, supported.length-i);
+                    enabled, 0, supported.length - i);
             socket.setEnabledProtocols(enabled);
             String[] result = socket.getEnabledProtocols();
             if (result.length != enabled.length) {
                 fail("Returned result does not correspond to expected.");
             }
-            for (int k=0; k<result.length; k++) {
-                found: {
-                    for (int n=0; n<enabled.length; n++) {
+            for (int k = 0; k < result.length; k++) {
+                found:
+                {
+                    for (int n = 0; n < enabled.length; n++) {
                         if (result[k].equals(enabled[n])) {
                             break found;
                         }
@@ -538,10 +574,11 @@ public class SSLSocketImplTest extends TestCase {
         String[] enabled = socket.getEnabledProtocols();
         assertNotNull(enabled);
         String[] supported = socket.getSupportedProtocols();
-        for (int i=0; i<enabled.length; i++) {
+        for (int i = 0; i < enabled.length; i++) {
             //System.out.println("Checking of "+enabled[i]);
-            found: {
-                for (int j=0; j<supported.length; j++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (enabled[i].equals(supported[j])) {
                         break found;
                     }
@@ -553,23 +590,24 @@ public class SSLSocketImplTest extends TestCase {
         socket.setEnabledProtocols(supported);
         socket.setEnabledProtocols(enabled);
         socket.setEnabledProtocols(supported);
-        String[] more_than_supported = new String[supported.length+1];
-        for (int i=0; i<supported.length+1; i++) {
+        String[] more_than_supported = new String[supported.length + 1];
+        for (int i = 0; i < supported.length + 1; i++) {
             more_than_supported[i]
-                = "NOT_SUPPORTED_PROTOCOL";
+                    = "NOT_SUPPORTED_PROTOCOL";
             System.arraycopy(supported, 0,
                     more_than_supported, 0, i);
             System.arraycopy(supported, i,
-                    more_than_supported, i+1, supported.length-i);
+                    more_than_supported, i + 1, supported.length - i);
             try {
                 socket.setEnabledProtocols(more_than_supported);
                 fail("Expected IllegalArgumentException was not thrown");
-            } catch (IllegalArgumentException e) { }
+            } catch (IllegalArgumentException e) {
+            }
         }
         enabled = socket.getEnabledProtocols();
         enabled[0] = "NOT_SUPPORTED_PROTOCOL";
         enabled = socket.getEnabledProtocols();
-        for (int i=0; i<enabled.length; i++) {
+        for (int i = 0; i < enabled.length; i++) {
             if ("NOT_SUPPORTED_PROTOCOL".equals(enabled[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -614,7 +652,8 @@ public class SSLSocketImplTest extends TestCase {
             if (endpoint != null) {
                 try {
                     endpoint.close();
-                } catch (IOException e) { }
+                } catch (IOException e) {
+                }
             }
         }
 
@@ -627,7 +666,9 @@ public class SSLSocketImplTest extends TestCase {
             server.close();
         }
 
-    };
+    }
+
+    ;
 
     /**
      * setUseClientMode(boolean mode) method testing.
@@ -665,7 +706,8 @@ public class SSLSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
             }
 
             try {
@@ -673,17 +715,20 @@ public class SSLSocketImplTest extends TestCase {
                 server.close();
                 socket.close();
                 fail("Expected IllegalArgumentException was not thrown");
-            } catch (IllegalArgumentException e) { }
+            } catch (IllegalArgumentException e) {
+            }
         } finally {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -778,15 +823,18 @@ public class SSLSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     try {
                         server.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     try {
                         socket.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     fail("getSession method did not start a handshake");
                 }
             }
@@ -794,21 +842,23 @@ public class SSLSocketImplTest extends TestCase {
             server.close(); // makes error during the handshake
             thread.join();
             if ((session[0] == null) ||
-                (!session[0].getCipherSuite()
-                 .endsWith("_NULL_WITH_NULL_NULL"))) {
+                    (!session[0].getCipherSuite()
+                            .endsWith("_NULL_WITH_NULL_NULL"))) {
                 fail("Returned session is null "
-                     + "or not TLS_NULL_WITH_NULL_NULL");
+                        + "or not TLS_NULL_WITH_NULL_NULL");
             }
         } finally {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -821,28 +871,33 @@ public class SSLSocketImplTest extends TestCase {
      */
     public void testAddRemoveHandshakeCompletedListener() throws Exception {
         HandshakeCompletedListener listener =
-            new HandshakeCompletedListener() {
-                public void handshakeCompleted(
-                        HandshakeCompletedEvent event) { }
-            };
+                new HandshakeCompletedListener() {
+                    public void handshakeCompleted(
+                            HandshakeCompletedEvent event) {
+                    }
+                };
         SSLSocket socket = createSSLSocket();
         socket.addHandshakeCompletedListener(listener);
         try {
             socket.addHandshakeCompletedListener(null);
             fail("Expected IllegalArgumentException was not thrown.");
-        } catch (IllegalArgumentException e) { }
+        } catch (IllegalArgumentException e) {
+        }
         try {
             socket.removeHandshakeCompletedListener(null);
             fail("Expected IllegalArgumentException was not thrown.");
-        } catch (IllegalArgumentException e) { }
+        } catch (IllegalArgumentException e) {
+        }
         try {
             socket.removeHandshakeCompletedListener(
                     new HandshakeCompletedListener() {
                         public void handshakeCompleted(
-                                HandshakeCompletedEvent event) { }
+                                HandshakeCompletedEvent event) {
+                        }
                     });
             fail("Expected IllegalArgumentException was not thrown.");
-        } catch (IllegalArgumentException e) { }
+        } catch (IllegalArgumentException e) {
+        }
         try {
             socket.removeHandshakeCompletedListener(listener);
         } catch (IllegalArgumentException e) {
@@ -883,7 +938,8 @@ public class SSLSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     fail("Handshake was not started");
@@ -899,12 +955,14 @@ public class SSLSocketImplTest extends TestCase {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -928,7 +986,8 @@ public class SSLSocketImplTest extends TestCase {
                 public void run() {
                     try {
                         s.getInputStream().read(); // should start handshake
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
                 }
             };
 
@@ -939,15 +998,18 @@ public class SSLSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     try {
                         server.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     try {
                         socket.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     fail("Handshake was not started");
                 }
             }
@@ -955,12 +1017,14 @@ public class SSLSocketImplTest extends TestCase {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -984,7 +1048,8 @@ public class SSLSocketImplTest extends TestCase {
                 public void run() {
                     try {
                         s.getOutputStream().write(0); // should start handshake
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
                 }
             };
 
@@ -995,15 +1060,18 @@ public class SSLSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     try {
                         server.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     try {
                         socket.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     fail("Handshake was not started");
                 }
             }
@@ -1011,12 +1079,14 @@ public class SSLSocketImplTest extends TestCase {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -1035,18 +1105,20 @@ public class SSLSocketImplTest extends TestCase {
             fail("Expected exception was not thrown");
         } catch (Exception e) {
             if (doLog) {
-                System.out.println("Trowed exception: "+e.getMessage());
+                System.out.println("Trowed exception: " + e.getMessage());
             }
         } finally {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -1065,18 +1137,20 @@ public class SSLSocketImplTest extends TestCase {
             fail("Expected exception was not thrown");
         } catch (Exception e) {
             if (doLog) {
-                System.out.println("Trowed exception: "+e.getMessage());
+                System.out.println("Trowed exception: " + e.getMessage());
             }
         } finally {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -1095,18 +1169,20 @@ public class SSLSocketImplTest extends TestCase {
             fail("Expected exception was not thrown");
         } catch (Exception e) {
             if (doLog) {
-                System.out.println("Trowed exception: "+e.getMessage());
+                System.out.println("Trowed exception: " + e.getMessage());
             }
         } finally {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -1125,18 +1201,20 @@ public class SSLSocketImplTest extends TestCase {
             fail("Expected exception was not thrown");
         } catch (Exception e) {
             if (doLog) {
-                System.out.println("Trowed exception: "+e.getMessage());
+                System.out.println("Trowed exception: " + e.getMessage());
             }
         } finally {
             if (server != null) {
                 try {
                     server.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }

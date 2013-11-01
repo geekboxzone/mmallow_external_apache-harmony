@@ -38,7 +38,6 @@ import java.util.Properties;
 /**
  * Helper class for the java.sql tests - a skeleton class which implements the
  * java.sql.Connection interface
- * 
  */
 public class TestHelper_Connection1 implements Connection {
     public void clearWarnings() throws SQLException {

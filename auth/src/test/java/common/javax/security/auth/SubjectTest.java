@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Stepan M. Mishura
-*/
+ * @author Stepan M. Mishura
+ */
 
 package javax.security.auth;
 
@@ -47,7 +47,7 @@ import junit.framework.TestSuite;
 
 
 /**
- * Tests Subject and its inner classes implementation. 
+ * Tests Subject and its inner classes implementation.
  */
 
 public class SubjectTest extends SecurityTest {
@@ -65,7 +65,7 @@ public class SubjectTest extends SecurityTest {
     };
 
     PrivilegedExceptionAction<Object> emptyPEAction = new PrivilegedExceptionAction<Object>
-    () {
+            () {
         public Object run() {
             return null;
         }
@@ -301,7 +301,7 @@ public class SubjectTest extends SecurityTest {
 
     /**
      * Tests SecurityException for Subject.doAsPrivileged(
-     *     Subject,PrivilegedAction,AccessControlContext)
+     * Subject,PrivilegedAction,AccessControlContext)
      */
     public final void testACE_doAsPrivileged_A() throws Exception {
 
@@ -316,7 +316,7 @@ public class SubjectTest extends SecurityTest {
 
     /**
      * Tests SecurityException for Subject.doAsPrivileged(
-     *     Subject,PrivilegedExceptionAction,AccessControlContext)
+     * Subject,PrivilegedExceptionAction,AccessControlContext)
      */
     public final void testACE_doAsPrivileged_EA() throws Exception {
 
@@ -458,7 +458,7 @@ public class SubjectTest extends SecurityTest {
 
     /**
      * Tests Subject.doAs* methods for creating new context
-     * 
+     * <p/>
      * Expected: no SecurityException
      */
     public final void testDoAs_newACC() throws Exception {
@@ -565,7 +565,7 @@ public class SubjectTest extends SecurityTest {
 
     /**
      * Verifies that Subject.equals() has defined comparison algorism.
-     * 
+     * <p/>
      * The sequence of checks is following:
      * 1)principal set
      * 2)public credential set
@@ -843,7 +843,7 @@ public class SubjectTest extends SecurityTest {
     }
 
     public final void testSerialization() throws Exception {
-        
+
         Subject subject = new Subject();
 
         subject.getPrincipals().add(new MyClass2());
@@ -895,7 +895,7 @@ public class SubjectTest extends SecurityTest {
 
     /**
      * Test subject's deserialization in case of invalid('null') principals
-     * 
+     * <p/>
      * Serialization byte array contains null element in principal set
      * The array is invalid because it is not possible to add null element
      * to principal set via public API methods.
@@ -1737,7 +1737,7 @@ public class SubjectTest extends SecurityTest {
         public PrivateCredentialPermission getPermission(String c, Set<? extends Principal> p) {
             StringBuffer buf = new StringBuffer(c);
 
-            for (Iterator<? extends Principal> it = p.iterator(); it.hasNext();) {
+            for (Iterator<? extends Principal> it = p.iterator(); it.hasNext(); ) {
                 Object o = it.next();
                 buf.append(" ");
                 buf.append(o.getClass().getName());

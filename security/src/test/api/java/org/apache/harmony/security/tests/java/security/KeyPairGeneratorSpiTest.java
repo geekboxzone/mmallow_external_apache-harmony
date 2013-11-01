@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -30,7 +30,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyPairGeneratorSpi</code> class constructors and methods.
- *
  */
 
 public class KeyPairGeneratorSpiTest extends TestCase {

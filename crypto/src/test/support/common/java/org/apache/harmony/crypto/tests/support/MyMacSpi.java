@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.support;
 
@@ -31,12 +31,12 @@ import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Additional class for verification of MacGeneratorSpi and MacSpi
- * 
  */
 
 public class MyMacSpi extends MacSpi {
-   
+
     private int length = 0;
+
     @Override
     protected int engineGetMacLength() {
         return length;
@@ -71,5 +71,5 @@ public class MyMacSpi extends MacSpi {
     @Override
     protected void engineReset() {
         length++;
-    }  
+    }
 }

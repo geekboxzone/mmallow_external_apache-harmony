@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -27,8 +27,7 @@ import java.security.KeyPairGenerator;
 import java.security.SecureRandom;
 
 /**
- *  Additional class extends KeyPairGenerator
- * 
+ * Additional class extends KeyPairGenerator
  */
 
 public class MyKeyPairGenerator2 extends KeyPairGenerator {

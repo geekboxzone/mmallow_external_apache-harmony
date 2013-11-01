@@ -36,32 +36,32 @@ public class EnumTest extends TestCase {
 
     enum Empty {
     }
-    
+
     enum Bogus {
         UNUSED
-    }   
-    
+    }
+
     enum Color {
         Red, Green, Blue {};
     }
-    
+
     enum MockCloneEnum {
         ONE;
-        
-        public void callClone() throws CloneNotSupportedException{
+
+        public void callClone() throws CloneNotSupportedException {
             super.clone();
         }
     }
-    
+
     /**
-     * @tests java.lang.Enum#compareTo(java.lang.Enum) 
+     * @tests java.lang.Enum#compareTo(java.lang.Enum)
      */
     public void test_compareToLjava_lang_Enum() {
         assertTrue(0 < Sample.MOE.compareTo(Sample.LARRY));
         assertEquals(0, Sample.MOE.compareTo(Sample.MOE));
         assertTrue(0 > Sample.MOE.compareTo(Sample.CURLY));
         try {
-            Sample.MOE.compareTo((Sample)null);
+            Sample.MOE.compareTo((Sample) null);
             fail("Should throw NullPointerException");
         } catch (NullPointerException e) {
             // Expected
@@ -90,7 +90,7 @@ public class EnumTest extends TestCase {
      * @tests java.lang.Enum#hashCode()
      */
     public void test_hashCode() {
-        assertEquals (moe.hashCode(), moe.hashCode());
+        assertEquals(moe.hashCode(), moe.hashCode());
     }
 
     /**
@@ -126,7 +126,7 @@ public class EnumTest extends TestCase {
         try {
             Sample.valueOf("non-existant");
             fail("Expected an exception");
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             // Expected
         }
         try {
@@ -138,7 +138,7 @@ public class EnumTest extends TestCase {
             // other compilers will throw this
         }
 
-        
+
         Sample s = Enum.valueOf(Sample.class, "CURLY");
         assertSame(s, Sample.CURLY);
         s = Enum.valueOf(Sample.class, "LARRY");
@@ -152,7 +152,7 @@ public class EnumTest extends TestCase {
             // Expected
         }
         try {
-            Enum.valueOf((Class<Sample>)null, "a string");
+            Enum.valueOf((Class<Sample>) null, "a string");
             fail("Expected an exception");
         } catch (NullPointerException e) {
             // May be caused by some compilers' code
@@ -168,7 +168,7 @@ public class EnumTest extends TestCase {
             // other compilers will throw this
         }
         try {
-            Enum.valueOf((Class<Sample>)null, (String)null);
+            Enum.valueOf((Class<Sample>) null, (String) null);
             fail("Expected an exception");
         } catch (NullPointerException e) {
             // May be caused by some compilers' code
@@ -187,7 +187,7 @@ public class EnumTest extends TestCase {
         assertEquals(Sample.LARRY, myValues[0]);
         assertEquals(Sample.MOE, myValues[1]);
         assertEquals(Sample.CURLY, myValues[2]);
-        
+
         assertEquals(0, Empty.values().length);
     }
 
@@ -203,13 +203,13 @@ public class EnumTest extends TestCase {
         }
 
     }
-    
-    public void test_compatibilitySerialization_inClass_Complex_Harmony() throws Exception{
+
+    public void test_compatibilitySerialization_inClass_Complex_Harmony() throws Exception {
         // TODO migrate to the new testing framework 
         assertTrue(SerializationTester.assertCompabilityEquals(new MockEnum2(),
-            "serialization/org/apache/harmony/luni/tests/java/lang/EnumTest.harmony.ser"));
+                "serialization/org/apache/harmony/luni/tests/java/lang/EnumTest.harmony.ser"));
     }
-    
+
     /**
      * @tests serialization/deserialization compatibility.
      */
@@ -251,7 +251,7 @@ public class EnumTest extends TestCase {
         enumColorMap.put(Color.Blue, 3);
 
         Object[] testCases = { Sample.CURLY, new MockEnum(),
-        // test a class that has enums and a string of same name as its fields.
+                // test a class that has enums and a string of same name as its fields.
                 new MockEnum2(),
                 // test a map class that has enums.
                 enumColorMap, };

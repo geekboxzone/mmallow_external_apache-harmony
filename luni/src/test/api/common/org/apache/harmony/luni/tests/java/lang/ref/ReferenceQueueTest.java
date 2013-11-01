@@ -22,86 +22,86 @@ import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
 
 public class ReferenceQueueTest extends junit.framework.TestCase {
-	static Boolean b;
+    static Boolean b;
 
-	static Integer integer;
+    static Integer integer;
 
-	protected void doneSuite() {
-		b = null;
-		integer = null;
-	}
+    protected void doneSuite() {
+        b = null;
+        integer = null;
+    }
 
-	public class ChildThread implements Runnable {
-		public ChildThread() {
-		}
+    public class ChildThread implements Runnable {
+        public ChildThread() {
+        }
 
-		public void run() {
-			try {
-				rq.wait(1000);
-			} catch (Exception e) {
-			}
-			synchronized (rq) {
-				// store in a static so it won't be gc'ed because the jit
-				// optimized it out
-				integer = new Integer(667);
-				SoftReference sr = new SoftReference(integer, rq);
-				sr.enqueue();
-				rq.notify();
-			}
-		}
-	}
+        public void run() {
+            try {
+                rq.wait(1000);
+            } catch (Exception e) {
+            }
+            synchronized (rq) {
+                // store in a static so it won't be gc'ed because the jit
+                // optimized it out
+                integer = new Integer(667);
+                SoftReference sr = new SoftReference(integer, rq);
+                sr.enqueue();
+                rq.notify();
+            }
+        }
+    }
 
-	ReferenceQueue rq;
+    ReferenceQueue rq;
 
-	/**
-	 * @tests java.lang.ref.ReferenceQueue#poll()
-	 */
-	public void test_poll() {
-		// store in a static so it won't be gc'ed because the jit
-		// optimized it out
-		b = new Boolean(true);
-		SoftReference sr = new SoftReference(b, rq);
-		sr.enqueue();
-                assertTrue("Remove failed.", ((Boolean) rq.poll().get())
-                                .booleanValue());
-	}
+    /**
+     * @tests java.lang.ref.ReferenceQueue#poll()
+     */
+    public void test_poll() {
+        // store in a static so it won't be gc'ed because the jit
+        // optimized it out
+        b = new Boolean(true);
+        SoftReference sr = new SoftReference(b, rq);
+        sr.enqueue();
+        assertTrue("Remove failed.", ((Boolean) rq.poll().get())
+                .booleanValue());
+    }
 
-	/**
-	 * @tests java.lang.ref.ReferenceQueue#remove()
-	 */
-	public void test_remove() throws Exception {
-		// store in a static so it won't be gc'ed because the jit
-		// optimized it out
-		b = new Boolean(true);
-		SoftReference sr = new SoftReference(b, rq);
-		sr.enqueue();
-                assertTrue("Remove failed.", ((Boolean) rq.remove().get())
-                                .booleanValue());
-	}
+    /**
+     * @tests java.lang.ref.ReferenceQueue#remove()
+     */
+    public void test_remove() throws Exception {
+        // store in a static so it won't be gc'ed because the jit
+        // optimized it out
+        b = new Boolean(true);
+        SoftReference sr = new SoftReference(b, rq);
+        sr.enqueue();
+        assertTrue("Remove failed.", ((Boolean) rq.remove().get())
+                .booleanValue());
+    }
 
-	/**
-	 * @tests java.lang.ref.ReferenceQueue#remove(long)
-	 */
-	public void test_removeJ() throws Exception {
-                assertNull("Queue is empty.", rq.poll());
-                assertNull("Queue is empty.", rq.remove((long) 1));
-                Thread ct = new Thread(new ChildThread());
-                ct.start();
-                Reference ret = rq.remove(0L);
-                assertNotNull("Delayed remove failed.", ret);
-	}
+    /**
+     * @tests java.lang.ref.ReferenceQueue#remove(long)
+     */
+    public void test_removeJ() throws Exception {
+        assertNull("Queue is empty.", rq.poll());
+        assertNull("Queue is empty.", rq.remove((long) 1));
+        Thread ct = new Thread(new ChildThread());
+        ct.start();
+        Reference ret = rq.remove(0L);
+        assertNotNull("Delayed remove failed.", ret);
+    }
 
-	/**
-	 * @tests java.lang.ref.ReferenceQueue#ReferenceQueue()
-	 */
-	public void test_Constructor() {
-		assertTrue("Used for testing.", true);
-	}
+    /**
+     * @tests java.lang.ref.ReferenceQueue#ReferenceQueue()
+     */
+    public void test_Constructor() {
+        assertTrue("Used for testing.", true);
+    }
 
-	protected void setUp() {
-		rq = new ReferenceQueue();
-	}
+    protected void setUp() {
+        rq = new ReferenceQueue();
+    }
 
-	protected void tearDown() {
-	}
+    protected void tearDown() {
+    }
 }

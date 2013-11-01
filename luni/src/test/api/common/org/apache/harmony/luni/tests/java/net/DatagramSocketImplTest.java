@@ -35,8 +35,8 @@ public class DatagramSocketImplTest extends junit.framework.TestCase {
         MockDatagramSocketImpl impl = new MockDatagramSocketImpl();
         assertNull(impl.getFileDescriptor());
     }
-    
-    
+
+
     public void test_connect() throws Exception {
         MockDatagramSocketImpl impl = new MockDatagramSocketImpl();
         InetAddress localhost = InetAddress.getByName("localhost"); //$NON-NLS-1$
@@ -142,11 +142,11 @@ class MockDatagramSocketImpl extends DatagramSocketImpl {
         // empty
     }
 
-    public void test_connect(InetAddress inetAddr, int port ) throws SocketException{
+    public void test_connect(InetAddress inetAddr, int port) throws SocketException {
         super.connect(inetAddr, port);
     }
-    
-    public void test_disconnect(){
+
+    public void test_disconnect() {
         super.disconnect();
     }
 }

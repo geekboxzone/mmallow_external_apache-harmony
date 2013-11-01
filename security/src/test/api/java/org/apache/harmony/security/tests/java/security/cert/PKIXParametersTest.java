@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -45,17 +45,17 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>PKIXParameters</code> fields and methods
- * 
  */
 public class PKIXParametersTest extends TestCase {
     /**
      * Some valid issuer name
      */
     private final static String testIssuer =
-        "CN=VM,OU=DRL Security,O=Intel,L=Novosibirsk,ST=NSO,C=RU";
+            "CN=VM,OU=DRL Security,O=Intel,L=Novosibirsk,ST=NSO,C=RU";
 
     /**
      * Constructor for PKIXParametersTest.
+     *
      * @param name
      */
     public PKIXParametersTest(String name) {
@@ -71,10 +71,12 @@ public class PKIXParametersTest extends TestCase {
      * Assertion: Creates an instance of <code>PKIXParameters</code> with the
      * specified <code>Set</code> of most-trusted CAs. Each element of the set
      * is a <code>TrustAnchor</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testPKIXParametersSet01()
-        throws InvalidAlgorithmParameterException {
+            throws InvalidAlgorithmParameterException {
         Set taSet = TestUtils.getTrustAnchorSet();
         if (taSet == null) {
             fail(getName() + ": not performed (could not create test TrustAnchor set)");
@@ -88,16 +90,18 @@ public class PKIXParametersTest extends TestCase {
      * Test #2 for <code>PKIXParameters(Set)</code> constructor<br>
      * Assertion: ... the <code>Set</code> is copied to protect against
      * subsequent modifications
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testPKIXParametersSet02()
-        throws InvalidAlgorithmParameterException {
+            throws InvalidAlgorithmParameterException {
         Set taSet = TestUtils.getTrustAnchorSet();
         if (taSet == null) {
             fail(getName() + ": not performed (could not create test TrustAnchor set)");
         }
-        HashSet originalSet = (HashSet)taSet;
-        HashSet originalSetCopy = (HashSet)originalSet.clone();
+        HashSet originalSet = (HashSet) taSet;
+        HashSet originalSetCopy = (HashSet) originalSet.clone();
         // create test object using originalSet 
         PKIXParameters pp = new PKIXParameters(originalSetCopy);
         // modify originalSet
@@ -116,7 +120,7 @@ public class PKIXParametersTest extends TestCase {
     public final void testPKIXParametersSet03() throws Exception {
         try {
             // pass null
-            new PKIXParameters((Set)null);
+            new PKIXParameters((Set) null);
             fail("NPE expected");
         } catch (NullPointerException e) {
         }
@@ -157,18 +161,20 @@ public class PKIXParametersTest extends TestCase {
         } catch (ClassCastException e) {
         }
     }
-    
+
     /**
      * Test #3 for <code>PKIXParameters(KeyStore)</code> constructor<br>
      * Assertion: <code>NullPointerException</code> -
      * if the <code>keystore</code> is <code>null</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws KeyStoreException
      */
     public final void testPKIXParametersKeyStore03() throws Exception {
         try {
             // pass null
-            new PKIXParameters((KeyStore)null);
+            new PKIXParameters((KeyStore) null);
             fail("NPE expected");
         } catch (NullPointerException e) {
         }
@@ -179,7 +185,9 @@ public class PKIXParametersTest extends TestCase {
      * Assertion: When a <code>PKIXParameters</code> object is created,
      * this flag is set to <code>true</code><br>
      * Assertion: returns the current value of the PolicyQualifiersRejected flag
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetPolicyQualifiersRejected() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -195,7 +203,9 @@ public class PKIXParametersTest extends TestCase {
      * Test for <code>setPolicyQualifiersRejected()</code> method<br>
      * Assertion: set the new value of the
      * <code>PolicyQualifiersRejected</code> flag
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetPolicyQualifiersRejected() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -205,9 +215,9 @@ public class PKIXParametersTest extends TestCase {
 
         PKIXParameters p = new PKIXParameters(taSet);
         p.setPolicyQualifiersRejected(false);
-        assertFalse("setFalse",p.getPolicyQualifiersRejected());
+        assertFalse("setFalse", p.getPolicyQualifiersRejected());
         p.setPolicyQualifiersRejected(true);
-        assertTrue("setTrue",p.getPolicyQualifiersRejected());
+        assertTrue("setTrue", p.getPolicyQualifiersRejected());
     }
 
     /**
@@ -216,7 +226,9 @@ public class PKIXParametersTest extends TestCase {
      * OID is inhibited, <code>false</code> otherwise<br>
      * Assertion: By default, the any policy OID is not inhibited
      * (<code>isAnyPolicyInhibited()</code> returns false).
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testIsAnyPolicyInhibited() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -232,7 +244,9 @@ public class PKIXParametersTest extends TestCase {
      * Test for <code>setAnyPolicyInhibited()</code> method<br>
      * Assertion: sets state to determine if the any policy OID
      * should be processed if it is included in a certificate
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetAnyPolicyInhibited() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -252,7 +266,9 @@ public class PKIXParametersTest extends TestCase {
      * Assertion: returns <code>true</code> if explicit policy is required,
      * <code>false</code> otherwise<br>
      * Assertion: by default, the ExplicitPolicyRequired flag is false
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testIsExplicitPolicyRequired() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -267,9 +283,11 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test for <code>setExplicitPolicyRequired()</code> method<br>
      * Assertion: sets the ExplicitPolicyRequired flag
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
-    public final void testSetExplicitPolicyRequired() throws Exception { 
+    public final void testSetExplicitPolicyRequired() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
         if (taSet == null) {
             fail(getName() + ": not performed (could not create test TrustAnchor set)");
@@ -286,7 +304,9 @@ public class PKIXParametersTest extends TestCase {
      * Test for <code>isPolicyMappingInhibited()</code> method<br>
      * Assertion: returns true if policy mapping is inhibited, false otherwise
      * Assertion: by default, policy mapping is not inhibited (the flag is false)
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testIsPolicyMappingInhibited() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -301,7 +321,9 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test for <code>setPolicyMappingInhibited()</code> method<br>
      * Assertion: sets the PolicyMappingInhibited flag
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetPolicyMappingInhibited() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -321,7 +343,9 @@ public class PKIXParametersTest extends TestCase {
      * Assertion: returns the current value of the RevocationEnabled flag
      * Assertion: when a <code>PKIXParameters</code> object is created,
      * this flag is set to true
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testIsRevocationEnabled() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -336,7 +360,9 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test for <code>isPolicyMappingInhibited()</code> method<br>
      * Assertion: sets the RevocationEnabled flag
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetRevocationEnabled() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -355,7 +381,9 @@ public class PKIXParametersTest extends TestCase {
      * Test for <code>getSigProvider()</code> method<br>
      * Assertion: returns the signature provider's name,
      * or null if not set
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetSigProvider() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -391,7 +419,9 @@ public class PKIXParametersTest extends TestCase {
      * Test #1 for <code>getTargetCertConstraints()</code> method<br>
      * Assertion: returns a <code>CertSelector</code> specifying
      * the constraints on the target certificate (or <code>null</code>)
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetTargetCertConstraints01() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -407,7 +437,9 @@ public class PKIXParametersTest extends TestCase {
      * Test #2 for <code>getTargetCertConstraints()</code> method<br>
      * Assertion: note that the <code>CertSelector</code> returned
      * is cloned to protect against subsequent modifications
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws IOException
      */
     public final void testGetTargetCertConstraints02() throws Exception {
@@ -420,11 +452,11 @@ public class PKIXParametersTest extends TestCase {
         PKIXParameters p = new PKIXParameters(taSet);
         p.setTargetCertConstraints(x509cs);
         // get cert selector
-        X509CertSelector cs1 = (X509CertSelector)p.getTargetCertConstraints();
+        X509CertSelector cs1 = (X509CertSelector) p.getTargetCertConstraints();
         // modify returned selector
         cs1.setIssuer(testIssuer);
         // get cert selector again
-        X509CertSelector cs2 = (X509CertSelector)p.getTargetCertConstraints();
+        X509CertSelector cs2 = (X509CertSelector) p.getTargetCertConstraints();
         // check that selector is not the same
         assertNotSame("notTheSame", cs1, cs2);
         // check that selector's internal state has
@@ -437,8 +469,10 @@ public class PKIXParametersTest extends TestCase {
      * Assertion: sets the required constraints on the target certificate.
      * The constraints are specified as an instance of CertSelector<br>
      * Assertion: ... If <code>null</code>, no constraints are defined
+     *
      * @throws IOException
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetTargetCertConstraints01() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -451,8 +485,8 @@ public class PKIXParametersTest extends TestCase {
         PKIXParameters p = new PKIXParameters(taSet);
         p.setTargetCertConstraints(x509cs);
         assertEquals("set",
-          testIssuer,
-          ((X509CertSelector)p.getTargetCertConstraints()).getIssuerAsString());
+                testIssuer,
+                ((X509CertSelector) p.getTargetCertConstraints()).getIssuerAsString());
         p.setTargetCertConstraints(null);
         assertNull("unset", p.getTargetCertConstraints());
     }
@@ -461,8 +495,10 @@ public class PKIXParametersTest extends TestCase {
      * Test #2 for <code>setTargetCertConstraints(CertSelector)</code> method<br>
      * Assertion: ... the CertSelector specified is cloned to protect against
      * subsequent modifications
+     *
      * @throws IOException
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetTargetCertConstraints02() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -476,7 +512,7 @@ public class PKIXParametersTest extends TestCase {
         // modify selector
         x509cs.setIssuer(testIssuer);
         // get selector
-        X509CertSelector x509cs1 = (X509CertSelector)p.getTargetCertConstraints();
+        X509CertSelector x509cs1 = (X509CertSelector) p.getTargetCertConstraints();
         // check that selector's internal state has
         // not been changed by above modification
         assertFalse(testIssuer.equals(x509cs1.getIssuerAsString()));
@@ -485,7 +521,9 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test #1 for <code>getCertStores()</code> method<br>
      * Assertion: list ... (may be empty, but never <code>null</code>)
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetCertStores01() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -502,7 +540,9 @@ public class PKIXParametersTest extends TestCase {
      * Test #2 for <code>getCertStores()</code> method<br>
      * Assertion: returns an immutable <code>List</code>
      * of <code>CertStores</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetCertStores02() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -524,8 +564,10 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test #1 for <code>setCertStores(List)</code> method<br>
      * Assertion: Sets the list of CertStores ...
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetCertStores01() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -542,7 +584,9 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test #2 for <code>setCertStores(List)</code> method<br>
      * Assertion: list ... may be <code>null</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetCertStores02() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -565,8 +609,10 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test #3 for <code>setCertStores(List)</code> method<br>
      * Assertion: list is copied to protect against subsequent modifications
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetCertStores03() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -589,7 +635,9 @@ public class PKIXParametersTest extends TestCase {
      * Assertion: <code>ClassCastException</code> -
      * if any of the elements in the list are not of type
      * <code>java.security.cert.CertStore</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws NoSuchAlgorithmException
      */
     public final void testSetCertStores04() throws Exception {
@@ -613,8 +661,10 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test #1 for <code>addCertStore(CertStore)</code> method<br>
      * Assertion: adds a <code>CertStore</code> to the end of the
-     * list of <code>CertStores</code> 
+     * list of <code>CertStores</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws NoSuchAlgorithmException
      */
     public final void testAddCertStore01() throws Exception {
@@ -631,8 +681,10 @@ public class PKIXParametersTest extends TestCase {
 
     /**
      * Test #2 for <code>addCertStore(CertStore)</code> method<br>
-     * Assertion: if <code>null</code>, the store is ignored (not added to list) 
+     * Assertion: if <code>null</code>, the store is ignored (not added to list)
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testAddCertStore02() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -648,7 +700,9 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test #1 for <code>getCertPathCheckers()</code> method<br>
      * Assertion: list ... may be empty, but not <code>null</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetCertPathCheckers01() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -659,14 +713,16 @@ public class PKIXParametersTest extends TestCase {
         PKIXParameters p = new PKIXParameters(taSet);
         List l = p.getCertPathCheckers();
         assertNotNull("notNull", l);
-        assertTrue("isEmpty",l.isEmpty());
+        assertTrue("isEmpty", l.isEmpty());
     }
 
     /**
      * Test #2 for <code>getCertPathCheckers()</code> method<br>
      * Assertion: returns an immutable <code>List</code>
      * of <code>PKIXCertPathChecker</code>s
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetCertPathCheckers02() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -690,7 +746,9 @@ public class PKIXParametersTest extends TestCase {
      * Assertion: The returned List is immutable, and each
      * <code>PKIXCertPathChecker</code> in the <code>List</code>
      * is cloned to protect against subsequent modifications
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws CertPathValidatorException
      */
     public final void testGetCertPathCheckers03() throws Exception {
@@ -719,7 +777,9 @@ public class PKIXParametersTest extends TestCase {
      * Test #1 for <code>setCertPathCheckers(List)</code> method<br>
      * Assertion: sets a <code>List</code> of additional
      * certification path checkers
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetCertPathCheckers01() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -740,7 +800,9 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test #2 for <code>setCertPathCheckers(List)</code> method<br>
      * Assertion: <code>List</code> ... may be null
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetCertPathCheckers02() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -764,7 +826,9 @@ public class PKIXParametersTest extends TestCase {
      * Assertion: <code>List</code> supplied here is copied and each
      * <code>PKIXCertPathChecker</code> in the list is cloned to protect
      * against subsequent modifications
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetCertPathCheckers03() throws Exception {
         // checks that list copied
@@ -791,8 +855,11 @@ public class PKIXParametersTest extends TestCase {
      * Assertion: <code>List</code> supplied here is copied and each
      * <code>PKIXCertPathChecker</code> in the list is cloned to protect
      * against subsequent modifications
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws CertPathValidatorException
      */
     public final void testSetCertPathCheckers04() throws Exception {
@@ -821,7 +888,9 @@ public class PKIXParametersTest extends TestCase {
      * Assertion: <code>ClassCastException</code> -
      * if any of the elements in the list are not of type
      * <code>java.security.cert.PKIXCertPathChecker</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetCertPathCheckers05() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -846,7 +915,8 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test #1 for <code>addCertPathChecker(PKIXCertPathChecker)</code> method<br>
      * Assertion: adds a <code>CertPathChecker</code> to the end of the
-     * list of <code>CertPathChecker</code>s 
+     * list of <code>CertPathChecker</code>s
+     *
      * @throws CertPathValidatorException
      */
     public final void testAddCertPathChecker01() throws Exception {
@@ -869,15 +939,17 @@ public class PKIXParametersTest extends TestCase {
         List l1 = p.getCertPathCheckers();
         assertEquals("listSize", 2, l1.size());
         assertFalse("order1",
-                ((PKIXCertPathChecker)l1.get(0)).isForwardCheckingSupported());
+                ((PKIXCertPathChecker) l1.get(0)).isForwardCheckingSupported());
         assertTrue("order2",
-                ((PKIXCertPathChecker)l1.get(1)).isForwardCheckingSupported());
+                ((PKIXCertPathChecker) l1.get(1)).isForwardCheckingSupported());
     }
 
     /**
      * Test #2 for <code>addCertPathChecker(PKIXCertPathChecker)</code> method<br>
      * Assertion: if null, the checker is ignored (not added to list).
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testAddCertPathChecker02() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -901,7 +973,9 @@ public class PKIXParametersTest extends TestCase {
      * Test #3 for <code>addCertPathChecker(PKIXCertPathChecker)</code> method<br>
      * Assertion: <code>PKIXCertPathChecker</code> is cloned to protect
      * against subsequent modifications
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws CertPathValidatorException
      */
     public final void testAddCertPathChecker03() throws Exception {
@@ -921,15 +995,17 @@ public class PKIXParametersTest extends TestCase {
         // state it contains has not been changed by the
         // above modification
         List l = p.getCertPathCheckers();
-        PKIXCertPathChecker cpc1 = (PKIXCertPathChecker)l.get(0);
+        PKIXCertPathChecker cpc1 = (PKIXCertPathChecker) l.get(0);
         assertEquals("listSize", 1, l.size());
         assertFalse("isCopied", cpc1.isForwardCheckingSupported());
     }
 
     /**
      * Test #1 for <code>getDate()</code> method<br>
-     * Assertion: the <code>Date</code>, or <code>null</code> if not set 
+     * Assertion: the <code>Date</code>, or <code>null</code> if not set
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetDate01() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -950,8 +1026,10 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test #2 for <code>getDate()</code> method<br>
      * Assertion: <code>Date</code> returned is copied to protect
-     * against subsequent modifications 
+     * against subsequent modifications
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetDate02() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -961,7 +1039,7 @@ public class PKIXParametersTest extends TestCase {
 
         PKIXParameters p = new PKIXParameters(taSet);
         Date currentDate = new Date();
-        p.setDate((Date)currentDate.clone());
+        p.setDate((Date) currentDate.clone());
         Date ret1 = p.getDate();
         // modify Date returned
         ret1.setTime(0L);
@@ -995,7 +1073,7 @@ public class PKIXParametersTest extends TestCase {
         // set another 'date'
         p.setDate(new Date(333L));
         assertEquals(333L, p.getDate().getTime());
-        
+
         // Regression for HARMONY-2882 (non-bug difference from RI)
         p = new PKIXParameters(taSet);
         p.setDate(new Date(555L));
@@ -1007,7 +1085,9 @@ public class PKIXParametersTest extends TestCase {
      * Test #1 for <code>getInitialPolicies()</code> method<br>
      * Assertion: The default return value is an empty <code>Set</code>
      * Assertion: Never returns <code>null</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetInitialPolicies01() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -1024,7 +1104,9 @@ public class PKIXParametersTest extends TestCase {
      * Test #2 for <code>getInitialPolicies()</code> method<br>
      * Assertion: returns an immutable <code>Set</code> of initial
      * policy OIDs in <code>String</code> format<br>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetInitialPolicies02() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -1046,7 +1128,9 @@ public class PKIXParametersTest extends TestCase {
      * Test #1 for <code>setInitialPolicies(Set)</code> method<br>
      * Assertion: sets the <code>Set</code> of initial policy
      * identifiers (OID strings)
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetInitialPolicies01() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -1064,7 +1148,9 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test #2 for <code>setInitialPolicies(Set)</code> method<br>
      * Assertion: <code>Set</code> may be <code>null</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetInitialPolicies02() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -1119,7 +1205,9 @@ public class PKIXParametersTest extends TestCase {
      * Test #5 for <code>setInitialPolicies(Set)</code> method<br>
      * Assertion: <code>ClassCastException</code> -
      * if any of the elements in the set are not of type <code>String</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetInitialPolicies05() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -1141,8 +1229,10 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test #1 for <code>getTrustAnchors()</code> method<br>
      * Assertion: an immutable <code>Set</code> of <code>TrustAnchors</code>
-     * (never <code>null</code>) 
+     * (never <code>null</code>)
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetTrustAnchors01() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -1157,8 +1247,10 @@ public class PKIXParametersTest extends TestCase {
     /**
      * Test #2 for <code>getTrustAnchors()</code> method<br>
      * Assertion: an immutable <code>Set</code> of <code>TrustAnchors</code>
-     * (never <code>null</code>) 
+     * (never <code>null</code>)
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetTrustAnchors02() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -1178,8 +1270,10 @@ public class PKIXParametersTest extends TestCase {
 
     /**
      * Test #1 for <code>setTrustAnchors(Set)</code> method<br>
-     * Assertion: Sets the <code>Set</code> of most-trusted CAs 
+     * Assertion: Sets the <code>Set</code> of most-trusted CAs
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetTrustAnchors01() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -1198,7 +1292,9 @@ public class PKIXParametersTest extends TestCase {
      * Assertion: <code>InvalidAlgorithmParameterException</code> -
      * if the specified <code>Set</code> is empty
      * (<code>trustAnchors.isEmpty() == true</code>)
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetTrustAnchors02() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();
@@ -1240,7 +1336,9 @@ public class PKIXParametersTest extends TestCase {
      * Assertion: <code>ClassCastException</code> -
      * if any of the elements in the set are not of type
      * <code>java.security.cert.TrustAnchor</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetTrustAnchors04() throws Exception {
         Set taSet = TestUtils.getTrustAnchorSet();

@@ -25,48 +25,48 @@ import junit.framework.TestCase;
 
 public class URIParameterTest extends TestCase {
 
-	private URIParameter uriParameter;
-	private URI			 uri;
+    private URIParameter uriParameter;
+    private URI uri;
 
-	/**
-	 * @tests {@link java.security.URIParamter#constructor(java.net.URI)}
-	 */
-	public void test_Constructor() throws URISyntaxException {
-		try {
-			new URIParameter(null);
-			fail("Should throw NPE");
-		} catch (NullPointerException e) {
-			// expected
-		}
-		
-		assertTrue(uriParameter instanceof Policy.Parameters);
-		assertTrue(uriParameter instanceof Configuration.Parameters);
-	}
-
-	/**
-	 * @tests {@link java.security.URIParameter#getURI()}
-	 */
-	public void testGetURI() {
-		URI u = uriParameter.getURI();
-		assertEquals(uri, u);
-		assertSame(uri, u);
-	}
-
-	/*
-     * @see TestCase#setUp()
+    /**
+     * @tests {@link java.security.URIParamter#constructor(java.net.URI)}
      */
-	protected void setUp() throws Exception {
+    public void test_Constructor() throws URISyntaxException {
+        try {
+            new URIParameter(null);
+            fail("Should throw NPE");
+        } catch (NullPointerException e) {
+            // expected
+        }
+
+        assertTrue(uriParameter instanceof Policy.Parameters);
+        assertTrue(uriParameter instanceof Configuration.Parameters);
+    }
+
+    /**
+     * @tests {@link java.security.URIParameter#getURI()}
+     */
+    public void testGetURI() {
+        URI u = uriParameter.getURI();
+        assertEquals(uri, u);
+        assertSame(uri, u);
+    }
+
+    /*
+    * @see TestCase#setUp()
+    */
+    protected void setUp() throws Exception {
         super.setUp();
         uri = new URI("http://www.test.com");
         uriParameter = new URIParameter(uri);
-	}
-	
-	/*
-     * @see TestCase#tearDown()
-     */
-	protected void tearDown() throws Exception {
+    }
+
+    /*
+    * @see TestCase#tearDown()
+    */
+    protected void tearDown() throws Exception {
         super.tearDown();
         uriParameter = null;
-        uri 		 = null;
+        uri = null;
     }
 }

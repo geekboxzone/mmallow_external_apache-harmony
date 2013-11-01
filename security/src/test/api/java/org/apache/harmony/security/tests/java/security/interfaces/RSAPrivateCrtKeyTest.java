@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.interfaces;
 
@@ -29,13 +29,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>RSAPrivateCrtKey</code> class field
- * 
  */
 public class RSAPrivateCrtKeyTest extends TestCase {
 
     /**
      * Constructor for RSAPrivateCrtKeyTest.
-     * 
+     *
      * @param arg0
      */
     public RSAPrivateCrtKeyTest(String arg0) {
@@ -51,43 +50,55 @@ public class RSAPrivateCrtKeyTest extends TestCase {
                 key.getSerVerUID(), //RSAPrivateCrtKey.serialVersionUID
                 -5682214253527700368L);
     }
+
     public class checkRSAPrivateCrtKey implements RSAPrivateCrtKey {
         public String getAlgorithm() {
             return "RSAPrivateCrtKey";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return new byte[0];
         }
+
         public long getSerVerUID() {
             return serialVersionUID;
         }
+
         public BigInteger getCrtCoefficient() {
             return null;
         }
+
         public BigInteger getPrimeP() {
             return null;
         }
+
         public BigInteger getPrimeQ() {
             return null;
         }
+
         public BigInteger getPrimeExponentP() {
             return null;
         }
+
         public BigInteger getPrimeExponentQ() {
             return null;
         }
+
         public BigInteger getPublicExponent() {
             return null;
         }
+
         public BigInteger getModulus() {
             return null;
         }
+
         public BigInteger getPrivateExponent() {
             return null;
         }
-        
+
     }
 }

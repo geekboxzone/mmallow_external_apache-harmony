@@ -183,7 +183,7 @@ public class MessageDigest1Test extends TestCase {
     }
 
     /**
-     * @tests java.security.MessageDigest#isEqual(byte[],byte[])
+     * @tests java.security.MessageDigest#isEqual(byte[], byte[])
      */
     public void test_isEqualLB$LB$() {
         byte[] b1 = { 1, 2, 3, 4 };

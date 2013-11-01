@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert.serialization;
 
@@ -30,7 +30,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for CertPathValidatorException serialization
- *
  */
 
 public class CertPathValidatorExceptionTest extends SerializationTest implements

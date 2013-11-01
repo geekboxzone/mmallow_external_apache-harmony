@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander V. Astapchuk
-*/
+ * @author Alexander V. Astapchuk
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.login;
 
@@ -76,6 +76,7 @@ public class LoginContext1Test extends TestCase {
      * global (fully qualified) ones.<br>
      * For example:<br>
      * TestLoginModule => javax.security.auth.login.LoginContextTest$TestLoginModule
+     *
      * @param shortName
      * @return fully qualified name
      */
@@ -85,19 +86,20 @@ public class LoginContext1Test extends TestCase {
 
     /**
      * Maps an integer value into appropriate LoginModuleControlFlag.
+     *
      * @param flag
      * @return
      */
     private static LoginModuleControlFlag mapControlFlag(int flag) {
         switch (flag) {
-        case OPTIONAL:
-            return LoginModuleControlFlag.OPTIONAL;
-        case REQUIRED:
-            return LoginModuleControlFlag.REQUIRED;
-        case REQUISITE:
-            return LoginModuleControlFlag.REQUISITE;
-        case SUFFICIENT:
-            return LoginModuleControlFlag.SUFFICIENT;
+            case OPTIONAL:
+                return LoginModuleControlFlag.OPTIONAL;
+            case REQUIRED:
+                return LoginModuleControlFlag.REQUIRED;
+            case REQUISITE:
+                return LoginModuleControlFlag.REQUISITE;
+            case SUFFICIENT:
+                return LoginModuleControlFlag.SUFFICIENT;
         }
         throw new Error("Unknown flag:" + flag);
     }
@@ -252,17 +254,17 @@ public class LoginContext1Test extends TestCase {
      * <il>
      * <li>its behaviour is managed - either on by-instance level (via a flags
      * passed to its ctor) ar on a global level - through the static mask
-     *
+     * <p/>
      * <li>the behaviour managed includes: returning a specified value
      * (true/false) from defined methods/ctor, or throwing an
      * Error/RuntimeException/LoginException -either specified by user or
      * created dynamically - from defined methods
-     *
+     * <p/>
      * <li>it keeps track of instances created
-     *
+     * <p/>
      * <li>each instance keeps track of which method was called
      * </il>
-     *
+     * <p/>
      * The behaviour can be managed either for each particular instance - by
      * passing an appropriate mask into ctor, or can be managed globally - via
      * static field {@link #staticMask}.<br>
@@ -412,6 +414,7 @@ public class LoginContext1Test extends TestCase {
          * Checks whether the instance variables are set and throw either
          * RuntimeException (checked first) or Error (checked next).<br>
          * If none of them specified, then the method returns silently.
+         *
          * @throws RuntimeException
          * @throws Error
          */
@@ -448,6 +451,7 @@ public class LoginContext1Test extends TestCase {
          * also not set, then the method returns <code>true</code>. If either
          * the static mask or the instance mask is set and match the
          * <code>msk</code> passed, then the method returns false.
+         *
          * @param msk
          * @return
          */
@@ -1118,8 +1122,8 @@ public class LoginContext1Test extends TestCase {
     /**
      * Tests LoginContext.login()<br>
      * If module fails during init():
-     * 		- its login() must NOT be called
-     * 		- its abort() must be called anyway.
+     * - its login() must NOT be called
+     * - its abort() must be called anyway.
      */
     public void testLogin_05() throws Exception {
         TestConfig.addInstalledRequired("TestLoginModule_InitFails");
@@ -1139,8 +1143,8 @@ public class LoginContext1Test extends TestCase {
     /**
      * Tests LoginContext.login()<br>
      * If module fails during init():
-     * 		- its login() must NOT be called
-     * 		- its login() MUST be called on the next attempt
+     * - its login() must NOT be called
+     * - its login() MUST be called on the next attempt
      */
     public void testLogin_06() throws Exception {
         TestConfig.addInstalledRequired("TestLoginModule");
@@ -1871,7 +1875,7 @@ public class LoginContext1Test extends TestCase {
      * <il>
      * <li>it shows whether its class was initialized or not (via the external
      * variable <code>boolean TestCallbackHandler_Contexted_staticDone</code>)
-     *
+     * <p/>
      * <li>keeps track of the active security contexts for each operation -
      * static{}, ctor(), handle()
      * </il>
@@ -1913,15 +1917,16 @@ public class LoginContext1Test extends TestCase {
      * <il>
      * <li>it shows whether its class was initialized or not (via the external
      * variable <code>boolean TestLoginModule_Contexted_staticDone</code>)
-     *
+     * <p/>
      * <li>keeps track of the active security contexts for each operation -
      * static{}, ctor(), initialize/login/commit/logout/abort
-     *
+     * <p/>
      * <li>it also invokes callback handler (if any) during its login() method
      * </il>
      */
     public static class TestLoginModule_Contexted extends TestLoginModule {
         public static AccessControlContext accStatic;
+
         static {
             accStatic = AccessController.getContext();
             TestLoginModule_Contexted_staticDone = true;
@@ -1942,6 +1947,7 @@ public class LoginContext1Test extends TestCase {
         public static TestLoginModule_Contexted item() {
             return item(0);
         }
+
         // Below are AccessControlContext-s for the appropriate operations:
         public AccessControlContext accCtor;
 
@@ -2000,11 +2006,13 @@ public class LoginContext1Test extends TestCase {
             return super.abort();
         }
     }
+
     /**
      * The real implementation of TestContextUsage_0 and TestContextUsage_1
      * methods.
+     *
      * @param useInstalledConfig
-     * @param dc - which domain combiner to test for
+     * @param dc                 - which domain combiner to test for
      * @throws Exception
      */
     private void implTestContextUsage(boolean useInstalledConfig,

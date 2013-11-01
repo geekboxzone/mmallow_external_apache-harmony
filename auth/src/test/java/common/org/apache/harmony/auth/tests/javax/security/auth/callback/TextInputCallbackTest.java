@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.callback;
 
@@ -34,7 +34,7 @@ public class TextInputCallbackTest extends TestCase {
     TextInputCallback text;
 
     /**
-     * Test for TextInputCallback(String), TextInputCallback(String, String) ctors 
+     * Test for TextInputCallback(String), TextInputCallback(String, String) ctors
      */
     public final void testTextInputCallback_01() {
         text = new TextInputCallback("prompt");
@@ -49,7 +49,7 @@ public class TextInputCallbackTest extends TestCase {
 
     /**
      * Test for TextOutputCallback(String prompt,String defaultText) ctor
-     * if prompt or defaultText is null or empty then expected IAE  
+     * if prompt or defaultText is null or empty then expected IAE
      */
     public final void testTextInputCallback_02() {
         try {
@@ -67,7 +67,7 @@ public class TextInputCallbackTest extends TestCase {
             fail("Prompt and DefaultText should not be null");
         } catch (IllegalArgumentException e) {
         }
-        
+
         try {
             text = new TextInputCallback("prompt", "");
             fail("Prompt and DefaultText should not be null");

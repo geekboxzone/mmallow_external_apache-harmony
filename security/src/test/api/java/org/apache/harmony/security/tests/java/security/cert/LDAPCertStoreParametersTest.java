@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -29,12 +29,12 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>java.security.cert.LDAPCertStoreParameters</code>
  * fields and methods
- * 
  */
 public class LDAPCertStoreParametersTest extends TestCase {
 
     /**
      * Constructor for LDAPCertStoreParametersTest.
+     *
      * @param name
      */
     public LDAPCertStoreParametersTest(String name) {
@@ -123,7 +123,7 @@ public class LDAPCertStoreParametersTest extends TestCase {
         String serverName = "myhost";
         int portNumber = 1099;
         LDAPCertStoreParameters cp =
-            new LDAPCertStoreParameters(serverName, portNumber);
+                new LDAPCertStoreParameters(serverName, portNumber);
         assertTrue("host", serverName.equals(cp.getServerName()));
         assertTrue("port", cp.getPort() == portNumber);
     }
@@ -147,8 +147,8 @@ public class LDAPCertStoreParametersTest extends TestCase {
      */
     public final void testClone() {
         LDAPCertStoreParameters cp1 =
-            new LDAPCertStoreParameters("myhost", 1100);
-        LDAPCertStoreParameters cp2 = (LDAPCertStoreParameters)cp1.clone();
+                new LDAPCertStoreParameters("myhost", 1100);
+        LDAPCertStoreParameters cp2 = (LDAPCertStoreParameters) cp1.clone();
         // check that that we have new object
         assertTrue("newObject", cp1 != cp2);
         assertTrue("hostsTheSame",
@@ -162,7 +162,7 @@ public class LDAPCertStoreParametersTest extends TestCase {
      */
     public final void testToString() {
         LDAPCertStoreParameters cp1 =
-            new LDAPCertStoreParameters("myhost", 1101);
+                new LDAPCertStoreParameters("myhost", 1101);
 
         assertNotNull(cp1.toString());
     }
@@ -174,7 +174,7 @@ public class LDAPCertStoreParametersTest extends TestCase {
     public final void testGetPort() {
         int portNumber = -1099;
         LDAPCertStoreParameters cp =
-            new LDAPCertStoreParameters("serverName", portNumber);
+                new LDAPCertStoreParameters("serverName", portNumber);
         assertTrue(cp.getPort() == portNumber);
     }
 
@@ -184,7 +184,7 @@ public class LDAPCertStoreParametersTest extends TestCase {
      */
     public final void testGetServerName() {
         LDAPCertStoreParameters cp =
-            new LDAPCertStoreParameters("serverName");
+                new LDAPCertStoreParameters("serverName");
         assertNotNull(cp.getServerName());
     }
 

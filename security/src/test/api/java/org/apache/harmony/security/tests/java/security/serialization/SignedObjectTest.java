@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.security.tests.java.security.serialization;
 
@@ -37,67 +37,66 @@ import org.apache.harmony.security.tests.support.TestKeyPair;
 
 /**
  * Tests for SignedObject serialization
- *
  */
 public class SignedObjectTest extends SerializationTest implements
         SerializationTest.SerializableAssert {
 
-	private Signature sig;
-	private TestKeyPair tkp = null;
+    private Signature sig;
+    private TestKeyPair tkp = null;
     private Properties prop;
 
     protected Object[] getData() {
-    	try {
-        	sig = Signature.getInstance("SHA1withDSA");
-    	} catch (NoSuchAlgorithmException e) {
-    		fail(e.toString());
-    	}
-    	try {
-			tkp = new TestKeyPair("DSA");
-		} catch (NoSuchAlgorithmException e1) {
-			fail(e1.toString());
-		}
-    	prop = new Properties();
-    	prop.put("aaa", "bbb");
-    	Object o = null;
-    	try {
-    		o = new SignedObject(prop, tkp.getPrivate(), sig);
-    	} catch (IOException e) {
-           	fail(e.toString());
-    	} catch (SignatureException e) {
-           	fail(e.toString());
-    	} catch (InvalidKeyException e) {
-           	fail(e.toString());
-    	} catch (InvalidKeySpecException e) {
-          	fail(e.toString());
-		}
-       return new Object[] { o };
+        try {
+            sig = Signature.getInstance("SHA1withDSA");
+        } catch (NoSuchAlgorithmException e) {
+            fail(e.toString());
+        }
+        try {
+            tkp = new TestKeyPair("DSA");
+        } catch (NoSuchAlgorithmException e1) {
+            fail(e1.toString());
+        }
+        prop = new Properties();
+        prop.put("aaa", "bbb");
+        Object o = null;
+        try {
+            o = new SignedObject(prop, tkp.getPrivate(), sig);
+        } catch (IOException e) {
+            fail(e.toString());
+        } catch (SignatureException e) {
+            fail(e.toString());
+        } catch (InvalidKeyException e) {
+            fail(e.toString());
+        } catch (InvalidKeySpecException e) {
+            fail(e.toString());
+        }
+        return new Object[] { o };
     }
 
     public void assertDeserialized(Serializable oref, Serializable otest) {
-    	SignedObject ref = (SignedObject) oref;
-    	SignedObject test = (SignedObject) otest;
+        SignedObject ref = (SignedObject) oref;
+        SignedObject test = (SignedObject) otest;
 
-    	assertEquals(test.getAlgorithm(), ref.getAlgorithm());
+        assertEquals(test.getAlgorithm(), ref.getAlgorithm());
 
         try {
             assertEquals(test.getObject(), prop);
         } catch (ClassNotFoundException e) {
-           	fail(e.toString());
+            fail(e.toString());
         } catch (IOException e) {
-           	fail(e.toString());
+            fail(e.toString());
         }
         try {
-        	if (!test.verify(tkp.getPublic(), sig)) {
-            	fail("verify() failed");
+            if (!test.verify(tkp.getPublic(), sig)) {
+                fail("verify() failed");
             }
         } catch (SignatureException e) {
-        	fail(e.toString());
+            fail(e.toString());
         } catch (InvalidKeyException e) {
-           	fail(e.toString());
+            fail(e.toString());
         } catch (InvalidKeySpecException e) {
-           	fail(e.toString());
-		}
+            fail(e.toString());
+        }
     }
 
 }

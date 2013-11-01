@@ -34,60 +34,62 @@ public class InetSocketAddressTest extends TestCase {
         assertEquals("/127.0.0.1:0", address.toString());
         String localhostName = address.getHostName();
         assertNotNull(localhostName);
-        assertEquals(localhostName+"/127.0.0.1:0", address.toString());
+        assertEquals(localhostName + "/127.0.0.1:0", address.toString());
     }
-    
+
     /**
-	 * @tests java.net.InetSocketAddress#createUnresolved(String, int)
-	 */
-	public void test_createUnresolvedLjava_lang_StringI() {
-		HostPortPair[] legalHostPortPairs = { new HostPortPair("127.0.0.1", 1234),
-				new HostPortPair("192.168.0.1", 10000), new HostPortPair("127.0.0", 0),
-				new HostPortPair("127.0.0", 65535),
-				new HostPortPair("strange host", 65535) };
-		for (int i = 0; i < legalHostPortPairs.length; i++) {
-			InetSocketAddress isa = InetSocketAddress.createUnresolved(
-					legalHostPortPairs[i].host, legalHostPortPairs[i].port);
-			assertTrue(isa.isUnresolved());
-			assertNull(isa.getAddress());
-			assertEquals(isa.getHostName(), legalHostPortPairs[i].host);
-			assertEquals(isa.getPort(), legalHostPortPairs[i].port);
-		}
-	}
+     * @tests java.net.InetSocketAddress#createUnresolved(String, int)
+     */
+    public void test_createUnresolvedLjava_lang_StringI() {
+        HostPortPair[] legalHostPortPairs = { new HostPortPair("127.0.0.1", 1234),
+                new HostPortPair("192.168.0.1", 10000), new HostPortPair("127.0.0", 0),
+                new HostPortPair("127.0.0", 65535),
+                new HostPortPair("strange host", 65535) };
+        for (int i = 0; i < legalHostPortPairs.length; i++) {
+            InetSocketAddress isa = InetSocketAddress.createUnresolved(
+                    legalHostPortPairs[i].host, legalHostPortPairs[i].port);
+            assertTrue(isa.isUnresolved());
+            assertNull(isa.getAddress());
+            assertEquals(isa.getHostName(), legalHostPortPairs[i].host);
+            assertEquals(isa.getPort(), legalHostPortPairs[i].port);
+        }
+    }
 
-	/**
-	 * @tests java.net.InetSocketAddress#createUnresolved(String, int)
-	 */
-	public void test_createUnresolvedLjava_lang_StringI_IllegalArgumentException() {
-		HostPortPair[] illegalHostPortPairs = { new HostPortPair(null, 1),
-				new HostPortPair("host", -1), new HostPortPair("host", 65536) };
-		for (int i = 0; i < illegalHostPortPairs.length; i++) {
-			try {
-				InetSocketAddress.createUnresolved(
-						illegalHostPortPairs[i].host,
-						illegalHostPortPairs[i].port);
-				fail("should throw IllegalArgumentException, host = "
-						+ illegalHostPortPairs[i].host + ",port = "
-						+ illegalHostPortPairs[i].port);
-			} catch (IllegalArgumentException e) {
-				// expected
-			}
-		}
-	}
+    /**
+     * @tests java.net.InetSocketAddress#createUnresolved(String, int)
+     */
+    public void test_createUnresolvedLjava_lang_StringI_IllegalArgumentException() {
+        HostPortPair[] illegalHostPortPairs = { new HostPortPair(null, 1),
+                new HostPortPair("host", -1), new HostPortPair("host", 65536) };
+        for (int i = 0; i < illegalHostPortPairs.length; i++) {
+            try {
+                InetSocketAddress.createUnresolved(
+                        illegalHostPortPairs[i].host,
+                        illegalHostPortPairs[i].port);
+                fail("should throw IllegalArgumentException, host = "
+                        + illegalHostPortPairs[i].host + ",port = "
+                        + illegalHostPortPairs[i].port);
+            } catch (IllegalArgumentException e) {
+                // expected
+            }
+        }
+    }
 
-	/*
-	 * inner class for createUnresolved test convenience.
-	 */
-	class HostPortPair {
-		String host;
+    /*
+      * inner class for createUnresolved test convenience.
+      */
+    class HostPortPair {
+        String host;
 
-		int port;
+        int port;
 
-		public HostPortPair(String host, int port) {
-			this.host = host;
-			this.port = port;
-		}
-	};
+        public HostPortPair(String host, int port) {
+            this.host = host;
+            this.port = port;
+        }
+    }
+
+    ;
 
     // comparator for InetSocketAddress objects
     private static final SerializableAssert COMPARATOR = new SerializableAssert() {

@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.KeyException;
 
 import junit.framework.TestCase;
@@ -27,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyException</code> class constructors and methods.
- * 
  */
 public class KeyExceptionTest extends TestCase {
 
@@ -36,7 +36,7 @@ public class KeyExceptionTest extends TestCase {
 
     /**
      * Constructor for KeyExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public KeyExceptionTest(String arg0) {

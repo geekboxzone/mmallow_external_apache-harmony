@@ -33,7 +33,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ExemptionMechanism</code> class constructors and methods
- * 
  */
 
 public class ExemptionMechanismTest extends TestCase {
@@ -45,7 +44,7 @@ public class ExemptionMechanismTest extends TestCase {
     private static final String ExemptionMechanismProviderClass = "org.apache.harmony.crypto.tests.support.MyExemptionMechanismSpi";
 
     /**
-     * Test for <code>ExemptionMechanism</code> constructor 
+     * Test for <code>ExemptionMechanism</code> constructor
      * Assertion: creates new object using provider and mechanism name
      */
     public void testExemptionMechanism() throws Exception {
@@ -56,31 +55,37 @@ public class ExemptionMechanismTest extends TestCase {
 
         ExemptionMechanismSpi spi = new MyExemptionMechanismSpi();
 
-        ExemptionMechanism em = new ExemptionMechanism(spi, mProv, defaultAlg) {};
+        ExemptionMechanism em = new ExemptionMechanism(spi, mProv, defaultAlg) {
+        };
         assertEquals("Incorrect provider", em.getProvider(), mProv);
         assertEquals("Incorrect algorithm", em.getName(), defaultAlg);
         try {
             em.init(null);
             fail("InvalidKeyException must be thrown");
-        } catch (InvalidKeyException e) {}
+        } catch (InvalidKeyException e) {
+        }
 
         try {
             em.getOutputSize(100);
             fail("IllegalStateException must be thrown");
-        } catch (IllegalStateException e) {}
+        } catch (IllegalStateException e) {
+        }
 
 
-        em = new ExemptionMechanism(null, null, null) {};
+        em = new ExemptionMechanism(null, null, null) {
+        };
         assertNull("Incorrect mechanism", em.getName());
         assertNull("Incorrect provider", em.getProvider());
         try {
             em.init(null);
             fail("NullPointerException must be thrown");
-        } catch (NullPointerException e) {}
+        } catch (NullPointerException e) {
+        }
         try {
             em.getOutputSize(100);
             fail("IllegalStateException must be thrown");
-        } catch (IllegalStateException e) {}
+        } catch (IllegalStateException e) {
+        }
     }
 
     /**
@@ -96,9 +101,9 @@ public class ExemptionMechanismTest extends TestCase {
             //expected
         }
     }
-    
+
     /**
-     * Test for <code>isCryptoAllowed(Key key)</code> method 
+     * Test for <code>isCryptoAllowed(Key key)</code> method
      */
     public void testIsCryptoAllowed() throws Exception {
 
@@ -129,7 +134,7 @@ public class ExemptionMechanismTest extends TestCase {
         em.init(key1);
         assertFalse(em.isCryptoAllowed(key));
     }
-    
+
     /**
      * Test for <code>genExemptionBlob((byte[] output, int outputOffset)</code> method
      */

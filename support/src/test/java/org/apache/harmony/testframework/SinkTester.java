@@ -76,7 +76,8 @@ public abstract class SinkTester {
         return result;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return getClass().getName();
     }
 
@@ -91,7 +92,7 @@ public abstract class SinkTester {
         }
 
         public void sinkTestNoWriting() throws Exception {
-            byte[] expected = new byte[] {};
+            byte[] expected = new byte[] { };
 
             OutputStream out = create();
             out.close();
@@ -99,13 +100,13 @@ public abstract class SinkTester {
         }
 
         public void sinkTestWriteZeroBytes() throws Exception {
-            byte[] expected = new byte[] {};
+            byte[] expected = new byte[] { };
 
             OutputStream out = create();
             byte[] a = new byte[1024];
             out.write(a, 1000, 0);
             out.write(a, 0, 0);
-            out.write(new byte[] {});
+            out.write(new byte[] { });
 
             out.close();
             assertArrayEquals(expected, getBytes());
@@ -212,7 +213,8 @@ public abstract class SinkTester {
 
         // adding a new test? Don't forget to update createTests().
 
-        @Override public String getName() {
+        @Override
+        public String getName() {
             return SinkTester.this.toString() + ":" + super.getName();
         }
     }

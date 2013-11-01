@@ -32,231 +32,231 @@ import org.apache.harmony.testframework.serialization.SerializationTest.Serializ
 
 public class LogRecordTest extends TestCase {
 
-	static final String MSG = "test msg, pls. ignore itb";
+    static final String MSG = "test msg, pls. ignore itb";
 
-	private LogRecord lr;
+    private LogRecord lr;
 
-	private static String className = LogRecordTest.class.getName();
+    private static String className = LogRecordTest.class.getName();
 
-	protected void setUp() throws Exception {
-		super.setUp();
-		lr = new LogRecord(Level.CONFIG, MSG);
+    protected void setUp() throws Exception {
+        super.setUp();
+        lr = new LogRecord(Level.CONFIG, MSG);
 
-	}
+    }
 
-	public void testLogRecordWithNullPointers() {
-		try {
-			new LogRecord(null, null);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-		}
-		try {
-			new LogRecord(null, MSG);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-		}
-		LogRecord r = new LogRecord(Level.WARNING, null);
-		assertSame(r.getLevel(), Level.WARNING);
-		assertNull(r.getMessage());
-	}
+    public void testLogRecordWithNullPointers() {
+        try {
+            new LogRecord(null, null);
+            fail("should throw NullPointerException");
+        } catch (NullPointerException e) {
+        }
+        try {
+            new LogRecord(null, MSG);
+            fail("should throw NullPointerException");
+        } catch (NullPointerException e) {
+        }
+        LogRecord r = new LogRecord(Level.WARNING, null);
+        assertSame(r.getLevel(), Level.WARNING);
+        assertNull(r.getMessage());
+    }
 
-	public void testGetSetLoggerName() {
-		assertNull(lr.getLoggerName());
-		lr.setLoggerName(null);
-		assertNull(lr.getLoggerName());
-		lr.setLoggerName("test logger name");
-		assertEquals("test logger name", lr.getLoggerName());
-	}
+    public void testGetSetLoggerName() {
+        assertNull(lr.getLoggerName());
+        lr.setLoggerName(null);
+        assertNull(lr.getLoggerName());
+        lr.setLoggerName("test logger name");
+        assertEquals("test logger name", lr.getLoggerName());
+    }
 
-	public void testGetSetResourceBundle() {
-		assertNull(lr.getResourceBundleName());
-		assertNull(lr.getResourceBundle());
+    public void testGetSetResourceBundle() {
+        assertNull(lr.getResourceBundleName());
+        assertNull(lr.getResourceBundle());
 
-		lr.setResourceBundle(null);
-		assertNull(lr.getResourceBundle());
+        lr.setResourceBundle(null);
+        assertNull(lr.getResourceBundle());
 
-		lr.setResourceBundleName("bundles/java/util/logging/res");
-		assertNull(lr.getResourceBundle());
+        lr.setResourceBundleName("bundles/java/util/logging/res");
+        assertNull(lr.getResourceBundle());
 
-		lr.setResourceBundleName(null);
-		ResourceBundle rb = ResourceBundle
-				.getBundle("bundles/java/util/logging/res");
-		lr.setResourceBundle(rb);
-		assertEquals(rb, lr.getResourceBundle());
-		assertNull(lr.getResourceBundleName());
-	}
+        lr.setResourceBundleName(null);
+        ResourceBundle rb = ResourceBundle
+                .getBundle("bundles/java/util/logging/res");
+        lr.setResourceBundle(rb);
+        assertEquals(rb, lr.getResourceBundle());
+        assertNull(lr.getResourceBundleName());
+    }
 
-	public void testGetSetResourceBundleName() {
-		assertNull(lr.getResourceBundleName());
-		lr.setResourceBundleName(null);
-		assertNull(lr.getResourceBundleName());
-		lr.setResourceBundleName("test");
-		assertEquals("test", lr.getResourceBundleName());
-	}
+    public void testGetSetResourceBundleName() {
+        assertNull(lr.getResourceBundleName());
+        lr.setResourceBundleName(null);
+        assertNull(lr.getResourceBundleName());
+        lr.setResourceBundleName("test");
+        assertEquals("test", lr.getResourceBundleName());
+    }
 
-	public void testGetSetLevel() {
-		try {
-			lr.setLevel(null);
-			fail("should throw NullPointerException");
-		} catch (NullPointerException e) {
-		}
-		assertSame(lr.getLevel(), Level.CONFIG);
-	}
+    public void testGetSetLevel() {
+        try {
+            lr.setLevel(null);
+            fail("should throw NullPointerException");
+        } catch (NullPointerException e) {
+        }
+        assertSame(lr.getLevel(), Level.CONFIG);
+    }
 
-	public void testGetSetSequenceNumber() {
-		long l = lr.getSequenceNumber();
-		lr.setSequenceNumber(-111);
-		assertEquals(lr.getSequenceNumber(), -111L);
-		lr.setSequenceNumber(0);
-		assertEquals(lr.getSequenceNumber(), 0L);
-		lr = new LogRecord(Level.ALL, null);
-		assertEquals(lr.getSequenceNumber(), l + 1);
-	}
+    public void testGetSetSequenceNumber() {
+        long l = lr.getSequenceNumber();
+        lr.setSequenceNumber(-111);
+        assertEquals(lr.getSequenceNumber(), -111L);
+        lr.setSequenceNumber(0);
+        assertEquals(lr.getSequenceNumber(), 0L);
+        lr = new LogRecord(Level.ALL, null);
+        assertEquals(lr.getSequenceNumber(), l + 1);
+    }
 
-	public void testGetSetSourceClassName() {
-		lr.setSourceClassName(null);
-		assertNull(lr.getSourceClassName());
-		lr.setSourceClassName("bad class name");
-		assertEquals("bad class name", lr.getSourceClassName());
-		lr.setSourceClassName(this.getClass().getName());
-		assertEquals(this.getClass().getName(), lr.getSourceClassName());
-	}
+    public void testGetSetSourceClassName() {
+        lr.setSourceClassName(null);
+        assertNull(lr.getSourceClassName());
+        lr.setSourceClassName("bad class name");
+        assertEquals("bad class name", lr.getSourceClassName());
+        lr.setSourceClassName(this.getClass().getName());
+        assertEquals(this.getClass().getName(), lr.getSourceClassName());
+    }
 
-	public void testGetSetSourceMethodName() {
-		lr.setSourceMethodName(null);
-		assertNull(lr.getSourceMethodName());
-		lr.setSourceMethodName("bad class name");
-		assertEquals("bad class name", lr.getSourceMethodName());
-		lr.setSourceMethodName(this.getClass().getName());
-		assertEquals(this.getClass().getName(), lr.getSourceMethodName());
-	}
+    public void testGetSetSourceMethodName() {
+        lr.setSourceMethodName(null);
+        assertNull(lr.getSourceMethodName());
+        lr.setSourceMethodName("bad class name");
+        assertEquals("bad class name", lr.getSourceMethodName());
+        lr.setSourceMethodName(this.getClass().getName());
+        assertEquals(this.getClass().getName(), lr.getSourceMethodName());
+    }
 
-	public void testGetSourceDefaultValue() {
-		assertNull(lr.getSourceMethodName());
-		assertNull(lr.getSourceClassName());
+    public void testGetSourceDefaultValue() {
+        assertNull(lr.getSourceMethodName());
+        assertNull(lr.getSourceClassName());
 
-		// find class and method who called logger
-		Logger logger = Logger.global;
-		MockHandler handler = new MockHandler();
-		logger.addHandler(handler);
-		logger.log(Level.SEVERE, MSG);
-		assertEquals(this.getClass().getName(), handler.getSourceClassName());
-		assertEquals("testGetSourceDefaultValue", handler.getSourceMethodName());
+        // find class and method who called logger
+        Logger logger = Logger.global;
+        MockHandler handler = new MockHandler();
+        logger.addHandler(handler);
+        logger.log(Level.SEVERE, MSG);
+        assertEquals(this.getClass().getName(), handler.getSourceClassName());
+        assertEquals("testGetSourceDefaultValue", handler.getSourceMethodName());
 
-		// only set source method to null
-		lr = new LogRecord(Level.SEVERE, MSG);
-		lr.setSourceMethodName(null);
-		logger.log(lr);
-		assertNull(handler.getSourceClassName());
-		assertNull(handler.getSourceMethodName());
+        // only set source method to null
+        lr = new LogRecord(Level.SEVERE, MSG);
+        lr.setSourceMethodName(null);
+        logger.log(lr);
+        assertNull(handler.getSourceClassName());
+        assertNull(handler.getSourceMethodName());
 
-		// only set source class to null
-		lr = new LogRecord(Level.SEVERE, MSG);
-		lr.setSourceClassName(null);
-		logger.log(lr);
-		assertNull(handler.getSourceClassName());
-		assertNull(handler.getSourceMethodName());
+        // only set source class to null
+        lr = new LogRecord(Level.SEVERE, MSG);
+        lr.setSourceClassName(null);
+        logger.log(lr);
+        assertNull(handler.getSourceClassName());
+        assertNull(handler.getSourceMethodName());
 
-		// set both
-		lr = new LogRecord(Level.SEVERE, MSG);
-		lr.setSourceClassName("className");
-		lr.setSourceMethodName(null);
-		logger.log(lr);
-		assertEquals("className", handler.getSourceClassName());
-		assertNull(handler.getSourceMethodName());
+        // set both
+        lr = new LogRecord(Level.SEVERE, MSG);
+        lr.setSourceClassName("className");
+        lr.setSourceMethodName(null);
+        logger.log(lr);
+        assertEquals("className", handler.getSourceClassName());
+        assertNull(handler.getSourceMethodName());
 
-		// test if LogRecord is constructed in another class, and is published
-		// by Logger
-		logger.log(RecordFactory.getDefaultRecord());
-		assertEquals(this.getClass().getName(), handler.getSourceClassName());
-		assertEquals("testGetSourceDefaultValue", handler.getSourceMethodName());
+        // test if LogRecord is constructed in another class, and is published
+        // by Logger
+        logger.log(RecordFactory.getDefaultRecord());
+        assertEquals(this.getClass().getName(), handler.getSourceClassName());
+        assertEquals("testGetSourceDefaultValue", handler.getSourceMethodName());
 
-		lr = RecordFactory.getDefaultRecord();
-		// assertNull(lr.getSourceClassName());
-		// assertNull(lr.getSourceMethodName());
-		RecordFactory.log(logger, lr);
-		assertEquals(RecordFactory.class.getName(), handler
-				.getSourceClassName());
-		assertEquals("log", handler.getSourceMethodName());
+        lr = RecordFactory.getDefaultRecord();
+        // assertNull(lr.getSourceClassName());
+        // assertNull(lr.getSourceMethodName());
+        RecordFactory.log(logger, lr);
+        assertEquals(RecordFactory.class.getName(), handler
+                .getSourceClassName());
+        assertEquals("log", handler.getSourceMethodName());
 
-		// only try once to get the default value
-		lr = RecordFactory.getDefaultRecord();
-		assertNull(lr.getSourceClassName());
-		assertNull(lr.getSourceMethodName());
-		RecordFactory.log(logger, lr);
-		assertNull(handler.getSourceClassName());
-		assertNull(handler.getSourceMethodName());
+        // only try once to get the default value
+        lr = RecordFactory.getDefaultRecord();
+        assertNull(lr.getSourceClassName());
+        assertNull(lr.getSourceMethodName());
+        RecordFactory.log(logger, lr);
+        assertNull(handler.getSourceClassName());
+        assertNull(handler.getSourceMethodName());
 
-		// it cannot find correct default value when logger is subclass
-		MockLogger ml = new MockLogger("foo", null);
-		ml.addHandler(handler);
-		ml.info(MSG);
-		assertEquals(className + "$MockLogger", handler.getSourceClassName());
-		assertEquals("info", handler.getSourceMethodName());
+        // it cannot find correct default value when logger is subclass
+        MockLogger ml = new MockLogger("foo", null);
+        ml.addHandler(handler);
+        ml.info(MSG);
+        assertEquals(className + "$MockLogger", handler.getSourceClassName());
+        assertEquals("info", handler.getSourceMethodName());
 
-		// it can find nothing when only call Subclass
-		ml = new MockLogger("foo", null);
-		ml.addHandler(handler);
-		ml.log(Level.SEVERE, MSG);
-		assertNull(handler.getSourceClassName());
-		assertNull(handler.getSourceMethodName());
+        // it can find nothing when only call Subclass
+        ml = new MockLogger("foo", null);
+        ml.addHandler(handler);
+        ml.log(Level.SEVERE, MSG);
+        assertNull(handler.getSourceClassName());
+        assertNull(handler.getSourceMethodName());
 
-		// test if don't call logger, what is the default value
-		lr = new LogRecord(Level.SEVERE, MSG);
-		handler.publish(lr);
-		assertNull(handler.getSourceClassName());
-		assertNull(handler.getSourceMethodName());
-		logger.removeHandler(handler);
-	}
+        // test if don't call logger, what is the default value
+        lr = new LogRecord(Level.SEVERE, MSG);
+        handler.publish(lr);
+        assertNull(handler.getSourceClassName());
+        assertNull(handler.getSourceMethodName());
+        logger.removeHandler(handler);
+    }
 
-	public void testGetSetMessage() {
-		assertEquals(MSG, lr.getMessage());
-		lr.setMessage(null);
-		assertNull(lr.getMessage());
-		lr.setMessage("");
-		assertEquals("", lr.getMessage());
-	}
+    public void testGetSetMessage() {
+        assertEquals(MSG, lr.getMessage());
+        lr.setMessage(null);
+        assertNull(lr.getMessage());
+        lr.setMessage("");
+        assertEquals("", lr.getMessage());
+    }
 
-	public void testGetSetParameters() {
-		assertNull(lr.getParameters());
-		lr.setParameters(null);
-		assertNull(lr.getParameters());
-		Object[] oa = new Object[0];
-		lr.setParameters(oa);
-		assertEquals(oa, lr.getParameters());
-		oa = new Object[] { new Object(), new Object() };
-		lr.setParameters(oa);
-		assertSame(oa, lr.getParameters());
-	}
+    public void testGetSetParameters() {
+        assertNull(lr.getParameters());
+        lr.setParameters(null);
+        assertNull(lr.getParameters());
+        Object[] oa = new Object[0];
+        lr.setParameters(oa);
+        assertEquals(oa, lr.getParameters());
+        oa = new Object[] { new Object(), new Object() };
+        lr.setParameters(oa);
+        assertSame(oa, lr.getParameters());
+    }
 
-	public void testGetSetMillis() {
-		long milli = lr.getMillis();
+    public void testGetSetMillis() {
+        long milli = lr.getMillis();
         assertTrue(milli > 0);
-		lr.setMillis(-1);
-		assertEquals(-1, lr.getMillis());
-		lr.setMillis(0);
-		assertEquals(0, lr.getMillis());
-	}
+        lr.setMillis(-1);
+        assertEquals(-1, lr.getMillis());
+        lr.setMillis(0);
+        assertEquals(0, lr.getMillis());
+    }
 
-	public void testGetSetThreadID() {
-		// TODO how to test the different thread
-		int id = lr.getThreadID();
-		lr = new LogRecord(Level.ALL, "a1");
-		assertEquals(id, lr.getThreadID());
-		lr.setThreadID(id + 10);
-		assertEquals(id + 10, lr.getThreadID());
-		lr = new LogRecord(Level.ALL, "a1");
-		assertEquals(id, lr.getThreadID());
-	}
+    public void testGetSetThreadID() {
+        // TODO how to test the different thread
+        int id = lr.getThreadID();
+        lr = new LogRecord(Level.ALL, "a1");
+        assertEquals(id, lr.getThreadID());
+        lr.setThreadID(id + 10);
+        assertEquals(id + 10, lr.getThreadID());
+        lr = new LogRecord(Level.ALL, "a1");
+        assertEquals(id, lr.getThreadID());
+    }
 
-	public void testGetSetThrown() {
-		assertNull(lr.getThrown());
-		lr.setThrown(null);
-		assertNull(lr.getThrown());
-		Throwable e = new Exception();
-		lr.setThrown(e);
-		assertEquals(e, lr.getThrown());
-	}
+    public void testGetSetThrown() {
+        assertNull(lr.getThrown());
+        lr.setThrown(null);
+        assertNull(lr.getThrown());
+        Throwable e = new Exception();
+        lr.setThrown(e);
+        assertEquals(e, lr.getThrown());
+    }
 
     // comparator for LogRecord objects
     private static final SerializableAssert LOGRECORD_COMPARATOR = new SerializableAssert() {
@@ -363,86 +363,86 @@ public class LogRecordTest extends TestCase {
         SerializationTest.verifyGolden(this, r, LOGRECORD_COMPARATOR);
     }
 
-	public static class MockHandler extends Handler {
-		private String className;
+    public static class MockHandler extends Handler {
+        private String className;
 
-		private String methodName;
+        private String methodName;
 
-		public void close() {
-		}
+        public void close() {
+        }
 
-		public void flush() {
-		}
+        public void flush() {
+        }
 
-		public void publish(LogRecord record) {
-			className = record.getSourceClassName();
-			methodName = record.getSourceMethodName();
-		}
+        public void publish(LogRecord record) {
+            className = record.getSourceClassName();
+            methodName = record.getSourceMethodName();
+        }
 
-		public String getSourceMethodName() {
-			return methodName;
-		}
+        public String getSourceMethodName() {
+            return methodName;
+        }
 
-		public String getSourceClassName() {
-			return className;
-		}
-	}
+        public String getSourceClassName() {
+            return className;
+        }
+    }
 
-	// mock class, try to test when the sourceclass and sourcemethod of
-	// LogRecord is initiated
-	public static class RecordFactory {
+    // mock class, try to test when the sourceclass and sourcemethod of
+    // LogRecord is initiated
+    public static class RecordFactory {
 
-		public static LogRecord getDefaultRecord() {
-			return new LogRecord(Level.SEVERE, MSG);
-		}
+        public static LogRecord getDefaultRecord() {
+            return new LogRecord(Level.SEVERE, MSG);
+        }
 
-		public static void log(Logger logger, LogRecord lr) {
-			logger.log(lr);
-		}
-	}
+        public static void log(Logger logger, LogRecord lr) {
+            logger.log(lr);
+        }
+    }
 
-	public static class MockLogger extends Logger {
+    public static class MockLogger extends Logger {
 
-		/**
-		 * @param name
-		 * @param resourceBundleName
-		 */
-		public MockLogger(String name, String resourceBundleName) {
-			super(name, resourceBundleName);
-		}
+        /**
+         * @param name
+         * @param resourceBundleName
+         */
+        public MockLogger(String name, String resourceBundleName) {
+            super(name, resourceBundleName);
+        }
 
-		public void log(Level l, String s) {
-			this.log(new LogRecord(l, s));
-		}
+        public void log(Level l, String s) {
+            this.log(new LogRecord(l, s));
+        }
 
-		public void info(String s) {
-			super.info(s);
-		}
+        public void info(String s) {
+            super.info(s);
+        }
 
-		public void log(LogRecord record) {
-			if (isLoggable(record.getLevel())) {
-				// call the handlers of this logger
-				// TODO: What if an exception occurred in handler?
-				Handler[] ha = this.getHandlers();
-				for (int i = 0; i < ha.length; i++) {
-					ha[i].publish(record);
-				}
-				// call the parent's handlers if set useParentHandlers
-				if (getUseParentHandlers()) {
-					Logger anyParent = this.getParent();
-					while (null != anyParent) {
-						ha = anyParent.getHandlers();
-						for (int i = 0; i < ha.length; i++) {
-							ha[i].publish(record);
-						}
-						if (anyParent.getUseParentHandlers()) {
-							anyParent = anyParent.getParent();
-						} else {
-							break;
-						}
-					}
-				}
-			}
-		}
-	}
+        public void log(LogRecord record) {
+            if (isLoggable(record.getLevel())) {
+                // call the handlers of this logger
+                // TODO: What if an exception occurred in handler?
+                Handler[] ha = this.getHandlers();
+                for (int i = 0; i < ha.length; i++) {
+                    ha[i].publish(record);
+                }
+                // call the parent's handlers if set useParentHandlers
+                if (getUseParentHandlers()) {
+                    Logger anyParent = this.getParent();
+                    while (null != anyParent) {
+                        ha = anyParent.getHandlers();
+                        for (int i = 0; i < ha.length; i++) {
+                            ha[i].publish(record);
+                        }
+                        if (anyParent.getUseParentHandlers()) {
+                            anyParent = anyParent.getParent();
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

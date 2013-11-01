@@ -131,7 +131,8 @@ public class FileInputStreamTest extends TestCase {
         } finally {
             try {
                 fis1.close();
-            } catch (IOException e) {}
+            } catch (IOException e) {
+            }
         }
 
         // TODO: how does this differ from the test above?
@@ -399,7 +400,7 @@ public class FileInputStreamTest extends TestCase {
         assertEquals(0, fis.getChannel().position());
         int r;
         int count = 1;
-        while((r = fis.read()) != -1) {
+        while ((r = fis.read()) != -1) {
             assertEquals(count++, fis.getChannel().position());
         }
         fis.close();
@@ -407,7 +408,7 @@ public class FileInputStreamTest extends TestCase {
         try {
             fis.getChannel().position();
             fail("should throw ClosedChannelException");
-        } catch(java.nio.channels.ClosedChannelException e){
+        } catch (java.nio.channels.ClosedChannelException e) {
             // Expected
         }
 

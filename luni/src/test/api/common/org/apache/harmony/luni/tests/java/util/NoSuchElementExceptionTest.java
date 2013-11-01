@@ -22,49 +22,49 @@ import java.util.Vector;
 
 public class NoSuchElementExceptionTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.util.NoSuchElementException#NoSuchElementException()
-	 */
-	public void test_Constructor() {
-		// Test for method java.util.NoSuchElementException()
+    /**
+     * @tests java.util.NoSuchElementException#NoSuchElementException()
+     */
+    public void test_Constructor() {
+        // Test for method java.util.NoSuchElementException()
 
-		try {
-			Vector v = new Vector();
-			v.elements().nextElement();
-		} catch (NoSuchElementException e) {
-			return;
-		}
-		// if we make it to here, assert a fail
-		fail("Failed to catch expected Exception");
-	}
+        try {
+            Vector v = new Vector();
+            v.elements().nextElement();
+        } catch (NoSuchElementException e) {
+            return;
+        }
+        // if we make it to here, assert a fail
+        fail("Failed to catch expected Exception");
+    }
 
-	/**
-	 * @tests java.util.NoSuchElementException#NoSuchElementException(java.lang.String)
-	 */
-	public void test_ConstructorLjava_lang_String() {
-		// Test for method java.util.NoSuchElementException(java.lang.String)
+    /**
+     * @tests java.util.NoSuchElementException#NoSuchElementException(java.lang.String)
+     */
+    public void test_ConstructorLjava_lang_String() {
+        // Test for method java.util.NoSuchElementException(java.lang.String)
 
-		try {
-			Vector v = new Vector();
-			v.firstElement();
-		} catch (NoSuchElementException e) {
-			return;
-		}
-		// if we make it to here, assert a fail
-		fail("Failed to catch Exception");
-	}
+        try {
+            Vector v = new Vector();
+            v.firstElement();
+        } catch (NoSuchElementException e) {
+            return;
+        }
+        // if we make it to here, assert a fail
+        fail("Failed to catch Exception");
+    }
 
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

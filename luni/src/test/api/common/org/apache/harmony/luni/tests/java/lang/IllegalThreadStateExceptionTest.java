@@ -21,7 +21,7 @@ import junit.framework.TestCase;
 
 public class IllegalThreadStateExceptionTest extends TestCase {
 
-	/**
+    /**
      * @tests java.lang.IllegalThreadStateException#IllegalThreadStateException()
      */
     public void test_Constructor() {

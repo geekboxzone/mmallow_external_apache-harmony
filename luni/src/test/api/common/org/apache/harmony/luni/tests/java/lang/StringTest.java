@@ -28,6 +28,7 @@ import junit.framework.TestCase;
 public class StringTest extends TestCase {
 
     private static final Constructor<String> UNSAFE_CONSTRUCTOR;
+
     static {
         Constructor<String> uc;
         try {
@@ -46,9 +47,9 @@ public class StringTest extends TestCase {
         }
 
         return UNSAFE_CONSTRUCTOR.newInstance(Integer.valueOf(start), Integer.valueOf(len),
-                    data);
+                data);
     }
-    
+
     /**
      * @tests java.lang.String#String()
      */
@@ -107,12 +108,12 @@ public class StringTest extends TestCase {
     public void test_Constructor$BIILjava_lang_String() throws Exception {
         String s = new String(new byte[] { 65, 66, 67, 68, 69 }, 0, 5, "8859_1");
         assertEquals("Incorrect string returned: " + s, "ABCDE", s);
-        
+
         try {
-        	new String(new byte[] { 65, 66, 67, 68, 69 }, 0, 5, "");
-        	fail("Should throw UnsupportedEncodingException");
+            new String(new byte[] { 65, 66, 67, 68, 69 }, 0, 5, "");
+            fail("Should throw UnsupportedEncodingException");
         } catch (UnsupportedEncodingException e) {
-        	//expected
+            //expected
         }
     }
 
@@ -180,7 +181,7 @@ public class StringTest extends TestCase {
     }
 
     /**
-     * @tests java.lang.String#String(int[],int,int)
+     * @tests java.lang.String#String(int[], int, int)
      */
     public void test_Constructor$III() {
         assertEquals("HelloWorld", new String(new int[] { 'H', 'e', 'l', 'l',
@@ -247,7 +248,7 @@ public class StringTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * @tests java.lang.String#contentEquals(StringBuffer)
      */
@@ -383,8 +384,8 @@ public class StringTest extends TestCase {
             fail("No IOOBE for index that's too large.");
         } catch (IndexOutOfBoundsException e) {
         }
-        
-        s = newString(2,3,"__abc__".toCharArray());
+
+        s = newString(2, 3, "__abc__".toCharArray());
         try {
             s.offsetByCodePoints(-1, 1);
             fail("No IOOBE for negative index.");
@@ -424,8 +425,8 @@ public class StringTest extends TestCase {
         assertEquals('a', s.codePointAt(0));
         assertEquals('b', s.codePointAt(1));
         assertEquals('c', s.codePointAt(2));
-        
-        s = newString(2,3,"__abc__".toCharArray());
+
+        s = newString(2, 3, "__abc__".toCharArray());
         assertEquals('a', s.codePointAt(0));
         assertEquals('b', s.codePointAt(1));
         assertEquals('c', s.codePointAt(2));
@@ -433,8 +434,8 @@ public class StringTest extends TestCase {
         s = "\uD800\uDC00";
         assertEquals(0x10000, s.codePointAt(0));
         assertEquals('\uDC00', s.codePointAt(1));
-        
-        s = newString(2,2,"__\uD800\uDC00__".toCharArray());
+
+        s = newString(2, 2, "__\uD800\uDC00__".toCharArray());
         assertEquals(0x10000, s.codePointAt(0));
         assertEquals('\uDC00', s.codePointAt(1));
 
@@ -456,8 +457,8 @@ public class StringTest extends TestCase {
             fail("No IOOBE on index greater than length.");
         } catch (IndexOutOfBoundsException e) {
         }
-        
-        s = newString(2,3,"__abc__".toCharArray());
+
+        s = newString(2, 3, "__abc__".toCharArray());
         try {
             s.codePointAt(-1);
             fail("No IOOBE on negative index.");
@@ -485,8 +486,8 @@ public class StringTest extends TestCase {
         assertEquals('a', s.codePointBefore(1));
         assertEquals('b', s.codePointBefore(2));
         assertEquals('c', s.codePointBefore(3));
-        
-        s = newString(2,3,"__abc__".toCharArray());
+
+        s = newString(2, 3, "__abc__".toCharArray());
         assertEquals('a', s.codePointBefore(1));
         assertEquals('b', s.codePointBefore(2));
         assertEquals('c', s.codePointBefore(3));
@@ -494,8 +495,8 @@ public class StringTest extends TestCase {
         s = "\uD800\uDC00";
         assertEquals(0x10000, s.codePointBefore(2));
         assertEquals('\uD800', s.codePointBefore(1));
-        
-        s = newString(2,2,"__\uD800\uDC00__".toCharArray());
+
+        s = newString(2, 2, "__\uD800\uDC00__".toCharArray());
         assertEquals(0x10000, s.codePointBefore(2));
         assertEquals('\uD800', s.codePointBefore(1));
 
@@ -517,8 +518,8 @@ public class StringTest extends TestCase {
             fail("No IOOBE on index greater than length.");
         } catch (IndexOutOfBoundsException e) {
         }
-        
-        s = newString(2,3,"__abc__".toCharArray());
+
+        s = newString(2, 3, "__abc__".toCharArray());
         try {
             s.codePointBefore(0);
             fail("No IOOBE on zero index.");
@@ -549,14 +550,14 @@ public class StringTest extends TestCase {
 
         assertEquals(3, "a\uD800\uDC00b".codePointCount(0, 4));
         assertEquals(4, "a\uD800\uDC00b\uD800".codePointCount(0, 5));
-        
-        assertEquals(1, newString(2,2,"__\uD800\uDC00__".toCharArray()).codePointCount(0, 2));
-        assertEquals(1, newString(2,2,"__\uD800\uDC01__".toCharArray()).codePointCount(0, 2));
-        assertEquals(1, newString(2,2,"__\uD801\uDC01__".toCharArray()).codePointCount(0, 2));
-        assertEquals(1, newString(2,2,"__\uDBFF\uDFFF__".toCharArray()).codePointCount(0, 2));
 
-        assertEquals(3, newString(2,4,"__a\uD800\uDC00b__".toCharArray()).codePointCount(0, 4));
-        assertEquals(4, newString(2,5,"__a\uD800\uDC00b\uD800__".toCharArray()).codePointCount(0, 5));
+        assertEquals(1, newString(2, 2, "__\uD800\uDC00__".toCharArray()).codePointCount(0, 2));
+        assertEquals(1, newString(2, 2, "__\uD800\uDC01__".toCharArray()).codePointCount(0, 2));
+        assertEquals(1, newString(2, 2, "__\uD801\uDC01__".toCharArray()).codePointCount(0, 2));
+        assertEquals(1, newString(2, 2, "__\uDBFF\uDFFF__".toCharArray()).codePointCount(0, 2));
+
+        assertEquals(3, newString(2, 4, "__a\uD800\uDC00b__".toCharArray()).codePointCount(0, 4));
+        assertEquals(4, newString(2, 5, "__a\uD800\uDC00b\uD800__".toCharArray()).codePointCount(0, 5));
 
         String s = "abc";
         try {
@@ -576,7 +577,7 @@ public class StringTest extends TestCase {
             fail("No IOOBE for begin index larger than end index.");
         } catch (IndexOutOfBoundsException e) {
         }
-        
+
         s = newString(2, 3, "__abc__".toCharArray());
         try {
             s.codePointCount(-1, 2);
@@ -596,10 +597,9 @@ public class StringTest extends TestCase {
         } catch (IndexOutOfBoundsException e) {
         }
     }
-    
+
     /**
-     * @tests {@link java.lang.String#String(byte[], int, int, Charset)} 
-     * 
+     * @tests {@link java.lang.String#String(byte[], int, int, Charset)}
      * @since 1.6
      */
     public void test_ConstructorBIIL() throws Exception {
@@ -657,89 +657,86 @@ public class StringTest extends TestCase {
             // expected
         }
         try {
-            new String(null, -1, 0, (Charset)null);
+            new String(null, -1, 0, (Charset) null);
             fail("should throw NullPointerException");
         } catch (NullPointerException e) {
             // expected
         }
         try {
-            new String(new byte[8], -1, 0, (Charset)null);
+            new String(new byte[8], -1, 0, (Charset) null);
             fail();
         } catch (NullPointerException expected) {
         } catch (StringIndexOutOfBoundsException expected) {
         }
         try {
-            new String(new byte[8], 0, 9, (Charset)null);
+            new String(new byte[8], 0, 9, (Charset) null);
             fail();
         } catch (NullPointerException expected) {
         } catch (StringIndexOutOfBoundsException expected) {
         }
         try {
-            new String(new byte[8], 0, 4, (Charset)null);
+            new String(new byte[8], 0, 4, (Charset) null);
             fail("should throw NullPointerException");
         } catch (NullPointerException e) {
             // expected
         }
     }
-    
+
     /**
      * @tests {@link java.lang.String#String(byte[], Charset)}
-     * 
-     *  @since 1.6
+     * @since 1.6
      */
     public void test_ConstructorBL() throws Exception {
         new String(new byte[8], Charset.defaultCharset());
         try {
-            new String(new byte[8],(Charset)null);
+            new String(new byte[8], (Charset) null);
             fail("should throw NullPointerException");
         } catch (NullPointerException e) {
             // expected
         }
         try {
-            new String(new byte[0],(Charset)null);
+            new String(new byte[0], (Charset) null);
             fail("should throw NullPointerException");
         } catch (NullPointerException e) {
             // expected
         }
         try {
-            new String(null,Charset.defaultCharset());
+            new String(null, Charset.defaultCharset());
             fail("should throw NullPointerException");
         } catch (NullPointerException e) {
             // expected
         }
         new String(new byte[0], Charset.defaultCharset());
     }
-    
+
     /**
      * @tests {@link java.lang.String#isEmpty()}
-     * 
      * @since 1.6
      */
     public void test_isEmpty() throws Exception {
         assertTrue(new String(new byte[0], Charset.defaultCharset()).isEmpty());
         assertTrue(new String(new byte[8], Charset.defaultCharset()).substring(0, 0).isEmpty());
     }
-    
+
     /**
      * @tests {@link java.lang.String#getBytes(Charset)}
-     * 
      * @since 1.6
      */
     public void test_getBytesLCharset() throws Exception {
         byte[] emptyBytes = new byte[0];
-        byte[] someBytes = new byte[]{'T','h','i','s',' ',' ','i','s',' ','t','e','s','t',' ','b','y','t','e','s'};
+        byte[] someBytes = new byte[] { 'T', 'h', 'i', 's', ' ', ' ', 'i', 's', ' ', 't', 'e', 's', 't', ' ', 'b', 'y', 't', 'e', 's' };
         assertEquals(0, new String(emptyBytes, Charset.defaultCharset()).getBytes(Charset.defaultCharset()).length);
-        try{
-            new String(emptyBytes, Charset.defaultCharset()).getBytes((Charset)null);
+        try {
+            new String(emptyBytes, Charset.defaultCharset()).getBytes((Charset) null);
             fail("should throw NPE");
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             // correct
         }
-        assertTrue(bytesEquals(someBytes,new String(someBytes, Charset.defaultCharset()).getBytes(Charset.defaultCharset())));
+        assertTrue(bytesEquals(someBytes, new String(someBytes, Charset.defaultCharset()).getBytes(Charset.defaultCharset())));
         SortedMap<String, Charset> charsets = Charset.availableCharsets();
     }
-    
-    boolean bytesEquals(byte[] bytes1, byte[] bytes2){
+
+    boolean bytesEquals(byte[] bytes1, byte[] bytes2) {
         return Arrays.toString(bytes1).equals(Arrays.toString(bytes2));
     }
 }

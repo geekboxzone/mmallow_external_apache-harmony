@@ -37,9 +37,9 @@ public class SSLEngineImplTest extends TestCase {
      * The cipher suites used for functionality testing.
      */
     private static final String[] cipher_suites = {
-        "RSA_WITH_RC4_128_MD5",
-        "RSA_WITH_DES_CBC_SHA",
-        "DH_anon_EXPORT_WITH_DES40_CBC_SHA"
+            "RSA_WITH_RC4_128_MD5",
+            "RSA_WITH_DES_CBC_SHA",
+            "DH_anon_EXPORT_WITH_DES40_CBC_SHA"
     };
 
     /**
@@ -64,9 +64,9 @@ public class SSLEngineImplTest extends TestCase {
      * Tests the interaction between the engines.
      */
     public void testSelfInteraction() throws Exception {
-        String[] protocols = {"SSLv3", "TLSv1"};
-        for (int i=0; i<cipher_suites.length; i++) {
-            for (int j=0; j<2; j++) {
+        String[] protocols = { "SSLv3", "TLSv1" };
+        for (int i = 0; i < cipher_suites.length; i++) {
+            for (int j = 0; j < 2; j++) {
                 if (doLog) {
                     System.out.println("\n===== Interact over suite: "
                             + cipher_suites[i]);
@@ -187,7 +187,7 @@ public class SSLEngineImplTest extends TestCase {
         assertNotNull(supported);
         supported[0] = "NOT_SUPPORTED_CIPHER_SUITE";
         supported = engine.getEnabledCipherSuites();
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             if ("NOT_SUPPORTED_CIPHER_SUITE".equals(supported[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -203,9 +203,10 @@ public class SSLEngineImplTest extends TestCase {
         String[] enabled = engine.getEnabledCipherSuites();
         assertNotNull(enabled);
         String[] supported = engine.getSupportedCipherSuites();
-        for (int i=0; i<enabled.length; i++) {
-            found: {
-                for (int j=0; j<supported.length; j++) {
+        for (int i = 0; i < enabled.length; i++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (enabled[i].equals(supported[j])) {
                         break found;
                     }
@@ -215,18 +216,19 @@ public class SSLEngineImplTest extends TestCase {
             }
         }
         engine.setEnabledCipherSuites(supported);
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             enabled = new String[supported.length - i];
             System.arraycopy(supported, 0,
-                    enabled, 0, supported.length-i);
+                    enabled, 0, supported.length - i);
             engine.setEnabledCipherSuites(enabled);
             String[] result = engine.getEnabledCipherSuites();
             if (result.length != enabled.length) {
                 fail("Returned result differs from expected.");
             }
-            for (int k=0; k<result.length; k++) {
-                found: {
-                    for (int n=0; n<enabled.length; n++) {
+            for (int k = 0; k < result.length; k++) {
+                found:
+                {
+                    for (int n = 0; n < enabled.length; n++) {
                         if (result[k].equals(enabled[n])) {
                             break found;
                         }
@@ -248,9 +250,10 @@ public class SSLEngineImplTest extends TestCase {
         String[] enabled = engine.getEnabledCipherSuites();
         assertNotNull(enabled);
         String[] supported = engine.getSupportedCipherSuites();
-        for (int i=0; i<enabled.length; i++) {
-            found: {
-                for (int j=0; j<supported.length; j++) {
+        for (int i = 0; i < enabled.length; i++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (enabled[i].equals(supported[j])) {
                         break found;
                     }
@@ -262,23 +265,24 @@ public class SSLEngineImplTest extends TestCase {
         engine.setEnabledCipherSuites(supported);
         engine.setEnabledCipherSuites(enabled);
         engine.setEnabledCipherSuites(supported);
-        String[] more_than_supported = new String[supported.length+1];
-        for (int i=0; i<supported.length+1; i++) {
+        String[] more_than_supported = new String[supported.length + 1];
+        for (int i = 0; i < supported.length + 1; i++) {
             more_than_supported[i]
-                = "NOT_SUPPORTED_CIPHER_SUITE";
+                    = "NOT_SUPPORTED_CIPHER_SUITE";
             System.arraycopy(supported, 0,
                     more_than_supported, 0, i);
             System.arraycopy(supported, i,
-                    more_than_supported, i+1, supported.length-i);
+                    more_than_supported, i + 1, supported.length - i);
             try {
                 engine.setEnabledCipherSuites(more_than_supported);
                 fail("Expected IllegalArgumentException was not thrown");
-            } catch (IllegalArgumentException e) { }
+            } catch (IllegalArgumentException e) {
+            }
         }
         enabled = engine.getEnabledCipherSuites();
         enabled[0] = "NOT_SUPPORTED_CIPHER_SUITE";
         enabled = engine.getEnabledCipherSuites();
-        for (int i=0; i<enabled.length; i++) {
+        for (int i = 0; i < enabled.length; i++) {
             if ("NOT_SUPPORTED_CIPHER_SUITE".equals(enabled[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -296,7 +300,7 @@ public class SSLEngineImplTest extends TestCase {
         assertFalse(supported.length == 0);
         supported[0] = "NOT_SUPPORTED_PROTOCOL";
         supported = engine.getSupportedProtocols();
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             if ("NOT_SUPPORTED_PROTOCOL".equals(supported[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -312,9 +316,10 @@ public class SSLEngineImplTest extends TestCase {
         String[] enabled = engine.getEnabledProtocols();
         assertNotNull(enabled);
         String[] supported = engine.getSupportedProtocols();
-        for (int i=0; i<enabled.length; i++) {
-            found: {
-                for (int j=0; j<supported.length; j++) {
+        for (int i = 0; i < enabled.length; i++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (enabled[i].equals(supported[j])) {
                         break found;
                     }
@@ -324,18 +329,19 @@ public class SSLEngineImplTest extends TestCase {
             }
         }
         engine.setEnabledProtocols(supported);
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             enabled = new String[supported.length - i];
             System.arraycopy(supported, i,
-                    enabled, 0, supported.length-i);
+                    enabled, 0, supported.length - i);
             engine.setEnabledProtocols(enabled);
             String[] result = engine.getEnabledProtocols();
             if (result.length != enabled.length) {
                 fail("Returned result differs from expected.");
             }
-            for (int k=0; k<result.length; k++) {
-                found: {
-                    for (int n=0; n<enabled.length; n++) {
+            for (int k = 0; k < result.length; k++) {
+                found:
+                {
+                    for (int n = 0; n < enabled.length; n++) {
                         if (result[k].equals(enabled[n])) {
                             break found;
                         }
@@ -367,15 +373,17 @@ public class SSLEngineImplTest extends TestCase {
         try {
             engine.setUseClientMode(false);
             fail("Expected IllegalArgumentException was not thrown");
-        } catch (IllegalArgumentException e) { }
+        } catch (IllegalArgumentException e) {
+        }
 
         engine.wrap(ByteBuffer.allocate(0), ByteBuffer.allocate(
                 engine.getSession().getPacketBufferSize()));
         try {
             engine.setUseClientMode(false);
             fail("Expected IllegalArgumentException was not thrown");
-        } catch (IllegalArgumentException e) { }
-     }
+        } catch (IllegalArgumentException e) {
+        }
+    }
 
     /**
      * setEnableSessionCreation(boolean flag) method testing.
@@ -401,7 +409,7 @@ public class SSLEngineImplTest extends TestCase {
         SSLSession session = engine.getSession();
         if ((session == null)
                 || (!session.getCipherSuite()
-                    .endsWith("_NULL_WITH_NULL_NULL"))) {
+                .endsWith("_NULL_WITH_NULL_NULL"))) {
             fail("Returned session is null "
                     + "or not TLS_NULL_WITH_NULL_NULL");
         }
@@ -409,7 +417,6 @@ public class SSLEngineImplTest extends TestCase {
 
     /**
      * beginHandshake() method testing
-     *
      */
     public void testBeginHandshake() throws Exception {
         SSLEngine engine = getEngine();
@@ -419,7 +426,8 @@ public class SSLEngineImplTest extends TestCase {
         try {
             engine.beginHandshake();
             fail("Expected IllegalStateException was not thrown");
-        } catch (IllegalStateException e) { }
+        } catch (IllegalStateException e) {
+        }
 
         engine = getEngine();
         engine.setUseClientMode(false);
@@ -453,7 +461,8 @@ public class SSLEngineImplTest extends TestCase {
             // should throw SSLException "engine already closed"
             engine.beginHandshake();
             fail("Expected exception was not thrown.");
-        } catch (SSLException e) { }
+        } catch (SSLException e) {
+        }
         assertTrue(engine.isOutboundDone());
     }
 
@@ -474,7 +483,8 @@ public class SSLEngineImplTest extends TestCase {
             // should throw SSLException "engine already closed"
             engine.beginHandshake();
             fail("Expected exception was not thrown.");
-        } catch (SSLException e) { }
+        } catch (SSLException e) {
+        }
         assertTrue(engine.isInboundDone());
     }
 
@@ -488,9 +498,9 @@ public class SSLEngineImplTest extends TestCase {
         initEngines(client, server);
 
         int packetBufferSize =
-            client.getSession().getPacketBufferSize();
+                client.getSession().getPacketBufferSize();
         int applicationBufferSize =
-            server.getSession().getApplicationBufferSize();
+                server.getSession().getApplicationBufferSize();
 
         ByteBuffer buffer = ByteBuffer.allocate(packetBufferSize);
         ByteBuffer app_data_buffer = ByteBuffer.allocate(applicationBufferSize);
@@ -533,11 +543,11 @@ public class SSLEngineImplTest extends TestCase {
                     SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING,
                     result.getHandshakeStatus());
             assertEquals(
-                "The length of the consumed data differs from expected",
-                0, result.bytesConsumed());
+                    "The length of the consumed data differs from expected",
+                    0, result.bytesConsumed());
             assertTrue(
-                "The length of the produced data differs from expected",
-                result.bytesProduced() > 0);
+                    "The length of the produced data differs from expected",
+                    result.bytesProduced() > 0);
             // tune buffer to be read
             buffer.flip();
             try {
@@ -581,9 +591,9 @@ public class SSLEngineImplTest extends TestCase {
         initEngines(client, server);
 
         int packetBufferSize =
-            client.getSession().getPacketBufferSize();
+                client.getSession().getPacketBufferSize();
         int applicationBufferSize =
-            server.getSession().getApplicationBufferSize();
+                server.getSession().getApplicationBufferSize();
 
         ByteBuffer buffer = ByteBuffer.allocate(packetBufferSize);
         ByteBuffer app_data_buffer = ByteBuffer.allocate(applicationBufferSize);
@@ -602,7 +612,7 @@ public class SSLEngineImplTest extends TestCase {
         } catch (Exception e) {
             if (doLog) {
                 System.out.println("\nServer threw exception: "
-                        +e.getMessage());
+                        + e.getMessage());
             }
             assertEquals("Unexpected status of operation:",
                     SSLEngineResult.HandshakeStatus.NEED_WRAP,
@@ -627,11 +637,11 @@ public class SSLEngineImplTest extends TestCase {
                     SSLEngineResult.HandshakeStatus.NEED_WRAP,
                     result.getHandshakeStatus());
             assertEquals(
-                "The length of the consumed data differs from expected",
-                0, result.bytesConsumed());
+                    "The length of the consumed data differs from expected",
+                    0, result.bytesConsumed());
             assertEquals(
-                "The length of the produced data differs from expected",
-                0, result.bytesProduced());
+                    "The length of the produced data differs from expected",
+                    0, result.bytesProduced());
 
             if (doLog) {
                 System.out.println("\nServer wraps the fatal alert");
@@ -644,11 +654,11 @@ public class SSLEngineImplTest extends TestCase {
                     SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING,
                     result.getHandshakeStatus());
             assertEquals(
-                "The length of the consumed data differs from expected",
-                0, result.bytesConsumed());
+                    "The length of the consumed data differs from expected",
+                    0, result.bytesConsumed());
             assertTrue(
-                "The length of the produced data differs from expected",
-                result.bytesProduced() > 0);
+                    "The length of the produced data differs from expected",
+                    result.bytesProduced() > 0);
 
             assertTrue("Outbound should be closed.",
                     server.isOutboundDone());
@@ -701,8 +711,8 @@ public class SSLEngineImplTest extends TestCase {
             SSLEngine server) throws Exception {
         if (doLog) {
             System.out.println("\n--- doHandshake:");
-            System.out.println("Server: "+server.getSession().getClass());
-            System.out.println("Client: "+client.getSession().getClass());
+            System.out.println("Server: " + server.getSession().getClass());
+            System.out.println("Client: " + client.getSession().getClass());
         }
 
         client.beginHandshake();
@@ -722,27 +732,27 @@ public class SSLEngineImplTest extends TestCase {
             System.out.println("\n--- doHandshakeImpl:");
             System.out.println("Client's hsh status: "
                     + client.getHandshakeStatus());
-            System.out.println("Client's session: "+client.getSession());
+            System.out.println("Client's session: " + client.getSession());
             System.out.println("Server's hsh status: "
                     + server.getHandshakeStatus());
-            System.out.println("Server's session: "+server.getSession());
+            System.out.println("Server's session: " + server.getSession());
         }
 
         int packetBufferSize =
-            client.getSession().getPacketBufferSize();
+                client.getSession().getPacketBufferSize();
         int applicationBufferSize =
-            server.getSession().getApplicationBufferSize();
+                server.getSession().getApplicationBufferSize();
 
         // buffer will contain handshake messages
-        ByteBuffer clients_buffer = ByteBuffer.allocate(packetBufferSize+1000);
-        ByteBuffer servers_buffer = ByteBuffer.allocate(packetBufferSize+1000);
+        ByteBuffer clients_buffer = ByteBuffer.allocate(packetBufferSize + 1000);
+        ByteBuffer servers_buffer = ByteBuffer.allocate(packetBufferSize + 1000);
         // buffers will contain application data messages
         ByteBuffer app_data = ByteBuffer.allocate(packetBufferSize);
         ByteBuffer app_data_plain = ByteBuffer.allocate(applicationBufferSize);
 
-        SSLEngine[] engines = new SSLEngine[] {client, server};
+        SSLEngine[] engines = new SSLEngine[] { client, server };
         ByteBuffer[] buffers =
-            new ByteBuffer[] {clients_buffer, servers_buffer};
+                new ByteBuffer[] { clients_buffer, servers_buffer };
 
         // choose which peer will start handshake negotiation
         // (initial handshake is initiated by client, but rehandshake
@@ -756,9 +766,9 @@ public class SSLEngineImplTest extends TestCase {
         SSLEngineResult.HandshakeStatus status;
 
         while ((client.getHandshakeStatus()
-                    != SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING)
+                != SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING)
                 || (server.getHandshakeStatus()
-                    != SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING)) {
+                != SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING)) {
             if (doLog) {
                 System.out.print("\n"
                         + ((current_engine == client) ? "CLIENT " : "SERVER "));
@@ -809,7 +819,7 @@ public class SSLEngineImplTest extends TestCase {
                                 "\nTry to WRAP the application data");
                     }
                     print(result = current_engine.wrap(
-                                ByteBuffer.wrap(new byte[] {0}), app_data));
+                            ByteBuffer.wrap(new byte[] { 0 }), app_data));
                     // The output in app_data will be produced only if it
                     // is rehandshaking stage
                     // (i.e. initial handshake has been done)
@@ -818,19 +828,19 @@ public class SSLEngineImplTest extends TestCase {
                         // unwrap it by another peer
                         if (doLog) {
                             System.out.print("\n" + ((current_engine != client)
-                                                     ? "CLIENT " : "SERVER "));
+                                    ? "CLIENT " : "SERVER "));
                             System.out.println(
-                                "UNWRAPs app data sent during handshake");
+                                    "UNWRAPs app data sent during handshake");
                         }
                         app_data.flip();
-                        print(result = engines[(step+1)%2].unwrap(
-                                    app_data, app_data_plain));
+                        print(result = engines[(step + 1) % 2].unwrap(
+                                app_data, app_data_plain));
                         app_data.clear();
                         app_data_plain.clear();
                     }
                 }
 
-                buffer = buffers[step^1];
+                buffer = buffers[step ^ 1];
 
                 // check if there is handshake data to be unwrapped
                 if (buffer.remaining() == 0) {
@@ -842,8 +852,8 @@ public class SSLEngineImplTest extends TestCase {
                     step ^= 1;
                     current_engine = engines[step];
                     if ((current_engine.getHandshakeStatus()
-                                == SSLEngineResult.HandshakeStatus.NEED_UNWRAP)
-                            && (buffers[step^1].remaining() == 0)) {
+                            == SSLEngineResult.HandshakeStatus.NEED_UNWRAP)
+                            && (buffers[step ^ 1].remaining() == 0)) {
                         System.out.println(
                                 "Both engines are in NEED_UNWRAP state");
                         fail("Both engines are in NEED_UNWRAP state");
@@ -860,11 +870,11 @@ public class SSLEngineImplTest extends TestCase {
                     current_engine.getDelegatedTask().run();
                     if (doLog) {
                         System.out.println("status after the task: "
-                                +current_engine.getHandshakeStatus());
+                                + current_engine.getHandshakeStatus());
                     }
                 }
             } else {
-                fail("Unexpected HandshakeStatus: "+status);
+                fail("Unexpected HandshakeStatus: " + status);
             }
             assertEquals("Unexpected status of operation:",
                     SSLEngineResult.Status.OK,
@@ -880,19 +890,19 @@ public class SSLEngineImplTest extends TestCase {
             SSLEngine not_allowed, boolean is_initial) throws Exception {
         if (doLog) {
             System.out.println(
-                    "\n--- doNoRenegotiationTest: is_initial: "+is_initial);
+                    "\n--- doNoRenegotiationTest: is_initial: " + is_initial);
         }
 
         not_allowed.setEnableSessionCreation(false);
         not_allowed.getSession().invalidate();
 
         int packetBufferSize =
-            allowed.getSession().getPacketBufferSize();
+                allowed.getSession().getPacketBufferSize();
         int applicationBufferSize =
-            not_allowed.getSession().getApplicationBufferSize();
+                not_allowed.getSession().getApplicationBufferSize();
 
         // buffer will contain handshake messages
-        ByteBuffer buffer = ByteBuffer.allocate(packetBufferSize+1000);
+        ByteBuffer buffer = ByteBuffer.allocate(packetBufferSize + 1000);
         // buffers will contain application data messages
         ByteBuffer app_data = ByteBuffer.allocate(packetBufferSize);
         ByteBuffer app_data_plain = ByteBuffer.allocate(applicationBufferSize);
@@ -904,11 +914,11 @@ public class SSLEngineImplTest extends TestCase {
 
         if (doLog) {
             System.out.println(
-                "\nAllowed peer wraps the initial session negotiation message");
+                    "\nAllowed peer wraps the initial session negotiation message");
         }
         // wrap the initial session negotiation message
         while (allowed.getHandshakeStatus().equals(
-                    SSLEngineResult.HandshakeStatus.NEED_WRAP)) {
+                SSLEngineResult.HandshakeStatus.NEED_WRAP)) {
             print(result = allowed.wrap(app_data_plain, buffer));
             assertTrue("Engine did not produce any data",
                     result.bytesProduced() > 0);
@@ -925,18 +935,18 @@ public class SSLEngineImplTest extends TestCase {
             if (is_initial) {
                 return; // ok, exception was thrown
             } else {
-                fail("Unexpected SSLException was thrown "+e);
+                fail("Unexpected SSLException was thrown " + e);
             }
         }
         // if it is not an initial handshake phase it is posible
         // SSLException to be thrown.
         try {
             while (!not_allowed.getHandshakeStatus().equals(
-                        SSLEngineResult.HandshakeStatus.NEED_WRAP)) {
+                    SSLEngineResult.HandshakeStatus.NEED_WRAP)) {
                 assertTrue("Engine did not consume any data",
                         result.bytesConsumed() > 0);
                 if (not_allowed.getHandshakeStatus().equals(
-                            SSLEngineResult.HandshakeStatus.NEED_TASK)) {
+                        SSLEngineResult.HandshakeStatus.NEED_TASK)) {
                     not_allowed.getDelegatedTask().run();
                     if (doLog) {
                         System.out.println("Status after the task: "
@@ -944,7 +954,7 @@ public class SSLEngineImplTest extends TestCase {
                     }
                     continue;
                 } else if (not_allowed.getHandshakeStatus().equals(
-                            SSLEngineResult.HandshakeStatus.NEED_UNWRAP)) {
+                        SSLEngineResult.HandshakeStatus.NEED_UNWRAP)) {
                     print(result = not_allowed.unwrap(buffer, app_data_plain));
                 } else {
                     fail("Unexpected status of operation: "
@@ -955,13 +965,13 @@ public class SSLEngineImplTest extends TestCase {
             buffer.clear();
             if (doLog) {
                 System.out.println(
-                    "\nWrapping the message. Expecting no_renegotiation alert");
+                        "\nWrapping the message. Expecting no_renegotiation alert");
             }
             // wrapping the message. expecting no_renegotiation alert
             print(result = not_allowed.wrap(app_data_plain, buffer));
         } catch (SSLException e) {
             if (!is_initial) {
-                fail("Unexpected SSLException was thrown."+e.getMessage());
+                fail("Unexpected SSLException was thrown." + e.getMessage());
             }
             if (doLog) {
                 System.out.println("Throwed exception during the unwrapping "
@@ -971,7 +981,7 @@ public class SSLEngineImplTest extends TestCase {
                         + not_allowed.getHandshakeStatus());
             }
             if (not_allowed.getHandshakeStatus().equals(
-                        SSLEngineResult.HandshakeStatus.NEED_WRAP)) {
+                    SSLEngineResult.HandshakeStatus.NEED_WRAP)) {
                 // needs to wrap fatal alert message
                 if (doLog) {
                     System.out.println(
@@ -1003,7 +1013,7 @@ public class SSLEngineImplTest extends TestCase {
                     result.getHandshakeStatus());
         } catch (SSLException e) {
             if (!is_initial) {
-                fail("Unexpected SSLException was thrown."+e.getMessage());
+                fail("Unexpected SSLException was thrown." + e.getMessage());
             }
             if (doLog) {
                 System.out.println("Throwed exception during the unwrapping "
@@ -1019,7 +1029,7 @@ public class SSLEngineImplTest extends TestCase {
      * Tests the data exchange process between two engines
      */
     private void doDataExchange(SSLEngine client,
-                                SSLEngine server) throws Exception {
+            SSLEngine server) throws Exception {
         if (doLog) {
             System.out.println("\n--- doDataExchange:");
         }
@@ -1068,8 +1078,8 @@ public class SSLEngineImplTest extends TestCase {
                 SSLEngineResult.Status.OK,
                 result.getStatus());
         assertEquals(
-            "The length of the received data differs from expected",
-            "data to be sent".length(), result.bytesProduced());
+                "The length of the received data differs from expected",
+                "data to be sent".length(), result.bytesProduced());
 
         // take the data from the buffer
         byte[] resulting_data = new byte[result.bytesProduced()];
@@ -1079,7 +1089,7 @@ public class SSLEngineImplTest extends TestCase {
         assertTrue(Arrays.equals(data_2b_sent.getBytes(), resulting_data));
 
         co.clear();
-        for (int i=1; i<10; i++) {
+        for (int i = 1; i < 10; i++) {
             byte[] buff = new byte[i];
             data = ByteBuffer.wrap(buff);
             if (doLog) {
@@ -1098,8 +1108,8 @@ public class SSLEngineImplTest extends TestCase {
                     SSLEngineResult.Status.OK,
                     result.getStatus());
             assertEquals(
-                "The length of the received data differs from expected",
-                i, result.bytesProduced());
+                    "The length of the received data differs from expected",
+                    i, result.bytesProduced());
             resulting_data = new byte[i];
             si.rewind();
             si.get(resulting_data);
@@ -1121,7 +1131,7 @@ public class SSLEngineImplTest extends TestCase {
         }
         ByteBuffer buffer = ByteBuffer.allocate(
                 // +100 because we put the data into the buffer multiple times
-                server.getSession().getPacketBufferSize()+100);
+                server.getSession().getPacketBufferSize() + 100);
         ByteBuffer app_data_buffer = ByteBuffer.allocate(
                 client.getSession().getApplicationBufferSize());
         SSLEngineResult result;
@@ -1129,7 +1139,7 @@ public class SSLEngineImplTest extends TestCase {
         if (doLog) {
             System.out.println("\nServer sends pending outboud data:");
         }
-        print(result = server.wrap(ByteBuffer.wrap(new byte[] {0}), buffer));
+        print(result = server.wrap(ByteBuffer.wrap(new byte[] { 0 }), buffer));
         assertEquals("Unexpected status of operation:",
                 SSLEngineResult.Status.OK,
                 result.getStatus());
@@ -1165,7 +1175,7 @@ public class SSLEngineImplTest extends TestCase {
         }
         // will do nothing because closure alert has been sent
         // and outbound has been closed
-        print(result = server.wrap(ByteBuffer.wrap(new byte[] {0}), buffer));
+        print(result = server.wrap(ByteBuffer.wrap(new byte[] { 0 }), buffer));
         assertEquals("Unexpected status of operation:",
                 SSLEngineResult.Status.CLOSED,
                 result.getStatus());
@@ -1173,11 +1183,11 @@ public class SSLEngineImplTest extends TestCase {
                 SSLEngineResult.HandshakeStatus.NEED_UNWRAP,
                 result.getHandshakeStatus());
         assertEquals(
-            "The length of the consumed data differs from expected",
-            0, result.bytesConsumed());
+                "The length of the consumed data differs from expected",
+                0, result.bytesConsumed());
         assertEquals(
-            "The length of the produced data differs from expected",
-            0, result.bytesProduced());
+                "The length of the produced data differs from expected",
+                0, result.bytesProduced());
 
         // prepare the buffer for reading
         buffer.flip();
@@ -1194,8 +1204,8 @@ public class SSLEngineImplTest extends TestCase {
                 SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING,
                 result.getHandshakeStatus());
         assertEquals(
-            "The length of the produced data differs from expected",
-            1, result.bytesProduced());
+                "The length of the produced data differs from expected",
+                1, result.bytesProduced());
 
         app_data_buffer.clear();
 
@@ -1210,11 +1220,11 @@ public class SSLEngineImplTest extends TestCase {
                 SSLEngineResult.HandshakeStatus.NEED_WRAP,
                 result.getHandshakeStatus());
         assertTrue(
-            "The length of the consumed data differs from expected",
-            result.bytesConsumed() > 0);
+                "The length of the consumed data differs from expected",
+                result.bytesConsumed() > 0);
         assertEquals(
-            "The length of the received data differs from expected",
-            0, result.bytesProduced());
+                "The length of the received data differs from expected",
+                0, result.bytesProduced());
 
         // prepare the buffer for writing
         app_data_buffer.clear();
@@ -1235,11 +1245,11 @@ public class SSLEngineImplTest extends TestCase {
                 SSLEngineResult.HandshakeStatus.NEED_WRAP,
                 result.getHandshakeStatus());
         assertEquals(
-            "The length of the consumed data differs from expected",
-            0, result.bytesConsumed());
+                "The length of the consumed data differs from expected",
+                0, result.bytesConsumed());
         assertEquals(
-            "The length of the received data differs from expected",
-            0, result.bytesProduced());
+                "The length of the received data differs from expected",
+                0, result.bytesProduced());
 
         // prepare the buffer for writing
         buffer.clear();
@@ -1247,7 +1257,7 @@ public class SSLEngineImplTest extends TestCase {
         if (doLog) {
             System.out.println("\nClient sends responding close notify");
         }
-        print(result = client.wrap(ByteBuffer.wrap(new byte[] {0}), buffer));
+        print(result = client.wrap(ByteBuffer.wrap(new byte[] { 0 }), buffer));
         assertEquals("Unexpected status of operation:",
                 SSLEngineResult.Status.CLOSED,
                 result.getStatus());
@@ -1255,17 +1265,17 @@ public class SSLEngineImplTest extends TestCase {
                 SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING,
                 result.getHandshakeStatus());
         assertEquals(
-            "The length of the consumed data differs from expected",
-            0, result.bytesConsumed());
+                "The length of the consumed data differs from expected",
+                0, result.bytesConsumed());
         assertTrue(
-            "The length of the produced data differs from expected",
-            result.bytesProduced() > 0);
+                "The length of the produced data differs from expected",
+                result.bytesProduced() > 0);
         if (doLog) {
             System.out.println(
                     "\nClient tries to send data after closure alert");
         }
         // this data will not be sent (should do nothing - 0 cons, 0 prod)
-        print(result = client.wrap(ByteBuffer.wrap(new byte[] {0}), buffer));
+        print(result = client.wrap(ByteBuffer.wrap(new byte[] { 0 }), buffer));
         assertEquals("Unexpected status of operation:",
                 SSLEngineResult.Status.CLOSED,
                 result.getStatus());
@@ -1273,11 +1283,11 @@ public class SSLEngineImplTest extends TestCase {
                 SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING,
                 result.getHandshakeStatus());
         assertEquals(
-            "The length of the consumed data differs from expected",
-            0, result.bytesConsumed());
+                "The length of the consumed data differs from expected",
+                0, result.bytesConsumed());
         assertEquals(
-            "The length of the produced data differs from expected",
-            0, result.bytesProduced());
+                "The length of the produced data differs from expected",
+                0, result.bytesProduced());
 
         // prepare the buffers for reading
         app_data_buffer.clear();
@@ -1294,11 +1304,11 @@ public class SSLEngineImplTest extends TestCase {
                 SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING,
                 result.getHandshakeStatus());
         assertTrue(
-            "The length of the consumed data differs from expected",
-            result.bytesConsumed() > 0);
+                "The length of the consumed data differs from expected",
+                result.bytesConsumed() > 0);
         assertEquals(
-            "The length of the produced data differs from expected",
-            0, result.bytesProduced());
+                "The length of the produced data differs from expected",
+                0, result.bytesProduced());
 
         if (doLog) {
             System.out.println("\nServer tries to read after closure");
@@ -1312,11 +1322,11 @@ public class SSLEngineImplTest extends TestCase {
                 SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING,
                 result.getHandshakeStatus());
         assertEquals(
-            "The length of the consumed data differs from expected",
-            0, result.bytesConsumed());
+                "The length of the consumed data differs from expected",
+                0, result.bytesConsumed());
         assertEquals(
-            "The length of the produced data differs from expected",
-            0, result.bytesProduced());
+                "The length of the produced data differs from expected",
+                0, result.bytesProduced());
 
         // it's needless, but should work:
         client.closeInbound();
@@ -1334,16 +1344,16 @@ public class SSLEngineImplTest extends TestCase {
                 SSLEngineResult.HandshakeStatus.NOT_HANDSHAKING,
                 result.getHandshakeStatus());
         assertEquals(
-            "The length of the consumed data differs from expected",
-            0, result.bytesConsumed());
+                "The length of the consumed data differs from expected",
+                0, result.bytesConsumed());
         assertEquals(
-            "The length of the produced data differs from expected",
-            0, result.bytesProduced());
+                "The length of the produced data differs from expected",
+                0, result.bytesProduced());
     }
 
     private static void print(SSLEngineResult result) {
         if (doLog) {
-            System.out.println("result:\n"+result);
+            System.out.println("result:\n" + result);
         }
     }
 
@@ -1360,12 +1370,12 @@ public class SSLEngineImplTest extends TestCase {
     private void initEngines(SSLEngine client, SSLEngine server) {
         String prefix = "TLS_";
 
-        client.setEnabledProtocols(new String[] {"TLSv1"});
-        server.setEnabledProtocols(new String[] {"TLSv1"});
+        client.setEnabledProtocols(new String[] { "TLSv1" });
+        server.setEnabledProtocols(new String[] { "TLSv1" });
         client.setEnabledCipherSuites(
-                new String[] {prefix+cipher_suites[0]});
+                new String[] { prefix + cipher_suites[0] });
         server.setEnabledCipherSuites(
-                new String[] {prefix+cipher_suites[0]});
+                new String[] { prefix + cipher_suites[0] });
 
         client.setUseClientMode(true);
         server.setUseClientMode(false);

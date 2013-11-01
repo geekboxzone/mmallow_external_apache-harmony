@@ -32,7 +32,7 @@ public class SSLStreamedInputTest extends TestCase {
      * SSLStreamedInput(InputStream in) method testing.
      */
     public void testSSLStreamedInput() throws Exception {
-        byte[] data = {1, 0, 0, 0, 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 5};
+        byte[] data = { 1, 0, 0, 0, 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 5 };
         ByteArrayInputStream bis = new ByteArrayInputStream(data);
         SSLStreamedInput sslsi = new SSLStreamedInput(bis);
         assertEquals(bis.available(), sslsi.available());

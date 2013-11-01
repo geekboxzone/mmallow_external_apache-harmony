@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -41,25 +41,26 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>CertPathValidator</code> class constructors and
  * methods.
- *
  */
 
 public class CertPathValidator1Test extends TestCase {
 
     /**
      * Constructor for CertPathValidatorTests.
+     *
      * @param name
      */
     public CertPathValidator1Test(String name) {
         super(name);
     }
+
     public static final String srvCertPathValidator = "CertPathValidator";
 
     private static final String defaultType = "PKIX";
-    public static final String [] validValues = {
+    public static final String[] validValues = {
             "PKIX", "pkix", "PkiX", "pKiX" };
 
-    private static String [] invalidValues = SpiEngUtils.invalidValues;
+    private static String[] invalidValues = SpiEngUtils.invalidValues;
 
     private static boolean PKIXSupport = false;
 
@@ -75,7 +76,6 @@ public class CertPathValidator1Test extends TestCase {
         defaultProviderName = (PKIXSupport ? defaultProvider.getName() : null);
         NotSupportMsg = defaultType.concat(" is not supported");
     }
-
 
 
     private static CertPathValidator[] createCPVs() {
@@ -99,7 +99,7 @@ public class CertPathValidator1Test extends TestCase {
 
     /**
      * Test for <code>getDefaultType()</code> method
-	 * Assertion: returns security property "certpathvalidator.type" or "PKIX"
+     * Assertion: returns security property "certpathvalidator.type" or "PKIX"
      */
     public void testCertPathValidator01() {
         if (!PKIXSupport) {
@@ -129,9 +129,9 @@ public class CertPathValidator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm)</code> method
-	 * Assertion:
-	 * throws NullPointerException when algorithm is null
-	 * throws NoSuchAlgorithmException when algorithm  is not available
+     * Assertion:
+     * throws NullPointerException when algorithm is null
+     * throws NoSuchAlgorithmException when algorithm  is not available
      */
     public void testCertPathValidator02() {
         try {
@@ -148,11 +148,12 @@ public class CertPathValidator1Test extends TestCase {
             }
         }
     }
+
     /**
      * Test for <code>getInstance(String algorithm)</code> method
-	 * Assertion: returns CertPathValidator object
+     * Assertion: returns CertPathValidator object
      */
-    public void testCertPathValidator03() throws NoSuchAlgorithmException  {
+    public void testCertPathValidator03() throws NoSuchAlgorithmException {
         if (!PKIXSupport) {
             fail(NotSupportMsg);
             return;
@@ -163,14 +164,15 @@ public class CertPathValidator1Test extends TestCase {
             assertEquals("Incorrect algorithm", certPV.getAlgorithm(), validValues[i]);
         }
     }
+
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
-	 * Assertion: throws IllegalArgumentException when provider is null or empty
-	 *
-	 * FIXME: verify what exception will be thrown if provider is empty
+     * Assertion: throws IllegalArgumentException when provider is null or empty
+     * <p/>
+     * FIXME: verify what exception will be thrown if provider is empty
      */
     public void testCertPathValidator04()
-            throws NoSuchAlgorithmException, NoSuchProviderException  {
+            throws NoSuchAlgorithmException, NoSuchProviderException {
         if (!PKIXSupport) {
             fail(NotSupportMsg);
             return;
@@ -189,10 +191,11 @@ public class CertPathValidator1Test extends TestCase {
             }
         }
     }
+
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
-	 * Assertion:
-	 * throws NoSuchProviderException when provider has invalid value
+     * Assertion:
+     * throws NoSuchProviderException when provider has invalid value
      */
     public void testCertPathValidator05() throws NoSuchAlgorithmException {
         if (!PKIXSupport) {
@@ -213,12 +216,12 @@ public class CertPathValidator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
-	 * Assertion:
-	 * throws NullPointerException when algorithm is null
-	 * throws NoSuchAlgorithmException when algorithm  is not available
+     * Assertion:
+     * throws NullPointerException when algorithm is null
+     * throws NoSuchAlgorithmException when algorithm  is not available
      */
     public void testCertPathValidator06()
-            throws NoSuchAlgorithmException, NoSuchProviderException  {
+            throws NoSuchAlgorithmException, NoSuchProviderException {
         if (!PKIXSupport) {
             fail(NotSupportMsg);
             return;
@@ -237,9 +240,10 @@ public class CertPathValidator1Test extends TestCase {
             }
         }
     }
+
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
-	 * Assertion: returns CertPathValidator object
+     * Assertion: returns CertPathValidator object
      */
     public void testCertPathValidator07() throws NoSuchAlgorithmException,
             NoSuchProviderException {
@@ -260,16 +264,16 @@ public class CertPathValidator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code> method
-	 * Assertion: throws IllegalArgumentException when provider is null
+     * Assertion: throws IllegalArgumentException when provider is null
      */
     public void testCertPathValidator08()
-            throws NoSuchAlgorithmException  {
+            throws NoSuchAlgorithmException {
         if (!PKIXSupport) {
             fail(NotSupportMsg);
             return;
         }
         Provider prov = null;
-        for (int t = 0; t < validValues.length; t++ ) {
+        for (int t = 0; t < validValues.length; t++) {
             try {
                 CertPathValidator.getInstance(validValues[t], prov);
                 fail("IllegalArgumentException must be thrown");
@@ -280,12 +284,12 @@ public class CertPathValidator1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
-	 * Assertion:
-	 * throws NullPointerException when algorithm is null
-	 * throws NoSuchAlgorithmException when algorithm  is not available
+     * Assertion:
+     * throws NullPointerException when algorithm is null
+     * throws NoSuchAlgorithmException when algorithm  is not available
      */
     public void testCertPathValidator09()
-            throws NoSuchAlgorithmException, NoSuchProviderException  {
+            throws NoSuchAlgorithmException, NoSuchProviderException {
         if (!PKIXSupport) {
             fail(NotSupportMsg);
             return;
@@ -304,9 +308,10 @@ public class CertPathValidator1Test extends TestCase {
             }
         }
     }
+
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
-	 * Assertion: returns CertPathValidator object
+     * Assertion: returns CertPathValidator object
      */
     public void testCertPathValidator10() throws NoSuchAlgorithmException,
             NoSuchProviderException {
@@ -327,8 +332,8 @@ public class CertPathValidator1Test extends TestCase {
 
     /**
      * Test for <code>validate(CertPath certpath, CertPathParameters params)</code> method
-	 * Assertion: throws InvalidAlgorithmParameterException params is not
-	 * instance of PKIXParameters or null
+     * Assertion: throws InvalidAlgorithmParameterException params is not
+     * instance of PKIXParameters or null
      */
     public void testCertPathValidator11()
             throws NoSuchAlgorithmException, NoSuchProviderException, CertPathValidatorException {
@@ -336,7 +341,7 @@ public class CertPathValidator1Test extends TestCase {
             fail(NotSupportMsg);
             return;
         }
-        CertPathValidator [] certPV = createCPVs();
+        CertPathValidator[] certPV = createCPVs();
         assertNotNull("CertPathValidator objects were not created", certPV);
         MyCertPath mCP = new MyCertPath(new byte[0]);
         invalidParams mPar = new invalidParams();
@@ -344,17 +349,17 @@ public class CertPathValidator1Test extends TestCase {
             try {
                 certPV[i].validate(mCP, mPar);
                 fail("InvalidAlgorithmParameterException must be thrown");
-            } catch(InvalidAlgorithmParameterException e) {
+            } catch (InvalidAlgorithmParameterException e) {
             }
             try {
                 certPV[i].validate(mCP, null);
                 fail("InvalidAlgorithmParameterException must be thrown");
-            } catch(InvalidAlgorithmParameterException e) {
+            } catch (InvalidAlgorithmParameterException e) {
             }
         }
     }
 
-     /**
+    /**
      * Test for
      * <code>CertPathValidator</code> constructor
      * Assertion: returns CertPathValidator object
@@ -368,7 +373,7 @@ public class CertPathValidator1Test extends TestCase {
         }
         CertPathValidatorSpi spi = new MyCertPathValidatorSpi();
         CertPathValidator certPV = new myCertPathValidator(spi,
-                    defaultProvider, defaultType);
+                defaultProvider, defaultType);
         assertEquals("Incorrect algorithm", certPV.getAlgorithm(), defaultType);
         assertEquals("Incorrect provider", certPV.getProvider(), defaultProvider);
         certPV.validate(null, null);
@@ -387,6 +392,7 @@ public class CertPathValidator1Test extends TestCase {
         }
     }
 }
+
 /**
  * Additional class to verify CertPathValidator constructor
  */
@@ -396,6 +402,7 @@ class myCertPathValidator extends CertPathValidator {
         super(spi, prov, type);
     }
 }
+
 /**
  * Additional class to verify validate method
  */

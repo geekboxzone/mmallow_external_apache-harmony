@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package javax.net.ssl;
 
@@ -32,13 +32,12 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>TrustManagerFactorySpi</code> class constructors and
  * methods.
- * 
  */
 
 public class TrustManagerFactorySpiTests extends TestCase {
     /**
      * Constructor for TrustManegerFactorySpiTests.
-     * 
+     *
      * @param arg0
      */
     public TrustManagerFactorySpiTests(String arg0) {
@@ -46,15 +45,15 @@ public class TrustManagerFactorySpiTests extends TestCase {
     }
 
     /**
-     * Test for <code>TrustManagerFactorySpi</code> constructor 
+     * Test for <code>TrustManagerFactorySpi</code> constructor
      * Assertion: constructs TrustManagerFactorySpi
      */
     public void testTrustManagerFactorySpi01() throws Exception {
-        TrustManagerFactorySpi kmfSpi = new MyTrustManagerFactorySpi();        
+        TrustManagerFactorySpi kmfSpi = new MyTrustManagerFactorySpi();
         assertNull("Not null results", kmfSpi.engineGetTrustManagers());
         KeyStore kStore = null;
         ManagerFactoryParameters mfp = null;
-        
+
         try {
             kmfSpi.engineInit(kStore);
             fail("KeyStoreException must be thrown");
@@ -65,12 +64,12 @@ public class TrustManagerFactorySpiTests extends TestCase {
             fail("InvalidAlgorithmParameterException must be thrown");
         } catch (InvalidAlgorithmParameterException e) {
         }
-        assertNull("getTrustManagers() should return null object", 
-                kmfSpi.engineGetTrustManagers());     
-        
+        assertNull("getTrustManagers() should return null object",
+                kmfSpi.engineGetTrustManagers());
+
         try {
             kStore = KeyStore.getInstance(KeyStore.getDefaultType());
-            kStore.load(null, null);            
+            kStore.load(null, null);
         } catch (KeyStoreException e) {
             fail("default keystore is not supported");
             return;

@@ -45,7 +45,7 @@ import tests.support.resource.Support_Resources;
 
 public class ClassTest extends junit.framework.TestCase {
 
-    public static final String FILENAME = ClassTest.class.getPackage().getName().replace('.', '/')+"/test#.properties";
+    public static final String FILENAME = ClassTest.class.getPackage().getName().replace('.', '/') + "/test#.properties";
 
     static class StaticMember$Class {
         class Member2$A {
@@ -96,12 +96,12 @@ public class ClassTest extends junit.framework.TestCase {
      */
     public void test_forNameLjava_lang_String() throws Exception {
         assertSame("Class for name failed for java.lang.Object",
-                   Object.class, Class.forName("java.lang.Object"));
+                Object.class, Class.forName("java.lang.Object"));
         assertSame("Class for name failed for [[Ljava.lang.Object;",
-                   Object[][].class, Class.forName("[[Ljava.lang.Object;"));
+                Object[][].class, Class.forName("[[Ljava.lang.Object;"));
 
         assertSame("Class for name failed for [I",
-                   int[].class, Class.forName("[I"));
+                int[].class, Class.forName("[I"));
 
         try {
             Class.forName("int");
@@ -174,7 +174,7 @@ public class ClassTest extends junit.framework.TestCase {
      */
     public void test_getClasses() {
         assertEquals("Incorrect class array returned",
-                     2, ClassTest.class.getClasses().length);
+                2, ClassTest.class.getClasses().length);
     }
 
     /**
@@ -205,7 +205,8 @@ public class ClassTest extends junit.framework.TestCase {
                     combine = false;
                     try {
                         AccessController.checkPermission(privCheckPermission);
-                    } catch (SecurityException e) {}
+                    } catch (SecurityException e) {
+                    }
                     return !combine;
                 } finally {
                     recurring = false;
@@ -229,7 +230,7 @@ public class ClassTest extends junit.framework.TestCase {
      * @tests java.lang.Class#getConstructor(java.lang.Class[])
      */
     public void test_getConstructor$Ljava_lang_Class()
-        throws NoSuchMethodException {
+            throws NoSuchMethodException {
         TestClass.class.getConstructor(new Class[0]);
         try {
             TestClass.class.getConstructor(Object.class);
@@ -292,7 +293,7 @@ public class ClassTest extends junit.framework.TestCase {
 
     /**
      * @tests java.lang.Class#getDeclaredMethod(java.lang.String,
-     *        java.lang.Class[])
+     *java.lang.Class[])
      */
     public void test_getDeclaredMethodLjava_lang_String$Ljava_lang_Class() throws Exception {
         Method m = TestClass.class.getDeclaredMethod("pubMethod", new Class[0]);
@@ -380,15 +381,16 @@ public class ClassTest extends junit.framework.TestCase {
     public void test_getMethods() throws Exception {
         Method[] m = TestClass.class.getMethods();
         assertEquals("Returned incorrect number of methods",
-                     2 + Object.class.getMethods().length, m.length);
+                2 + Object.class.getMethods().length, m.length);
         m = SubTestClass.class.getMethods();
         assertEquals("Returned incorrect number of sub-class methods",
-                     2 + Object.class.getMethods().length, m.length);
+                2 + Object.class.getMethods().length, m.length);
         // Number of inherited methods
     }
 
     private static final class PrivateClass {
     }
+
     /**
      * @tests java.lang.Class#getModifiers()
      */
@@ -546,7 +548,7 @@ public class ClassTest extends junit.framework.TestCase {
 
         clazz = Class.forName("java.lang.Throwable");
         assertSame("new Throwable instance was not a throwable",
-                   clazz, clazz.newInstance().getClass());
+                clazz, clazz.newInstance().getClass());
 
         clazz = Class.forName("java.lang.Integer");
         try {
@@ -562,74 +564,80 @@ public class ClassTest extends junit.framework.TestCase {
      */
     public void test_toString() throws ClassNotFoundException {
         assertEquals("Class toString printed wrong value",
-                     "int", int.class.toString());
+                "int", int.class.toString());
         Class<?> clazz = null;
         clazz = Class.forName("[I");
         assertEquals("Class toString printed wrong value",
-                     "class [I", clazz.toString());
+                "class [I", clazz.toString());
 
         clazz = Class.forName("java.lang.Object");
         assertEquals("Class toString printed wrong value",
-                     "class java.lang.Object", clazz.toString());
+                "class java.lang.Object", clazz.toString());
 
         clazz = Class.forName("[Ljava.lang.Object;");
         assertEquals("Class toString printed wrong value",
-                     "class [Ljava.lang.Object;", clazz.toString());
+                "class [Ljava.lang.Object;", clazz.toString());
     }
 
 
     // Regression Test for JIRA-2047
-	public void test_getResourceAsStream_withSharpChar() throws Exception{
-		InputStream in = getClass().getResourceAsStream("/"+FILENAME);
-		assertNotNull(in);
-		in.close();
+    public void test_getResourceAsStream_withSharpChar() throws Exception {
+        InputStream in = getClass().getResourceAsStream("/" + FILENAME);
+        assertNotNull(in);
+        in.close();
 
         in = getClass().getResourceAsStream(FILENAME);
         assertNull(in);
 
-		in = this.getClass().getClassLoader().getResourceAsStream(
-				FILENAME);
-		assertNotNull(in);
-		in.close();
-	}
+        in = this.getClass().getClassLoader().getResourceAsStream(
+                FILENAME);
+        assertNotNull(in);
+        in.close();
+    }
 
-        /*
-         * Regression test for HARMONY-2644:
-         * Load system and non-system array classes via Class.forName()
-         */
-        public void test_forName_arrays() throws Exception {
-            Class c1 = getClass();
-            String s = c1.getName();
-            Class a1 = Class.forName("[L" + s + ";");
-            Class a2 = Class.forName("[[L" + s + ";");
-            assertSame(c1, a1.getComponentType());
-            assertSame(a1, a2.getComponentType());
-            Class l4 = Class.forName("[[[[[J");
-            assertSame(long[][][][][].class, l4);
+    /*
+    * Regression test for HARMONY-2644:
+    * Load system and non-system array classes via Class.forName()
+    */
+    public void test_forName_arrays() throws Exception {
+        Class c1 = getClass();
+        String s = c1.getName();
+        Class a1 = Class.forName("[L" + s + ";");
+        Class a2 = Class.forName("[[L" + s + ";");
+        assertSame(c1, a1.getComponentType());
+        assertSame(a1, a2.getComponentType());
+        Class l4 = Class.forName("[[[[[J");
+        assertSame(long[][][][][].class, l4);
 
-            try{
-                System.out.println(Class.forName("[;"));
-                fail("1");
-            } catch (ClassNotFoundException ok) {}
-            try{
-                System.out.println(Class.forName("[["));
-                fail("2");
-            } catch (ClassNotFoundException ok) {}
-            try{
-                System.out.println(Class.forName("[L"));
-                fail("3");
-            } catch (ClassNotFoundException ok) {}
-            try{
-                System.out.println(Class.forName("[L;"));
-                fail("4");
-            } catch (ClassNotFoundException ok) {}
-            try{
-                System.out.println(Class.forName(";"));
-                fail("5");
-            } catch (ClassNotFoundException ok) {}
-            try{
-                System.out.println(Class.forName(""));
-                fail("6");
-            } catch (ClassNotFoundException ok) {}
+        try {
+            System.out.println(Class.forName("[;"));
+            fail("1");
+        } catch (ClassNotFoundException ok) {
         }
+        try {
+            System.out.println(Class.forName("[["));
+            fail("2");
+        } catch (ClassNotFoundException ok) {
+        }
+        try {
+            System.out.println(Class.forName("[L"));
+            fail("3");
+        } catch (ClassNotFoundException ok) {
+        }
+        try {
+            System.out.println(Class.forName("[L;"));
+            fail("4");
+        } catch (ClassNotFoundException ok) {
+        }
+        try {
+            System.out.println(Class.forName(";"));
+            fail("5");
+        } catch (ClassNotFoundException ok) {
+        }
+        try {
+            System.out.println(Class.forName(""));
+            fail("6");
+        } catch (ClassNotFoundException ok) {
+        }
+    }
 }

@@ -26,58 +26,58 @@ import java.util.PropertyPermission;
 
 public class AccessControlContextTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.security.AccessControlContext#AccessControlContext(java.security.ProtectionDomain[])
-	 */
-	public void test_Constructor$Ljava_security_ProtectionDomain() {
-		// Test for method
-		// java.security.AccessControlContext(java.security.ProtectionDomain [])
+    /**
+     * @tests java.security.AccessControlContext#AccessControlContext(java.security.ProtectionDomain[])
+     */
+    public void test_Constructor$Ljava_security_ProtectionDomain() {
+        // Test for method
+        // java.security.AccessControlContext(java.security.ProtectionDomain [])
 
-		// Create a permission which is not normally granted
-		final Permission perm = new PropertyPermission("java.class.path",
-				"read");
-		PermissionCollection col = perm.newPermissionCollection();
-		col.add(perm);
-		final ProtectionDomain pd = new ProtectionDomain(null, col);
-		AccessControlContext acc = new AccessControlContext(
-				new ProtectionDomain[] { pd });
-		try {
-			acc.checkPermission(perm);
-		} catch (SecurityException e) {
-			fail("Should have permission");
-		}
+        // Create a permission which is not normally granted
+        final Permission perm = new PropertyPermission("java.class.path",
+                "read");
+        PermissionCollection col = perm.newPermissionCollection();
+        col.add(perm);
+        final ProtectionDomain pd = new ProtectionDomain(null, col);
+        AccessControlContext acc = new AccessControlContext(
+                new ProtectionDomain[] { pd });
+        try {
+            acc.checkPermission(perm);
+        } catch (SecurityException e) {
+            fail("Should have permission");
+        }
 
-		final boolean[] result = new boolean[] { false };
-		Thread th = new Thread(new Runnable() {
-			public void run() {
-				AccessControlContext acc = new AccessControlContext(
-						new ProtectionDomain[] { pd });
-				try {
-					acc.checkPermission(perm);
-					result[0] = true;
-				} catch (SecurityException e) {
-				}
-			}
-		});
-		th.start();
-		try {
-			th.join();
-		} catch (InterruptedException e) {
-			// ignore
-		}
-		assertTrue("Thread should have permission", result[0]);
-	}
+        final boolean[] result = new boolean[] { false };
+        Thread th = new Thread(new Runnable() {
+            public void run() {
+                AccessControlContext acc = new AccessControlContext(
+                        new ProtectionDomain[] { pd });
+                try {
+                    acc.checkPermission(perm);
+                    result[0] = true;
+                } catch (SecurityException e) {
+                }
+            }
+        });
+        th.start();
+        try {
+            th.join();
+        } catch (InterruptedException e) {
+            // ignore
+        }
+        assertTrue("Thread should have permission", result[0]);
+    }
 
-	/**
-	 * @tests java.security.AccessControlContext#AccessControlContext(java.security.AccessControlContext,
-	 *        java.security.DomainCombiner)
-	 */
-	public void test_ConstructorLjava_security_AccessControlContextLjava_security_DomainCombiner() {
-		AccessControlContext context = AccessController.getContext();
-		try {
-			new AccessControlContext(context, null);
-		} catch (NullPointerException e) {
-			fail("should not throw NullPointerException");
-		}
-	}
+    /**
+     * @tests java.security.AccessControlContext#AccessControlContext(java.security.AccessControlContext,
+     *java.security.DomainCombiner)
+     */
+    public void test_ConstructorLjava_security_AccessControlContextLjava_security_DomainCombiner() {
+        AccessControlContext context = AccessController.getContext();
+        try {
+            new AccessControlContext(context, null);
+        } catch (NullPointerException e) {
+            fail("should not throw NullPointerException");
+        }
+    }
 }

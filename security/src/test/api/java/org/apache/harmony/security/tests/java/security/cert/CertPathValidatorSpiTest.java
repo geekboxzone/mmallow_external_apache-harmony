@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -34,14 +34,13 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>CertPathValidatorSpi</code> class constructors and methods.
- * 
  */
 
 public class CertPathValidatorSpiTest extends TestCase {
 
     /**
      * Constructor for CertPathValidatorSpiTest.
-     * 
+     *
      * @param arg0
      */
     public CertPathValidatorSpiTest(String arg0) {
@@ -63,12 +62,12 @@ public class CertPathValidatorSpiTest extends TestCase {
         try {
             certPathValid.engineValidate(certPath, params);
             fail("CertPathValidatorException must be thrown");
-        } catch (CertPathValidatorException e) {            
+        } catch (CertPathValidatorException e) {
         }
         try {
             certPathValid.engineValidate(certPath, params);
             fail("InvalidAlgorithmParameterException must be thrown");
-        } catch (InvalidAlgorithmParameterException e) {            
+        } catch (InvalidAlgorithmParameterException e) {
         }
     }
 }

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.interfaces;
 
@@ -29,13 +29,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>RSAPrivateKey</code> class field
- * 
  */
 public class RSAPrivateKeyTest extends TestCase {
 
     /**
      * Constructor for RSAPrivateKeyTest.
-     * 
+     *
      * @param arg0
      */
     public RSAPrivateKeyTest(String arg0) {
@@ -51,22 +50,28 @@ public class RSAPrivateKeyTest extends TestCase {
                 key.getSerVerUID(), //RSAPrivateKey.serialVersionUID, 
                 5187144804936595022L);
     }
+
     public class checkRSAPrivateKey implements RSAPrivateKey {
         public String getAlgorithm() {
             return "RSAPrivateKey";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return new byte[0];
         }
+
         public long getSerVerUID() {
             return serialVersionUID;
         }
+
         public BigInteger getPrivateExponent() {
             return null;
         }
+
         public BigInteger getModulus() {
             return null;
         }

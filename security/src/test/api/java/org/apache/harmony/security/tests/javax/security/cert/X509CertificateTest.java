@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.security.tests.javax.security.cert;
 
@@ -39,7 +39,6 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 
-
 /**
  */
 
@@ -50,24 +49,24 @@ public class X509CertificateTest extends TestCase {
     // by org.apache.harmony.misc.Base64 class.
 
     private static String base64cert =
-        "-----BEGIN CERTIFICATE-----\n" +
-        "MIIC+jCCAragAwIBAgICAiswDAYHKoZIzjgEAwEBADAdMRswGQYDVQQKExJDZXJ0a" +
-        "WZpY2F0ZSBJc3N1ZXIwIhgPMTk3MDAxMTIxMzQ2NDBaGA8xOTcwMDEyNDAzMzMyMF" +
-        "owHzEdMBsGA1UEChMUU3ViamVjdCBPcmdhbml6YXRpb24wGTAMBgcqhkjOOAQDAQE" +
-        "AAwkAAQIDBAUGBwiBAgCqggIAVaOCAhQwggIQMA8GA1UdDwEB/wQFAwMBqoAwEgYD" +
-        "VR0TAQH/BAgwBgEB/wIBBTAUBgNVHSABAf8ECjAIMAYGBFUdIAAwZwYDVR0RAQH/B" +
-        "F0wW4EMcmZjQDgyMi5OYW1lggdkTlNOYW1lpBcxFTATBgNVBAoTDE9yZ2FuaXphdG" +
-        "lvboYaaHR0cDovL3VuaWZvcm0uUmVzb3VyY2UuSWSHBP///wCIByoDolyDsgMwDAY" +
-        "DVR0eAQH/BAIwADAMBgNVHSQBAf8EAjAAMIGZBgNVHSUBAf8EgY4wgYsGBFUdJQAG" +
-        "CCsGAQUFBwMBBggrBgEFBQcDAQYIKwYBBQUHAwIGCCsGAQUFBwMDBggrBgEFBQcDB" +
-        "AYIKwYBBQUHAwUGCCsGAQUFBwMGBggrBgEFBQcDBwYIKwYBBQUHAwgGCCsGAQUFBw" +
-        "MJBggrBgEFBQgCAgYKKwYBBAGCNwoDAwYJYIZIAYb4QgQBMA0GA1UdNgEB/wQDAgE" +
-        "BMA4GBCpNhgkBAf8EAwEBATBkBgNVHRIEXTBbgQxyZmNAODIyLk5hbWWCB2ROU05h" +
-        "bWWkFzEVMBMGA1UEChMMT3JnYW5pemF0aW9uhhpodHRwOi8vdW5pZm9ybS5SZXNvd" +
-        "XJjZS5JZIcE////AIgHKgOiXIOyAzAJBgNVHR8EAjAAMAoGA1UdIwQDAQEBMAoGA1" +
-        "UdDgQDAQEBMAoGA1UdIQQDAQEBMAwGByqGSM44BAMBAQADMAAwLQIUAL4QvoazNWP" +
-        "7jrj84/GZlhm09DsCFQCBKGKCGbrP64VtUt4JPmLjW1VxQA==\n" +
-        "-----END CERTIFICATE-----";
+            "-----BEGIN CERTIFICATE-----\n" +
+                    "MIIC+jCCAragAwIBAgICAiswDAYHKoZIzjgEAwEBADAdMRswGQYDVQQKExJDZXJ0a" +
+                    "WZpY2F0ZSBJc3N1ZXIwIhgPMTk3MDAxMTIxMzQ2NDBaGA8xOTcwMDEyNDAzMzMyMF" +
+                    "owHzEdMBsGA1UEChMUU3ViamVjdCBPcmdhbml6YXRpb24wGTAMBgcqhkjOOAQDAQE" +
+                    "AAwkAAQIDBAUGBwiBAgCqggIAVaOCAhQwggIQMA8GA1UdDwEB/wQFAwMBqoAwEgYD" +
+                    "VR0TAQH/BAgwBgEB/wIBBTAUBgNVHSABAf8ECjAIMAYGBFUdIAAwZwYDVR0RAQH/B" +
+                    "F0wW4EMcmZjQDgyMi5OYW1lggdkTlNOYW1lpBcxFTATBgNVBAoTDE9yZ2FuaXphdG" +
+                    "lvboYaaHR0cDovL3VuaWZvcm0uUmVzb3VyY2UuSWSHBP///wCIByoDolyDsgMwDAY" +
+                    "DVR0eAQH/BAIwADAMBgNVHSQBAf8EAjAAMIGZBgNVHSUBAf8EgY4wgYsGBFUdJQAG" +
+                    "CCsGAQUFBwMBBggrBgEFBQcDAQYIKwYBBQUHAwIGCCsGAQUFBwMDBggrBgEFBQcDB" +
+                    "AYIKwYBBQUHAwUGCCsGAQUFBwMGBggrBgEFBQcDBwYIKwYBBQUHAwgGCCsGAQUFBw" +
+                    "MJBggrBgEFBQgCAgYKKwYBBAGCNwoDAwYJYIZIAYb4QgQBMA0GA1UdNgEB/wQDAgE" +
+                    "BMA4GBCpNhgkBAf8EAwEBATBkBgNVHRIEXTBbgQxyZmNAODIyLk5hbWWCB2ROU05h" +
+                    "bWWkFzEVMBMGA1UEChMMT3JnYW5pemF0aW9uhhpodHRwOi8vdW5pZm9ybS5SZXNvd" +
+                    "XJjZS5JZIcE////AIgHKgOiXIOyAzAJBgNVHR8EAjAAMAoGA1UdIwQDAQEBMAoGA1" +
+                    "UdDgQDAQEBMAoGA1UdIQQDAQEBMAwGByqGSM44BAMBAQADMAAwLQIUAL4QvoazNWP" +
+                    "7jrj84/GZlhm09DsCFQCBKGKCGbrP64VtUt4JPmLjW1VxQA==\n" +
+                    "-----END CERTIFICATE-----";
 
     private java.security.cert.X509Certificate cert;
     private javax.security.cert.X509Certificate tbt_cert;
@@ -75,11 +74,11 @@ public class X509CertificateTest extends TestCase {
     protected void setUp() throws Exception {
         try {
             ByteArrayInputStream bais =
-                new ByteArrayInputStream(base64cert.getBytes());
+                    new ByteArrayInputStream(base64cert.getBytes());
 
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
             this.cert = (java.security.cert.X509Certificate)
-                                                cf.generateCertificate(bais);
+                    cf.generateCertificate(bais);
             this.tbt_cert = X509Certificate.getInstance(cert.getEncoded());
         } catch (java.security.cert.CertificateException e) {
             // The requested certificate type is not available.
@@ -103,7 +102,7 @@ public class X509CertificateTest extends TestCase {
         }
         try {
             ByteArrayInputStream bais =
-                new ByteArrayInputStream(cert.getEncoded());
+                    new ByteArrayInputStream(cert.getEncoded());
 
             X509Certificate.getInstance(bais);
         } catch (java.security.cert.CertificateEncodingException e) {
@@ -169,15 +168,15 @@ public class X509CertificateTest extends TestCase {
         try {
             tbt_cert.checkValidity();
             assertFalse("CertificateExpiredException expected",
-                                            date.compareTo(na_date) > 0);
+                    date.compareTo(na_date) > 0);
             assertFalse("CertificateNotYetValidException expected",
-                                            date.compareTo(nb_date) < 0);
+                    date.compareTo(nb_date) < 0);
         } catch (CertificateExpiredException e) {
             assertTrue("Unexpected CertificateExpiredException was thrown",
-                                            date.compareTo(na_date) > 0);
+                    date.compareTo(na_date) > 0);
         } catch (CertificateNotYetValidException e) {
             assertTrue("Unexpected CertificateNotYetValidException was thrown",
-                                            date.compareTo(nb_date) < 0);
+                    date.compareTo(nb_date) < 0);
         }
     }
 
@@ -192,25 +191,25 @@ public class X509CertificateTest extends TestCase {
         }
         Date[] date = new Date[4];
         Calendar calendar = Calendar.getInstance();
-        for (int i=0; i<date.length; i++) {
-            calendar.set(i*50, Calendar.JANUARY, 1);
+        for (int i = 0; i < date.length; i++) {
+            calendar.set(i * 50, Calendar.JANUARY, 1);
             date[i] = calendar.getTime();
         }
         Date nb_date = tbt_cert.getNotBefore();
         Date na_date = tbt_cert.getNotAfter();
-        for (int i=0; i<date.length; i++) {
+        for (int i = 0; i < date.length; i++) {
             try {
                 tbt_cert.checkValidity(date[i]);
                 assertFalse("CertificateExpiredException expected",
-                                                date[i].compareTo(na_date) > 0);
+                        date[i].compareTo(na_date) > 0);
                 assertFalse("CertificateNotYetValidException expected",
-                                                date[i].compareTo(nb_date) < 0);
+                        date[i].compareTo(nb_date) < 0);
             } catch (CertificateExpiredException e) {
                 assertTrue("Unexpected CertificateExpiredException was thrown",
-                                                date[i].compareTo(na_date) > 0);
+                        date[i].compareTo(na_date) > 0);
             } catch (CertificateNotYetValidException e) {
                 assertTrue("Unexpected CertificateNotYetValidException "
-                                + "was thrown", date[i].compareTo(nb_date) < 0);
+                        + "was thrown", date[i].compareTo(nb_date) < 0);
             }
         }
     }
@@ -225,7 +224,7 @@ public class X509CertificateTest extends TestCase {
             return;
         }
         assertEquals("The version is not correct.",
-                                                tbt_cert.getVersion(), 2);
+                tbt_cert.getVersion(), 2);
     }
 
     /**
@@ -238,7 +237,7 @@ public class X509CertificateTest extends TestCase {
             return;
         }
         assertEquals("The serial number is not correct.",
-                            tbt_cert.getSerialNumber(), cert.getSerialNumber());
+                tbt_cert.getSerialNumber(), cert.getSerialNumber());
     }
 
     /**
@@ -251,7 +250,7 @@ public class X509CertificateTest extends TestCase {
             return;
         }
         assertEquals("The issuer DN is not correct.",
-                                    tbt_cert.getIssuerDN(), cert.getIssuerDN());
+                tbt_cert.getIssuerDN(), cert.getIssuerDN());
     }
 
     /**
@@ -264,7 +263,7 @@ public class X509CertificateTest extends TestCase {
             return;
         }
         assertEquals("The subject DN is not correct.",
-                                tbt_cert.getSubjectDN(), cert.getSubjectDN());
+                tbt_cert.getSubjectDN(), cert.getSubjectDN());
     }
 
     /**
@@ -277,7 +276,7 @@ public class X509CertificateTest extends TestCase {
             return;
         }
         assertEquals("The NotBefore date is not correct.",
-                                tbt_cert.getNotBefore(), cert.getNotBefore());
+                tbt_cert.getNotBefore(), cert.getNotBefore());
     }
 
     /**
@@ -290,7 +289,7 @@ public class X509CertificateTest extends TestCase {
             return;
         }
         assertEquals("The NotAfter date is not correct.",
-                                tbt_cert.getNotAfter(), cert.getNotAfter());
+                tbt_cert.getNotAfter(), cert.getNotAfter());
     }
 
     /**
@@ -303,7 +302,7 @@ public class X509CertificateTest extends TestCase {
             return;
         }
         assertEquals("The name of signature algorithm is not correct.",
-                                tbt_cert.getSigAlgName(), cert.getSigAlgName());
+                tbt_cert.getSigAlgName(), cert.getSigAlgName());
     }
 
     /**
@@ -316,7 +315,7 @@ public class X509CertificateTest extends TestCase {
             return;
         }
         assertEquals("The name of OID of signature algorithm is not correct.",
-                                tbt_cert.getSigAlgOID(), cert.getSigAlgOID());
+                tbt_cert.getSigAlgOID(), cert.getSigAlgOID());
     }
 
     /**
@@ -330,7 +329,7 @@ public class X509CertificateTest extends TestCase {
         }
         assertTrue("The byte array with encoded algorithm parameters "
                 + "is not correct.", Arrays.equals(tbt_cert.getSigAlgParams(),
-                                                    cert.getSigAlgParams()));
+                cert.getSigAlgParams()));
     }
 
     public static Test suite() {

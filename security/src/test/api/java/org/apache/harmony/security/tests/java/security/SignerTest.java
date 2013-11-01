@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Aleksei Y. Semenov
-*/
+ * @author Aleksei Y. Semenov
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.*;
 import org.apache.harmony.security.tests.support.PrivateKeyStub;
 import org.apache.harmony.security.tests.support.PublicKeyStub;
@@ -28,16 +29,15 @@ import org.apache.harmony.security.tests.support.SignerStub;
 import junit.framework.TestCase;
 
 
-
 /**
  * tests for class Signer
- *
  */
 
 public class SignerTest extends TestCase {
 
     /**
      * Constructor for SignerTest.
+     *
      * @param arg0
      */
     public SignerTest(String arg0) {
@@ -97,7 +97,7 @@ public class SignerTest extends TestCase {
      * verify Signer.getPrivateKey() returns null or private key
      */
     public void testGetPrivateKey() throws Exception {
-        byte [] privateKeyData = { 1, 2, 3, 4, 5};
+        byte[] privateKeyData = { 1, 2, 3, 4, 5 };
         PrivateKeyStub privateKey = new PrivateKeyStub("private", "fff", privateKeyData);
         PublicKeyStub publicKey = new PublicKeyStub("public", "fff", null);
         KeyPair kp = new KeyPair(publicKey, privateKey);

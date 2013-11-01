@@ -48,7 +48,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SSLContext</code> class constructors and methods.
- * 
  */
 
 public class SSLContext1Test extends TestCase {
@@ -70,6 +69,7 @@ public class SSLContext1Test extends TestCase {
     private static final String NotSupportedMsg = "There is no suitable provider for SSLContext";
 
     private static String[] validValues = new String[3];
+
     static {
         defaultProvider = SpiEngUtils.isSupport(defaultProtocol, srvSSLContext);
         DEFSupported = (defaultProvider != null);
@@ -82,11 +82,11 @@ public class SSLContext1Test extends TestCase {
         } else {
             defaultProtocol = null;
         }
-        
+
         SSLParameters staticSupportSSLParameter = new SSLParameters(new String[] {
                 "TLS_RSA_WITH_RC4_128_MD5", "TLS_RSA_WITH_RC4_128_SHA" },
                 new String[] { "TLSv1", "SSLv3" });
-        
+
         SSLParameters staticDefaultSSLParameter = new SSLParameters(new String[] {
                 "TLS_RSA_WITH_RC4_128_MD5", "TLS_RSA_WITH_RC4_128_SHA" },
                 new String[] { "TLSv1", "SSLv3" });
@@ -338,10 +338,9 @@ public class SSLContext1Test extends TestCase {
      * <code>getSocketFactory()</code>
      * <code>init(KeyManager[] km, TrustManager[] tm, SecureRandom random)</code>
      * methods Assertion: returns correspondent object
-     * 
      */
-    
-     public void testSSLContext11() throws NoSuchAlgorithmException,
+
+    public void testSSLContext11() throws NoSuchAlgorithmException,
             KeyManagementException, KeyStoreException,
             UnrecoverableKeyException {
         if (!DEFSupported) {
@@ -418,10 +417,11 @@ public class SSLContext1Test extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     public void testGetDefault() throws Exception {
         //TODO: Need evaluation
-        class PrivateClassLoader extends ClassLoader {}
+        class PrivateClassLoader extends ClassLoader {
+        }
         try {
             // register my provider and its service.
             Security.addProvider(new MyProvider());
@@ -429,18 +429,15 @@ public class SSLContext1Test extends TestCase {
             ClassLoader privateClassLoader = new PrivateClassLoader();
             Class class1 = privateClassLoader
                     .loadClass("org.apache.harmony.xnet.tests.javax.net.ssl.MySSLContext");
-            SSLContext sslContext = (SSLContext) class1.newInstance();      
+            SSLContext sslContext = (SSLContext) class1.newInstance();
             System.out.println(SSLContext.getInstance("Default"));
             assertTrue((sslContext.getDefault()) instanceof SSLContext);
         } catch (NoSuchAlgorithmException e) {
             // expected            
         }
-    }    
-    
+    }
 
 
-    
-    
     public void testGetDefaultSSLParameters() throws Exception {
         SSLContext[] sslContexts = createSSLCon();
         assertNotNull("SSLContext objects were not created", sslContexts);
@@ -490,19 +487,19 @@ public class SSLContext1Test extends TestCase {
 /**
  * Addifional class to verify SSLContext constructor
  */
-class MyProvider extends Provider {    
+class MyProvider extends Provider {
     MyProvider() {
         super("MyProviderForSSLContextTest", 1.0, "Provider for testing");
         put("SSLContext.Default", "org.apache.harmony.xnet.tests.javax.net.ssl.MySSLContext");
     }
 }
-    
+
 class MySSLContext extends SSLContext {
     public MySSLContext(SSLContextSpi spi, Provider prov, String alg) {
         super(spi, prov, alg);
     }
-    
-    public MySSLContext(){
+
+    public MySSLContext() {
         super(null, null, null);
     }
 }

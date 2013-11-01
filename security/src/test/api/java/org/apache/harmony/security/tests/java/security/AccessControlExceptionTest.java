@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander V. Astapchuk
-*/
+ * @author Alexander V. Astapchuk
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -48,7 +48,6 @@ public class AccessControlExceptionTest extends TestCase {
     }
 
     /**
-     *
      * Tests AccessControlException.getPermission()
      */
     public void testGetPermission() {

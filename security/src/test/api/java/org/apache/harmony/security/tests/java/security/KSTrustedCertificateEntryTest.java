@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.*;
 import java.security.cert.Certificate;
 
@@ -28,8 +29,7 @@ import org.apache.harmony.security.tests.support.cert.MyCertificate;
 import junit.framework.TestCase;
 
 /**
- * Tests for <code>KeyStore.TrustedCertificateEntry</code> class constructor and methods 
- * 
+ * Tests for <code>KeyStore.TrustedCertificateEntry</code> class constructor and methods
  */
 
 public class KSTrustedCertificateEntryTest extends TestCase {
@@ -47,25 +47,25 @@ public class KSTrustedCertificateEntryTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test for <codfe>getTrustedCertificate()</code> method
-     * Assertion: returns trusted Certificate from goven entry 
+     * Assertion: returns trusted Certificate from goven entry
      */
     public void testGetTrustedCertificate() {
         Certificate cert = new MyCertificate("TEST", new byte[10]);
-        KeyStore.TrustedCertificateEntry ksTCE = 
+        KeyStore.TrustedCertificateEntry ksTCE =
                 new KeyStore.TrustedCertificateEntry(cert);
         assertEquals("Incorrect certificate", cert, ksTCE.getTrustedCertificate());
     }
 
     /**
      * Test for <codfe>toString()</code> method
-     * Assertion: returns non null string 
+     * Assertion: returns non null string
      */
     public void testToString() {
         Certificate cert = new MyCertificate("TEST", new byte[10]);
-        KeyStore.TrustedCertificateEntry ksTCE = 
+        KeyStore.TrustedCertificateEntry ksTCE =
                 new KeyStore.TrustedCertificateEntry(cert);
         assertNotNull("toString() returns null string", ksTCE.toString());
     }

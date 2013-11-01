@@ -31,10 +31,10 @@ import junit.framework.TestSuite;
 public class SHA1PRNG_SecureRandomTest extends TestCase {
 
     private static final int LENGTH = 20;               // constant defining loop limit
-    private static final int INCR   = 2;                // constant defining loop increment
+    private static final int INCR = 2;                // constant defining loop increment
 
     private static final String algorithm = "SHA1PRNG";  // algorithm's name
-    private static final String provider  = "Crypto";   // provider's name
+    private static final String provider = "Crypto";   // provider's name
 
     private static SecureRandom sr;     // fields used by tests
     private static SecureRandom sr2;    //
@@ -44,7 +44,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
      */
     protected void setUp() throws Exception {
         super.setUp();
-        sr  = SecureRandom.getInstance(algorithm, provider);
+        sr = SecureRandom.getInstance(algorithm, provider);
         sr2 = SecureRandom.getInstance(algorithm, provider);
     }
 
@@ -69,11 +69,11 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
      */
     public final void testGenerateSeedint02() {
 
-        for ( int i = 0; i < LENGTH; i++ ) {
+        for (int i = 0; i < LENGTH; i++) {
 
             byte[] myBytes = sr.generateSeed(i);
             assertFalse("unexpected: myBytes.length != i  :: i==" + i +
-                        " myBytes.length=" + myBytes.length, myBytes.length != i);
+                    " myBytes.length=" + myBytes.length, myBytes.length != i);
         }
     }
 
@@ -88,17 +88,17 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
         byte[] myBytes1;
         byte[] myBytes2;
 
-        for ( int i = 0; i < LENGTH; i+=INCR ) {
+        for (int i = 0; i < LENGTH; i += INCR) {
             int n = 0;
             myBytes1 = sr.generateSeed(i);
             myBytes2 = sr.generateSeed(i);
 
-            for ( int j = 0; j < i; j++ ) {
-                if ( myBytes1[j] == myBytes2[j] ) {
+            for (int j = 0; j < i; j++) {
+                if (myBytes1[j] == myBytes2[j]) {
                     n++;
                 }
             }
-            assertFalse("unexpected: n*2 > i  :: i=" + i + " n=" + n, n*2 > i );
+            assertFalse("unexpected: n*2 > i  :: i=" + i + " n=" + n, n * 2 > i);
         }
     }
 
@@ -130,53 +130,53 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
         byte[] myBytes2;
 
         // case1: sequencies are of the same length
-        for ( int i = 1; i < LENGTH; i+=INCR ) {
+        for (int i = 1; i < LENGTH; i += INCR) {
 
             myBytes = new byte[i];
 
-            for ( int j = 1; j < i ; j++ ) {
-                myBytes[j] = (byte)(j&0xFF);
+            for (int j = 1; j < i; j++) {
+                myBytes[j] = (byte) (j & 0xFF);
             }
             sr.setSeed(myBytes);
             sr2.setSeed(myBytes);
 
-            for ( int k = 1; k < LENGTH; k+=INCR ) {
+            for (int k = 1; k < LENGTH; k += INCR) {
 
                 myBytes1 = new byte[k];
                 myBytes2 = new byte[k];
                 sr.nextBytes(myBytes1);
                 sr2.nextBytes(myBytes2);
 
-                for ( int l = 0; l < k; l++ ) {
+                for (int l = 0; l < k; l++) {
                     assertFalse("unexpected: myBytes1[l] != myBytes2[l]  :: l==" + l +
-                        " k=" + k + " i=" + i + " myBytes1[l]=" + myBytes1[l] +
-                        " myBytes2[l]=" + myBytes2[l], myBytes1[l] != myBytes2[l] );
+                            " k=" + k + " i=" + i + " myBytes1[l]=" + myBytes1[l] +
+                            " myBytes2[l]=" + myBytes2[l], myBytes1[l] != myBytes2[l]);
                 }
             }
         }
 
         // case2: sequencies are of different lengths
-        for ( int n = 1; n < LENGTH; n+=INCR ) {
+        for (int n = 1; n < LENGTH; n += INCR) {
             int n1 = 10;
             int n2 = 20;
             int n3 = 100;
             byte[][] bytes1 = new byte[10][n1];
-            byte[][] bytes2 = new byte[ 5][n2];
+            byte[][] bytes2 = new byte[5][n2];
 
-            for ( int k = 0; k < bytes1.length; k++ ) {
+            for (int k = 0; k < bytes1.length; k++) {
                 sr.nextBytes(bytes1[k]);
             }
-            for ( int k = 0; k < bytes2.length; k++) {
-               sr2.nextBytes(bytes2[k]);
+            for (int k = 0; k < bytes2.length; k++) {
+                sr2.nextBytes(bytes2[k]);
             }
 
-            for ( int k = 0; k < n3 ; k++ ) {
-                int i1 = k /n1;
-                int i2 = k %n1;
-                int i3 = k /n2;
-                int i4 = k %n2;
-                assertTrue("non-equality: i1="+ i1 +" i2="+i2 +" i3="+i3 +" i4=" +i4,
-                           bytes1[i1][i2] == bytes2[i3][i4]);
+            for (int k = 0; k < n3; k++) {
+                int i1 = k / n1;
+                int i2 = k % n1;
+                int i3 = k / n2;
+                int i4 = k % n2;
+                assertTrue("non-equality: i1=" + i1 + " i2=" + i2 + " i3=" + i3 + " i4=" + i4,
+                        bytes1[i1][i2] == bytes2[i3][i4]);
             }
         }
     }
@@ -189,7 +189,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
      * as results of their "nextBytes(byte[])" methods
      */
     public final void testNextBytesbyteArray03() throws NoSuchAlgorithmException,
-                                                        NoSuchProviderException {
+            NoSuchProviderException {
 
         SecureRandom sr1;    // these are needed to test new SecureRandom objects in loop
         SecureRandom sr2;    //
@@ -197,7 +197,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
         byte[] myBytes1;
         byte[] myBytes2;
 
-        for ( int i = 1; i < LENGTH/2; i+=INCR ) {
+        for (int i = 1; i < LENGTH / 2; i += INCR) {
 
             sr1 = SecureRandom.getInstance(algorithm, provider);
             sr2 = SecureRandom.getInstance(algorithm, provider);
@@ -209,18 +209,18 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
 
             sr1.nextBytes(myBytes1);
             sr2.nextBytes(myBytes2);
-            for ( int j = 0; j < i; j++ ) {
+            for (int j = 0; j < i; j++) {
                 flag &= myBytes1[j] == myBytes2[j];
             }
 
             // check again to avoid intermittent failures
             sr1.nextBytes(myBytes1);
             sr2.nextBytes(myBytes2);
-            for ( int j = 0; j < i; j++ ) {
+            for (int j = 0; j < i; j++) {
                 flag &= myBytes1[j] == myBytes2[j];
             }
 
-            if ( flag ) {
+            if (flag) {
                 // probability of false failure is 1.5*10^-5 per run for i=1 or less for i > 1
                 fail("TESTING RANDOM NUMBER GENERATOR QUALITY: IGNORE THIS FAILURE IF INTERMITTENT :: i=" + i);
             }
@@ -242,7 +242,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
      * then further calls to "nextBytes(new byte[0])" methods has no effect
      */
     public final void testNextBytesbyteArray04() throws NoSuchAlgorithmException,
-                                                        NoSuchProviderException {
+            NoSuchProviderException {
 
         SecureRandom sr1;    // these are needed to test new SecureRandom objects in loop
         SecureRandom sr2;    //
@@ -252,7 +252,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
         byte[] myBytes2;
 
         // case 1:
-        for ( int i = 1; i < LENGTH/2; i+=INCR ) {
+        for (int i = 1; i < LENGTH / 2; i += INCR) {
 
             sr1 = SecureRandom.getInstance(algorithm, provider);
             sr2 = SecureRandom.getInstance(algorithm, provider);
@@ -267,27 +267,27 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
 
             sr1.nextBytes(myBytes1);
             sr2.nextBytes(myBytes2);
-            for ( int j = 0; j < i; j++ ) {
+            for (int j = 0; j < i; j++) {
                 flag &= myBytes1[j] == myBytes2[j];
             }
 
             // check again to avoid intermittent failures
             sr1.nextBytes(myBytes1);
             sr2.nextBytes(myBytes2);
-            for ( int j = 0; j < i; j++ ) {
+            for (int j = 0; j < i; j++) {
                 flag &= myBytes1[j] == myBytes2[j];
             }
 
-            if ( flag ) {
+            if (flag) {
                 // probability of false failure is 1.5*10^-5 per run for i=1 or less for i > 1
                 fail("TESTING RANDOM NUMBER GENERATOR QUALITY: IGNORE THIS FAILURE IF INTERMITTENT :: i=" + i);
             }
         }
 
-        myBytes = new byte[] { (byte)0 };
+        myBytes = new byte[] { (byte) 0 };
 
         // case2:
-        for ( int n = 1; n < LENGTH; n+=INCR ) {
+        for (int n = 1; n < LENGTH; n += INCR) {
 
             byte[][] bytes1 = new byte[2][n];
             byte[][] bytes2 = new byte[2][n];
@@ -305,11 +305,11 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
             sr2.nextBytes(new byte[0]);
             sr2.nextBytes(bytes2[1]);
 
-            for ( int k = 0; k < 2 ; k++ ) {
-                for ( int j = 0; j < n; j++ ) {
-                    assertTrue("non-equality: k="+ k +" j="+j +
-                               " bytes1[k][j]="+bytes1[k][j] +" bytes2[k][j]=" +bytes2[k][j],
-                           bytes1[k][j] == bytes2[k][j] );
+            for (int k = 0; k < 2; k++) {
+                for (int j = 0; j < n; j++) {
+                    assertTrue("non-equality: k=" + k + " j=" + j +
+                            " bytes1[k][j]=" + bytes1[k][j] + " bytes2[k][j]=" + bytes2[k][j],
+                            bytes1[k][j] == bytes2[k][j]);
                 }
             }
         }
@@ -336,15 +336,15 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
      * rather than replaces current seed
      */
     public final void testSetSeedbyteArray02() throws NoSuchFieldException,
-                                                        SecurityException,
-                                                        IllegalAccessException {
-        byte[]   seed = new byte[LENGTH];
+            SecurityException,
+            IllegalAccessException {
+        byte[] seed = new byte[LENGTH];
         byte[] bytes1 = new byte[LENGTH];
         byte[] bytes2 = new byte[LENGTH];
         boolean b;
 
         for (int i = 0; i < seed.length; i++) {
-            seed[i] = (byte)i;
+            seed[i] = (byte) i;
         }
 
         sr.setSeed(seed);
@@ -366,25 +366,25 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
      * test against the "void setSeed(byte[])" method;
      * it checks out that the "byte[0]" argument has no effect; there are two testcases:
      * - if one of two SecureRandom objects supplied with the same seed is additionally
-     *   supplied with such array, "nextBytes(..)" of both objects return the same bytes;
+     * supplied with such array, "nextBytes(..)" of both objects return the same bytes;
      * - two byte arrays returned by "nextBytes(..)" in following sequence
-     *   nextBytes(..); setSeed(new byte[0]); nextBytes(..);
-     *   don't contain the same byte sequencies.
+     * nextBytes(..); setSeed(new byte[0]); nextBytes(..);
+     * don't contain the same byte sequencies.
      */
     public final void testSetSeedbyteArray03() throws NoSuchFieldException,
-                                                        SecurityException,
-                                                        IllegalAccessException {
-        byte[]   seed = new byte[LENGTH];
+            SecurityException,
+            IllegalAccessException {
+        byte[] seed = new byte[LENGTH];
         byte[] bytes1;
         byte[] bytes2;
 
         for (int i = 0; i < seed.length; i++) {
-            seed[i] = (byte)i;
+            seed[i] = (byte) i;
         }
 
 
         // testcase begins with "bytes1" and "bytes2" of zero length
-        for ( int i = 0; i < LENGTH; i++ ) {
+        for (int i = 0; i < LENGTH; i++) {
             bytes1 = new byte[i];
             bytes2 = new byte[i];
 
@@ -396,11 +396,11 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
             sr2.nextBytes(bytes2);
 
             for (int j = 0; j < bytes1.length; j++) {
-                assertEquals("bytes1[j] != bytes2[j] :: j=" +j, bytes1[j], bytes2[j]);
+                assertEquals("bytes1[j] != bytes2[j] :: j=" + j, bytes1[j], bytes2[j]);
             }
         }
 
-        for ( int i = 1; i < LENGTH; i++ ) {
+        for (int i = 1; i < LENGTH; i++) {
             bytes1 = new byte[i];
             bytes2 = new byte[i];
 
@@ -411,7 +411,7 @@ public class SHA1PRNG_SecureRandomTest extends TestCase {
 
             boolean b = true;
             for (int j = 0; j < bytes1.length; j++) {
-                b &= bytes1[j] == bytes2[j] ;
+                b &= bytes1[j] == bytes2[j];
             }
             assertFalse("sequences are equal i=" + i, b);
         }

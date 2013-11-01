@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -34,23 +34,22 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>Provider</code> constructor and methods
- * 
  */
 public class ProviderTest extends TestCase {
 
     Provider p;
-    
+
     /*
-     * @see TestCase#setUp()
-     */
+    * @see TestCase#setUp()
+    */
     protected void setUp() throws Exception {
         super.setUp();
         p = new MyProvider();
     }
-    
+
     /*
-     * Class under test for void Provider()
-     */
+    * Class under test for void Provider()
+    */
     public final void testProvider() {
         assertEquals("Provider.id name", p.getProperty("Provider.id name"),
                 String.valueOf(p.getName()));
@@ -104,7 +103,7 @@ public class ProviderTest extends TestCase {
         if (!"value 1".equals(p.getProperty("Property 1").trim()) ||
                 !"attrValue".equals(p.getProperty("serviceName.algName attrName").trim()) ||
                 !"standardName".equals(p.getProperty("Alg.Alias.engineClassName.aliasName").trim()) ||
-                !"aaa.bbb.ccc.ddd".equals(p.getProperty("MessageDigest.SHA-1").trim()) ) {
+                !"aaa.bbb.ccc.ddd".equals(p.getProperty("MessageDigest.SHA-1").trim())) {
             fail("Incorrect property value");
         }
     }
@@ -114,7 +113,7 @@ public class ProviderTest extends TestCase {
      */
     public final void testEntrySet() {
         p.put("MessageDigest.SHA-256", "aaa.bbb.ccc.ddd");
-        
+
         Set s = p.entrySet();
         try {
             s.clear();
@@ -124,10 +123,10 @@ public class ProviderTest extends TestCase {
 
         assertEquals("Incorrect set size", 8, s.size());
 
-        for (Iterator it = s.iterator(); it.hasNext();) {
-            Entry e = (Entry)it.next();
-            String key = (String)e.getKey();
-            String val = (String)e.getValue();
+        for (Iterator it = s.iterator(); it.hasNext(); ) {
+            Entry e = (Entry) it.next();
+            String key = (String) e.getKey();
+            String val = (String) e.getValue();
             if (key.equals("MessageDigest.SHA-1") && val.equals("SomeClassName")) {
                 continue;
             }
@@ -153,7 +152,7 @@ public class ProviderTest extends TestCase {
                 continue;
             }
             fail("Incorrect set");
-        }        
+        }
     }
 
     /*
@@ -161,7 +160,7 @@ public class ProviderTest extends TestCase {
      */
     public final void testKeySet() {
         p.put("MessageDigest.SHA-256", "aaa.bbb.ccc.ddd");
-        
+
         Set s = p.keySet();
         try {
             s.clear();
@@ -188,7 +187,7 @@ public class ProviderTest extends TestCase {
      */
     public final void testValues() {
         p.put("MessageDigest.SHA-256", "aaa.bbb.ccc.ddd");
-        
+
         Collection c = p.values();
         try {
             c.clear();
@@ -217,12 +216,12 @@ public class ProviderTest extends TestCase {
         p.put("Type.Algorithm", "className");
         assertEquals("aaa.bbb.ccc.ddd", p.getProperty("MessageDigest.SHA-1")
                 .trim());
-        
+
         Set services = p.getServices();
         assertEquals(3, services.size());
 
-        for (Iterator it = services.iterator(); it.hasNext();) {
-            Provider.Service s = (Provider.Service)it.next();
+        for (Iterator it = services.iterator(); it.hasNext(); ) {
+            Provider.Service s = (Provider.Service) it.next();
             if ("Type".equals(s.getType()) &&
                     "Algorithm".equals(s.getAlgorithm()) &&
                     "className".equals(s.getClassName())) {
@@ -252,7 +251,7 @@ public class ProviderTest extends TestCase {
         assertNull(p.getProperty("MessageDigest.SHA-1"));
         assertEquals(1, p.getServices().size());
     }
- 
+
     public final void testService1() {
         p.put("MessageDigest.SHA-1", "AnotherClassName");
         Provider.Service s = p.getService("MessageDigest", "SHA-1");
@@ -260,39 +259,39 @@ public class ProviderTest extends TestCase {
         assertEquals("AnotherClassName", s.getClassName());
     }
 
- /*
-    public final void testService2() {
-        Provider[] pp = Security.getProviders("MessageDigest.SHA-1");
-        if (pp == null) {
-            return;
-        }
-        Provider p2 = pp[0];
-        String old = p2.getProperty("MessageDigest.SHA-1");
-        try {
-            p2.put("MessageDigest.SHA-1", "AnotherClassName");
-            Provider.Service s = p2.getService("MessageDigest", "SHA-1");
-            if (!"AnotherClassName".equals(s.getClassName())) {
-                fail("Incorrect class name "+ s.getClassName());
+    /*
+        public final void testService2() {
+            Provider[] pp = Security.getProviders("MessageDigest.SHA-1");
+            if (pp == null) {
+                return;
             }
+            Provider p2 = pp[0];
+            String old = p2.getProperty("MessageDigest.SHA-1");
             try {
-                s.newInstance(null);
-                fail("No expected NoSuchAlgorithmException");
-            } catch (NoSuchAlgorithmException e) {    
+                p2.put("MessageDigest.SHA-1", "AnotherClassName");
+                Provider.Service s = p2.getService("MessageDigest", "SHA-1");
+                if (!"AnotherClassName".equals(s.getClassName())) {
+                    fail("Incorrect class name "+ s.getClassName());
+                }
+                try {
+                    s.newInstance(null);
+                    fail("No expected NoSuchAlgorithmException");
+                } catch (NoSuchAlgorithmException e) {
+                }
+            } finally {
+                p2.put("MessageDigest.SHA-1", old);
             }
-        } finally {
-            p2.put("MessageDigest.SHA-1", old);
         }
-    }
-*/
+    */
     //Regression for HARMONY-2760.
     public void testConstructor() {
-		MyProvider myProvider = new MyProvider(null, 1, null);
-		assertNull(myProvider.getName());
-		assertNull(myProvider.getInfo());
-		assertEquals("null", myProvider.getProperty("Provider.id name"));
-		assertEquals("null", myProvider.getProperty("Provider.id info"));
-	}
-    
+        MyProvider myProvider = new MyProvider(null, 1, null);
+        assertNull(myProvider.getName());
+        assertNull(myProvider.getInfo());
+        assertEquals("null", myProvider.getProperty("Provider.id name"));
+        assertEquals("null", myProvider.getProperty("Provider.id info"));
+    }
+
     class MyProvider extends Provider {
         MyProvider() {
             super("MyProvider", 1.0, "Provider for testing");
@@ -300,7 +299,7 @@ public class ProviderTest extends TestCase {
             put("MessageDigest.abc", "SomeClassName");
             put("Alg.Alias.MessageDigest.SHA1", "SHA-1");
         }
-        
+
         MyProvider(String name, double version, String info) {
             super(name, version, info);
         }

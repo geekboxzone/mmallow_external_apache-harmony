@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander V. Astapchuk
-*/
+ * @author Alexander V. Astapchuk
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -46,7 +46,6 @@ import javax.security.auth.x500.X500Principal;
 /**
  * The class contains various utility methods used during the java.security
  * classes testing.
- * 
  */
 
 public final class TestCertUtils {
@@ -57,7 +56,7 @@ public final class TestCertUtils {
 
     /**
      * Returns new instance of test certificate each time the method is called.
-     * 
+     *
      * @return test certificate
      */
     public static Certificate getCert() {
@@ -69,7 +68,7 @@ public final class TestCertUtils {
      * real chain of certificates, it's just an array of 3 certs. The method
      * returns new array each time it's called. The number of 3 was chosen
      * arbitrarily and is subject to change.
-     * 
+     *
      * @return an array of 3 certificates
      */
     public static Certificate[] getCertChain() {
@@ -81,7 +80,7 @@ public final class TestCertUtils {
     /**
      * Returns a test CertPath, which uses getCertChain() to obtain a list of
      * certificates to store.
-     * 
+     *
      * @return test cert path
      */
     public static CertPath getCertPath() {
@@ -90,14 +89,14 @@ public final class TestCertUtils {
 
     /**
      * Generates and returns an instance of TestCertPath.<br>
-     * TestCertificate-s included in the CertPath will be uniq (will have 
-     * different numbers passed to their ctor-s).<br> 
+     * TestCertificate-s included in the CertPath will be uniq (will have
+     * different numbers passed to their ctor-s).<br>
      * The second arguments shows which number will have the first Certificate
-     * in the CertPath. The second certificate will have (startID+1) number 
+     * in the CertPath. The second certificate will have (startID+1) number
      * and so on.
-     * 
+     *
      * @param howMany - shows how many TestCerts must contain the CertPath generated
-     * @param startID - specifies the starting ID which the first certificate will have  
+     * @param startID - specifies the starting ID which the first certificate will have
      * @return TestCertPath
      */
     public static CertPath genCertPath(int howMany, int startID) {
@@ -141,7 +140,6 @@ public final class TestCertUtils {
 
     /**
      * The class represents test certificate path.
-     * 
      */
 
     public static final class TestCertPath extends CertPath implements
@@ -155,9 +153,9 @@ public final class TestCertUtils {
         private Certificate[] certs;
 
         /**
-         * Default ctor for TestCertPath. Uses {@link TestCertUtils#getCertChain()} 
+         * Default ctor for TestCertPath. Uses {@link TestCertUtils#getCertChain()}
          * to obtain list of certificates.<br>
-         * All TestCertPath-s constructed via this ctor will be equals() to each 
+         * All TestCertPath-s constructed via this ctor will be equals() to each
          * other.
          */
         public TestCertPath() {
@@ -166,25 +164,26 @@ public final class TestCertUtils {
         }
 
         /**
-         * Constructs TestCertPath and keeps the given array of certificates.<br> 
-         * The TestCertPaths constructed via this ctor may be different (if they 
+         * Constructs TestCertPath and keeps the given array of certificates.<br>
+         * The TestCertPaths constructed via this ctor may be different (if they
          * have different set of certificates)<br>
-         * @see TestCertUtils#genCertPath(int, int)
+         *
          * @param certs
+         * @see TestCertUtils#genCertPath(int, int)
          */
         public TestCertPath(Certificate[] certs) {
             super("testCertPath");
             this.certs = certs;
         }
 
-        /** 
+        /**
          * @see java.security.cert.CertPath#getCertificates()
          */
         public List getCertificates() {
             return Arrays.asList(certs);
         }
 
-        /** 
+        /**
          * @see java.security.cert.CertPath#getEncoded()
          */
         public byte[] getEncoded() throws CertificateEncodingException {
@@ -207,16 +206,15 @@ public final class TestCertUtils {
             v.add("myTestEncoding");
             return v.iterator();
         }
-        
+
         public String toString() {
             StringBuffer buf = new StringBuffer(200);
             buf.append("TestCertPath. certs count=");
-            if( certs == null ) {
+            if (certs == null) {
                 buf.append("0\n");
-            }
-            else {
+            } else {
                 buf.append(certs.length).append("\n");
-                for( int i=0; i<certs.length; i++) {
+                for (int i = 0; i < certs.length; i++) {
                     buf.append("\t").append(i).append(" ");
                     buf.append(certs[i]).append("\n");
                 }
@@ -229,7 +227,7 @@ public final class TestCertUtils {
          * (String) serializedData<br>
          * (int) number of certificates in this CertPath<br>
          * <array of certificates>
-         * 
+         *
          * @param out
          * @throws IOException
          */
@@ -270,7 +268,6 @@ public final class TestCertUtils {
 
     /**
      * The class represents empty PublicKey.
-     * 
      */
 
     public static final class TestPublicKey implements PublicKey {
@@ -296,7 +293,6 @@ public final class TestCertUtils {
 
     /**
      * The class represents test certificate.
-     * 
      */
 
     public static class TestCertificate extends Certificate implements
@@ -322,7 +318,7 @@ public final class TestCertUtils {
 
         /**
          * A special purpose ctor. Pass different String-s to have different TestCertificates.
-         * TestCertificate-s with the same String passed to this ctor are considered equal. 
+         * TestCertificate-s with the same String passed to this ctor are considered equal.
          */
         public TestCertificate(String diff) {
             super(TYPE);
@@ -330,9 +326,9 @@ public final class TestCertUtils {
         }
 
         /**
-         * A ctor that allows to specify both the TYPE of certificate and the 
-         * diff. Leave the <code>diff</code> null when no difference needed. 
-         * 
+         * A ctor that allows to specify both the TYPE of certificate and the
+         * diff. Leave the <code>diff</code> null when no difference needed.
+         *
          * @param diff
          * @param type
          */
@@ -383,9 +379,9 @@ public final class TestCertUtils {
 
         /**
          * Writes:<br>
-         * boolean - true if this certificate has a diff string, 
+         * boolean - true if this certificate has a diff string,
          * false otherwise, followed by <br>
-         * writeUTF() of string (if presented)  
+         * writeUTF() of string (if presented)
          *
          * @param out
          * @throws IOException
@@ -424,12 +420,10 @@ public final class TestCertUtils {
     }
 
     /**
-     * 
      * TestX509CErtificate.<br>
-     * Does nothing interesting, but<br> 
+     * Does nothing interesting, but<br>
      * a) is not abstract, so it can be instantiated<br>
      * b) returns Encoded form<br>
-     * 
      */
     public static class TestX509Certificate extends X509Certificate {
         private X500Principal subject;
@@ -451,10 +445,9 @@ public final class TestCertUtils {
 
         /**
          * The encoded for of this X509Certificate is a byte array where
-         * first are bytes of encoded form of Subject (as X500Principal), 
+         * first are bytes of encoded form of Subject (as X500Principal),
          * followed by one zero byte
          * and followed by the encoded form of Issuer (as X500Principal)
-         * 
          */
         public byte[] getEncoded() throws CertificateEncodingException {
             byte[] asubj = subject.getEncoded();
@@ -577,7 +570,7 @@ public final class TestCertUtils {
     }
 
     /**
-     * TestProvider. Does nothing, but pretends to 
+     * TestProvider. Does nothing, but pretends to
      * implement X.509 CertificateFactory.
      */
     public static class TestProvider extends Provider {
@@ -599,17 +592,16 @@ public final class TestCertUtils {
 
     /**
      * Some kind of Certificate Factory, used during unit testing.
-     * 
-     * 
      */
     public static class TestFactorySpi extends CertificateFactorySpi {
 
         /**
-         * Tries to create an instance of TestX509Certificate, basing 
-         * on the presumption that its {@link TestX509Certificate#getEncoded() 
+         * Tries to create an instance of TestX509Certificate, basing
+         * on the presumption that its {@link TestX509Certificate#getEncoded()
          * encoded} form is stored.<br>
-         * @throws CertificateException is the presumption is not met or if 
-         * any IO problem occurs.
+         *
+         * @throws CertificateException is the presumption is not met or if
+         *                              any IO problem occurs.
          */
         public Certificate engineGenerateCertificate(InputStream is)
                 throws CertificateException {
@@ -641,6 +633,7 @@ public final class TestCertUtils {
 
         /**
          * Not supported yet.
+         *
          * @throws UnsupportedOperationException
          */
         public Collection engineGenerateCertificates(InputStream inStream)
@@ -650,6 +643,7 @@ public final class TestCertUtils {
 
         /**
          * Not supported yet.
+         *
          * @throws UnsupportedOperationException
          */
         public CRL engineGenerateCRL(InputStream inStream) throws CRLException {
@@ -658,6 +652,7 @@ public final class TestCertUtils {
 
         /**
          * Not supported yet.
+         *
          * @throws UnsupportedOperationException
          */
         public Collection engineGenerateCRLs(InputStream inStream)
@@ -667,14 +662,15 @@ public final class TestCertUtils {
 
         /**
          * Returns an instance of TestCertPath.<br>
-         * @throws CertificateException if 
-         * a) any of Certificates passed is not an instance of X509Certificate
-         * b) any of Certificates passed is an instance of TestInvalidX509Certificate
+         *
+         * @throws CertificateException if
+         *                              a) any of Certificates passed is not an instance of X509Certificate
+         *                              b) any of Certificates passed is an instance of TestInvalidX509Certificate
          */
         public CertPath engineGenerateCertPath(List certs)
                 throws CertificateException {
             ArrayList validCerts = new ArrayList();
-            for (Iterator i = certs.iterator(); i.hasNext();) {
+            for (Iterator i = certs.iterator(); i.hasNext(); ) {
                 Certificate c = (Certificate) i.next();
                 if (!(c instanceof X509Certificate)) {
                     throw new CertificateException("Not X509: " + c);
@@ -699,7 +695,7 @@ public final class TestCertUtils {
         private static final String datasNames[] = { "CN", "OU", "O", "C" };
 
         private static final String datas[][] = {
-        // Names database
+                // Names database
                 { "Alex Astapchuk", null, null, null },
                 { "John Doe", null, null, null },
                 // 'organisation unit'-s
@@ -761,8 +757,9 @@ public final class TestCertUtils {
         }
 
         /**
-         * Generates some amount of uniq names, none of which is equals to 
+         * Generates some amount of uniq names, none of which is equals to
          * {@link #rootName}.
+         *
          * @param howMany
          * @return
          */
@@ -771,7 +768,7 @@ public final class TestCertUtils {
             ArrayList al = new ArrayList();
 
             // not really the thrifty algorithm... 
-            for (int i = 0; i < howMany;) {
+            for (int i = 0; i < howMany; ) {
 
                 //                System.out.print("#"+i+": ");
                 //                for( int j=0; j<counts.length; j++) {
@@ -810,8 +807,9 @@ public final class TestCertUtils {
         }
 
         /**
-         * Generates some amount of uniq X500Principals, none of which is equals 
+         * Generates some amount of uniq X500Principals, none of which is equals
          * has a string equals to {@link #rootName}.
+         *
          * @param howMany
          * @return
          */

@@ -97,12 +97,12 @@ public class MockAbstractPreferences extends AbstractPreferences {
 
     private void checkException() throws BackingStoreException {
         switch (result) {
-        case NORMAL:
-            return;
-        case backingException:
-            throw new BackingStoreException("test");
-        case runtimeException:
-            throw new MockRuntimeException("test");
+            case NORMAL:
+                return;
+            case backingException:
+                throw new BackingStoreException("test");
+            case runtimeException:
+                throw new MockRuntimeException("test");
         }
     }
 
@@ -238,7 +238,7 @@ public class MockAbstractPreferences extends AbstractPreferences {
     }
 
     public AbstractPreferences getChildImpl(String name)
-    throws BackingStoreException {
+            throws BackingStoreException {
         return super.getChild(name);
     }
 

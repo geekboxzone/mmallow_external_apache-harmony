@@ -20,6 +20,7 @@ import junit.framework.TestCase;
 
 public class ClassCircularityErrorTest extends TestCase {
     // Thrown when a circularity has been detected while initializing a class.
+
     /**
      * @tests java.lang.ClassCircularityError#ClassCircularityError()
      */

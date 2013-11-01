@@ -24,25 +24,25 @@ import java.io.IOException;
 
 public class Support_ProcessReadWriteTest {
 
-	public static void main(String[] args) {
-		try {
-			FileInputStream input = new FileInputStream(FileDescriptor.in);
-			FileOutputStream output = new FileOutputStream(FileDescriptor.out);
+    public static void main(String[] args) {
+        try {
+            FileInputStream input = new FileInputStream(FileDescriptor.in);
+            FileOutputStream output = new FileOutputStream(FileDescriptor.out);
 
-			// read just three lines since EOF isn't working properly. It would
-			// be better to read to the end and echo it all
-			for (int i = 0; i < 3; i++) {
-				int c = input.read();
-				while (c != '\n') {
-					output.write(c);
-					c = input.read();
-				}
-				output.write(c);
-			}
-			input.close();
-			output.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+            // read just three lines since EOF isn't working properly. It would
+            // be better to read to the end and echo it all
+            for (int i = 0; i < 3; i++) {
+                int c = input.read();
+                while (c != '\n') {
+                    output.write(c);
+                    c = input.read();
+                }
+                output.write(c);
+            }
+            input.close();
+            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -30,7 +30,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>EllipticCurve</code> class fields and methods.
- * 
  */
 public class EllipticCurve_ImplTest extends TestCase {
 
@@ -42,10 +41,10 @@ public class EllipticCurve_ImplTest extends TestCase {
      */
     public final void testEqualsObject02() {
         // test case 1: must not be equal to null
-        EllipticCurve c2=null, c1 =
-            new EllipticCurve(new ECFieldFp(BigInteger.valueOf(23L)),
-                    BigInteger.ONE,
-                    BigInteger.valueOf(19L));
+        EllipticCurve c2 = null, c1 =
+                new EllipticCurve(new ECFieldFp(BigInteger.valueOf(23L)),
+                        BigInteger.ONE,
+                        BigInteger.valueOf(19L));
         assertFalse(c1.equals(c2));
 
         // test case 2: not equal objects - field

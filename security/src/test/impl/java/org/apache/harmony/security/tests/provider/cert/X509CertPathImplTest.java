@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.security.tests.provider.cert;
 
@@ -43,6 +43,7 @@ import org.apache.harmony.security.provider.cert.X509CertPathImpl;
 public class X509CertPathImplTest extends TestCase {
 
     private X509Certificate certificate;
+
     {
         try {
             X509CertImplTest test = new X509CertImplTest();
@@ -52,12 +53,13 @@ public class X509CertPathImplTest extends TestCase {
             e.printStackTrace();
         }
     }
+
     private X509CertPathImpl certPath;
     private List certList;
 
     protected void setUp() throws java.lang.Exception {
         certList = new ArrayList();
-        for (int i=0; i<2; i++) {
+        for (int i = 0; i < 2; i++) {
             certList.add(certificate);
         }
         certPath = new X509CertPathImpl(certList);
@@ -161,7 +163,7 @@ public class X509CertPathImplTest extends TestCase {
     public void testGetEncodings() {
         try {
             Iterator it = certPath.getEncodings();
-            Object encoding  = it.next();
+            Object encoding = it.next();
             assertNotNull("Default encodings should not be null", encoding);
             it.remove();
             fail("UnsupportedOperationException should be thrown");

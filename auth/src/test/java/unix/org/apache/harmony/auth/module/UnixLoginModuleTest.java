@@ -61,7 +61,7 @@ public class UnixLoginModuleTest extends TestCase {
     public void testInitialize() {
         // Need new, non initialized instance of LoginModule
         lm = new UnixLoginModule();
-        
+
         Map shared = new HashMap();
         Map options = new HashMap();
         CallbackHandler cbh = new TestCallbackHandler();
@@ -86,18 +86,18 @@ public class UnixLoginModuleTest extends TestCase {
         }
     }
 
-    public void testAbort() throws  LoginException {
+    public void testAbort() throws LoginException {
         lm.login();
         lm.abort();
     }
 
-    public void testCommit() throws  LoginException {
+    public void testCommit() throws LoginException {
         lm.login();
         lm.commit();
         lm.logout();
     }
 
-    public void testLogin() throws  LoginException {
+    public void testLogin() throws LoginException {
         lm.login();
         lm.abort();
     }

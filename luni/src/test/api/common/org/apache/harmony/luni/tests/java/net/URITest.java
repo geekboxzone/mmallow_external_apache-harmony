@@ -76,7 +76,7 @@ public class URITest extends TestCase {
                 // malformed hostname, therefore registry-based,
                 // with query
                 new URI("file:///c:/temp/calculate.pl?"),
-        // empty authority, non empty path, empty query
+                // empty authority, non empty path, empty query
         };
         return uris;
     }
@@ -159,7 +159,7 @@ public class URITest extends TestCase {
                 // with no host
 
                 "mailto:user^name@fklkf.com" // invalid char in scheme
-        // specific part
+                // specific part
         };
 
         int[] constructorTestsInvalidIndices = new int[] { 9, 13, 13, 13, 13,
@@ -280,7 +280,7 @@ public class URITest extends TestCase {
 
     /**
      * @tests java.net.URI#URI(java.lang.String, java.lang.String,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_StringLjava_lang_String()
             throws URISyntaxException {
@@ -322,8 +322,8 @@ public class URITest extends TestCase {
 
     /**
      * @tests java.net.URI#URI(java.lang.String, java.lang.String,
-     *        java.lang.String, int, java.lang.String, java.lang.String,
-     *        java.lang.String)
+     *java.lang.String, int, java.lang.String, java.lang.String,
+     *java.lang.String)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_StringLjava_lang_StringILjava_lang_StringLjava_lang_StringLjava_lang_String() {
         // check for URISyntaxException for invalid Server Authority
@@ -387,7 +387,7 @@ public class URITest extends TestCase {
             assertEquals("wrong fragment", "frag#me?nt", uri.getFragment());
             assertEquals("wrong SchemeSpecificPart",
                     "//us:e@r@hostname:85/file/dir#/qu?e/?qu?er#y", uri
-                            .getSchemeSpecificPart());
+                    .getSchemeSpecificPart());
         } catch (URISyntaxException e) {
             fail("Unexpected Exception: " + e);
         }
@@ -413,7 +413,7 @@ public class URITest extends TestCase {
     /**
      * @throws URISyntaxException
      * @tests java.net.URI#URI(java.lang.String, java.lang.String,
-     *        java.lang.String, java.lang.String)
+     *java.lang.String, java.lang.String)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_StringLjava_lang_StringLjava_lang_String()
             throws URISyntaxException {
@@ -459,7 +459,7 @@ public class URITest extends TestCase {
     /**
      * @throws URISyntaxException
      * @tests java.net.URI#URI(java.lang.String, java.lang.String,
-     *        java.lang.String, java.lang.String, java.lang.String)
+     *java.lang.String, java.lang.String, java.lang.String)
      */
     public void test_ConstructorLjava_lang_StringLjava_lang_StringLjava_lang_StringLjava_lang_StringLjava_lang_String()
             throws URISyntaxException {
@@ -492,21 +492,21 @@ public class URITest extends TestCase {
                 uri.getSchemeSpecificPart());
         assertEquals("wrong RawSchemeSpecificPart",
                 "///p%23a%25E2%2582%25ACth?q%5Eu%2525ery", uri
-                        .getRawSchemeSpecificPart());
+                .getRawSchemeSpecificPart());
         assertEquals(
                 "incorrect toString()",
                 "ht12-3+tp:///p%23a%25E2%2582%25ACth?q%5Eu%2525ery#f/r\u00dfag",
                 uri.toString());
         assertEquals("incorrect toASCIIString()",
 
-        "ht12-3+tp:///p%23a%25E2%2582%25ACth?q%5Eu%2525ery#f/r%C3%9Fag", uri
+                "ht12-3+tp:///p%23a%25E2%2582%25ACth?q%5Eu%2525ery#f/r%C3%9Fag", uri
                 .toASCIIString());
     }
 
     /**
      * @throws URISyntaxException
      * @tests java.net.URI#URI(java.lang.String, java.lang.String,
-     *        java.lang.String, java.lang.String, java.lang.String)
+     *java.lang.String, java.lang.String, java.lang.String)
      */
     public void test_fiveArgConstructor() throws URISyntaxException {
         // accept [] as part of valid ipv6 host name

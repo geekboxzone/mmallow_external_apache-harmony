@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package javax.net.ssl;
 
@@ -30,26 +30,25 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SSLSocketFactory</code> class methods.
- * 
  */
 public class SSLSocketFactoryTest extends TestCase {
 
     private SSLSocketFactory customSocketFactory;
-    
+
     /*
-     * @see TestCase#setUp()
-     */
+    * @see TestCase#setUp()
+    */
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         String defaultName = Security.getProperty("ssl.SocketFactory.provider");
-        if (defaultName != null) {    
+        if (defaultName != null) {
             try {
                 customSocketFactory = (SSLSocketFactory) Class.forName(
                         defaultName, true, ClassLoader.getSystemClassLoader())
                         .newInstance();
-             } catch (Exception e) {
-             }
+            } catch (Exception e) {
+            }
         }
         if (customSocketFactory == null) {
             SSLContext context = DefaultSSLContext.getContext();
@@ -66,12 +65,12 @@ public class SSLSocketFactoryTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
     }
-    
+
     public final void testGetDefault() {
-        SSLSocketFactory factory = (SSLSocketFactory)SSLSocketFactory.getDefault();
+        SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
         if (customSocketFactory != null) {
             if (!factory.getClass().getName().equals(customSocketFactory.getClass().getName())) {
-                fail("incorrect instance: " + factory.getClass()+
+                fail("incorrect instance: " + factory.getClass() +
                         " expected: " + customSocketFactory.getClass().getName());
             }
         } else {
@@ -90,7 +89,7 @@ public class SSLSocketFactoryTest extends TestCase {
             } catch (SocketException e) {
             } catch (IOException e) {
                 fail(e.toString());
-            }              
+            }
         }
     }
 

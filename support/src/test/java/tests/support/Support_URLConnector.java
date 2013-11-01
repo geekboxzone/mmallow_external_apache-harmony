@@ -29,57 +29,57 @@ import java.net.URLConnection;
  * URL's
  */
 public class Support_URLConnector implements Support_HttpConnector {
-	private URLConnection instance;
+    private URLConnection instance;
 
-	private boolean streamOpen = false;
+    private boolean streamOpen = false;
 
-	/**
-	 * @see com.ibm.support.Support_HttpConnector#open(String)
-	 */
-	public void open(String address) throws IOException {
-		instance = new URL(address).openConnection();
-	}
+    /**
+     * @see com.ibm.support.Support_HttpConnector#open(String)
+     */
+    public void open(String address) throws IOException {
+        instance = new URL(address).openConnection();
+    }
 
-	public void close() throws IOException {
-		if (!streamOpen) {
-			((HttpURLConnection) instance).disconnect();
-		}
-	}
+    public void close() throws IOException {
+        if (!streamOpen) {
+            ((HttpURLConnection) instance).disconnect();
+        }
+    }
 
-	/**
-	 * @see com.ibm.support.Support_HttpConnector#getInputStream()
-	 */
-	public InputStream getInputStream() throws IOException {
-		if (instance == null) {
+    /**
+     * @see com.ibm.support.Support_HttpConnector#getInputStream()
+     */
+    public InputStream getInputStream() throws IOException {
+        if (instance == null) {
             return null;
         }
-		streamOpen = true;
-		return instance.getInputStream();
-	}
+        streamOpen = true;
+        return instance.getInputStream();
+    }
 
-	public OutputStream getOutputStream() throws IOException {
-		if (instance == null) {
+    public OutputStream getOutputStream() throws IOException {
+        if (instance == null) {
             return null;
         }
-		instance.setDoOutput(true);
-		((HttpURLConnection) instance).setRequestMethod("POST");
-		streamOpen = true;
-		return instance.getOutputStream();
-	}
+        instance.setDoOutput(true);
+        ((HttpURLConnection) instance).setRequestMethod("POST");
+        streamOpen = true;
+        return instance.getOutputStream();
+    }
 
-	public boolean isChunkedOnFlush() {
-		return false;
-	}
+    public boolean isChunkedOnFlush() {
+        return false;
+    }
 
-	public void setRequestProperty(String key, String value) throws IOException {
-		instance.setRequestProperty(key, value);
-	}
+    public void setRequestProperty(String key, String value) throws IOException {
+        instance.setRequestProperty(key, value);
+    }
 
-	public String getHeaderField(int index) throws IOException {
-		return ((HttpURLConnection) instance).getHeaderField(index);
-	}
+    public String getHeaderField(int index) throws IOException {
+        return ((HttpURLConnection) instance).getHeaderField(index);
+    }
 
-	public String getHeaderFieldKey(int index) throws IOException {
-		return ((HttpURLConnection) instance).getHeaderFieldKey(index);
-	}
+    public String getHeaderFieldKey(int index) throws IOException {
+        return ((HttpURLConnection) instance).getHeaderFieldKey(index);
+    }
 }

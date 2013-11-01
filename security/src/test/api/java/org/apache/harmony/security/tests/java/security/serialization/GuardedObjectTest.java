@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexey V. Varlamov
-*/
+ * @author Alexey V. Varlamov
+ */
 
 package org.apache.harmony.security.tests.java.security.serialization;
 
@@ -53,7 +53,7 @@ public class GuardedObjectTest extends SerializationTest implements
         try {
             copySerializable(new GuardedObject(null, new MyGuard(false)));
             fail("Should not serialize if guard denies access");
+        } catch (SecurityException ok) {
         }
-        catch (SecurityException ok) {}
     }
 }

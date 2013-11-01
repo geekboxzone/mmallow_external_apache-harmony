@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -37,7 +37,6 @@ import java.util.Enumeration;
 
 /**
  * Additional class for KeyStoreSpi and KeyStore verification
- * 
  */
 
 public class MyKeyStoreSpi extends KeyStoreSpi {

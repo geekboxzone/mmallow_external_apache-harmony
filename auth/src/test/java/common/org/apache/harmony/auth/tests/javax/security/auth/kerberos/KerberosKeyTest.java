@@ -30,7 +30,7 @@ import junit.framework.TestCase;
 
 /**
  * Tests KerberosKey class implementation.
- * 
+ *
  * @see http://www.ietf.org/rfc/rfc3961.txt
  */
 public class KerberosKeyTest extends TestCase {
@@ -45,7 +45,7 @@ public class KerberosKeyTest extends TestCase {
 
     /**
      * @tests javax.security.auth.kerberos.KerberosKey#KerberosKey(
-     *        javax.security.auth.kerberos.KerberosPrincipal, byte[], int, int)
+     *javax.security.auth.kerberos.KerberosPrincipal, byte[], int, int)
      */
     public void test_Ctor1() {
 
@@ -75,8 +75,8 @@ public class KerberosKeyTest extends TestCase {
 
     /**
      * @tests javax.security.auth.kerberos.KerberosKey#KerberosKey(
-     *        javax.security.auth.kerberos.KerberosPrincipal, char[],
-     *        java.lang.String)
+     *javax.security.auth.kerberos.KerberosPrincipal, char[],
+     *java.lang.String)
      */
     public void test_Ctor2() {
 
@@ -144,7 +144,7 @@ public class KerberosKeyTest extends TestCase {
                         new byte[] { (byte) 0xdf, (byte) 0x3d, (byte) 0x32,
                                 (byte) 0xa7, (byte) 0x4f, (byte) 0xd9,
                                 (byte) 0x2a, (byte) 0x01 } },
-        // TODO add "pianist@EXAMPLE.COM" and "Juri ... @ATHENA.MIT.EDU"
+                // TODO add "pianist@EXAMPLE.COM" and "Juri ... @ATHENA.MIT.EDU"
         };
 
         for (Object[] element : testcases) {
@@ -226,7 +226,7 @@ public class KerberosKeyTest extends TestCase {
         } catch (IllegalStateException e) {
         }
     }
-    
+
     /**
      * @tests javax.security.auth.kerberos.KerberosKey#equals(java.lang.Object)
      */

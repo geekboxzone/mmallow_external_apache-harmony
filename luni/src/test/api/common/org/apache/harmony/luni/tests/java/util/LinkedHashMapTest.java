@@ -45,6 +45,7 @@ public class LinkedHashMapTest extends junit.framework.TestCase {
     static Object[] objArray;
 
     static Object[] objArray2;
+
     {
         objArray = new Object[hmSize];
         objArray2 = new Object[hmSize];
@@ -145,7 +146,7 @@ public class LinkedHashMapTest extends junit.framework.TestCase {
                 hm.get("T"));
         hm.put("T", "HELLO");
         assertEquals("Get returned incorecct value for existing key", "HELLO", hm.get("T")
-                );
+        );
 
         LinkedHashMap m = new LinkedHashMap();
         m.put(null, "test");

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -47,7 +47,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for KeyAgreement constructor and methods
- * 
  */
 
 public class KeyAgreementTest extends TestCase {
@@ -301,7 +300,7 @@ public class KeyAgreementTest extends TestCase {
 
     /**
      * Test for the methods: <code>init(Key key)</code>
-     * <code>generateSecret()</code> 
+     * <code>generateSecret()</code>
      * <code>generateSecret(byte[] sharedsecret, int offset)</code>
      * <code>generateSecret(String algorithm)</code>
      * Assertions: initializes KeyAgreement; returns sharedSecret; puts

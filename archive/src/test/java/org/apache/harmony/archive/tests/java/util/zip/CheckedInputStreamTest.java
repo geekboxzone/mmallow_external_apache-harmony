@@ -28,7 +28,7 @@ import junit.framework.TestCase;
 import tests.support.resource.Support_Resources;
 
 public class CheckedInputStreamTest extends TestCase {
-    
+
     @Override
     protected void tearDown() {
         try {
@@ -40,11 +40,11 @@ public class CheckedInputStreamTest extends TestCase {
 
     }
 
-	/**
-	 * @tests java.util.zip.CheckedInputStream#CheckedInputStream(java.io.InputStream,
-	 *        java.util.zip.Checksum)
-	 */
-	public void test_ConstructorLjava_io_InputStreamLjava_util_zip_Checksum() throws Exception {
+    /**
+     * @tests java.util.zip.CheckedInputStream#CheckedInputStream(java.io.InputStream,
+     *java.util.zip.Checksum)
+     */
+    public void test_ConstructorLjava_io_InputStreamLjava_util_zip_Checksum() throws Exception {
         InputStream checkInput = Support_Resources.getStream("hyts_checkInput.txt");
         CheckedInputStream checkIn = new CheckedInputStream(checkInput, new CRC32());
         assertEquals("constructor of checkedInputStream has failed", 0, checkIn.getChecksum()
@@ -52,10 +52,10 @@ public class CheckedInputStreamTest extends TestCase {
         checkInput.close();
     }
 
-	/**
-	 * @tests java.util.zip.CheckedInputStream#getChecksum()
-	 */
-	public void test_getChecksum() throws Exception {
+    /**
+     * @tests java.util.zip.CheckedInputStream#getChecksum()
+     */
+    public void test_getChecksum() throws Exception {
         byte outBuf[] = new byte[100];
         // testing getChecksum for an empty file
         FileOutputStream outEmp = new FileOutputStream("empty.txt");
@@ -89,10 +89,10 @@ public class CheckedInputStreamTest extends TestCase {
         checkInput.close();
     }
 
-	/**
-	 * @tests java.util.zip.CheckedInputStream#skip(long)
-	 */
-	public void test_skipJ() throws Exception {
+    /**
+     * @tests java.util.zip.CheckedInputStream#skip(long)
+     */
+    public void test_skipJ() throws Exception {
         // testing that the return by skip is valid
         InputStream checkInput = Support_Resources.getStream("hyts_checkInput.txt");
         CheckedInputStream checkIn = new CheckedInputStream(checkInput, new CRC32());

@@ -662,7 +662,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -685,7 +685,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_1() {
         SQLFeatureNotSupportedException sQLFeatureNotSupportedException = new SQLFeatureNotSupportedException(
@@ -707,7 +707,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_2() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -730,7 +730,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_3() {
         SQLFeatureNotSupportedException sQLFeatureNotSupportedException = new SQLFeatureNotSupportedException(
@@ -752,7 +752,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_4() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -775,7 +775,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_5() {
         SQLFeatureNotSupportedException sQLFeatureNotSupportedException = new SQLFeatureNotSupportedException(
@@ -798,7 +798,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_6() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -821,7 +821,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_7() {
         SQLFeatureNotSupportedException sQLFeatureNotSupportedException = new SQLFeatureNotSupportedException(
@@ -844,7 +844,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_8() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -867,7 +867,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_9() {
         SQLFeatureNotSupportedException sQLFeatureNotSupportedException = new SQLFeatureNotSupportedException(
@@ -889,7 +889,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_10() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -912,7 +912,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_11() {
         SQLFeatureNotSupportedException sQLFeatureNotSupportedException = new SQLFeatureNotSupportedException(
@@ -934,7 +934,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_12() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -957,7 +957,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_13() {
         SQLFeatureNotSupportedException sQLFeatureNotSupportedException = new SQLFeatureNotSupportedException(
@@ -979,7 +979,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_14() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1002,7 +1002,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_15() {
         SQLFeatureNotSupportedException sQLFeatureNotSupportedException = new SQLFeatureNotSupportedException(
@@ -1025,7 +1025,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_16() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1048,7 +1048,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_17() {
         SQLFeatureNotSupportedException sQLFeatureNotSupportedException = new SQLFeatureNotSupportedException(
@@ -1070,7 +1070,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_18() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1093,7 +1093,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_19() {
         SQLFeatureNotSupportedException sQLFeatureNotSupportedException = new SQLFeatureNotSupportedException(
@@ -1115,7 +1115,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_20() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1138,7 +1138,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_21() {
         SQLFeatureNotSupportedException sQLFeatureNotSupportedException = new SQLFeatureNotSupportedException(
@@ -1160,7 +1160,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_22() {
         Throwable cause = new Exception("MYTHROWABLE");
@@ -1183,7 +1183,7 @@ public class SQLFeatureNotSupportedExceptionTest extends TestCase {
 
     /**
      * @test java.sql.SQLFeatureNotSupportedException(String, String, int,
-     *       Throwable)
+     *Throwable)
      */
     public void test_Constructor_LStringLStringILThrowable_23() {
         SQLFeatureNotSupportedException sQLFeatureNotSupportedException = new SQLFeatureNotSupportedException(

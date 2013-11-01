@@ -44,7 +44,7 @@ public class HttpRetryExceptionTest extends TestCase {
             assertEquals("getMessage", ref.getMessage(), tst.getMessage());
         }
     };
-    
+
     /**
      * @tests serialization/deserialization.
      */

@@ -87,15 +87,15 @@ public class HandshakeCompletedEventTest extends TestCase {
         SSLSession ses = new MySSLSession();
 
         HandshakeCompletedEvent event = new HandshakeCompletedEvent(soc, ses);
-        
+
         assertEquals(event.getCipherSuite(), ses.getCipherSuite());
     }
 
     public final void testGetLocalCertificates() {
-    	if (noFreePort || noSocket) {
+        if (noFreePort || noSocket) {
             return;
         }
-    	SSLSession ses = new MySSLSession();
+        SSLSession ses = new MySSLSession();
         HandshakeCompletedEvent event = new HandshakeCompletedEvent(soc, ses);
 
         Certificate[] certs = event.getLocalCertificates();
@@ -114,10 +114,10 @@ public class HandshakeCompletedEventTest extends TestCase {
     }
 
     public final void testGetPeerCertificates() {
-    	if (noFreePort || noSocket) {
+        if (noFreePort || noSocket) {
             return;
         }
-    	SSLSession ses = new MySSLSession();
+        SSLSession ses = new MySSLSession();
         HandshakeCompletedEvent event = new HandshakeCompletedEvent(soc, ses);
         try {
             event.getPeerCertificates();
@@ -127,10 +127,10 @@ public class HandshakeCompletedEventTest extends TestCase {
     }
 
     public final void testGetPeerCertificateChain() {
-    	if (noFreePort || noSocket) {
+        if (noFreePort || noSocket) {
             return;
         }
-    	SSLSession ses = new MySSLSession();
+        SSLSession ses = new MySSLSession();
         HandshakeCompletedEvent event = new HandshakeCompletedEvent(soc, ses);
         try {
             event.getPeerCertificateChain();
@@ -140,12 +140,12 @@ public class HandshakeCompletedEventTest extends TestCase {
     }
 
     public final void testHandshakeCompletedEvent() {
-    	if (noFreePort || noSocket) {
+        if (noFreePort || noSocket) {
             return;
         }
-    	SSLSession ses = new MySSLSession();
+        SSLSession ses = new MySSLSession();
         HandshakeCompletedEvent event = new HandshakeCompletedEvent(soc, ses);
-        
+
         assertEquals(ses, event.getSession());
         assertEquals(soc, event.getSocket());
     }

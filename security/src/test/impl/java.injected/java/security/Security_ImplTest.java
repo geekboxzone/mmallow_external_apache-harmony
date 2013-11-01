@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package java.security;
 
@@ -30,7 +30,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>Security</code> constructor and methods
- * 
  */
 public class Security_ImplTest extends TestCase {
 
@@ -46,7 +45,7 @@ public class Security_ImplTest extends TestCase {
         Security.addProvider(p);
         try {
             assertEquals("Incorrect result (provider added)",
-                    "SomeClassName", Security.getAlgorithmProperty("MyAlGoriThm", "MySerVicE"));    
+                    "SomeClassName", Security.getAlgorithmProperty("MyAlGoriThm", "MySerVicE"));
         } finally { //clean up
             Security.removeProvider(p.getName());
         }
@@ -89,7 +88,7 @@ public class Security_ImplTest extends TestCase {
         try {
             Security.getProviders(m);
             fail("attribute value is empty string: No expected InvalidParameterException");
-        } catch (InvalidParameterException  e) {    
+        } catch (InvalidParameterException e) {
         }
     }
 

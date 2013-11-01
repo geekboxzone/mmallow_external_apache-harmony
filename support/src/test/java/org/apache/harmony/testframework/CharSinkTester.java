@@ -75,7 +75,8 @@ public abstract class CharSinkTester {
         return result;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return getClass().getName();
     }
 
@@ -90,7 +91,7 @@ public abstract class CharSinkTester {
         }
 
         public void sinkTestNoWriting() throws Exception {
-            char[] expected = new char[] {};
+            char[] expected = new char[] { };
 
             Writer out = create();
             out.close();
@@ -98,13 +99,13 @@ public abstract class CharSinkTester {
         }
 
         public void sinkTestWriteZeroChars() throws Exception {
-            char[] expected = new char[] {};
+            char[] expected = new char[] { };
 
             Writer out = create();
             char[] a = new char[1024];
             out.write(a, 1000, 0);
             out.write(a, 0, 0);
-            out.write(new char[] {});
+            out.write(new char[] { });
 
             out.close();
             assertArrayEquals(expected, getChars());
@@ -200,7 +201,8 @@ public abstract class CharSinkTester {
 
         // adding a new test? Don't forget to update createTests().
 
-        @Override public String getName() {
+        @Override
+        public String getName() {
             return CharSinkTester.this.toString() + ":" + super.getName();
         }
     }

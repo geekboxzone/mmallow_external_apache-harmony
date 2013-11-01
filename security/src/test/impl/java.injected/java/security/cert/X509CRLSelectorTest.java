@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package java.security.cert;
 
@@ -118,17 +118,15 @@ public class X509CRLSelectorTest extends TestCase {
         }
 
         public void verify(PublicKey key)
-                 throws CRLException, NoSuchAlgorithmException,
-                        InvalidKeyException, NoSuchProviderException,
-                        SignatureException
-        {
+                throws CRLException, NoSuchAlgorithmException,
+                InvalidKeyException, NoSuchProviderException,
+                SignatureException {
         }
 
         public void verify(PublicKey key, String sigProvider)
-                 throws CRLException, NoSuchAlgorithmException,
-                        InvalidKeyException, NoSuchProviderException,
-                        SignatureException
-        {
+                throws CRLException, NoSuchAlgorithmException,
+                InvalidKeyException, NoSuchProviderException,
+                SignatureException {
         }
 
         public int getVersion() {
@@ -193,19 +191,19 @@ public class X509CRLSelectorTest extends TestCase {
 
         selector.setIssuers(null);
         assertTrue("Any CRL issuers should match in the case of null issuers.",
-                    selector.match(crl1) && selector.match(crl2));
+                selector.match(crl1) && selector.match(crl2));
 
         ArrayList issuers = new ArrayList(2);
         issuers.add(iss1);
         issuers.add(iss2);
         selector.setIssuers(issuers);
         assertTrue("The CRL should match the selection criteria.",
-                    selector.match(crl1) && selector.match(crl2));
+                selector.match(crl1) && selector.match(crl2));
         assertFalse("The CRL should not match the selection criteria.",
-                                            selector.match(crl3));
+                selector.match(crl3));
         issuers.add(iss3);
         assertFalse("The internal issuer collection is not protected "
-                    + "against the modifications.", selector.match(crl3));
+                + "against the modifications.", selector.match(crl3));
     }
 
     /**
@@ -219,9 +217,9 @@ public class X509CRLSelectorTest extends TestCase {
         X509CRLSelector selector = new X509CRLSelector();
         String iss1 = "O=First Org.";
         byte[] iss2 = new byte[]
-            //manually obtained DER encoding of "O=Second Org." issuer name;
-            {48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
-            83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=Second Org." issuer name;
+                { 48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
+                        83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46 };
         String iss3 = "O=Third Org.";
         TestCRL crl1 = new TestCRL(new X500Principal(iss1));
         TestCRL crl2 = new TestCRL(new X500Principal(iss2));
@@ -234,7 +232,7 @@ public class X509CRLSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertTrue("Any CRL issuers should match in the case of null issuers.",
-                    selector.match(crl1) && selector.match(crl2));
+                selector.match(crl1) && selector.match(crl2));
 
         ArrayList issuers = new ArrayList(2);
         issuers.add(iss1);
@@ -246,12 +244,12 @@ public class X509CRLSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertTrue("The CRL should match the selection criteria.",
-                    selector.match(crl1) && selector.match(crl2));
+                selector.match(crl1) && selector.match(crl2));
         assertFalse("The CRL should not match the selection criteria.",
-                                            selector.match(crl3));
+                selector.match(crl3));
         issuers.add(iss3);
         assertFalse("The internal issuer collection is not protected "
-                    + "against the modifications.", selector.match(crl3));
+                + "against the modifications.", selector.match(crl3));
     }
 
     /**
@@ -268,12 +266,12 @@ public class X509CRLSelectorTest extends TestCase {
 
         selector.addIssuer(iss1);
         assertTrue("The CRL should match the selection criteria.",
-                                            selector.match(crl1));
+                selector.match(crl1));
         assertFalse("The CRL should not match the selection criteria.",
-                                            selector.match(crl2));
+                selector.match(crl2));
         selector.addIssuer(iss2);
         assertTrue("The CRL should match the selection criteria.",
-                                            selector.match(crl2));
+                selector.match(crl2));
     }
 
     /**
@@ -295,9 +293,9 @@ public class X509CRLSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertTrue("The CRL should match the selection criteria.",
-                                            selector.match(crl1));
+                selector.match(crl1));
         assertFalse("The CRL should not match the selection criteria.",
-                                            selector.match(crl2));
+                selector.match(crl2));
         try {
             selector.addIssuerName(iss2);
         } catch (IOException e) {
@@ -305,7 +303,7 @@ public class X509CRLSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertTrue("The CRL should match the selection criteria.",
-                                            selector.match(crl2));
+                selector.match(crl2));
     }
 
     /**
@@ -316,13 +314,13 @@ public class X509CRLSelectorTest extends TestCase {
     public void testAddIssuerName2() {
         X509CRLSelector selector = new X509CRLSelector();
         byte[] iss1 = new byte[]
-            //manually obtained DER encoding of "O=First Org." issuer name;
-            {48, 21, 49, 19, 48, 17, 6, 3, 85, 4, 10, 19, 10,
-                70, 105, 114, 115, 116, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=First Org." issuer name;
+                { 48, 21, 49, 19, 48, 17, 6, 3, 85, 4, 10, 19, 10,
+                        70, 105, 114, 115, 116, 32, 79, 114, 103, 46 };
         byte[] iss2 = new byte[]
-            //manually obtained DER encoding of "O=Second Org." issuer name;
-            {48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
-            83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=Second Org." issuer name;
+                { 48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
+                        83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46 };
         TestCRL crl1 = new TestCRL(new X500Principal(iss1));
         TestCRL crl2 = new TestCRL(new X500Principal(iss2));
 
@@ -333,9 +331,9 @@ public class X509CRLSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertTrue("The CRL should match the selection criteria.",
-                                            selector.match(crl1));
+                selector.match(crl1));
         assertFalse("The CRL should not match the selection criteria.",
-                                            selector.match(crl2));
+                selector.match(crl2));
         try {
             selector.addIssuerName(iss2);
         } catch (IOException e) {
@@ -343,7 +341,7 @@ public class X509CRLSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertTrue("The CRL should match the selection criteria.",
-                                            selector.match(crl2));
+                selector.match(crl2));
     }
 
     /**
@@ -359,13 +357,13 @@ public class X509CRLSelectorTest extends TestCase {
 
         selector.setMinCRLNumber(null);
         assertTrue("Any CRL should match in the case of null minCRLNumber.",
-                                            selector.match(crl));
+                selector.match(crl));
         selector.setMinCRLNumber(minCRL);
         assertTrue("The CRL should match the selection criteria.",
-                                            selector.match(crl));
+                selector.match(crl));
         selector.setMinCRLNumber(new BigInteger("10001"));
         assertFalse("The CRL should not match the selection criteria.",
-                                            selector.match(crl));
+                selector.match(crl));
     }
 
     /**
@@ -381,13 +379,13 @@ public class X509CRLSelectorTest extends TestCase {
 
         selector.setMaxCRLNumber(null);
         assertTrue("Any CRL should match in the case of null minCRLNumber.",
-                                            selector.match(crl));
+                selector.match(crl));
         selector.setMaxCRLNumber(maxCRL);
         assertTrue("The CRL should match the selection criteria.",
-                                            selector.match(crl));
+                selector.match(crl));
         selector.setMaxCRLNumber(new BigInteger("9999"));
         assertFalse("The CRL should not match the selection criteria.",
-                                            selector.match(crl));
+                selector.match(crl));
     }
 
     /**
@@ -401,22 +399,22 @@ public class X509CRLSelectorTest extends TestCase {
         TestCRL crl = new TestCRL(new Date(200), new Date(300));
         selector.setDateAndTime(null);
         assertTrue("Any CRL should match in the case of null dateAndTime.",
-                                            selector.match(crl));
+                selector.match(crl));
         selector.setDateAndTime(new Date(200));
         assertTrue("The CRL should match the selection criteria.",
-                                            selector.match(crl));
+                selector.match(crl));
         selector.setDateAndTime(new Date(250));
         assertTrue("The CRL should match the selection criteria.",
-                                            selector.match(crl));
+                selector.match(crl));
         selector.setDateAndTime(new Date(300));
         assertTrue("The CRL should match the selection criteria.",
-                                            selector.match(crl));
+                selector.match(crl));
         selector.setDateAndTime(new Date(150));
         assertFalse("The CRL should not match the selection criteria.",
-                                            selector.match(crl));
+                selector.match(crl));
         selector.setDateAndTime(new Date(350));
         assertFalse("The CRL should not match the selection criteria.",
-                                            selector.match(crl));
+                selector.match(crl));
     }
 
     /**
@@ -434,7 +432,7 @@ public class X509CRLSelectorTest extends TestCase {
         String iss_name_2 = "O=Second String DN";
         String iss_name_3 = "O=Third String DN";
         assertNull("The collection should be null.",
-                                        selector.getIssuers());
+                selector.getIssuers());
         selector.addIssuerName(iss_name_1);
         selector.addIssuer(iss1);
         selector.addIssuerName(iss_name_2);
@@ -450,16 +448,16 @@ public class X509CRLSelectorTest extends TestCase {
         } catch (UnsupportedOperationException e) {
         }
         assertTrue("The collection should contain the specified DN.",
-                                            result.contains(iss1));
+                result.contains(iss1));
         assertTrue("The collection should contain the specified DN.",
-                                            result.contains(iss2));
+                result.contains(iss2));
         assertTrue("The collection should contain the specified DN.",
-                        result.contains(new X500Principal(iss_name_1)));
+                result.contains(new X500Principal(iss_name_1)));
         assertTrue("The collection should contain the specified DN.",
-                        result.contains(new X500Principal(iss_name_2)));
+                result.contains(new X500Principal(iss_name_2)));
         selector.addIssuer(iss3);
         assertTrue("The collection should contain the specified DN.",
-                                            result.contains(iss3));
+                result.contains(iss3));
     }
 
     /**
@@ -470,15 +468,15 @@ public class X509CRLSelectorTest extends TestCase {
     public void testGetIssuerNames() {
         X509CRLSelector selector = new X509CRLSelector();
         byte[] iss1 = new byte[]
-            //manually obtained DER encoding of "O=First Org." issuer name;
-            {48, 21, 49, 19, 48, 17, 6, 3, 85, 4, 10, 19, 10,
-                70, 105, 114, 115, 116, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=First Org." issuer name;
+                { 48, 21, 49, 19, 48, 17, 6, 3, 85, 4, 10, 19, 10,
+                        70, 105, 114, 115, 116, 32, 79, 114, 103, 46 };
         byte[] iss2 = new byte[]
-            //manually obtained DER encoding of "O=Second Org." issuer name;
-            {48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
-            83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=Second Org." issuer name;
+                { 48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
+                        83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46 };
         assertNull("The collection should be null.",
-                                        selector.getIssuerNames());
+                selector.getIssuerNames());
         try {
             selector.addIssuerName(iss1);
             selector.addIssuerName(iss2);
@@ -488,7 +486,7 @@ public class X509CRLSelectorTest extends TestCase {
         }
         Collection result = selector.getIssuerNames();
         assertEquals("The collection should contain all of the specified DNs.",
-                                                2, result.size());
+                2, result.size());
     }
 
     /**
@@ -499,11 +497,11 @@ public class X509CRLSelectorTest extends TestCase {
     public void testGetMinCRL() {
         X509CRLSelector selector = new X509CRLSelector();
         assertNull("Initially the minCRL should be null.",
-                                        selector.getMinCRL());
+                selector.getMinCRL());
         BigInteger minCRL = new BigInteger("10000");
         selector.setMinCRLNumber(minCRL);
         assertTrue("The result should be equal to specified.",
-                                        minCRL.equals(selector.getMinCRL()));
+                minCRL.equals(selector.getMinCRL()));
     }
 
     /**
@@ -514,11 +512,11 @@ public class X509CRLSelectorTest extends TestCase {
     public void testGetMaxCRL() {
         X509CRLSelector selector = new X509CRLSelector();
         assertNull("Initially the maxCRL should be null.",
-                                        selector.getMaxCRL());
+                selector.getMaxCRL());
         BigInteger maxCRL = new BigInteger("10000");
         selector.setMaxCRLNumber(maxCRL);
         assertTrue("The result should be equal to specified.",
-                                        maxCRL.equals(selector.getMaxCRL()));
+                maxCRL.equals(selector.getMaxCRL()));
     }
 
     /**
@@ -529,11 +527,11 @@ public class X509CRLSelectorTest extends TestCase {
     public void testGetDateAndTime() {
         X509CRLSelector selector = new X509CRLSelector();
         assertNull("Initially the dateAndTime criteria should be null.",
-                                        selector.getDateAndTime());
+                selector.getDateAndTime());
         Date date = new Date(200);
         selector.setDateAndTime(date);
         assertTrue("The result should be equal to specified.",
-                                        date.equals(selector.getDateAndTime()));
+                date.equals(selector.getDateAndTime()));
     }
 
     /**
@@ -543,7 +541,7 @@ public class X509CRLSelectorTest extends TestCase {
     public void testMatch() {
         X509CRLSelector selector = new X509CRLSelector();
         assertFalse("The null object should not match",
-                                        selector.match((X509CRL) null));
+                selector.match((X509CRL) null));
     }
 
     /**
@@ -572,12 +570,12 @@ public class X509CRLSelectorTest extends TestCase {
         crl.setCrlNumber(minCRL);
         crl.setUpdateDates(new Date(200), new Date(200));
         assertTrue("The specified CRL should match the clone selector.",
-                    selector.match(crl));
+                selector.match(crl));
 
         clone.addIssuer(iss3);
         assertFalse("The changes of the clone selector should not cause "
-                    + "the changes of initial object",
-                                    selector.getIssuerNames().size() == 3);
+                + "the changes of initial object",
+                selector.getIssuerNames().size() == 3);
     }
 
     public void testToString() {

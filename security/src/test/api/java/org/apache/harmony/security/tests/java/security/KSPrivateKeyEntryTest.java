@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -33,31 +33,32 @@ import junit.framework.TestSuite;
 
 /**
  * Tests for <code>KeyStore.PrivateKeyEntry</code>  class constructor and methods
- *
  */
 
 public class KSPrivateKeyEntryTest extends TestCase {
 
     /**
      * Constructor for KSPrivateKeyEntryTest.
+     *
      * @param arg0
      */
     public KSPrivateKeyEntryTest(String arg0) {
         super(arg0);
     }
+
     private PrivateKey testPrivateKey;
-    private Certificate [] testChain;
+    private Certificate[] testChain;
 
     private void createParams(boolean diffCerts, boolean diffKeys) {
-        byte[] encoded = {(byte)0, (byte)1, (byte)2, (byte)3};
+        byte[] encoded = { (byte) 0, (byte) 1, (byte) 2, (byte) 3 };
         testChain = new Certificate[5];
         for (int i = 0; i < testChain.length; i++) {
             String s = (diffCerts ? Integer.toString(i) : "NEW");
             testChain[i] = new MyCertificate("MY_TEST_CERTIFICATE_"
                     .concat(s), encoded);
         }
-        testPrivateKey = (diffKeys ? (PrivateKey)new tmpPrivateKey() :
-            (PrivateKey)new tmpPrivateKey(testChain[0].getPublicKey().getAlgorithm()));
+        testPrivateKey = (diffKeys ? (PrivateKey) new tmpPrivateKey() :
+                (PrivateKey) new tmpPrivateKey(testChain[0].getPublicKey().getAlgorithm()));
     }
 
     /**
@@ -96,6 +97,7 @@ public class KSPrivateKeyEntryTest extends TestCase {
         } catch (IllegalArgumentException e) {
         }
     }
+
     /**
      * Test for <code>PrivateKeyEntry(PrivateKey privateKey, Certificate[] chain)</code>
      * constructor

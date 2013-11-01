@@ -29,9 +29,9 @@ import junit.framework.TestCase;
 
 public class X509CRL2Test extends junit.framework.TestCase {
 
-	private X509Certificate pemCert = null;
+    private X509Certificate pemCert = null;
 
-	protected void setUp() throws Exception {
+    protected void setUp() throws Exception {
 
         InputStream is = Support_Resources
                 .getResourceStream("hyts_certificate_PEM.txt");
@@ -40,27 +40,27 @@ public class X509CRL2Test extends junit.framework.TestCase {
         pemCert = (X509Certificate) certFact.generateCertificate(is);
     }
 
-	/**
-	 * @tests java.security.cert.X509CRL#getExtensionValue(java.lang.String)
-	 */
-	public void test_getExtensionValueLjava_lang_String() {
-		if (pemCert != null) {
-			Vector extensionOids = new Vector();
-			extensionOids.addAll(pemCert.getCriticalExtensionOIDs());
-			extensionOids.addAll(pemCert.getNonCriticalExtensionOIDs());
-			Iterator i = extensionOids.iterator();
-			while (i.hasNext()) {
-				String oid = (String) i.next();
-				byte[] value = pemCert.getExtensionValue(oid);
-				if (value != null && value.length > 0) {
-					// check that it is an encoded as a OCTET STRING
-					assertTrue("The extension value for the oid " + oid
-							+ " was not encoded as an OCTET STRING",
-							value[0] == 0x04);
-				}
-			}// end while
-		} else {
-			fail("Unable to obtain X509Certificate");
-		}
-	}
+    /**
+     * @tests java.security.cert.X509CRL#getExtensionValue(java.lang.String)
+     */
+    public void test_getExtensionValueLjava_lang_String() {
+        if (pemCert != null) {
+            Vector extensionOids = new Vector();
+            extensionOids.addAll(pemCert.getCriticalExtensionOIDs());
+            extensionOids.addAll(pemCert.getNonCriticalExtensionOIDs());
+            Iterator i = extensionOids.iterator();
+            while (i.hasNext()) {
+                String oid = (String) i.next();
+                byte[] value = pemCert.getExtensionValue(oid);
+                if (value != null && value.length > 0) {
+                    // check that it is an encoded as a OCTET STRING
+                    assertTrue("The extension value for the oid " + oid
+                            + " was not encoded as an OCTET STRING",
+                            value[0] == 0x04);
+                }
+            }// end while
+        } else {
+            fail("Unable to obtain X509Certificate");
+        }
+    }
 }

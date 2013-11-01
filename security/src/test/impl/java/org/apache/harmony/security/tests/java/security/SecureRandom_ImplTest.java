@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -29,114 +29,112 @@ import java.security.Security;
 import junit.framework.TestCase;
 
 /**
- *
  * Tests for internal Secure Random implementation based on Random
- * 
  */
 public class SecureRandom_ImplTest extends TestCase {
-	
-	/**
-	 * Registered providers
-	 */
-	Provider providers[] = Security.getProviders();
-	
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		super.setUp();
-		// remove all registered providers
-		for (int i = 0; i < providers.length; i++) {
-			Security.removeProvider(providers[i].getName());
-		}
-	}
 
-	/*
-	 * @see TestCase#tearDown()
-	 */
-	protected void tearDown() throws Exception {
-		super.tearDown();
-		// restore all registered providers
-		for (int i = 0; i < providers.length; i++) {
-			Security.addProvider(providers[i]);
-		}
-	}
+    /**
+     * Registered providers
+     */
+    Provider providers[] = Security.getProviders();
 
-	/*
-	 * Class under test for void setSeed(long)
-	 */
-	public final void testSetSeedlong() {
-		SecureRandom sr = new SecureRandom();
-		sr.setSeed(0);
-		sr.setSeed(-1);
-		sr.setSeed(11111111111L);
-	}
+    /*
+      * @see TestCase#setUp()
+      */
+    protected void setUp() throws Exception {
+        super.setUp();
+        // remove all registered providers
+        for (int i = 0; i < providers.length; i++) {
+            Security.removeProvider(providers[i].getName());
+        }
+    }
 
-	public final void testNextBytes() {
-		SecureRandom sr = new SecureRandom();
-		sr.nextBytes(new byte[20]);
-		sr.nextBytes(new byte[1]);
-		
-		//Not specified behavior: throws NullPointerException if bytes is null
-		try {
-			sr.nextBytes(null);
-		} catch (NullPointerException e) {	
-		}
-		sr.nextBytes(new byte[5]);
-	}
+    /*
+      * @see TestCase#tearDown()
+      */
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        // restore all registered providers
+        for (int i = 0; i < providers.length; i++) {
+            Security.addProvider(providers[i]);
+        }
+    }
 
-	/*
-	 * Class under test for SecureRandom getInstance(String)
-	 */
-	public final void testGetInstanceString() {
-		try {
-			SecureRandom.getInstance("SHA1PRNG");
-			fail("No expected NoSuchAlgorithmException");
-		} catch (NoSuchAlgorithmException e) {	
-		}
-	}
-	
-	public final void testGetProvider() {
+    /*
+      * Class under test for void setSeed(long)
+      */
+    public final void testSetSeedlong() {
+        SecureRandom sr = new SecureRandom();
+        sr.setSeed(0);
+        sr.setSeed(-1);
+        sr.setSeed(11111111111L);
+    }
+
+    public final void testNextBytes() {
+        SecureRandom sr = new SecureRandom();
+        sr.nextBytes(new byte[20]);
+        sr.nextBytes(new byte[1]);
+
+        //Not specified behavior: throws NullPointerException if bytes is null
+        try {
+            sr.nextBytes(null);
+        } catch (NullPointerException e) {
+        }
+        sr.nextBytes(new byte[5]);
+    }
+
+    /*
+      * Class under test for SecureRandom getInstance(String)
+      */
+    public final void testGetInstanceString() {
+        try {
+            SecureRandom.getInstance("SHA1PRNG");
+            fail("No expected NoSuchAlgorithmException");
+        } catch (NoSuchAlgorithmException e) {
+        }
+    }
+
+    public final void testGetProvider() {
         assertNull("Non null provider", new SecureRandom().getProvider());
-	}
-	
-	public final void testGetAlgorithm() {
+    }
+
+    public final void testGetAlgorithm() {
         //test default implementation
-		SecureRandom sr = new SecureRandom();
+        SecureRandom sr = new SecureRandom();
         assertEquals("Incorrect algorithm", "SHA1PRNG", sr.getAlgorithm());
         assertNull("Incorrect provider", sr.getProvider());
-        
+
         //just in case
         sr.nextBytes(new byte[100]);
-	}
-	
-	/*
-	 * Class under test for void setSeed(byte[])
-	 */
-	public final void testSetSeedbyteArray() {
-		SecureRandom sr = new SecureRandom();
+    }
 
-		//Not specified behavior: throws NullPointerException if bytes is null
-		try {
-			sr.setSeed(null);
-		} catch (NullPointerException e) {	
-		}
-		
-		byte[] seed = {1,2,3,4};
-		sr.setSeed(seed);
-		
-		byte[] seed1 = {1,2,3,4, -2, 100, 9, 111};
-		sr.setSeed(seed1);
-	}
+    /*
+      * Class under test for void setSeed(byte[])
+      */
+    public final void testSetSeedbyteArray() {
+        SecureRandom sr = new SecureRandom();
 
-	public final void testGetSeed() {
-		byte[] seed = SecureRandom.getSeed(5);
-		new SecureRandom(seed).nextBytes(new byte[20]);
-	}
+        //Not specified behavior: throws NullPointerException if bytes is null
+        try {
+            sr.setSeed(null);
+        } catch (NullPointerException e) {
+        }
 
-	public final void testGenerateSeed() {
-		SecureRandom sr = new SecureRandom();
-		byte[] seed = sr.generateSeed(5);
-		new SecureRandom(seed).nextBytes(new byte[20]);
-	}
+        byte[] seed = { 1, 2, 3, 4 };
+        sr.setSeed(seed);
+
+        byte[] seed1 = { 1, 2, 3, 4, -2, 100, 9, 111 };
+        sr.setSeed(seed1);
+    }
+
+    public final void testGetSeed() {
+        byte[] seed = SecureRandom.getSeed(5);
+        new SecureRandom(seed).nextBytes(new byte[20]);
+    }
+
+    public final void testGenerateSeed() {
+        SecureRandom sr = new SecureRandom();
+        byte[] seed = sr.generateSeed(5);
+        new SecureRandom(seed).nextBytes(new byte[20]);
+    }
 }

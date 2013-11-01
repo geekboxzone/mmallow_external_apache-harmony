@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -28,22 +28,22 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyStore.PasswordProtection</code> class constructor and methods
- * 
  */
 
 public class KSPasswordProtectionTest extends TestCase {
 
     /**
      * Constructor for KSPasswordProtectionTest.
+     *
      * @param arg0
      */
     public KSPasswordProtectionTest(String arg0) {
         super(arg0);
     }
-    
+
     /**
      * Test for <code>KeyStore.PasswordProtection(char[] password)</code> constructor
-     * and the following methods 
+     * and the following methods
      * <code>getPassword()<code>
      * <code>destroy()<code>
      * <code>isDestroyed()<code>
@@ -52,10 +52,10 @@ public class KSPasswordProtectionTest extends TestCase {
      * if PasswordProtection is destroyed
      */
     public void testGetPassword() throws DestroyFailedException {
-        char [] pass = {'a', 'b', 'c'};
+        char[] pass = { 'a', 'b', 'c' };
         KeyStore.PasswordProtection ksPWP = new KeyStore.PasswordProtection(pass);
-        char [] rPass = ksPWP.getPassword();
-        assertFalse("PasswordProtection Should not be destroyed", ksPWP.isDestroyed());        
+        char[] rPass = ksPWP.getPassword();
+        assertFalse("PasswordProtection Should not be destroyed", ksPWP.isDestroyed());
         assertEquals("Incorrect password length", pass.length, rPass.length);
         for (int i = 0; i < pass.length; i++) {
             assertEquals("Incorrect password (item: ".concat(Integer.toString(i))

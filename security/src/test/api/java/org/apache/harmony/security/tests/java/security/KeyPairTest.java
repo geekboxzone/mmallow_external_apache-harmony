@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 
@@ -28,7 +29,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for fields and methods of class <code>KeyPair</code>
- * 
  */
 public class KeyPairTest extends TestCase {
 
@@ -38,31 +38,37 @@ public class KeyPairTest extends TestCase {
                 public String getAlgorithm() {
                     return "never mind";
                 }
+
                 public String getFormat() {
                     return "never mind";
                 }
+
                 public byte[] getEncoded() {
                     return null;
-                }                
+                }
             };
         }
+
         static PrivateKey getPrivate() {
             return new PrivateKey() {
                 public String getAlgorithm() {
                     return "never mind";
                 }
+
                 public String getFormat() {
                     return "never mind";
                 }
+
                 public byte[] getEncoded() {
                     return null;
-                }                
-            };                
+                }
+            };
         }
     }
 
     /**
      * Constructor for KeyPairTest.
+     *
      * @param name
      */
     public KeyPairTest(String name) {
@@ -83,6 +89,7 @@ public class KeyPairTest extends TestCase {
      * Test #2 for <code>KeyPair(PublicKey, PrivateKey)</code> constructor<br>
      * Assertion: creates new <code>KeyPair</code> instance using valid
      * parameters (both valid keys)
+     *
      * @throws InvalidKeySpecException
      */
     public final void testKeyPair02() throws InvalidKeySpecException {
@@ -102,6 +109,7 @@ public class KeyPairTest extends TestCase {
     /**
      * Test #2 for <code>getPrivate()</code> method<br>
      * Assertion: returns private key (valid private key in this case)
+     *
      * @throws InvalidKeySpecException
      */
     public final void testGetPrivate02() throws InvalidKeySpecException {
@@ -122,6 +130,7 @@ public class KeyPairTest extends TestCase {
     /**
      * Test #2 for <code>getPublic()</code> method<br>
      * Assertion: returns public key (valid public key in this case)
+     *
      * @throws InvalidKeySpecException
      */
     public final void testGetPublic02() throws InvalidKeySpecException {

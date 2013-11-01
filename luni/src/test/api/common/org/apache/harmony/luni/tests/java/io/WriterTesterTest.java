@@ -75,13 +75,15 @@ public class WriterTesterTest {
             this.append = append;
         }
 
-        @Override public Writer create() throws Exception {
+        @Override
+        public Writer create() throws Exception {
             file = File.createTempFile("FileOutputStreamSinkTester", "tmp");
             file.deleteOnExit();
             return new FileWriter(file, append);
         }
 
-        @Override public char[] getChars() throws Exception {
+        @Override
+        public char[] getChars() throws Exception {
             return Streams.streamToString(new FileReader(file)).toCharArray();
         }
     }
@@ -89,12 +91,14 @@ public class WriterTesterTest {
     private static class CharArrayWriterCharSinkTester extends CharSinkTester {
         private CharArrayWriter writer;
 
-        @Override public Writer create() throws Exception {
+        @Override
+        public Writer create() throws Exception {
             writer = new CharArrayWriter();
             return writer;
         }
 
-        @Override public char[] getChars() throws Exception {
+        @Override
+        public char[] getChars() throws Exception {
             return writer.toCharArray();
         }
     }
@@ -111,6 +115,7 @@ public class WriterTesterTest {
             executor = Executors.newSingleThreadExecutor();
             future = executor.submit(new Callable<char[]>() {
                 final CharArrayWriter chars = new CharArrayWriter();
+
                 public char[] call() throws Exception {
                     char[] buffer = new char[256];
                     int count;
@@ -124,7 +129,8 @@ public class WriterTesterTest {
             return out;
         }
 
-        @Override public char[] getChars() throws Exception {
+        @Override
+        public char[] getChars() throws Exception {
             executor.shutdown();
             return future.get();
         }
@@ -133,12 +139,14 @@ public class WriterTesterTest {
     private static class StringWriterCharSinkTester extends CharSinkTester {
         private StringWriter writer;
 
-        @Override public Writer create() throws Exception {
+        @Override
+        public Writer create() throws Exception {
             writer = new StringWriter();
             return writer;
         }
 
-        @Override public char[] getChars() throws Exception {
+        @Override
+        public char[] getChars() throws Exception {
             return writer.toString().toCharArray();
         }
     }
@@ -150,31 +158,39 @@ public class WriterTesterTest {
             this.bufferSize = bufferSize;
         }
 
-        @Override public Writer create(Writer delegate) throws Exception {
+        @Override
+        public Writer create(Writer delegate) throws Exception {
             return new BufferedWriter(delegate, bufferSize);
         }
 
-        @Override public char[] decode(char[] delegateChars) throws Exception {
+        @Override
+        public char[] decode(char[] delegateChars) throws Exception {
             return delegateChars;
         }
     }
 
     private static class FilterWriterCharSinkTester extends CharWrapperTester {
-        @Override public Writer create(Writer delegate) throws Exception {
-            return new FilterWriter(delegate) {};
+        @Override
+        public Writer create(Writer delegate) throws Exception {
+            return new FilterWriter(delegate) {
+            };
         }
 
-        @Override public char[] decode(char[] delegateChars) throws Exception {
+        @Override
+        public char[] decode(char[] delegateChars) throws Exception {
             return delegateChars;
         }
     }
 
     private static class PrintWriterCharSinkTester extends CharWrapperTester {
-        @Override public Writer create(Writer delegate) throws Exception {
-            return new PrintWriter(delegate) {};
+        @Override
+        public Writer create(Writer delegate) throws Exception {
+            return new PrintWriter(delegate) {
+            };
         }
 
-        @Override public char[] decode(char[] delegateChars) throws Exception {
+        @Override
+        public char[] decode(char[] delegateChars) throws Exception {
             return delegateChars;
         }
     }
@@ -182,12 +198,14 @@ public class WriterTesterTest {
     private static class OutputStreamWriterCharSinkTester extends CharSinkTester {
         private ByteArrayOutputStream out;
 
-        @Override public Writer create() throws Exception {
+        @Override
+        public Writer create() throws Exception {
             out = new ByteArrayOutputStream();
             return new OutputStreamWriter(out, "UTF-8");
         }
 
-        @Override public char[] getChars() throws Exception {
+        @Override
+        public char[] getChars() throws Exception {
             return new String(out.toByteArray(), "UTF-8").toCharArray();
         }
     }

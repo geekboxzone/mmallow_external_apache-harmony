@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.auth.tests.javax.security.sasl.serialization;
 
@@ -29,7 +29,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for RealmChoiceCallback serialization
- * 
  */
 
 public class RealmChoiceCallbackTest extends SerializationTest implements
@@ -39,21 +38,21 @@ public class RealmChoiceCallbackTest extends SerializationTest implements
             "New String",
             "Another string",
             "Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string. Long string.",
-            "t"};
+            "t" };
 
-    public static final int [] idx = {2, 3};
-    
+    public static final int[] idx = { 2, 3 };
+
     @Override
     protected Object[] getData() {
-        Object [] oo = {
+        Object[] oo = {
                 new RealmChoiceCallback(msgs[0], msgs, 0, true),
                 new RealmChoiceCallback(msgs[1], msgs, 1, true),
                 new RealmChoiceCallback(msgs[1], msgs, 0, false),
                 new RealmChoiceCallback(msgs[2], msgs, 0, false)
 
-        };        
+        };
         for (Object element : oo) {
-            RealmChoiceCallback rc = (RealmChoiceCallback)element;           
+            RealmChoiceCallback rc = (RealmChoiceCallback) element;
             if (rc.allowMultipleSelections()) {
                 rc.setSelectedIndexes(idx);
             } else {
@@ -66,21 +65,21 @@ public class RealmChoiceCallbackTest extends SerializationTest implements
     public void assertDeserialized(Serializable oref, Serializable otest) {
         RealmChoiceCallback ref = (RealmChoiceCallback) oref;
         RealmChoiceCallback test = (RealmChoiceCallback) otest;
-        
+
         boolean all = ref.allowMultipleSelections();
         assertEquals(all, test.allowMultipleSelections());
         String prompt = ref.getPrompt();
         assertEquals(prompt, test.getPrompt());
-        
-        String [] ch = ref.getChoices();
-        String [] tCh = test.getChoices();        
-        assertEquals(ch.length, tCh.length);        
+
+        String[] ch = ref.getChoices();
+        String[] tCh = test.getChoices();
+        assertEquals(ch.length, tCh.length);
         for (int i = 0; i < ch.length; i++) {
             assertEquals(ch[i], tCh[i]);
         }
         assertEquals(ref.getDefaultChoice(), test.getDefaultChoice());
-        int [] in = ref.getSelectedIndexes();
-        int [] tIn = test.getSelectedIndexes();
+        int[] in = ref.getSelectedIndexes();
+        int[] tIn = test.getSelectedIndexes();
 //        assertNull("in is not null", in);            
 //        assertNull("tIn is not null", tIn);
 
@@ -92,7 +91,7 @@ public class RealmChoiceCallbackTest extends SerializationTest implements
             assertEquals("Incorrect length", in.length, tIn.length);
             for (int i = 0; i < in.length; i++) {
                 assertEquals(in[i], tIn[i]);
-            }            
+            }
         }
     }
 }

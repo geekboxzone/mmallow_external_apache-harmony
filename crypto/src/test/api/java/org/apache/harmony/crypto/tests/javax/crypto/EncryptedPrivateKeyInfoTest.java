@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -52,7 +52,7 @@ import junit.framework.TestCase;
 
 /**
  * Test for EncryptedPrivateKeyInfo class.
- * 
+ * <p/>
  * All binary data for this test were generated using BEA JRockit j2sdk1.4.2_04
  * (http://www.bea.com) with security providers list extended by Bouncy Castle's
  * one (http://www.bouncycastle.org)
@@ -66,7 +66,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * getKeySpec(...) methods
      */
     private static final String[][] algName = {
-    // AES
+            // AES
             { "AES", null },
             //            {"AES", "AES/ECB/PKCS5Padding"},
             //            {"AES", "AES/CBC/PKCS5Padding"},
@@ -161,30 +161,30 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
             //            {"1.2.840.113549.1.12.1.2",null},
             { "1.2.840.113549.1.12.1.3", null },
             { "PBEWithSHA1AndDESede", null },
-    //            {"1.2.840.113549.1.12.1.4",null},
-    //            {"1.2.840.113549.1.12.1.5",null},
-    //            {"1.2.840.113549.1.12.1.6",null},
-    //            {"ELGAMAL/PKCS1", "ELGAMAL/ECB/PKCS1PADDING"},
-    //            {"ELGAMAL/PKCS1","ELGAMAL/NONE/PKCS1PADDING"},
-    //            {"PBEWITHSHAAND3-KEYTRIPLEDES-CBC", null},
-    //            {"PBEWITHSHA1ANDDESEDE", null},
-    //            {"PBEWithSHAAnd3KeyTripleDES",null},
-    //            {"PBEWITHSHAAND3-KEYTRIPLEDES-CBC",null},
-    //
-    //            {"RC5-32",null},
-    //
-    //            {"RSA/1", "RSA/1/PKCS1PADDING"},
-    //            {"RSA/2", "RSA/2/PKCS1PADDING"},
-    //            {"RSA/ISO9796-1", "RSA/ECB/ISO9796-1PADDING"},
-    //            {"RSA", "RSA/ECB/NOPADDING"},
-    //            {"RSA/OAEP", "RSA/ECB/OAEPPADDING"},
-    //            {"RSA/PKCS1", "RSA/ECB/PKCS1PADDING"},
-    //            {"RSA/ISO9796-1", "RSA/NONE/ISO9796-1PADDING"},
-    //            {"RSA", "RSA/NONE/NOPADDING"},
-    //            {"RSA/OAEP", "RSA/NONE/OAEPPADDING"},
-    //            {"RSA/PKCS1", "RSA/NONE/PKCS1PADDING"},
-    //            {"RSA",null}, // 1.2.840.113549.1.1.1
-    //            {"1.2.840.113549.1.1.1", null},
+            //            {"1.2.840.113549.1.12.1.4",null},
+            //            {"1.2.840.113549.1.12.1.5",null},
+            //            {"1.2.840.113549.1.12.1.6",null},
+            //            {"ELGAMAL/PKCS1", "ELGAMAL/ECB/PKCS1PADDING"},
+            //            {"ELGAMAL/PKCS1","ELGAMAL/NONE/PKCS1PADDING"},
+            //            {"PBEWITHSHAAND3-KEYTRIPLEDES-CBC", null},
+            //            {"PBEWITHSHA1ANDDESEDE", null},
+            //            {"PBEWithSHAAnd3KeyTripleDES",null},
+            //            {"PBEWITHSHAAND3-KEYTRIPLEDES-CBC",null},
+            //
+            //            {"RC5-32",null},
+            //
+            //            {"RSA/1", "RSA/1/PKCS1PADDING"},
+            //            {"RSA/2", "RSA/2/PKCS1PADDING"},
+            //            {"RSA/ISO9796-1", "RSA/ECB/ISO9796-1PADDING"},
+            //            {"RSA", "RSA/ECB/NOPADDING"},
+            //            {"RSA/OAEP", "RSA/ECB/OAEPPADDING"},
+            //            {"RSA/PKCS1", "RSA/ECB/PKCS1PADDING"},
+            //            {"RSA/ISO9796-1", "RSA/NONE/ISO9796-1PADDING"},
+            //            {"RSA", "RSA/NONE/NOPADDING"},
+            //            {"RSA/OAEP", "RSA/NONE/OAEPPADDING"},
+            //            {"RSA/PKCS1", "RSA/NONE/PKCS1PADDING"},
+            //            {"RSA",null}, // 1.2.840.113549.1.1.1
+            //            {"1.2.840.113549.1.1.1", null},
     };
 
     /**
@@ -193,7 +193,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * Assertion: creates <code>EncryptedPrivateKeyInfo</code> instance <br>
      * Test preconditions: valid parameters passed <br>
      * Expected: must pass without any exceptions
-     * 
+     *
      * @throws IOException
      * @throws NoSuchAlgorithmException
      */
@@ -209,7 +209,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * <code>null</code><br>
      * Test preconditions: <code>null</code> passed as a parameter <br>
      * Expected: <code>NullPointerException</code>
-     * 
+     *
      * @throws IOException
      */
     public final void testEncryptedPrivateKeyInfobyteArray2()
@@ -347,7 +347,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * Test preconditions: valid array passed then modified <br>
      * Expected: getEncoded(), invoked after above modification, must return
      * array as it was before the modification
-     * 
+     *
      * @throws IOException
      */
     public final void testEncryptedPrivateKeyInfobyteArray6() throws Exception {
@@ -417,7 +417,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * Test preconditions: pass <code>null</code> as algorithm name then as
      * encrypted data <br>
      * Expected: <code>NullPointerException</code> in both cases
-     * 
+     *
      * @throws NoSuchAlgorithmException
      */
     public final void testEncryptedPrivateKeyInfoStringbyteArray3()
@@ -449,7 +449,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
     public final void testEncryptedPrivateKeyInfoStringbyteArray4()
             throws Exception {
         try {
-            new EncryptedPrivateKeyInfo("DSA", new byte[] {});
+            new EncryptedPrivateKeyInfo("DSA", new byte[] { });
             fail(getName() + ": IllegalArgumentException has not been thrown");
         } catch (IllegalArgumentException ok) {
         }
@@ -462,7 +462,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * Test preconditions: valid array passed then modified <br>
      * Expected: getEncryptedData(), invoked after above modification, must
      * return array as it was before the modification
-     * 
+     *
      * @throws IOException
      */
     public final void testEncryptedPrivateKeyInfoStringbyteArray5()
@@ -486,11 +486,11 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
     public final void testEncryptedPrivateKeyInfoStringbyteArray6() {
         //Regression for HARMONY-768
         try {
-            new EncryptedPrivateKeyInfo("0", new byte[] {});
+            new EncryptedPrivateKeyInfo("0", new byte[] { });
             fail("NoSuchAlgorithmException expected");
         } catch (NoSuchAlgorithmException e) {
             //expected
-        }    
+        }
     }
 
     /**
@@ -501,7 +501,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * Assertion: creates <code>EncryptedPrivateKeyInfo</code> instance <br>
      * Test preconditions: valid parameters passed <br>
      * Expected: must pass without any exceptions
-     * 
+     *
      * @throws IOException
      */
     public final void testEncryptedPrivateKeyInfoAlgorithmParametersbyteArray1()
@@ -536,7 +536,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * Test preconditions: pass <code>null</code> as algorithm parameters then
      * as encrypted data <br>
      * Expected: <code>NullPointerException</code> in both cases
-     * 
+     *
      * @throws NoSuchAlgorithmException
      * @throws IOException
      */
@@ -570,7 +570,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * empty, i.e. 0-length <br>
      * Test preconditions: pass empty encrypted data <br>
      * Expected: <code>IllegalArgumentException</code>
-     * 
+     *
      * @throws NoSuchAlgorithmException
      * @throws IOException
      */
@@ -581,7 +581,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
             // use pregenerated AlgorithmParameters encodings
             ap.init(EncryptedPrivateKeyInfoData.getParametersEncoding("DSA"));
 
-            new EncryptedPrivateKeyInfo(ap, new byte[] {});
+            new EncryptedPrivateKeyInfo(ap, new byte[] { });
             fail(getName() + ": IllegalArgumentException has not been thrown");
 
         } catch (IllegalArgumentException ok) {
@@ -597,7 +597,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * Test preconditions: valid array passed then modified <br>
      * Expected: getEncryptedData(), invoked after above modification, must
      * return array as it was before the modification
-     * 
+     *
      * @throws IOException
      */
     public final void testEncryptedPrivateKeyInfoAlgorithmParametersbyteArray4()
@@ -626,7 +626,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * form as the only parameter; encoded form passed contains algorithm
      * parameters encoding <br>
      * Expected: corresponding algorithm parameters must be returned
-     * 
+     *
      * @throws IOException
      */
     public final void testGetAlgParameters01() throws IOException {
@@ -675,7 +675,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * form as the only parameter; encoded form passed does not contain
      * algorithm parameters encoding <br>
      * Expected: <code>null</code> must be returned
-     * 
+     *
      * @throws IOException
      */
     public final void testGetAlgParameters02() throws IOException {
@@ -708,7 +708,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * Test preconditions: test object created using ctor which takes algorithm
      * name and encrypted data as a parameters <br>
      * Expected: <code>null</code> must be returned
-     * 
+     *
      * @throws IOException
      */
     public final void testGetAlgParameters03() throws IOException {
@@ -737,7 +737,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * AlgorithmParameters and encrypted data as a parameters; <br>
      * Expected: the same algorithm parameters as ones passed to the ctor must be
      * returned
-     * 
+     *
      * @throws IOException
      */
     public final void testGetAlgParameters04() throws IOException {
@@ -773,7 +773,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * form as the only parameter; encoded form passed contains encrypted data
      * <br>
      * Expected: the equivalent encrypted data must be returned
-     * 
+     *
      * @throws IOException
      */
     public final void testGetEncryptedData01() throws IOException {
@@ -789,7 +789,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
                 // valid encrypted data
                 assertTrue(Arrays.equals(
                         EncryptedPrivateKeyInfoData.encryptedData, epki
-                                .getEncryptedData()));
+                        .getEncryptedData()));
 
                 performed = true;
             } catch (NoSuchAlgorithmException allowedFailure) {
@@ -817,7 +817,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
                 // valid encrypted data
                 assertTrue(Arrays.equals(
                         EncryptedPrivateKeyInfoData.encryptedData, epki
-                                .getEncryptedData()));
+                        .getEncryptedData()));
 
                 performed = true;
             } catch (NoSuchAlgorithmException allowedFailure) {
@@ -832,7 +832,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * Test preconditions: test object created using ctor which takes algorithm
      * parameters and encrypted data as a parameters <br>
      * Expected: the equivalent encrypted data must be returned
-     * 
+     *
      * @throws IOException
      */
     public final void testGetEncryptedData03() throws IOException {
@@ -852,7 +852,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
                 // valid encrypted data
                 assertTrue(Arrays.equals(
                         EncryptedPrivateKeyInfoData.encryptedData, epki
-                                .getEncryptedData()));
+                        .getEncryptedData()));
 
                 performed = true;
             } catch (NoSuchAlgorithmException allowedFailure) {
@@ -898,7 +898,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * Test preconditions: test object created using ctor which takes encoded
      * form as the only parameter <br>
      * Expected: equivalent encoded form must be returned
-     * 
+     *
      * @throws IOException
      */
     public final void testGetEncoded01() throws IOException {
@@ -927,7 +927,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * Test preconditions: test object created using ctor which takes algorithm
      * name and encrypted data as a parameters <br>
      * Expected: equivalent encoded form (without alg params) must be returned
-     * 
+     *
      * @throws IOException
      */
     public final void testGetEncoded02() throws IOException {
@@ -962,7 +962,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * Test preconditions: test object created using ctor which takes algorithm
      * name and encrypted data as a parameters <br>
      * Expected: equivalent encoded form (without alg params) must be returned
-     * 
+     *
      * @throws IOException
      */
     public final void testGetEncoded03() throws IOException {
@@ -982,9 +982,9 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
                 // valid encoded form
                 assertTrue(Arrays.equals(
                         EncryptedPrivateKeyInfoData
-                            .getValidEncryptedPrivateKeyInfoEncoding(
-                                EncryptedPrivateKeyInfoData.algName0[i][0]),
-                                epki.getEncoded()));
+                                .getValidEncryptedPrivateKeyInfoEncoding(
+                                        EncryptedPrivateKeyInfoData.algName0[i][0]),
+                        epki.getEncoded()));
 
                 performed = true;
             } catch (NoSuchAlgorithmException allowedFailure) {
@@ -1000,7 +1000,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
      * name and encrypted data as a parameters <br>
      * Expected: several refs to byte array returned by the method under test
      * must be different
-     * 
+     *
      * @throws IOException
      */
     public final void testGetEncoded04() throws IOException {
@@ -1257,7 +1257,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
                         }
 
                         public byte[] getEncoded() {
-                            return new byte[] {};
+                            return new byte[] { };
                         }
                     }, (String) null);
 
@@ -1399,7 +1399,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
                         }
 
                         public byte[] getEncoded() {
-                            return new byte[] {};
+                            return new byte[] { };
                         }
                     }, (Provider) null);
 
@@ -1799,7 +1799,7 @@ public class EncryptedPrivateKeyInfoTest extends TestCase {
             (byte) 0x0d, (byte) 0x01, (byte) 0x01, (byte) 0x01, (byte) 0x05,
             (byte) 0x00, (byte) 0x04, // private key octet str
             (byte) 0x82, (byte) 0x02, (byte) 0x62, // Damage: l=460->461
-                                                   // (0x61->0x62)
+            // (0x61->0x62)
             (byte) 0x30, (byte) 0x82, (byte) 0x02, (byte) 0x5d, (byte) 0x02,
             (byte) 0x01, (byte) 0x00, (byte) 0x02, (byte) 0x81, (byte) 0x81,
             (byte) 0x00, (byte) 0xb2, (byte) 0x4a, (byte) 0x9b, (byte) 0x5b,

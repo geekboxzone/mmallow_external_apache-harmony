@@ -59,7 +59,7 @@ public class DSAKeyFactoryImplTest extends TestCase {
 
     static KeyPair keyPair;
 
-    static DSAPublicKey  publicKey;
+    static DSAPublicKey publicKey;
     static DSAPrivateKey privateKey;
 
     static DSAParams publicParams;
@@ -107,7 +107,7 @@ public class DSAKeyFactoryImplTest extends TestCase {
 
             keyPair = kpGen.generateKeyPair();
 
-            publicKey  = (DSAPublicKey)  keyPair.getPublic();
+            publicKey = (DSAPublicKey) keyPair.getPublic();
             privateKey = (DSAPrivateKey) keyPair.getPrivate();
 
             publicParams = publicKey.getParams();
@@ -118,9 +118,9 @@ public class DSAKeyFactoryImplTest extends TestCase {
             publicY = publicKey.getY();
 
             publicAlgorithm = publicKey.getAlgorithm();
-            publicFormat    = publicKey.getFormat();
+            publicFormat = publicKey.getFormat();
 
-            publicEncoding  = publicKey.getEncoded();
+            publicEncoding = publicKey.getEncoded();
 
             x509KeySpec = (KeySpec) new X509EncodedKeySpec(publicEncoding);
 
@@ -133,37 +133,83 @@ public class DSAKeyFactoryImplTest extends TestCase {
             privateX = privateKey.getX();
 
             privateAlgorithm = privateKey.getAlgorithm();
-            privateFormat    = privateKey.getFormat();
+            privateFormat = privateKey.getFormat();
 
-            privateEncoding  = privateKey.getEncoded();
+            privateEncoding = privateKey.getEncoded();
 
             pkcs8KeySpec = (KeySpec) new PKCS8EncodedKeySpec(privateEncoding);
 
 
-            privateRSAKey = new RSAPrivateKey () {
-                public BigInteger getPrivateExponent() { return BigInteger.ZERO; }
-                public BigInteger getModulus()         { return BigInteger.ZERO; }
-                public String     getAlgorithm()       { return "RSA"; }
-                public byte[]     getEncoded()         { return new byte[] {0}; }
-                public String     getFormat()          { return "fff"; }
+            privateRSAKey = new RSAPrivateKey() {
+                public BigInteger getPrivateExponent() {
+                    return BigInteger.ZERO;
+                }
+
+                public BigInteger getModulus() {
+                    return BigInteger.ZERO;
+                }
+
+                public String getAlgorithm() {
+                    return "RSA";
+                }
+
+                public byte[] getEncoded() {
+                    return new byte[] { 0 };
+                }
+
+                public String getFormat() {
+                    return "fff";
+                }
             };
 
-            publicRSAKey = new RSAPublicKey () {
-                public BigInteger getPublicExponent()  { return BigInteger.ZERO; }
-                public BigInteger getModulus()         { return BigInteger.ZERO; }
-                public String     getAlgorithm()       { return "RSA"; }
-                public byte[]     getEncoded()         { return new byte[] {0}; }
-                public String     getFormat()          { return "fff"; }
+            publicRSAKey = new RSAPublicKey() {
+                public BigInteger getPublicExponent() {
+                    return BigInteger.ZERO;
+                }
+
+                public BigInteger getModulus() {
+                    return BigInteger.ZERO;
+                }
+
+                public String getAlgorithm() {
+                    return "RSA";
+                }
+
+                public byte[] getEncoded() {
+                    return new byte[] { 0 };
+                }
+
+                public String getFormat() {
+                    return "fff";
+                }
             };
 
-            keyPublic = new Key()  { public String getAlgorithm() { return "DSA"; }
-                                     public byte[] getEncoded()   { return publicEncoding; }
-                                     public String getFormat()    { return "X.509"; }
-                                   };
-            keyPrivate = new Key() { public String getAlgorithm() { return "DSA"; }
-                                     public byte[] getEncoded()   { return privateEncoding; }
-                                     public String getFormat()    { return "PKCS#8"; }
-                                   };
+            keyPublic = new Key() {
+                public String getAlgorithm() {
+                    return "DSA";
+                }
+
+                public byte[] getEncoded() {
+                    return publicEncoding;
+                }
+
+                public String getFormat() {
+                    return "X.509";
+                }
+            };
+            keyPrivate = new Key() {
+                public String getAlgorithm() {
+                    return "DSA";
+                }
+
+                public byte[] getEncoded() {
+                    return privateEncoding;
+                }
+
+                public String getFormat() {
+                    return "PKCS#8";
+                }
+            };
 
             flag = true;
         } catch (Exception e) {
@@ -182,9 +228,8 @@ public class DSAKeyFactoryImplTest extends TestCase {
             throw new Exception("some problem in static initializer : " + reason);
         }
         super.setUp();
-        kf  = KeyFactory.getInstance(algorithm, "Crypto");
+        kf = KeyFactory.getInstance(algorithm, "Crypto");
     }
-
 
 
     private void checkPublicIntegers(DSAPublicKey pk) {
@@ -213,9 +258,9 @@ public class DSAKeyFactoryImplTest extends TestCase {
         assertEquals("failure for 'pk.getFormat().compareTo(publicFormat)'", 0,
                 pk.getFormat().compareTo(publicFormat));
 
-        if ( publicEncoding != null) {
+        if (publicEncoding != null) {
             assertTrue("failure: encodings are not equal",
-                       Arrays.equals(pk.getEncoded(), publicEncoding) );
+                    Arrays.equals(pk.getEncoded(), publicEncoding));
         }
     }
 
@@ -246,9 +291,9 @@ public class DSAKeyFactoryImplTest extends TestCase {
         assertEquals("failure for 'pk.getFormat().compareTo(privateFormat)", 0,
                 pk.getFormat().compareTo(privateFormat));
 
-        if ( privateEncoding != null) {
+        if (privateEncoding != null) {
             assertTrue("failure: encodings are not equal",
-                       Arrays.equals(pk.getEncoded(), privateEncoding) );
+                    Arrays.equals(pk.getEncoded(), privateEncoding));
         }
     }
 
@@ -279,7 +324,7 @@ public class DSAKeyFactoryImplTest extends TestCase {
      */
     public final void testGeneratePublicKeySpec02() throws Exception {
 
-        checkPublicKeys( (DSAPublicKey) kf.generatePublic(x509KeySpec) );
+        checkPublicKeys((DSAPublicKey) kf.generatePublic(x509KeySpec));
     }
 
 
@@ -292,7 +337,7 @@ public class DSAKeyFactoryImplTest extends TestCase {
 
         KeySpec keySpec = (KeySpec) new DSAPublicKeySpec(publicY, publicP, publicQ, publicG);
 
-        checkPublicKeys( (DSAPublicKey) kf.generatePublic(keySpec) );
+        checkPublicKeys((DSAPublicKey) kf.generatePublic(keySpec));
     }
 
 
@@ -315,20 +360,32 @@ public class DSAKeyFactoryImplTest extends TestCase {
         System.arraycopy(publicEncoding, 0, enc1, 0, 20);
         final byte[] enc2 = enc1;
 
-        pubKey = new DSAPublicKey () {
+        pubKey = new DSAPublicKey() {
 
-                  public BigInteger getY() { return y; }
-                  public DSAParams getParams() {
-                      return  (DSAParams)(new DSAParameterSpec(p, q, g));
-                  }
-                  public String getAlgorithm() { return "DSA"; }
-                  public byte[] getEncoded()   { return enc2; }
-                  public String getFormat()    { return "X.509"; }
-              };
+            public BigInteger getY() {
+                return y;
+            }
+
+            public DSAParams getParams() {
+                return (DSAParams) (new DSAParameterSpec(p, q, g));
+            }
+
+            public String getAlgorithm() {
+                return "DSA";
+            }
+
+            public byte[] getEncoded() {
+                return enc2;
+            }
+
+            public String getFormat() {
+                return "X.509";
+            }
+        };
 
         ks = kf.getKeySpec(pubKey, X509EncodedKeySpec.class);
         try {
-            pubKey = (DSAPublicKey) kf.generatePublic((KeySpec)ks);
+            pubKey = (DSAPublicKey) kf.generatePublic((KeySpec) ks);
             fail("no InvalidKeySpecException");
         } catch (InvalidKeySpecException e) {
         }
@@ -357,19 +414,31 @@ public class DSAKeyFactoryImplTest extends TestCase {
         enc1[13] = 0;
         final byte[] enc2 = enc1;
 
-        pubKey = new DSAPublicKey () {
+        pubKey = new DSAPublicKey() {
 
-                  public BigInteger getY() { return y; }
-                  public DSAParams getParams() {
-                      return  (DSAParams)(new DSAParameterSpec(p, q, g));
-                  }
-                  public String getAlgorithm() { return "DSA"; }
-                  public byte[] getEncoded()   { return enc2; }
-                  public String getFormat()    { return "X.509"; }
-              };
+            public BigInteger getY() {
+                return y;
+            }
+
+            public DSAParams getParams() {
+                return (DSAParams) (new DSAParameterSpec(p, q, g));
+            }
+
+            public String getAlgorithm() {
+                return "DSA";
+            }
+
+            public byte[] getEncoded() {
+                return enc2;
+            }
+
+            public String getFormat() {
+                return "X.509";
+            }
+        };
 
         ks = kf.getKeySpec(pubKey, X509EncodedKeySpec.class);
-        pubKey = (DSAPublicKey) kf.generatePublic((KeySpec)ks);
+        pubKey = (DSAPublicKey) kf.generatePublic((KeySpec) ks);
 
         String alg = pubKey.getAlgorithm();
         assertNotNull(alg);
@@ -403,7 +472,7 @@ public class DSAKeyFactoryImplTest extends TestCase {
      */
     public final void testGeneratePrivateKeySpec02() throws Exception {
 
-         checkPrivateKeys( (DSAPrivateKey) kf.generatePrivate(pkcs8KeySpec) );
+        checkPrivateKeys((DSAPrivateKey) kf.generatePrivate(pkcs8KeySpec));
     }
 
 
@@ -415,9 +484,9 @@ public class DSAKeyFactoryImplTest extends TestCase {
     public final void testGeneratePrivateKeySpec03() throws Exception {
 
         KeySpec keySpec = (KeySpec) new DSAPrivateKeySpec(privateX,
-                                                          privateP, privateQ, privateG);
+                privateP, privateQ, privateG);
 
-        checkPrivateKeys( (DSAPrivateKey) kf.generatePrivate(keySpec) );
+        checkPrivateKeys((DSAPrivateKey) kf.generatePrivate(keySpec));
     }
 
 
@@ -440,20 +509,32 @@ public class DSAKeyFactoryImplTest extends TestCase {
         System.arraycopy(privateEncoding, 0, enc1, 0, 20);
         final byte[] enc2 = enc1;
 
-        prKey = new DSAPrivateKey () {
+        prKey = new DSAPrivateKey() {
 
-                  public BigInteger getX() { return x; }
-                  public DSAParams getParams() {
-                      return  (DSAParams)(new DSAParameterSpec(p, q, g));
-                  }
-                  public String getAlgorithm() { return "DSA"; }
-                  public byte[] getEncoded()   { return enc2; }
-                  public String getFormat()    { return "PKCS8"; }
-              };
+            public BigInteger getX() {
+                return x;
+            }
+
+            public DSAParams getParams() {
+                return (DSAParams) (new DSAParameterSpec(p, q, g));
+            }
+
+            public String getAlgorithm() {
+                return "DSA";
+            }
+
+            public byte[] getEncoded() {
+                return enc2;
+            }
+
+            public String getFormat() {
+                return "PKCS8";
+            }
+        };
 
         ks = kf.getKeySpec(prKey, PKCS8EncodedKeySpec.class);
         try {
-            prKey = (DSAPrivateKey) kf.generatePrivate((KeySpec)ks);
+            prKey = (DSAPrivateKey) kf.generatePrivate((KeySpec) ks);
             fail("no InvalidKeySpecException");
         } catch (InvalidKeySpecException e) {
         }
@@ -482,19 +563,31 @@ public class DSAKeyFactoryImplTest extends TestCase {
         enc1[13] = 0;
         final byte[] enc2 = enc1;
 
-        prKey = new DSAPrivateKey () {
+        prKey = new DSAPrivateKey() {
 
-                  public BigInteger getX() { return x; }
-                  public DSAParams getParams() {
-                      return  (DSAParams)(new DSAParameterSpec(p, q, g));
-                  }
-                  public String getAlgorithm() { return "DSA"; }
-                  public byte[] getEncoded()   { return enc2; }
-                  public String getFormat()    { return "PKCS8"; }
-              };
+            public BigInteger getX() {
+                return x;
+            }
+
+            public DSAParams getParams() {
+                return (DSAParams) (new DSAParameterSpec(p, q, g));
+            }
+
+            public String getAlgorithm() {
+                return "DSA";
+            }
+
+            public byte[] getEncoded() {
+                return enc2;
+            }
+
+            public String getFormat() {
+                return "PKCS8";
+            }
+        };
 
         ks = kf.getKeySpec(prKey, PKCS8EncodedKeySpec.class);
-        prKey = (DSAPrivateKey) kf.generatePrivate((KeySpec)ks);
+        prKey = (DSAPrivateKey) kf.generatePrivate((KeySpec) ks);
 
         String alg = prKey.getAlgorithm();
         assertNotNull(alg);
@@ -511,42 +604,42 @@ public class DSAKeyFactoryImplTest extends TestCase {
     public final void testGetKeySpec01() throws Exception {
 
         try {
-            kf.getKeySpec( privateKey, DSAPublicKeySpec.class);
+            kf.getKeySpec(privateKey, DSAPublicKeySpec.class);
             fail("testcase1: No InvalidKeySpecException");
         } catch (InvalidKeySpecException e) {
         }
         try {
-            kf.getKeySpec( privateKey, X509EncodedKeySpec.class);
+            kf.getKeySpec(privateKey, X509EncodedKeySpec.class);
             fail("testcase2: No InvalidKeySpecException");
         } catch (InvalidKeySpecException e) {
         }
         try {
-            kf.getKeySpec( null, DSAPublicKeySpec.class);
+            kf.getKeySpec(null, DSAPublicKeySpec.class);
             fail("testcase3: No InvalidKeySpecException");
         } catch (InvalidKeySpecException e) {
         }
         try {
-            kf.getKeySpec( null, X509EncodedKeySpec.class);
+            kf.getKeySpec(null, X509EncodedKeySpec.class);
             fail("testcase4: No InvalidKeySpecException");
         } catch (InvalidKeySpecException e) {
         }
         try {
-            kf.getKeySpec( publicKey, DSAPrivateKeySpec.class);
+            kf.getKeySpec(publicKey, DSAPrivateKeySpec.class);
             fail("testcase5: No InvalidKeySpecException");
         } catch (InvalidKeySpecException e) {
         }
         try {
-            kf.getKeySpec( publicKey, PKCS8EncodedKeySpec.class);
+            kf.getKeySpec(publicKey, PKCS8EncodedKeySpec.class);
             fail("testcase6: No InvalidKeySpecException");
         } catch (InvalidKeySpecException e) {
         }
         try {
-            kf.getKeySpec( null, DSAPrivateKeySpec.class);
+            kf.getKeySpec(null, DSAPrivateKeySpec.class);
             fail("testcase7: No InvalidKeySpecException");
         } catch (InvalidKeySpecException e) {
         }
         try {
-            kf.getKeySpec( null, PKCS8EncodedKeySpec.class);
+            kf.getKeySpec(null, PKCS8EncodedKeySpec.class);
             fail("testcase8: No InvalidKeySpecException");
         } catch (InvalidKeySpecException e) {
         }
@@ -576,18 +669,18 @@ public class DSAKeyFactoryImplTest extends TestCase {
      * A test against the "getKeySpec(Key, Class)" method.
      * The test checks out that
      * 1) a KeySpec returned by the method is being casted to
-     *    expected "DSAPublicKeySpec" or "X509EncodedKeySpec", and
+     * expected "DSAPublicKeySpec" or "X509EncodedKeySpec", and
      * 2) DSAPublickey object generated from KeySpec is equal a "publicKey" argument.
      */
     public final void testGetKeySpec03() throws Exception {
 
         KeySpec ks;
 
-        ks = kf.getKeySpec( publicKey, DSAPublicKeySpec.class);
-        checkPublicKeys( (DSAPublicKey) kf.generatePublic((DSAPublicKeySpec) ks) );
+        ks = kf.getKeySpec(publicKey, DSAPublicKeySpec.class);
+        checkPublicKeys((DSAPublicKey) kf.generatePublic((DSAPublicKeySpec) ks));
 
-        ks = kf.getKeySpec( publicKey, X509EncodedKeySpec.class);
-        checkPublicKeys( (DSAPublicKey) kf.generatePublic((X509EncodedKeySpec) ks) );
+        ks = kf.getKeySpec(publicKey, X509EncodedKeySpec.class);
+        checkPublicKeys((DSAPublicKey) kf.generatePublic((X509EncodedKeySpec) ks));
     }
 
 
@@ -595,18 +688,18 @@ public class DSAKeyFactoryImplTest extends TestCase {
      * A test against the "getKeySpec(Key, Class)" method.
      * The test checks out that
      * 1) a KeySpec returned by the method is being casted to
-          expected "DSAPrivateKeySpec" or "PKCS8EncodedKeySpec", and
+     * expected "DSAPrivateKeySpec" or "PKCS8EncodedKeySpec", and
      * 2) DSAPublickey object generated from KeySpec is equal a "privateKey" argument.
      */
     public final void testGetKeySpec04() throws Exception {
 
         KeySpec ks;
 
-        ks = kf.getKeySpec( privateKey, DSAPrivateKeySpec.class);
-        checkPrivateKeys( (DSAPrivateKey) kf.generatePrivate((DSAPrivateKeySpec) ks) );
+        ks = kf.getKeySpec(privateKey, DSAPrivateKeySpec.class);
+        checkPrivateKeys((DSAPrivateKey) kf.generatePrivate((DSAPrivateKeySpec) ks));
 
-        ks = kf.getKeySpec( privateKey, PKCS8EncodedKeySpec.class);
-        checkPrivateKeys( (DSAPrivateKey) kf.generatePrivate((PKCS8EncodedKeySpec) ks) );
+        ks = kf.getKeySpec(privateKey, PKCS8EncodedKeySpec.class);
+        checkPrivateKeys((DSAPrivateKey) kf.generatePrivate((PKCS8EncodedKeySpec) ks));
     }
 
 
@@ -626,18 +719,30 @@ public class DSAKeyFactoryImplTest extends TestCase {
         final BigInteger g = privateG;
 
         final byte enc1[] = new byte[lng];
-        System.arraycopy(privateEncoding, 0, enc1, 0, lng);	// enc1 contains incorrect encoding
+        System.arraycopy(privateEncoding, 0, enc1, 0, lng);    // enc1 contains incorrect encoding
 
-        DSAPrivateKey prKey = new DSAPrivateKey () {
+        DSAPrivateKey prKey = new DSAPrivateKey() {
 
-                  public BigInteger getX() { return x; }
-                  public DSAParams getParams() {
-                      return  (DSAParams)(new DSAParameterSpec(p, q, g));
-                  }
-                  public String getAlgorithm() { return "DSA"; }
-                  public byte[] getEncoded()   { return enc1; }
-                  public String getFormat()    { return "PKCS8"; }
-              };
+            public BigInteger getX() {
+                return x;
+            }
+
+            public DSAParams getParams() {
+                return (DSAParams) (new DSAParameterSpec(p, q, g));
+            }
+
+            public String getAlgorithm() {
+                return "DSA";
+            }
+
+            public byte[] getEncoded() {
+                return enc1;
+            }
+
+            public String getFormat() {
+                return "PKCS8";
+            }
+        };
         try {
             kf.getKeySpec(prKey, PKCS8EncodedKeySpec.class);
         } catch (InvalidKeySpecException e) {
@@ -662,18 +767,31 @@ public class DSAKeyFactoryImplTest extends TestCase {
         final BigInteger g = publicG;
 
         final byte enc2[] = new byte[lng];
-        System.arraycopy(publicEncoding, 0, enc2, 0, lng);;	// enc2 contains incorrect encoding
+        System.arraycopy(publicEncoding, 0, enc2, 0, lng);
+        ;    // enc2 contains incorrect encoding
 
-        DSAPublicKey pubKey = new DSAPublicKey () {
+        DSAPublicKey pubKey = new DSAPublicKey() {
 
-                  public BigInteger getY() { return y; }
-                  public DSAParams getParams() {
-                      return  (DSAParams)(new DSAParameterSpec(p, q, g));
-                  }
-                  public String getAlgorithm() { return "DSA"; }
-                  public byte[] getEncoded()   { return enc2; }
-                  public String getFormat()    { return "X.509"; }
-              };
+            public BigInteger getY() {
+                return y;
+            }
+
+            public DSAParams getParams() {
+                return (DSAParams) (new DSAParameterSpec(p, q, g));
+            }
+
+            public String getAlgorithm() {
+                return "DSA";
+            }
+
+            public byte[] getEncoded() {
+                return enc2;
+            }
+
+            public String getFormat() {
+                return "X.509";
+            }
+        };
 
         try {
             kf.getKeySpec(pubKey, X509EncodedKeySpec.class);
@@ -691,12 +809,12 @@ public class DSAKeyFactoryImplTest extends TestCase {
      */
     public final void testTranslateKey01() throws Exception {
         try {
-            kf.translateKey( (Key) privateRSAKey );
+            kf.translateKey((Key) privateRSAKey);
             fail("testcase1: No InvalidKeyException");
         } catch (InvalidKeyException e) {
         }
         try {
-            kf.translateKey( (Key) publicRSAKey );
+            kf.translateKey((Key) publicRSAKey);
             fail("testcase2: No InvalidKeyException");
         } catch (InvalidKeyException e) {
         }
@@ -725,7 +843,7 @@ public class DSAKeyFactoryImplTest extends TestCase {
      */
     public final void testTranslateKey02() throws Exception {
 
-        checkPublicIntegers( (DSAPublicKey) kf.translateKey(publicKey) );
+        checkPublicIntegers((DSAPublicKey) kf.translateKey(publicKey));
     }
 
 
@@ -736,7 +854,7 @@ public class DSAKeyFactoryImplTest extends TestCase {
      */
     public final void testTranslateKey03() throws Exception {
 
-        checkPrivateIntegers( (DSAPrivateKey) kf.translateKey(privateKey) );
+        checkPrivateIntegers((DSAPrivateKey) kf.translateKey(privateKey));
     }
 
 
@@ -755,28 +873,40 @@ public class DSAKeyFactoryImplTest extends TestCase {
         final BigInteger q = publicQ;
         final BigInteger g = publicG;
 
-        byte[] publicEncoding  = publicKey.getEncoded();
+        byte[] publicEncoding = publicKey.getEncoded();
 
         final byte enc1[] = new byte[publicEncoding.length];
         System.arraycopy(publicEncoding, 0, enc1, 0, publicEncoding.length);
         enc1[13] = 0;
         final byte[] enc2 = enc1;
 
-        DSAPublicKey pubKey = new DSAPublicKey () {
+        DSAPublicKey pubKey = new DSAPublicKey() {
 
-                  public BigInteger getY() { return y; }
-                  public DSAParams getParams() {
-                      return  (DSAParams)(new DSAParameterSpec(p, q, g));
-                  }
-                  public String getAlgorithm() { return "DSA"; }
-                  public byte[] getEncoded()   { return enc2; }
-                  public String getFormat()    { return "X.509"; }
-              };
+            public BigInteger getY() {
+                return y;
+            }
+
+            public DSAParams getParams() {
+                return (DSAParams) (new DSAParameterSpec(p, q, g));
+            }
+
+            public String getAlgorithm() {
+                return "DSA";
+            }
+
+            public byte[] getEncoded() {
+                return enc2;
+            }
+
+            public String getFormat() {
+                return "X.509";
+            }
+        };
 
         X509EncodedKeySpec ks = kf.getKeySpec(pubKey, X509EncodedKeySpec.class);
 
-        pubKey = (DSAPublicKey) kf.generatePublic((KeySpec)ks);
-        pubKey = (DSAPublicKey) kf.translateKey( (Key)pubKey );
+        pubKey = (DSAPublicKey) kf.generatePublic((KeySpec) ks);
+        pubKey = (DSAPublicKey) kf.translateKey((Key) pubKey);
 
         String alg = pubKey.getAlgorithm();
         assertNotNull(alg);
@@ -799,28 +929,40 @@ public class DSAKeyFactoryImplTest extends TestCase {
         final BigInteger q = privateParams.getP();
         final BigInteger g = privateParams.getP();
 
-        byte[] privateEncoding  = privateKey.getEncoded();
+        byte[] privateEncoding = privateKey.getEncoded();
 
         final byte enc1[] = new byte[privateEncoding.length];
         System.arraycopy(privateEncoding, 0, enc1, 0, privateEncoding.length);
         enc1[13] = 0;
         final byte[] enc2 = enc1;
 
-        DSAPrivateKey prKey = new DSAPrivateKey () {
+        DSAPrivateKey prKey = new DSAPrivateKey() {
 
-                  public BigInteger getX() { return x; }
-                  public DSAParams getParams() {
-                      return  (DSAParams)(new DSAParameterSpec(p, q, g));
-                  }
-                  public String getAlgorithm() { return "DSA"; }
-                  public byte[] getEncoded()   { return enc2; }
-                  public String getFormat()    { return "PKCS8"; }
-              };
+            public BigInteger getX() {
+                return x;
+            }
+
+            public DSAParams getParams() {
+                return (DSAParams) (new DSAParameterSpec(p, q, g));
+            }
+
+            public String getAlgorithm() {
+                return "DSA";
+            }
+
+            public byte[] getEncoded() {
+                return enc2;
+            }
+
+            public String getFormat() {
+                return "PKCS8";
+            }
+        };
 
         PKCS8EncodedKeySpec ks = kf.getKeySpec(prKey, PKCS8EncodedKeySpec.class);
 
-        prKey = (DSAPrivateKey) kf.generatePrivate((KeySpec)ks);
-        prKey = (DSAPrivateKey) kf.translateKey( (Key)prKey );
+        prKey = (DSAPrivateKey) kf.generatePrivate((KeySpec) ks);
+        prKey = (DSAPrivateKey) kf.translateKey((Key) prKey);
 
         String alg = prKey.getAlgorithm();
         assertNotNull(alg);

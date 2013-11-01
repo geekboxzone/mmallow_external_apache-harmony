@@ -538,7 +538,6 @@ public class SQLExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.sql.SQLException#SQLException(Throwable)}
-     * 
      * @since 1.6
      */
     public void testConstructor_Ljava_lang_Throwable() {
@@ -550,7 +549,6 @@ public class SQLExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.sql.SQLException#SQLException(String, Throwable)}
-     * 
      * @since 1.6
      */
     public void testConstructor_LString_Throwable() {
@@ -563,7 +561,6 @@ public class SQLExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.sql.SQLException#SQLException(String, String, Throwable)}
-     * 
      * @since 1.6
      */
     public void testConstructor_LString_String_Throwable() {
@@ -577,7 +574,6 @@ public class SQLExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.sql.SQLException#SQLException(String, String, int, Throwable)}
-     * 
      * @since 1.6
      */
     public void testConstructor_LString_String_I_Throwable() {
@@ -592,7 +588,6 @@ public class SQLExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.sql.SQLException#iterator()}
-     * 
      * @since 1.6
      */
     public void test_iterator() throws Exception {

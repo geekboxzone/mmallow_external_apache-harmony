@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -37,7 +37,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyStore</code> constructor and methods
- * 
  */
 
 public class KeyStore_Impl3Test extends TestCase {
@@ -70,7 +69,7 @@ public class KeyStore_Impl3Test extends TestCase {
         super.setUp();
         mProv = (new SpiEngUtils()).new MyProvider("MyKSProvider",
                 "Testing provider", KeyStoreTestSupport.srvKeyStore.concat(".")
-                        .concat(defaultType), KeyStoreProviderClass);
+                .concat(defaultType), KeyStoreProviderClass);
         Security.insertProviderAt(mProv, 2);
         defaultProvider = SpiEngUtils.isSupport(defaultType,
                 KeyStoreTestSupport.srvKeyStore);
@@ -87,16 +86,17 @@ public class KeyStore_Impl3Test extends TestCase {
     }
 
     /**
-     * Test for <code>load(InputStream stream, char[] password)</code> 
-     * <code>store(InputStream stream, char[] password)</code> 
+     * Test for <code>load(InputStream stream, char[] password)</code>
+     * <code>store(InputStream stream, char[] password)</code>
      * <code>size()</code>
      * <code>getCreationDate(String alias)</code>
-     * methods 
+     * methods
      * Assertions: store(...) throws NullPointerException when stream or
-     * password is null; 
+     * password is null;
      * getCreationDate(...) throws NullPointerException when alias is null;
      * stores KeyStore and then loads it;
-     * @throws Exception 
+     *
+     * @throws Exception
      */
 
     public void testLoadStore01() throws Exception {

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -29,12 +29,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>RSAPublicKeySpec</code> class fields and methods
- * 
  */
 public class RSAPublicKeySpecTest extends TestCase {
 
     /**
      * Constructor for RSAPublicKeySpecTest.
+     *
      * @param name
      */
     public RSAPublicKeySpecTest(String name) {
@@ -49,9 +49,9 @@ public class RSAPublicKeySpecTest extends TestCase {
      */
     public final void testRSAPublicKeySpec01() {
         KeySpec ks =
-            new RSAPublicKeySpec(BigInteger.valueOf(1234567890L),
-                                 BigInteger.valueOf(3L));
-        
+                new RSAPublicKeySpec(BigInteger.valueOf(1234567890L),
+                        BigInteger.valueOf(3L));
+
         assertTrue(ks instanceof RSAPublicKeySpec);
     }
 
@@ -62,19 +62,19 @@ public class RSAPublicKeySpecTest extends TestCase {
      */
     public final void testRSAPublicKeySpec02() {
         KeySpec ks =
-            new RSAPublicKeySpec(null, null);
+                new RSAPublicKeySpec(null, null);
 
         assertTrue(ks instanceof RSAPublicKeySpec);
     }
-    
+
     /**
      * Test for <code>getModulus()</code> method<br>
      * Assertion: returns modulus
      */
     public final void testGetModulus() {
         RSAPublicKeySpec rpks =
-            new RSAPublicKeySpec(BigInteger.valueOf(1234567890L),
-                                 BigInteger.valueOf(3L));
+                new RSAPublicKeySpec(BigInteger.valueOf(1234567890L),
+                        BigInteger.valueOf(3L));
         assertTrue(BigInteger.valueOf(1234567890L).equals(rpks.getModulus()));
     }
 
@@ -84,8 +84,8 @@ public class RSAPublicKeySpecTest extends TestCase {
      */
     public final void testGetPublicExponent() {
         RSAPublicKeySpec rpks =
-            new RSAPublicKeySpec(BigInteger.valueOf(3L),
-                                 BigInteger.valueOf(1234567890L));
+                new RSAPublicKeySpec(BigInteger.valueOf(3L),
+                        BigInteger.valueOf(1234567890L));
         assertTrue(BigInteger.valueOf(1234567890L).equals(rpks.getPublicExponent()));
     }
 

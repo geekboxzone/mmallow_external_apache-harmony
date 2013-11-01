@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.UnrecoverableKeyException;
 
 import junit.framework.TestCase;
@@ -28,7 +29,6 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>UnrecoverableKeyException</code> class constructors and
  * methods.
- * 
  */
 public class UnrecoverableKeyExceptionTest extends TestCase {
 
@@ -37,7 +37,7 @@ public class UnrecoverableKeyExceptionTest extends TestCase {
 
     /**
      * Constructor for UnrecoverableKeyExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public UnrecoverableKeyExceptionTest(String arg0) {

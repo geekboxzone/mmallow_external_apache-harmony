@@ -45,7 +45,7 @@ import org.apache.harmony.security.x509.tsp.TimeStampResp;
 public class TimeStampRespTest extends TestCase {
 
     /**
-     * @throws IOException 
+     * @throws IOException
      * @tests 'org.apache.harmony.security.x509.tsp.TimeStampResp.getEncoded()'
      */
     public void testGetEncoded() throws IOException {
@@ -53,8 +53,8 @@ public class TimeStampRespTest extends TestCase {
         PKIStatusInfo status = new PKIStatusInfo(PKIStatus.REJECTION,
                 Collections.singletonList(statusString),
                 PKIFailureInfo.BAD_REQUEST);
-        
-        
+
+
         // creating TimeStampToken
         String policy = "1.2.3.4.5";
         String sha1 = "1.3.14.3.2.26";
@@ -75,14 +75,14 @@ public class TimeStampRespTest extends TestCase {
 
         TSTInfo tSTInfo = new TSTInfo(1, policy, msgImprint, BigInteger.TEN,
                 genTime, accuracy, Boolean.FALSE, nonce, tsa, exts);
-        
+
         Object[] issuerAndSerialNumber = new Object[] { new Name("CN=issuer"),
                 ASN1Integer.fromIntValue(12345) };
         // SHA1withDSA OID
         String sha1dsa = "1.2.840.10040.4.3";
         SignerInfo sigInfo = new SignerInfo(1, issuerAndSerialNumber,
                 new AlgorithmIdentifier(sha1), null, new AlgorithmIdentifier(
-                        sha1dsa), new byte[20], null);
+                sha1dsa), new byte[20], null);
         // TSTInfo OID according to RFC 3161
         int[] tSTInfoOid = new int[] { 1, 2, 840, 113549, 1, 9, 16, 1, 4 };
         ContentInfo tSTInfoEncoded = new ContentInfo(tSTInfoOid,
@@ -93,20 +93,20 @@ public class TimeStampRespTest extends TestCase {
                 null, null, Collections.singletonList(sigInfo));
         ContentInfo timeStampToken = new ContentInfo(ContentInfo.SIGNED_DATA,
                 tokenContent);
-        
+
         TimeStampResp response = new TimeStampResp(status, timeStampToken);
-        
-        byte [] encoding = TimeStampResp.ASN1.encode(response);
+
+        byte[] encoding = TimeStampResp.ASN1.encode(response);
         TimeStampResp decoded = (TimeStampResp) TimeStampResp.ASN1
                 .decode(encoding);
 
         // deeper checks are performed in the corresponding unit tests
         assertTrue("Decoded status is incorrect", Arrays.equals(
                 PKIStatusInfo.ASN1.encode(status), PKIStatusInfo.ASN1
-                        .encode(decoded.getStatus())));
+                .encode(decoded.getStatus())));
         assertTrue("Decoded timeStampToken is incorrect", Arrays.equals(
                 timeStampToken.getEncoded(), decoded.getTimeStampToken()
-                        .getEncoded()));
+                .getEncoded()));
     }
 }
 

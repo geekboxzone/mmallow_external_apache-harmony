@@ -18,11 +18,11 @@
 package tests.support;
 
 public interface Support_Proxy_I1 {
-	boolean equals(Object o);
+    boolean equals(Object o);
 
-	int[] array(long[] f);
+    int[] array(long[] f);
 
-	void foo(int i, boolean b);
+    void foo(int i, boolean b);
 
-	String string(String s) throws Support_Proxy_ParentException, LinkageError;
+    String string(String s) throws Support_Proxy_ParentException, LinkageError;
 }

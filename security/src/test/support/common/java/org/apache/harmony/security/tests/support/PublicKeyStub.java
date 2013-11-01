@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Aleksei Y. Semenov
-*/
+ * @author Aleksei Y. Semenov
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -27,7 +27,6 @@ import java.security.PublicKey;
 
 /**
  * Stub implements interface PublicKey
- * 
  */
 
 public class PublicKeyStub implements PublicKey {
@@ -36,10 +35,10 @@ public class PublicKeyStub implements PublicKey {
 
     String algorithm = null;
     String format = null;
-    byte [] encoded = null;
-    
+    byte[] encoded = null;
+
     /**
-     *  constructor 
+     * constructor
      */
     public PublicKeyStub(String algorithm, String format, byte[] encoded) {
         this.algorithm = algorithm;
@@ -56,14 +55,16 @@ public class PublicKeyStub implements PublicKey {
 
     /**
      * returns format
+     *
      * @see java.security.Key#getFormat()
      */
     public String getFormat() {
         return format;
     }
 
-    /** 
+    /**
      * returns encoded
+     *
      * @see java.security.Key#getEncoded()
      */
     public byte[] getEncoded() {

@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.ProviderException;
 
 import junit.framework.TestCase;
@@ -27,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ProviderException</code> class constructors and methods.
- * 
  */
 public class ProviderExceptionTest extends TestCase {
 
@@ -36,7 +36,7 @@ public class ProviderExceptionTest extends TestCase {
 
     /**
      * Constructor for ProviderExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public ProviderExceptionTest(String arg0) {
