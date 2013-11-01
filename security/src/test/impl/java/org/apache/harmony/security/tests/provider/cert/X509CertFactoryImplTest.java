@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.security.tests.provider.cert;
 
@@ -52,8 +52,8 @@ public class X509CertFactoryImplTest extends TestCase {
 
         // DER encoded certificate generation testing
         ByteArrayInputStream bais =
-            new ByteArrayInputStream(
-                    CertFactoryTestData.getCertEncoding());
+                new ByteArrayInputStream(
+                        CertFactoryTestData.getCertEncoding());
         cert = certFactory.engineGenerateCertificate(bais);
         assertNotNull("First generated certificate is null", cert);
         cert = certFactory.engineGenerateCertificate(bais);
@@ -88,8 +88,8 @@ public class X509CertFactoryImplTest extends TestCase {
 
         // DER encoded certificate generation testing
         ByteArrayInputStream bais =
-            new ByteArrayInputStream(
-                    CertFactoryTestData.getCertEncoding());
+                new ByteArrayInputStream(
+                        CertFactoryTestData.getCertEncoding());
         assertEquals("The size of collection is not correct", 2, certFactory
                 .engineGenerateCertificates(bais).size());
 
@@ -109,8 +109,8 @@ public class X509CertFactoryImplTest extends TestCase {
 
         // DER encoded crt generation testing
         ByteArrayInputStream bais =
-            new ByteArrayInputStream(
-                    CertFactoryTestData.getCRLEncoding());
+                new ByteArrayInputStream(
+                        CertFactoryTestData.getCRLEncoding());
         crl = certFactory.engineGenerateCRL(bais);
         assertNotNull("First generated CRL is null", crl);
         crl = certFactory.engineGenerateCRL(bais);
@@ -146,8 +146,8 @@ public class X509CertFactoryImplTest extends TestCase {
 
         // DER encoded crt generation testing
         ByteArrayInputStream bais =
-            new ByteArrayInputStream(
-                    CertFactoryTestData.getCRLEncoding());
+                new ByteArrayInputStream(
+                        CertFactoryTestData.getCRLEncoding());
         assertEquals("The size of collection is not correct", 2, certFactory
                 .engineGenerateCRLs(bais).size());
 
@@ -203,7 +203,7 @@ public class X509CertFactoryImplTest extends TestCase {
         X509Certificate certificate = test.certificate;
 
         ArrayList certList = new ArrayList();
-        for (int i=0; i<2; i++) {
+        for (int i = 0; i < 2; i++) {
             certList.add(certificate);
         }
 
@@ -224,8 +224,8 @@ public class X509CertFactoryImplTest extends TestCase {
     public void testEngineGetCertPathEncodings() {
         try {
             Iterator it =
-                new X509CertFactoryImpl().engineGetCertPathEncodings();
-            Object encoding  = it.next();
+                    new X509CertFactoryImpl().engineGetCertPathEncodings();
+            Object encoding = it.next();
             assertNotNull("Default encodings should not be null", encoding);
             it.remove();
             fail("UnsupportedOperationException should be thrown");

@@ -23,61 +23,61 @@ import java.io.UTFDataFormatException;
 
 public class UTFDataFormatExceptionTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.io.UTFDataFormatException#UTFDataFormatException()
-	 */
-	public void test_Constructor() {
-		// Test for method java.io.UTFDataFormatException()
-		try {
-			int stringBufferSize = 70000;
-			int loopCount = 66;
-			StringBuffer sb = new StringBuffer(stringBufferSize);
-			for (int i = 0; i < (loopCount); i++)
-				sb
-						.append("qwertyuiopasdfghjklzxcvbnmlkjhgfdsaqwertyuioplkjhgqwertyuiopasdfghjklzxcvbnmlkjhgfdsaqwertyuioplkjhg");
-			DataOutputStream dos = new DataOutputStream(
-					new ByteArrayOutputStream());
-			dos.writeUTF(sb.toString());
-		} catch (UTFDataFormatException e) {
-			return;
-		} catch (Exception e) {
-			fail("Exception during Constructor test : " + e.getMessage());
-		}
-	}
+    /**
+     * @tests java.io.UTFDataFormatException#UTFDataFormatException()
+     */
+    public void test_Constructor() {
+        // Test for method java.io.UTFDataFormatException()
+        try {
+            int stringBufferSize = 70000;
+            int loopCount = 66;
+            StringBuffer sb = new StringBuffer(stringBufferSize);
+            for (int i = 0; i < (loopCount); i++)
+                sb
+                        .append("qwertyuiopasdfghjklzxcvbnmlkjhgfdsaqwertyuioplkjhgqwertyuiopasdfghjklzxcvbnmlkjhgfdsaqwertyuioplkjhg");
+            DataOutputStream dos = new DataOutputStream(
+                    new ByteArrayOutputStream());
+            dos.writeUTF(sb.toString());
+        } catch (UTFDataFormatException e) {
+            return;
+        } catch (Exception e) {
+            fail("Exception during Constructor test : " + e.getMessage());
+        }
+    }
 
-	/**
-	 * @tests java.io.UTFDataFormatException#UTFDataFormatException(java.lang.String)
-	 */
-	public void test_ConstructorLjava_lang_String() {
-		// Test for method java.io.UTFDataFormatException(java.lang.String)
-		try {
-			int stringBufferSize = 70000;
-			int loopCount = 66;
-			StringBuffer sb = new StringBuffer(stringBufferSize);
-			for (int i = 0; i < (loopCount); i++)
-				sb
-						.append("qwertyuiopasdfghjklzxcvbnmlkjhgfdsaqwertyuioplkjhgqwertyuiopasdfghjklzxcvbnmlkjhgfdsaqwertyuioplkjhg");
-			DataOutputStream dos = new DataOutputStream(
-					new ByteArrayOutputStream());
-			dos.writeUTF(sb.toString());
-		} catch (UTFDataFormatException e) {
-			return;
-		} catch (Exception e) {
-			fail("Exception during Constructor test : " + e.getMessage());
-		}
-	}
+    /**
+     * @tests java.io.UTFDataFormatException#UTFDataFormatException(java.lang.String)
+     */
+    public void test_ConstructorLjava_lang_String() {
+        // Test for method java.io.UTFDataFormatException(java.lang.String)
+        try {
+            int stringBufferSize = 70000;
+            int loopCount = 66;
+            StringBuffer sb = new StringBuffer(stringBufferSize);
+            for (int i = 0; i < (loopCount); i++)
+                sb
+                        .append("qwertyuiopasdfghjklzxcvbnmlkjhgfdsaqwertyuioplkjhgqwertyuiopasdfghjklzxcvbnmlkjhgfdsaqwertyuioplkjhg");
+            DataOutputStream dos = new DataOutputStream(
+                    new ByteArrayOutputStream());
+            dos.writeUTF(sb.toString());
+        } catch (UTFDataFormatException e) {
+            return;
+        } catch (Exception e) {
+            fail("Exception during Constructor test : " + e.getMessage());
+        }
+    }
 
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

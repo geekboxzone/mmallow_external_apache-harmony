@@ -16,21 +16,23 @@
  */
 
 /**
-* @author Alexey V. Varlamov
-*/
+ * @author Alexey V. Varlamov
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.*;
 import junit.framework.TestCase;
 
 /**
  * Tests for <code>GuardedObject</code>
- *
  */
 
 public class GuardedObjectTest extends TestCase {
 
-    /** Null guard imposes no restriction. */
+    /**
+     * Null guard imposes no restriction.
+     */
     public void testNoGuard() {
         Object obj = null;
         GuardedObject go = new GuardedObject(obj, null);
@@ -41,7 +43,9 @@ public class GuardedObjectTest extends TestCase {
         assertEquals(obj, go.getObject());
     }
 
-    /** Test real guard can both allow and deny access. */
+    /**
+     * Test real guard can both allow and deny access.
+     */
     public void testGuard() {
         final String message = "test message";
         final StringBuffer objBuffer = new StringBuffer("235345 t");

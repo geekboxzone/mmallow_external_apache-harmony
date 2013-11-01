@@ -27,7 +27,7 @@ import junit.framework.TestCase;
 
 /**
  * Automated Test Suite for class java.io.ByteArrayOutputStream
- * 
+ *
  * @see java.io.ByteArrayOutputStream
  */
 public class ByteArrayOutputStreamTest extends TestCase {

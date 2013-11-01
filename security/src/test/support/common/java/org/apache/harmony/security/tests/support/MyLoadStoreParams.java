@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -26,9 +26,9 @@ import java.security.KeyStore;
 /**
  * Additional class extends KeyStore.LoadStoreParameter
  */
-public class MyLoadStoreParams implements 
+public class MyLoadStoreParams implements
         KeyStore.LoadStoreParameter {
-    
+
     KeyStore.ProtectionParameter protPar;
 
     public MyLoadStoreParams(KeyStore.ProtectionParameter p) {

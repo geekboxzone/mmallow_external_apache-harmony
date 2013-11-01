@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class NoSuchFieldErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.NoSuchFieldError#NoSuchFieldError()
-	 */
+    /**
+     * @tests java.lang.NoSuchFieldError#NoSuchFieldError()
+     */
     public void test_Constructor() {
         NoSuchFieldError e = new NoSuchFieldError();
         assertNull(e.getMessage());

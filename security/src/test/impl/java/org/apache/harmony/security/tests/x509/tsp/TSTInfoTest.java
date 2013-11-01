@@ -35,7 +35,7 @@ import org.apache.harmony.security.x509.tsp.TSTInfo;
 public class TSTInfoTest extends TestCase {
 
     /**
-     * @throws IOException 
+     * @throws IOException
      * @tests 'org.apache.harmony.security.x509.tsp.TSTInfo.getEncoded()'
      */
     public void testGetEncoded() throws IOException {
@@ -68,7 +68,7 @@ public class TSTInfoTest extends TestCase {
         assertEquals("Decoded policy is incorrect", policy, decoded.getPolicy());
         assertTrue("Decoded messageImprint is incorrect", Arrays.equals(
                 MessageImprint.ASN1.encode(msgImprint), MessageImprint.ASN1
-                        .encode(decoded.getMessageImprint())));
+                .encode(decoded.getMessageImprint())));
         assertEquals("Decoded serialNumber is incorrect", BigInteger.TEN,
                 decoded.getSerialNumber());
         assertEquals("Decoded genTime is incorrect", genTime, decoded

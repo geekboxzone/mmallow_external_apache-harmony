@@ -19,28 +19,28 @@ package org.apache.harmony.luni.tests.java.lang;
 
 public class OutOfMemoryErrorTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.lang.OutOfMemoryError#OutOfMemoryError()
-	 */
-	public void test_Constructor() {
-		// Test for method java.lang.OutOfMemoryError()
-	    Error e = new OutOfMemoryError();
+    /**
+     * @tests java.lang.OutOfMemoryError#OutOfMemoryError()
+     */
+    public void test_Constructor() {
+        // Test for method java.lang.OutOfMemoryError()
+        Error e = new OutOfMemoryError();
         assertNull(e.getCause());
         assertNull(e.getMessage());
-	}
+    }
 
-	/**
-	 * @tests java.lang.OutOfMemoryError#OutOfMemoryError(java.lang.String)
-	 */
-	public void test_ConstructorLjava_lang_String() {
-		// Test for method java.lang.OutOfMemoryError(java.lang.String)
-		Error e = new OutOfMemoryError(null);
+    /**
+     * @tests java.lang.OutOfMemoryError#OutOfMemoryError(java.lang.String)
+     */
+    public void test_ConstructorLjava_lang_String() {
+        // Test for method java.lang.OutOfMemoryError(java.lang.String)
+        Error e = new OutOfMemoryError(null);
         assertNull(e.getMessage());
         assertNull(e.getCause());
-        
-        e= new OutOfMemoryError("msg");
+
+        e = new OutOfMemoryError("msg");
         assertEquals("msg", e.getMessage());
         assertNull(e.getCause());
-	}
+    }
 
 }

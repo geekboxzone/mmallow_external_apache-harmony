@@ -40,10 +40,10 @@ public class ObjectStreamClassTest extends TestCase {
 
         int ham = 9999;
 
-		public static long getUID() {
-			return serialVersionUID;
-		}
-	}
+        public static long getUID() {
+            return serialVersionUID;
+        }
+    }
 
     /**
      * @tests java.io.ObjectStreamClass#forClass()
@@ -197,11 +197,12 @@ public class ObjectStreamClassTest extends TestCase {
                 enumFields.length);
     }
 
-        /**
+    /**
      * @since 1.6
      */
     static class NonSerialzableClass {
         private static final long serialVersionUID = 1l;
+
         public static long getUID() {
             return serialVersionUID;
         }
@@ -222,7 +223,7 @@ public class ObjectStreamClassTest extends TestCase {
             throw new IOException();
         }
 
-	}
+    }
 
     /**
      * @tests java.io.ObjectStreamClass#lookupAny(java.lang.Class)
@@ -234,7 +235,7 @@ public class ObjectStreamClassTest extends TestCase {
         ObjectStreamClass osc = ObjectStreamClass.lookupAny(DummyClass.class);
         assertEquals("lookup returned wrong class: " + osc.getName(),
                 "org.apache.harmony.luni.tests.java.io.ObjectStreamClassTest$DummyClass", osc
-                        .getName());
+                .getName());
 
         osc = ObjectStreamClass.lookupAny(NonSerialzableClass.class);
         assertEquals("lookup returned wrong class: " + osc.getName(),

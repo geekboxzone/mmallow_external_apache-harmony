@@ -19,48 +19,48 @@ package org.apache.harmony.luni.tests.java.lang;
 
 public class NumberTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.lang.Number#byteValue()
-	 */
-	public void test_byteValue() {
-		int number = 1231243;
-		assertTrue("Incorrect byte returned for: " + number,
-				((byte) new Integer(number).intValue()) == new Integer(number)
-						.byteValue());
-		number = 0;
-		assertTrue("Incorrect byte returned for: " + number,
-				((byte) new Integer(number).intValue()) == new Integer(number)
-						.byteValue());
-		number = -1;
-		assertTrue("Incorrect byte returned for: " + number,
-				((byte) new Integer(number).intValue()) == new Integer(number)
-						.byteValue());
-		number = -84109328;
-		assertTrue("Incorrect byte returned for: " + number,
-				((byte) new Integer(number).intValue()) == new Integer(number)
-						.byteValue());
-	}
+    /**
+     * @tests java.lang.Number#byteValue()
+     */
+    public void test_byteValue() {
+        int number = 1231243;
+        assertTrue("Incorrect byte returned for: " + number,
+                ((byte) new Integer(number).intValue()) == new Integer(number)
+                        .byteValue());
+        number = 0;
+        assertTrue("Incorrect byte returned for: " + number,
+                ((byte) new Integer(number).intValue()) == new Integer(number)
+                        .byteValue());
+        number = -1;
+        assertTrue("Incorrect byte returned for: " + number,
+                ((byte) new Integer(number).intValue()) == new Integer(number)
+                        .byteValue());
+        number = -84109328;
+        assertTrue("Incorrect byte returned for: " + number,
+                ((byte) new Integer(number).intValue()) == new Integer(number)
+                        .byteValue());
+    }
 
-	/**
-	 * @tests java.lang.Number#shortValue()
-	 */
-	public void test_shortValue() {
-		int number = 1231243;
-		assertTrue("Incorrect byte returned for: " + number,
-				((short) new Integer(number).intValue()) == new Integer(number)
-						.shortValue());
-		number = 0;
-		assertTrue("Incorrect byte returned for: " + number,
-				((short) new Integer(number).intValue()) == new Integer(number)
-						.shortValue());
-		number = -1;
-		assertTrue("Incorrect byte returned for: " + number,
-				((short) new Integer(number).intValue()) == new Integer(number)
-						.shortValue());
-		number = -84109328;
-		assertTrue("Incorrect byte returned for: " + number,
-				((short) new Integer(number).intValue()) == new Integer(number)
-						.shortValue());
+    /**
+     * @tests java.lang.Number#shortValue()
+     */
+    public void test_shortValue() {
+        int number = 1231243;
+        assertTrue("Incorrect byte returned for: " + number,
+                ((short) new Integer(number).intValue()) == new Integer(number)
+                        .shortValue());
+        number = 0;
+        assertTrue("Incorrect byte returned for: " + number,
+                ((short) new Integer(number).intValue()) == new Integer(number)
+                        .shortValue());
+        number = -1;
+        assertTrue("Incorrect byte returned for: " + number,
+                ((short) new Integer(number).intValue()) == new Integer(number)
+                        .shortValue());
+        number = -84109328;
+        assertTrue("Incorrect byte returned for: " + number,
+                ((short) new Integer(number).intValue()) == new Integer(number)
+                        .shortValue());
 
-	}
+    }
 }

@@ -167,7 +167,7 @@ public class ByteTest extends TestCase {
     }
 
     /**
-     * @tests java.lang.Byte#valueOf(String,int)
+     * @tests java.lang.Byte#valueOf(String, int)
      */
     public void test_valueOfLjava_lang_StringI() {
         assertEquals(new Byte((byte) 0), Byte.valueOf("0", 10));
@@ -237,7 +237,7 @@ public class ByteTest extends TestCase {
     }
 
     /**
-     * @tests java.lang.Byte#parseByte(String,int)
+     * @tests java.lang.Byte#parseByte(String, int)
      */
     public void test_parseByteLjava_lang_StringI() {
         assertEquals(0, Byte.parseByte("0", 10));
@@ -534,11 +534,11 @@ public class ByteTest extends TestCase {
      * @tests java.lang.Byte#parseByte(java.lang.String)
      */
     public void test_parseByteLjava_lang_String2() {
-        assertEquals((byte)127, Byte.parseByte("127"));
-        assertEquals((byte)-128, Byte.parseByte("-128"));
-        assertEquals((byte)0, Byte.parseByte("0"));
-        assertEquals((byte)0x80, Byte.parseByte("-128"));
-        assertEquals((byte)0x7F, Byte.parseByte("127"));
+        assertEquals((byte) 127, Byte.parseByte("127"));
+        assertEquals((byte) -128, Byte.parseByte("-128"));
+        assertEquals((byte) 0, Byte.parseByte("0"));
+        assertEquals((byte) 0x80, Byte.parseByte("-128"));
+        assertEquals((byte) 0x7F, Byte.parseByte("127"));
 
         try {
             Byte.parseByte("-1000");
@@ -602,7 +602,7 @@ public class ByteTest extends TestCase {
             fail("Failed to throw exception for hex MAX_VALUE + 1");
         } catch (NumberFormatException e) {
         }
-        
+
         try {
             Byte.parseByte("-81", 16);
             fail("Failed to throw exception for hex MIN_VALUE + 1");
@@ -614,7 +614,7 @@ public class ByteTest extends TestCase {
      * @tests java.lang.Byte#shortValue()
      */
     public void test_shortValue2() {
-        assertEquals((short)127, new Byte((byte)127).shortValue());
+        assertEquals((short) 127, new Byte((byte) 127).shortValue());
     }
 
     /**

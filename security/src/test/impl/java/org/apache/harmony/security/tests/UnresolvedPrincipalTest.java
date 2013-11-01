@@ -15,8 +15,8 @@
  *  limitations under the License.
  */
 /**
-* @author Alexey V. Varlamov
-*/
+ * @author Alexey V. Varlamov
+ */
 
 package org.apache.harmony.security.tests;
 
@@ -28,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>UnresolvedPrincipal</code>
- *
  */
 
 public class UnresolvedPrincipalTest extends TestCase {
@@ -56,14 +55,14 @@ public class UnresolvedPrincipalTest extends TestCase {
         FakePrincipal fp = new FakePrincipal(name);
 
         assertTrue(new UnresolvedPrincipal(FakePrincipal.class.getName(), name)
-            .equals(fp));
+                .equals(fp));
         assertTrue(new UnresolvedPrincipal(UnresolvedPrincipal.WILDCARD, name)
-            .equals(fp));
+                .equals(fp));
         assertTrue(new UnresolvedPrincipal(FakePrincipal.class.getName(),
-            UnresolvedPrincipal.WILDCARD).equals(fp));
+                UnresolvedPrincipal.WILDCARD).equals(fp));
 
         assertFalse(new UnresolvedPrincipal(FakePrincipal.class.getName(),
-            "sdkljfgbkwe").equals(fp));
+                "sdkljfgbkwe").equals(fp));
     }
 
     public void testEquals_Common() {
@@ -85,18 +84,18 @@ public class UnresolvedPrincipalTest extends TestCase {
         String name = "sgrt";
         FakePrincipal fp = new FakePrincipal(name);
         assertTrue(new UnresolvedPrincipal(FakePrincipal.class.getName(), name)
-            .implies(fp));
+                .implies(fp));
         assertTrue(new UnresolvedPrincipal(UnresolvedPrincipal.WILDCARD, name)
-            .implies(fp));
+                .implies(fp));
         assertTrue(new UnresolvedPrincipal(FakePrincipal.class.getName(),
-            UnresolvedPrincipal.WILDCARD).implies(fp));
+                UnresolvedPrincipal.WILDCARD).implies(fp));
         assertTrue(new UnresolvedPrincipal(UnresolvedPrincipal.WILDCARD,
-            UnresolvedPrincipal.WILDCARD).implies(fp));
+                UnresolvedPrincipal.WILDCARD).implies(fp));
 
         assertFalse(new UnresolvedPrincipal(
-            UnresolvedPrincipal.class.getName(), name).implies(fp));
+                UnresolvedPrincipal.class.getName(), name).implies(fp));
         assertFalse(new UnresolvedPrincipal(FakePrincipal.class.getName(),
-            "hgfuytr765").implies(fp));
+                "hgfuytr765").implies(fp));
     }
 }
 

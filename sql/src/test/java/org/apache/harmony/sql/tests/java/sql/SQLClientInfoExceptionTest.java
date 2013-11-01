@@ -47,7 +47,7 @@ public class SQLClientInfoExceptionTest extends TestCase {
     }
 
     /**
-     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(Map<String,ClientInfoStatus>)
+     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(Map<String, ClientInfoStatus>)
      */
     public void test_Constructor_LMap() {
         Map<String, ClientInfoStatus> failedProperties = new HashMap<String, ClientInfoStatus>();
@@ -68,7 +68,7 @@ public class SQLClientInfoExceptionTest extends TestCase {
     }
 
     /**
-     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(Map<String,ClientInfoStatus>,Throwable)
+     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(Map<String, ClientInfoStatus>, Throwable)
      */
     public void test_Constructor_LMapLThrowable() {
         Map<String, ClientInfoStatus> failedProperties = new HashMap<String, ClientInfoStatus>();
@@ -83,7 +83,7 @@ public class SQLClientInfoExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLClientInfoException should be equals to cause.toString()",
                 "java.lang.RuntimeException: Message", sqlClientInfoException
-                        .getMessage());
+                .getMessage());
         assertEquals(
                 "The FailedProperties of SQLClientInfoException set and get should be equivalent",
                 failedProperties, sqlClientInfoException.getFailedProperties());
@@ -107,7 +107,7 @@ public class SQLClientInfoExceptionTest extends TestCase {
     }
 
     /**
-     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(String,Map<String,ClientInfoStatus>)
+     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(String, Map<String, ClientInfoStatus>)
      */
     public void test_Constructor_LStringLMap() {
         Map<String, ClientInfoStatus> failedProperties = new HashMap<String, ClientInfoStatus>();
@@ -130,7 +130,7 @@ public class SQLClientInfoExceptionTest extends TestCase {
     }
 
     /**
-     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(String,Map<String,ClientInfoStatus>,Throwable)
+     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(String, Map<String, ClientInfoStatus>, Throwable)
      */
     public void test_Constructor_LStringLMapLThrowable() {
         Map<String, ClientInfoStatus> failedProperties = new HashMap<String, ClientInfoStatus>();
@@ -157,7 +157,7 @@ public class SQLClientInfoExceptionTest extends TestCase {
     }
 
     /**
-     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(String,String,Map<String,ClientInfoStatus>)
+     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(String, String, Map<String, ClientInfoStatus>)
      */
     public void test_Constructor_LStringLStringLMap() {
         Map<String, ClientInfoStatus> failedProperties = new HashMap<String, ClientInfoStatus>();
@@ -180,7 +180,7 @@ public class SQLClientInfoExceptionTest extends TestCase {
     }
 
     /**
-     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(String,String,Map<String,ClientInfoStatus>,Throwable)
+     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(String, String, Map<String, ClientInfoStatus>, Throwable)
      */
     public void test_Constructor_LStringLStringLMapLThrowable() {
         Map<String, ClientInfoStatus> failedProperties = new HashMap<String, ClientInfoStatus>();
@@ -207,7 +207,7 @@ public class SQLClientInfoExceptionTest extends TestCase {
     }
 
     /**
-     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(String,String,int,Map<String,ClientInfoStatus>,Throwable)
+     * @tests java.sql.SQLClientInfoException#SQLClientInfoException(String, String, int, Map<String, ClientInfoStatus>, Throwable)
      */
     public void test_Constructor_LStringLStringILMapLThrowable() {
         Map<String, ClientInfoStatus> failedProperties = new HashMap<String, ClientInfoStatus>();

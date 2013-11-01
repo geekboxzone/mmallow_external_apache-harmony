@@ -35,87 +35,87 @@ import java.util.Enumeration;
  */
 public class Support_DummyPKCS12Keystore extends KeyStoreSpi {
 
-	public Support_DummyPKCS12Keystore() {
-		super();
-	}
+    public Support_DummyPKCS12Keystore() {
+        super();
+    }
 
-	@Override
+    @Override
     public Key engineGetKey(String arg0, char[] arg1)
-			throws NoSuchAlgorithmException, UnrecoverableKeyException {
-		return null;
-	}
+            throws NoSuchAlgorithmException, UnrecoverableKeyException {
+        return null;
+    }
 
     @Override
     public Certificate[] engineGetCertificateChain(String arg0) {
-		return null;
-	}
+        return null;
+    }
 
-	@Override
+    @Override
     public Certificate engineGetCertificate(String arg0) {
-		return null;
-	}
+        return null;
+    }
 
-	@Override
+    @Override
     public Date engineGetCreationDate(String arg0) {
-		return null;
-	}
+        return null;
+    }
 
-	@Override
+    @Override
     public void engineSetKeyEntry(String arg0, Key arg1, char[] arg2,
-			Certificate[] arg3) throws KeyStoreException {
-	}
+            Certificate[] arg3) throws KeyStoreException {
+    }
 
     @Override
     public void engineSetKeyEntry(String arg0, byte[] arg1, Certificate[] arg2)
-			throws KeyStoreException {
-	}
+            throws KeyStoreException {
+    }
 
-	@Override
+    @Override
     public void engineSetCertificateEntry(String arg0, Certificate arg1)
-			throws KeyStoreException {
-	}
+            throws KeyStoreException {
+    }
 
-	@Override
+    @Override
     public void engineDeleteEntry(String arg0) throws KeyStoreException {
-	}
+    }
 
-	@Override
+    @Override
     public Enumeration<String> engineAliases() {
-		return null;
-	}
+        return null;
+    }
 
     @Override
     public boolean engineContainsAlias(String arg0) {
-		return false;
-	}
+        return false;
+    }
 
     @Override
     public int engineSize() {
-		return 0;
-	}
+        return 0;
+    }
 
-	@Override
+    @Override
     public boolean engineIsKeyEntry(String arg0) {
-		return false;
-	}
+        return false;
+    }
 
-	@Override
+    @Override
     public boolean engineIsCertificateEntry(String arg0) {
-		return false;
-	}
+        return false;
+    }
 
-	@Override
+    @Override
     public String engineGetCertificateAlias(Certificate arg0) {
-		return null;
-	}
+        return null;
+    }
 
-	@Override
+    @Override
     public void engineStore(OutputStream arg0, char[] arg1) throws IOException,
-			NoSuchAlgorithmException, CertificateException {
-	}
+            NoSuchAlgorithmException, CertificateException {
+    }
 
-	@Override
+    @Override
     public void engineLoad(InputStream arg0, char[] arg1) throws IOException,
-			NoSuchAlgorithmException, CertificateException {
-	}
+            NoSuchAlgorithmException, CertificateException {
+    }
 }

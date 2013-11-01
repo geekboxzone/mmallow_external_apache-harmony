@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -29,7 +29,6 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 
 /**
  * Additional class for creating CallBackHandler object
- * 
  */
 
 public class tmpCallbackHandler implements CallbackHandler {

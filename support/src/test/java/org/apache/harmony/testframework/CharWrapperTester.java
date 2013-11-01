@@ -72,23 +72,27 @@ public abstract class CharWrapperTester {
         return result;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return getClass().getName();
     }
 
     private class WrapperSinkTester extends CharSinkTester {
         private ClosableStringWriter delegate;
 
-        @Override public Writer create() throws Exception {
+        @Override
+        public Writer create() throws Exception {
             delegate = new ClosableStringWriter();
             return CharWrapperTester.this.create(delegate);
         }
 
-        @Override public char[] getChars() throws Exception {
+        @Override
+        public char[] getChars() throws Exception {
             return decode(delegate.buffer.toString().toCharArray());
         }
 
-        @Override public String toString() {
+        @Override
+        public String toString() {
             return CharWrapperTester.this.toString();
         }
     }
@@ -99,7 +103,8 @@ public abstract class CharWrapperTester {
             super(name);
         }
 
-        @Override public String getName() {
+        @Override
+        public String getName() {
             return CharWrapperTester.this.toString() + ":" + super.getName();
         }
 
@@ -133,7 +138,7 @@ public abstract class CharWrapperTester {
                 assertTrue(delegate.flushed);
                 fail("flush exception ignored");
             } catch (IOException expected) {
-                assertEquals("Flush failed" , expected.getMessage());
+                assertEquals("Flush failed", expected.getMessage());
             }
         }
 
@@ -149,7 +154,7 @@ public abstract class CharWrapperTester {
                 assertTrue(delegate.flushed);
                 fail("flush exception ignored");
             } catch (IOException expected) {
-                assertEquals("Flush failed" , expected.getMessage());
+                assertEquals("Flush failed", expected.getMessage());
             }
 
             try {
@@ -167,7 +172,7 @@ public abstract class CharWrapperTester {
                 assertTrue(delegate.closed);
                 fail("close exception ignored");
             } catch (IOException expected) {
-                assertEquals("Close failed" , expected.getMessage());
+                assertEquals("Close failed", expected.getMessage());
             }
         }
 
@@ -189,13 +194,17 @@ public abstract class CharWrapperTester {
         private final StringBuilder buffer = new StringBuilder();
         private boolean closed = false;
 
-        @Override public void close() throws IOException {
+        @Override
+        public void close() throws IOException {
             closed = true;
         }
 
-        @Override public void flush() throws IOException {}
+        @Override
+        public void flush() throws IOException {
+        }
 
-        @Override public void write(char[] buf, int offset, int count) throws IOException {
+        @Override
+        public void write(char[] buf, int offset, int count) throws IOException {
             if (closed) {
                 throw new IOException();
             }
@@ -207,18 +216,21 @@ public abstract class CharWrapperTester {
         boolean flushed = false;
         boolean closed = false;
 
-        @Override public void write(char[] buf, int offset, int count) throws IOException {
+        @Override
+        public void write(char[] buf, int offset, int count) throws IOException {
             if (closed) {
                 throw new IOException("Already closed");
             }
         }
 
-        @Override public void close() throws IOException {
+        @Override
+        public void close() throws IOException {
             closed = true;
             flush();
         }
 
-        @Override public void flush() throws IOException {
+        @Override
+        public void flush() throws IOException {
             if (!flushed) {
                 flushed = true;
                 throw new IOException("Flush failed");
@@ -229,11 +241,16 @@ public abstract class CharWrapperTester {
     private static class FailOnCloseWriter extends Writer {
         boolean closed = false;
 
-        @Override public void flush() throws IOException {}
+        @Override
+        public void flush() throws IOException {
+        }
 
-        @Override public void write(char[] buf, int offset, int count) throws IOException {}
+        @Override
+        public void write(char[] buf, int offset, int count) throws IOException {
+        }
 
-        @Override public void close() throws IOException {
+        @Override
+        public void close() throws IOException {
             closed = true;
             throw new IOException("Close failed");
         }

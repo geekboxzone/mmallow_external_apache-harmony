@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class NoClassDefFoundErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.NoClassDefFoundError#NoClassDefFoundError()
-	 */
+    /**
+     * @tests java.lang.NoClassDefFoundError#NoClassDefFoundError()
+     */
     public void test_Constructor() {
         NoClassDefFoundError e = new NoClassDefFoundError();
         assertNull(e.getMessage());

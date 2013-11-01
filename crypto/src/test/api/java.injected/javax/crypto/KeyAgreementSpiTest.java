@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package javax.crypto;
 
@@ -34,13 +34,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyAgreementSpi</code> class constructors and methods.
- * 
  */
 
 public class KeyAgreementSpiTest extends TestCase {
     /**
      * Constructor for KeyAgreementSpiTests.
-     * 
+     *
      * @param arg0
      */
     public KeyAgreementSpiTest(String arg0) {
@@ -52,7 +51,7 @@ public class KeyAgreementSpiTest extends TestCase {
      * KeyAgreementSpi
      */
     public void testKeyAgreementSpi01() throws InvalidKeyException,
-            ShortBufferException, NoSuchAlgorithmException, 
+            ShortBufferException, NoSuchAlgorithmException,
             InvalidAlgorithmParameterException {
         KeyAgreementSpi kaSpi = new MyKeyAgreementSpi();
 
@@ -63,9 +62,9 @@ public class KeyAgreementSpiTest extends TestCase {
         } catch (IllegalStateException e) {
         }
         byte[] bb = kaSpi.engineGenerateSecret();
-        assertEquals("Length is not 0", bb.length, 0);        
-        assertEquals("Returned integer is not 0", 
-                kaSpi.engineGenerateSecret(new byte[1], 10), 
+        assertEquals("Length is not 0", bb.length, 0);
+        assertEquals("Returned integer is not 0",
+                kaSpi.engineGenerateSecret(new byte[1], 10),
                 -1);
         assertNull("Not null result", kaSpi.engineGenerateSecret("aaa"));
         try {
@@ -84,6 +83,6 @@ public class KeyAgreementSpiTest extends TestCase {
             kaSpi.engineInit(key, params, new SecureRandom());
             fail("IllegalArgumentException must be thrown");
         } catch (IllegalArgumentException e) {
-        }        
+        }
     }
 }

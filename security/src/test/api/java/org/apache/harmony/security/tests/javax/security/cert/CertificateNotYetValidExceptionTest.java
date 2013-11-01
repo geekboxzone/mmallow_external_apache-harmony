@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.javax.security.cert;
 
@@ -28,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>DigestException</code> class constructors and methods.
- * 
  */
 public class CertificateNotYetValidExceptionTest extends TestCase {
 
@@ -37,7 +36,7 @@ public class CertificateNotYetValidExceptionTest extends TestCase {
 
     /**
      * Constructor for CertificateNotYetValidExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public CertificateNotYetValidExceptionTest(String arg0) {

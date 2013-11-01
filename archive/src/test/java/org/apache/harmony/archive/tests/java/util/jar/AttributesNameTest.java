@@ -23,17 +23,17 @@ import junit.framework.TestCase;
 
 public class AttributesNameTest extends TestCase {
 
-	/**
-	 * @tests java.util.jar.Attributes.Name#Name(java.lang.String)
-	 */
-	public void testAttributesNameConstructor() {
-		// Regression for HARMONY-85
-		try {
-			new Attributes.Name(
-					"01234567890123456789012345678901234567890123456789012345678901234567890");
-			fail("Should throw IllegalArgumentException");
-		} catch (IllegalArgumentException e) {
-			// expected
-		}
-	}
+    /**
+     * @tests java.util.jar.Attributes.Name#Name(java.lang.String)
+     */
+    public void testAttributesNameConstructor() {
+        // Regression for HARMONY-85
+        try {
+            new Attributes.Name(
+                    "01234567890123456789012345678901234567890123456789012345678901234567890");
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+    }
 }

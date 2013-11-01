@@ -33,54 +33,54 @@ import java.security.cert.Certificate;
 
 public class DomainCombinerTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.security.DomainCombiner#combine(java.security.ProtectionDomain[],
-	 *        java.security.ProtectionDomain[])
-	 */
-	public void test_combine$Ljava_security_ProtectionDomain$Ljava_security_ProtectionDomain() {
-		final boolean[] calledDomainCombiner = new boolean[] { false, false };
+    /**
+     * @tests java.security.DomainCombiner#combine(java.security.ProtectionDomain[],
+     *java.security.ProtectionDomain[])
+     */
+    public void test_combine$Ljava_security_ProtectionDomain$Ljava_security_ProtectionDomain() {
+        final boolean[] calledDomainCombiner = new boolean[] { false, false };
 
-		class MyCombiner implements DomainCombiner {
-			int i;
+        class MyCombiner implements DomainCombiner {
+            int i;
 
-			MyCombiner(int i) {
-				this.i = i;
-			}
+            MyCombiner(int i) {
+                this.i = i;
+            }
 
-			public ProtectionDomain[] combine(
-					ProtectionDomain[] executionDomains,
-					ProtectionDomain[] parentDomains) {
-				calledDomainCombiner[i] = true;
-				PermissionCollection pc = new Permissions();
-				pc.add(new AllPermission());
-				ProtectionDomain pd;
-				// if run with the system classloader then there will be no
-				// execution domains
-				if (executionDomains.length > 0) {
-					pd = new ProtectionDomain(executionDomains[0]
-							.getCodeSource(), pc);
-				} else {
-					pd = new ProtectionDomain(parentDomains[0].getCodeSource(),
-							pc);
-				}
-				return new ProtectionDomain[] { pd };
-			}
-		}
-
-		ProtectionDomain[] domains = new ProtectionDomain[] { new ProtectionDomain(
-				new CodeSource(null, (Certificate[]) null), new Permissions()) };
-
-		AccessControlContext parent = new AccessControlContext(domains);
-		AccessControlContext c0 = new AccessControlContext(parent,
-				new MyCombiner(0));
-		final AccessControlContext c1 = new AccessControlContext(parent,
-				new MyCombiner(1));
-
-                class TestPermission extends BasicPermission {
-                    TestPermission(String s) {
-                        super(s);
-                    }
+            public ProtectionDomain[] combine(
+                    ProtectionDomain[] executionDomains,
+                    ProtectionDomain[] parentDomains) {
+                calledDomainCombiner[i] = true;
+                PermissionCollection pc = new Permissions();
+                pc.add(new AllPermission());
+                ProtectionDomain pd;
+                // if run with the system classloader then there will be no
+                // execution domains
+                if (executionDomains.length > 0) {
+                    pd = new ProtectionDomain(executionDomains[0]
+                            .getCodeSource(), pc);
+                } else {
+                    pd = new ProtectionDomain(parentDomains[0].getCodeSource(),
+                            pc);
                 }
+                return new ProtectionDomain[] { pd };
+            }
+        }
 
-	}
+        ProtectionDomain[] domains = new ProtectionDomain[] { new ProtectionDomain(
+                new CodeSource(null, (Certificate[]) null), new Permissions()) };
+
+        AccessControlContext parent = new AccessControlContext(domains);
+        AccessControlContext c0 = new AccessControlContext(parent,
+                new MyCombiner(0));
+        final AccessControlContext c1 = new AccessControlContext(parent,
+                new MyCombiner(1));
+
+        class TestPermission extends BasicPermission {
+            TestPermission(String s) {
+                super(s);
+            }
+        }
+
+    }
 }

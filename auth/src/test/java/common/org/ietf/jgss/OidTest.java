@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander V. Esin
-*/
+ * @author Alexander V. Esin
+ */
 package org.ietf.jgss;
 
 import java.io.ByteArrayInputStream;
@@ -27,15 +27,15 @@ import junit.framework.TestCase;
 
 /**
  * Tests Oid class
- *
+ * <p/>
  * ASN.1 encodings and string values are base on X.690 specification.
- *  
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 public class OidTest extends TestCase {
 
     /**
-     * Testing: Constructors, toString(), equals(), getDER() 
+     * Testing: Constructors, toString(), equals(), getDER()
      */
     public void testValidOid() {
         Object[][] testcase = new Object[][] {
@@ -100,19 +100,19 @@ public class OidTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * @tests org.ieft.jgss.Oid#containedIn(org.ieft.jgss.Oid[])
      */
     public void testContainedIn() throws Exception {
-        Oid oid= new Oid("1.2.1.2.1");
-        Oid [] oidArr= new Oid [] { 
+        Oid oid = new Oid("1.2.1.2.1");
+        Oid[] oidArr = new Oid[] {
                 new Oid("1.1.1.2.1"),
                 new Oid("1.2.2.2.1"),
                 new Oid("1.2.1.2.1"), //right
                 new Oid("1.2.1.2.5")
-                };
-        assertTrue(oid.containedIn(oidArr) );
+        };
+        assertTrue(oid.containedIn(oidArr));
 
         try {
             oid.containedIn(null);
@@ -120,7 +120,7 @@ public class OidTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Oid constructor Oid(String oid) is tested in case when
      * string oid contains a subidentifier with leading zero
@@ -138,7 +138,7 @@ public class OidTest extends TestCase {
         assertEquals(oid1.hashCode(), oid2.hashCode());
         assertEquals(oid1.hashCode(), oid3.hashCode());
     }
-    
+
     /**
      * Oid constructor Oid(String oid) is tested in case when
      * an invalid oid string is passed as a parameter
@@ -183,7 +183,7 @@ public class OidTest extends TestCase {
     public void testInvalidOIDEncodings() {
 
         byte[][] testcase = new byte[][] {
-        // incorrect tag: MUST be 0x06
+                // incorrect tag: MUST be 0x06
                 new byte[] { 0x05, 0x03, 0x55, 0x04, 0x03 },
                 // incorrect length: MUST be 0x03
                 new byte[] { 0x06, 0x07, 0x55, 0x04, 0x03 },
@@ -217,7 +217,7 @@ public class OidTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * Tests 2 cases of Encoding Rules violation.
      * Both cases should be in testInvalidOIDEncodings().
@@ -233,7 +233,7 @@ public class OidTest extends TestCase {
         assertEquals("2.5.4.3", new Oid(case1).toString());
         assertEquals("2.5.4.3", new Oid(case2).toString());
     }
-    
+
     public void testImmutability() throws Exception {
 
         byte[] encoding = new byte[] { 0x06, 0x03, 0x55, 0x04, 0x03 };
@@ -247,13 +247,13 @@ public class OidTest extends TestCase {
         assertTrue(enc1 != enc2);
     }
 
-    
+
     /**
      * Oid encoding contains 2 extra bytes.
      * Two Oid constructors are verified:
-     *     - Oid(byte[] oid): GSSException is thrown
-     *     - Oid(InputStream oid): oid object is created,
-     *                             input stream contains extra bytes
+     * - Oid(byte[] oid): GSSException is thrown
+     * - Oid(InputStream oid): oid object is created,
+     * input stream contains extra bytes
      */
     public void testExtraBytes() throws Exception {
         byte[] encoding = new byte[] { 0x06, 0x01, 0x55, 0x04, 0x03 };
@@ -312,7 +312,7 @@ public class OidTest extends TestCase {
         } catch (GSSException e) {
         }
     }
-    
+
     public void test_KerberosV5() throws Exception {
         Oid oid = new Oid("1.2.840.113554.1.2.2");
         byte[] expectedDer = new byte[] { 6, 9, 42, -122, 72, -122, -9, 18, 1,

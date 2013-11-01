@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -34,7 +34,6 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>CertPathValidatorException</code> class constructors and
  * methods.
- * 
  */
 public class CertPathValidatorExceptionTest extends TestCase {
 
@@ -43,7 +42,7 @@ public class CertPathValidatorExceptionTest extends TestCase {
 
     /**
      * Constructor for CertPathValidatorExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public CertPathValidatorExceptionTest(String arg0) {
@@ -330,7 +329,7 @@ public class CertPathValidatorExceptionTest extends TestCase {
                         .getCertPath());
                 assertEquals(
                         "getCertPath() must return ".concat(cp.toString()), tE
-                                .getCertPath(), cp);
+                        .getCertPath(), cp);
                 assertEquals("getIndex() must return -1", tE.getIndex(), -1);
 
             } catch (IndexOutOfBoundsException e) {
@@ -339,7 +338,7 @@ public class CertPathValidatorExceptionTest extends TestCase {
             }
         }
     }
-    
+
     class myCertPath extends CertPath {
 
         public List getCertificates() {

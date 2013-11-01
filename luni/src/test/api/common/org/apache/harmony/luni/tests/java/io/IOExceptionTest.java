@@ -50,10 +50,10 @@ public class IOExceptionTest extends TestCase {
             // Expected
         }
     }
-    
+
     /**
      * @tests java.io.IOException#IOException(java.lang.String,
-     *        java.lang.Throwable)
+     *java.lang.Throwable)
      * @since 1.6
      */
     public void test_ConstructorLString_LThrowable() {
@@ -81,12 +81,12 @@ public class IOExceptionTest extends TestCase {
     public void test_Constructor_LThrowable() {
         // Test for constructor java.io.IOException(java.lang.Throwable)
         Throwable cause = new Throwable("A dummy Throwable"); //$NON-NLS-1$
-        IOException ioException = new IOException(cause); 
+        IOException ioException = new IOException(cause);
         assertEquals(cause.toString(), ioException.getMessage());
-        
-        ioException = new IOException((Throwable)null);
+
+        ioException = new IOException((Throwable) null);
         assertNull(ioException.getMessage());
-        
+
         try {
             throw new IOException(new Throwable("Some error message")); //$NON-NLS-1$
         } catch (IOException e) {
@@ -96,18 +96,18 @@ public class IOExceptionTest extends TestCase {
         }
         fail("Failed to generate exception"); //$NON-NLS-1$
     }
-    
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-	}
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+    }
+
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

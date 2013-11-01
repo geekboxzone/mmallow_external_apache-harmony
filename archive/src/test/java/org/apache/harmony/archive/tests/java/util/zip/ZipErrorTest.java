@@ -30,7 +30,7 @@ public class ZipErrorTest extends TestCase {
         ZipError error = new ZipError("ZipError");
         assertEquals("ZipError", error.getMessage());
     }
-    
+
     /**
      * @tests java.util.zip.ZipError#Serialization()
      */
@@ -38,7 +38,7 @@ public class ZipErrorTest extends TestCase {
         ZipError error = new ZipError("serialization test");
         SerializationTest.verifySelf(error);
     }
-    
+
     /**
      * @tests serialization/deserialization compatibility with RI.
      */

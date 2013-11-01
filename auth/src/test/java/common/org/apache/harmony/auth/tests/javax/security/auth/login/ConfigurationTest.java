@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.login;
 
@@ -58,21 +58,21 @@ public class ConfigurationTest extends TestCase {
     private static String testConfFile = Support_Resources
             .getAbsoluteResourcePath("auth.conf");
 
-	/**
-	 * Ease the configuration class
-	 */
-	public static class ConfTestProvider extends Configuration {
+    /**
+     * Ease the configuration class
+     */
+    public static class ConfTestProvider extends Configuration {
 
-		@Override
+        @Override
         public AppConfigurationEntry[] getAppConfigurationEntry(
-				String applicationName) {
-			return null;
-		}
+                String applicationName) {
+            return null;
+        }
 
-		@Override
+        @Override
         public void refresh() {
-		}
-	}
+        }
+    }
 
     // default implementation of Configuration class
     Configuration defaultConfig;
@@ -98,10 +98,10 @@ public class ConfigurationTest extends TestCase {
         Configuration.setConfiguration(defaultConfig);
     }
 
-	/**
-	 * Tests loading of a default provider, both valid and invalid class
-	 * references.
-	 */
+    /**
+     * Tests loading of a default provider, both valid and invalid class
+     * references.
+     */
     public void test_loadDefaultProvider() {
 
         String oldProvider = Security.getProperty(LOGIN_CONFIG_PROVIDER);
@@ -195,7 +195,7 @@ public class ConfigurationTest extends TestCase {
     /**
      * Tests loading config files specified with the security properties
      * login.config.url.N
-     *
+     * <p/>
      * TODO create test for loading a default config file:
      * ${user.home}/.java.login.config
      */
@@ -232,34 +232,31 @@ public class ConfigurationTest extends TestCase {
     /**
      * @tests javax.security.auth.login.Configuration#getInstance(java.lang.String, javax.security.auth.login.Configuration.Parameters, java.security.Provider)
      */
-    public void test_getInstance_String_Parameters_Provider() throws NoSuchAlgorithmException{
+    public void test_getInstance_String_Parameters_Provider() throws NoSuchAlgorithmException {
         MockConfigurationParameters mcp = new MockConfigurationParameters();
         MockProvider mp = new MockProvider();
         Configuration cf = Configuration.getInstance("MockType", mcp, mp);
-        assertEquals("Configuration parameters got should be equals to parameters provided",cf.getParameters(),mcp);
-        assertEquals("Configuration provider got should be equals to provider provided",cf.getProvider(),mp);
-        assertEquals("Configuration type got should be equals to type provided",cf.getType(),"MockType");
-        try{
+        assertEquals("Configuration parameters got should be equals to parameters provided", cf.getParameters(), mcp);
+        assertEquals("Configuration provider got should be equals to provider provided", cf.getProvider(), mp);
+        assertEquals("Configuration type got should be equals to type provided", cf.getType(), "MockType");
+        try {
             Configuration.getInstance(null, mcp, mp);
             fail("Should throw NullPointerException here");
-        }
-        catch(NullPointerException e){
+        } catch (NullPointerException e) {
             //expect to catch NullPointerException here
         }
 
-        try{
+        try {
             Configuration.getInstance("MockType2", mcp, mp);
             fail("Should throw NoSuchAlgorithmException here");
-        }
-        catch(NoSuchAlgorithmException e){
+        } catch (NoSuchAlgorithmException e) {
             //expect to catch NoSuchAlgorithmException here
         }
 
-        try{
-            Configuration.getInstance("MockType2", mcp, (Provider)null);
+        try {
+            Configuration.getInstance("MockType2", mcp, (Provider) null);
             fail("Should throw IllegalArgumentException here");
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             //expect to catch NoSuchAlgorithmException here
         }
 
@@ -271,52 +268,47 @@ public class ConfigurationTest extends TestCase {
     /**
      * @tests javax.security.auth.login.Configuration#getInstance(java.lang.String, javax.security.auth.login.Configuration.Parameters, java.lang.String)
      */
-    public void test_getInstance_String_Parameters_String() throws NoSuchAlgorithmException, NoSuchProviderException{
+    public void test_getInstance_String_Parameters_String() throws NoSuchAlgorithmException, NoSuchProviderException {
         MockConfigurationParameters mcp = new MockConfigurationParameters();
         MockProvider mp = new MockProvider();
         Security.addProvider(mp);
         Configuration cf = Configuration.getInstance("MockType", mcp, "MockProvider");
 
-        assertEquals("Configuration parameters got should be equals to parameters provided",cf.getParameters(),mcp);
-        assertEquals("Configuration provider got should be equals to provider provided",cf.getProvider(),mp);
-        assertEquals("Configuration type got should be equals to type provided",cf.getType(),"MockType");
-        try{
+        assertEquals("Configuration parameters got should be equals to parameters provided", cf.getParameters(), mcp);
+        assertEquals("Configuration provider got should be equals to provider provided", cf.getProvider(), mp);
+        assertEquals("Configuration type got should be equals to type provided", cf.getType(), "MockType");
+        try {
             Configuration.getInstance(null, mcp, "MockProvider");
             fail("Should throw NullPointerException here");
-        }
-        catch(NullPointerException e){
+        } catch (NullPointerException e) {
             //expect to catch NullPointerException here
         }
 
-        try{
+        try {
             Configuration.getInstance("MockType2", mcp, "MockProvider");
             fail("Should throw NoSuchAlgorithmException here");
-        }
-        catch(NoSuchAlgorithmException e){
+        } catch (NoSuchAlgorithmException e) {
             //expect to catch NoSuchAlgorithmException here
         }
 
-        try{
-            Configuration.getInstance("MockType2", mcp, (String)null);
+        try {
+            Configuration.getInstance("MockType2", mcp, (String) null);
             fail("Should throw IllegalArgumentException here");
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             //expect to catch NoSuchAlgorithmException here
         }
 
-        try{
+        try {
             Configuration.getInstance("MockType2", mcp, "");
             fail("Should throw IllegalArgumentException here");
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             //expect to catch NoSuchAlgorithmException here
         }
 
-        try{
+        try {
             Configuration.getInstance("MockType2", mcp, "not_exist_provider");
             fail("Should throw NoSuchProviderException here");
-        }
-        catch(NoSuchProviderException e){
+        } catch (NoSuchProviderException e) {
             //expect to catch NoSuchAlgorithmException here
         }
 
@@ -326,29 +318,27 @@ public class ConfigurationTest extends TestCase {
     /**
      * @tests javax.security.auth.login.Configuration#getInstance(java.lang.String, javax.security.auth.login.Configuration.Parameters)
      */
-    public void test_getInstance_String_Parameters() throws NoSuchAlgorithmException{
+    public void test_getInstance_String_Parameters() throws NoSuchAlgorithmException {
         MockConfigurationParameters mcp = new MockConfigurationParameters();
         MockProvider mp = new MockProvider();
         Security.addProvider(mp);
         Configuration cf = Configuration.getInstance("MockType", mcp);
 
-        assertEquals("Configuration parameters got should be equals to parameters provided",cf.getParameters(),mcp);
-        assertEquals("Configuration provider got should be equals to provider provided",cf.getProvider(),mp);
-        assertEquals("Configuration type got should be equals to type provided",cf.getType(),"MockType");
+        assertEquals("Configuration parameters got should be equals to parameters provided", cf.getParameters(), mcp);
+        assertEquals("Configuration provider got should be equals to provider provided", cf.getProvider(), mp);
+        assertEquals("Configuration type got should be equals to type provided", cf.getType(), "MockType");
 
-        try{
+        try {
             Configuration.getInstance(null, mcp);
             fail("Should throw NullPointerException here");
-        }
-        catch(NullPointerException e){
+        } catch (NullPointerException e) {
             //expect to catch NullPointerException here
         }
 
-        try{
+        try {
             Configuration.getInstance("MockType2", mcp);
             fail("Should throw NoSuchAlgorithmException here");
-        }
-        catch(NoSuchAlgorithmException e){
+        } catch (NoSuchAlgorithmException e) {
             //expect to catch NoSuchAlgorithmException here
         }
 
@@ -359,36 +349,36 @@ public class ConfigurationTest extends TestCase {
      * @throws NoSuchAlgorithmException
      * @tests javax.security.auth.login.Configuration#getProvider()
      */
-    public void test_getProvider() throws NoSuchAlgorithmException{
+    public void test_getProvider() throws NoSuchAlgorithmException {
         MockConfigurationParameters mcp = new MockConfigurationParameters();
         MockProvider mp = new MockProvider();
         Configuration cf = Configuration.getInstance("MockType", mcp, mp);
-        assertEquals("Configuration provider got should be equals to provider provided",cf.getProvider(),mp);
+        assertEquals("Configuration provider got should be equals to provider provided", cf.getProvider(), mp);
     }
 
     /**
      * @throws NoSuchAlgorithmException
      * @tests javax.security.auth.login.Configuration#getProvider()
      */
-    public void test_getParameter() throws NoSuchAlgorithmException{
+    public void test_getParameter() throws NoSuchAlgorithmException {
         MockConfigurationParameters mcp = new MockConfigurationParameters();
         MockProvider mp = new MockProvider();
         Configuration cf = Configuration.getInstance("MockType", mcp, mp);
-        assertEquals("Configuration parameters got should be equals to parameters provided",cf.getParameters(),mcp);
+        assertEquals("Configuration parameters got should be equals to parameters provided", cf.getParameters(), mcp);
     }
 
     /**
      * @throws NoSuchAlgorithmException
      * @tests javax.security.auth.login.Configuration#getProvider()
      */
-    public void test_getType() throws NoSuchAlgorithmException{
+    public void test_getType() throws NoSuchAlgorithmException {
         MockConfigurationParameters mcp = new MockConfigurationParameters();
         MockProvider mp = new MockProvider();
         Configuration cf = Configuration.getInstance("MockType", mcp, mp);
-        assertEquals("Configuration type got should be equals to type provided",cf.getType(),"MockType");
+        assertEquals("Configuration type got should be equals to type provided", cf.getType(), "MockType");
     }
 
-    private static class MockConfigurationParameters implements Configuration.Parameters{
+    private static class MockConfigurationParameters implements Configuration.Parameters {
 
     }
 
@@ -405,18 +395,17 @@ public class ConfigurationTest extends TestCase {
         }
     }
 
-    private static class MockProvider extends Provider{
+    private static class MockProvider extends Provider {
         /**
          *
          */
         private static final long serialVersionUID = 1L;
 
-        public MockProvider(){
-            super("MockProvider",1.0,"MokeProvider for configuration test");
+        public MockProvider() {
+            super("MockProvider", 1.0, "MokeProvider for configuration test");
             put("Configuration.MockType", MockConfiguration.class.getName());
         }
     }
-
 
 
     public static class SecurityPropertiesToBeRead {

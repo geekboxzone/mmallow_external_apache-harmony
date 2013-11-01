@@ -349,7 +349,6 @@ public class SQLWarningTest extends TestCase {
 
     /**
      * @tests {@link java.sql.SQLWarning#SQLWarning(Throwable)}
-     * 
      * @since 1.6
      */
     public void testConstructor_Ljava_lang_Throwable() {
@@ -361,7 +360,6 @@ public class SQLWarningTest extends TestCase {
 
     /**
      * @tests {@link java.sql.SQLWarning#SQLWarning(String, Throwable)}
-     * 
      * @since 1.6
      */
     public void testConstructor_LString_Throwable() {
@@ -374,7 +372,6 @@ public class SQLWarningTest extends TestCase {
 
     /**
      * @tests {@link java.sql.SQLWarning#SQLWarning(String, String, Throwable)}
-     * 
      * @since 1.6
      */
     public void testConstructor_LString_String_Throwable() {
@@ -388,7 +385,6 @@ public class SQLWarningTest extends TestCase {
 
     /**
      * @tests {@link java.sql.SQLWarning#SQLWarning(String, String, int, Throwable)}
-     * 
      * @since 1.6
      */
     public void testConstructor_LString_String_I_Throwable() {

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -29,24 +29,24 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.harmony.security.tests.support.SpiEngUtils;
 import junit.framework.TestCase;
+
 /**
  * Tests for <code>SecretKeyFactory</code> class constructors and methods.
- * 
  */
 
 public class SecretKeyFactory_Impl1Test extends TestCase {
-    
+
     public static final String srvSecretKeyFactory = "SecretKeyFactory";
-        
+
     private static String defaultAlgorithm1 = "DESede";
     private static String defaultAlgorithm2 = "DES";
-    
+
     public static String defaultAlgorithm = null;
 
     private static String defaultProviderName = null;
 
     private static Provider defaultProvider = null;
-    
+
     private static boolean DEFSupported = false;
 
     private static final String NotSupportMsg = "Default algorithm is not supported";
@@ -94,20 +94,20 @@ public class SecretKeyFactory_Impl1Test extends TestCase {
 
     /**
      * Test for <code>translateKey(SecretKey key)</code> method
-     * Assertion: 
+     * Assertion:
      * throw InvalidKeyException if parameter is inappropriate
-     */    
+     */
     public void testSecretKeyFactory11() throws InvalidKeyException {
         if (!DEFSupported) {
             fail(NotSupportMsg);
             return;
         }
         byte[] bb = new byte[10];
-        SecretKeySpec secKeySpec = new SecretKeySpec(bb,defaultAlgorithm);
+        SecretKeySpec secKeySpec = new SecretKeySpec(bb, defaultAlgorithm);
         SecretKeyFactory[] skF = createSKFac();
         assertNotNull("SecretKeyFactory object were not created", skF);
         for (int i = 0; i < skF.length; i++) {
-            try { 
+            try {
                 skF[i].translateKey(null);
                 fail("InvalidKeyException must be thrown: " + i);
             } catch (InvalidKeyException e) {

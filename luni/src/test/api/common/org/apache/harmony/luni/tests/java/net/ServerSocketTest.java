@@ -392,10 +392,10 @@ public class ServerSocketTest extends junit.framework.TestCase {
                         + theSocket.getLocalSocketAddress().toString()
                         + "Expected: "
                         + (new InetSocketAddress(InetAddress.getLocalHost(),
-                                portNumber)).toString(), theSocket
-                        .getLocalSocketAddress().equals(
-                                new InetSocketAddress(InetAddress
-                                        .getLocalHost(), portNumber)));
+                        portNumber)).toString(), theSocket
+                .getLocalSocketAddress().equals(
+                        new InetSocketAddress(InetAddress
+                                .getLocalHost(), portNumber)));
         assertTrue("Server socket not bound when it should be:", theSocket
                 .isBound());
 
@@ -456,7 +456,7 @@ public class ServerSocketTest extends junit.framework.TestCase {
     }
 
     /**
-     * @tests java.net.ServerSocket#bind(java.net.SocketAddress,int)
+     * @tests java.net.ServerSocket#bind(java.net.SocketAddress, int)
      */
     public void test_bindLjava_net_SocketAddressI() throws IOException {
         class mySocketAddress extends SocketAddress {
@@ -476,10 +476,10 @@ public class ServerSocketTest extends junit.framework.TestCase {
                         + theSocket.getLocalSocketAddress().toString()
                         + "Expected: "
                         + (new InetSocketAddress(InetAddress.getLocalHost(),
-                                portNumber)).toString(), theSocket
-                        .getLocalSocketAddress().equals(
-                                new InetSocketAddress(InetAddress
-                                        .getLocalHost(), portNumber)));
+                        portNumber)).toString(), theSocket
+                .getLocalSocketAddress().equals(
+                        new InetSocketAddress(InetAddress
+                                .getLocalHost(), portNumber)));
         assertTrue("Server socket not bound when it should be:", theSocket
                 .isBound());
 
@@ -580,7 +580,7 @@ public class ServerSocketTest extends junit.framework.TestCase {
                 + theSocket.getLocalSocketAddress().toString()
                 + "Expected: "
                 + (new InetSocketAddress(InetAddress.getLocalHost(),
-                        portNumber)).toString(), theSocket
+                portNumber)).toString(), theSocket
                 .getLocalSocketAddress().equals(
                         new InetSocketAddress(InetAddress.getLocalHost(),
                                 portNumber)));
@@ -742,7 +742,7 @@ public class ServerSocketTest extends junit.framework.TestCase {
             serverSocket.bind(theAddress);
         } catch (IOException ex) {
             fail("Unexpected exception when setReuseAddress is true and we bind:"
-                + theAddress.toString() + ":" + ex.toString());
+                    + theAddress.toString() + ":" + ex.toString());
         }
         stillActiveSocket.close();
         theSocket.close();
@@ -766,7 +766,7 @@ public class ServerSocketTest extends junit.framework.TestCase {
             serverSocket.bind(theAddress);
         } catch (IOException ex) {
             fail("Unexpected exception when setReuseAddress is the default case and we bind:"
-                + theAddress.toString() + ":" + ex.toString());
+                    + theAddress.toString() + ":" + ex.toString());
         }
         stillActiveSocket.close();
         theSocket.close();
@@ -878,10 +878,11 @@ public class ServerSocketTest extends junit.framework.TestCase {
 
     /**
      * Regression for HARMONY-3265
+     *
      * @throws Exception
      */
     public void test_ServerSocket_init() throws Exception {
-        String[] args = new String[]{"org.apache.harmony.luni.tests.java.net.TestServerSocketInit"};
+        String[] args = new String[] { "org.apache.harmony.luni.tests.java.net.TestServerSocketInit" };
         Support_Exec.execJava(args, null, true);
     }
 

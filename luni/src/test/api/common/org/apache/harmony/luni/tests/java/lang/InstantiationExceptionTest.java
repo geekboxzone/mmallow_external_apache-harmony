@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class InstantiationExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.InstantiationException#InstantiationException()
-	 */
+    /**
+     * @tests java.lang.InstantiationException#InstantiationException()
+     */
     public void test_Constructor() {
         InstantiationException e = new InstantiationException();
         assertNull(e.getMessage());

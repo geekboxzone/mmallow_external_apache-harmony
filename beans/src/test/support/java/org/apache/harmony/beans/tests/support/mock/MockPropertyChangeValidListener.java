@@ -32,19 +32,17 @@ public interface MockPropertyChangeValidListener extends EventListener {
 
     public void mockNotAEventObject(MockFakeEvent event);
 
-    public void mockPropertyChange_Valid(MockEvent event); 
-    
+    public void mockPropertyChange_Valid(MockEvent event);
+
     public void mockPropertyChange_Valid(Mock2Event event);
-    
+
     public void mockPropertyChange_Valid(MockPropertyChangeEvent event);
-   
+
 
 }
 
-class MockEvent 
-{
+class MockEvent {
 }
 
-class Mock2Event
-{
+class Mock2Event {
 }

@@ -30,7 +30,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest.Serializ
 
 /**
  * Test class for javax.sql.StatementEvent.
- * 
+ *
  * @since 1.6
  */
 public class StatementEventTest extends TestCase {

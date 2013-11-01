@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -30,12 +30,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>RSAPrivateCrtKeySpec</code> class fields and methods
- * 
  */
 public class RSAPrivateCrtKeySpecTest extends TestCase {
 
     /**
      * Constructor for RSAPrivateCrtKeySpecTest.
+     *
      * @param name
      */
     public RSAPrivateCrtKeySpecTest(String name) {
@@ -94,7 +94,7 @@ public class RSAPrivateCrtKeySpecTest extends TestCase {
                 null,
                 null);
     }
-    
+
     /**
      * Test for <code>getCrtCoefficient()</code> method<br>
      * Assertion: returns crt coefficient
@@ -200,7 +200,7 @@ public class RSAPrivateCrtKeySpecTest extends TestCase {
     //
     // Tests for inherited methods
     //
-    
+
     /**
      * Test for <code>getModulus()</code> method<br>
      * Assertion: returns modulus

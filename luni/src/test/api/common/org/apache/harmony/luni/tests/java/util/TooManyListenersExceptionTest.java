@@ -21,44 +21,44 @@ import java.util.TooManyListenersException;
 
 public class TooManyListenersExceptionTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.util.TooManyListenersException#TooManyListenersException()
-	 */
-	public void test_Constructor() {
-		// Test for method java.util.TooManyListenersException()
-		try {
-			throw new TooManyListenersException();
-		} catch (TooManyListenersException e) {
-			assertNull(
-					"Message thrown with exception constructed with no message",
-					e.getMessage());
-		}
-	}
+    /**
+     * @tests java.util.TooManyListenersException#TooManyListenersException()
+     */
+    public void test_Constructor() {
+        // Test for method java.util.TooManyListenersException()
+        try {
+            throw new TooManyListenersException();
+        } catch (TooManyListenersException e) {
+            assertNull(
+                    "Message thrown with exception constructed with no message",
+                    e.getMessage());
+        }
+    }
 
-	/**
-	 * @tests java.util.TooManyListenersException#TooManyListenersException(java.lang.String)
-	 */
-	public void test_ConstructorLjava_lang_String() {
-		// Test for method java.util.TooManyListenersException(java.lang.String)
-		try {
-			throw new TooManyListenersException("Gah");
-		} catch (TooManyListenersException e) {
-			assertEquals("Incorrect message thrown with exception", "Gah", e
-					.getMessage());
-		}
-	}
+    /**
+     * @tests java.util.TooManyListenersException#TooManyListenersException(java.lang.String)
+     */
+    public void test_ConstructorLjava_lang_String() {
+        // Test for method java.util.TooManyListenersException(java.lang.String)
+        try {
+            throw new TooManyListenersException("Gah");
+        } catch (TooManyListenersException e) {
+            assertEquals("Incorrect message thrown with exception", "Gah", e
+                    .getMessage());
+        }
+    }
 
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

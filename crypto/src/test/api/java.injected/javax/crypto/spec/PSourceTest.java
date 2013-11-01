@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package javax.crypto.spec;
 
@@ -48,14 +48,14 @@ public class PSourceTest extends TestCase {
         }
 
         assertEquals("The PSource.PSpecified DEFAULT value should be byte[0]",
-                            0, PSource.PSpecified.DEFAULT.getValue().length);
+                0, PSource.PSpecified.DEFAULT.getValue().length);
 
-        byte[] p = new byte[] {1, 2, 3, 4, 5};
+        byte[] p = new byte[] { 1, 2, 3, 4, 5 };
         PSource.PSpecified ps = new PSource.PSpecified(p);
-        p[0] ++;
+        p[0]++;
         assertFalse("The change of p specified in the constructor "
-                    + "should not cause the change of internal array.",
-                    p[0] == ps.getValue()[0]);
+                + "should not cause the change of internal array.",
+                p[0] == ps.getValue()[0]);
     }
 
     /**
@@ -64,18 +64,18 @@ public class PSourceTest extends TestCase {
      * of returned array does not affect the internal array.
      */
     public void testGetValue() {
-        byte[] p = new byte[] {1, 2, 3, 4, 5};
+        byte[] p = new byte[] { 1, 2, 3, 4, 5 };
 
         PSource.PSpecified ps = new PSource.PSpecified(p);
         byte[] result = ps.getValue();
-        if (! Arrays.equals(p, result)) {
+        if (!Arrays.equals(p, result)) {
             fail("The returned array does not equal to the specified "
                     + "in the constructor.");
         }
-        result[0] ++;
+        result[0]++;
         assertFalse("The change of returned by getValue() array "
-                    + "should not cause the change of internal array.",
-                    result[0] == ps.getValue()[0]);
+                + "should not cause the change of internal array.",
+                result[0] == ps.getValue()[0]);
     }
 
     /**

@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -108,6 +109,7 @@ public class AlgorithmParameterGenerator2Test extends TestCase {
         } catch (IllegalArgumentException e) {
         }
     }
+
     /**
      * Test for <code>getInstance(String algorithm)</code> method
      * Assertions:
@@ -246,14 +248,17 @@ public class AlgorithmParameterGenerator2Test extends TestCase {
             checkResult(apG);
         }
     }
+
     /**
      * Additional class for init(...) methods verification
      */
     class tmpAlgorithmParameterSpec implements AlgorithmParameterSpec {
         private final String type;
+
         public tmpAlgorithmParameterSpec(String type) {
             this.type = type;
         }
+
         public String getType() {
             return type;
         }

@@ -34,7 +34,7 @@ public class Support_Exec extends TestCase {
      * Exec java returns the exitCode, and stdOut and stdErr as strings
      */
     public static Object[] runJava(List<String> args, String[] envp,
-                                   boolean displayOutput)
+            boolean displayOutput)
             throws IOException, InterruptedException {
         String executable = System.getProperty("java.home");
         if (!executable.endsWith(File.separator)) {
@@ -59,7 +59,7 @@ public class Support_Exec extends TestCase {
      * Exec command returns the exitCode, and stdOut and stdErr as strings
      */
     public static Object[] run(String command, List<String> args, String[] envp,
-                               boolean displayOutput)
+            boolean displayOutput)
             throws IOException, InterruptedException {
         Object[] arr = exec(command, args, envp, displayOutput);
 
@@ -81,20 +81,20 @@ public class Support_Exec extends TestCase {
         int exitCode = proc.exitValue();
         proc.destroy();
         return new Object[] {
-            Integer.valueOf(exitCode),
-            output.toString(),
-            ((StringBuilder)arr[1]).toString()
+                Integer.valueOf(exitCode),
+                output.toString(),
+                ((StringBuilder) arr[1]).toString()
         };
     }
-        
+
     /**
-     *  This function returns the output of the process as a string
+     * This function returns the output of the process as a string
      */
     public static String execJava(String[] args, String[] classpath,
-                                  boolean displayOutput)
-        throws IOException, InterruptedException {
+            boolean displayOutput)
+            throws IOException, InterruptedException {
         Object[] arr =
-            execJavaCommon(args, classpath, null, displayOutput, true);
+                execJavaCommon(args, classpath, null, displayOutput, true);
 
         return getProcessOutput(arr, displayOutput, true);
     }
@@ -103,16 +103,16 @@ public class Support_Exec extends TestCase {
      * This function returns the output of the process as a string
      */
     public static String execJava(String[] args, String[] classpath,
-                                  String[] envp, boolean displayOutput)
+            String[] envp, boolean displayOutput)
             throws IOException, InterruptedException {
         Object[] arr =
-            execJavaCommon(args, classpath, envp, displayOutput, false);
+                execJavaCommon(args, classpath, envp, displayOutput, false);
 
         return getProcessOutput(arr, displayOutput, true);
     }
 
     private static String getProcessOutput(Object[] arr, boolean displayOutput,
-                                           boolean checkStderr)
+            boolean checkStderr)
             throws IOException, InterruptedException {
         Process proc = (Process) arr[0];
         StringBuilder output = new StringBuilder();
@@ -138,25 +138,25 @@ public class Support_Exec extends TestCase {
     }
 
     public static void checkStderr(Object[] execArgs) {
-            StringBuilder errBuf = (StringBuilder) execArgs[1];
+        StringBuilder errBuf = (StringBuilder) execArgs[1];
 
-            synchronized (errBuf) {
-                if (errBuf.length() > 0) {
-                    fail(errBuf.toString());
-                }
+        synchronized (errBuf) {
+            if (errBuf.length() > 0) {
+                fail(errBuf.toString());
             }
+        }
     }
 
     public static Object[] execJava2(String[] args, String[] classpath,
-                                     boolean displayOutput)
+            boolean displayOutput)
             throws IOException, InterruptedException {
         return execJavaCommon(args, classpath, null, displayOutput, true);
     }
 
     private static Object[] execJavaCommon(String[] args, String[] classpath,
-                                           String[] envp,
-                                           boolean displayOutput,
-                                           boolean appendToSystemClassPath)
+            String[] envp,
+            boolean displayOutput,
+            boolean appendToSystemClassPath)
             throws IOException, InterruptedException {
         // this function returns the resulting process from the exec
         ArrayList<String> execArgs = null;
@@ -182,7 +182,7 @@ public class Support_Exec extends TestCase {
         if (appendToSystemClassPath) {
             execArgs.add("-cp");
             execArgs.add(System.getProperty("java.class.path") +
-                         classPathString);
+                    classPathString);
         } else {
             if (classpath != null) {
                 execArgs.add("-cp");
@@ -208,8 +208,8 @@ public class Support_Exec extends TestCase {
     }
 
     private static Object[] exec(String command, List<String> args,
-                                 String[] envp,
-                                 boolean displayOutput)
+            String[] envp,
+            boolean displayOutput)
             throws IOException, InterruptedException {
         // this function returns the resulting process from the exec
         args.add(0, command);
@@ -228,58 +228,58 @@ public class Support_Exec extends TestCase {
 
         // execute java process
         final Process proc =
-            Runtime.getRuntime().exec(args.toArray(new String[args.size()]),
-                                      envp);
+                Runtime.getRuntime().exec(args.toArray(new String[args.size()]),
+                        envp);
 
         final StringBuilder errBuf = new StringBuilder();
         Thread errThread = new Thread(new Runnable() {
-                public void run() {
-                    synchronized (errBuf) {
-                        InputStream err;
-                        int result;
-                        byte[] bytes = new byte[1024];
+            public void run() {
+                synchronized (errBuf) {
+                    InputStream err;
+                    int result;
+                    byte[] bytes = new byte[1024];
 
-                        synchronized (proc) {
-                            proc.notifyAll();
+                    synchronized (proc) {
+                        proc.notifyAll();
+                    }
+
+                    err = proc.getErrorStream();
+                    try {
+                        while ((result = err.read(bytes)) != -1) {
+                            System.err.write(bytes, 0, result);
+                            errBuf.append(new String(bytes));
                         }
-
-                        err = proc.getErrorStream();
-                        try {
-                            while ((result = err.read(bytes)) != -1) {
-                                System.err.write(bytes, 0, result);
-                                errBuf.append(new String(bytes));
-                            }
-                            err.close();
-                        } catch (IOException e) {
-                            ByteArrayOutputStream out =
+                        err.close();
+                    } catch (IOException e) {
+                        ByteArrayOutputStream out =
                                 new ByteArrayOutputStream();
-                            PrintStream printer = new PrintStream(out);
-                            
-                            e.printStackTrace();
-                            e.printStackTrace(printer);
-                            printer.close();
-                            errBuf.append(new String(out.toByteArray()));
-                        }
+                        PrintStream printer = new PrintStream(out);
+
+                        e.printStackTrace();
+                        e.printStackTrace(printer);
+                        printer.close();
+                        errBuf.append(new String(out.toByteArray()));
                     }
                 }
-            });
+            }
+        });
 
         synchronized (proc) {
             errThread.start();
             // wait for errThread to start
             int count = 0;
             boolean isFinished = false;
-            while(!isFinished) {
+            while (!isFinished) {
                 try {
                     proc.wait();
                     isFinished = true;
                 } catch (InterruptedException e) {
-                    if(++count == 2) {
+                    if (++count == 2) {
                         throw e;
                     }
                 }
             }
-            if(count > 0) {
+            if (count > 0) {
                 Thread.currentThread().interrupt();
             }
         }

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.support.cert;
 
@@ -28,17 +28,17 @@ import java.security.cert.CertPathBuilderSpi;
 import java.security.cert.CertPathParameters;
 
 /**
- * Additional class for verification CertPathBuilderSpi 
- * and CertPathBuilder 
- 
+ * Additional class for verification CertPathBuilderSpi
+ * and CertPathBuilder
  */
 
 public class MyCertPathBuilderSpi extends CertPathBuilderSpi {
     private int swi = 0;
+
     public CertPathBuilderResult engineBuild(CertPathParameters params)
             throws CertPathBuilderException, InvalidAlgorithmParameterException {
         swi++;
-        if ((params == null) && ((swi %2 ) != 0)) {
+        if ((params == null) && ((swi % 2) != 0)) {
             throw new CertPathBuilderException("Null parameter");
         }
         return null;

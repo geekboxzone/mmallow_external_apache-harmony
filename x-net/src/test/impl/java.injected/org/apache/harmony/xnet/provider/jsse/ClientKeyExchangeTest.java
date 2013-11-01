@@ -25,7 +25,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ClientKeyExchange</code> constructor and methods
- *  
  */
 public class ClientKeyExchangeTest extends TestCase {
 

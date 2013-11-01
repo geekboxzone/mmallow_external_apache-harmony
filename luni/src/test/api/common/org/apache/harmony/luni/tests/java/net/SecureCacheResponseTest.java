@@ -37,7 +37,7 @@ public class SecureCacheResponseTest extends TestCase {
         assertNull(sc.getCipherSuite());
     }
 
-    class MockCacheResponse extends SecureCacheResponse{
+    class MockCacheResponse extends SecureCacheResponse {
 
         @Override
         public String getCipherSuite() {
@@ -80,6 +80,6 @@ public class SecureCacheResponseTest extends TestCase {
             // do nothing
             return null;
         }
-        
+
     }
 }

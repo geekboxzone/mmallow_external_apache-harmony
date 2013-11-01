@@ -34,39 +34,39 @@ import tests.support.Support_GetLocal;
 
 public class SecureClassLoader2Test extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.security.SecureClassLoader#getPermissions(java.security.CodeSource)
-	 */
-	public void test_getPermissionsLjava_security_CodeSource() throws IOException {
-		class MyClassLoader extends SecureClassLoader {
-			public PermissionCollection getPerms() {
-				return super.getPermissions(new CodeSource(null,
-						(Certificate[]) null));
-			}
+    /**
+     * @tests java.security.SecureClassLoader#getPermissions(java.security.CodeSource)
+     */
+    public void test_getPermissionsLjava_security_CodeSource() throws IOException {
+        class MyClassLoader extends SecureClassLoader {
+            public PermissionCollection getPerms() {
+                return super.getPermissions(new CodeSource(null,
+                        (Certificate[]) null));
+            }
 
-			public Class define(String name, byte[] bytes) {
-				return defineClass(name, bytes, 0, bytes.length,
-						(ProtectionDomain) null);
-			}
-		}
+            public Class define(String name, byte[] bytes) {
+                return defineClass(name, bytes, 0, bytes.length,
+                        (ProtectionDomain) null);
+            }
+        }
 
-		MyClassLoader myloader = new MyClassLoader();
-		PermissionCollection pc = myloader.getPerms();
-		Enumeration e1 = pc.elements();
-		int count = 0;
-		while (e1.hasMoreElements()) {
-			e1.nextElement();
-			count++;
-		}
-		assertEquals("expected no permissions", 0, count);
+        MyClassLoader myloader = new MyClassLoader();
+        PermissionCollection pc = myloader.getPerms();
+        Enumeration e1 = pc.elements();
+        int count = 0;
+        while (e1.hasMoreElements()) {
+            e1.nextElement();
+            count++;
+        }
+        assertEquals("expected no permissions", 0, count);
 
         File file = Support_GetLocal.getLocalFile("hyts_security.jar");
         JarFile jar = new JarFile(file);
         InputStream in = jar.getInputStream(jar.getEntry("packA/SecurityTest.class"));
         byte[] bytes = InputStreamHelper.readFullyAndClose(in);
         Class c = myloader.define("packA.SecurityTest", bytes);
-		ProtectionDomain pd = c.getProtectionDomain();
-		assertNotNull("Expected dynamic policy", pd.getClassLoader());
-		assertNull("Expected null permissions", pd.getPermissions());
-	}
+        ProtectionDomain pd = c.getProtectionDomain();
+        assertNotNull("Expected dynamic policy", pd.getClassLoader());
+        assertNull("Expected null permissions", pd.getPermissions());
+    }
 }

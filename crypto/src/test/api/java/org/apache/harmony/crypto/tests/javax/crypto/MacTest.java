@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -45,7 +45,6 @@ import junit.framework.TestSuite;
 
 /**
  * Tests for Mac class constructors and methods
- *
  */
 
 public class MacTest extends TestCase {
@@ -66,8 +65,8 @@ public class MacTest extends TestCase {
 
     private static String[] validValues = new String[3];
 
-    public static final String validAlgorithmsMac [] =
-        {"HmacSHA1", "HmacMD5", "HmacSHA256", "HmacSHA384", "HmacSHA512"};
+    public static final String validAlgorithmsMac[] =
+            { "HmacSHA1", "HmacMD5", "HmacSHA256", "HmacSHA384", "HmacSHA512" };
 
 
     static {
@@ -86,13 +85,13 @@ public class MacTest extends TestCase {
         }
     }
 
-    private Mac [] createMacs() {
+    private Mac[] createMacs() {
         if (!DEFSupported) {
             fail(NotSupportedMsg);
             return null;
         }
         try {
-            Mac m [] = new Mac[3];
+            Mac m[] = new Mac[3];
             m[0] = Mac.getInstance(defaultAlgorithm);
             m[1] = Mac.getInstance(defaultAlgorithm, defaultProvider);
             m[2] = Mac.getInstance(defaultAlgorithm, defaultProviderName);
@@ -140,6 +139,7 @@ public class MacTest extends TestCase {
             assertEquals("Incorrect algorithm", mac.getAlgorithm(), validValues[i]);
         }
     }
+
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
      * Assertion:
@@ -198,10 +198,11 @@ public class MacTest extends TestCase {
                 Mac.getInstance(invalidValues[i], defaultProviderName);
                 fail("NoSuchAlgorithmException must be throws when algorithm is not available: "
                         .concat(invalidValues[i]));
-            } catch( NoSuchAlgorithmException e) {
+            } catch (NoSuchAlgorithmException e) {
             }
         }
     }
+
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
      * Assertion: returns Mac object
@@ -239,6 +240,7 @@ public class MacTest extends TestCase {
             }
         }
     }
+
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code> method
      * Assertion:
@@ -284,6 +286,7 @@ public class MacTest extends TestCase {
             assertEquals("Incorrect provider", mac.getProvider(), defaultProvider);
         }
     }
+
     /**
      * Test for <code>update</code> and <code>doFinal</code> methods
      * Assertion: throws IllegalStateException when Mac is not initialized
@@ -293,13 +296,13 @@ public class MacTest extends TestCase {
             fail(NotSupportedMsg);
             return;
         }
-        Mac [] macs = createMacs();
+        Mac[] macs = createMacs();
         assertNotNull("Mac objects were not created", macs);
-        byte [] buf = new byte[10];
+        byte[] buf = new byte[10];
         ByteBuffer bBuf = ByteBuffer.wrap(buf, 0, 10);
         for (int i = 0; i < macs.length; i++) {
             try {
-                macs[i].update((byte)0);
+                macs[i].update((byte) 0);
                 fail("IllegalStateException must be thrown");
             } catch (IllegalStateException e) {
             }
@@ -335,6 +338,7 @@ public class MacTest extends TestCase {
             }
         }
     }
+
     /**
      * Test for <code>doFinal(byte[] output, int outOffset)</code> method
      * Assertion:
@@ -396,14 +400,14 @@ public class MacTest extends TestCase {
             fail(NotSupportedMsg);
             return;
         }
-        Mac [] macs = createMacs();
+        Mac[] macs = createMacs();
         assertNotNull("Mac objects were not created", macs);
-        byte [] b = {(byte)0, (byte)0, (byte)0, (byte)0, (byte)0};
+        byte[] b = { (byte) 0, (byte) 0, (byte) 0, (byte) 0, (byte) 0 };
         SecretKeySpec scs = new SecretKeySpec(b, "SHA1");
         for (int i = 0; i < macs.length; i++) {
             macs[i].init(scs);
-            byte [] res1 = macs[i].doFinal();
-            byte [] res2 = new byte[res1.length + 10];
+            byte[] res1 = macs[i].doFinal();
+            byte[] res2 = new byte[res1.length + 10];
             macs[i].doFinal(res2, 0);
             for (int j = 0; j < res1.length; j++) {
                 assertEquals("Not equals byte number: "
@@ -411,35 +415,36 @@ public class MacTest extends TestCase {
             }
         }
     }
+
     /**
      * Test for <code>doFinal(byte[] input)</code> method
      * Assertion: update Mac and returns result
      */
     public void testMac12() throws NoSuchAlgorithmException, NoSuchProviderException,
             IllegalArgumentException, IllegalStateException,
-            InvalidKeyException  {
+            InvalidKeyException {
         if (!DEFSupported) {
             fail(NotSupportedMsg);
             return;
         }
-        Mac [] macs = createMacs();
+        Mac[] macs = createMacs();
         assertNotNull("Mac objects were not created", macs);
-        byte [] b = {(byte)0, (byte)0, (byte)0, (byte)0, (byte)0};
-        byte [] upd = {(byte)5, (byte)4, (byte)3, (byte)2, (byte)1, (byte)0};
+        byte[] b = { (byte) 0, (byte) 0, (byte) 0, (byte) 0, (byte) 0 };
+        byte[] upd = { (byte) 5, (byte) 4, (byte) 3, (byte) 2, (byte) 1, (byte) 0 };
         SecretKeySpec scs = new SecretKeySpec(b, "SHA1");
         for (int i = 0; i < macs.length; i++) {
             macs[i].init(scs);
-            byte [] res1 = macs[i].doFinal();
-            byte [] res2 = macs[i].doFinal();
+            byte[] res1 = macs[i].doFinal();
+            byte[] res2 = macs[i].doFinal();
             assertEquals("Results are not the same", res1.length, res2.length);
-            for(int t = 0; t < res1.length; t++) {
+            for (int t = 0; t < res1.length; t++) {
                 assertEquals("Results are not the same", res1[t], res2[t]);
             }
             res2 = macs[i].doFinal(upd);
             macs[i].update(upd);
             res1 = macs[i].doFinal();
             assertEquals("Results are not the same", res1.length, res2.length);
-            for(int t = 0; t < res1.length; t++) {
+            for (int t = 0; t < res1.length; t++) {
                 assertEquals("Results are not the same", res1[t], res2[t]);
             }
         }
@@ -457,9 +462,9 @@ public class MacTest extends TestCase {
             fail(NotSupportedMsg);
             return;
         }
-        Mac [] macs = createMacs();
+        Mac[] macs = createMacs();
         assertNotNull("Mac objects were not created", macs);
-        byte [] b = {(byte)0, (byte)0, (byte)0, (byte)0, (byte)0};
+        byte[] b = { (byte) 0, (byte) 0, (byte) 0, (byte) 0, (byte) 0 };
         SecretKeySpec scs = new SecretKeySpec(b, "SHA1");
         for (int i = 0; i < macs.length; i++) {
             macs[i].init(scs);
@@ -485,6 +490,7 @@ public class MacTest extends TestCase {
             }
         }
     }
+
     /**
      * Test for <code>update(byte[] input, int outset, int len)</code> and
      * <code>update(byte[] input</code>
@@ -498,13 +504,13 @@ public class MacTest extends TestCase {
             fail(NotSupportedMsg);
             return;
         }
-        Mac [] macs = createMacs();
+        Mac[] macs = createMacs();
         assertNotNull("Mac objects were not created", macs);
-        byte [] b = {(byte)0, (byte)0, (byte)0, (byte)0, (byte)0};
-        byte [] upd1 = {(byte)0, (byte)1, (byte)5, (byte)4, (byte)3, (byte)2};
-        byte [] upd2 = {(byte)5, (byte)4, (byte)3, (byte)2};
-        byte [] res1;
-        byte [] res2;
+        byte[] b = { (byte) 0, (byte) 0, (byte) 0, (byte) 0, (byte) 0 };
+        byte[] upd1 = { (byte) 0, (byte) 1, (byte) 5, (byte) 4, (byte) 3, (byte) 2 };
+        byte[] upd2 = { (byte) 5, (byte) 4, (byte) 3, (byte) 2 };
+        byte[] res1;
+        byte[] res2;
         SecretKeySpec scs = new SecretKeySpec(b, "SHA1");
         for (int i = 0; i < macs.length; i++) {
             macs[i].init(scs);
@@ -514,21 +520,22 @@ public class MacTest extends TestCase {
             macs[i].update(upd2);
             res2 = macs[i].doFinal();
             assertEquals("Results are not the same", res1.length, res2.length);
-            for(int t = 0; t < res1.length; t++) {
+            for (int t = 0; t < res1.length; t++) {
                 assertEquals("Results are not the same", res1[t], res2[t]);
             }
             macs[i].init(scs);
-            macs[i].update((byte)5);
+            macs[i].update((byte) 5);
             res1 = macs[i].doFinal();
             macs[i].init(scs);
-            macs[i].update(upd1,2,1);
+            macs[i].update(upd1, 2, 1);
             res2 = macs[i].doFinal();
             assertEquals("Results are not the same", res1.length, res2.length);
-            for(int t = 0; t < res1.length; t++) {
+            for (int t = 0; t < res1.length; t++) {
                 assertEquals("Results are not the same", res1[t], res2[t]);
             }
         }
     }
+
     /**
      * Test for <code>clone()</code> method
      * Assertion: returns Mac object or throws CloneNotSupportedException
@@ -538,7 +545,7 @@ public class MacTest extends TestCase {
             fail(NotSupportedMsg);
             return;
         }
-        Mac [] macs = createMacs();
+        Mac[] macs = createMacs();
         assertNotNull("Mac objects were not created", macs);
         for (int i = 0; i < macs.length; i++) {
             try {
@@ -550,6 +557,7 @@ public class MacTest extends TestCase {
             }
         }
     }
+
     /**
      * Test for
      * <code>init(Key key, AlgorithmParameterSpec params)</code>
@@ -565,9 +573,9 @@ public class MacTest extends TestCase {
             fail(NotSupportedMsg);
             return;
         }
-        Mac [] macs = createMacs();
+        Mac[] macs = createMacs();
         assertNotNull("Mac objects were not created", macs);
-        byte [] b = {(byte)1, (byte)2, (byte)3, (byte)4, (byte)5};
+        byte[] b = { (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5 };
         SecretKeySpec sks = new SecretKeySpec(b, "SHA1");
         DHGenParameterSpec algPS = new DHGenParameterSpec(1, 2);
 
@@ -605,14 +613,14 @@ public class MacTest extends TestCase {
             fail(NotSupportedMsg);
             return;
         }
-        Mac [] macs = createMacs();
+        Mac[] macs = createMacs();
         assertNotNull("Mac objects were not created", macs);
-        byte [] bb = {(byte)1, (byte)2, (byte)3, (byte)4, (byte)5};
+        byte[] bb = { (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5 };
         SecretKeySpec sks = new SecretKeySpec(bb, "SHA1");
         ByteBuffer byteNull = null;
         ByteBuffer byteBuff = ByteBuffer.allocate(0);
-        byte [] bb1;
-        byte [] bb2;
+        byte[] bb1;
+        byte[] bb2;
         for (int i = 0; i < macs.length; i++) {
             macs[i].init(sks);
             bb1 = macs[i].doFinal();
@@ -635,6 +643,7 @@ public class MacTest extends TestCase {
             }
         }
     }
+
     /**
      * Test for <code>update(ByteBuffer input)</code>
      * <code>update(byte[] input, int offset, int len)</code>
@@ -648,14 +657,14 @@ public class MacTest extends TestCase {
             fail(NotSupportedMsg);
             return;
         }
-        Mac [] macs = createMacs();
+        Mac[] macs = createMacs();
         assertNotNull("Mac objects were not created", macs);
-        byte [] bb = {(byte)1, (byte)2, (byte)3, (byte)4, (byte)5};
+        byte[] bb = { (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5 };
         SecretKeySpec sks = new SecretKeySpec(bb, "SHA1");
-        byte [] bbuf = {(byte)5, (byte)4, (byte)3, (byte)2, (byte)1};
+        byte[] bbuf = { (byte) 5, (byte) 4, (byte) 3, (byte) 2, (byte) 1 };
         ByteBuffer byteBuf;
-        byte [] bb1;
-        byte [] bb2;
+        byte[] bb1;
+        byte[] bb2;
         for (int i = 0; i < macs.length; i++) {
             byteBuf = ByteBuffer.allocate(5);
             byteBuf.put(bbuf);
@@ -672,27 +681,29 @@ public class MacTest extends TestCase {
             }
         }
     }
+
     /**
      * Test for <code>clone()</code> method
      * Assertion: clone if provider is clo
      */
-    public void testClone()  {
+    public void testClone() {
         if (!DEFSupported) {
             fail(NotSupportedMsg);
             return;
         }
-        Mac [] macs = createMacs();
+        Mac[] macs = createMacs();
         assertNotNull("Mac objects were not created", macs);
         Mac res;
         for (int i = 0; i < macs.length; i++) {
             try {
-                res = (Mac)macs[i].clone();
+                res = (Mac) macs[i].clone();
                 assertTrue("Object should not be equals", !macs[i].equals(res));
                 assertEquals("Incorrect class", macs[i].getClass(), res.getClass());
             } catch (CloneNotSupportedException e) {
             }
         }
     }
+
     /**
      * Test for <code>getMacLength()</code> method
      * Assertion: return Mac length
@@ -702,7 +713,7 @@ public class MacTest extends TestCase {
             fail(NotSupportedMsg);
             return;
         }
-        Mac [] macs = createMacs();
+        Mac[] macs = createMacs();
         assertNotNull("Mac objects were not created", macs);
         for (int i = 0; i < macs.length; i++) {
             assertTrue("Length should be positive", (macs[i].getMacLength() >= 0));
@@ -718,21 +729,21 @@ public class MacTest extends TestCase {
             fail(NotSupportedMsg);
             return;
         }
-        Mac [] macs = createMacs();
+        Mac[] macs = createMacs();
         assertNotNull("Mac objects were not created", macs);
-        byte [] bb = {(byte)1, (byte)2, (byte)3, (byte)4, (byte)5};
+        byte[] bb = { (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5 };
         SecretKeySpec sks = new SecretKeySpec(bb, "SHA1");
-        byte [] bbuf = {(byte)5, (byte)4, (byte)3, (byte)2, (byte)1};
-        byte [] bb1;
-        byte [] bb2;
+        byte[] bbuf = { (byte) 5, (byte) 4, (byte) 3, (byte) 2, (byte) 1 };
+        byte[] bb1;
+        byte[] bb2;
         for (int i = 0; i < macs.length; i++) {
             macs[i].init(sks);
             bb1 = macs[i].doFinal();
             macs[i].reset();
             bb2 = macs[i].doFinal();
-            assertEquals("incorrect result",bb1.length, bb2.length);
+            assertEquals("incorrect result", bb1.length, bb2.length);
             for (int t = 0; t < bb1.length; t++) {
-               assertEquals("Incorrect doFinal result", bb1[t], bb2[t]);
+                assertEquals("Incorrect doFinal result", bb1[t], bb2[t]);
             }
             macs[i].reset();
             macs[i].update(bbuf);
@@ -740,12 +751,13 @@ public class MacTest extends TestCase {
             macs[i].reset();
             macs[i].update(bbuf, 0, bbuf.length);
             bb2 = macs[i].doFinal();
-            assertEquals("incorrect result",bb1.length, bb2.length);
+            assertEquals("incorrect result", bb1.length, bb2.length);
             for (int t = 0; t < bb1.length; t++) {
-               assertEquals("Incorrect doFinal result", bb1[t], bb2[t]);
+                assertEquals("Incorrect doFinal result", bb1[t], bb2[t]);
             }
         }
     }
+
     /**
      * Test for <code>Mac</code> constructor
      * Assertion: returns Mac object
@@ -788,6 +800,7 @@ public class MacTest extends TestCase {
     }
 
 }
+
 /**
  * Additional class for Mac constructor verification
  */

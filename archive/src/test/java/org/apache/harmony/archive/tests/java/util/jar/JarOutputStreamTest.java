@@ -32,73 +32,73 @@ import tests.support.resource.Support_Resources;
 
 public class JarOutputStreamTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.util.jar.JarOutputStream#putNextEntry(java.util.zip.ZipEntry)
-	 */
-	public void test_putNextEntryLjava_util_zip_ZipEntry() throws Exception {
-		// testClass file`s actual extension is .class, since having .class
-		// extension files in source dir causes
-		// problems on eclipse, the extension is changed into .ser or it can be
-		// anything. The file is being
-		// read by inputstream and being written to other file,
-		// as long as the content of the file is not changed, the extension does
-		// not matter
-		final String testClass = "hyts_mainClass.ser";
-		final String entryName = "foo/bar/execjartest/MainClass.class";
+    /**
+     * @tests java.util.jar.JarOutputStream#putNextEntry(java.util.zip.ZipEntry)
+     */
+    public void test_putNextEntryLjava_util_zip_ZipEntry() throws Exception {
+        // testClass file`s actual extension is .class, since having .class
+        // extension files in source dir causes
+        // problems on eclipse, the extension is changed into .ser or it can be
+        // anything. The file is being
+        // read by inputstream and being written to other file,
+        // as long as the content of the file is not changed, the extension does
+        // not matter
+        final String testClass = "hyts_mainClass.ser";
+        final String entryName = "foo/bar/execjartest/MainClass.class";
 
-		// test whether specifying the main class in the manifest
-		// works using either /'s or .'s as a separator
-		final String[] manifestMain = { "foo.bar.execjartest.MainClass",
-				"foo/bar/execjartest/MainClass" };
+        // test whether specifying the main class in the manifest
+        // works using either /'s or .'s as a separator
+        final String[] manifestMain = { "foo.bar.execjartest.MainClass",
+                "foo/bar/execjartest/MainClass" };
 
-		for (String element : manifestMain) {
+        for (String element : manifestMain) {
 
-			// create the manifest
-			Manifest newman = new Manifest();
-			Attributes att = newman.getMainAttributes();
-			att.put(Attributes.Name.MANIFEST_VERSION, "1.0");
-			att.put(Attributes.Name.MAIN_CLASS, element);
+            // create the manifest
+            Manifest newman = new Manifest();
+            Attributes att = newman.getMainAttributes();
+            att.put(Attributes.Name.MANIFEST_VERSION, "1.0");
+            att.put(Attributes.Name.MAIN_CLASS, element);
 
-			File outputJar = null;
-			JarOutputStream jout = null;
+            File outputJar = null;
+            JarOutputStream jout = null;
 
-			// open the output jarfile
-			outputJar = File.createTempFile("hyts_", ".jar");
-			jout = new JarOutputStream(new FileOutputStream(outputJar),
-					newman);
-			jout.putNextEntry(new JarEntry(entryName));
+            // open the output jarfile
+            outputJar = File.createTempFile("hyts_", ".jar");
+            jout = new JarOutputStream(new FileOutputStream(outputJar),
+                    newman);
+            jout.putNextEntry(new JarEntry(entryName));
 
-			File resources = Support_Resources.createTempFolder();
+            File resources = Support_Resources.createTempFolder();
 
-                        // read in the class file, and output it to the jar
-			Support_Resources.copyFile(resources, null, testClass);
-			URL jarURL = new URL((new File(resources, testClass)).toURL()
-					.toString());
-			InputStream jis = jarURL.openStream();
-			byte[] bytes = new byte[1024];
-			int len;
-			while ((len = jis.read(bytes)) != -1) {
-                            jout.write(bytes, 0, len);
-                        }
-			jout.flush();
-			jout.close();
-			jis.close();
+            // read in the class file, and output it to the jar
+            Support_Resources.copyFile(resources, null, testClass);
+            URL jarURL = new URL((new File(resources, testClass)).toURL()
+                    .toString());
+            InputStream jis = jarURL.openStream();
+            byte[] bytes = new byte[1024];
+            int len;
+            while ((len = jis.read(bytes)) != -1) {
+                jout.write(bytes, 0, len);
+            }
+            jout.flush();
+            jout.close();
+            jis.close();
 
-			String res = null;
-			// set up the VM parameters
-			String[] args = new String[2];
-			args[0] = "-jar";
-			args[1] = outputJar.getAbsolutePath();
+            String res = null;
+            // set up the VM parameters
+            String[] args = new String[2];
+            args[0] = "-jar";
+            args[1] = outputJar.getAbsolutePath();
 
-			// execute the JAR and read the result
-			res = Support_Exec.execJava(args, null, true);
+            // execute the JAR and read the result
+            res = Support_Exec.execJava(args, null, true);
 
-			assertTrue("Error executing JAR test on: " + element
-					+ ". Result returned was incorrect.", res
-					.startsWith("TEST"));
-			outputJar.delete();
-		}
-	}
+            assertTrue("Error executing JAR test on: " + element
+                    + ". Result returned was incorrect.", res
+                    .startsWith("TEST"));
+            outputJar.delete();
+        }
+    }
 
     public void test_JarOutputStreamLjava_io_OutputStreamLjava_util_jar_Manifest()
             throws IOException {
@@ -120,7 +120,7 @@ public class JarOutputStreamTest extends junit.framework.TestCase {
         } catch (IOException ee) {
             // expected
         }
-        
+
         try {
             new JarOutputStream(fos, null);
             fail("NullPointerException expected");
@@ -154,12 +154,12 @@ public class JarOutputStreamTest extends junit.framework.TestCase {
         }
     }
 
-	@Override
+    @Override
     protected void setUp() {
-	}
+    }
 
-	@Override
+    @Override
     protected void tearDown() {
-	}
+    }
 
 }

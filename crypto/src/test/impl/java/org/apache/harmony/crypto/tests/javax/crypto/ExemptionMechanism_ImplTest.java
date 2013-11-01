@@ -40,7 +40,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ExemptionMechanism</code> class constructors and methods
- * 
  */
 
 public class ExemptionMechanism_ImplTest extends TestCase {
@@ -178,7 +177,7 @@ public class ExemptionMechanism_ImplTest extends TestCase {
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
      * method
-     * Assertions: 
+     * Assertions:
      * throws NullPointerException when algorithm is null;
      * throws NoSuchAlgorithmException when algorithm is null or incorrect;
      * throws IllegalArgumentException when provider is null;

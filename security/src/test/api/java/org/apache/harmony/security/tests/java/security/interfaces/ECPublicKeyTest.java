@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.interfaces;
 
@@ -30,13 +30,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ECPublicKey</code> class field
- * 
  */
 public class ECPublicKeyTest extends TestCase {
 
     /**
      * Constructor for ECPublicKeyTest.
-     * 
+     *
      * @param arg0
      */
     public ECPublicKeyTest(String arg0) {
@@ -52,22 +51,28 @@ public class ECPublicKeyTest extends TestCase {
                 key.getSerVerUID(), // ECPublicKey.serialVersionUID
                 -3314988629879632826L);
     }
+
     public class checkECPublicKey implements ECPublicKey {
         public String getAlgorithm() {
             return "ECPublicKey";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return new byte[0];
-        }        
+        }
+
         public ECPoint getW() {
             return null;
         }
+
         public ECParameterSpec getParams() {
             return null;
         }
+
         public long getSerVerUID() {
             return serialVersionUID;
         }

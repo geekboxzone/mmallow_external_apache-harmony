@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.xnet.tests.javax.net.ssl.serialization;
 
@@ -28,7 +28,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for SSLException serialization
- * 
  */
 
 public class SSLExceptionTest extends SerializationTest {

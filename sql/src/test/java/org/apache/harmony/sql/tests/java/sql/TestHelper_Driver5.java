@@ -23,7 +23,6 @@ import java.sql.SQLException;
 
 /**
  * Basic JDBC driver implementation to help with tests
- * 
  */
 public class TestHelper_Driver5 extends TestHelper_Driver4 {
 

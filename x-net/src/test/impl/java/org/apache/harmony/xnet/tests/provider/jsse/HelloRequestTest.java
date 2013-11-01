@@ -26,7 +26,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>HelloRequest</code> constructor and methods
- *
  */
 public class HelloRequestTest extends TestCase {
 

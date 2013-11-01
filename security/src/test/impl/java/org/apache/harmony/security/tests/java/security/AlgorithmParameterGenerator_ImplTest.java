@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -37,7 +37,7 @@ import junit.framework.TestCase;
 public class AlgorithmParameterGenerator_ImplTest extends TestCase {
 
     private static String validAlgName = "DSA";
-            
+
     public static final String srvAlgorithmParameterGenerator = "AlgorithmParameterGenerator";
 
 
@@ -74,20 +74,20 @@ public class AlgorithmParameterGenerator_ImplTest extends TestCase {
      * <code>init(int size, SecureRandom random<code> methods
      * Assertion: throws InvalidParameterException when size is incorrect
      */
-    public void testAlgorithmParameterGenerator11() throws Exception {        
+    public void testAlgorithmParameterGenerator11() throws Exception {
         if (!DSASupported) {
             fail(validAlgName + " algorithm is not supported");
             return;
         }
         // Invalid key strengths (strength must be from 512 - 1024 and a multiple of 64)
-        int [] keys = {-10000, -512, -1, 0, 10000};
+        int[] keys = { -10000, -512, -1, 0, 10000 };
         SecureRandom random = new SecureRandom();
         AlgorithmParameterGenerator[] apgs = createAPGen();
         assertNotNull("AlgorithmParameterGenerator objects were not created",
                 apgs);
 
         for (int i = 0; i < apgs.length; i++) {
-            
+
             // Test invalid strengths
             for (int j = 0; j < keys.length; j++) {
                 try {
@@ -112,7 +112,7 @@ public class AlgorithmParameterGenerator_ImplTest extends TestCase {
                     // expected
                 }
             }
-            
+
             // Test valid strengths
             apgs[i].init(512);
             apgs[i].init(512, random);
@@ -122,5 +122,5 @@ public class AlgorithmParameterGenerator_ImplTest extends TestCase {
             apgs[i].init(1024, random);
         }
     }
-    
+
 }

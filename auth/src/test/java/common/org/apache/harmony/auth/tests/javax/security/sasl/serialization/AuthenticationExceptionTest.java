@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.auth.tests.javax.security.sasl.serialization;
 
@@ -27,7 +27,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for AuthenticationException serialization
- * 
  */
 
 public class AuthenticationExceptionTest extends SerializationTest {
@@ -47,6 +46,6 @@ public class AuthenticationExceptionTest extends SerializationTest {
                 new AuthenticationException(msgs[0], null),
                 new AuthenticationException(msg, cause),
                 new AuthenticationException(msgs[1], cause)
-                };
+        };
     }
 }

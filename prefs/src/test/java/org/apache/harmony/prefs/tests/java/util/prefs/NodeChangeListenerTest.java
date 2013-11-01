@@ -23,7 +23,7 @@ import java.util.prefs.Preferences;
 import junit.framework.TestCase;
 
 /**
- * 
+ *
  */
 public class NodeChangeListenerTest extends TestCase {
 

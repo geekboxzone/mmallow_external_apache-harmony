@@ -26,11 +26,11 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 
 public class Cipher_Impl1Test extends junit.framework.TestCase {
-    
+
     static Key cipherKey;
     final static String algorithm = "DESede";
     final static int keyLen = 168;
-    
+
     static {
         try {
             KeyGenerator kg = KeyGenerator.getInstance(algorithm);
@@ -45,7 +45,7 @@ public class Cipher_Impl1Test extends junit.framework.TestCase {
     /**
      * @tests javax.crypto.Cipher#getIV()
      * @tests javax.crypto.Cipher#init(int, java.security.Key,
-     *        java.security.AlgorithmParameters)
+     *java.security.AlgorithmParameters)
      */
     public void test_getIV() throws Exception {
         /*
@@ -72,7 +72,7 @@ public class Cipher_Impl1Test extends junit.framework.TestCase {
     /**
      * @tests javax.crypto.Cipher#getParameters()
      * @tests javax.crypto.Cipher#init(int, java.security.Key,
-     *        java.security.AlgorithmParameters, java.security.SecureRandom)
+     *java.security.AlgorithmParameters, java.security.SecureRandom)
      */
     public void test_getParameters() throws Exception {
 

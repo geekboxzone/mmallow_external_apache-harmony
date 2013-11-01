@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto.interfaces;
 
@@ -31,13 +31,12 @@ import java.math.BigInteger;
 
 /**
  * Tests for <code>DHPrivateKey</code> class field
- * 
  */
 public class DHPrivateKeyTest extends TestCase {
 
     /**
      * Constructor for DHPrivateKey.
-     * 
+     *
      * @param arg0
      */
     public DHPrivateKeyTest(String arg0) {
@@ -53,23 +52,28 @@ public class DHPrivateKeyTest extends TestCase {
                 key.getSerVerUID(), //DHPrivateKey.serialVersionUID
                 2211791113380396553L);
     }
-    
+
     public class checkDHPrivateKey implements DHPrivateKey {
         public String getAlgorithm() {
             return "SecretKey";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return new byte[0];
         }
+
         public long getSerVerUID() {
             return serialVersionUID;
         }
+
         public BigInteger getX() {
             return null;
         }
+
         public DHParameterSpec getParams() {
             return null;
         }

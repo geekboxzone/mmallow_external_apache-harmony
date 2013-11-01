@@ -95,7 +95,6 @@ public class DataTruncationTest extends TestCase {
 
     /**
      * @tests {@link java.sql.DataTruncation#DataTruncation(int, boolean, boolean, int, int, Throwable)}
-     * 
      * @since 1.6
      */
     public void testConstructor_IBBIILjava_lang_Throwable() {

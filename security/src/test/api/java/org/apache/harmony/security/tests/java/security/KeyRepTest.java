@@ -16,19 +16,19 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
 import junit.framework.TestCase;
 
 /**
- * 
- * 
+ *
+ *
  */
 public class KeyRepTest extends TestCase {
-//
+    //
 //    private static final Set<String> keyFactoryAlgorithm;
 //    static {
 //        keyFactoryAlgorithm = Security.getAlgorithms("KeyFactory");

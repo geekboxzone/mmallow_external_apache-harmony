@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -29,12 +29,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>java.security.cert.CRL</code> fields and methods
- * 
  */
 public class CRLTest extends TestCase {
 
     /**
      * Constructor for CRLTest.
+     *
      * @param name
      */
     public CRLTest(String name) {

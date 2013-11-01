@@ -43,7 +43,7 @@ import java.util.Arrays;
 
 import junit.framework.TestCase;
 
-@SuppressWarnings( { "unused", "serial" })
+@SuppressWarnings({ "unused", "serial" })
 public class ObjectOutputStreamTest extends TestCase implements Serializable {
 
     File f;
@@ -129,9 +129,11 @@ public class ObjectOutputStreamTest extends TestCase implements Serializable {
         public static java.lang.String staticVar1;
 
         public static java.lang.String staticVar2;
+
         {
             instVar1 = "NonStaticInitialValue";
         }
+
         static {
             staticVar1 = "StaticInitialValue";
             staticVar1 = new String(staticVar1);
@@ -303,7 +305,9 @@ public class ObjectOutputStreamTest extends TestCase implements Serializable {
 
     private static class MyExceptionWhenDumping implements java.io.Serializable {
         private static class MyException extends java.io.IOException {
-        };
+        }
+
+        ;
 
         public boolean anInstanceVar = false;
 
@@ -335,7 +339,9 @@ public class ObjectOutputStreamTest extends TestCase implements Serializable {
             java.io.Serializable {
         private static class MyException extends java.io.IOException {
             private Object notSerializable = new Object();
-        };
+        }
+
+        ;
 
         public boolean anInstanceVar = false;
 
@@ -465,7 +471,9 @@ public class ObjectOutputStreamTest extends TestCase implements Serializable {
 
         private static enum Color {
             red, blue, green
-        };
+        }
+
+        ;
 
         public WriteReplaceObject(Object o) {
             replaceObject = o;

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.support;
 
@@ -32,18 +32,18 @@ import javax.crypto.ExemptionMechanismSpi;
 import javax.crypto.ShortBufferException;
 
 /**
- * Additional class for verification ExemptionMechanismSpi 
+ * Additional class for verification ExemptionMechanismSpi
  * and ExemptionMechanism classes
- * 
  */
 
-public class MyExemptionMechanismSpi  extends ExemptionMechanismSpi {
-    
+public class MyExemptionMechanismSpi extends ExemptionMechanismSpi {
+
     private static final int byteArrayLength = 5;
-    
+
     public static final int getLength() {
         return byteArrayLength;
     }
+
     @Override
     protected byte[] engineGenExemptionBlob()
             throws ExemptionMechanismException {
@@ -77,7 +77,7 @@ public class MyExemptionMechanismSpi  extends ExemptionMechanismSpi {
             throws InvalidKeyException, InvalidAlgorithmParameterException,
             ExemptionMechanismException {
         if (key == null) {
-            throw new InvalidKeyException("key is null");            
+            throw new InvalidKeyException("key is null");
         }
         if (!(key instanceof tmpKey)) {
             throw new ExemptionMechanismException("Incorrect key");
@@ -95,37 +95,46 @@ public class MyExemptionMechanismSpi  extends ExemptionMechanismSpi {
             throw new ExemptionMechanismException("Incorrect key");
         }
     }
-    
+
     @SuppressWarnings("serial")
     public class tmpKey implements Key {
         private String alg;
         private byte[] enc;
+
         public tmpKey(String alg, byte[] enc) {
             this.alg = alg;
             this.enc = enc;
         }
+
         public String getFormat() {
             return "tmpKey";
         }
+
         public String getAlgorithm() {
             return alg;
         }
+
         public byte[] getEncoded() {
             return enc;
         }
     }
+
     @SuppressWarnings("serial")
     public class tmp1Key implements Key {
         private byte[] enc;
+
         public tmp1Key(String alg, byte[] enc) {
             this.enc = enc;
         }
+
         public String getAlgorithm() {
             return "tmp1Key";
         }
+
         public String getFormat() {
             return "tmp1Key";
         }
+
         public byte[] getEncoded() {
             return enc;
         }

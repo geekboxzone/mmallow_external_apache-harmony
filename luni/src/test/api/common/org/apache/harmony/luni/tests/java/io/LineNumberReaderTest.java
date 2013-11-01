@@ -148,8 +148,13 @@ public class LineNumberReaderTest extends TestCase {
         lnr = new LineNumberReader(new Reader() {
             private StringReader delegate = new StringReader("hello\nworld");
             private int calls = 0;
-            @Override public void close() throws IOException {}
-            @Override public int read(char[] buf, int offset, int len) throws IOException {
+
+            @Override
+            public void close() throws IOException {
+            }
+
+            @Override
+            public int read(char[] buf, int offset, int len) throws IOException {
                 if (calls++ < 2) {
                     throw new IOException();
                 } else {

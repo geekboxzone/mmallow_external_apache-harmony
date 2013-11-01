@@ -28,156 +28,156 @@ import junit.framework.TestCase;
 
 public class ConcurrentModTest extends TestCase {
 
-	/*
-	 * Test method for 'java.util.AbstractList.subList(int, int)'
-	 */
-	public void testGet() {
-		AbstractList al = new ArrayList();
-		Double one = new Double(1.0);
-		Double two = new Double(2.0);
-		Double three = new Double(3.0);
-		Double four = new Double(4.0);
-		al.add(one);
-		al.add(two);
-		al.add(three);
-		al.add(four);
-		List sub = al.subList(1, 3);
-		assertEquals(2, sub.size());
-		// the sub.get(1) is 3.0
-		assertTrue(((Double) sub.get(1)).doubleValue() <= 3.0);
-		assertTrue(((Double) sub.get(1)).doubleValue() > 2.0);
+    /*
+      * Test method for 'java.util.AbstractList.subList(int, int)'
+      */
+    public void testGet() {
+        AbstractList al = new ArrayList();
+        Double one = new Double(1.0);
+        Double two = new Double(2.0);
+        Double three = new Double(3.0);
+        Double four = new Double(4.0);
+        al.add(one);
+        al.add(two);
+        al.add(three);
+        al.add(four);
+        List sub = al.subList(1, 3);
+        assertEquals(2, sub.size());
+        // the sub.get(1) is 3.0
+        assertTrue(((Double) sub.get(1)).doubleValue() <= 3.0);
+        assertTrue(((Double) sub.get(1)).doubleValue() > 2.0);
 
-		al.remove(1); // remove the 2.0
+        al.remove(1); // remove the 2.0
 
-		try {
-			// illegal call the subList's method get(int).
-			sub.get(1);
-			fail("It should throws ConcurrentModificationException.");
-		} catch (ConcurrentModificationException e) {
-			return;
-		}
-	}
+        try {
+            // illegal call the subList's method get(int).
+            sub.get(1);
+            fail("It should throws ConcurrentModificationException.");
+        } catch (ConcurrentModificationException e) {
+            return;
+        }
+    }
 
-	/*
-	 * Test method for 'java.util.AbstractList.subList(int, int)'
-	 */
-	public void testSet() {
-		AbstractList al = new ArrayList();
-		Double one = new Double(1.0);
-		Double two = new Double(2.0);
-		Double three = new Double(3.0);
-		Double four = new Double(4.0);
-		al.add(one);
-		al.add(two);
-		al.add(three);
-		al.add(four);
-		List sub = al.subList(1, 3);
-		assertEquals(2, sub.size());
-		// the sub.get(1) is 3.0
-		assertTrue(((Double) sub.get(1)).doubleValue() <= 3.0);
-		assertTrue(((Double) sub.get(1)).doubleValue() > 2.0);
+    /*
+      * Test method for 'java.util.AbstractList.subList(int, int)'
+      */
+    public void testSet() {
+        AbstractList al = new ArrayList();
+        Double one = new Double(1.0);
+        Double two = new Double(2.0);
+        Double three = new Double(3.0);
+        Double four = new Double(4.0);
+        al.add(one);
+        al.add(two);
+        al.add(three);
+        al.add(four);
+        List sub = al.subList(1, 3);
+        assertEquals(2, sub.size());
+        // the sub.get(1) is 3.0
+        assertTrue(((Double) sub.get(1)).doubleValue() <= 3.0);
+        assertTrue(((Double) sub.get(1)).doubleValue() > 2.0);
 
-		al.remove(1); // remove the 2.0
+        al.remove(1); // remove the 2.0
 
-		try {
-			// illegal call the subList's method set(int,Object).
-			sub.set(1, two);
-			fail("It should throws ConcurrentModificationException.");
-		} catch (ConcurrentModificationException e) {
-			return;
-		}
-	}
+        try {
+            // illegal call the subList's method set(int,Object).
+            sub.set(1, two);
+            fail("It should throws ConcurrentModificationException.");
+        } catch (ConcurrentModificationException e) {
+            return;
+        }
+    }
 
-	/*
-	 * Test method for 'java.util.AbstractList.subList(int, int)'
-	 */
-	public void testAdd() {
-		AbstractList al = new ArrayList();
-		Double one = new Double(1.0);
-		Double two = new Double(2.0);
-		Double three = new Double(3.0);
-		Double four = new Double(4.0);
-		al.add(one);
-		al.add(two);
-		al.add(three);
-		al.add(four);
-		List sub = al.subList(1, 3);
-		assertEquals(2, sub.size());
-		// the sub.get(1) is 3.0
-		assertTrue(((Double) sub.get(1)).doubleValue() <= 3.0);
-		assertTrue(((Double) sub.get(1)).doubleValue() > 2.0);
+    /*
+      * Test method for 'java.util.AbstractList.subList(int, int)'
+      */
+    public void testAdd() {
+        AbstractList al = new ArrayList();
+        Double one = new Double(1.0);
+        Double two = new Double(2.0);
+        Double three = new Double(3.0);
+        Double four = new Double(4.0);
+        al.add(one);
+        al.add(two);
+        al.add(three);
+        al.add(four);
+        List sub = al.subList(1, 3);
+        assertEquals(2, sub.size());
+        // the sub.get(1) is 3.0
+        assertTrue(((Double) sub.get(1)).doubleValue() <= 3.0);
+        assertTrue(((Double) sub.get(1)).doubleValue() > 2.0);
 
-		al.remove(1); // remove the 2.0
+        al.remove(1); // remove the 2.0
 
-		try {
-			// illegal call the subList's method Add(int,Object).
-			sub.add(1, two);
-			fail("It should throws ConcurrentModificationException.");
-		} catch (ConcurrentModificationException e) {
-			return;
-		}
-	}
+        try {
+            // illegal call the subList's method Add(int,Object).
+            sub.add(1, two);
+            fail("It should throws ConcurrentModificationException.");
+        } catch (ConcurrentModificationException e) {
+            return;
+        }
+    }
 
-	/*
-	 * Test method for 'java.util.AbstractList.subList(int, int)'
-	 */
-	public void testRemove() {
-		AbstractList al = new ArrayList();
-		Double one = new Double(1.0);
-		Double two = new Double(2.0);
-		Double three = new Double(3.0);
-		Double four = new Double(4.0);
-		al.add(one);
-		al.add(two);
-		al.add(three);
-		al.add(four);
-		List sub = al.subList(1, 3);
-		assertEquals(2, sub.size());
-		// the sub.get(1) is 3.0
-		assertTrue(((Double) sub.get(1)).doubleValue() <= 3.0);
-		assertTrue(((Double) sub.get(1)).doubleValue() > 2.0);
+    /*
+      * Test method for 'java.util.AbstractList.subList(int, int)'
+      */
+    public void testRemove() {
+        AbstractList al = new ArrayList();
+        Double one = new Double(1.0);
+        Double two = new Double(2.0);
+        Double three = new Double(3.0);
+        Double four = new Double(4.0);
+        al.add(one);
+        al.add(two);
+        al.add(three);
+        al.add(four);
+        List sub = al.subList(1, 3);
+        assertEquals(2, sub.size());
+        // the sub.get(1) is 3.0
+        assertTrue(((Double) sub.get(1)).doubleValue() <= 3.0);
+        assertTrue(((Double) sub.get(1)).doubleValue() > 2.0);
 
-		al.remove(1); // remove the 2.0
+        al.remove(1); // remove the 2.0
 
-		try {
-			// illegal call the subList's method remove(int).
-			sub.remove(1);
-			fail("It should throws ConcurrentModificationException.");
-		} catch (ConcurrentModificationException e) {
-			return;
-		}
-	}
+        try {
+            // illegal call the subList's method remove(int).
+            sub.remove(1);
+            fail("It should throws ConcurrentModificationException.");
+        } catch (ConcurrentModificationException e) {
+            return;
+        }
+    }
 
-	/*
-	 * Test method for 'java.util.AbstractList.subList(int, int)'
-	 */
-	public void testAddAll() {
-		AbstractList al = new ArrayList();
-		Double one = new Double(1.0);
-		Double two = new Double(2.0);
-		Double three = new Double(3.0);
-		Double four = new Double(4.0);
-		al.add(one);
-		al.add(two);
-		al.add(three);
-		al.add(four);
-		List sub = al.subList(1, 3);
-		assertEquals(2, sub.size());
-		// the sub.get(1) is 3.0
-		assertTrue(((Double) sub.get(1)).doubleValue() <= 3.0);
-		assertTrue(((Double) sub.get(1)).doubleValue() > 2.0);
+    /*
+      * Test method for 'java.util.AbstractList.subList(int, int)'
+      */
+    public void testAddAll() {
+        AbstractList al = new ArrayList();
+        Double one = new Double(1.0);
+        Double two = new Double(2.0);
+        Double three = new Double(3.0);
+        Double four = new Double(4.0);
+        al.add(one);
+        al.add(two);
+        al.add(three);
+        al.add(four);
+        List sub = al.subList(1, 3);
+        assertEquals(2, sub.size());
+        // the sub.get(1) is 3.0
+        assertTrue(((Double) sub.get(1)).doubleValue() <= 3.0);
+        assertTrue(((Double) sub.get(1)).doubleValue() > 2.0);
 
-		al.remove(1); // remove the 2.0
+        al.remove(1); // remove the 2.0
 
-		try {
-			// illegal call the subList's method addAll(int,Collection).
-			Collection c = new Vector();
-			Double five = new Double(5.0);
-			c.add(five);
-			sub.addAll(1, c);
-			fail("It should throws ConcurrentModificationException.");
-		} catch (ConcurrentModificationException e) {
-			return;
-		}
-	}
+        try {
+            // illegal call the subList's method addAll(int,Collection).
+            Collection c = new Vector();
+            Double five = new Double(5.0);
+            c.add(five);
+            sub.addAll(1, c);
+            fail("It should throws ConcurrentModificationException.");
+        } catch (ConcurrentModificationException e) {
+            return;
+        }
+    }
 }

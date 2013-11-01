@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.support.cert;
 
@@ -26,13 +26,12 @@ import java.security.cert.Certificate;
 
 /**
  * Stub class for <code>java.security.cert.CRL</code> tests
- * 
  */
 public class MyCRL extends CRL {
 
     /**
      * Constructor
-     * 
+     *
      * @param type
      */
     public MyCRL(String type) {

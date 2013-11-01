@@ -25,7 +25,7 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Tests for java.util.ServiceConfigurationError
- * 
+ *
  * @since 1.6
  */
 public class ServiceConfigurationErrorTest extends TestCase {

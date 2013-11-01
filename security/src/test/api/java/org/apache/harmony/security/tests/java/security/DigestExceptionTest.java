@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.DigestException;
 
 import junit.framework.TestCase;
@@ -27,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>DigestException</code> class constructors and methods.
- * 
  */
 public class DigestExceptionTest extends TestCase {
 
@@ -36,7 +36,7 @@ public class DigestExceptionTest extends TestCase {
 
     /**
      * Constructor for DigestExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public DigestExceptionTest(String arg0) {

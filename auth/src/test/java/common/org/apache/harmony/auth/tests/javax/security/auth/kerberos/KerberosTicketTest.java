@@ -86,7 +86,7 @@ public class KerberosTicketTest extends TestCase {
     }
 
     /**
-     * @tests javax.security.auth.kerberos.KerberosTicket#getAuthTime() 
+     * @tests javax.security.auth.kerberos.KerberosTicket#getAuthTime()
      */
     public void test_getAuthTime() throws Exception {
 
@@ -113,7 +113,7 @@ public class KerberosTicketTest extends TestCase {
     }
 
     /**
-     * @tests javax.security.auth.kerberos.KerberosTicket#getClient() 
+     * @tests javax.security.auth.kerberos.KerberosTicket#getClient()
      */
     public void test_getClient() throws Exception {
 
@@ -133,7 +133,7 @@ public class KerberosTicketTest extends TestCase {
     }
 
     /**
-     * @tests javax.security.auth.kerberos.KerberosTicket#getClientAddresses() 
+     * @tests javax.security.auth.kerberos.KerberosTicket#getClientAddresses()
      */
     public void test_getClientAddresses() throws Exception {
 
@@ -157,7 +157,7 @@ public class KerberosTicketTest extends TestCase {
     }
 
     /**
-     * @tests javax.security.auth.kerberos.KerberosTicket#getEncoded() 
+     * @tests javax.security.auth.kerberos.KerberosTicket#getEncoded()
      */
     public void test_getEncoded() throws Exception {
 
@@ -183,7 +183,7 @@ public class KerberosTicketTest extends TestCase {
     }
 
     /**
-     * @tests javax.security.auth.kerberos.KerberosTicket#getEndTime() 
+     * @tests javax.security.auth.kerberos.KerberosTicket#getEndTime()
      */
     public void test_getEndTime() throws Exception {
 
@@ -290,7 +290,7 @@ public class KerberosTicketTest extends TestCase {
     }
 
     /**
-     * @tests javax.security.auth.kerberos.KerberosTicket#getServer() 
+     * @tests javax.security.auth.kerberos.KerberosTicket#getServer()
      */
     public void test_getServer() throws Exception {
 
@@ -310,7 +310,7 @@ public class KerberosTicketTest extends TestCase {
     }
 
     /**
-     * @tests javax.security.auth.kerberos.KerberosTicket#getSessionKey() 
+     * @tests javax.security.auth.kerberos.KerberosTicket#getSessionKey()
      */
     public void test_getSessionKey() throws Exception {
 
@@ -355,7 +355,7 @@ public class KerberosTicketTest extends TestCase {
     }
 
     /**
-     * @tests javax.security.auth.kerberos.KerberosTicket#getStartTime() 
+     * @tests javax.security.auth.kerberos.KerberosTicket#getStartTime()
      */
     public void test_getStartTime() throws Exception {
 
@@ -521,7 +521,7 @@ public class KerberosTicketTest extends TestCase {
 
         // TODO test: ticket refreshing 
     }
-    
+
     /**
      * @tests javax.security.auth.kerberos.KerberosTicket#equals(java.lang.Object)
      */
@@ -546,7 +546,7 @@ public class KerberosTicketTest extends TestCase {
         }
         assertFalse("Destroyed krbTicket sholudn't be equivalent ", krbTicket1
                 .equals(krbTicket2));
-        
+
         //Regression test for KerberosTicket.equals().
         final KerberosPrincipal clientPrincipal = new KerberosPrincipal(
                 "leo@EXAMPLE.COM");
@@ -563,7 +563,7 @@ public class KerberosTicketTest extends TestCase {
                 null, null);
         assertEquals(tgt, tgt1);
         assertEquals(tgt1, tgt);
-        
+
     }
 
     /**

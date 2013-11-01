@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class IndexOutOfBoundsExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.IndexOutOfBoundsException#IndexOutOfBoundsException()
-	 */
+    /**
+     * @tests java.lang.IndexOutOfBoundsException#IndexOutOfBoundsException()
+     */
     public void test_Constructor() {
         IndexOutOfBoundsException e = new IndexOutOfBoundsException();
         assertNull(e.getMessage());

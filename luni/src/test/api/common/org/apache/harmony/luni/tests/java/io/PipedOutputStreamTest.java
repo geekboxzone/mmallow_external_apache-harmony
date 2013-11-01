@@ -159,7 +159,7 @@ public class PipedOutputStreamTest extends TestCase {
 
     /**
      * @tests java.io.PipedOutputStream#write(byte[], int, int) Regression for
-     *        HARMONY-387
+     * HARMONY-387
      */
     public void test_write$BII_2() throws IOException {
         PipedInputStream pis = new PipedInputStream();

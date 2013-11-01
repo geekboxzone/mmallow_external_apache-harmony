@@ -27,7 +27,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for SSLSessionBindingEvent serialization
- * 
  */
 
 public class SSLSessionBindingEventTest extends SerializationTest implements
@@ -38,10 +37,10 @@ public class SSLSessionBindingEventTest extends SerializationTest implements
         try {
             SSLContext cont = SSLContext.getInstance("TLS");
             cont.init(null, null, null);
-            SSLSocket soc = (SSLSocket )cont.getSocketFactory().createSocket();
-            return new Object[] { new SSLSessionBindingEvent(soc.getSession(), "someName")};
+            SSLSocket soc = (SSLSocket) cont.getSocketFactory().createSocket();
+            return new Object[] { new SSLSessionBindingEvent(soc.getSession(), "someName") };
         } catch (Exception e) {
-            fail("Can not create data: "+ e);
+            fail("Can not create data: " + e);
             return null;
         }
     }

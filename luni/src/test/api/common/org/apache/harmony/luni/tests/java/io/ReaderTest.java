@@ -69,7 +69,7 @@ public class ReaderTest extends TestCase {
         assertEquals(s.substring(CHARBUFFER_REMAINING), String
                 .valueOf(destBuffer));
     }
-    
+
     /**
      * @tests {@link java.io.Reader#mark(int)}
      */
@@ -164,7 +164,7 @@ public class ReaderTest extends TestCase {
         private int current_offset = 0;
 
         private int length = 0;
-        
+
         public MockReader() {
             super();
         }

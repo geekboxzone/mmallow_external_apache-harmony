@@ -30,7 +30,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyManagerFactoryImpl</code> constructor and methods
- *  
  */
 public class KeyManagerFactoryImplTest extends TestCase {
 
@@ -49,12 +48,12 @@ public class KeyManagerFactoryImplTest extends TestCase {
         } catch (KeyStoreException e) {
         } finally {
             if (def_keystore == null) {
-                 System.clearProperty("javax.net.ssl.keyStore");
+                System.clearProperty("javax.net.ssl.keyStore");
             } else {
                 System.setProperty("javax.net.ssl.keyStore", def_keystore);
             }
         }
-      
+
     }
 
     /*

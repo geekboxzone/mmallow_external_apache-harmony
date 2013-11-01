@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -41,15 +41,14 @@ import junit.framework.TestCase;
 
 /**
  * Tests for KeyAgreement class constructors and methods
- * 
  */
 
 public class KeyAgreement_ImplTest extends TestCase {
-    
+
     private static final String srvKeyAgreement = "KeyAgreement";
 
     private static final String defaultAlg = "MyKeyAgr";
-    
+
     private static final String KeyAgreementProviderClass = "org.apache.harmony.crypto.tests.support.MyKeyAgreementSpi";
 
     private static final String[] invalidValues = SpiEngUtils.invalidValues;
@@ -68,12 +67,12 @@ public class KeyAgreement_ImplTest extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        mProv = (new SpiEngUtils()).new MyProvider("MyKAProvider", "Testing provider", 
-                srvKeyAgreement.concat(".").concat(defaultAlg), 
+        mProv = (new SpiEngUtils()).new MyProvider("MyKAProvider", "Testing provider",
+                srvKeyAgreement.concat(".").concat(defaultAlg),
                 KeyAgreementProviderClass);
         Security.insertProviderAt(mProv, 1);
     }
-    
+
     /**
      * @see TestCase#tearDown()
      */
@@ -81,9 +80,9 @@ public class KeyAgreement_ImplTest extends TestCase {
         super.tearDown();
         Security.removeProvider(mProv.getName());
     }
-    
-    protected void checkResult(KeyAgreement keyAgr) 
-            throws InvalidKeyException, ShortBufferException, 
+
+    protected void checkResult(KeyAgreement keyAgr)
+            throws InvalidKeyException, ShortBufferException,
             NoSuchAlgorithmException, IllegalStateException,
             InvalidAlgorithmParameterException {
         assertNull("Not null result", keyAgr.doPhase(null, true));
@@ -93,9 +92,9 @@ public class KeyAgreement_ImplTest extends TestCase {
         } catch (IllegalStateException e) {
         }
         byte[] bb = keyAgr.generateSecret();
-        assertEquals("Length is not 0", bb.length, 0);        
-        assertEquals("Returned integer is not 0", 
-                keyAgr.generateSecret(new byte[1], 10), 
+        assertEquals("Length is not 0", bb.length, 0);
+        assertEquals("Returned integer is not 0",
+                keyAgr.generateSecret(new byte[1], 10),
                 -1);
         assertNull("Not null result", keyAgr.generateSecret("aaa"));
         try {
@@ -150,10 +149,11 @@ public class KeyAgreement_ImplTest extends TestCase {
             checkResult(keyAgr);
         }
     }
+
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
      * method
-     * Assertions: 
+     * Assertions:
      * throws NullPointerException when algorithm is null;
      * throws NoSuchAlgorithmException when algorithm is null or incorrect;
      * throws IllegalArgumentException when provider is null or null;
@@ -163,7 +163,7 @@ public class KeyAgreement_ImplTest extends TestCase {
     public void testGetInstance02() throws NoSuchAlgorithmException,
             NoSuchProviderException, IllegalArgumentException,
             InvalidKeySpecException, InvalidKeyException,
-            ShortBufferException, InvalidAlgorithmParameterException {            
+            ShortBufferException, InvalidAlgorithmParameterException {
         try {
             KeyAgreement.getInstance(null, mProv.getName());
             fail("NullPointerException or NoSuchAlgorithmException should be thrown if algorithm is null");
@@ -224,7 +224,6 @@ public class KeyAgreement_ImplTest extends TestCase {
      * throws NoSuchAlgorithmException when algorithm is null or incorrect;
      * throws IllegalArgumentException when provider is null;
      * returns KeyAgreement object
-     * 
      */
     public void testGetInstance03() throws NoSuchAlgorithmException,
             IllegalArgumentException,
@@ -260,6 +259,6 @@ public class KeyAgreement_ImplTest extends TestCase {
                     validValues[i]);
             assertEquals("Incorrect provider", keyAgr.getProvider(), mProv);
             checkResult(keyAgr);
-       }
+        }
     }
 }

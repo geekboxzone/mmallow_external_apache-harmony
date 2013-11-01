@@ -123,7 +123,7 @@ public class DeflaterInputStreamTest extends TestCase {
     }
 
     /**
-     * @tests DeflaterInputStream#read(byte[],int,int)
+     * @tests DeflaterInputStream#read(byte[], int, int)
      */
     public void testReadByteArrayIntInt() throws IOException {
         byte[] buf1 = new byte[256];
@@ -311,9 +311,9 @@ public class DeflaterInputStreamTest extends TestCase {
     public void testDataFormatException() {
         new DataFormatException();
     }
-    
+
     /**
-     * @tests DeflaterInputStream#DeflaterInputStream(InputStream,Deflater)
+     * @tests DeflaterInputStream#DeflaterInputStream(InputStream, Deflater)
      */
     public void testDeflaterInputStreamInputStreamDeflater() {
         // ok
@@ -334,7 +334,7 @@ public class DeflaterInputStreamTest extends TestCase {
     }
 
     /**
-     * @tests DeflaterInputStream#DeflaterInputStream(InputStream,Deflater,int)
+     * @tests DeflaterInputStream#DeflaterInputStream(InputStream, Deflater, int)
      */
     public void testDeflaterInputStreamInputStreamDeflaterInt() {
         // ok

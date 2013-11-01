@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.security.tests.fortress;
 
@@ -31,46 +31,46 @@ import junit.framework.TestCase;
 
 
 /**
- *
  * Tests for Engine
  */
 public class EngineTest extends TestCase {
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
-		Services.updateServiceInfo();
-	}
-	
-	/*
-	 * Class under test for SpiImpl getInstance(String, Object)
-	 */
-	public void testGetInstanceStringObject1() throws Exception {
-		Provider p = new MyProvider();
-		Services.initServiceInfo(p);
-		Engine engine = new Engine("Service");
-		
-		
-		engine.getInstance("AlGOrItHM", null);
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        Services.updateServiceInfo();
+    }
 
-		if (engine.provider != p) {
-			fail("Incorrect provider");
-		}
-		if (!(engine.spi instanceof SomeClass)) {
-			fail("Incorrect spi");
-		}
-	}
+    /*
+      * Class under test for SpiImpl getInstance(String, Object)
+      */
+    public void testGetInstanceStringObject1() throws Exception {
+        Provider p = new MyProvider();
+        Services.initServiceInfo(p);
+        Engine engine = new Engine("Service");
+
+
+        engine.getInstance("AlGOrItHM", null);
+
+        if (engine.provider != p) {
+            fail("Incorrect provider");
+        }
+        if (!(engine.spi instanceof SomeClass)) {
+            fail("Incorrect spi");
+        }
+    }
 
     /*
 	 * Class under test for SpiImpl getInstance(String, Object)
 	 */
-	public void testGetInstanceStringObject2() {
+    public void testGetInstanceStringObject2() {
         Provider p = new MyProvider();
         Services.initServiceInfo(p);
         Engine engine = new Engine("Service");
         try {
             engine.getInstance(null, null);
             fail("No expected NoSuchAlgorithmException");
-        } catch (NoSuchAlgorithmException e) {}
+        } catch (NoSuchAlgorithmException e) {
+        }
     }
 
     /*
@@ -102,7 +102,8 @@ public class EngineTest extends TestCase {
         try {
             engine.getInstance(null, p, null);
             fail("No expected NoSuchAlgorithmException");
-        } catch (NoSuchAlgorithmException e) {}
+        } catch (NoSuchAlgorithmException e) {
+        }
     }
 
     public void testGetInstanceStringProvider1() throws Exception {
@@ -114,17 +115,17 @@ public class EngineTest extends TestCase {
         engine.getInstance("Collection", p,
                 new java.security.cert.CollectionCertStoreParameters());
     }
-	
-	public void testGetInstanceStringProvider2() throws Exception {
-		Provider p = Security.getProvider("SUN");
-		if (p == null) {
-			return;
-		}
-        
-		Engine engine = new Engine("CertStore");
+
+    public void testGetInstanceStringProvider2() throws Exception {
+        Provider p = Security.getProvider("SUN");
+        if (p == null) {
+            return;
+        }
+
+        Engine engine = new Engine("CertStore");
         engine.getInstance("Collection",
                 new java.security.cert.CollectionCertStoreParameters());
-	}
-	
+    }
+
 
 }

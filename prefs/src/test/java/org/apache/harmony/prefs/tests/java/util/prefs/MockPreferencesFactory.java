@@ -20,11 +20,11 @@ import java.util.prefs.Preferences;
 import java.util.prefs.PreferencesFactory;
 
 /**
- * 
+ *
  */
 public class MockPreferencesFactory implements PreferencesFactory {
     static MockAbstractPreferences userRoot = new MockAbstractPreferences(null,
-    "");
+            "");
 
     static MockAbstractPreferences systemRoot = new MockAbstractPreferences(
             null, "");

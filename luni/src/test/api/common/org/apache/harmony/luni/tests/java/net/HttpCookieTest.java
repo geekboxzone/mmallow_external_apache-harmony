@@ -27,7 +27,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie(String, String).
-     * 
      * @since 1.6
      */
     public void test_HttpCookie_LString_LString() {
@@ -67,7 +66,7 @@ public class HttpCookieTest extends TestCase {
         } catch (NullPointerException e) {
             // expected
         }
-        
+
         try {
             new HttpCookie("\u007f", value);
             fail("Should throw IllegalArgumentException");
@@ -94,7 +93,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#domainMatches(String, String).
-     * 
      * @since 1.6
      */
     public void test_DomainMatches() {
@@ -168,7 +166,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#getVersion(), setVersion(int).
-     * 
      * @since 1.6
      */
     public void test_Get_SetVersion() {
@@ -196,7 +193,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#getValue(), setValue(String)
-     * 
      * @since 1.6
      */
     public void test_Get_SetValue() {
@@ -217,7 +213,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#getName()
-     * 
      * @since 1.6
      */
     public void test_GetName() {
@@ -227,7 +222,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#getSecure(), setSecure(boolean)
-     * 
      * @since 1.6
      */
     public void test_Get_SetSecure() {
@@ -245,7 +239,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#getPath(), setPath(String)
-     * 
      * @since 1.6
      */
     public void test_Get_SetPath() {
@@ -265,7 +258,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#getMaxAge(), setMaxAge(long)
-     * 
      * @since 1.6
      */
     public void test_Get_SetMaxAge() {
@@ -282,7 +274,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#getDomain(), setDomain(String)
-     * 
      * @since 1.6
      */
     public void test_Get_SetDomain() {
@@ -302,7 +293,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#getPortlist(), setPortlist(String)
-     * 
      * @since 1.6
      */
     public void test_Get_SetPortlist() {
@@ -318,7 +308,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#getDiscard(), setDiscard(boolean)
-     * 
      * @since 1.6
      */
     public void test_Get_SetDiscard() {
@@ -335,7 +324,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#getCommentURL(), setCommentURL(String)
-     * 
      * @since 1.6
      */
     public void test_Get_SetCommentURL() {
@@ -353,7 +341,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#getComment(), setComment(String)
-     * 
      * @since 1.6
      */
     public void test_Get_SetComment() {
@@ -371,7 +358,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#hasExpired()
-     * 
      * @since 1.6
      */
     public void test_HasExpired() {
@@ -397,7 +383,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#equals()
-     * 
      * @since 1.6
      */
     public void test_Equals() {
@@ -430,7 +415,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#clone()
-     * 
      * @since 1.6
      */
     public void test_Clone() {
@@ -446,7 +430,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#toString()
-     * 
      * @since 1.6
      */
     public void test_ToString() {
@@ -485,7 +468,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#hashCode()
-     * 
      * @since 1.6
      */
     public void test_HashCode() {
@@ -511,7 +493,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#parse(String) for exception cases
-     * 
      * @since 1.6
      */
     public void test_Parse_exception() {
@@ -579,8 +560,7 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#parse(String) for locales other than
-     *        Locale.ENGLISH.
-     * 
+     * Locale.ENGLISH.
      * @since 1.6
      */
     public void test_Parse_locale() {
@@ -623,7 +603,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#parse(String) for normal cases
-     * 
      * @since 1.6
      */
     public void test_Parse() {
@@ -782,14 +761,14 @@ public class HttpCookieTest extends TestCase {
         assertEquals(1, list.size());
 
         HttpCookie c = HttpCookie.parse(
-        "Set-cookie:NAME2=VALUE2;path=/t;domain=.b.c;version=1").get(0);
+                "Set-cookie:NAME2=VALUE2;path=/t;domain=.b.c;version=1").get(0);
         assertEquals(1, c.getVersion());
-        
+
         c = HttpCookie.parse(
-        "Set-cookie2:NAME2=VALUE2;path=/t;domain=.b.c;version=0")
-        .get(0);
+                "Set-cookie2:NAME2=VALUE2;path=/t;domain=.b.c;version=0")
+                .get(0);
         assertEquals(1, c.getVersion());
-        
+
         list = HttpCookie.parse("Set-cookie:null=;Domain=null;Port=null");
         cookie = list.get(0);
 
@@ -797,27 +776,27 @@ public class HttpCookieTest extends TestCase {
         assertNotNull(cookie.getName());
         assertNotNull(cookie.getDomain());
         assertNotNull(cookie.getPortlist());
-        
+
         // Check CommentURL, RI's bug: 'a  name' is not valid attribute name. 
         list = HttpCookie
-               .parse("Set-Cookie:a  name=tes,t;Commenturl;commentuRL=(la,la);path=hello");
+                .parse("Set-Cookie:a  name=tes,t;Commenturl;commentuRL=(la,la);path=hello");
         cookie = list.get(0);
         assertEquals("(la,la)", cookie.getCommentURL());
 
-        
+
         list = HttpCookie
                 .parse("Set-Cookie:name=tes,t;Commenturl;commentuRL=(la,la);commentuRL=hello");
         cookie = list.get(0);
         assertEquals("(la,la)", cookie.getCommentURL());
-        
+
         list = HttpCookie
                 .parse("Set-Cookie:name=tes,t;Commenturl;commentuRL=(la,la); path  =hello");
         cookie = list.get(0);
         assertEquals("(la,la)", cookie.getCommentURL());
         assertEquals("hello", cookie.getPath());
-        
+
         list = HttpCookie
-            .parse("a  Set-Cookie:name=tes,t;Commenturl;commentuRL=(la,la);path=hello");
+                .parse("a  Set-Cookie:name=tes,t;Commenturl;commentuRL=(la,la);path=hello");
         cookie = list.get(0);
         assertEquals("(la,la)", cookie.getCommentURL());
 
@@ -826,7 +805,6 @@ public class HttpCookieTest extends TestCase {
 
     /**
      * @tests java.net.HttpCookie#parse(String) for version conflict cases
-     * 
      * @since 1.6
      */
     public void test_Parse_versionConflict() {
@@ -885,7 +863,7 @@ public class HttpCookieTest extends TestCase {
         list = HttpCookie.parse("Set-Cookie:name=test;vERsion=0;Version=1;versioN=0;vErsIon=1");
         cookie = list.get(0);
         assertEquals(1, cookie.getVersion());
-        
+
         // When expires does not exist, max-age takes effect.
         list = HttpCookie.parse("Set-Cookie:name=test;Max-Age=11");
         cookie = list.get(0);
@@ -897,16 +875,15 @@ public class HttpCookieTest extends TestCase {
         cookie = list.get(0);
         assertEquals(0, cookie.getVersion());
     }
-    
+
     /**
      * @tests java.net.HttpCookie#parse(String) on multiple threads
      * Regression test for HARMONY-6307
-     * 
      * @since 1.6
-     * 
      */
     class ParseThread extends Thread {
         public AssertionError error = null;
+
         public void run() {
             try {
                 for (int i = 0; i < 200; i++) {
@@ -928,7 +905,7 @@ public class HttpCookieTest extends TestCase {
         for (int i = 0; i < threads.length; i++) {
             threads[i] = new ParseThread();
         }
-        
+
         // start threads
         for (ParseThread thread : threads) {
             thread.start();
@@ -941,11 +918,11 @@ public class HttpCookieTest extends TestCase {
 
         for (ParseThread thread : threads) {
             if (thread.error != null) {
-                fail("Assertion thrown in thread "+thread+": "+thread.error);
+                fail("Assertion thrown in thread " + thread + ": " + thread.error);
             }
-        }        
+        }
     }
-    
+
     private void checkValidValue(String header, String value) {
         List<HttpCookie> list = HttpCookie
                 .parse(header + "name=" + value + ";");

@@ -22,7 +22,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ProtocolVersion</code> constructor and methods
- *  
  */
 public class ProtocolVersionTest extends TestCase {
 
@@ -48,9 +47,9 @@ public class ProtocolVersionTest extends TestCase {
     public void testGetByVersion() {
         assertNull(ProtocolVersion.getByVersion(new byte[] { 2, 1 }));
         assertEquals("SSLv3",
-                     ProtocolVersion.getByVersion(new byte[] { 3, 0 }).name);
+                ProtocolVersion.getByVersion(new byte[] { 3, 0 }).name);
         assertEquals("TLSv1",
-                     ProtocolVersion.getByVersion(new byte[] { 3, 1 }).name);
+                ProtocolVersion.getByVersion(new byte[] { 3, 1 }).name);
     }
 
     /*
@@ -75,7 +74,7 @@ public class ProtocolVersionTest extends TestCase {
                 "SSLv2", "TLSv1", "SSLv3" });
         assertEquals("Incorrect protocol version", "TLSv1", ver.name);
 
-        ver = ProtocolVersion.getLatestVersion(new String[] {"SSLv3",
+        ver = ProtocolVersion.getLatestVersion(new String[] { "SSLv3",
                 "unknown", "SSLv2" });
         assertEquals("Incorrect protocol version", "SSLv3", ver.name);
     }

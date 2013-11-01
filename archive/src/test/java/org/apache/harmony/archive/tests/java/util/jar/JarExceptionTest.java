@@ -36,12 +36,12 @@ public class JarExceptionTest extends TestCase {
             // correct
         }
     }
-    
+
     /**
      * @tests java.util.jar.JarException#JarException(java.lang.String)
      */
     public void test_ConstructorLjava_lang_String1() throws Exception {
-         assertEquals("Jar Exception", new JarException("Jar Exception").getMessage());
+        assertEquals("Jar Exception", new JarException("Jar Exception").getMessage());
     }
 
     /**

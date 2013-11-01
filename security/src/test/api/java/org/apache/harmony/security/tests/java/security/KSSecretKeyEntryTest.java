@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -27,19 +27,20 @@ import javax.crypto.SecretKey;
 import junit.framework.TestCase;
 
 /**
- * Tests for <code>KeyStore.SecretKeyEntry</code> class constructor and methods 
- * 
+ * Tests for <code>KeyStore.SecretKeyEntry</code> class constructor and methods
  */
 
 public class KSSecretKeyEntryTest extends TestCase {
 
     /**
      * Constructor for KSSecretKeyTest.
+     *
      * @param arg0
      */
     public KSSecretKeyEntryTest(String arg0) {
         super(arg0);
     }
+
     /**
      * Test for <code>SecretKeyEntry(SecretKey secretKey)</code> constructor
      * Assertion: throws NullPointerException when secretKey is null
@@ -49,10 +50,10 @@ public class KSSecretKeyEntryTest extends TestCase {
         try {
             new KeyStore.SecretKeyEntry(sk);
             fail("NullPointerException must be thrown when secretKey is null");
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test for <code>getSecretKey()</code> method
      * Assertion: returns SecretKey from the given entry
@@ -62,7 +63,7 @@ public class KSSecretKeyEntryTest extends TestCase {
         KeyStore.SecretKeyEntry ske = new KeyStore.SecretKeyEntry(sk);
         assertEquals("Incorrect SecretKey", sk, ske.getSecretKey());
     }
-   
+
     /**
      * Test for <code>toString()</code> method
      * Assertion: returns non null string
@@ -78,9 +79,11 @@ class tmpSecretKey implements SecretKey {
     public String getAlgorithm() {
         return "My algorithm";
     }
+
     public String getFormat() {
         return "My Format";
     }
+
     public byte[] getEncoded() {
         return new byte[1];
     }

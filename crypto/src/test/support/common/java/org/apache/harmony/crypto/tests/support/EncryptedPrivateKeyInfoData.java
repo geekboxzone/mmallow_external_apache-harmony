@@ -21,9 +21,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 /**
- *
  * Support class for EncryptedPrivateKeyInfo_ImplTest and EncryptedPrivateKeyInfo_Test
- * 
+ * <p/>
  * All binary data for these tests were generated using
  * BEA JRockit j2sdk1.4.2_04 (http://www.bea.com) with
  * security providers list extended by Bouncy Castle's one
@@ -1169,7 +1168,7 @@ public class EncryptedPrivateKeyInfoData {
     public final static String[][] algName0 = new String[][] {
             { "DSA", "DSA" },
             { "DH", "DiffieHellman", "Diffie-Hellman" },
-            { "1.2.840.10040.4.1", "DSA" }, 
+            { "1.2.840.10040.4.1", "DSA" },
             { "1.2.840.113549.1.1.1", "RSA" },
             { "1.2.840.113549.1.3.1", "DiffieHellman" },
             { "1.2.840.113549.1.5.3", "pbeWithMD5AndDES-CBC" },
@@ -1188,7 +1187,7 @@ public class EncryptedPrivateKeyInfoData {
     /**
      * Returns valid encoding of EncryptedPrivateKeyInfo However encoded private
      * key field (encryptedData) does not contain valid encrypted data.
-     * 
+     *
      * @throws NoSuchAlgorithmException
      */
     public static byte[] getValidEncryptedPrivateKeyInfoEncoding(
@@ -1212,7 +1211,7 @@ public class EncryptedPrivateKeyInfoData {
     /**
      * Returns valid encoding of EncryptedPrivateKeyInfo However encoded private
      * key field (encryptedData) does not contain valid encrypted data.
-     * 
+     *
      * @throws NoSuchAlgorithmException
      */
     public static byte[] getParametersEncoding(String algName)

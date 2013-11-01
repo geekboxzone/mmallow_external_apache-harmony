@@ -30,7 +30,6 @@ import junit.framework.TestCase;
 
 /**
  * Test for <code>CertificateRequest</code> constructors and methods
- *  
  */
 public class CertificateRequestTest extends TestCase {
 
@@ -53,15 +52,15 @@ public class CertificateRequestTest extends TestCase {
             + "7jrj84/GZlhm09DsCFQCBKGKCGbrP64VtUt4JPmLjW1VxQA==\n"
             + "-----END CERTIFICATE-----\n";
 
-public void testCertificateRequest() throws Exception {
+    public void testCertificateRequest() throws Exception {
 
         CertificateFactory certFactory = CertificateFactory.getInstance("X509");
         ByteArrayInputStream bais = new ByteArrayInputStream(base64certEncoding
                 .getBytes("UTF-8"));
         X509Certificate cert = (X509Certificate) certFactory.generateCertificate(bais);
-        X509Certificate[] accepted = {cert};
-        X500Principal[] certificate_authorities = {cert.getIssuerX500Principal()};
-        
+        X509Certificate[] accepted = { cert };
+        X500Principal[] certificate_authorities = { cert.getIssuerX500Principal() };
+
         byte[] certificate_types = new byte[] { CertificateRequest.RSA_SIGN,
                 CertificateRequest.RSA_FIXED_DH };
         CertificateRequest message = new CertificateRequest(certificate_types,
@@ -73,32 +72,32 @@ public void testCertificateRequest() throws Exception {
         assertTrue("incorrect CertificateRequest", Arrays.equals(
                 message.certificate_authorities, certificate_authorities));
 
-		HandshakeIODataStream out = new HandshakeIODataStream();
-		message.send(out);
-		byte[] encoded = out.getData(1000);
+        HandshakeIODataStream out = new HandshakeIODataStream();
+        message.send(out);
+        byte[] encoded = out.getData(1000);
         assertEquals("incorrect out data length", message.length(), encoded.length);
 
-		HandshakeIODataStream in = new HandshakeIODataStream();
-		in.append(encoded);
-		CertificateRequest message_2 = new CertificateRequest(in, message.length());
-        assertTrue("incorrect message decoding", 
+        HandshakeIODataStream in = new HandshakeIODataStream();
+        in.append(encoded);
+        CertificateRequest message_2 = new CertificateRequest(in, message.length());
+        assertTrue("incorrect message decoding",
                 Arrays.equals(message.certificate_types, message_2.certificate_types));
-        assertTrue("incorrect message decoding", 
+        assertTrue("incorrect message decoding",
                 Arrays.equals(message.certificate_authorities, message_2.certificate_authorities));
 
-		in.append(encoded);
-		try {
-			message_2 = new CertificateRequest(in, message.length() - 1);
-			fail("Small length: No expected AlertException");
-		} catch (AlertException e) {
-		}
+        in.append(encoded);
+        try {
+            message_2 = new CertificateRequest(in, message.length() - 1);
+            fail("Small length: No expected AlertException");
+        } catch (AlertException e) {
+        }
 
-		in.append(encoded);
-		in.append(new byte[] { 1, 2, 3 });
-		try {
-			message_2 = new CertificateRequest(in, message.length() + 3);
-			fail("Extra bytes: No expected AlertException ");
-		} catch (AlertException e) {
-		}
-	}
+        in.append(encoded);
+        in.append(new byte[] { 1, 2, 3 });
+        try {
+            message_2 = new CertificateRequest(in, message.length() + 3);
+            fail("Extra bytes: No expected AlertException ");
+        } catch (AlertException e) {
+        }
+    }
 }

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.security.tests.x509;
 
@@ -54,27 +54,34 @@ import org.apache.harmony.security.x509.TBSCertList;
 public class CertificateListTest extends TestCase {
 
     // OID was taken from http://oid.elibel.tm.fr
-    private static String algOID          = "1.2.840.10040.4.3";
+    private static String algOID = "1.2.840.10040.4.3";
     //private static String algName         = "SHA1withDSA";
-    private static byte[] algParams       = {1, 1, 0}; // DER boolean false encoding
+    private static byte[] algParams = { 1, 1, 0 }; // DER boolean false encoding
     private static AlgorithmIdentifier signature;
     private static byte[] signatureValue = new byte[10];
+
     static {
         signature = new AlgorithmIdentifier(algOID, algParams);
     }
-    private static String issuerName      = "O=Certificate Issuer";
+
+    private static String issuerName = "O=Certificate Issuer";
     private static Date thisUpdate = new Date();
     private static Date nextUpdate;
+
     static {
-        nextUpdate = new Date(thisUpdate.getTime()+100000);
+        nextUpdate = new Date(thisUpdate.getTime() + 100000);
     }
+
     private static Extension crlEntryExtension;
+
     static {
         // Invalidity Date Extension (rfc 3280)
         crlEntryExtension = new Extension("2.5.29.24",
-                    ASN1GeneralizedTime.getInstance().encode(new Date()));
+                ASN1GeneralizedTime.getInstance().encode(new Date()));
     }
+
     private static Extensions crlEntryExtensions = new Extensions();
+
     static {
         //*
         crlEntryExtensions.addExtension(crlEntryExtension);
@@ -87,40 +94,41 @@ public class CertificateListTest extends TestCase {
         try {
             crlEntryExtensions.addExtension(
                     new Extension("2.5.29.29", true,
-                        //*
-                        //ASN1OctetString.getInstance().encode(
+                            //*
+                            //ASN1OctetString.getInstance().encode(
                             GeneralNames.ASN1.encode(
-                                new GeneralNames(Arrays.asList(
-                                    new GeneralName[] {
-                                        new GeneralName(new Name("O=Cert Organization"))//new GeneralName(4, "O=Organization")
-                                    })
-                                )
+                                    new GeneralNames(Arrays.asList(
+                                            new GeneralName[] {
+                                                    new GeneralName(new Name("O=Cert Organization"))//new GeneralName(4, "O=Organization")
+                                            })
+                                    )
                             )
-                        //)
-                        //*/
+                            //)
+                            //*/
                     )
-                );
+            );
         } catch (Exception e) {
             e.printStackTrace();
         }
         //*/
     }
+
     private static Date revocationDate = new Date();
     private static List revokedCertificates = Arrays.asList(
             new TBSCertList.RevokedCertificate[] {
-                new TBSCertList.RevokedCertificate(BigInteger.valueOf(555),
-                    revocationDate, null),//crlEntryExtensions),
-                new TBSCertList.RevokedCertificate(BigInteger.valueOf(666),
-                    revocationDate, crlEntryExtensions),
-                new TBSCertList.RevokedCertificate(BigInteger.valueOf(777),
-                    revocationDate, null),//crlEntryExtensions)
+                    new TBSCertList.RevokedCertificate(BigInteger.valueOf(555),
+                            revocationDate, null),//crlEntryExtensions),
+                    new TBSCertList.RevokedCertificate(BigInteger.valueOf(666),
+                            revocationDate, crlEntryExtensions),
+                    new TBSCertList.RevokedCertificate(BigInteger.valueOf(777),
+                            revocationDate, null),//crlEntryExtensions)
             });
     private static Extensions crlExtensions = new Extensions(
-        Arrays.asList(new Extension[] {
-            new Extension("2.5.29.20", // CRL Number Extension (rfc 3280)
-                    ASN1Integer.getInstance().encode(
-                        BigInteger.valueOf(4444).toByteArray())),
-        }));
+            Arrays.asList(new Extension[] {
+                    new Extension("2.5.29.20", // CRL Number Extension (rfc 3280)
+                            ASN1Integer.getInstance().encode(
+                                    BigInteger.valueOf(4444).toByteArray())),
+            }));
 
     private CertificateList certificateList;
     private TBSCertList tbscertlist;
@@ -131,20 +139,20 @@ public class CertificateListTest extends TestCase {
             Name issuer = new Name(issuerName);
 
             tbscertlist =
-                new TBSCertList(2, signature, issuer, thisUpdate,
-                    nextUpdate, revokedCertificates, crlExtensions);
+                    new TBSCertList(2, signature, issuer, thisUpdate,
+                            nextUpdate, revokedCertificates, crlExtensions);
 
             certificateList =
-                new CertificateList(tbscertlist, signature, signatureValue);
+                    new CertificateList(tbscertlist, signature, signatureValue);
 
             encoding = CertificateList.ASN1.encode(certificateList);
 
             certificateList = (CertificateList)
-                CertificateList.ASN1.decode(encoding);
+                    CertificateList.ASN1.decode(encoding);
 
         } catch (IOException e) {
             e.printStackTrace();
-            fail("Unexpected IOException was thrown: "+e.getMessage());
+            fail("Unexpected IOException was thrown: " + e.getMessage());
         }
     }
 
@@ -156,12 +164,12 @@ public class CertificateListTest extends TestCase {
     public void testCertificateList() {
         try {
             AlgorithmIdentifier signature =
-                new AlgorithmIdentifier(algOID, algParams);
+                    new AlgorithmIdentifier(algOID, algParams);
             Name issuer = new Name(issuerName);
             TBSCertList tbscl =
-                new TBSCertList(signature, issuer, thisUpdate);
+                    new TBSCertList(signature, issuer, thisUpdate);
             CertificateList cl =
-                new CertificateList(tbscl, signature, new byte[] {0});
+                    new CertificateList(tbscl, signature, new byte[] { 0 });
 
             byte[] encoding = CertificateList.ASN1.encode(cl);
             CertificateList.ASN1.decode(encoding);
@@ -169,14 +177,14 @@ public class CertificateListTest extends TestCase {
             tbscl = new TBSCertList(2, signature, issuer, thisUpdate,
                     nextUpdate, revokedCertificates, crlExtensions);
 
-            cl = new CertificateList(tbscl, signature, new byte[] {0});
+            cl = new CertificateList(tbscl, signature, new byte[] { 0 });
 
             encoding = CertificateList.ASN1.encode(cl);
             CertificateList.ASN1.decode(encoding);
 
         } catch (IOException e) {
             e.printStackTrace();
-            fail("Unexpected IOException was thrown: "+e.getMessage());
+            fail("Unexpected IOException was thrown: " + e.getMessage());
         }
     }
 
@@ -206,17 +214,17 @@ public class CertificateListTest extends TestCase {
 
     public void testSupportIndirectCRLs() throws Exception {
         X509CRL crl = (X509CRL)
-            CertificateFactory.getInstance("X.509").generateCRL(
-                    new ByteArrayInputStream(encoding));
+                CertificateFactory.getInstance("X.509").generateCRL(
+                        new ByteArrayInputStream(encoding));
         Set rcerts = crl.getRevokedCertificates();
-        System.out.println(">> rcerts:"+rcerts);
+        System.out.println(">> rcerts:" + rcerts);
 
-        System.out.println("}>> "+ rcerts.toArray()[0]);
-        System.out.println("}>> "+((X509CRLEntry) rcerts.toArray()[0]).getCertificateIssuer());
-        System.out.println("}>> "+((X509CRLEntry) rcerts.toArray()[1]).getCertificateIssuer());
-        System.out.println("}>> "+((X509CRLEntry) rcerts.toArray()[2]).getCertificateIssuer());
-        System.out.println(">> "+crl.getRevokedCertificate(
-                    BigInteger.valueOf(555)).getCertificateIssuer());
+        System.out.println("}>> " + rcerts.toArray()[0]);
+        System.out.println("}>> " + ((X509CRLEntry) rcerts.toArray()[0]).getCertificateIssuer());
+        System.out.println("}>> " + ((X509CRLEntry) rcerts.toArray()[1]).getCertificateIssuer());
+        System.out.println("}>> " + ((X509CRLEntry) rcerts.toArray()[2]).getCertificateIssuer());
+        System.out.println(">> " + crl.getRevokedCertificate(
+                BigInteger.valueOf(555)).getCertificateIssuer());
     }
 
     public static Test suite() {

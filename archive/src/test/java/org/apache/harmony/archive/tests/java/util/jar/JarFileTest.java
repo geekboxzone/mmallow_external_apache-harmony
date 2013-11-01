@@ -40,7 +40,7 @@ public class JarFileTest extends TestCase {
 
     /**
      * The file contains the following entries:
-     * 
+     * <p/>
      * <pre>
      * META-INF/ META-INF/MANIFEST.MF
      * foo/ foo/bar/ foo/bar/A.class
@@ -84,7 +84,7 @@ public class JarFileTest extends TestCase {
 
     /**
      * Constructs JarFile object.
-     * 
+     *
      * @tests java.util.jar.JarFile#JarFile(java.io.File)
      * @tests java.util.jar.JarFile#JarFile(java.lang.String)
      */
@@ -220,23 +220,24 @@ public class JarFileTest extends TestCase {
             while (is.available() > 0) {
                 StringBuilder linebuff = new StringBuilder(80); // Typical line
                 // length
-                done: while (true) {
+                done:
+                while (true) {
                     int nextByte = is.read();
                     switch (nextByte) {
-                    case -1:
-                        break done;
-                    case (byte) '\r':
-                        if (linebuff.length() == 0) {
-                            // ignore
-                        }
-                        break done;
-                    case (byte) '\n':
-                        if (linebuff.length() == 0) {
-                            // ignore
-                        }
-                        break done;
-                    default:
-                        linebuff.append((char) nextByte);
+                        case -1:
+                            break done;
+                        case (byte) '\r':
+                            if (linebuff.length() == 0) {
+                                // ignore
+                            }
+                            break done;
+                        case (byte) '\n':
+                            if (linebuff.length() == 0) {
+                                // ignore
+                            }
+                            break done;
+                        default:
+                            linebuff.append((char) nextByte);
                     }
                 }
                 if (linebuff.length() == 0) {
@@ -375,7 +376,7 @@ public class JarFileTest extends TestCase {
 
     /**
      * Signed file is verified by default.
-     * 
+     *
      * @tests java.util.jar.JarFile#getInputStream(java.util.zip.ZipEntry)
      */
     public void testInputStreamOperations() throws Exception {
@@ -610,7 +611,7 @@ public class JarFileTest extends TestCase {
             }
         }
     }
-    
+
     public void testGetInputStreamLjava_util_jar_JarEntry() throws IOException {
         Support_Resources.copyFile(resources, null, JAR1);
         JarFile jf = new JarFile(new File(resources, JAR1));
@@ -640,7 +641,7 @@ public class JarFileTest extends TestCase {
         jf = new JarFile(new File(resources, JAR1));
         is = jf.getInputStream(new JarEntry("invalid"));
         assertNull(is);
-        jf.close(); 
+        jf.close();
     }
 
     public void testJarVerificationEmptyEntry() throws IOException {

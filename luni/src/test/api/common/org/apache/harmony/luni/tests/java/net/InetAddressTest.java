@@ -127,11 +127,11 @@ public class InetAddressTest extends junit.framework.TestCase {
 
         // TODO : Test to ensure all the address formats are recognized
         InetAddress i = InetAddress.getByName("1.2.3");
-        assertEquals("1.2.0.3",i.getHostAddress());
+        assertEquals("1.2.0.3", i.getHostAddress());
         i = InetAddress.getByName("1.2");
-        assertEquals("1.0.0.2",i.getHostAddress());
+        assertEquals("1.0.0.2", i.getHostAddress());
         i = InetAddress.getByName(String.valueOf(0xffffffffL));
-        assertEquals("255.255.255.255",i.getHostAddress());
+        assertEquals("255.255.255.255", i.getHostAddress());
     }
 
     /**
@@ -265,7 +265,7 @@ public class InetAddressTest extends junit.framework.TestCase {
         InetAddress ia2 = InetAddress.getByName("127.0.0.1");
         assertEquals("/127.0.0.1", ia2.toString());
         // Regression for HARMONY-84
-        InetAddress addr2 = InetAddress.getByAddress(new byte[]{127, 0, 0, 1});
+        InetAddress addr2 = InetAddress.getByAddress(new byte[] { 127, 0, 0, 1 });
         assertEquals("Assert 1: wrong string from address", "/127.0.0.1", addr2.toString());
     }
 
@@ -358,7 +358,7 @@ public class InetAddressTest extends junit.framework.TestCase {
         ia = InetAddress.getByName("localhost"); //$NON-NLS-1$
         Enumeration<NetworkInterface> nif = NetworkInterface.getNetworkInterfaces();
         NetworkInterface netif;
-        while(nif.hasMoreElements()) {
+        while (nif.hasMoreElements()) {
             netif = nif.nextElement();
             ia.isReachable(netif, 10, 1000);
         }

@@ -102,7 +102,7 @@ public class URLClassLoaderTest extends TestCase {
 
     /**
      * @tests java.net.URLClassLoader#URLClassLoader(java.net.URL[],
-     *        java.lang.ClassLoader)
+     *java.lang.ClassLoader)
      */
     public void test_Constructor$Ljava_net_URLLjava_lang_ClassLoader() {
         ClassLoader cl = new BogusClassLoader();
@@ -138,7 +138,7 @@ public class URLClassLoaderTest extends TestCase {
                     resValues[i++], sb.toString());
         }
         assertEquals("Incorrect number of resources returned: " + i, 2, i);
-        
+
         // Regression for HARMONY-6510
         res = ucl.findResources(null);
         assertNotNull(res);
@@ -187,7 +187,7 @@ public class URLClassLoaderTest extends TestCase {
 
     /**
      * @tests java.net.URLClassLoader#newInstance(java.net.URL[],
-     *        java.lang.ClassLoader)
+     *java.lang.ClassLoader)
      */
     public void test_newInstance$Ljava_net_URLLjava_lang_ClassLoader() {
         ClassLoader cl = new BogusClassLoader();
@@ -200,7 +200,7 @@ public class URLClassLoaderTest extends TestCase {
 
     /**
      * @tests java.net.URLClassLoader#URLClassLoader(java.net.URL[],
-     *        java.lang.ClassLoader, java.net.URLStreamHandlerFactory)
+     *java.lang.ClassLoader, java.net.URLStreamHandlerFactory)
      */
     public void test_Constructor$Ljava_net_URLLjava_lang_ClassLoaderLjava_net_URLStreamHandlerFactory() {
         class TestFactory implements URLStreamHandlerFactory {
@@ -259,12 +259,12 @@ public class URLClassLoaderTest extends TestCase {
             URL url2 = (URL) en.nextElement();
             resourcesFound = resourcesFound
                     && url1.equals(new URL("jar:file:/"
-                            + resPath.replace('\\', '/')
-                            + "/JarIndex/hyts_22.jar!/bpack/"));
+                    + resPath.replace('\\', '/')
+                    + "/JarIndex/hyts_22.jar!/bpack/"));
             resourcesFound = resourcesFound
                     && url2.equals(new URL("jar:file:/"
-                            + resPath.replace('\\', '/')
-                            + "/JarIndex/hyts_23.jar!/bpack/"));
+                    + resPath.replace('\\', '/')
+                    + "/JarIndex/hyts_23.jar!/bpack/"));
             if (en.hasMoreElements()) {
                 resourcesFound = false;
             }
@@ -312,8 +312,8 @@ public class URLClassLoaderTest extends TestCase {
         en = ucl.findResources("bpack/");
         resourcesFound = resourcesFound
                 && ((URL) en.nextElement()).equals(new URL("jar:file:/"
-                        + resPath.replace('\\', '/')
-                        + "/JarIndex/hyts_42.jar!/bpack/"));
+                + resPath.replace('\\', '/')
+                + "/JarIndex/hyts_42.jar!/bpack/"));
         assertTrue("Resources not found (2)", resourcesFound);
         assertFalse("No more resources expected", en.hasMoreElements());
 
@@ -487,25 +487,25 @@ public class URLClassLoaderTest extends TestCase {
         in = this.getClass().getResourceAsStream("test%25.properties");
         assertNull(in);
     }
-    
+
     /**
      * Regression test for HARMONY-6074
      */
-    public void test_findClassLjava_lang_String_Jar_Class_Path() throws Exception{
+    public void test_findClassLjava_lang_String_Jar_Class_Path() throws Exception {
         File resources = Support_Resources.createTempFolder();
         String resPath = resources.toString();
         if (resPath.charAt(0) == '/' || resPath.charAt(0) == '\\') {
             resPath = resPath.substring(1);
         }
-        
+
         Support_Resources.copyFile(resources, "JarIndex", "hyts_11.jar");
         Support_Resources.copyFile(resources, "JarIndex", "hyts_13.jar");
 
         JarFile jarFile = new JarFile(resources.getAbsolutePath() + "/JarIndex/hyts_11.jar");
-        Manifest mf = jarFile.getManifest(); 
+        Manifest mf = jarFile.getManifest();
         Attributes attrs = mf.getMainAttributes();
         attrs.putValue("Class-Path", "file:/" + resPath + "/JarIndex/hyts_13.jar");
-        
+
         File mainJar = new File(resources.getAbsolutePath() + "/JarIndex/main.jar");
         JarOutputStream jos = new JarOutputStream(new FileOutputStream(mainJar), mf);
         jos.flush();

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto.spec;
 
@@ -82,12 +82,12 @@ public class OAEPParameterSpecTest extends TestCase {
                 + "OAEPParameterSpec.DEFAULT field should be the same object "
                 + "as MGF1ParameterSpec.SHA1",
                 OAEPParameterSpec.DEFAULT.getMGFParameters()
-                                                    == MGF1ParameterSpec.SHA1);
+                        == MGF1ParameterSpec.SHA1);
         assertTrue("The source of the encoding input P of "
                 + "OAEPParameterSpec.DEFAULT field should be the same object "
                 + "PSource.PSpecified.DEFAULT",
                 OAEPParameterSpec.DEFAULT.getPSource()
-                                                == PSource.PSpecified.DEFAULT);
+                        == PSource.PSpecified.DEFAULT);
     }
 
     /**
@@ -100,7 +100,7 @@ public class OAEPParameterSpecTest extends TestCase {
         PSource pSrc = PSource.PSpecified.DEFAULT;
 
         OAEPParameterSpec ps = new OAEPParameterSpec(mdName, mgfName,
-                                                                mgfSpec, pSrc);
+                mgfSpec, pSrc);
         assertTrue("The returned value does not equal to the "
                 + "value specified in the constructor.",
                 ps.getDigestAlgorithm().equals(mdName));
@@ -116,7 +116,7 @@ public class OAEPParameterSpecTest extends TestCase {
         PSource pSrc = PSource.PSpecified.DEFAULT;
 
         OAEPParameterSpec ps = new OAEPParameterSpec(mdName, mgfName,
-                                                                mgfSpec, pSrc);
+                mgfSpec, pSrc);
         assertTrue("The returned value does not equal to the "
                 + "value specified in the constructor.",
                 ps.getMGFAlgorithm().equals(mgfName));
@@ -132,7 +132,7 @@ public class OAEPParameterSpecTest extends TestCase {
         PSource pSrc = PSource.PSpecified.DEFAULT;
 
         OAEPParameterSpec ps = new OAEPParameterSpec(mdName, mgfName,
-                                                                mgfSpec, pSrc);
+                mgfSpec, pSrc);
         assertTrue("The returned value does not equal to the "
                 + "value specified in the constructor.",
                 ps.getMGFParameters() == mgfSpec);
@@ -148,7 +148,7 @@ public class OAEPParameterSpecTest extends TestCase {
         PSource pSrc = PSource.PSpecified.DEFAULT;
 
         OAEPParameterSpec ps = new OAEPParameterSpec(mdName, mgfName,
-                                                                mgfSpec, pSrc);
+                mgfSpec, pSrc);
         assertTrue("The returned value does not equal to the "
                 + "value specified in the constructor.",
                 ps.getPSource() == pSrc);

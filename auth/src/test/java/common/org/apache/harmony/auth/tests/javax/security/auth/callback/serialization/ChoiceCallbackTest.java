@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.callback.serialization;
 
@@ -39,9 +39,9 @@ public class ChoiceCallbackTest extends SerializationTest implements
 
         String prompt = "prompt";
         int defaultChoice = 1;
-        String[] choices = {"AAA", "BBB"};
-        
-        return new Object[] {new ChoiceCallback(prompt, choices, defaultChoice, true)};
+        String[] choices = { "AAA", "BBB" };
+
+        return new Object[] { new ChoiceCallback(prompt, choices, defaultChoice, true) };
     }
 
     public void assertDeserialized(Serializable golden, Serializable test) {
@@ -51,5 +51,5 @@ public class ChoiceCallbackTest extends SerializationTest implements
         assertEquals(((ChoiceCallback) golden).getDefaultChoice(),
                 ((ChoiceCallback) test).getDefaultChoice());
     }
-    
+
 }

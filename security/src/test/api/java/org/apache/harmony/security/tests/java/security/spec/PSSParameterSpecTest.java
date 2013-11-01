@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -29,13 +29,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>PSSParameterSpec</code> class (1.5)
- * 
  */
 public class PSSParameterSpecTest extends TestCase {
 
     /**
      * Constructor for PSSParameterSpecTest.
-     * 
+     *
      * @param name
      */
     public PSSParameterSpecTest(String name) {
@@ -156,7 +155,6 @@ public class PSSParameterSpecTest extends TestCase {
      * PSSParameterSpec(String,String,AlgorithmParameterSpec,int,int)
      * </code> ctor<br>
      * Assertion: <code>AlgorithmParameterSpec</code> can be null
-     * 
      */
     public final void testPSSParameterSpec0206() {
         new PSSParameterSpec("SHA-1", "MGF1", null, 20, 1);
@@ -164,7 +162,7 @@ public class PSSParameterSpecTest extends TestCase {
 
     /**
      * Test for <code>getDigestAlgorithm()</code> method
-     * Assertion: returns message digest algorithm name 
+     * Assertion: returns message digest algorithm name
      */
     public final void testGetDigestAlgorithm() {
         PSSParameterSpec pssps = new PSSParameterSpec("SHA-1", "MGF1",
@@ -174,7 +172,7 @@ public class PSSParameterSpecTest extends TestCase {
 
     /**
      * Test for <code>getMGFAlgorithm()</code> method
-     * Assertion: returns mask generation function algorithm name 
+     * Assertion: returns mask generation function algorithm name
      */
     public final void testGetMGFAlgorithm() {
         PSSParameterSpec pssps = new PSSParameterSpec("SHA-1", "MGF1",
@@ -184,19 +182,19 @@ public class PSSParameterSpecTest extends TestCase {
 
     /**
      * Test #1 for <code>getMGFParameters()</code> method
-     * Assertion: returns mask generation function parameters 
+     * Assertion: returns mask generation function parameters
      */
     public final void testGetMGFParameters01() {
         PSSParameterSpec pssps = new PSSParameterSpec("SHA-1", "MGF1",
                 MGF1ParameterSpec.SHA1, 20, 1);
         assertTrue(MGF1ParameterSpec.SHA1.equals(pssps.getMGFParameters()));
     }
-    
+
     /**
      * Test #2 for <code>getMGFParameters()</code> method
      * Assertion: returns <code>null</code>
      * if <code>null</code> had been passed as
-     * AlgorithmParameterSpec parameter to the ctor  
+     * AlgorithmParameterSpec parameter to the ctor
      */
     public final void testGetMGFParameters02() {
         PSSParameterSpec pssps = new PSSParameterSpec("SHA-1", "MGF1",
@@ -246,7 +244,7 @@ public class PSSParameterSpecTest extends TestCase {
      * generation function are <code>MGF1ParameterSpec.SHA1</code>
      */
     public final void testDEFAULTmgfSpec() {
-        assertTrue(MGF1ParameterSpec.SHA1.equals(PSSParameterSpec.DEFAULT.getMGFParameters()));        
+        assertTrue(MGF1ParameterSpec.SHA1.equals(PSSParameterSpec.DEFAULT.getMGFParameters()));
     }
 
     /**

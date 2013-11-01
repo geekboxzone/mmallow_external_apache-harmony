@@ -106,7 +106,7 @@ public class UnixSocketTest extends TestCase {
         ServerSocket ss = new ServerSocket(0);
         int port = ss.getLocalPort();
         ss.close();
-        
+
         Socket socket = new Socket("127.0.0.1", port, false);
         OutputStream o = socket.getOutputStream();
         try {

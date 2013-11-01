@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -44,26 +44,25 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyStore</code> constructor and methods
- * 
  */
 
 public class KeyStore_Impl1Test extends TestCase {
-    
+
     public static final String srvKeyStore = KeyStoreTestSupport.srvKeyStore;
-    public static String[] validValues =  KeyStoreTestSupport.validValues;
+    public static String[] validValues = KeyStoreTestSupport.validValues;
 
     private static final String[] aliases = { "", "alias", "Alias", "ALIAS",
             "new alias", "another alias", "ADDITIONAL", "THE SAME ALIAS" };
 
-    private static String[] invalidValues =  SpiEngUtils.invalidValues;
+    private static String[] invalidValues = SpiEngUtils.invalidValues;
 
     public static String defaultType = KeyStoreTestSupport.defaultType;
     public static boolean JKSSupported = KeyStoreTestSupport.JKSSupported;
     public static String defaultProviderName = KeyStoreTestSupport.defaultProviderName;
     public static Provider defaultProvider = KeyStoreTestSupport.defaultProvider;
-       
+
     private static String NotSupportMsg = "Default KeyStore type is not supported";
-       
+
     public KeyStore[] createKS() throws Exception {
         assertTrue(NotSupportMsg, JKSSupported);
         KeyStore[] kpg = new KeyStore[3];
@@ -75,7 +74,7 @@ public class KeyStore_Impl1Test extends TestCase {
     }
 
     /**
-     * Test for <code>getInstance(String type)</code> method 
+     * Test for <code>getInstance(String type)</code> method
      * Assertion:
      * returns KeyStoreException object
      */
@@ -133,7 +132,7 @@ public class KeyStore_Impl1Test extends TestCase {
     /**
      * Test for <code>getInstance(String type, String provider)</code> method
      * Assertion:
-     * throws NullPointerException when type is null 
+     * throws NullPointerException when type is null
      * throws KeyStoreException when type is not available
      */
     public void testKeyStore06() throws NoSuchProviderException {
@@ -172,7 +171,7 @@ public class KeyStore_Impl1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String type, Provider provider)</code> method
-     * Assertion: throws IllegalArgumentException when provider is null 
+     * Assertion: throws IllegalArgumentException when provider is null
      */
     public void testKeyStore08() throws KeyStoreException {
         assertTrue(NotSupportMsg, JKSSupported);
@@ -189,9 +188,9 @@ public class KeyStore_Impl1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String type, Provider provider)</code>
-     * method 
-     * Assertions: 
-     * throws NullPointerException when type is null 
+     * method
+     * Assertions:
+     * throws NullPointerException when type is null
      * throws KeyStoreException when type is not available
      */
     public void testKeyStore09() {
@@ -215,7 +214,7 @@ public class KeyStore_Impl1Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String type, Provider provider)</code>
-     * method 
+     * method
      * Assertion: returns KeyStore object
      */
     public void testKeyStore10() throws KeyStoreException {
@@ -250,8 +249,8 @@ public class KeyStore_Impl1Test extends TestCase {
      */
     public void testKeyStore11() throws Exception {
         assertTrue(NotSupportMsg, JKSSupported);
-        String msgF ="KeyStoreException must be thrown because KeyStore was not initialized";
-        KeyStore [] kss = createKS();
+        String msgF = "KeyStoreException must be thrown because KeyStore was not initialized";
+        KeyStore[] kss = createKS();
         assertNotNull("KeyStore objects were not created", kss);
         for (int i = 0; i < kss.length; i++) {
             try {
@@ -293,7 +292,7 @@ public class KeyStore_Impl1Test extends TestCase {
                 kss[i].setKeyEntry("", null, new char[0], new Certificate[0]);
                 fail(msgF);
             } catch (KeyStoreException e) {
-            }     
+            }
             try {
                 kss[i].setKeyEntry("", new byte[0], new Certificate[0]);
                 fail(msgF);
@@ -350,25 +349,24 @@ public class KeyStore_Impl1Test extends TestCase {
             }
         }
     }
-    
+
     /**
      * Test for
      * <code>setEntry(String alias, KeyStore.Entry entry, KeyStore.ProtectionParameter params)</code>
      * <code>containsAlias(String alias)</code>
-     * <code>getEntry(String alias)</code> 
-     * <code>getCertificate(String alias)</code> 
-     * <code>isCertificateEntry(String alias)</code> 
+     * <code>getEntry(String alias)</code>
+     * <code>getCertificate(String alias)</code>
+     * <code>isCertificateEntry(String alias)</code>
      * <code>isKeyEntry(String alias)</code>
      * methods Assertions: setEntry(..) throws NullPointerException when alias
      * or entry is null;
-     * 
+     * <p/>
      * containsAlias(..), getEntry(..), isCertificateEntry(..), isKeyEntry(...)
      * throw NullPointerException when alias is null;
-     * 
+     * <p/>
      * setEntry(..) stores Entry and getEntry(..) returns it when
      * KeyStore.TrustedCertificateEntry is used; getCertificate(...) returns
      * used trusted certificate.
-     *  
      */
     public void testEntry01() throws Exception {
         assertTrue(NotSupportMsg, JKSSupported);
@@ -430,7 +428,7 @@ public class KeyStore_Impl1Test extends TestCase {
                 assertEquals("Incorrect certificate",
                         ((KeyStore.TrustedCertificateEntry) en)
                                 .getTrustedCertificate(), entry
-                                .getTrustedCertificate());
+                        .getTrustedCertificate());
                 assertEquals("Incorrect certificate", kss[i]
                         .getCertificate(aliases[j]), trust);
             }
@@ -439,23 +437,22 @@ public class KeyStore_Impl1Test extends TestCase {
 
 
     /**
-     * Test for 
+     * Test for
      * <code>setEntry(String alias, KeyStore.Entry entry, KeyStore.ProtectionParameter params)</code>
      * <code>containsAlias(String alias)</code>
-     * <code>getEntry(String alias)</code> 
-     * <code>isCertificateEntry(String alias)</code> 
-     * <code>isKeyEntry(String alias)</code> 
+     * <code>getEntry(String alias)</code>
+     * <code>isCertificateEntry(String alias)</code>
+     * <code>isKeyEntry(String alias)</code>
      * methods
-     * Assertions: 
+     * Assertions:
      * getEntry(...) throws KeyStoreException if password is incorrect;
      * setEntry(..) throws KeyStoreException if password is destroyed;
-     * 
+     * <p/>
      * setEntry(..) throws KeyStoreException when incorrect Entry is used;
-     * 
-     * setEntry(..) stores Entry and getEntry(...) returns it when 
+     * <p/>
+     * setEntry(..) stores Entry and getEntry(...) returns it when
      * KeyStore.PrivateKeyEntry is used.
-     * 
-     */    
+     */
     public void testEntry02() throws Exception {
         assertTrue(NotSupportMsg, JKSSupported);
         TestKeyPair tkp = new TestKeyPair("DSA");
@@ -491,15 +488,15 @@ public class KeyStore_Impl1Test extends TestCase {
                 assertTrue("Incorrect Entry",
                         en instanceof KeyStore.PrivateKeyEntry);
                 Key key = pKey.getPrivateKey();
-                Key key1  = ((KeyStore.PrivateKeyEntry) en).getPrivateKey();
+                Key key1 = ((KeyStore.PrivateKeyEntry) en).getPrivateKey();
                 if (!key.getAlgorithm().equals(key1.getAlgorithm()) ||
-                		!key.getFormat().equals(key1.getFormat())) {
-                	fail("Incorrect key");
+                        !key.getFormat().equals(key1.getFormat())) {
+                    fail("Incorrect key");
                 }
                 byte[] enc = key.getEncoded();
                 byte[] enc1 = key1.getEncoded();
                 assertTrue("Diff. keys encoding", Arrays.equals(enc, enc1));
-              
+
                 cc = ((KeyStore.PrivateKeyEntry) en).getCertificateChain();
                 assertEquals("Incorrect CertificateChain", cc.length,
                         certs.length);
@@ -508,15 +505,15 @@ public class KeyStore_Impl1Test extends TestCase {
                 }
 
                 key = kss[i].getKey(aliases[j], pwd);
-                key1  = privKey;
+                key1 = privKey;
                 if (!key.getAlgorithm().equals(key1.getAlgorithm()) ||
-                		!key.getFormat().equals(key1.getFormat())) {
-                	fail("Incorrect Entry: key");
+                        !key.getFormat().equals(key1.getFormat())) {
+                    fail("Incorrect Entry: key");
                 }
                 enc = key.getEncoded();
                 enc1 = key1.getEncoded();
                 assertTrue("Incorrect Entry: Diff. keys encoding", Arrays.equals(enc, enc1));
-                  
+
                 cc = kss[i].getCertificateChain(aliases[j]);
                 assertEquals("Incorrect CertificateChain", cc.length,
                         certs.length);
@@ -555,40 +552,40 @@ public class KeyStore_Impl1Test extends TestCase {
             }
         }
     }
-    
+
     /**
-     * Test for 
+     * Test for
      * <code>setEntry(String alias, KeyStore.Entry entry, KeyStore.ProtectionParameter params)</code>
      * <code>containsAlias(String alias)</code>
-     * <code>getEntry(String alias)</code> 
-     * <code>isCertificateEntry(String alias)</code> 
-     * <code>isKeyEntry(String alias)</code> 
+     * <code>getEntry(String alias)</code>
+     * <code>isCertificateEntry(String alias)</code>
+     * <code>isKeyEntry(String alias)</code>
      * methods
-     * Assertions: 
-     * setEntry(..) stores used entry and getEntry(..) returns it when 
+     * Assertions:
+     * setEntry(..) stores used entry and getEntry(..) returns it when
      * KeyStore.SecretKeyEntry is used;
-     * 
+     * <p/>
      * setEntry(..) throws KeyStoreException when incorrect Entry is used.
-     * 
+     * <p/>
      * FIXME: this test should be changed to verify SecretKeyEntry.
-     * It is not supported.  
-     */    
+     * It is not supported.
+     */
     public void testEntry03() throws Exception {
         assertTrue(NotSupportMsg, JKSSupported);
         TestKeyPair tkp = new TestKeyPair("DSA");
         KeyStoreTestSupport.SKey secKey = new KeyStoreTestSupport.SKey("DSA",
                 tkp.getPrivate().getEncoded());
         KeyStore.SecretKeyEntry sKey = new KeyStore.SecretKeyEntry(
-                secKey);        
-        char [] pwd = {'p', 'a', 's', 's', 'w', 'd'};
+                secKey);
+        char[] pwd = { 'p', 'a', 's', 's', 'w', 'd' };
         KeyStore.PasswordProtection pPath = new KeyStore.PasswordProtection(pwd);
         KeyStoreTestSupport.AnotherEntry aEntry = new KeyStoreTestSupport.AnotherEntry();
         KeyStoreTestSupport.ProtPar pPar = new KeyStoreTestSupport.ProtPar();
-        KeyStore [] kss = createKS();
+        KeyStore[] kss = createKS();
         assertNotNull("KeyStore objects were not created", kss);
         for (int i = 0; i < kss.length; i++) {
             kss[i].load(null, null);
-            for (int j = 0; j < aliases.length; j++)  {
+            for (int j = 0; j < aliases.length; j++) {
                 try {
                     kss[i].setEntry(aliases[j], sKey, pPath);
                 } catch (KeyStoreException e) {
@@ -597,20 +594,20 @@ public class KeyStore_Impl1Test extends TestCase {
                 }
             }
 
-            for (int j = 0; j < aliases.length; j++)  {            
+            for (int j = 0; j < aliases.length; j++) {
                 assertTrue("Incorrect alias", kss[i].containsAlias(aliases[j]));
-                assertTrue("Not KeyEntry", kss[i].isKeyEntry(aliases[j]));                
+                assertTrue("Not KeyEntry", kss[i].isKeyEntry(aliases[j]));
                 assertFalse("Incorrect CertificateEntry", kss[i].isCertificateEntry(aliases[j]));
                 Key key1;
                 try {
-                	key1 = kss[i].getKey(aliases[j], pwd);
-                } catch (UnrecoverableKeyException e) { 
-                	//logln("testEntry03: non-PrivateKeys not supported.");
-                	return;
+                    key1 = kss[i].getKey(aliases[j], pwd);
+                } catch (UnrecoverableKeyException e) {
+                    //logln("testEntry03: non-PrivateKeys not supported.");
+                    return;
                 }
                 if (!secKey.getAlgorithm().equals(key1.getAlgorithm()) ||
-                		!secKey.getFormat().equals(key1.getFormat())) {
-                	fail("Incorrect key");
+                        !secKey.getFormat().equals(key1.getFormat())) {
+                    fail("Incorrect key");
                 }
                 byte[] enc = secKey.getEncoded();
                 byte[] enc1 = key1.getEncoded();
@@ -619,49 +616,48 @@ public class KeyStore_Impl1Test extends TestCase {
             }
         }
         pPath.destroy();
-        for (int i = 0; i < kss.length; i++) {        
+        for (int i = 0; i < kss.length; i++) {
             try {
                 kss[i].setEntry("ZZZ", aEntry, pPath);
                 fail("KeyStoreException should be thrown because password is destroyed");
-            } catch (KeyStoreException e) {                
+            } catch (KeyStoreException e) {
             }
-            for (int j = 0; j < aliases.length; j++)  {  
+            for (int j = 0; j < aliases.length; j++) {
                 try {
-                    kss[i].getEntry(aliases[j], pPath);                 
+                    kss[i].getEntry(aliases[j], pPath);
                     fail("KeyStoreException should be thrown because password is destroyed");
-                } catch (KeyStoreException e) {                
+                } catch (KeyStoreException e) {
                 }
                 try {
-                    kss[i].getEntry(aliases[j], pPar);                 
+                    kss[i].getEntry(aliases[j], pPar);
                     fail("UnrecoverableEntryException should be thrown");
-                } catch (UnrecoverableEntryException e) {                
+                } catch (UnrecoverableEntryException e) {
                 }
             }
         }
     }
 
-    
+
     /**
-     * Test for 
+     * Test for
      * <code>setCertificateEntry(String alias, Certificate cert)</code>
      * <code>containsAlias(String alias)</code>
      * <code>getCertificate(String alias)</code>
-     * <code>isCertificateEntry(String alias)</code> 
+     * <code>isCertificateEntry(String alias)</code>
      * methods
-     * Assertions: 
+     * Assertions:
      * setCertificateEntry(..), containsAlias(..), getCertificate(..) and isCertificateEntry(..)
      * throw NullPointerException when alias is null
-     * 
-     * setCertificateEntry(..) stores used entry and getCertificate(..) returns it 
-     * 
+     * <p/>
+     * setCertificateEntry(..) stores used entry and getCertificate(..) returns it
      */
     public void testEntry04() throws Exception {
         assertTrue(NotSupportMsg, JKSSupported);
         KeyStoreTestSupport.MCertificate cert = new KeyStoreTestSupport.MCertificate(
                 "type", new byte[0]);
-        KeyStore [] kss = createKS();
+        KeyStore[] kss = createKS();
         assertNotNull("KeyStore objects were not created", kss);
-        
+
         for (int i = 0; i < kss.length; i++) {
             kss[i].load(null, null);
             try {
@@ -669,7 +665,7 @@ public class KeyStore_Impl1Test extends TestCase {
                 fail("NullPointerException should be thrown when alias is null");
             } catch (NullPointerException e) {
             }
-            for (int j = 0; j < aliases.length; j++)  {
+            for (int j = 0; j < aliases.length; j++) {
                 kss[i].setCertificateEntry(aliases[j], cert);
             }
         }
@@ -689,41 +685,40 @@ public class KeyStore_Impl1Test extends TestCase {
                 fail("NullPointerException should be thrown when alias is null");
             } catch (NullPointerException e) {
             }
-            for (int j = 0; j < aliases.length; j++)  {            
+            for (int j = 0; j < aliases.length; j++) {
                 assertFalse("Incorrect alias", kss[i].containsAlias("Bad".concat(aliases[j])));
                 assertTrue("Incorrect alias", kss[i].containsAlias(aliases[j]));
                 assertTrue("Not CertificateEntry", kss[i].isCertificateEntry(aliases[j]));
-                assertFalse("Incorrect KeyEntry", kss[i].isKeyEntry(aliases[j]));                
+                assertFalse("Incorrect KeyEntry", kss[i].isKeyEntry(aliases[j]));
                 assertEquals("Incorrect Certificate", kss[i].getCertificate(aliases[j]),
                         cert);
             }
-        }    
+        }
     }
-    
+
     /**
-     * Test for 
+     * Test for
      * <code>setKeyEntry(String alias, Key key, char[] password, Certificate[] chain)</code>
      * <code>containsAlias(String alias)</code>
      * <code>getKey(String alias, char[] password)</code>
-     * <code>isCertificateEntry(String alias)</code> 
+     * <code>isCertificateEntry(String alias)</code>
      * <code>isKeyEntry(String alias)</code>
      * <code>setCerificateEntry(String alias, Certificate cert)</code>
      * <code>getCertificateChain(String alias)</code>
      * <code>getCertificateAlias(Certificate cert)</code>
      * methods
-     * 
-     * Assertions: 
+     * <p/>
+     * Assertions:
      * setKeyEntry(..), getKeyEntry(..) and isKeyEntry(..)
      * throw NullPointerException when alias is null
-     * 
+     * <p/>
      * setKeyEntry(...) throws KeyStoreException when key or password
      * is null
-     * 
+     * <p/>
      * setCertificateEntry(..) throws KeyStoreException when KeyEntry was overwritten
-     * 
+     * <p/>
      * setKeyEntry(..) stores used entry, getKey(..) returns it and getCertificateChain(...)
-     * returns cert 
-     * 
+     * returns cert
      */
     public void testEntry05() throws Exception {
         assertTrue(NotSupportMsg, JKSSupported);
@@ -735,13 +730,13 @@ public class KeyStore_Impl1Test extends TestCase {
         char[] pwd = new char[0];
         TestKeyPair tkp = new TestKeyPair("DSA");
         PrivateKey key = tkp.getPrivate();
-        KeyStore [] kss = createKS();
+        KeyStore[] kss = createKS();
         assertNotNull("KeyStore objects were not created", kss);
         for (int i = 0; i < kss.length; i++) {
             kss[i].load(null, null);
-            
+
             // Null as alias does not necessarily lead to NullPointerException
-            
+
             try {
                 kss[i].setKeyEntry("ZZZ", null, pwd, certs);
                 fail("KeyStoreException should be thrown when key is null");
@@ -761,17 +756,17 @@ public class KeyStore_Impl1Test extends TestCase {
             } catch (IllegalArgumentException e) {
             }
 
-            for (int j = 0; j < aliases.length; j++)  {
+            for (int j = 0; j < aliases.length; j++) {
                 kss[i].setKeyEntry(aliases[j], key, pwd, certs);
             }
-            
+
             kss[i].setKeyEntry("KeyAlias", key, pwd, certs);
             try {
                 kss[i].setCertificateEntry("KeyAlias", cert);
                 fail("KeyStoreException should be thrown when we try to overwrite KeyEntry to Certificate");
             } catch (KeyStoreException e) {
             }
-            
+
             try {
                 kss[i].isKeyEntry(null);
                 fail("NullPointerException should be thrown when alias is null");
@@ -787,49 +782,48 @@ public class KeyStore_Impl1Test extends TestCase {
                 fail("NullPointerException should be thrown when alias is null");
             } catch (NullPointerException e) {
             }
-            for (int j = 0; j < aliases.length; j++)  {            
+            for (int j = 0; j < aliases.length; j++) {
                 assertFalse("Incorrect alias", kss[i].containsAlias("Bad".concat(aliases[j])));
                 assertTrue("Incorrect alias", kss[i].containsAlias(aliases[j]));
                 assertTrue("Not KeyEntry", kss[i].isKeyEntry(aliases[j]));
                 assertFalse("Incorrect CertificateEntry", kss[i].isCertificateEntry(aliases[j]));
-                Key key1  = kss[i].getKey(aliases[j], pwd);
+                Key key1 = kss[i].getKey(aliases[j], pwd);
                 if (!key.getAlgorithm().equals(key1.getAlgorithm()) ||
-                		!key.getFormat().equals(key1.getFormat())) {
-                	fail("Incorrect key");
+                        !key.getFormat().equals(key1.getFormat())) {
+                    fail("Incorrect key");
                 }
                 byte[] enc = key.getEncoded();
                 byte[] enc1 = key1.getEncoded();
                 assertTrue("Diff. keys encoding", Arrays.equals(enc, enc1));
-                Certificate [] cc = kss[i].getCertificateChain(aliases[j]);
+                Certificate[] cc = kss[i].getCertificateChain(aliases[j]);
                 assertEquals("Incorrect chain", cc.length, certs.length);
                 for (int t = 0; t < cc.length; t++) {
-                    assertEquals("Incorrect certificate", cc[t], certs[t]);                    
+                    assertEquals("Incorrect certificate", cc[t], certs[t]);
                 }
             }
             assertNull(kss[i].getCertificateAlias(cert));
             String ss = kss[i].getCertificateAlias(certs[0]);
             boolean ans = false;
-            for (int j = 1; j < aliases.length; j++)  {
+            for (int j = 1; j < aliases.length; j++) {
                 if (ss.equals(aliases[j])) {
                     ans = true;
                     break;
                 }
             }
             assertTrue("There is no alias for certificate <type1, new byte[10]>", ans);
-        }       
+        }
     }
-    
+
     /**
-     * Test for 
+     * Test for
      * <code>deleteEntry(String alias)</code>
-     * <code>size()</code> 
+     * <code>size()</code>
      * methods
-     * Assertions: 
+     * Assertions:
      * throws NullPointerException when alias is null;
-     * 
+     * <p/>
      * deletes entry from KeyStore.
-     * 
-     */    
+     */
     public void testEntry06() throws Exception {
         assertTrue(NotSupportMsg, JKSSupported);
         KeyStore.TrustedCertificateEntry tCert = new KeyStore.TrustedCertificateEntry(
@@ -881,23 +875,22 @@ public class KeyStore_Impl1Test extends TestCase {
             }
         }
     }
-    
+
     /**
-     * Test for 
+     * Test for
      * <code>entryInstanceOf(String alias, Class class)</code>
      * method
-     * Assertions: 
-     * throws NullPointerException when alias is null 
+     * Assertions:
+     * throws NullPointerException when alias is null
      * returns false if KeyStore does not contain entry with defined alias
      * returns false if defined alias is not correspond Entry
-     * returns false  
+     * returns false
      * setEntry(..) throws KeyStoreException when incorrect Entry is used;
-     * 
-     * setEntry(..) stores Entry and getEntry(...) returns it when 
+     * <p/>
+     * setEntry(..) stores Entry and getEntry(...) returns it when
      * KeyStore.PrivateKeyEntry is used.
-     * 
-     */    
-    public void testEntry07() throws Exception {  
+     */
+    public void testEntry07() throws Exception {
         assertTrue(NotSupportMsg, JKSSupported);
         TestKeyPair tkp = new TestKeyPair("DSA");
         KeyStoreTestSupport.MCertificate certs[] = {
@@ -906,18 +899,18 @@ public class KeyStore_Impl1Test extends TestCase {
                 new KeyStoreTestSupport.MCertificate("DSA", tkp.getPrivate()
                         .getEncoded()) };
         PrivateKey privKey = tkp.getPrivate();
-        KeyStore.PrivateKeyEntry pKey = new KeyStore.PrivateKeyEntry(privKey, certs);        
-        char [] pwd = {'p', 'a', 's', 's', 'w', 'd'};
+        KeyStore.PrivateKeyEntry pKey = new KeyStore.PrivateKeyEntry(privKey, certs);
+        char[] pwd = { 'p', 'a', 's', 's', 'w', 'd' };
         String aliasKE = "KeyAlias";
         KeyStore.PasswordProtection pp = new KeyStore.PasswordProtection(pwd);
         new KeyStore.PasswordProtection(new char[0]);
-        KeyStore [] kss = createKS();
+        KeyStore[] kss = createKS();
         assertNotNull("KeyStore objects were not created", kss);
 
         for (int i = 0; i < kss.length; i++) {
             kss[i].load(null, null);
             // set entries
-            for (int j = 0; j < aliases.length; j++)  {
+            for (int j = 0; j < aliases.length; j++) {
                 kss[i].setEntry(aliases[j], pKey, pp);
             }
             kss[i].setKeyEntry(aliasKE, privKey, pwd, certs);
@@ -926,28 +919,28 @@ public class KeyStore_Impl1Test extends TestCase {
                 fail("NullPointerEXception must be thrown");
             } catch (NullPointerException e) {
             }
-            assertFalse("Incorrect class entry 1", 
+            assertFalse("Incorrect class entry 1",
                     kss[i].entryInstanceOf("ZZZ", pKey.getClass()));
-            for (int j = 0; j < aliases.length; j++)  {
-                assertTrue("Incorrect class entry 2", 
+            for (int j = 0; j < aliases.length; j++) {
+                assertTrue("Incorrect class entry 2",
                         kss[i].entryInstanceOf(aliases[j], pKey.getClass()));
 
                 //make it compilable on 1.5
                 Class c = privKey.getClass();
-                assertFalse("Incorrect class entry 3", 
-                        kss[i].entryInstanceOf(aliases[j], c ));
+                assertFalse("Incorrect class entry 3",
+                        kss[i].entryInstanceOf(aliases[j], c));
             }
 
             //make it compilable on 1.5
             Class c = privKey.getClass();
-            assertFalse("Incorrect class entry 4", 
-                kss[i].entryInstanceOf(aliasKE, c ));
-            assertTrue("Incorrect class entry 5", 
-                kss[i].entryInstanceOf(aliasKE, pKey.getClass()));            
+            assertFalse("Incorrect class entry 4",
+                    kss[i].entryInstanceOf(aliasKE, c));
+            assertTrue("Incorrect class entry 5",
+                    kss[i].entryInstanceOf(aliasKE, pKey.getClass()));
         }
     }
 
-    
+
     /**
      * Test for <code>KeyStore(KeyStoreSpi spi, Provider prov, String type)</code>
      * constructor
@@ -961,7 +954,7 @@ public class KeyStore_Impl1Test extends TestCase {
         assertEquals("Incorrect name", keySt.getType(),
                 defaultType);
         assertEquals("Incorrect provider", keySt.getProvider(), defaultProvider);
-        char [] pwd = new char[0];
+        char[] pwd = new char[0];
         try {
             keySt.store(null, pwd);
             fail("KeyStoreException must be thrown");

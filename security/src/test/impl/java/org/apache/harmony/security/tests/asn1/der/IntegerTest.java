@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Stepan M. Mishura
-*/
+ * @author Stepan M. Mishura
+ */
 
 package org.apache.harmony.security.tests.asn1.der;
 
@@ -119,7 +119,7 @@ public class IntegerTest extends TestCase {
      */
     public void testDecode_Invalid() throws IOException {
         byte[][] invalid = new byte[][] {
-        // wrong tag: tag is not 0x02
+                // wrong tag: tag is not 0x02
                 new byte[] { 0x01, 0x01, 0x00 },
                 // wrong length: length is 0
                 new byte[] { 0x02, 0x00 },

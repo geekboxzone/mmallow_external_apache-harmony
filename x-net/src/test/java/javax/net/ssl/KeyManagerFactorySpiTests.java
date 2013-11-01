@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package javax.net.ssl;
 
@@ -33,14 +33,13 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyManagerFactorySpi</code> class constructors and methods.
- * 
  */
 
 public class KeyManagerFactorySpiTests extends TestCase {
 
     /**
      * Constructor for KeyManegerFactorySpiTests.
-     * 
+     *
      * @param arg0
      */
     public KeyManagerFactorySpiTests(String arg0) {
@@ -48,7 +47,7 @@ public class KeyManagerFactorySpiTests extends TestCase {
     }
 
     /**
-     * Test for <code>KeyManagerFactorySpi</code> constructor 
+     * Test for <code>KeyManagerFactorySpi</code> constructor
      * Assertion: constructs KeyManagerFactorySpi
      */
     public void testKeyManagerFactorySpi01()
@@ -57,7 +56,7 @@ public class KeyManagerFactorySpiTests extends TestCase {
         assertNull(kmfSpi.engineGetKeyManagers());
         KeyStore kStore = null;
         ManagerFactoryParameters mfp = null;
-        
+
         char[] pass = { 'a', 'b', 'c' };
 
         try {
@@ -75,12 +74,12 @@ public class KeyManagerFactorySpiTests extends TestCase {
             fail("InvalidAlgorithmParameterException must be thrown");
         } catch (InvalidAlgorithmParameterException e) {
         }
-        assertNull("getKeyManagers() should return null object", 
+        assertNull("getKeyManagers() should return null object",
                 kmfSpi.engineGetKeyManagers());
-        
+
         try {
             kStore = KeyStore.getInstance(KeyStore.getDefaultType());
-            kStore.load(null, null);            
+            kStore.load(null, null);
         } catch (KeyStoreException e) {
             fail("default keystore type is not supported");
             return;

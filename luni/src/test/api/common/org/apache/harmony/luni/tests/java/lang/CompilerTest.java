@@ -43,7 +43,7 @@ public class CompilerTest extends TestCase {
     public void test_compileClassesLjava_lang_String() {
         // Do not test return value, may return true or false depending on
         // if the jit is enabled. Make the call to ensure it doesn't crash.
-            Compiler.compileClasses("Compiler");
+        Compiler.compileClasses("Compiler");
     }
 
     /**

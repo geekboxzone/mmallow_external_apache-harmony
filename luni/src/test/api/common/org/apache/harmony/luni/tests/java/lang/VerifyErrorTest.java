@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class VerifyErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.VerifyError#VerifyError()
-	 */
+    /**
+     * @tests java.lang.VerifyError#VerifyError()
+     */
     public void test_Constructor() {
         VerifyError e = new VerifyError();
         assertNull(e.getMessage());

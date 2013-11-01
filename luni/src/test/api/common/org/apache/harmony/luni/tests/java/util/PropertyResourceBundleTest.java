@@ -34,40 +34,40 @@ import java.util.Vector;
 
 public class PropertyResourceBundleTest extends junit.framework.TestCase {
 
-	static PropertyResourceBundle prb;
-
-	/**
-	 * @throws IOException
-	 * @tests java.util.PropertyResourceBundle#PropertyResourceBundle(java.io.InputStream)
-	 */
-	@SuppressWarnings("nls")
-	public void test_ConstructorLjava_io_InputStream() throws IOException {
-		InputStream propertiesStream = new ByteArrayInputStream(
-				"p1=one\ncharset=iso-8859-1".getBytes("ISO-8859-1"));
-		prb = new PropertyResourceBundle(propertiesStream);
-		assertEquals(2, prb.keySet().size());
-		assertEquals("one", prb.getString("p1"));
-		assertEquals("iso-8859-1", prb.getString("charset"));
-
-		propertiesStream = new ByteArrayInputStream("p1=one\ncharset=UTF-8"
-				.getBytes("UTF-8"));
-		prb = new PropertyResourceBundle(propertiesStream);
-		assertEquals(2, prb.keySet().size());
-		assertEquals("UTF-8", prb.getString("charset"));
-
-		try {
-			new PropertyResourceBundle((InputStream) null);
-			fail("Should throw NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
-	}
+    static PropertyResourceBundle prb;
 
     /**
-	 * @throws IOException
-	 * @tests {@link java.util.PropertyResourceBundle#PropertyResourceBundle(java.io.Reader)}
-	 * @since 1.6
-	 */
+     * @throws IOException
+     * @tests java.util.PropertyResourceBundle#PropertyResourceBundle(java.io.InputStream)
+     */
+    @SuppressWarnings("nls")
+    public void test_ConstructorLjava_io_InputStream() throws IOException {
+        InputStream propertiesStream = new ByteArrayInputStream(
+                "p1=one\ncharset=iso-8859-1".getBytes("ISO-8859-1"));
+        prb = new PropertyResourceBundle(propertiesStream);
+        assertEquals(2, prb.keySet().size());
+        assertEquals("one", prb.getString("p1"));
+        assertEquals("iso-8859-1", prb.getString("charset"));
+
+        propertiesStream = new ByteArrayInputStream("p1=one\ncharset=UTF-8"
+                .getBytes("UTF-8"));
+        prb = new PropertyResourceBundle(propertiesStream);
+        assertEquals(2, prb.keySet().size());
+        assertEquals("UTF-8", prb.getString("charset"));
+
+        try {
+            new PropertyResourceBundle((InputStream) null);
+            fail("Should throw NullPointerException");
+        } catch (NullPointerException e) {
+            // expected
+        }
+    }
+
+    /**
+     * @throws IOException
+     * @tests {@link java.util.PropertyResourceBundle#PropertyResourceBundle(java.io.Reader)}
+     * @since 1.6
+     */
     @SuppressWarnings("nls")
     public void test_ConstructorLjava_io_Reader() throws IOException {
         Charset charset = Charset.forName("ISO-8859-1");
@@ -101,49 +101,49 @@ public class PropertyResourceBundleTest extends junit.framework.TestCase {
     }
 
     /**
-	 * @tests java.util.PropertyResourceBundle#getKeys()
-	 */
-	public void test_getKeys() {
-		Enumeration keyEnum = prb.getKeys();
-		Vector<Object> test = new Vector<Object>();
-		int keyCount = 0;
-		while (keyEnum.hasMoreElements()) {
-			test.addElement(keyEnum.nextElement());
-			keyCount++;
-		}
+     * @tests java.util.PropertyResourceBundle#getKeys()
+     */
+    public void test_getKeys() {
+        Enumeration keyEnum = prb.getKeys();
+        Vector<Object> test = new Vector<Object>();
+        int keyCount = 0;
+        while (keyEnum.hasMoreElements()) {
+            test.addElement(keyEnum.nextElement());
+            keyCount++;
+        }
 
-		assertEquals("Returned the wrong number of keys", 2, keyCount);
-		assertTrue("Returned the wrong keys", test.contains("p1")
-				&& test.contains("p2"));
-	}
+        assertEquals("Returned the wrong number of keys", 2, keyCount);
+        assertTrue("Returned the wrong keys", test.contains("p1")
+                && test.contains("p2"));
+    }
 
-	/**
-	 * @tests java.util.PropertyResourceBundle#handleGetObject(java.lang.String)
-	 */
-	public void test_handleGetObjectLjava_lang_String() {
-		// Test for method java.lang.Object
-		// java.util.PropertyResourceBundle.handleGetObject(java.lang.String)
-		try {
-			assertTrue("Returned incorrect objects", prb.getObject("p1")
-					.equals("one")
-					&& prb.getObject("p2").equals("two"));
-		} catch (MissingResourceException e) {
-			fail(
-					"Threw MisingResourceException for a key contained in the bundle");
-		}
-		try {
-			prb.getObject("Not in the bundle");
-		} catch (MissingResourceException e) {
-			return;
-		}
-		fail(
-				"Failed to throw MissingResourceException for object not in the bundle");
-	}
+    /**
+     * @tests java.util.PropertyResourceBundle#handleGetObject(java.lang.String)
+     */
+    public void test_handleGetObjectLjava_lang_String() {
+        // Test for method java.lang.Object
+        // java.util.PropertyResourceBundle.handleGetObject(java.lang.String)
+        try {
+            assertTrue("Returned incorrect objects", prb.getObject("p1")
+                    .equals("one")
+                    && prb.getObject("p2").equals("two"));
+        } catch (MissingResourceException e) {
+            fail(
+                    "Threw MisingResourceException for a key contained in the bundle");
+        }
+        try {
+            prb.getObject("Not in the bundle");
+        } catch (MissingResourceException e) {
+            return;
+        }
+        fail(
+                "Failed to throw MissingResourceException for object not in the bundle");
+    }
 
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-     * 
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     *
      * @throws UnsupportedEncodingException
      */
     protected void setUp() throws UnsupportedEncodingException {
@@ -152,17 +152,17 @@ public class PropertyResourceBundleTest extends junit.framework.TestCase {
         try {
             prb = new PropertyResourceBundle(propertiesStream);
         } catch (java.io.IOException e) {
-			fail(
-					"Construction of PropertyResourceBundle threw IOException");
-		}
-	}
+            fail(
+                    "Construction of PropertyResourceBundle threw IOException");
+        }
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 
     /**
      * @add tests {@link java.util.PropertyResourceBundle#Enumeration}

@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class UnsatisfiedLinkErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.UnsatisfiedLinkError#UnsatisfiedLinkError()
-	 */
+    /**
+     * @tests java.lang.UnsatisfiedLinkError#UnsatisfiedLinkError()
+     */
     public void test_Constructor() {
         UnsatisfiedLinkError e = new UnsatisfiedLinkError();
         assertNull(e.getMessage());

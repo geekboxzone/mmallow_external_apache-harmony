@@ -26,19 +26,19 @@ import org.apache.harmony.logging.tests.java.util.logging.HandlerTest.NullOutput
 import junit.framework.TestCase;
 
 public class ErrorManagerTest extends TestCase {
-    
-    
+
+
     private final PrintStream err = System.err;
 
-    private OutputStream errSubstituteStream = null;        
-    
-    public void setUp() throws Exception{
+    private OutputStream errSubstituteStream = null;
+
+    public void setUp() throws Exception {
         super.setUp();
         errSubstituteStream = new NullOutputStream();
-        System.setErr(new PrintStream(errSubstituteStream));           
+        System.setErr(new PrintStream(errSubstituteStream));
     }
-    
-    public void tearDown() throws Exception{
+
+    public void tearDown() throws Exception {
         System.setErr(err);
         super.tearDown();
     }

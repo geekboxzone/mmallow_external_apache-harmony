@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.login;
 
@@ -39,7 +39,7 @@ public class AccountExceptionTest extends TestCase {
 
     /**
      * @tests javax.security.auth.login.AccountException#AccountException(
-     *        java.lang.String)
+     *java.lang.String)
      */
     public final void testCtor2() {
         assertNull(new AccountException(null).getMessage());

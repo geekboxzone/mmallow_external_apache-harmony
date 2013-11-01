@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -33,14 +33,13 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>CertPathBuilderSpi</code> class constructors and methods.
- * 
  */
 
 public class CertPathBuilderSpiTest extends TestCase {
 
     /**
      * Constructor for CertPathBuilderSpiTest.
-     * 
+     *
      * @param arg0
      */
     public CertPathBuilderSpiTest(String arg0) {
@@ -59,7 +58,7 @@ public class CertPathBuilderSpiTest extends TestCase {
             certPathBuilder.engineBuild(cpp);
             fail("CertPathBuilderException must be thrown");
         } catch (CertPathBuilderException e) {
-        }    
+        }
         CertPathBuilderResult cpbResult = certPathBuilder.engineBuild(cpp);
         assertNull("Not null CertPathBuilderResult", cpbResult);
     }

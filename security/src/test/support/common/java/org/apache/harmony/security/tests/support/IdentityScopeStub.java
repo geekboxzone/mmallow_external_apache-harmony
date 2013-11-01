@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Aleksei Y. Semenov
-*/
+ * @author Aleksei Y. Semenov
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -33,7 +33,7 @@ import java.util.Enumeration;
 
 public class IdentityScopeStub extends IdentityScope {
 
-    
+
     /**
      * Stub constructor
      */
@@ -43,6 +43,7 @@ public class IdentityScopeStub extends IdentityScope {
 
     /**
      * Stub constructor
+     *
      * @param name
      */
     public IdentityScopeStub(String name) {
@@ -51,6 +52,7 @@ public class IdentityScopeStub extends IdentityScope {
 
     /**
      * Stub constructor
+     *
      * @param name
      * @param scope
      * @throws KeyManagementException
@@ -62,24 +64,27 @@ public class IdentityScopeStub extends IdentityScope {
 
     /**
      * Stub - returns 0
+     *
      * @see java.security.IdentityScope#size()
      */
     public int size() {
-        
+
         return 0;
     }
 
     /**
      * Stub - returns <code>this</code>
+     *
      * @see java.security.IdentityScope#getIdentity(java.lang.String)
      */
     public Identity getIdentity(String name) {
-        
+
         return this;
     }
 
     /**
      * Stub - returns <code>this</code>
+     *
      * @see java.security.IdentityScope#getIdentity(java.security.PublicKey)
      */
     public Identity getIdentity(PublicKey key) {
@@ -88,37 +93,41 @@ public class IdentityScopeStub extends IdentityScope {
 
     /**
      * Stub - does nothing
+     *
      * @see java.security.IdentityScope#addIdentity(java.security.Identity)
      */
     public void addIdentity(Identity identity) throws KeyManagementException {
-        
+
 
     }
 
     /**
      * Stub - does nothing
+     *
      * @see java.security.IdentityScope#removeIdentity(java.security.Identity)
      */
     public void removeIdentity(Identity identity) throws KeyManagementException {
-        
+
 
     }
 
     /**
      * Stub - returns <code>null</code>
+     *
      * @see java.security.IdentityScope#identities()
      */
     public Enumeration identities() {
         return null;
     }
-    
+
     /**
      * Sets the system's identity scope
+     *
      * @param scope
      */
     public static void mySetSystemScope(IdentityScope scope) {
-        
+
         IdentityScope.setSystemScope(scope);
     }
-    
+
 }

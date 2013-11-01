@@ -46,7 +46,7 @@ public class CipherTest extends junit.framework.TestCase {
     static Key cipherKey;
     static final String algorithm = "DESede";
     static final int keyLen = 168;
-    
+
     static {
         try {
             KeyGenerator kg = KeyGenerator.getInstance(algorithm);
@@ -56,8 +56,8 @@ public class CipherTest extends junit.framework.TestCase {
             fail("No key " + e);
         }
     }
-    
-    
+
+
     /**
      * @tests javax.crypto.Cipher#getInstance(java.lang.String)
      */
@@ -68,7 +68,7 @@ public class CipherTest extends junit.framework.TestCase {
 
     /**
      * @tests javax.crypto.Cipher#getInstance(java.lang.String,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_getInstanceLjava_lang_StringLjava_lang_String()
             throws Exception {
@@ -109,7 +109,7 @@ public class CipherTest extends junit.framework.TestCase {
 
     /**
      * @tests javax.crypto.Cipher#getInstance(java.lang.String,
-     *        java.security.Provider)
+     *java.security.Provider)
      */
     public void test_getInstanceLjava_lang_StringLjava_security_Provider()
             throws Exception {
@@ -192,7 +192,7 @@ public class CipherTest extends junit.framework.TestCase {
 
     /**
      * @tests javax.crypto.Cipher#init(int, java.security.Key,
-     *        java.security.SecureRandom)
+     *java.security.SecureRandom)
      */
     public void test_initILjava_security_KeyLjava_security_SecureRandom()
             throws Exception {
@@ -203,7 +203,7 @@ public class CipherTest extends junit.framework.TestCase {
 
     /**
      * @tests javax.crypto.Cipher#init(int, java.security.Key,
-     *        java.security.spec.AlgorithmParameterSpec)
+     *java.security.spec.AlgorithmParameterSpec)
      */
     public void test_initILjava_security_KeyLjava_security_spec_AlgorithmParameterSpec()
             throws Exception {
@@ -228,8 +228,8 @@ public class CipherTest extends junit.framework.TestCase {
 
     /**
      * @tests javax.crypto.Cipher#init(int, java.security.Key,
-     *        java.security.spec.AlgorithmParameterSpec,
-     *        java.security.SecureRandom)
+     *java.security.spec.AlgorithmParameterSpec,
+     *java.security.SecureRandom)
      */
     public void test_initILjava_security_KeyLjava_security_spec_AlgorithmParameterSpecLjava_security_SecureRandom()
             throws Exception {
@@ -364,19 +364,19 @@ public class CipherTest extends junit.framework.TestCase {
             return null;
         }
     }
-    
+
     public void testGetParameters() throws Exception {
         Cipher c = Cipher.getInstance("DES");
         assertNull(c.getParameters());
     }
-    
+
     /*
-     * Class under test for int update(byte[], int, int, byte[], int)
-     */
+    * Class under test for int update(byte[], int, int, byte[], int)
+    */
     public void testUpdatebyteArrayintintbyteArrayint() throws Exception {
         Cipher c = Cipher.getInstance("DESede");
         c.init(Cipher.ENCRYPT_MODE, cipherKey);
-        byte[] b = {1,2,3,4,5,6,7,8,9,10};
+        byte[] b = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         byte[] b1 = new byte[6];
         try {
             c.update(b, 0, 10, b1, 5);
@@ -384,23 +384,23 @@ public class CipherTest extends junit.framework.TestCase {
         } catch (ShortBufferException e) {
         }
     }
-    
+
     /*
-     * Class under test for int doFinal(byte[], int, int, byte[], int)
-     */
+    * Class under test for int doFinal(byte[], int, int, byte[], int)
+    */
     public void testDoFinalbyteArrayintintbyteArrayint() throws Exception {
         Cipher c = Cipher.getInstance("DESede");
         c.init(Cipher.ENCRYPT_MODE, cipherKey);
-        byte[] b = {1,2,3,4,5,6,7,8,9,10};
+        byte[] b = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         byte[] b1 = new byte[6];
-    // FIXME Failed on BC provider
-    //    try {
-    //        c.doFinal(b, 3, 6, b1, 5);
-    //        fail("No expected ShortBufferException");
-    //    } catch (ShortBufferException e) {
-    //    }
+        // FIXME Failed on BC provider
+        //    try {
+        //        c.doFinal(b, 3, 6, b1, 5);
+        //        fail("No expected ShortBufferException");
+        //    } catch (ShortBufferException e) {
+        //    }
     }
-    
+
     public void testGetMaxAllowedKeyLength() throws NoSuchAlgorithmException {
         try {
             Cipher.getMaxAllowedKeyLength(null);
@@ -440,7 +440,7 @@ public class CipherTest extends junit.framework.TestCase {
 
     /**
      * @tests javax.crypto.Cipher#Cipher(CipherSpi cipherSpi, Provider provider,
-     *        String transformation)
+     *String transformation)
      */
     public void test_Ctor() throws Exception {
         // Regression for Harmony-1184
@@ -459,7 +459,8 @@ public class CipherTest extends junit.framework.TestCase {
         }
 
         try {
-            new testCipher(null, new Provider("qwerty", 1.0, "qwerty") {}, "s");
+            new testCipher(null, new Provider("qwerty", 1.0, "qwerty") {
+            }, "s");
             fail("NullPointerException expected for 'null' cipherSpi");
         } catch (NullPointerException e) {
             // expected

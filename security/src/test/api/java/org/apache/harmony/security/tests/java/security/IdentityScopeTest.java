@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Aleksei Y. Semenov
-*/
+ * @author Aleksei Y. Semenov
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.*;
 import org.apache.harmony.security.tests.support.IdentityScopeStub;
 
@@ -28,7 +29,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>IdentityScope</code>
- *
  */
 
 public class IdentityScopeTest extends TestCase {
@@ -37,6 +37,7 @@ public class IdentityScopeTest extends TestCase {
 
     /**
      * Constructor for IdentityScopeTest.
+     *
      * @param arg0
      */
     public IdentityScopeTest(String arg0) {

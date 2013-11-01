@@ -30,131 +30,132 @@ import java.util.WeakHashMap;
 import tests.support.Support_MapTest2;
 
 public class WeakHashMapTest extends junit.framework.TestCase {
-	class MockMap extends AbstractMap {
-		public Set entrySet() {
-			return null;
-		}
-		public int size(){
-			return 0;
-		}
-	}
+    class MockMap extends AbstractMap {
+        public Set entrySet() {
+            return null;
+        }
 
-	Object[] keyArray = new Object[100];
+        public int size() {
+            return 0;
+        }
+    }
 
-	Object[] valueArray = new Object[100];
+    Object[] keyArray = new Object[100];
 
-	WeakHashMap whm;
+    Object[] valueArray = new Object[100];
+
+    WeakHashMap whm;
 
     Object[] KEY_ARRAY;
 
     Object[] VALUE_ARRAY;
 
-	/**
-	 * @tests java.util.WeakHashMap#WeakHashMap()
-	 */
-	public void test_Constructor() {
-		// Test for method java.util.WeakHashMap()
-		new Support_MapTest2(new WeakHashMap()).runTest();
+    /**
+     * @tests java.util.WeakHashMap#WeakHashMap()
+     */
+    public void test_Constructor() {
+        // Test for method java.util.WeakHashMap()
+        new Support_MapTest2(new WeakHashMap()).runTest();
 
-		whm = new WeakHashMap();
-		for (int i = 0; i < 100; i++)
-			whm.put(keyArray[i], valueArray[i]);
-		for (int i = 0; i < 100; i++)
-			assertTrue("Incorrect value retrieved",
-					whm.get(keyArray[i]) == valueArray[i]);
+        whm = new WeakHashMap();
+        for (int i = 0; i < 100; i++)
+            whm.put(keyArray[i], valueArray[i]);
+        for (int i = 0; i < 100; i++)
+            assertTrue("Incorrect value retrieved",
+                    whm.get(keyArray[i]) == valueArray[i]);
 
-	}
+    }
 
-	/**
-	 * @tests java.util.WeakHashMap#WeakHashMap(int)
-	 */
-	public void test_ConstructorI() {
-		// Test for method java.util.WeakHashMap(int)
-		whm = new WeakHashMap(50);
-		for (int i = 0; i < 100; i++)
-			whm.put(keyArray[i], valueArray[i]);
-		for (int i = 0; i < 100; i++)
-			assertTrue("Incorrect value retrieved",
-					whm.get(keyArray[i]) == valueArray[i]);
+    /**
+     * @tests java.util.WeakHashMap#WeakHashMap(int)
+     */
+    public void test_ConstructorI() {
+        // Test for method java.util.WeakHashMap(int)
+        whm = new WeakHashMap(50);
+        for (int i = 0; i < 100; i++)
+            whm.put(keyArray[i], valueArray[i]);
+        for (int i = 0; i < 100; i++)
+            assertTrue("Incorrect value retrieved",
+                    whm.get(keyArray[i]) == valueArray[i]);
 
-		WeakHashMap empty = new WeakHashMap(0);
-		assertNull("Empty weakhashmap access", empty.get("nothing"));
-		empty.put("something", "here");
-		assertTrue("cannot get element", empty.get("something") == "here");
-	}
+        WeakHashMap empty = new WeakHashMap(0);
+        assertNull("Empty weakhashmap access", empty.get("nothing"));
+        empty.put("something", "here");
+        assertTrue("cannot get element", empty.get("something") == "here");
+    }
 
-	/**
-	 * @tests java.util.WeakHashMap#WeakHashMap(int, float)
-	 */
-	public void test_ConstructorIF() {
-		// Test for method java.util.WeakHashMap(int, float)
-		whm = new WeakHashMap(50, 0.5f);
-		for (int i = 0; i < 100; i++)
-			whm.put(keyArray[i], valueArray[i]);
-		for (int i = 0; i < 100; i++)
-			assertTrue("Incorrect value retrieved",
-					whm.get(keyArray[i]) == valueArray[i]);
+    /**
+     * @tests java.util.WeakHashMap#WeakHashMap(int, float)
+     */
+    public void test_ConstructorIF() {
+        // Test for method java.util.WeakHashMap(int, float)
+        whm = new WeakHashMap(50, 0.5f);
+        for (int i = 0; i < 100; i++)
+            whm.put(keyArray[i], valueArray[i]);
+        for (int i = 0; i < 100; i++)
+            assertTrue("Incorrect value retrieved",
+                    whm.get(keyArray[i]) == valueArray[i]);
 
-		WeakHashMap empty = new WeakHashMap(0, 0.75f);
-		assertNull("Empty hashtable access", empty.get("nothing"));
-		empty.put("something", "here");
-		assertTrue("cannot get element", empty.get("something") == "here");
-	}
+        WeakHashMap empty = new WeakHashMap(0, 0.75f);
+        assertNull("Empty hashtable access", empty.get("nothing"));
+        empty.put("something", "here");
+        assertTrue("cannot get element", empty.get("something") == "here");
+    }
 
-	/**
-	 * @tests java.util.WeakHashMap#WeakHashMap(java.util.Map)
-	 */
-	public void test_ConstructorLjava_util_Map() {
+    /**
+     * @tests java.util.WeakHashMap#WeakHashMap(java.util.Map)
+     */
+    public void test_ConstructorLjava_util_Map() {
         Map mockMap = new MockMap();
         WeakHashMap map = new WeakHashMap(mockMap);
         assertEquals("Size should be 0", 0, map.size());
-	}
+    }
 
-	/**
-	 * @tests java.util.WeakHashMap#clear()
-	 */
-	public void test_clear() {
-		// Test for method boolean java.util.WeakHashMap.clear()
-		whm = new WeakHashMap();
-		for (int i = 0; i < 100; i++)
-			whm.put(keyArray[i], valueArray[i]);
-		whm.clear();
-		assertTrue("Cleared map should be empty", whm.isEmpty());
-		for (int i = 0; i < 100; i++)
-			assertNull("Cleared map should only return null", whm
-					.get(keyArray[i]));
+    /**
+     * @tests java.util.WeakHashMap#clear()
+     */
+    public void test_clear() {
+        // Test for method boolean java.util.WeakHashMap.clear()
+        whm = new WeakHashMap();
+        for (int i = 0; i < 100; i++)
+            whm.put(keyArray[i], valueArray[i]);
+        whm.clear();
+        assertTrue("Cleared map should be empty", whm.isEmpty());
+        for (int i = 0; i < 100; i++)
+            assertNull("Cleared map should only return null", whm
+                    .get(keyArray[i]));
 
-	}
+    }
 
-	/**
-	 * @tests java.util.WeakHashMap#containsKey(java.lang.Object)
-	 */
-	public void test_containsKeyLjava_lang_Object() {
-		// Test for method boolean java.util.WeakHashMap.containsKey()
-		whm = new WeakHashMap();
-		for (int i = 0; i < 100; i++)
-			whm.put(keyArray[i], valueArray[i]);
-		for (int i = 0; i < 100; i++)
-			assertTrue("Should contain referenced key", whm
-					.containsKey(keyArray[i]));
-		keyArray[25] = null;
-		keyArray[50] = null;
-	}
+    /**
+     * @tests java.util.WeakHashMap#containsKey(java.lang.Object)
+     */
+    public void test_containsKeyLjava_lang_Object() {
+        // Test for method boolean java.util.WeakHashMap.containsKey()
+        whm = new WeakHashMap();
+        for (int i = 0; i < 100; i++)
+            whm.put(keyArray[i], valueArray[i]);
+        for (int i = 0; i < 100; i++)
+            assertTrue("Should contain referenced key", whm
+                    .containsKey(keyArray[i]));
+        keyArray[25] = null;
+        keyArray[50] = null;
+    }
 
-	/**
-	 * @tests java.util.WeakHashMap#containsValue(java.lang.Object)
-	 */
-	public void test_containsValueLjava_lang_Object() {
-		// Test for method boolean java.util.WeakHashMap.containsValue()
-		whm = new WeakHashMap();
-		for (int i = 0; i < 100; i++)
-			whm.put(keyArray[i], valueArray[i]);
-		for (int i = 0; i < 100; i++)
-			assertTrue("Should contain referenced value", whm
-					.containsValue(valueArray[i]));
-		keyArray[25] = null;
-		keyArray[50] = null;
-	}
+    /**
+     * @tests java.util.WeakHashMap#containsValue(java.lang.Object)
+     */
+    public void test_containsValueLjava_lang_Object() {
+        // Test for method boolean java.util.WeakHashMap.containsValue()
+        whm = new WeakHashMap();
+        for (int i = 0; i < 100; i++)
+            whm.put(keyArray[i], valueArray[i]);
+        for (int i = 0; i < 100; i++)
+            assertTrue("Should contain referenced value", whm
+                    .containsValue(valueArray[i]));
+        keyArray[25] = null;
+        keyArray[50] = null;
+    }
 
     /**
      * @tests java.util.WeakHashMap#entrySet()
@@ -234,141 +235,142 @@ public class WeakHashMapTest extends junit.framework.TestCase {
                 .hasNext());
     }
 
-	/**
-	 * @tests java.util.WeakHashMap#entrySet()
-	 */
-	public void test_entrySet_2() {
-		// Test for method java.util.Set java.util.WeakHashMap.entrySet()
-		whm = new WeakHashMap();
-		for (int i = 0; i < 100; i++)
-			whm.put(keyArray[i], valueArray[i]);
-		List keys = Arrays.asList(keyArray);
-		List values = Arrays.asList(valueArray);
-		Set entrySet = whm.entrySet();
-		assertTrue("Incorrect number of entries returned--wanted 100, got: "
-				+ entrySet.size(), entrySet.size() == 100);
-		Iterator it = entrySet.iterator();
-		while (it.hasNext()) {
-			Map.Entry entry = (Map.Entry) it.next();
-			assertTrue("Invalid map entry returned--bad key", keys
-					.contains(entry.getKey()));
-			assertTrue("Invalid map entry returned--bad key", values
-					.contains(entry.getValue()));
-		}
-		keys = null;
-		values = null;
-		keyArray[50] = null;
+    /**
+     * @tests java.util.WeakHashMap#entrySet()
+     */
+    public void test_entrySet_2() {
+        // Test for method java.util.Set java.util.WeakHashMap.entrySet()
+        whm = new WeakHashMap();
+        for (int i = 0; i < 100; i++)
+            whm.put(keyArray[i], valueArray[i]);
+        List keys = Arrays.asList(keyArray);
+        List values = Arrays.asList(valueArray);
+        Set entrySet = whm.entrySet();
+        assertTrue("Incorrect number of entries returned--wanted 100, got: "
+                + entrySet.size(), entrySet.size() == 100);
+        Iterator it = entrySet.iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            assertTrue("Invalid map entry returned--bad key", keys
+                    .contains(entry.getKey()));
+            assertTrue("Invalid map entry returned--bad key", values
+                    .contains(entry.getValue()));
+        }
+        keys = null;
+        values = null;
+        keyArray[50] = null;
 
         enqueueWeakReferences();
 
-		assertTrue(
-				"Incorrect number of entries returned after gc--wanted 99, got: "
-						+ entrySet.size(), entrySet.size() == 99);
-	}
+        assertTrue(
+                "Incorrect number of entries returned after gc--wanted 99, got: "
+                        + entrySet.size(), entrySet.size() == 99);
+    }
 
-	/**
-	 * @tests java.util.WeakHashMap#get(java.lang.Object)
-	 */
-	public void test_getLjava_lang_Object() {
-		// Test for method java.lang.Object
-		// java.util.WeakHashMap.get(java.lang.Object)
-		assertTrue("Used to test", true);
-	}
+    /**
+     * @tests java.util.WeakHashMap#get(java.lang.Object)
+     */
+    public void test_getLjava_lang_Object() {
+        // Test for method java.lang.Object
+        // java.util.WeakHashMap.get(java.lang.Object)
+        assertTrue("Used to test", true);
+    }
 
-	/**
-	 * @tests java.util.WeakHashMap#isEmpty()
-	 */
-	public void test_isEmpty() {
-		// Test for method boolean java.util.WeakHashMap.isEmpty()
-		whm = new WeakHashMap();
-		assertTrue("New map should be empty", whm.isEmpty());
-		Object myObject = new Object();
-		whm.put(myObject, myObject);
-		assertTrue("Map should not be empty", !whm.isEmpty());
-		whm.remove(myObject);
-		assertTrue("Map with elements removed should be empty", whm.isEmpty());
-	}
+    /**
+     * @tests java.util.WeakHashMap#isEmpty()
+     */
+    public void test_isEmpty() {
+        // Test for method boolean java.util.WeakHashMap.isEmpty()
+        whm = new WeakHashMap();
+        assertTrue("New map should be empty", whm.isEmpty());
+        Object myObject = new Object();
+        whm.put(myObject, myObject);
+        assertTrue("Map should not be empty", !whm.isEmpty());
+        whm.remove(myObject);
+        assertTrue("Map with elements removed should be empty", whm.isEmpty());
+    }
 
-	/**
-	 * @tests java.util.WeakHashMap#put(java.lang.Object, java.lang.Object)
-	 */
-	public void test_putLjava_lang_ObjectLjava_lang_Object() {
-		// Test for method java.lang.Object
-		// java.util.WeakHashMap.put(java.lang.Object, java.lang.Object)
-		WeakHashMap map = new WeakHashMap();
-		map.put(null, "value"); // add null key
+    /**
+     * @tests java.util.WeakHashMap#put(java.lang.Object, java.lang.Object)
+     */
+    public void test_putLjava_lang_ObjectLjava_lang_Object() {
+        // Test for method java.lang.Object
+        // java.util.WeakHashMap.put(java.lang.Object, java.lang.Object)
+        WeakHashMap map = new WeakHashMap();
+        map.put(null, "value"); // add null key
         enqueueWeakReferences();
-		map.remove("nothing"); // Cause objects in queue to be removed
-		assertEquals("null key was removed", 1, map.size());
-	}
+        map.remove("nothing"); // Cause objects in queue to be removed
+        assertEquals("null key was removed", 1, map.size());
+    }
 
     /**
      * @tests java.util.WeakHashMap#putAll(java.util.Map)
      */
     public void test_putAllLjava_util_Map() {
-        Map mockMap=new MockMap();
+        Map mockMap = new MockMap();
         WeakHashMap map = new WeakHashMap();
         map.putAll(mockMap);
         assertEquals("Size should be 0", 0, map.size());
     }
 
-	/**
-	 * @tests java.util.WeakHashMap#remove(java.lang.Object)
-	 */
-	public void test_removeLjava_lang_Object() {
-		// Test for method java.lang.Object
-		// java.util.WeakHashMap.remove(java.lang.Object)
-		whm = new WeakHashMap();
-		for (int i = 0; i < 100; i++)
-			whm.put(keyArray[i], valueArray[i]);
+    /**
+     * @tests java.util.WeakHashMap#remove(java.lang.Object)
+     */
+    public void test_removeLjava_lang_Object() {
+        // Test for method java.lang.Object
+        // java.util.WeakHashMap.remove(java.lang.Object)
+        whm = new WeakHashMap();
+        for (int i = 0; i < 100; i++)
+            whm.put(keyArray[i], valueArray[i]);
 
-		assertTrue("Remove returned incorrect value",
-				whm.remove(keyArray[25]) == valueArray[25]);
-		assertNull("Remove returned incorrect value",
-				whm.remove(keyArray[25]));
-		assertEquals("Size should be 99 after remove", 99, whm.size());
-	}
+        assertTrue("Remove returned incorrect value",
+                whm.remove(keyArray[25]) == valueArray[25]);
+        assertNull("Remove returned incorrect value",
+                whm.remove(keyArray[25]));
+        assertEquals("Size should be 99 after remove", 99, whm.size());
+    }
 
-	/**
-	 * @tests java.util.WeakHashMap#size()
-	 */
-	public void test_size() {
-		// Test for method int java.util.WeakHashMap.size()
-		assertTrue("Used to test", true);
-	}
+    /**
+     * @tests java.util.WeakHashMap#size()
+     */
+    public void test_size() {
+        // Test for method int java.util.WeakHashMap.size()
+        assertTrue("Used to test", true);
+    }
 
-	/**
-	 * @tests java.util.WeakHashMap#keySet()
-	 */
-	public void test_keySet() {
-		// Test for method java.util.Set java.util.WeakHashMap.keySet()
-		whm = new WeakHashMap();
-		for (int i = 0; i < 100; i++)
-			whm.put(keyArray[i], valueArray[i]);
+    /**
+     * @tests java.util.WeakHashMap#keySet()
+     */
+    public void test_keySet() {
+        // Test for method java.util.Set java.util.WeakHashMap.keySet()
+        whm = new WeakHashMap();
+        for (int i = 0; i < 100; i++)
+            whm.put(keyArray[i], valueArray[i]);
 
-		List keys = Arrays.asList(keyArray);
-		List values = Arrays.asList(valueArray);
+        List keys = Arrays.asList(keyArray);
+        List values = Arrays.asList(valueArray);
 
-		Set keySet = whm.keySet();
-		assertEquals("Incorrect number of keys returned,", 100, keySet.size());
-		Iterator it = keySet.iterator();
-		while (it.hasNext()) {
-			Object key = it.next();
-			assertTrue("Invalid map entry returned--bad key", keys
-					.contains(key));
-		}
-		keys = null;
-		values = null;
-		keyArray[50] = null;
+        Set keySet = whm.keySet();
+        assertEquals("Incorrect number of keys returned,", 100, keySet.size());
+        Iterator it = keySet.iterator();
+        while (it.hasNext()) {
+            Object key = it.next();
+            assertTrue("Invalid map entry returned--bad key", keys
+                    .contains(key));
+        }
+        keys = null;
+        values = null;
+        keyArray[50] = null;
 
         enqueueWeakReferences();
 
-		assertEquals("Incorrect number of keys returned after gc,", 99, keySet
-				.size());
-	}
+        assertEquals("Incorrect number of keys returned after gc,", 99, keySet
+                .size());
+    }
 
     /**
      * Regression test for HARMONY-3883
+     *
      * @tests java.util.WeakHashMap#keySet()
      */
     public void test_keySet_hasNext() {
@@ -401,42 +403,42 @@ public class WeakHashMapTest extends junit.framework.TestCase {
     }
 
 
-	/**
-	 * @tests java.util.WeakHashMap#values()
-	 */
-	public void test_values() {
-		// Test for method java.util.Set java.util.WeakHashMap.values()
-		whm = new WeakHashMap();
-		for (int i = 0; i < 100; i++)
-			whm.put(keyArray[i], valueArray[i]);
+    /**
+     * @tests java.util.WeakHashMap#values()
+     */
+    public void test_values() {
+        // Test for method java.util.Set java.util.WeakHashMap.values()
+        whm = new WeakHashMap();
+        for (int i = 0; i < 100; i++)
+            whm.put(keyArray[i], valueArray[i]);
 
-		List keys = Arrays.asList(keyArray);
-		List values = Arrays.asList(valueArray);
+        List keys = Arrays.asList(keyArray);
+        List values = Arrays.asList(valueArray);
 
-		Collection valuesCollection = whm.values();
-		assertEquals("Incorrect number of keys returned,", 100,
-				valuesCollection.size());
-		Iterator it = valuesCollection.iterator();
-		while (it.hasNext()) {
-			Object value = it.next();
-			assertTrue("Invalid map entry returned--bad value", values
-					.contains(value));
-		}
-		keys = null;
-		values = null;
-		keyArray[50] = null;
+        Collection valuesCollection = whm.values();
+        assertEquals("Incorrect number of keys returned,", 100,
+                valuesCollection.size());
+        Iterator it = valuesCollection.iterator();
+        while (it.hasNext()) {
+            Object value = it.next();
+            assertTrue("Invalid map entry returned--bad value", values
+                    .contains(value));
+        }
+        keys = null;
+        values = null;
+        keyArray[50] = null;
 
         enqueueWeakReferences();
 
-		assertEquals("Incorrect number of keys returned after gc,", 99,
-				valuesCollection.size());
-	}
+        assertEquals("Incorrect number of keys returned after gc,", 99,
+                valuesCollection.size());
+    }
 
     /**
      * Induce the VM to enqueue weak references into the corresponding reference
      * queues. This guarantees that all weak hash maps can observe their own
      * references as both cleared and enqueued.
-     *
+     * <p/>
      * <p>This method assumes that one value enqueued implies all others will be
      * enqueued. This behavior isn't specified, and this method may return too
      * early on some VMs.
@@ -452,21 +454,21 @@ public class WeakHashMapTest extends junit.framework.TestCase {
     }
 
     /**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-		for (int i = 0; i < 100; i++) {
-			keyArray[i] = new Object();
-			valueArray[i] = new Object();
-		}
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+        for (int i = 0; i < 100; i++) {
+            keyArray[i] = new Object();
+            valueArray[i] = new Object();
+        }
 
-	}
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

@@ -27,8 +27,7 @@ public class CookiePolicyTest extends TestCase {
 
     /**
      * @tests java.net.CookiePolicy#shouldAccept(java.net.URI,
-     *        java.net.HttpCookie).
-     * 
+     *java.net.HttpCookie).
      * @since 1.6
      */
     public void test_ShouldAccept_LURI_LHttpCookie() throws URISyntaxException {

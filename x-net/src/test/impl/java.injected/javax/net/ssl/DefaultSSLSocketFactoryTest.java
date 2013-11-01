@@ -29,7 +29,6 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>DefaultSSLSocketFactory</code> class constructors and
  * methods.
- *  
  */
 public class DefaultSSLSocketFactoryTest extends TestCase {
 

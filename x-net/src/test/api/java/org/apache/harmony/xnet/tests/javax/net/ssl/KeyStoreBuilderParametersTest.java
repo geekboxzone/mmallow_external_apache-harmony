@@ -32,7 +32,7 @@ import junit.framework.TestCase;
  * methods.
  */
 public class KeyStoreBuilderParametersTest extends TestCase {
-    
+
     class EmptyBuilder extends KeyStore.Builder {
         @Override
         public KeyStore getKeyStore() throws KeyStoreException {
@@ -90,10 +90,10 @@ public class KeyStoreBuilderParametersTest extends TestCase {
         }
         assertEquals("incorrect size", 1, result.size());
         assertTrue("incorrect list", result.contains(builder));
-        
+
         ksbuilders = new ArrayList<Builder>();
         ksbuilders.add(builder);
-        ksbuilders.add(new EmptyBuilder());  
+        ksbuilders.add(new EmptyBuilder());
         param = new KeyStoreBuilderParameters(ksbuilders);
         result = param.getParameters();
         try {

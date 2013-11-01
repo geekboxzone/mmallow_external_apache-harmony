@@ -329,7 +329,7 @@ public class SQLDataExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLDataException should be equals to cause.toString()",
                 "java.lang.Exception: MYTHROWABLE", sQLDataException
-                        .getMessage());
+                .getMessage());
         assertNull("The SQLState of SQLDataException should be null",
                 sQLDataException.getSQLState());
         assertEquals("The error code of SQLDataException should be 0",

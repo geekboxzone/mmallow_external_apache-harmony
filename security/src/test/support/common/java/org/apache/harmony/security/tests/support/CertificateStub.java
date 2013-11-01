@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Aleksei Y. Semenov
-*/
+ * @author Aleksei Y. Semenov
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -39,19 +39,20 @@ public class CertificateStub implements Certificate {
     Principal guarantor;
     Principal principal;
     PublicKey key;
-    
-    public CertificateStub(String format, Principal guarantor, Principal principal, PublicKey key){
+
+    public CertificateStub(String format, Principal guarantor, Principal principal, PublicKey key) {
         this.format = format;
         this.guarantor = guarantor;
         this.principal = principal;
         this.key = key;
     }
-    
+
     /**
      * Stub - does nothing
+     *
      * @see java.security.Certificate#decode(java.io.InputStream)
      */
-    public void decode(InputStream stream) throws KeyException, 
+    public void decode(InputStream stream) throws KeyException,
             IOException {
 
 
@@ -59,6 +60,7 @@ public class CertificateStub implements Certificate {
 
     /**
      * Stub - does nothing
+     *
      * @see java.security.Certificate#encode(java.io.OutputStream)
      */
     public void encode(OutputStream stream) throws KeyException,
@@ -99,6 +101,7 @@ public class CertificateStub implements Certificate {
 
     /**
      * Stub - returns <code>null</code>
+     *
      * @see java.security.Certificate#toString(boolean)
      */
     public String toString(boolean detailed) {

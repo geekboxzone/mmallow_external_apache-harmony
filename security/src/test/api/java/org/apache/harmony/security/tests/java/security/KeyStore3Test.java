@@ -44,13 +44,13 @@ import java.util.Enumeration;
 import junit.framework.TestCase;
 
 public class KeyStore3Test extends TestCase {
-    
+
     private KeyStore mockKeyStore;
-    
+
     private KeyPair keyPair;
-    
+
     private Certificate certificate;
-    
+
     public KeyStore3Test() throws Exception {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("DSA");
         keyPair = keyPairGenerator.generateKeyPair();
@@ -82,7 +82,7 @@ public class KeyStore3Test extends TestCase {
         CertificateFactory cf = CertificateFactory.getInstance("X.509");
         certificate = cf.generateCertificate(certArray);
     }
-    
+
     public void test_load() throws Exception {
         // No exception should be thrown out.
         mockKeyStore.load(null);
@@ -95,24 +95,24 @@ public class KeyStore3Test extends TestCase {
         } catch (KeyStoreException e) {
             // expected
         }
-        
+
         // No exception should be thrown out.
         mockKeyStore.load(null, null);
         mockKeyStore.store(null);
     }
 
     public void test_setKeyEntry_null() throws Exception {
-        mockKeyStore.load(null, null); 
+        mockKeyStore.load(null, null);
         // No exception should be thrown out.
-        mockKeyStore.setKeyEntry(null, null, null, null);        
+        mockKeyStore.setKeyEntry(null, null, null, null);
     }
-    
+
     public void test_setKeyEntry_key_is_null() throws Exception {
         mockKeyStore.load(null, null);
         // No exception should be thrown out.
-        mockKeyStore.setKeyEntry("Alias", null, null, new Certificate[]{certificate});        
+        mockKeyStore.setKeyEntry("Alias", null, null, new Certificate[] { certificate });
     }
-    
+
     public void test_setKeyEntry_key_is_private() throws Exception {
         mockKeyStore.load(null, null);
         Key key = keyPair.getPrivate();
@@ -122,7 +122,7 @@ public class KeyStore3Test extends TestCase {
         } catch (IllegalArgumentException e) {
             // expected
         }
-        
+
         try {
             mockKeyStore.setKeyEntry("Alias", key, null,
                     new Certificate[0]);
@@ -130,20 +130,19 @@ public class KeyStore3Test extends TestCase {
         } catch (IllegalArgumentException e) {
             // expected
         }
-        
-        mockKeyStore.setKeyEntry("Alias", key, null, new Certificate[]{certificate});        
+
+        mockKeyStore.setKeyEntry("Alias", key, null, new Certificate[] { certificate });
     }
-    
-    public void test_setKeyEntry_key_is_public() throws Exception
-    {
+
+    public void test_setKeyEntry_key_is_public() throws Exception {
         mockKeyStore.load(null, null);
         Key key = keyPair.getPublic();
         mockKeyStore.setKeyEntry("Alias1", key, null, null);
         mockKeyStore.setKeyEntry("Alias2", key, null,
                 new Certificate[0]);
-        mockKeyStore.setKeyEntry("Alias3", key, null, new Certificate[]{certificate});
+        mockKeyStore.setKeyEntry("Alias3", key, null, new Certificate[] { certificate });
     }
-    
+
     public void test_setCertificateEntry_null() throws Exception {
         mockKeyStore.load(null, null);
 
@@ -153,12 +152,12 @@ public class KeyStore3Test extends TestCase {
 
         mockKeyStore.setCertificateEntry("Alias", null);
     }
-    
+
     public void test_store_null() throws Exception {
         mockKeyStore.load(null, null);
         mockKeyStore.store(null, null);
     }
-    
+
     public void test_getKeyStore() throws KeyStoreException,
             NoSuchAlgorithmException, CertificateException,
             FileNotFoundException, IOException {
@@ -183,12 +182,12 @@ public class KeyStore3Test extends TestCase {
         assertNotSame(firstKeyStore, b.getKeyStore());
         assertSame(firstProtParameter, b.getProtectionParameter(alias));
     }
-    
+
     protected void setUp() throws Exception {
         super.setUp();
         mockKeyStore = new MyKeyStore(new MyKeyStoreSpi(), null, "MyKeyStore");
     }
-    
+
     private static class MyKeyStore extends KeyStore {
 
         public MyKeyStore(KeyStoreSpi keyStoreSpi, Provider provider,
@@ -264,7 +263,7 @@ public class KeyStore3Test extends TestCase {
             return 0;
         }
 
-        public void engineStore(KeyStore.LoadStoreParameter param){
+        public void engineStore(KeyStore.LoadStoreParameter param) {
             return;
         }
 
@@ -272,8 +271,8 @@ public class KeyStore3Test extends TestCase {
                 throws IOException, NoSuchAlgorithmException,
                 CertificateException {
             return;
-        }        
-    }    
+        }
+    }
 
 }
 

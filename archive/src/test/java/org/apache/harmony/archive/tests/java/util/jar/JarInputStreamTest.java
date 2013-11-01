@@ -32,11 +32,11 @@ import java.util.zip.ZipException;
 import tests.support.resource.Support_Resources;
 
 public class JarInputStreamTest extends junit.framework.TestCase {
-	// a 'normal' jar file
-	private String jarName;
+    // a 'normal' jar file
+    private String jarName;
 
-	// same as patch.jar but without a manifest file
-	private String jarName2;
+    // same as patch.jar but without a manifest file
+    private String jarName2;
 
     private final String entryName = "foo/bar/A.class";
 
@@ -45,31 +45,31 @@ public class JarInputStreamTest extends junit.framework.TestCase {
     private static final int indexofTESTCLASS = 4;
 
     private static final int totalEntries = 4;
-    
+
     @Override
     protected void setUp() {
         jarName = Support_Resources.getURL("morestuff/hyts_patch.jar");
         jarName2 = Support_Resources.getURL("morestuff/hyts_patch2.jar");
     }
 
-	/**
-	 * @tests java.util.jar.JarInputStream#JarInputStream(java.io.InputStream)
-	 */
-	public void test_ConstructorLjava_io_InputStream() throws Exception {
-		// Test for method java.util.jar.JarInputStream(java.io.InputStream)
-		InputStream is = new URL(jarName).openConnection().getInputStream();
-		boolean hasCorrectEntry = false;
-		JarInputStream jis = new JarInputStream(is);
-		assertNotNull("The jar input stream should have a manifest", jis.getManifest());
-		JarEntry je = jis.getNextJarEntry();
-		while (je != null) {
-                    if (je.getName().equals(entryName)) {
-                        hasCorrectEntry = true;
-                    }
-                    je = jis.getNextJarEntry();
-                }
-		assertTrue("The jar input stream does not contain the correct entries",	hasCorrectEntry);
-	}
+    /**
+     * @tests java.util.jar.JarInputStream#JarInputStream(java.io.InputStream)
+     */
+    public void test_ConstructorLjava_io_InputStream() throws Exception {
+        // Test for method java.util.jar.JarInputStream(java.io.InputStream)
+        InputStream is = new URL(jarName).openConnection().getInputStream();
+        boolean hasCorrectEntry = false;
+        JarInputStream jis = new JarInputStream(is);
+        assertNotNull("The jar input stream should have a manifest", jis.getManifest());
+        JarEntry je = jis.getNextJarEntry();
+        while (je != null) {
+            if (je.getName().equals(entryName)) {
+                hasCorrectEntry = true;
+            }
+            je = jis.getNextJarEntry();
+        }
+        assertTrue("The jar input stream does not contain the correct entries", hasCorrectEntry);
+    }
 
     public void test_closeAfterException() throws Exception {
         File resources = Support_Resources.createTempFolder();
@@ -126,28 +126,28 @@ public class JarInputStreamTest extends junit.framework.TestCase {
         }
     }
 
-	/**
-	 * @tests java.util.jar.JarInputStream#getManifest()
-	 */
-	public void test_getManifest() throws Exception {
-		// Test for method java.util.jar.Manifest
-		// java.util.jar.JarInputStream.getManifest()
-		Manifest m;
-		InputStream is = new URL(jarName2).openConnection().getInputStream();
-		JarInputStream jis = new JarInputStream(is);
-		m = jis.getManifest();
-		assertNull("The jar input stream should not have a manifest", m);
+    /**
+     * @tests java.util.jar.JarInputStream#getManifest()
+     */
+    public void test_getManifest() throws Exception {
+        // Test for method java.util.jar.Manifest
+        // java.util.jar.JarInputStream.getManifest()
+        Manifest m;
+        InputStream is = new URL(jarName2).openConnection().getInputStream();
+        JarInputStream jis = new JarInputStream(is);
+        m = jis.getManifest();
+        assertNull("The jar input stream should not have a manifest", m);
 
-		is = new URL(jarName).openConnection().getInputStream();
-		jis = new JarInputStream(is);
-		m = jis.getManifest();
-		assertNotNull("The jar input stream should have a manifest", m);
-	}
+        is = new URL(jarName).openConnection().getInputStream();
+        jis = new JarInputStream(is);
+        m = jis.getManifest();
+        assertNotNull("The jar input stream should have a manifest", m);
+    }
 
-	/**
-	 * @tests java.util.jar.JarInputStream#getNextJarEntry()
-	 */
-	public void test_getNextJarEntry() throws Exception {
+    /**
+     * @tests java.util.jar.JarInputStream#getNextJarEntry()
+     */
+    public void test_getNextJarEntry() throws Exception {
         final Set<String> desired = new HashSet<String>(Arrays.asList(new String[] { "foo/",
                 "foo/bar/", "foo/bar/A.class", "Blah.txt" }));
         Set<String> actual = new HashSet<String>();
@@ -388,7 +388,7 @@ public class JarInputStreamTest extends junit.framework.TestCase {
         }
         assertEquals(totalEntries + 1, count);
         jin.close();
-    }    
+    }
 
     public void test_getNextEntry() throws Exception {
         File resources = Support_Resources.createTempFolder();

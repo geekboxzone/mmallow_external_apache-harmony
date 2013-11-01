@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class ExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.Exception#Exception()
-	 */
+    /**
+     * @tests java.lang.Exception#Exception()
+     */
     public void test_Constructor() {
         Exception e = new Exception();
         assertNull(e.getMessage());

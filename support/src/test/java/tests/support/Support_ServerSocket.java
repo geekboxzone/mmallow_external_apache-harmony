@@ -21,17 +21,16 @@ import java.io.IOException;
 
 /**
  * The interface for a generic server socket.
- * 
  */
 public interface Support_ServerSocket {
 
-	public Support_Socket accept() throws IOException;
+    public Support_Socket accept() throws IOException;
 
-	public void setTimeout(int timeout);
+    public void setTimeout(int timeout);
 
-	public void setPort(int port);
+    public void setPort(int port);
 
-	public void open() throws IOException;
+    public void open() throws IOException;
 
-	public void close() throws IOException;
+    public void close() throws IOException;
 }

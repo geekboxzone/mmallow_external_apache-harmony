@@ -35,19 +35,19 @@ import java.util.SortedMap;
 
 public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
         implements SortedMap<K, V>, Cloneable, Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     private static final class MapEntry<K, V> implements Map.Entry<K, V> {
-        
+
         final K key;
         V value;
-        
+
         MapEntry(K key, V value) {
             this.key = key;
             this.value = value;
         }
-        
+
         public K getKey() {
             return key;
         }
@@ -66,7 +66,7 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
             return (getKey() == null ? 0 : getKey().hashCode())
                     ^ (getValue() == null ? 0 : getValue().hashCode());
         }
-        
+
         public boolean equals(Object object) {
             if (this == object) {
                 return true;
@@ -76,23 +76,23 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
                 return (getKey() == null ? entry.getKey() == null : getKey().equals(entry
                         .getKey()))
                         && (getValue() == null ? entry.getValue() == null : getValue()
-                                .equals(entry.getValue()));
+                        .equals(entry.getValue()));
             }
             return false;
         }
     }
-    
+
     transient ArrayList<MapEntry<K, V>> entries = new ArrayList<MapEntry<K, V>>();
     transient int modCnt;
 
     private final Comparator<? super K> comparator;
-    
-    class SubMap extends java.util.AbstractMap<K, V> 
-            implements SortedMap<K, V>, Cloneable {     
+
+    class SubMap extends java.util.AbstractMap<K, V>
+            implements SortedMap<K, V>, Cloneable {
 
         final boolean hasStart, hasEnd;
         final K start, end;
-        
+
         SubMap(boolean hasFirst, K first, boolean hasLast, K last) {
             this.hasStart = hasFirst;
             this.start = first;
@@ -102,25 +102,25 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
                 throw new IllegalArgumentException();
             }
         }
-        
+
         @Override
         public Set<java.util.Map.Entry<K, V>> entrySet() {
-            return new AbstractSet<Entry<K,V>> () {             
-                
+            return new AbstractSet<Entry<K, V>>() {
+
                 @Override
                 public Iterator<java.util.Map.Entry<K, V>> iterator() {
-                    return new Iterator<Entry<K,V>>() {
+                    return new Iterator<Entry<K, V>>() {
                         int modCnt = RefSortedMap.this.modCnt;
-                        int offset = SubMap.this.size() > 0 ? 
+                        int offset = SubMap.this.size() > 0 ?
                                 bsearch(SubMap.this.firstKey()) - 1 :
-                                entries.size(); 
-                        
+                                entries.size();
+
                         public boolean hasNext() {
                             if (modCnt != RefSortedMap.this.modCnt) {
                                 throw new ConcurrentModificationException();
-                            }                           
-                            return offset + 1 < entries.size() 
-                                && isInRange(entries.get(offset + 1).getKey());
+                            }
+                            return offset + 1 < entries.size()
+                                    && isInRange(entries.get(offset + 1).getKey());
                         }
 
                         public Map.Entry<K, V> next() {
@@ -143,7 +143,7 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
                             RefSortedMap.this.entries.remove(offset);
                             offset--;
                         }
-                        
+
                     };
                 }
 
@@ -151,15 +151,15 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
                 public int size() {
                     try {
                         int lastIdx = bsearch(SubMap.this.lastKey());
-                        int firstIdx = bsearch(SubMap.this.firstKey()); 
+                        int firstIdx = bsearch(SubMap.this.firstKey());
                         return lastIdx - firstIdx + 1;
                     } catch (NoSuchElementException e) {
                         return 0;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         return 0;
-                    }                   
+                    }
                 }
-                
+
             };
         }
 
@@ -179,7 +179,7 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
             if (idx >= 0) {
                 return start;
             }
-            if (-idx - 1 >= entries.size() || !isInRange(entries.get(-idx - 1).getKey())) { 
+            if (-idx - 1 >= entries.size() || !isInRange(entries.get(-idx - 1).getKey())) {
                 throw new NoSuchElementException();
             }
             return entries.get(-idx - 1).getKey();
@@ -201,7 +201,7 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
                 return res;
             }
             int idx = bsearch(end);
-            idx = idx >= 0 ? idx - 1 : -idx -2; 
+            idx = idx >= 0 ? idx - 1 : -idx - 2;
             if (idx < 0 || !isInRange(entries.get(idx).getKey())) {
                 throw new NoSuchElementException();
             }
@@ -224,26 +224,26 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
             }
             return new SubMap(true, key, hasEnd, end);
         }
-        
+
         private boolean isInRange(K key) {
             if (hasStart && compare(key, start) < 0) {
-                    return false;
+                return false;
             }
             if (hasEnd && compare(key, end) >= 0) {
-                    return false;
+                return false;
             }
             return true;
         }
-        
-    }       
-    
+
+    }
+
     public RefSortedMap() {
         this((Comparator<? super K>) null);
     }
 
     @SuppressWarnings("unchecked")
-    public int compare(K start, K end) {        
-        return comparator != null ? comparator.compare(start, end) 
+    public int compare(K start, K end) {
+        return comparator != null ? comparator.compare(start, end)
                 : ((Comparable<K>) start).compareTo(end);
     }
 
@@ -275,7 +275,7 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
         return entries.get(0).getKey();
     }
 
-    public SortedMap<K, V> headMap(K key) {     
+    public SortedMap<K, V> headMap(K key) {
         return new SubMap(false, null, true, key);
     }
 
@@ -315,7 +315,7 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
         }
         return false;
     }
-    
+
     @SuppressWarnings("unchecked")
     public V get(Object arg0) {
         int idx = bsearch(arg0);
@@ -329,10 +329,10 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
     public V put(K arg0, V arg1) {
         modCnt++;
         int idx = bsearch(arg0);
-        if (idx >= 0) {         
+        if (idx >= 0) {
             return entries.get(idx).setValue(arg1);
         }
-        entries.add(-idx -1, new MapEntry<K, V>(arg0, arg1));
+        entries.add(-idx - 1, new MapEntry<K, V>(arg0, arg1));
         return null;
     }
 
@@ -348,19 +348,19 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
         int idx = bsearch(arg0);
         if (idx < 0) {
             return null;
-        }       
+        }
         return entries.remove(idx).getValue();
     }
-    
+
     transient private Comparator<MapEntry<K, V>> cmp = createCmp();
-    
+
     Comparator<MapEntry<K, V>> createCmp() {
         return new Comparator<MapEntry<K, V>>() {
-    
+
             public int compare(MapEntry<K, V> arg0, MapEntry<K, V> arg1) {
                 return RefSortedMap.this.compare(arg0.getKey(), arg1.getKey());
             }
-            
+
         };
     }
 
@@ -372,11 +372,11 @@ public class RefSortedMap<K, V> extends java.util.AbstractMap<K, V>
     public int size() {
         return entries.size();
     }
-    
+
     public RefSortedMap<K, V> clone() {
-        return new RefSortedMap<K, V>(this);        
+        return new RefSortedMap<K, V>(this);
     }
-    
+
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         stream.writeInt(size());

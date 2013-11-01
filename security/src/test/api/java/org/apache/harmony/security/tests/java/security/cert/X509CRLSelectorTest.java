@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -109,7 +109,8 @@ public class X509CRLSelectorTest extends TestCase {
         try {
             selector.addIssuerName("a");
             fail("IOException expected");
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
 
         //no exception for null
         selector.addIssuerName((String) null);

@@ -614,14 +614,14 @@ public class BitSetTest extends junit.framework.TestCase {
         assertTrue("Failed to flip bit", bs.get(128));
 
         bs = new BitSet(64);
-        for (int i = bs.size(); --i >= 0;) {
+        for (int i = bs.size(); --i >= 0; ) {
             bs.flip(i);
             assertTrue("Test1: Incorrectly flipped bit" + i, bs.get(i));
-            assertEquals("Incorrect length", i+1, bs.length());
-            for (int j = bs.size(); --j > i;) {
+            assertEquals("Incorrect length", i + 1, bs.length());
+            for (int j = bs.size(); --j > i; ) {
                 assertTrue("Test2: Incorrectly flipped bit" + j, !bs.get(j));
             }
-            for (int j = i; --j >= 0;) {
+            for (int j = i; --j >= 0; ) {
                 assertTrue("Test3: Incorrectly flipped bit" + j, !bs.get(j));
             }
             bs.flip(i);
@@ -662,7 +662,7 @@ public class BitSetTest extends junit.framework.TestCase {
             bitset.set(i);
         }
         bitset.flip(10, 10);
-               
+
         // Test for method void java.util.BitSet.flip(int, int)
         // pos1 and pos2 are in the same bitset element
         BitSet bs = new BitSet(16);
@@ -824,13 +824,13 @@ public class BitSetTest extends junit.framework.TestCase {
         assertTrue("Failed to set bit", bs.get(128));
 
         bs = new BitSet(64);
-        for (int i = bs.size(); --i >= 0;) {
+        for (int i = bs.size(); --i >= 0; ) {
             bs.set(i);
             assertTrue("Incorrectly set", bs.get(i));
-            assertEquals("Incorrect length", i+1, bs.length());
-            for (int j = bs.size(); --j > i;)
+            assertEquals("Incorrect length", i + 1, bs.length());
+            for (int j = bs.size(); --j > i; )
                 assertFalse("Incorrectly set bit " + j, bs.get(j));
-            for (int j = i; --j >= 0;)
+            for (int j = i; --j >= 0; )
                 assertFalse("Incorrectly set bit " + j, bs.get(j));
             bs.clear(i);
         }
@@ -867,7 +867,7 @@ public class BitSetTest extends junit.framework.TestCase {
     public void test_setII() throws IndexOutOfBoundsException {
         BitSet bitset = new BitSet(30);
         bitset.set(29, 29);
-        
+
         // Test for method void java.util.BitSet.set(int, int)
         // pos1 and pos2 are in the same bitset element
         BitSet bs = new BitSet(16);
@@ -1011,7 +1011,7 @@ public class BitSetTest extends junit.framework.TestCase {
      * @tests java.util.BitSet#cardinality()
      * @tests java.util.BitSet#get(int)
      * @tests java.util.BitSet#flip(int, int)
-     * @tests java.util.BitSet#clear(int,int)
+     * @tests java.util.BitSet#clear(int, int)
      */
 
     public void test_111478() {
@@ -1155,7 +1155,7 @@ public class BitSetTest extends junit.framework.TestCase {
         bs2.set(3);
         bs.andNot(bs2);
         assertEquals("Incorrect bitset after andNot",
-                     "{0, 1, 4, 6, 7}", bs.toString());
+                "{0, 1, 4, 6, 7}", bs.toString());
 
         bs = new BitSet(0);
         bs.andNot(bs2);
@@ -1534,7 +1534,6 @@ public class BitSetTest extends junit.framework.TestCase {
 
     /**
      * helper method to display the contents of a bitset
-     * 
      */
     private static void printBitset(BitSet bs) {
         System.out.println();

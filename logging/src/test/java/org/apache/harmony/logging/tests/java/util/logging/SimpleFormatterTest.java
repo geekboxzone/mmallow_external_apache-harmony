@@ -26,89 +26,89 @@ import java.util.logging.SimpleFormatter;
 import junit.framework.TestCase;
 
 /**
- * 
+ *
  */
 public class SimpleFormatterTest extends TestCase {
 
-	SimpleFormatter sf;
+    SimpleFormatter sf;
 
-	LogRecord lr;
+    LogRecord lr;
 
-	private static String MSG = "test msg. pls. ignore it\nadaadasfdasfd\nadfafdadfsa";
+    private static String MSG = "test msg. pls. ignore it\nadaadasfdasfd\nadfafdadfsa";
 
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		super.setUp();
-		sf = new SimpleFormatter();
-		lr = new LogRecord(Level.FINE, MSG);
-	}
+    /*
+      * @see TestCase#setUp()
+      */
+    protected void setUp() throws Exception {
+        super.setUp();
+        sf = new SimpleFormatter();
+        lr = new LogRecord(Level.FINE, MSG);
+    }
 
-	public void testFormatNull() {
-		try {
-			sf.format(null);
-			fail("should throw nullpointer exception");
-		} catch (NullPointerException e) {
-		}
-		sf.format(new LogRecord(Level.SEVERE, null));
-	}
+    public void testFormatNull() {
+        try {
+            sf.format(null);
+            fail("should throw nullpointer exception");
+        } catch (NullPointerException e) {
+        }
+        sf.format(new LogRecord(Level.SEVERE, null));
+    }
 
-	public void testLocalizedFormat() {
-		// if bundle set, should use localized message
-		ResourceBundle rb = ResourceBundle
-				.getBundle("bundles/java/util/logging/res");
-		lr.setResourceBundle(rb);
-		lr.setMessage("msg");
-		String localeMsg = rb.getString("msg");
-		String str = sf.format(lr);
-		assertTrue(str.indexOf(localeMsg) > 0);
+    public void testLocalizedFormat() {
+        // if bundle set, should use localized message
+        ResourceBundle rb = ResourceBundle
+                .getBundle("bundles/java/util/logging/res");
+        lr.setResourceBundle(rb);
+        lr.setMessage("msg");
+        String localeMsg = rb.getString("msg");
+        String str = sf.format(lr);
+        assertTrue(str.indexOf(localeMsg) > 0);
 
-		// if bundle not set but bundle name set, should use original message
-		lr.setResourceBundle(null);
-		lr.setResourceBundleName("bundles/java/util/logging/res");
-		lr.setMessage("msg");
-		str = sf.format(lr);
-		localeMsg = rb.getString("msg");
-		assertTrue(str.indexOf(localeMsg) < 0);
-	}
+        // if bundle not set but bundle name set, should use original message
+        lr.setResourceBundle(null);
+        lr.setResourceBundleName("bundles/java/util/logging/res");
+        lr.setMessage("msg");
+        str = sf.format(lr);
+        localeMsg = rb.getString("msg");
+        assertTrue(str.indexOf(localeMsg) < 0);
+    }
 
-	public void testFormat() {
-		String str = sf.format(lr);
-		Throwable t;
+    public void testFormat() {
+        String str = sf.format(lr);
+        Throwable t;
 
-		lr.setMessage(MSG + " {0,number}");
-		lr.setLoggerName("logger");
-		lr.setResourceBundleName("rb name");
-		lr.setSourceClassName("class");
-		lr.setSourceMethodName("method");
-		lr.setParameters(new Object[] { new Integer(100), new Object() });
-		lr.setThreadID(1000);
-		lr.setThrown(t = new Exception("exception") {
-			private static final long serialVersionUID = 1L;
+        lr.setMessage(MSG + " {0,number}");
+        lr.setLoggerName("logger");
+        lr.setResourceBundleName("rb name");
+        lr.setSourceClassName("class");
+        lr.setSourceMethodName("method");
+        lr.setParameters(new Object[] { new Integer(100), new Object() });
+        lr.setThreadID(1000);
+        lr.setThrown(t = new Exception("exception") {
+            private static final long serialVersionUID = 1L;
 
-			public String getLocalizedMessage() {
-				return "locale";
-			}
-		});
-		lr.setSequenceNumber(12321312);
-		lr.setMillis(0);
-		str = sf.format(lr);
-		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(12321312);
-		assertTrue(str.indexOf(String.valueOf(cal.get(Calendar.YEAR))) >= 0);
-		assertTrue(str.indexOf("class") > 0);
-		assertTrue(str.indexOf("method") > 0);
-		assertTrue(str.indexOf("100") > 0);
-		assertTrue(str.indexOf(t.toString()) > 0);
-		assertTrue(str.indexOf(Level.FINE.getLocalizedName()) > 0);
-	}
+            public String getLocalizedMessage() {
+                return "locale";
+            }
+        });
+        lr.setSequenceNumber(12321312);
+        lr.setMillis(0);
+        str = sf.format(lr);
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(12321312);
+        assertTrue(str.indexOf(String.valueOf(cal.get(Calendar.YEAR))) >= 0);
+        assertTrue(str.indexOf("class") > 0);
+        assertTrue(str.indexOf("method") > 0);
+        assertTrue(str.indexOf("100") > 0);
+        assertTrue(str.indexOf(t.toString()) > 0);
+        assertTrue(str.indexOf(Level.FINE.getLocalizedName()) > 0);
+    }
 
-	public void testGetHead() {
-		assertEquals("", sf.getHead(null));
-	}
+    public void testGetHead() {
+        assertEquals("", sf.getHead(null));
+    }
 
-	public void testGetTail() {
-		assertEquals("", sf.getTail(null));
-	}
+    public void testGetTail() {
+        assertEquals("", sf.getTail(null));
+    }
 }

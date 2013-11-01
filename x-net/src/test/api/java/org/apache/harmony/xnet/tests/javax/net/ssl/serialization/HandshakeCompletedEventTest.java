@@ -27,7 +27,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for HandshakeCompletedEvent serialization
- * 
  */
 
 public class HandshakeCompletedEventTest extends SerializationTest implements
@@ -38,13 +37,13 @@ public class HandshakeCompletedEventTest extends SerializationTest implements
         try {
             SSLContext cont = SSLContext.getInstance("TLS");
             cont.init(null, null, null);
-            SSLSocket soc = (SSLSocket )cont.getSocketFactory().createSocket();
-            return new Object[] { new HandshakeCompletedEvent(soc, soc.getSession())};
+            SSLSocket soc = (SSLSocket) cont.getSocketFactory().createSocket();
+            return new Object[] { new HandshakeCompletedEvent(soc, soc.getSession()) };
         } catch (Exception e) {
-            fail("Can not create data: "+ e);
+            fail("Can not create data: " + e);
             return null;
         }
-        
+
     }
 
     public void assertDeserialized(Serializable oref, Serializable otest) {

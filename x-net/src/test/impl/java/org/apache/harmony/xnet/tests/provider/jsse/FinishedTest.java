@@ -28,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>Finished</code> constructor and methods
- *  
  */
 public class FinishedTest extends TestCase {
 

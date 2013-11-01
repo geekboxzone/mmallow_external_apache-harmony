@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -27,12 +27,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ECGenParameterSpec</code> class fields and methods.
- * 
  */
 public class ECGenParameterSpecTest extends TestCase {
 
     /**
      * Constructor for ECGenParameterSpecTest.
+     *
      * @param name
      */
     public ECGenParameterSpecTest(String name) {
@@ -45,9 +45,9 @@ public class ECGenParameterSpecTest extends TestCase {
 
     /**
      * Test #1 for <code>ECGenParameterSpec</code> constructor<br>
-     *
+     * <p/>
      * Assertion: creates new object of <code>ECGenParameterSpec</code> class
-     * using valid <code>name</code> 
+     * using valid <code>name</code>
      */
     public final void testECGenParameterSpec01() {
         new ECGenParameterSpec("someName");
@@ -55,21 +55,22 @@ public class ECGenParameterSpecTest extends TestCase {
 
     /**
      * Test #2 for <code>ECGenParameterSpec</code> constructor<br>
-     *
+     * <p/>
      * Assertion: throws NullPointerException
-     * if <code>name</code> is <code>null</code>  
+     * if <code>name</code> is <code>null</code>
      */
     public final void testECGenParameterSpec02() {
         try {
             new ECGenParameterSpec(null);
             fail("NPE expected");
-        } catch (NullPointerException ok) {}
+        } catch (NullPointerException ok) {
+        }
     }
 
     /**
      * Test for <code>getName()</code> method<br>
-     *
-     * Assertion: returns the <code>name</code>  
+     * <p/>
+     * Assertion: returns the <code>name</code>
      */
     public final void testGetName() {
         String name = "someName";

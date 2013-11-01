@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -32,7 +32,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ECPrivateKeySpec</code> class fields and methods.
- * 
  */
 public class ECPrivateKeySpec_ImplTest extends TestCase {
 
@@ -46,7 +45,7 @@ public class ECPrivateKeySpec_ImplTest extends TestCase {
     //
 
     /**
-     * Test #1 for <code>ECPrivateKeySpec(BigInteger, ECParameterSpec)</code> constructor<br> 
+     * Test #1 for <code>ECPrivateKeySpec(BigInteger, ECParameterSpec)</code> constructor<br>
      * Assertion: creates <code>ECPrivateKeySpec</code> instance<br>
      * Test preconditions: valid parameters passed<br>
      * Expected: must pass without any exceptions
@@ -54,17 +53,17 @@ public class ECPrivateKeySpec_ImplTest extends TestCase {
     public final void testECPrivateKeySpec01() {
         // Valid (see note below) parameters set
         EllipticCurve c =
-            new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
-                              BigInteger.ZERO,
-                              BigInteger.valueOf(4L));
+                new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
+                        BigInteger.ZERO,
+                        BigInteger.valueOf(4L));
         ECPoint g = new ECPoint(BigInteger.ZERO, BigInteger.valueOf(2L));
         new ECPrivateKeySpec(BigInteger.ZERO,
                 new ECParameterSpec(c, g, BigInteger.valueOf(5L), 10));
-        
+
     }
 
-   /**
-     * Test #2 for <code>ECPrivateKeySpec(BigInteger, ECParameterSpec)</code> constructor<br> 
+    /**
+     * Test #2 for <code>ECPrivateKeySpec(BigInteger, ECParameterSpec)</code> constructor<br>
      * Assertion: throws <code>NullPointerException</code> if
      * <code>s</code> or <code>params</code> is <code>null</code><br>
      * Test preconditions: pass <code>null</code> as mentioned parameters<br>
@@ -73,15 +72,15 @@ public class ECPrivateKeySpec_ImplTest extends TestCase {
     public final void testECPrivateKeySpec02() {
         // Valid (see note below) parameters set
         EllipticCurve c =
-            new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
-                              BigInteger.ZERO,
-                              BigInteger.valueOf(4L));
+                new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
+                        BigInteger.ZERO,
+                        BigInteger.valueOf(4L));
         ECPoint g = new ECPoint(BigInteger.ZERO, BigInteger.valueOf(2L));
 
         // Test case 1: s is null
         try {
             new ECPrivateKeySpec(null,
-                new ECParameterSpec(c, g, BigInteger.valueOf(5L), 10));
+                    new ECParameterSpec(c, g, BigInteger.valueOf(5L), 10));
             fail("#1: Expected NPE not thrown");
         } catch (NullPointerException ok) {
         }
@@ -115,16 +114,16 @@ public class ECPrivateKeySpec_ImplTest extends TestCase {
     public final void testGetParams() {
         // Valid (see note below) parameters set
         EllipticCurve c =
-            new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
-                              BigInteger.ZERO,
-                              BigInteger.valueOf(4L));
+                new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
+                        BigInteger.ZERO,
+                        BigInteger.valueOf(4L));
         ECPoint g = new ECPoint(BigInteger.ZERO, BigInteger.valueOf(2L));
         ECParameterSpec params =
-            new ECParameterSpec(c, g, BigInteger.valueOf(5L), 10);
+                new ECParameterSpec(c, g, BigInteger.valueOf(5L), 10);
 
         ECPrivateKeySpec ks = new ECPrivateKeySpec(BigInteger.ZERO, params);
         ECParameterSpec paramsRet = ks.getParams();
-        
+
         assertEquals(params, paramsRet);
         assertSame(params, paramsRet);
     }
@@ -141,12 +140,12 @@ public class ECPrivateKeySpec_ImplTest extends TestCase {
     public final void testGetS() {
         // Valid (see note below) parameters set
         EllipticCurve c =
-            new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
-                              BigInteger.ZERO,
-                              BigInteger.valueOf(4L));
+                new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
+                        BigInteger.ZERO,
+                        BigInteger.valueOf(4L));
         ECPoint g = new ECPoint(BigInteger.ZERO, BigInteger.valueOf(2L));
         ECParameterSpec params =
-            new ECParameterSpec(c, g, BigInteger.valueOf(5L), 10);
+                new ECParameterSpec(c, g, BigInteger.valueOf(5L), 10);
         BigInteger s = BigInteger.valueOf(5L);
 
         ECPrivateKeySpec ks = new ECPrivateKeySpec(s, params);

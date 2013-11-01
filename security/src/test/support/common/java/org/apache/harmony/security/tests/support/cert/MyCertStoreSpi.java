@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.support.cert;
 
@@ -32,14 +32,13 @@ import java.util.Collection;
 /**
  * Additional class for verification CertStoreSpi
  * and CertStore
- * 
  */
 
 public class MyCertStoreSpi extends CertStoreSpi {
-    
+
     public MyCertStoreSpi(CertStoreParameters params)
             throws InvalidAlgorithmParameterException {
-        super(params);        
+        super(params);
         if (!(params instanceof MyCertStoreParameters)) {
             throw new InvalidAlgorithmParameterException("Invalid params");
         }

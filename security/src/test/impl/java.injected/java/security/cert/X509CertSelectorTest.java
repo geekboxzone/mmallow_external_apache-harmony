@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package java.security.cert;
 
@@ -73,7 +73,6 @@ import org.apache.harmony.security.x509.TBSCertificate;
 import org.apache.harmony.security.x509.Validity;
 
 
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -107,7 +106,8 @@ public class X509CertSelectorTest extends TestCase {
         protected NameConstraints nameConstraints = null;
 
         /* Stuff methods */
-        public TestCert() {}
+        public TestCert() {
+        }
 
         public TestCert(GeneralNames sans) {
             setSubjectAlternativeNames(sans);
@@ -172,13 +172,13 @@ public class X509CertSelectorTest extends TestCase {
 
         public void setExtendedKeyUsage(Set extKeyUsage) {
             this.extKeyUsage = (extKeyUsage == null)
-                                ? null
-                                : new ArrayList(extKeyUsage);
+                    ? null
+                    : new ArrayList(extKeyUsage);
         }
 
         public void setKeyUsage(boolean[] keyUsage) {
             this.keyUsage = (keyUsage == null) ? null
-                                               : (boolean[]) keyUsage.clone();
+                    : (boolean[]) keyUsage.clone();
         }
 
         public void setPublicKey(PublicKey key) {
@@ -224,10 +224,10 @@ public class X509CertSelectorTest extends TestCase {
                 return false;
             }
             if ((equalCriteria == null)
-                    || (((TestCert)cert).equalCriteria == null)) {
+                    || (((TestCert) cert).equalCriteria == null)) {
                 return false;
             } else {
-                return equalCriteria.equals(((TestCert)cert).equalCriteria);
+                return equalCriteria.equals(((TestCert) cert).equalCriteria);
             }
         }
 
@@ -239,11 +239,12 @@ public class X509CertSelectorTest extends TestCase {
         }
 
         public void checkValidity() throws CertificateExpiredException,
-                                           CertificateNotYetValidException {}
+                CertificateNotYetValidException {
+        }
 
         public void checkValidity(Date date)
-                                    throws CertificateExpiredException,
-                                           CertificateNotYetValidException {
+                throws CertificateExpiredException,
+                CertificateNotYetValidException {
             if (this.date == null) {
                 throw new CertificateExpiredException();
             }
@@ -291,8 +292,7 @@ public class X509CertSelectorTest extends TestCase {
         }
 
         public byte[] getTBSCertificate()
-                            throws CertificateEncodingException
-        {
+                throws CertificateEncodingException {
             return null;
         }
 
@@ -325,7 +325,7 @@ public class X509CertSelectorTest extends TestCase {
         }
 
         public List/*<String>*/ getExtendedKeyUsage()
-                                    throws CertificateParsingException {
+                throws CertificateParsingException {
             return extKeyUsage;
         }
 
@@ -334,32 +334,29 @@ public class X509CertSelectorTest extends TestCase {
         }
 
         public Collection/*<List<?>>*/ getSubjectAlternativeNames()
-                                    throws CertificateParsingException {
+                throws CertificateParsingException {
             return sans.getPairsList();
         }
 
 
         public void verify(PublicKey key)
-                     throws CertificateException, NoSuchAlgorithmException,
-                            InvalidKeyException, NoSuchProviderException,
-                            SignatureException
-        {
+                throws CertificateException, NoSuchAlgorithmException,
+                InvalidKeyException, NoSuchProviderException,
+                SignatureException {
         }
 
         public void verify(PublicKey key,
-                                    String sigProvider)
-                     throws CertificateException, NoSuchAlgorithmException,
-                            InvalidKeyException, NoSuchProviderException,
-                            SignatureException
-        {
+                String sigProvider)
+                throws CertificateException, NoSuchAlgorithmException,
+                InvalidKeyException, NoSuchProviderException,
+                SignatureException {
         }
 
         public PublicKey getPublicKey() {
             return key;
         }
 
-        public byte[] getEncoded() throws CertificateEncodingException
-        {
+        public byte[] getEncoded() throws CertificateEncodingException {
             return encoding;
         }
 
@@ -378,7 +375,7 @@ public class X509CertSelectorTest extends TestCase {
             }
             if ("2.5.29.16".equals(oid)) {
                 PrivateKeyUsagePeriod pkup =
-                                new PrivateKeyUsagePeriod(notBefore, notAfter);
+                        new PrivateKeyUsagePeriod(notBefore, notAfter);
                 byte[] encoded = pkup.getEncoded();
                 return ASN1OctetString.getInstance().encode(encoded);
             }
@@ -392,46 +389,46 @@ public class X509CertSelectorTest extends TestCase {
                     val[id++] = (String) it.next();
                 }
                 return ASN1OctetString.getInstance().encode(
-                    new ASN1Sequence(oa).encode(val));
+                        new ASN1Sequence(oa).encode(val));
             }
             if ("2.5.29.19".equals(oid)) {
                 return ASN1OctetString.getInstance().encode(
-                            new ASN1Sequence(
-                                    new ASN1Type[] {
-                                            ASN1Boolean.getInstance(),
-                                            ASN1Integer.getInstance()
-                                    }).encode(
-                                           new Object[] {
-                                                   new Boolean(pathLen != -1),
-                                                   BigInteger.valueOf(pathLen).
-                                                   toByteArray()
-                                           })
-                            );
+                        new ASN1Sequence(
+                                new ASN1Type[] {
+                                        ASN1Boolean.getInstance(),
+                                        ASN1Integer.getInstance()
+                                }).encode(
+                                new Object[] {
+                                        new Boolean(pathLen != -1),
+                                        BigInteger.valueOf(pathLen).
+                                                toByteArray()
+                                })
+                );
             }
             if ("2.5.29.17".equals(oid) && (sans != null)) {
                 if (sans.getNames() == null) {
                     return null;
                 }
                 return ASN1OctetString.getInstance().encode(
-                            GeneralNames.ASN1.encode(sans));
+                        GeneralNames.ASN1.encode(sans));
             }
             if ("2.5.29.32".equals(oid) && (policies != null)
-                                                    && (policies.length > 0)) {
+                    && (policies.length > 0)) {
                 //  Certificate Policies Extension (as specified in rfc 3280)
                 CertificatePolicies certificatePolicies =
-                                                new CertificatePolicies();
-                for (int i=0; i<policies.length; i++) {
+                        new CertificatePolicies();
+                for (int i = 0; i < policies.length; i++) {
                     PolicyInformation policyInformation =
-                                            new PolicyInformation(policies[i]);
+                            new PolicyInformation(policies[i]);
                     certificatePolicies.addPolicyInformation(policyInformation);
                 }
                 return ASN1OctetString.getInstance().encode(
-                            certificatePolicies.getEncoded());
+                        certificatePolicies.getEncoded());
             }
             if ("2.5.29.30".equals(oid) && (nameConstraints != null)) {
                 // Name Constraints Extension (as specified in rfc 3280)
                 return ASN1OctetString.getInstance().encode(
-                            nameConstraints.getEncoded());
+                        nameConstraints.getEncoded());
             }
             return null;
         }
@@ -457,16 +454,16 @@ public class X509CertSelectorTest extends TestCase {
 
         selector.setCertificate(null);
         assertTrue("Any certificates should match in the case of null "
-                                                + "certificateEquals criteria.",
-                            selector.match(cert_1) && selector.match(cert_2));
+                + "certificateEquals criteria.",
+                selector.match(cert_1) && selector.match(cert_2));
         selector.setCertificate(cert_1);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         selector.setCertificate(cert_2);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
     }
 
     /**
@@ -482,9 +479,9 @@ public class X509CertSelectorTest extends TestCase {
         assertNull("Selector should return null", selector.getCertificate());
         selector.setCertificate(cert_1);
         assertEquals("The returned certificate should be equal to specified",
-                                        cert_1, selector.getCertificate());
+                cert_1, selector.getCertificate());
         assertFalse("The returned certificate should differ",
-                                cert_2.equals(selector.getCertificate()));
+                cert_2.equals(selector.getCertificate()));
     }
 
     /**
@@ -501,16 +498,16 @@ public class X509CertSelectorTest extends TestCase {
 
         selector.setSerialNumber(null);
         assertTrue("Any certificate should match in the case of null "
-                                                + "serialNumber criteria.",
-                    selector.match(cert_1) && selector.match(cert_2));
+                + "serialNumber criteria.",
+                selector.match(cert_1) && selector.match(cert_2));
         selector.setSerialNumber(ser1);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         selector.setSerialNumber(ser2);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
     }
 
     /**
@@ -526,9 +523,9 @@ public class X509CertSelectorTest extends TestCase {
         assertNull("Selector should return null", selector.getSerialNumber());
         selector.setSerialNumber(ser1);
         assertEquals("The returned serial number should be equal to specified",
-                                        ser1, selector.getSerialNumber());
+                ser1, selector.getSerialNumber());
         assertFalse("The returned serial number should differ",
-                                    ser2.equals(selector.getSerialNumber()));
+                ser2.equals(selector.getSerialNumber()));
     }
 
     /**
@@ -545,16 +542,16 @@ public class X509CertSelectorTest extends TestCase {
 
         selector.setIssuer((X500Principal) null);
         assertTrue("Any certificates should match "
-                                + "in the case of null issuer criteria.",
-                    selector.match(cert_1) && selector.match(cert_2));
+                + "in the case of null issuer criteria.",
+                selector.match(cert_1) && selector.match(cert_2));
         selector.setIssuer(iss1);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         selector.setIssuer(iss2);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
     }
 
     /**
@@ -570,9 +567,9 @@ public class X509CertSelectorTest extends TestCase {
         assertNull("Selector should return null", selector.getIssuer());
         selector.setIssuer(iss1);
         assertEquals("The returned issuer should be equal to specified",
-                                        iss1, selector.getIssuer());
+                iss1, selector.getIssuer());
         assertFalse("The returned issuer should differ",
-                                        iss2.equals(selector.getIssuer()));
+                iss2.equals(selector.getIssuer()));
     }
 
     /**
@@ -619,15 +616,15 @@ public class X509CertSelectorTest extends TestCase {
         assertNull("Selector should return null", selector.getIssuerAsString());
         selector.setIssuer(iss1);
         assertEquals("The returned issuer should be equal to specified",
-                            new X500Principal(name1),
-                            new X500Principal(selector.getIssuerAsString()));
+                new X500Principal(name1),
+                new X500Principal(selector.getIssuerAsString()));
         assertFalse("The returned issuer should differ",
-                            new X500Principal(name2).equals(
-                            new X500Principal(selector.getIssuerAsString())));
+                new X500Principal(name2).equals(
+                        new X500Principal(selector.getIssuerAsString())));
         selector.setIssuer(iss2);
         assertEquals("The returned issuer should be equal to specified",
-                            new X500Principal(name2),
-                            new X500Principal(selector.getIssuerAsString()));
+                new X500Principal(name2),
+                new X500Principal(selector.getIssuerAsString()));
     }
 
     /**
@@ -637,13 +634,13 @@ public class X509CertSelectorTest extends TestCase {
      */
     public void testSetIssuer3() throws IOException {
         byte[] name1 = new byte[]
-            //manually obtained DER encoding of "O=First Org." issuer name;
-            {48, 21, 49, 19, 48, 17, 6, 3, 85, 4, 10, 19, 10,
-                70, 105, 114, 115, 116, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=First Org." issuer name;
+                { 48, 21, 49, 19, 48, 17, 6, 3, 85, 4, 10, 19, 10,
+                        70, 105, 114, 115, 116, 32, 79, 114, 103, 46 };
         byte[] name2 = new byte[]
-            //manually obtained DER encoding of "O=Second Org." issuer name;
-            {48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
-            83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=Second Org." issuer name;
+                { 48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
+                        83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46 };
         X500Principal iss1 = new X500Principal(name1);
         X500Principal iss2 = new X500Principal(name2);
         TestCert cert_1 = new TestCert(iss1);
@@ -672,13 +669,13 @@ public class X509CertSelectorTest extends TestCase {
      */
     public void testGetIssuerAsBytes() throws IOException {
         byte[] name1 = new byte[]
-            //manually obtained DER encoding of "O=First Org." issuer name;
-            {48, 21, 49, 19, 48, 17, 6, 3, 85, 4, 10, 19, 10,
-                70, 105, 114, 115, 116, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=First Org." issuer name;
+                { 48, 21, 49, 19, 48, 17, 6, 3, 85, 4, 10, 19, 10,
+                        70, 105, 114, 115, 116, 32, 79, 114, 103, 46 };
         byte[] name2 = new byte[]
-            //manually obtained DER encoding of "O=Second Org." issuer name;
-            {48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
-            83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=Second Org." issuer name;
+                { 48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
+                        83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46 };
         X500Principal iss1 = new X500Principal(name1);
         X500Principal iss2 = new X500Principal(name2);
         X509CertSelector selector = new X509CertSelector();
@@ -688,14 +685,14 @@ public class X509CertSelectorTest extends TestCase {
         selector.setIssuer(iss1);
         assertEquals("The returned issuer should be equal to specified",
                 new X500Principal(name1), new X500Principal(selector
-                        .getIssuerAsBytes()));
+                .getIssuerAsBytes()));
         assertFalse("The returned issuer should differ", new X500Principal(
                 name2).equals(new X500Principal(selector.getIssuerAsBytes())));
 
         selector.setIssuer(iss2);
         assertEquals("The returned issuer should be equal to specified",
                 new X500Principal(name2), new X500Principal(selector
-                        .getIssuerAsBytes()));
+                .getIssuerAsBytes()));
     }
 
     /**
@@ -712,16 +709,16 @@ public class X509CertSelectorTest extends TestCase {
 
         selector.setSubject((X500Principal) null);
         assertTrue("Any certificates should match "
-                                + "in the case of null subjcet criteria.",
-                    selector.match(cert_1) && selector.match(cert_2));
+                + "in the case of null subjcet criteria.",
+                selector.match(cert_1) && selector.match(cert_2));
         selector.setSubject(sub1);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         selector.setSubject(sub2);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
     }
 
     /**
@@ -737,9 +734,9 @@ public class X509CertSelectorTest extends TestCase {
         assertNull("Selector should return null", selector.getSubject());
         selector.setSubject(sub1);
         assertEquals("The returned subject should be equal to specified",
-                                        sub1, selector.getSubject());
+                sub1, selector.getSubject());
         assertFalse("The returned subject should differ",
-                                        sub2.equals(selector.getSubject()));
+                sub2.equals(selector.getSubject()));
     }
 
     /**
@@ -785,18 +782,18 @@ public class X509CertSelectorTest extends TestCase {
         X509CertSelector selector = new X509CertSelector();
 
         assertNull("Selector should return null",
-                                                selector.getSubjectAsString());
+                selector.getSubjectAsString());
         selector.setSubject(sub1);
         assertEquals("The returned subject should be equal to specified",
-                            new X500Principal(name1),
-                            new X500Principal(selector.getSubjectAsString()));
+                new X500Principal(name1),
+                new X500Principal(selector.getSubjectAsString()));
         assertFalse("The returned subject should differ",
-                            new X500Principal(name2).equals(
-                            new X500Principal(selector.getSubjectAsString())));
+                new X500Principal(name2).equals(
+                        new X500Principal(selector.getSubjectAsString())));
         selector.setSubject(sub2);
         assertEquals("The returned subject should be equal to specified",
-                            new X500Principal(name2),
-                            new X500Principal(selector.getSubjectAsString()));
+                new X500Principal(name2),
+                new X500Principal(selector.getSubjectAsString()));
     }
 
     /**
@@ -806,13 +803,13 @@ public class X509CertSelectorTest extends TestCase {
      */
     public void testSetSubject3() throws IOException {
         byte[] name1 = new byte[]
-            //manually obtained DER encoding of "O=First Org." issuer name;
-            {48, 21, 49, 19, 48, 17, 6, 3, 85, 4, 10, 19, 10,
-                70, 105, 114, 115, 116, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=First Org." issuer name;
+                { 48, 21, 49, 19, 48, 17, 6, 3, 85, 4, 10, 19, 10,
+                        70, 105, 114, 115, 116, 32, 79, 114, 103, 46 };
         byte[] name2 = new byte[]
-            //manually obtained DER encoding of "O=Second Org." issuer name;
-            {48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
-            83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=Second Org." issuer name;
+                { 48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
+                        83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46 };
         X500Principal sub1 = new X500Principal(name1);
         X500Principal sub2 = new X500Principal(name2);
         TestCert cert_1 = new TestCert(sub1);
@@ -842,13 +839,13 @@ public class X509CertSelectorTest extends TestCase {
      */
     public void testGetSubjectAsBytes() throws IOException {
         byte[] name1 = new byte[]
-            //manually obtained DER encoding of "O=First Org." issuer name;
-            {48, 21, 49, 19, 48, 17, 6, 3, 85, 4, 10, 19, 10,
-                70, 105, 114, 115, 116, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=First Org." issuer name;
+                { 48, 21, 49, 19, 48, 17, 6, 3, 85, 4, 10, 19, 10,
+                        70, 105, 114, 115, 116, 32, 79, 114, 103, 46 };
         byte[] name2 = new byte[]
-            //manually obtained DER encoding of "O=Second Org." issuer name;
-            {48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
-            83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46};
+                //manually obtained DER encoding of "O=Second Org." issuer name;
+                { 48, 22, 49, 20, 48, 18, 6, 3, 85, 4, 10, 19, 11,
+                        83, 101, 99, 111, 110, 100, 32, 79, 114, 103, 46 };
         X500Principal sub1 = new X500Principal(name1);
         X500Principal sub2 = new X500Principal(name2);
         X509CertSelector selector = new X509CertSelector();
@@ -858,14 +855,14 @@ public class X509CertSelectorTest extends TestCase {
 
         assertEquals("The returned issuer should be equal to specified",
                 new X500Principal(name1), new X500Principal(selector
-                        .getSubjectAsBytes()));
+                .getSubjectAsBytes()));
         assertFalse("The returned issuer should differ", new X500Principal(
                 name2).equals(new X500Principal(selector.getSubjectAsBytes())));
 
         selector.setSubject(sub2);
         assertEquals("The returned issuer should be equal to specified",
                 new X500Principal(name2), new X500Principal(selector
-                        .getSubjectAsBytes()));
+                .getSubjectAsBytes()));
     }
 
     /**
@@ -875,25 +872,25 @@ public class X509CertSelectorTest extends TestCase {
      * object are copied during the initialization.
      */
     public void testSetSubjectKeyIdentifier() {
-        byte[] skid1 = new byte[] {1, 2, 3, 4, 5}; // random value
-        byte[] skid2 = new byte[] {5, 4, 3, 2, 1}; // random value
+        byte[] skid1 = new byte[] { 1, 2, 3, 4, 5 }; // random value
+        byte[] skid2 = new byte[] { 5, 4, 3, 2, 1 }; // random value
         TestCert cert_1 = new TestCert(skid1);
         TestCert cert_2 = new TestCert(skid2);
         X509CertSelector selector = new X509CertSelector();
 
         selector.setSubjectKeyIdentifier(null);
         assertTrue("Any certificate should match in the case of null "
-                                                + "serialNumber criteria.",
-                    selector.match(cert_1) && selector.match(cert_2));
+                + "serialNumber criteria.",
+                selector.match(cert_1) && selector.match(cert_2));
         selector.setSubjectKeyIdentifier(skid1);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         selector.setSubjectKeyIdentifier(skid2);
-        skid2[0] ++;
+        skid2[0]++;
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
     }
 
     /**
@@ -903,20 +900,20 @@ public class X509CertSelectorTest extends TestCase {
      * and its modification does not cause the modification of internal object.
      */
     public void testGetSubjectKeyIdentifier() {
-        byte[] skid1 = new byte[] {1, 2, 3, 4, 5}; // random value
-        byte[] skid2 = new byte[] {4, 5, 5, 4, 3, 2, 1}; // random value
+        byte[] skid1 = new byte[] { 1, 2, 3, 4, 5 }; // random value
+        byte[] skid2 = new byte[] { 4, 5, 5, 4, 3, 2, 1 }; // random value
         X509CertSelector selector = new X509CertSelector();
 
         assertNull("Selector should return null",
-                                            selector.getSubjectKeyIdentifier());
+                selector.getSubjectKeyIdentifier());
         selector.setSubjectKeyIdentifier(skid1);
         assertTrue("The returned keyID should be equal to specified",
-                    Arrays.equals(skid1, selector.getSubjectKeyIdentifier()));
-        selector.getSubjectKeyIdentifier()[0] ++;
+                Arrays.equals(skid1, selector.getSubjectKeyIdentifier()));
+        selector.getSubjectKeyIdentifier()[0]++;
         assertTrue("The returned keyID should be equal to specified",
-                    Arrays.equals(skid1, selector.getSubjectKeyIdentifier()));
+                Arrays.equals(skid1, selector.getSubjectKeyIdentifier()));
         assertFalse("The returned keyID should differ",
-                    Arrays.equals(skid2, selector.getSubjectKeyIdentifier()));
+                Arrays.equals(skid2, selector.getSubjectKeyIdentifier()));
     }
 
     /**
@@ -926,25 +923,25 @@ public class X509CertSelectorTest extends TestCase {
      * object are copied during the initialization.
      */
     public void testSetAuthorityKeyIdentifier() {
-        byte[] akid1 = new byte[] {1, 2, 3, 4, 5}; // random value
-        byte[] akid2 = new byte[] {5, 4, 3, 2, 1}; // random value
+        byte[] akid1 = new byte[] { 1, 2, 3, 4, 5 }; // random value
+        byte[] akid2 = new byte[] { 5, 4, 3, 2, 1 }; // random value
         TestCert cert_1 = new TestCert(akid1);
         TestCert cert_2 = new TestCert(akid2);
         X509CertSelector selector = new X509CertSelector();
 
         selector.setAuthorityKeyIdentifier(null);
         assertTrue("Any certificate should match in the case of null "
-                                                + "serialNumber criteria.",
-                    selector.match(cert_1) && selector.match(cert_2));
+                + "serialNumber criteria.",
+                selector.match(cert_1) && selector.match(cert_2));
         selector.setAuthorityKeyIdentifier(akid1);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         selector.setAuthorityKeyIdentifier(akid2);
-        akid2[0] ++;
+        akid2[0]++;
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
     }
 
     /**
@@ -954,20 +951,20 @@ public class X509CertSelectorTest extends TestCase {
      * and its modification does not cause the modification of internal object.
      */
     public void testGetAuthorityKeyIdentifier() {
-        byte[] akid1 = new byte[] {4, 5, 1, 2, 3, 4, 5}; // random value
-        byte[] akid2 = new byte[] {4, 5, 5, 4, 3, 2, 1}; // random value
+        byte[] akid1 = new byte[] { 4, 5, 1, 2, 3, 4, 5 }; // random value
+        byte[] akid2 = new byte[] { 4, 5, 5, 4, 3, 2, 1 }; // random value
         X509CertSelector selector = new X509CertSelector();
 
         assertNull("Selector should return null",
-                                        selector.getAuthorityKeyIdentifier());
+                selector.getAuthorityKeyIdentifier());
         selector.setAuthorityKeyIdentifier(akid1);
         assertTrue("The returned keyID should be equal to specified",
-                    Arrays.equals(akid1, selector.getAuthorityKeyIdentifier()));
-        selector.getAuthorityKeyIdentifier()[0] ++;
+                Arrays.equals(akid1, selector.getAuthorityKeyIdentifier()));
+        selector.getAuthorityKeyIdentifier()[0]++;
         assertTrue("The returned keyID should be equal to specified",
-                    Arrays.equals(akid1, selector.getAuthorityKeyIdentifier()));
+                Arrays.equals(akid1, selector.getAuthorityKeyIdentifier()));
         assertFalse("The returned keyID should differ",
-                    Arrays.equals(akid2, selector.getAuthorityKeyIdentifier()));
+                Arrays.equals(akid2, selector.getAuthorityKeyIdentifier()));
     }
 
     /**
@@ -985,17 +982,17 @@ public class X509CertSelectorTest extends TestCase {
 
         selector.setCertificateValid(null);
         assertTrue("Any certificate should match in the case of null "
-                                                + "serialNumber criteria.",
-                    selector.match(cert_1) && selector.match(cert_2));
+                + "serialNumber criteria.",
+                selector.match(cert_1) && selector.match(cert_2));
         selector.setCertificateValid(date1);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         selector.setCertificateValid(date2);
         date2.setTime(300);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
     }
 
     /**
@@ -1010,15 +1007,15 @@ public class X509CertSelectorTest extends TestCase {
         X509CertSelector selector = new X509CertSelector();
 
         assertNull("Selector should return null",
-                                        selector.getCertificateValid());
+                selector.getCertificateValid());
         selector.setCertificateValid(date1);
         assertTrue("The returned date should be equal to specified",
-                    date1.equals(selector.getCertificateValid()));
+                date1.equals(selector.getCertificateValid()));
         selector.getCertificateValid().setTime(200);
         assertTrue("The returned date should be equal to specified",
-                    date1.equals(selector.getCertificateValid()));
+                date1.equals(selector.getCertificateValid()));
         assertFalse("The returned date should differ",
-                    date2.equals(selector.getCertificateValid()));
+                date2.equals(selector.getCertificateValid()));
     }
 
     /**
@@ -1039,17 +1036,17 @@ public class X509CertSelectorTest extends TestCase {
 
         selector.setPrivateKeyValid(null);
         assertTrue("Any certificate should match in the case of null "
-                                            + "privateKeyValid criteria.",
-                    selector.match(cert_1) && selector.match(cert_2));
+                + "privateKeyValid criteria.",
+                selector.match(cert_1) && selector.match(cert_2));
         selector.setPrivateKeyValid(date4);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         selector.setPrivateKeyValid(date5);
         date5.setTime(date4.getTime());
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
     }
 
     /**
@@ -1064,15 +1061,15 @@ public class X509CertSelectorTest extends TestCase {
         X509CertSelector selector = new X509CertSelector();
 
         assertNull("Selector should return null",
-                                        selector.getPrivateKeyValid());
+                selector.getPrivateKeyValid());
         selector.setPrivateKeyValid(date1);
         assertTrue("The returned date should be equal to specified",
-                    date1.equals(selector.getPrivateKeyValid()));
+                date1.equals(selector.getPrivateKeyValid()));
         selector.getPrivateKeyValid().setTime(200);
         assertTrue("The returned date should be equal to specified",
-                    date1.equals(selector.getPrivateKeyValid()));
+                date1.equals(selector.getPrivateKeyValid()));
         assertFalse("The returned date should differ",
-                    date2.equals(selector.getPrivateKeyValid()));
+                date2.equals(selector.getPrivateKeyValid()));
     }
 
     /**
@@ -1132,13 +1129,13 @@ public class X509CertSelectorTest extends TestCase {
         X509CertSelector selector = new X509CertSelector();
 
         assertNull("Selector should return null",
-                                        selector.getSubjectPublicKeyAlgID());
+                selector.getSubjectPublicKeyAlgID());
 
         selector.setSubjectPublicKeyAlgID(pkaid1);
         assertTrue("The returned oid should be equal to specified",
-                    pkaid1.equals(selector.getSubjectPublicKeyAlgID()));
+                pkaid1.equals(selector.getSubjectPublicKeyAlgID()));
         assertFalse("The returned oid should differ",
-                    pkaid2.equals(selector.getSubjectPublicKeyAlgID()));
+                pkaid2.equals(selector.getSubjectPublicKeyAlgID()));
     }
 
     /**
@@ -1156,16 +1153,16 @@ public class X509CertSelectorTest extends TestCase {
 
         selector.setSubjectPublicKey((PublicKey) null);
         assertTrue("Any certificate should match in the case of null "
-                                            + "subjectPublicKey criteria.",
-                    selector.match(cert_1) && selector.match(cert_2));
+                + "subjectPublicKey criteria.",
+                selector.match(cert_1) && selector.match(cert_2));
         selector.setSubjectPublicKey(pkey1);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         selector.setSubjectPublicKey(pkey2);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
     }
 
     /**
@@ -1180,12 +1177,12 @@ public class X509CertSelectorTest extends TestCase {
         X509CertSelector selector = new X509CertSelector();
 
         assertNull("Selector should return null",
-                                            selector.getSubjectPublicKey());
+                selector.getSubjectPublicKey());
         selector.setSubjectPublicKey(pkey);
         PublicKey result = selector.getSubjectPublicKey();
 
         assertEquals("The name of algorithm should be RSA",
-                                        result.getAlgorithm(), "RSA");
+                result.getAlgorithm(), "RSA");
     }
 
     /**
@@ -1236,14 +1233,14 @@ public class X509CertSelectorTest extends TestCase {
         X509CertSelector selector = new X509CertSelector();
 
         assertNull("Selector should return null",
-                                            selector.getSubjectPublicKey());
+                selector.getSubjectPublicKey());
 
         selector.setSubjectPublicKey(pkey.getEncoded());
 
         PublicKey result = selector.getSubjectPublicKey();
 
         assertEquals("The name of algorithm should be RSA",
-                                        result.getAlgorithm(), "RSA");
+                result.getAlgorithm(), "RSA");
     }
 
     /**
@@ -1255,10 +1252,10 @@ public class X509CertSelectorTest extends TestCase {
      */
     public void testSetKeyUsage() {
         boolean[] ku1 = new boolean[]
-                    {true, true, true, true, true, true, true, true, true};
+                { true, true, true, true, true, true, true, true, true };
         // decipherOnly is disallowed
         boolean[] ku2 = new boolean[]
-                    {true, true, true, true, true, true, true, true, false};
+                { true, true, true, true, true, true, true, true, false };
         TestCert cert_1 = new TestCert(ku1);
         TestCert cert_2 = new TestCert(ku2);
         TestCert cert_3 = new TestCert((boolean[]) null);
@@ -1266,20 +1263,20 @@ public class X509CertSelectorTest extends TestCase {
 
         selector.setKeyUsage(null);
         assertTrue("Any certificate should match in the case of null "
-                                                        + "keyUsage criteria.",
-                            selector.match(cert_1) && selector.match(cert_2));
+                + "keyUsage criteria.",
+                selector.match(cert_1) && selector.match(cert_2));
         selector.setKeyUsage(ku1);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         assertTrue("The certificate which does not have a keyUsage extension "
-                   + "implicitly allows all keyUsage values.",
-                                                        selector.match(cert_3));
+                + "implicitly allows all keyUsage values.",
+                selector.match(cert_3));
         selector.setKeyUsage(ku2);
         ku2[0] = !ku2[0];
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
     }
 
     /**
@@ -1290,17 +1287,17 @@ public class X509CertSelectorTest extends TestCase {
      */
     public void testGetKeyUsage() {
         boolean[] ku = new boolean[]
-                    {true, false, true, false, true, false, true, false, true};
+                { true, false, true, false, true, false, true, false, true };
         X509CertSelector selector = new X509CertSelector();
 
         assertNull("Selector should return null", selector.getKeyUsage());
         selector.setKeyUsage(ku);
         assertTrue("The returned date should be equal to specified",
-                                    Arrays.equals(ku, selector.getKeyUsage()));
+                Arrays.equals(ku, selector.getKeyUsage()));
         boolean[] result = selector.getKeyUsage();
         result[0] = !result[0];
         assertTrue("The returned keyUsage should be equal to specified",
-                                    Arrays.equals(ku, selector.getKeyUsage()));
+                Arrays.equals(ku, selector.getKeyUsage()));
     }
 
     /**
@@ -1310,12 +1307,12 @@ public class X509CertSelectorTest extends TestCase {
         HashSet ku1 = new HashSet(Arrays.asList(new String[] {
                 "1.3.6.1.5.5.7.3.1", "1.3.6.1.5.5.7.3.2", "1.3.6.1.5.5.7.3.3",
                 "1.3.6.1.5.5.7.3.4", "1.3.6.1.5.5.7.3.8", "1.3.6.1.5.5.7.3.9",
-                "1.3.6.1.5.5.7.3.5", "1.3.6.1.5.5.7.3.6", "1.3.6.1.5.5.7.3.7"}
-                              ));
+                "1.3.6.1.5.5.7.3.5", "1.3.6.1.5.5.7.3.6", "1.3.6.1.5.5.7.3.7" }
+        ));
         HashSet ku2 = new HashSet(Arrays.asList(new String[] {
                 "1.3.6.1.5.5.7.3.1", "1.3.6.1.5.5.7.3.2", "1.3.6.1.5.5.7.3.3",
                 "1.3.6.1.5.5.7.3.4", "1.3.6.1.5.5.7.3.8", "1.3.6.1.5.5.7.3.9",
-                "1.3.6.1.5.5.7.3.5", "1.3.6.1.5.5.7.3.6"}));
+                "1.3.6.1.5.5.7.3.5", "1.3.6.1.5.5.7.3.6" }));
         TestCert cert_1 = new TestCert(ku1);
         TestCert cert_2 = new TestCert(ku2);
         TestCert cert_3 = new TestCert((Set) null);
@@ -1351,12 +1348,12 @@ public class X509CertSelectorTest extends TestCase {
         HashSet ku = new HashSet(Arrays.asList(new String[] {
                 "1.3.6.1.5.5.7.3.1", "1.3.6.1.5.5.7.3.2", "1.3.6.1.5.5.7.3.3",
                 "1.3.6.1.5.5.7.3.4", "1.3.6.1.5.5.7.3.8", "1.3.6.1.5.5.7.3.9",
-                "1.3.6.1.5.5.7.3.5", "1.3.6.1.5.5.7.3.6", "1.3.6.1.5.5.7.3.7"}
-                            ));
+                "1.3.6.1.5.5.7.3.5", "1.3.6.1.5.5.7.3.6", "1.3.6.1.5.5.7.3.7" }
+        ));
         X509CertSelector selector = new X509CertSelector();
 
         assertNull("Selector should return null",
-                                                selector.getExtendedKeyUsage());
+                selector.getExtendedKeyUsage());
         try {
             selector.setExtendedKeyUsage(ku);
         } catch (IOException e) {
@@ -1364,7 +1361,7 @@ public class X509CertSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertTrue("The returned extendedKeyUsage should be equal to specified",
-                            ku.equals(selector.getExtendedKeyUsage()));
+                ku.equals(selector.getExtendedKeyUsage()));
         try {
             selector.getExtendedKeyUsage().add("KRIBLE-GRABLI");
             fail("The returned Set should be immutable.");
@@ -1378,14 +1375,14 @@ public class X509CertSelectorTest extends TestCase {
     public void testSetSubjectAlternativeNames() {
         try {
             GeneralName san0 =
-                new GeneralName(new OtherName("1.2.3.4.5",
-                            new byte[] {1, 2, 0, 1}));
+                    new GeneralName(new OtherName("1.2.3.4.5",
+                            new byte[] { 1, 2, 0, 1 }));
             GeneralName san1 = new GeneralName(1, "rfc@822.Name");
             GeneralName san2 = new GeneralName(2, "dNSName");
             GeneralName san3 = new GeneralName(new ORAddress());
             GeneralName san4 = new GeneralName(new Name("O=Organization"));
             GeneralName san5 =
-                new GeneralName(new EDIPartyName("assigner", "party"));
+                    new GeneralName(new EDIPartyName("assigner", "party"));
             GeneralName san6 = new GeneralName(6, "http://uniform.Resource.Id");
             GeneralName san7 = new GeneralName(7, "1.1.1.1");
             GeneralName san8 = new GeneralName(8, "1.2.3.4444.55555");
@@ -1410,22 +1407,22 @@ public class X509CertSelectorTest extends TestCase {
 
             selector.setSubjectAlternativeNames(null);
             assertTrue("Any certificate should match in the case of null "
-                                        + "subjectAlternativeNames criteria.",
-                            selector.match(cert_1) && selector.match(cert_2));
+                    + "subjectAlternativeNames criteria.",
+                    selector.match(cert_1) && selector.match(cert_2));
 
             Collection sans = sans_1.getPairsList();
             selector.setSubjectAlternativeNames(sans);
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                    selector.match(cert_1));
             assertFalse("The certificate should not match "
-                        + "the selection criteria.",    selector.match(cert_2));
+                    + "the selection criteria.", selector.match(cert_2));
             sans.clear();
             assertTrue("The modification of initialization object "
-                        + "should not affect the modification "
-                        + "of internal object.",        selector.match(cert_1));
+                    + "should not affect the modification "
+                    + "of internal object.", selector.match(cert_1));
             selector.setSubjectAlternativeNames(sans_2.getPairsList());
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                    selector.match(cert_2));
         } catch (IOException e) {
             e.printStackTrace();
             fail("Unexpected IOException was thrown.");
@@ -1473,9 +1470,9 @@ public class X509CertSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
 
         try {
             selector.addSubjectAlternativeName(2, name2);
@@ -1484,9 +1481,9 @@ public class X509CertSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
 
         try {
             selector.addSubjectAlternativeName(4, name4);
@@ -1495,9 +1492,9 @@ public class X509CertSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         try {
             selector.addSubjectAlternativeName(6, name6);
             selector.addSubjectAlternativeName(7, name7);
@@ -1507,9 +1504,9 @@ public class X509CertSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
     }
 
     /**
@@ -1518,18 +1515,18 @@ public class X509CertSelectorTest extends TestCase {
     public void testAddSubjectAlternativeName2() {
         try {
             GeneralName san0 =
-                new GeneralName(new OtherName("1.2.3.4.5",
-                        ASN1Integer.getInstance().encode(
-                                BigInteger.valueOf(55L).toByteArray())
-                            ));
+                    new GeneralName(new OtherName("1.2.3.4.5",
+                            ASN1Integer.getInstance().encode(
+                                    BigInteger.valueOf(55L).toByteArray())
+                    ));
             GeneralName san1 = new GeneralName(1, "rfc@822.Name");
             GeneralName san2 = new GeneralName(2, "dNSName");
             GeneralName san3 = new GeneralName(new ORAddress());
             GeneralName san4 = new GeneralName(new Name("O=Organization"));
             GeneralName san5 =
-                new GeneralName(new EDIPartyName("assigner", "party"));
+                    new GeneralName(new EDIPartyName("assigner", "party"));
             GeneralName san6 = new GeneralName(6, "http://uniform.Resource.Id");
-            GeneralName san7 = new GeneralName(new byte[] {1, 1, 1, 1});
+            GeneralName san7 = new GeneralName(new byte[] { 1, 1, 1, 1 });
             GeneralName san8 = new GeneralName(8, "1.2.3.4444.55555");
 
             GeneralNames sans_1 = new GeneralNames();
@@ -1554,53 +1551,53 @@ public class X509CertSelectorTest extends TestCase {
 
             selector.addSubjectAlternativeName(0, san0.getEncodedName());
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                    selector.match(cert_1));
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                    selector.match(cert_2));
             selector.addSubjectAlternativeName(1, san1.getEncodedName());
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                    selector.match(cert_1));
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                    selector.match(cert_2));
             selector.addSubjectAlternativeName(2, san2.getEncodedName());
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                    selector.match(cert_1));
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                    selector.match(cert_2));
             selector.addSubjectAlternativeName(3, san3.getEncodedName());
             assertTrue("The certificate should match the selection criteria.",
-                                                    selector.match(cert_1));
+                    selector.match(cert_1));
             assertFalse("The certificate should not match the selection criteria.",
-                                                    selector.match(cert_2));
+                    selector.match(cert_2));
             selector.addSubjectAlternativeName(4, san4.getEncodedName());
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                    selector.match(cert_1));
             assertFalse("The certificate should not match "
-                        + "the selection criteria.",    selector.match(cert_2));
+                    + "the selection criteria.", selector.match(cert_2));
             selector.addSubjectAlternativeName(5, san5.getEncodedName());
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                    selector.match(cert_1));
             assertFalse("The certificate should not match "
-                        + "the selection criteria.",    selector.match(cert_2));
+                    + "the selection criteria.", selector.match(cert_2));
             selector.addSubjectAlternativeName(6, san6.getEncodedName());
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                    selector.match(cert_1));
             assertFalse("The certificate should not match "
-                        + "the selection criteria.",    selector.match(cert_2));
+                    + "the selection criteria.", selector.match(cert_2));
             selector.addSubjectAlternativeName(7, san7.getEncodedName());
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                    selector.match(cert_1));
             assertFalse("The certificate should not match "
-                        + "the selection criteria.",    selector.match(cert_2));
+                    + "the selection criteria.", selector.match(cert_2));
             byte[] oid = san8.getEncodedName();
             selector.addSubjectAlternativeName(8, oid);
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                    selector.match(cert_1));
             assertFalse("The certificate should not match "
-                        + "the selection criteria.",    selector.match(cert_2));
+                    + "the selection criteria.", selector.match(cert_2));
             oid[3] += 1;
             assertTrue("The byte array should be cloned to protect against "
-                       + "subsequent modifications.",   selector.match(cert_1));
+                    + "subsequent modifications.", selector.match(cert_1));
         } catch (IOException e) {
             e.printStackTrace();
             fail("Unexpected IOException was thrown.");
@@ -1623,15 +1620,15 @@ public class X509CertSelectorTest extends TestCase {
             X509CertSelector selector = new X509CertSelector();
 
             assertNull("Selector should return null",
-                                        selector.getSubjectAlternativeNames());
+                    selector.getSubjectAlternativeNames());
 
             selector.setSubjectAlternativeNames(sans.getPairsList());
             assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                    selector.match(cert_1));
             selector.getSubjectAlternativeNames().clear();
             assertTrue("The modification of initialization object "
-                        + "should not affect the modification "
-                        + "of internal object.",        selector.match(cert_1));
+                    + "should not affect the modification "
+                    + "of internal object.", selector.match(cert_1));
         } catch (IOException e) {
             e.printStackTrace();
             fail("Unexpected IOException was thrown.");
@@ -1658,8 +1655,8 @@ public class X509CertSelectorTest extends TestCase {
 
             selector.setSubjectAlternativeNames(sans_2.getPairsList());
             assertFalse("Only certificate which contain all of the specified "
-                       + "subject alternative names should match.",
-                                                        selector.match(cert));
+                    + "subject alternative names should match.",
+                    selector.match(cert));
             selector.setMatchAllSubjectAltNames(false);
             /*
             assertTrue("The certificate which contain at least one of the "
@@ -1694,86 +1691,86 @@ public class X509CertSelectorTest extends TestCase {
         // If no name of the type is in the certificate,
         // the certificate is acceptable (rfc 3280).
 
-        GeneralName [] name_constraints = new GeneralName[] {
-            new GeneralName(1, "822.Name"),
-            new GeneralName(1, "rfc@822.Name"),
-            new GeneralName(2, "Name.org"),
-            new GeneralName(2, "dNS.Name.org"),
-            //new GeneralName(4, "O=Organization"),
-            new GeneralName(6, "http://.Resource.Id"),
-            new GeneralName(6, "http://uniform.Resource.Id"),
-            new GeneralName(7, "1.1.1.1"),
-            // new GeneralName(7, new byte[] {1, 1, 1, 1, 3, 3, 3, 3}),
-            new GeneralName(new byte[] {1, 1, 1, 1, 1, 1, 1, 1,
-                                        1, 1, 1, 1, 1, 1, 1, 1}),
-            // new GeneralName(7, new byte[] {1, 1, 1, 1, 1, 1, 1, 1,
-            //                                1, 1, 1, 1, 1, 1, 1, 1,
-            //                                3, 3, 3, 3, 3, 3, 3, 3,
-            //                                3, 3, 3, 3, 3, 3, 3, 3})
+        GeneralName[] name_constraints = new GeneralName[] {
+                new GeneralName(1, "822.Name"),
+                new GeneralName(1, "rfc@822.Name"),
+                new GeneralName(2, "Name.org"),
+                new GeneralName(2, "dNS.Name.org"),
+                //new GeneralName(4, "O=Organization"),
+                new GeneralName(6, "http://.Resource.Id"),
+                new GeneralName(6, "http://uniform.Resource.Id"),
+                new GeneralName(7, "1.1.1.1"),
+                // new GeneralName(7, new byte[] {1, 1, 1, 1, 3, 3, 3, 3}),
+                new GeneralName(new byte[] { 1, 1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1, 1 }),
+                // new GeneralName(7, new byte[] {1, 1, 1, 1, 1, 1, 1, 1,
+                //                                1, 1, 1, 1, 1, 1, 1, 1,
+                //                                3, 3, 3, 3, 3, 3, 3, 3,
+                //                                3, 3, 3, 3, 3, 3, 3, 3})
         };
 
         // names which should match divided from names which should not
         // match by null
         GeneralName[][] alternative_names = new GeneralName[][] {
-            {
+                {
+                        new GeneralName(1, "rfc@822.Name"),
+                        null,
+                        new GeneralName(1, "rfc@Other.Name")
+                }, {
                 new GeneralName(1, "rfc@822.Name"),
                 null,
                 new GeneralName(1, "rfc@Other.Name")
-            }, {
-                new GeneralName(1, "rfc@822.Name"),
-                null,
-                new GeneralName(1, "rfc@Other.Name")
-            }, {
+        }, {
                 new GeneralName(2, "Name.org"),
                 new GeneralName(2, "dNS.Name.org"),
                 null,
                 new GeneralName(2, "dNS.OtherName.org")
-            }, {
+        }, {
                 new GeneralName(2, "dNS.Name.org"),
                 null,
                 new GeneralName(2, "Name.org"),
                 new GeneralName(2, "dNS.OtherName.org")
-            }, {
+        }, {
 
-            //    new GeneralName(4, "O=Organization"),
-            //    null,
-            //    new GeneralName(4, "O=OtherOrganization")
-            //}, {
+                //    new GeneralName(4, "O=Organization"),
+                //    null,
+                //    new GeneralName(4, "O=OtherOrganization")
+                //}, {
 
                 new GeneralName(6, "http://uniform.Resource.Id/location"),
                 null,
                 //new GeneralName(6, "http://Resource.Id")
-            }, {
+        }, {
                 new GeneralName(6, "http://uniform.Resource.Id"),
                 null,
                 new GeneralName(6, "http://Resource.Id")
-            }, {
-                new GeneralName(new byte[] {1, 1, 1, 1}),
+        }, {
+                new GeneralName(new byte[] { 1, 1, 1, 1 }),
                 null,
-                new GeneralName(new byte[] {2, 2, 2, 2})
-            // }, {
-            //     new GeneralName(7, new byte[] {1, 1, 1, 1}),
-            //     new GeneralName(7, new byte[] {2, 2, 2, 2}),
-            //     new GeneralName(7, new byte[] {3, 3, 3, 3}),
-            //     null,
-            //     new GeneralName(7, new byte[] {4, 4, 4, 4})
-            }, {
-                new GeneralName(new byte[] {1, 1, 1, 1, 1, 1, 1, 1,
-                                            1, 1, 1, 1, 1, 1, 1, 1}),
+                new GeneralName(new byte[] { 2, 2, 2, 2 })
+                // }, {
+                //     new GeneralName(7, new byte[] {1, 1, 1, 1}),
+                //     new GeneralName(7, new byte[] {2, 2, 2, 2}),
+                //     new GeneralName(7, new byte[] {3, 3, 3, 3}),
+                //     null,
+                //     new GeneralName(7, new byte[] {4, 4, 4, 4})
+        }, {
+                new GeneralName(new byte[] { 1, 1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1, 1 }),
                 null,
-                new GeneralName(new byte[] {2, 2, 2, 2, 2, 2, 2, 2,
-                                            2, 2, 2, 2, 2, 2, 2, 2}),
-            // }, {
-            //     new GeneralName(7, new byte[] {1, 1, 1, 1, 1, 1, 1, 1,
-            //                                    1, 1, 1, 1, 1, 1, 1, 1}),
-            //     new GeneralName(7, new byte[] {2, 2, 2, 2, 2, 2, 2, 2,
-            //                                    2, 2, 2, 2, 2, 2, 2, 2}),
-            //     new GeneralName(7, new byte[] {3, 3, 3, 3, 3, 3, 3, 3,
-            //                                    3, 3, 3, 3, 3, 3, 3, 3}),
-            //     null,
-            //     new GeneralName(7, new byte[] {4, 4, 4, 4, 4, 4, 4, 4,
-            //                                    4, 4, 4, 4, 4, 4, 4, 4}),
-            }
+                new GeneralName(new byte[] { 2, 2, 2, 2, 2, 2, 2, 2,
+                        2, 2, 2, 2, 2, 2, 2, 2 }),
+                // }, {
+                //     new GeneralName(7, new byte[] {1, 1, 1, 1, 1, 1, 1, 1,
+                //                                    1, 1, 1, 1, 1, 1, 1, 1}),
+                //     new GeneralName(7, new byte[] {2, 2, 2, 2, 2, 2, 2, 2,
+                //                                    2, 2, 2, 2, 2, 2, 2, 2}),
+                //     new GeneralName(7, new byte[] {3, 3, 3, 3, 3, 3, 3, 3,
+                //                                    3, 3, 3, 3, 3, 3, 3, 3}),
+                //     null,
+                //     new GeneralName(7, new byte[] {4, 4, 4, 4, 4, 4, 4, 4,
+                //                                    4, 4, 4, 4, 4, 4, 4, 4}),
+        }
         };
 
         X509CertSelector selector = new X509CertSelector();
@@ -1781,18 +1778,18 @@ public class X509CertSelectorTest extends TestCase {
         X500Principal x500Subject = new X500Principal(subject);
         try {
             Name nameSubject = new Name(subject);
-            for (int i=0; i<name_constraints.length; i++) {
+            for (int i = 0; i < name_constraints.length; i++) {
                 // make the subtrees (part of name constraints)
                 // this subtrees will be used as permited and as excluded
                 GeneralSubtree subtree =
-                    new GeneralSubtree(name_constraints[i]);
+                        new GeneralSubtree(name_constraints[i]);
                 GeneralSubtrees subtrees = new GeneralSubtrees();
                 NameConstraints constraints;
                 subtrees.addSubtree(subtree);
                 // start the checking for each alt. name corresponding
                 // to current name_constraints[i]
                 boolean check_matching = true;
-                for (int j=0; j<alternative_names[i].length; j++) {
+                for (int j = 0; j < alternative_names[i].length; j++) {
                     GeneralNames alt_names_extension = new GeneralNames();
                     if (alternative_names[i][j] == null) {
                         // double trick: turn the switch and check that the
@@ -1806,36 +1803,36 @@ public class X509CertSelectorTest extends TestCase {
                     TestCert certificate = new TestCert(alt_names_extension);
                     certificate.setSubject(x500Subject);
                     certificate.setEncoding(getCertEncoding(nameSubject,
-                                                     alt_names_extension));
+                            alt_names_extension));
                     // first check if permited name match
                     constraints = new NameConstraints(subtrees, null);
                     selector.setNameConstraints(constraints.getEncoded());
                     boolean expected = check_matching
-                                       || (alternative_names[i][j] == null);
+                            || (alternative_names[i][j] == null);
                     assertTrue("The method match() for:\n        "
-                               + alternative_names[i][j]
-                               + "\nand permited name\n        "
-                               + name_constraints[i]
-                               + "\nshould return: "+expected,
-                               selector.match(certificate) == expected);
+                            + alternative_names[i][j]
+                            + "\nand permited name\n        "
+                            + name_constraints[i]
+                            + "\nshould return: " + expected,
+                            selector.match(certificate) == expected);
                     // second check if excluded name does not match
                     constraints = (check_matching)
-                                    // check for 'Any name matching a
-                                    // restriction in the excludedSubtrees
-                                    // field is invalid regardless of
-                                    // information appearing in the
-                                    // permittedSubtrees'.
-                                    ? new NameConstraints(subtrees, subtrees)
-                                    : new NameConstraints(null, subtrees);
+                            // check for 'Any name matching a
+                            // restriction in the excludedSubtrees
+                            // field is invalid regardless of
+                            // information appearing in the
+                            // permittedSubtrees'.
+                            ? new NameConstraints(subtrees, subtrees)
+                            : new NameConstraints(null, subtrees);
                     selector.setNameConstraints(constraints.getEncoded());
                     expected = !check_matching
-                               || (alternative_names[i][j] == null);
+                            || (alternative_names[i][j] == null);
                     assertTrue("The method match() for:\n        "
-                               + alternative_names[i][j]
-                               + "\nand excluded name\n        "
-                               + name_constraints[i]
-                               + "\nshould return: "+expected,
-                               selector.match(certificate) == expected);
+                            + alternative_names[i][j]
+                            + "\nand excluded name\n        "
+                            + name_constraints[i]
+                            + "\nshould return: " + expected,
+                            selector.match(certificate) == expected);
                 }
             }
         } catch (IOException e) {
@@ -1851,18 +1848,18 @@ public class X509CertSelectorTest extends TestCase {
      */
     public void testSetNameConstraints1() throws IOException {
 
-        GeneralName [] name_constraints = new GeneralName[] {
-            new GeneralName(1, "822.Name"),
-            new GeneralName(1, "rfc@822.Name"),
-            new GeneralName(2, "Name.org"),
-            new GeneralName(2, "dNS.Name.org"),
-            new GeneralName(6, "http://.Resource.Id"),
-            new GeneralName(6, "http://uniform.Resource.Id"),
-            new GeneralName(7, "1.1.1.1"),
-            new GeneralName(7, "1.1.1.1/3.3.3.3"),
-            new GeneralName(7, "0101:0101:0101:0101:0101:0101:0101:0101"),
-            new GeneralName(7, "0101:0101:0101:0101:0101:0101:0101:0101"
-                            + "/0303:0303:0303:0303:0303:0303:0303:0303"),
+        GeneralName[] name_constraints = new GeneralName[] {
+                new GeneralName(1, "822.Name"),
+                new GeneralName(1, "rfc@822.Name"),
+                new GeneralName(2, "Name.org"),
+                new GeneralName(2, "dNS.Name.org"),
+                new GeneralName(6, "http://.Resource.Id"),
+                new GeneralName(6, "http://uniform.Resource.Id"),
+                new GeneralName(7, "1.1.1.1"),
+                new GeneralName(7, "1.1.1.1/3.3.3.3"),
+                new GeneralName(7, "0101:0101:0101:0101:0101:0101:0101:0101"),
+                new GeneralName(7, "0101:0101:0101:0101:0101:0101:0101:0101"
+                        + "/0303:0303:0303:0303:0303:0303:0303:0303"),
         };
 
         // Names which should match divided from names which should not
@@ -1872,60 +1869,60 @@ public class X509CertSelectorTest extends TestCase {
         // is acceptable (rfc 3280). This assertion is checked during processing
         // of null GeneralName object (it also serves as separator).
         GeneralName[][] alternative_names = new GeneralName[][] {
-            {
+                {
+                        new GeneralName(1, "rfc@822.Name"),
+                        null,
+                        new GeneralName(1, "rfc@Other.Name")
+                }, {
                 new GeneralName(1, "rfc@822.Name"),
                 null,
                 new GeneralName(1, "rfc@Other.Name")
-            }, {
-                new GeneralName(1, "rfc@822.Name"),
-                null,
-                new GeneralName(1, "rfc@Other.Name")
-            }, {
+        }, {
                 new GeneralName(2, "Name.org"),
                 new GeneralName(2, "dNS.Name.org"),
                 null,
                 new GeneralName(2, "dNS.OtherName.org")
-            }, {
+        }, {
                 new GeneralName(2, "dNS.Name.org"),
                 null,
                 new GeneralName(2, "Name.org"),
                 new GeneralName(2, "dNS.OtherName.org")
-            }, {
+        }, {
 
                 new GeneralName(6, "http://uniform.Resource.Id/location"),
                 null,
                 new GeneralName(6, "http://Resource.Id")
-            }, {
+        }, {
                 new GeneralName(6, "http://uniform.Resource.Id"),
                 null,
                 new GeneralName(6, "http://Resource.Id")
-            }, {
-                new GeneralName(new byte[] {1, 1, 1, 1}),
+        }, {
+                new GeneralName(new byte[] { 1, 1, 1, 1 }),
                 null,
-                new GeneralName(new byte[] {2, 2, 2, 2})
-            }, {
-                new GeneralName(new byte[] {1, 1, 1, 1}),
-                new GeneralName(new byte[] {2, 2, 2, 2}),
-                new GeneralName(new byte[] {3, 3, 3, 3}),
+                new GeneralName(new byte[] { 2, 2, 2, 2 })
+        }, {
+                new GeneralName(new byte[] { 1, 1, 1, 1 }),
+                new GeneralName(new byte[] { 2, 2, 2, 2 }),
+                new GeneralName(new byte[] { 3, 3, 3, 3 }),
                 null,
-                new GeneralName(new byte[] {4, 4, 4, 4})
-            }, {
-                new GeneralName(new byte[] {1, 1, 1, 1, 1, 1, 1, 1,
-                                            1, 1, 1, 1, 1, 1, 1, 1}),
+                new GeneralName(new byte[] { 4, 4, 4, 4 })
+        }, {
+                new GeneralName(new byte[] { 1, 1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1, 1 }),
                 null,
-                new GeneralName(new byte[] {2, 2, 2, 2, 2, 2, 2, 2,
-                                            2, 2, 2, 2, 2, 2, 2, 2}),
-            }, {
-                new GeneralName(new byte[] {1, 1, 1, 1, 1, 1, 1, 1,
-                                            1, 1, 1, 1, 1, 1, 1, 1}),
-                new GeneralName(new byte[] {2, 2, 2, 2, 2, 2, 2, 2,
-                                            2, 2, 2, 2, 2, 2, 2, 2}),
-                new GeneralName(new byte[] {3, 3, 3, 3, 3, 3, 3, 3,
-                                            3, 3, 3, 3, 3, 3, 3, 3}),
+                new GeneralName(new byte[] { 2, 2, 2, 2, 2, 2, 2, 2,
+                        2, 2, 2, 2, 2, 2, 2, 2 }),
+        }, {
+                new GeneralName(new byte[] { 1, 1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1, 1 }),
+                new GeneralName(new byte[] { 2, 2, 2, 2, 2, 2, 2, 2,
+                        2, 2, 2, 2, 2, 2, 2, 2 }),
+                new GeneralName(new byte[] { 3, 3, 3, 3, 3, 3, 3, 3,
+                        3, 3, 3, 3, 3, 3, 3, 3 }),
                 null,
-                new GeneralName(new byte[] {4, 4, 4, 4, 4, 4, 4, 4,
-                                            4, 4, 4, 4, 4, 4, 4, 4}),
-            }
+                new GeneralName(new byte[] { 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4 }),
+        }
         };
 
         X509CertSelector selector = new X509CertSelector();
@@ -1933,18 +1930,18 @@ public class X509CertSelectorTest extends TestCase {
         X500Principal x500Subject = new X500Principal(subject);
         try {
             Name nameSubject = new Name(subject);
-            for (int i=0; i<name_constraints.length; i++) {
+            for (int i = 0; i < name_constraints.length; i++) {
                 // make the subtrees (part of name constraints)
                 // this subtrees will be used as permited and as excluded
                 GeneralSubtree subtree =
-                    new GeneralSubtree(name_constraints[i]);
+                        new GeneralSubtree(name_constraints[i]);
                 GeneralSubtrees subtrees = new GeneralSubtrees();
                 NameConstraints constraints;
                 subtrees.addSubtree(subtree);
                 // start the checking for each alt. name corresponding
                 // to current name_constraints[i]
                 boolean check_matching = true;
-                for (int j=0; j<alternative_names[i].length; j++) {
+                for (int j = 0; j < alternative_names[i].length; j++) {
                     GeneralNames alt_names_extension = new GeneralNames();
                     if (alternative_names[i][j] == null) {
                         // double trick: turn the switch and check that the
@@ -1958,36 +1955,36 @@ public class X509CertSelectorTest extends TestCase {
                     TestCert certificate = new TestCert(alt_names_extension);
                     certificate.setSubject(x500Subject);
                     certificate.setEncoding(getCertEncoding(nameSubject,
-                                                     alt_names_extension));
+                            alt_names_extension));
                     // first check if permited name match
                     constraints = new NameConstraints(subtrees, null);
                     selector.setNameConstraints(constraints.getEncoded());
                     boolean expected = check_matching
-                                       || (alternative_names[i][j] == null);
+                            || (alternative_names[i][j] == null);
                     assertTrue("The method match() for:\n        "
-                               + alternative_names[i][j]
-                               + "\nand permited name\n        "
-                               + name_constraints[i]
-                               + "\nshould return: "+expected,
-                               selector.match(certificate) == expected);
+                            + alternative_names[i][j]
+                            + "\nand permited name\n        "
+                            + name_constraints[i]
+                            + "\nshould return: " + expected,
+                            selector.match(certificate) == expected);
                     // second check if excluded name does not match
                     constraints = (check_matching)
-                                    // check for 'Any name matching a
-                                    // restriction in the excludedSubtrees
-                                    // field is invalid regardless of
-                                    // information appearing in the
-                                    // permittedSubtrees'.
-                                    ? new NameConstraints(subtrees, subtrees)
-                                    : new NameConstraints(null, subtrees);
+                            // check for 'Any name matching a
+                            // restriction in the excludedSubtrees
+                            // field is invalid regardless of
+                            // information appearing in the
+                            // permittedSubtrees'.
+                            ? new NameConstraints(subtrees, subtrees)
+                            : new NameConstraints(null, subtrees);
                     selector.setNameConstraints(constraints.getEncoded());
                     expected = !check_matching
-                               || (alternative_names[i][j] == null);
+                            || (alternative_names[i][j] == null);
                     assertTrue("The method match() for:\n        "
-                               + alternative_names[i][j]
-                               + "\nand excluded name\n        "
-                               + name_constraints[i]
-                               + "\nshould return: "+expected,
-                               selector.match(certificate) == expected);
+                            + alternative_names[i][j]
+                            + "\nand excluded name\n        "
+                            + name_constraints[i]
+                            + "\nshould return: " + expected,
+                            selector.match(certificate) == expected);
                 }
             }
         } catch (IOException e) {
@@ -2016,16 +2013,16 @@ public class X509CertSelectorTest extends TestCase {
         // According to p. 4.1.2.4 comparing the encoded forms of the names.
 
         String[][] variants = new String[][] {
-            //  subject    Alternative   Presented name     Absent name
-            //   name         name       perm(t)/excl(f)  perm(f)/excl(t)
-            {"O=Org",       "O=Org",        "O=Org",        "O=Org2"},
-            {"O=Org",       "O=Org1",       "O=Org",        "O=Org2"},
-            {"O=Org1",      "O=Org",        "O=Org",        "O=Org2"},
+                //  subject    Alternative   Presented name     Absent name
+                //   name         name       perm(t)/excl(f)  perm(f)/excl(t)
+                { "O=Org", "O=Org", "O=Org", "O=Org2" },
+                { "O=Org", "O=Org1", "O=Org", "O=Org2" },
+                { "O=Org1", "O=Org", "O=Org", "O=Org2" },
         };
 
         X509CertSelector selector = new X509CertSelector();
         try {
-            for (int i=0; i<variants.length; i++) {
+            for (int i = 0; i < variants.length; i++) {
                 // make the names objects
                 X500Principal subject = new X500Principal(variants[i][0]);
                 Name subject_name = new Name(variants[i][0]);
@@ -2036,19 +2033,19 @@ public class X509CertSelectorTest extends TestCase {
                 TestCert certificate = new TestCert(alt_names_extension);
                 certificate.setSubject(subject);
                 certificate.setEncoding(getCertEncoding(subject_name,
-                                                 alt_names_extension));
+                        alt_names_extension));
                 // make the subtrees (part of name constraints)
                 // this subtrees will be used as permited and as excluded
                 // name which is presented in certificate:
                 GeneralSubtrees pos_subtrees = new GeneralSubtrees();
                 pos_subtrees.addSubtree(
                         new GeneralSubtree(
-                            new GeneralName(4, variants[i][2])));
+                                new GeneralName(4, variants[i][2])));
                 // name which is absent in certificate:
                 GeneralSubtrees neg_subtrees = new GeneralSubtrees();
                 neg_subtrees.addSubtree(
                         new GeneralSubtree(
-                            new GeneralName(4, variants[i][3])));
+                                new GeneralName(4, variants[i][3])));
 
                 NameConstraints constraints;
                 // Work with name which is presented in certificate
@@ -2056,52 +2053,52 @@ public class X509CertSelectorTest extends TestCase {
                 constraints = new NameConstraints(pos_subtrees, null);
                 selector.setNameConstraints(constraints.getEncoded());
                 assertTrue("The method match() for certificate "
-                           + "with subject:\n        "
-                           + variants[i][0]
-                           + "\nand with alternative name:\n        "
-                           + variants[i][1]
-                           + "\nand permited name\n        "
-                           + variants[i][2]
-                           + "\nshould return true",
-                           selector.match(certificate));
+                        + "with subject:\n        "
+                        + variants[i][0]
+                        + "\nand with alternative name:\n        "
+                        + variants[i][1]
+                        + "\nand permited name\n        "
+                        + variants[i][2]
+                        + "\nshould return true",
+                        selector.match(certificate));
                 // second check if certificate with excluded name doesn't match:
                 constraints = new NameConstraints(pos_subtrees, pos_subtrees);
                 selector.setNameConstraints(constraints.getEncoded());
                 assertTrue("The method match() for certificate "
-                           + "with subject:\n        "
-                           + variants[i][0]
-                           + "\nand with alternative name:\n        "
-                           + variants[i][1]
-                           + "\nand excluded name\n        "
-                           + variants[i][2]
-                           + "\nshould return false",
-                           !selector.match(certificate));
+                        + "with subject:\n        "
+                        + variants[i][0]
+                        + "\nand with alternative name:\n        "
+                        + variants[i][1]
+                        + "\nand excluded name\n        "
+                        + variants[i][2]
+                        + "\nshould return false",
+                        !selector.match(certificate));
                 // Work with name which is not presented in certificate
                 // first check if the certificate without permited name
                 // does not match:
                 constraints = new NameConstraints(neg_subtrees, null);
                 selector.setNameConstraints(constraints.getEncoded());
                 assertTrue("The method match() for certificate "
-                           + "with subject:\n        "
-                           + variants[i][0]
-                           + "\nand with alternative name:\n        "
-                           + variants[i][1]
-                           + "\nand permited name\n        "
-                           + variants[i][3]
-                           + "\nshould return false",
-                           !selector.match(certificate));
+                        + "with subject:\n        "
+                        + variants[i][0]
+                        + "\nand with alternative name:\n        "
+                        + variants[i][1]
+                        + "\nand permited name\n        "
+                        + variants[i][3]
+                        + "\nshould return false",
+                        !selector.match(certificate));
                 // second check if certificate without excluded name matches:
                 constraints = new NameConstraints(neg_subtrees, neg_subtrees);
                 selector.setNameConstraints(constraints.getEncoded());
                 assertTrue("The method match() for certificate "
-                           + "with subject:\n        "
-                           + variants[i][0]
-                           + "\nand with alternative name:\n        "
-                           + variants[i][1]
-                           + "\nand excluded name\n        "
-                           + variants[i][3]
-                           + "\nshould return false",
-                           !selector.match(certificate));
+                        + "with subject:\n        "
+                        + variants[i][0]
+                        + "\nand with alternative name:\n        "
+                        + variants[i][1]
+                        + "\nand excluded name\n        "
+                        + variants[i][3]
+                        + "\nshould return false",
+                        !selector.match(certificate));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -2114,25 +2111,25 @@ public class X509CertSelectorTest extends TestCase {
      * of TBSCertificate and specified alternative names.
      */
     private byte[] getCertEncoding(Name subject, GeneralNames subjectAltNames)
-                                                        throws IOException {
+            throws IOException {
         // make the TBSCertificate for Certificate
         int version = 2; //v3
         BigInteger serialNumber = BigInteger.valueOf(555L);
         AlgorithmIdentifier signature = new AlgorithmIdentifier("1.2.3.44.555");
         Name issuer = new Name("O=Certificate Issuer");
         Validity validity = new Validity(new Date(100000000),
-                                         new Date(200000000));
+                new Date(200000000));
         SubjectPublicKeyInfo subjectPublicKeyInfo =
-            new SubjectPublicKeyInfo(
-                    new AlgorithmIdentifier("1.2.840.113549.1.1.2"),
-                                            new byte[10]);
-        boolean[] issuerUniqueID  = new boolean[]
-                    {true, false, true, false, true, false, true, false};
+                new SubjectPublicKeyInfo(
+                        new AlgorithmIdentifier("1.2.840.113549.1.1.2"),
+                        new byte[10]);
+        boolean[] issuerUniqueID = new boolean[]
+                { true, false, true, false, true, false, true, false };
         boolean[] subjectUniqueID = new boolean[]
-                    {false, true, false, true, false, true, false, true};
+                { false, true, false, true, false, true, false, true };
 
         Extension extension = new Extension("2.5.29.17",
-                                            true, subjectAltNames.getEncoded());
+                true, subjectAltNames.getEncoded());
         Extensions extensions = new Extensions();
         extensions.addExtension(extension);
 
@@ -2143,8 +2140,8 @@ public class X509CertSelectorTest extends TestCase {
 
         // make the Certificate
         org.apache.harmony.security.x509.Certificate certificate =
-                        new org.apache.harmony.security.x509.Certificate
-                                    (tbsCertificate, signature, new byte[10]);
+                new org.apache.harmony.security.x509.Certificate
+                        (tbsCertificate, signature, new byte[10]);
 
         return certificate.getEncoded();
     }
@@ -2173,16 +2170,16 @@ public class X509CertSelectorTest extends TestCase {
 
         selector.setBasicConstraints(-1);
         assertTrue("Any certificate should match in the case of -1 "
-                                                + "pathLen criteria.",
-                    selector.match(cert_1) && selector.match(cert_2));
+                + "pathLen criteria.",
+                selector.match(cert_1) && selector.match(cert_2));
         selector.setBasicConstraints(plen1);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertFalse("The certificate should not match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         selector.setBasicConstraints(plen2);
         assertTrue("The certificate should match the selection criteria.",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
     }
 
     /**
@@ -2194,12 +2191,12 @@ public class X509CertSelectorTest extends TestCase {
         X509CertSelector selector = new X509CertSelector();
 
         assertEquals("Selector should return -1",
-                                        selector.getBasicConstraints(), -1);
+                selector.getBasicConstraints(), -1);
         selector.setBasicConstraints(plen1);
         assertEquals("The returned value should be equal to specified",
-                    plen1, selector.getBasicConstraints());
+                plen1, selector.getBasicConstraints());
         assertFalse("The returned value should differ",
-                    plen2 == selector.getBasicConstraints());
+                plen2 == selector.getBasicConstraints());
     }
 
     /**
@@ -2207,18 +2204,18 @@ public class X509CertSelectorTest extends TestCase {
      */
     public void testSetPolicy() {
         String[] policies_1 = new String[] {
-            "0.0.0.0.0.0",
-            "1.1.1.1.1.1",
+                "0.0.0.0.0.0",
+                "1.1.1.1.1.1",
         };
         String[] policies_2 = new String[] {
-            "0.0.0.0.0.0",
-            "1.1.1.1.1.1",
-            "2.2.2.2.2.2"
+                "0.0.0.0.0.0",
+                "1.1.1.1.1.1",
+                "2.2.2.2.2.2"
         };
         String[] policies_3 = new String[] {
-            "2.2.2.2.2.2"
+                "2.2.2.2.2.2"
         };
-        String[] policies_4 = new String[] {};
+        String[] policies_4 = new String[] { };
         X509CertSelector selector = new X509CertSelector();
         HashSet set = new HashSet(Arrays.asList(policies_1));
         try {
@@ -2232,17 +2229,17 @@ public class X509CertSelectorTest extends TestCase {
         TestCert cert_3 = new TestCert(policies_3);
         TestCert cert_4 = new TestCert(policies_4);
         assertTrue("The certificate should match the specified criteria",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertTrue("The certificate should match the specified criteria",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         assertFalse("The certificate should not match the specified criteria",
-                                                        selector.match(cert_3));
+                selector.match(cert_3));
         assertFalse("The certificate should not match the specified criteria",
-                                                        selector.match(cert_4));
+                selector.match(cert_4));
         set.add("2.2.2.2.2.2");
         assertFalse("The modification of the set should not cause the "
-                    + "modification of internal object",
-                                                        selector.match(cert_3));
+                + "modification of internal object",
+                selector.match(cert_3));
         set = new HashSet();
         try {
             selector.setPolicy(set);
@@ -2251,13 +2248,13 @@ public class X509CertSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertTrue("The certificate should match the specified criteria",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertTrue("The certificate should match the specified criteria",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         assertTrue("The certificate should match the specified criteria",
-                                                        selector.match(cert_3));
+                selector.match(cert_3));
         assertFalse("The certificate should not match the specified criteria",
-                                                        selector.match(cert_4));
+                selector.match(cert_4));
         set.add("2.2.2.2.2.2");
         try {
             selector.setPolicy(set);
@@ -2266,13 +2263,13 @@ public class X509CertSelectorTest extends TestCase {
             fail("Unexpected IOException was thrown.");
         }
         assertFalse("The certificate should not match the specified criteria",
-                                                        selector.match(cert_1));
+                selector.match(cert_1));
         assertTrue("The certificate should match the specified criteria",
-                                                        selector.match(cert_2));
+                selector.match(cert_2));
         assertTrue("The certificate should match the specified criteria",
-                                                        selector.match(cert_3));
+                selector.match(cert_3));
         assertFalse("The certificate should not match the specified criteria",
-                                                        selector.match(cert_4));
+                selector.match(cert_4));
     }
 
     /**
@@ -2280,9 +2277,9 @@ public class X509CertSelectorTest extends TestCase {
      */
     public void testGetPolicy() {
         String[] policies = new String[] {
-            "0.0.0.0.0.0",
-            "1.1.1.1.1.1",
-            "2.2.2.2.2.2"
+                "0.0.0.0.0.0",
+                "1.1.1.1.1.1",
+                "2.2.2.2.2.2"
         };
         X509CertSelector selector = new X509CertSelector();
         HashSet set = new HashSet(Arrays.asList(policies));
@@ -2301,7 +2298,7 @@ public class X509CertSelectorTest extends TestCase {
         if (result.size() != 3) {
             fail("The size of returned set differs from specified.");
         }
-        for (int i=0; i<policies.length; i++) {
+        for (int i = 0; i < policies.length; i++) {
             if (!result.contains(policies[i])) {
                 fail("The set does not have specified policy.");
             }
@@ -2314,16 +2311,16 @@ public class X509CertSelectorTest extends TestCase {
     public void testSetPathToNames() {
         try {
             GeneralName[] names = new GeneralName[] {
-                new GeneralName(1, "rfc@822.Name"),
-                new GeneralName(1, "rfc@822.AnotherName"),
-                new GeneralName(2, "dNSName"),
-                new GeneralName(2, "AnotherdNSName"),
-                new GeneralName(4, "O=Organization"),
-                new GeneralName(4, "O=Another Organization"),
-                new GeneralName(6, "http://uniform.Resource.Id"),
-                new GeneralName(6, "http://another.uniform.Resource.Id"),
-                new GeneralName(7, "1.1.1.1"),
-                new GeneralName(7, "2.2.2.2")
+                    new GeneralName(1, "rfc@822.Name"),
+                    new GeneralName(1, "rfc@822.AnotherName"),
+                    new GeneralName(2, "dNSName"),
+                    new GeneralName(2, "AnotherdNSName"),
+                    new GeneralName(4, "O=Organization"),
+                    new GeneralName(4, "O=Another Organization"),
+                    new GeneralName(6, "http://uniform.Resource.Id"),
+                    new GeneralName(6, "http://another.uniform.Resource.Id"),
+                    new GeneralName(7, "1.1.1.1"),
+                    new GeneralName(7, "2.2.2.2")
             };
 
             X509CertSelector selector = new X509CertSelector();
@@ -2331,7 +2328,7 @@ public class X509CertSelectorTest extends TestCase {
             TestCert cert;
             GeneralSubtrees subtrees;
             NameConstraints constraints;
-            for (int i=0; i<names.length; i+=2) {
+            for (int i = 0; i < names.length; i += 2) {
                 // Set up the pathToNames criterion
                 ArrayList pathToNames = new ArrayList();
                 pathToNames.add(names[i].getAsList());
@@ -2339,83 +2336,83 @@ public class X509CertSelectorTest extends TestCase {
 
                 // Construct the subtrees without the current name
                 subtrees = new GeneralSubtrees();
-                for (int j=0; j<names.length; j++) {
-                    if (i != j && i+1 != j) {
+                for (int j = 0; j < names.length; j++) {
+                    if (i != j && i + 1 != j) {
                         subtrees.addSubtree(new GeneralSubtree(names[j]));
                     }
                 }
                 constraints = new NameConstraints(subtrees, null);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate does not contain the names "
-                            + "of such type so method match() should "
-                            + "return true.", selector.match(cert));
+                        + "certificate does not contain the names "
+                        + "of such type so method match() should "
+                        + "return true.", selector.match(cert));
 
                 constraints = new NameConstraints(subtrees, subtrees);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate does not contain the names "
-                            + "of such type so method match() should "
-                            + "return true.", selector.match(cert));
+                        + "certificate does not contain the names "
+                        + "of such type so method match() should "
+                        + "return true.", selector.match(cert));
 
                 constraints = new NameConstraints(null, subtrees);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate does not contain the names "
-                            + "of such type so method match() should "
-                            + "return true.", selector.match(cert));
+                        + "certificate does not contain the names "
+                        + "of such type so method match() should "
+                        + "return true.", selector.match(cert));
 
-                subtrees.addSubtree(new GeneralSubtree(names[i+1]));
+                subtrees.addSubtree(new GeneralSubtree(names[i + 1]));
 
                 constraints = new NameConstraints(subtrees, null);
                 cert = new TestCert(constraints);
                 assertFalse("The Name Constraints Extension of the "
-                            + "certificate does not contain the name "
-                            + "as a permitted name so method match() "
-                            + "should return false", selector.match(cert));
+                        + "certificate does not contain the name "
+                        + "as a permitted name so method match() "
+                        + "should return false", selector.match(cert));
 
                 constraints = new NameConstraints(subtrees, subtrees);
                 cert = new TestCert(constraints);
                 assertFalse("The Name Constraints Extension of the "
-                            + "certificate does not contain the name "
-                            + "as an excluded name but it does not "
-                            + "contain this name as a permitted so match()"
-                            + "should return false", selector.match(cert));
+                        + "certificate does not contain the name "
+                        + "as an excluded name but it does not "
+                        + "contain this name as a permitted so match()"
+                        + "should return false", selector.match(cert));
 
                 constraints = new NameConstraints(null, subtrees);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate does not contain the name "
-                            + "as an excluded name so method match() "
-                            + "should return true", selector.match(cert));
+                        + "certificate does not contain the name "
+                        + "as an excluded name so method match() "
+                        + "should return true", selector.match(cert));
 
                 subtrees.addSubtree(new GeneralSubtree(names[i]));
 
                 constraints = new NameConstraints(subtrees, null);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate contains the name "
-                            + "as a permitted name so method match() "
-                            + "should return true", selector.match(cert));
+                        + "certificate contains the name "
+                        + "as a permitted name so method match() "
+                        + "should return true", selector.match(cert));
 
                 constraints = new NameConstraints(subtrees, subtrees);
                 cert = new TestCert(constraints);
                 assertFalse("The Name Constraints Extension of the "
-                            + "certificate contains the name "
-                            + "as an excluded name so method match() "
-                            + "should return false", selector.match(cert));
+                        + "certificate contains the name "
+                        + "as an excluded name so method match() "
+                        + "should return false", selector.match(cert));
 
                 constraints = new NameConstraints(null, subtrees);
                 cert = new TestCert(constraints);
                 assertFalse("The Name Constraints Extension of the "
-                            + "certificate contains the name "
-                            + "as an excluded name so method match() "
-                            + "should return false", selector.match(cert));
+                        + "certificate contains the name "
+                        + "as an excluded name so method match() "
+                        + "should return false", selector.match(cert));
 
                 pathToNames.clear();
                 assertFalse("The modification of initialization parameter "
-                            + "should not cause the modification of "
-                            + "internal object ", selector.match(cert));
+                        + "should not cause the modification of "
+                        + "internal object ", selector.match(cert));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -2428,18 +2425,18 @@ public class X509CertSelectorTest extends TestCase {
      */
     public void testAddPathToName1() {
         try {
-            int[] types = new int[] {1, 1, 2, 2, 4, 4, 6, 6, 7, 7};
+            int[] types = new int[] { 1, 1, 2, 2, 4, 4, 6, 6, 7, 7 };
             String[] names = new String[] {
-                        "rfc@822.Name",
-                        "rfc@822.AnotherName",
-                        "dNSName",
-                        "AnotherdNSName",
-                        "O=Organization",
-                        "O=Another Organization",
-                        "http://uniform.Resource.Id",
-                        "http://another.uniform.Resource.Id",
-                        "1.1.1.1",
-                        "2.2.2.2"
+                    "rfc@822.Name",
+                    "rfc@822.AnotherName",
+                    "dNSName",
+                    "AnotherdNSName",
+                    "O=Organization",
+                    "O=Another Organization",
+                    "http://uniform.Resource.Id",
+                    "http://another.uniform.Resource.Id",
+                    "1.1.1.1",
+                    "2.2.2.2"
             };
 
             X509CertSelector selector = new X509CertSelector();
@@ -2447,90 +2444,90 @@ public class X509CertSelectorTest extends TestCase {
             TestCert cert;
             GeneralSubtrees subtrees;
             NameConstraints constraints;
-            for (int i=0; i<names.length-2; i+=2) {
+            for (int i = 0; i < names.length - 2; i += 2) {
                 // Set up the pathToNames criterion
                 selector.addPathToName(types[i], names[i]);
 
                 // Construct the subtrees without the current name
                 subtrees = new GeneralSubtrees();
-                for (int j=i+2; j<names.length; j++) {
-                    if (i != j && i+1 != j) {
+                for (int j = i + 2; j < names.length; j++) {
+                    if (i != j && i + 1 != j) {
                         subtrees.addSubtree(
                                 new GeneralSubtree(
-                                    new GeneralName(types[j], names[j])));
+                                        new GeneralName(types[j], names[j])));
                     }
                 }
                 constraints = new NameConstraints(subtrees, null);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate does not contain the names "
-                            + "of such type so method match() should "
-                            + "return true.", selector.match(cert));
+                        + "certificate does not contain the names "
+                        + "of such type so method match() should "
+                        + "return true.", selector.match(cert));
 
                 constraints = new NameConstraints(subtrees, subtrees);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate does not contain the names "
-                            + "of such type so method match() should "
-                            + "return true.", selector.match(cert));
+                        + "certificate does not contain the names "
+                        + "of such type so method match() should "
+                        + "return true.", selector.match(cert));
 
                 constraints = new NameConstraints(null, subtrees);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate does not contain the names "
-                            + "of such type so method match() should "
-                            + "return true.", selector.match(cert));
+                        + "certificate does not contain the names "
+                        + "of such type so method match() should "
+                        + "return true.", selector.match(cert));
 
                 subtrees.addSubtree(
                         new GeneralSubtree(
-                            new GeneralName(types[i+1], names[i+1])));
+                                new GeneralName(types[i + 1], names[i + 1])));
 
                 constraints = new NameConstraints(subtrees, null);
                 cert = new TestCert(constraints);
                 assertFalse("The Name Constraints Extension of the "
-                            + "certificate does not contain the name "
-                            + "as a permitted name so method match() "
-                            + "should return false", selector.match(cert));
+                        + "certificate does not contain the name "
+                        + "as a permitted name so method match() "
+                        + "should return false", selector.match(cert));
 
                 constraints = new NameConstraints(subtrees, subtrees);
                 cert = new TestCert(constraints);
                 assertFalse("The Name Constraints Extension of the "
-                            + "certificate does not contain the name "
-                            + "as an excluded name but it does not "
-                            + "contain this name as a permitted so match()"
-                            + "should return false", selector.match(cert));
+                        + "certificate does not contain the name "
+                        + "as an excluded name but it does not "
+                        + "contain this name as a permitted so match()"
+                        + "should return false", selector.match(cert));
 
                 constraints = new NameConstraints(null, subtrees);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate does not contain the name "
-                            + "as an excluded name so method match() "
-                            + "should return true", selector.match(cert));
+                        + "certificate does not contain the name "
+                        + "as an excluded name so method match() "
+                        + "should return true", selector.match(cert));
 
                 subtrees.addSubtree(
                         new GeneralSubtree(
-                            new GeneralName(types[i], names[i])));
+                                new GeneralName(types[i], names[i])));
 
                 constraints = new NameConstraints(subtrees, null);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate contains the name "
-                            + "as a permitted name so method match() "
-                            + "should return true", selector.match(cert));
+                        + "certificate contains the name "
+                        + "as a permitted name so method match() "
+                        + "should return true", selector.match(cert));
 
                 constraints = new NameConstraints(subtrees, subtrees);
                 cert = new TestCert(constraints);
                 assertFalse("The Name Constraints Extension of the "
-                            + "certificate contains the name "
-                            + "as an excluded name so method match() "
-                            + "should return false", selector.match(cert));
+                        + "certificate contains the name "
+                        + "as an excluded name so method match() "
+                        + "should return false", selector.match(cert));
 
                 constraints = new NameConstraints(null, subtrees);
                 cert = new TestCert(constraints);
                 assertFalse("The Name Constraints Extension of the "
-                            + "certificate contains the name "
-                            + "as an excluded name so method match() "
-                            + "should return false", selector.match(cert));
+                        + "certificate contains the name "
+                        + "as an excluded name so method match() "
+                        + "should return false", selector.match(cert));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -2543,20 +2540,20 @@ public class X509CertSelectorTest extends TestCase {
      */
     public void testAddPathToName2() {
         try {
-            int[] types = new int[] {1, 1, 2, 2, 4, 4, 6, 6, 7, 7};
+            int[] types = new int[] { 1, 1, 2, 2, 4, 4, 6, 6, 7, 7 };
             byte[][] names = new byte[][] {
-                new GeneralName(1, "rfc@822.Name").getEncodedName(),
-                new GeneralName(1, "rfc@822.AnotherName").getEncodedName(),
-                new GeneralName(2, "dNSName").getEncodedName(),
-                new GeneralName(2, "AnotherdNSName").getEncodedName(),
-                new GeneralName(4, "O=Organization").getEncodedName(),
-                new GeneralName(4, "O=Another Organization").getEncodedName(),
-                new GeneralName(6, "http://uniform.Resource.Id")
-                                                            .getEncodedName(),
-                new GeneralName(6, "http://another.uniform.Resource.Id")
-                                                            .getEncodedName(),
-                new GeneralName(7, "1.1.1.1").getEncodedName(),
-                new GeneralName(7, "2.2.2.2").getEncodedName()
+                    new GeneralName(1, "rfc@822.Name").getEncodedName(),
+                    new GeneralName(1, "rfc@822.AnotherName").getEncodedName(),
+                    new GeneralName(2, "dNSName").getEncodedName(),
+                    new GeneralName(2, "AnotherdNSName").getEncodedName(),
+                    new GeneralName(4, "O=Organization").getEncodedName(),
+                    new GeneralName(4, "O=Another Organization").getEncodedName(),
+                    new GeneralName(6, "http://uniform.Resource.Id")
+                            .getEncodedName(),
+                    new GeneralName(6, "http://another.uniform.Resource.Id")
+                            .getEncodedName(),
+                    new GeneralName(7, "1.1.1.1").getEncodedName(),
+                    new GeneralName(7, "2.2.2.2").getEncodedName()
             };
 
             X509CertSelector selector = new X509CertSelector();
@@ -2564,90 +2561,90 @@ public class X509CertSelectorTest extends TestCase {
             TestCert cert;
             GeneralSubtrees subtrees;
             NameConstraints constraints;
-            for (int i=0; i<names.length-2; i+=2) {
+            for (int i = 0; i < names.length - 2; i += 2) {
                 // Set up the pathToNames criterion
                 selector.addPathToName(types[i], names[i]);
 
                 // Construct the subtrees without the current name
                 subtrees = new GeneralSubtrees();
-                for (int j=i+2; j<names.length; j++) {
-                    if (i != j && i+1 != j) {
+                for (int j = i + 2; j < names.length; j++) {
+                    if (i != j && i + 1 != j) {
                         subtrees.addSubtree(
                                 new GeneralSubtree(
-                                    new GeneralName(types[j], names[j])));
+                                        new GeneralName(types[j], names[j])));
                     }
                 }
                 constraints = new NameConstraints(subtrees, null);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate does not contain the names "
-                            + "of such type so method match() should "
-                            + "return true.", selector.match(cert));
+                        + "certificate does not contain the names "
+                        + "of such type so method match() should "
+                        + "return true.", selector.match(cert));
 
                 constraints = new NameConstraints(subtrees, subtrees);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate does not contain the names "
-                            + "of such type so method match() should "
-                            + "return true.", selector.match(cert));
+                        + "certificate does not contain the names "
+                        + "of such type so method match() should "
+                        + "return true.", selector.match(cert));
 
                 constraints = new NameConstraints(null, subtrees);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate does not contain the names "
-                            + "of such type so method match() should "
-                            + "return true.", selector.match(cert));
+                        + "certificate does not contain the names "
+                        + "of such type so method match() should "
+                        + "return true.", selector.match(cert));
 
                 subtrees.addSubtree(
                         new GeneralSubtree(
-                            new GeneralName(types[i+1], names[i+1])));
+                                new GeneralName(types[i + 1], names[i + 1])));
 
                 constraints = new NameConstraints(subtrees, null);
                 cert = new TestCert(constraints);
                 assertFalse("The Name Constraints Extension of the "
-                            + "certificate does not contain the name "
-                            + "as a permitted name so method match() "
-                            + "should return false", selector.match(cert));
+                        + "certificate does not contain the name "
+                        + "as a permitted name so method match() "
+                        + "should return false", selector.match(cert));
 
                 constraints = new NameConstraints(subtrees, subtrees);
                 cert = new TestCert(constraints);
                 assertFalse("The Name Constraints Extension of the "
-                            + "certificate does not contain the name "
-                            + "as an excluded name but it does not "
-                            + "contain this name as a permitted so match()"
-                            + "should return false", selector.match(cert));
+                        + "certificate does not contain the name "
+                        + "as an excluded name but it does not "
+                        + "contain this name as a permitted so match()"
+                        + "should return false", selector.match(cert));
 
                 constraints = new NameConstraints(null, subtrees);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate does not contain the name "
-                            + "as an excluded name so method match() "
-                            + "should return true", selector.match(cert));
+                        + "certificate does not contain the name "
+                        + "as an excluded name so method match() "
+                        + "should return true", selector.match(cert));
 
                 subtrees.addSubtree(
                         new GeneralSubtree(
-                            new GeneralName(types[i], names[i])));
+                                new GeneralName(types[i], names[i])));
 
                 constraints = new NameConstraints(subtrees, null);
                 cert = new TestCert(constraints);
                 assertTrue("The Name Constraints Extension of the "
-                            + "certificate contains the name "
-                            + "as a permitted name so method match() "
-                            + "should return true", selector.match(cert));
+                        + "certificate contains the name "
+                        + "as a permitted name so method match() "
+                        + "should return true", selector.match(cert));
 
                 constraints = new NameConstraints(subtrees, subtrees);
                 cert = new TestCert(constraints);
                 assertFalse("The Name Constraints Extension of the "
-                            + "certificate contains the name "
-                            + "as an excluded name so method match() "
-                            + "should return false", selector.match(cert));
+                        + "certificate contains the name "
+                        + "as an excluded name so method match() "
+                        + "should return false", selector.match(cert));
 
                 constraints = new NameConstraints(null, subtrees);
                 cert = new TestCert(constraints);
                 assertFalse("The Name Constraints Extension of the "
-                            + "certificate contains the name "
-                            + "as an excluded name so method match() "
-                            + "should return false", selector.match(cert));
+                        + "certificate contains the name "
+                        + "as an excluded name so method match() "
+                        + "should return false", selector.match(cert));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -2661,7 +2658,7 @@ public class X509CertSelectorTest extends TestCase {
     public void testGetPathToNames() {
         try {
             byte[] encoding =
-                new GeneralName(1, "rfc@822.Name").getEncodedName();
+                    new GeneralName(1, "rfc@822.Name").getEncodedName();
 
             X509CertSelector selector = new X509CertSelector();
 
@@ -2672,7 +2669,7 @@ public class X509CertSelectorTest extends TestCase {
             List list = (List) it.next();
             Object result = list.get(1);
             if ((result instanceof byte[])
-                    && (encoding[0] == ((byte[])result)[0])) {
+                    && (encoding[0] == ((byte[]) result)[0])) {
                 fail("Deep copy should be performed on pathToNames.");
             }
         } catch (IOException e) {
@@ -2688,7 +2685,7 @@ public class X509CertSelectorTest extends TestCase {
         BigInteger serial = new BigInteger("10000");
         X500Principal issuer = new X500Principal("O=Issuer Org.");
         X500Principal subject = new X500Principal("O=Subject Org.");
-        byte[] subject_auth_KeyID = new byte[] {1, 2, 3, 4, 5};
+        byte[] subject_auth_KeyID = new byte[] { 1, 2, 3, 4, 5 };
         Date certValid = new Date(2000000000);
         Date[] privateKeyValid = new Date[] {
                 new Date(100000000L),
@@ -2701,24 +2698,24 @@ public class X509CertSelectorTest extends TestCase {
         pkey = new TestKeyPair("RSA").getPublic();
 
         boolean[] keyUsage = new boolean[]
-                    {true, true, true, true, true, true, true, true, false};
+                { true, true, true, true, true, true, true, true, false };
         // OID values was taken from rfc 3280
         HashSet extKeyUsage = new HashSet(Arrays.asList(new String[] {
                 "1.3.6.1.5.5.7.3.1", "1.3.6.1.5.5.7.3.2", "1.3.6.1.5.5.7.3.3",
                 "1.3.6.1.5.5.7.3.4", "1.3.6.1.5.5.7.3.8", "1.3.6.1.5.5.7.3.9",
-                "1.3.6.1.5.5.7.3.5", "1.3.6.1.5.5.7.3.6", "1.3.6.1.5.5.7.3.7"}
+                "1.3.6.1.5.5.7.3.5", "1.3.6.1.5.5.7.3.6", "1.3.6.1.5.5.7.3.7" }
         ));
         GeneralNames subjectAltNames = new GeneralNames(Arrays.asList(
-            new GeneralName[] {
-                new GeneralName(1, "rfc@822.Name"),
-                new GeneralName(2, "dNSName"),
-                new GeneralName(6, "http://uniform.Resource.Id"),
-                new GeneralName(7, "1.1.1.1")
-            }
+                new GeneralName[] {
+                        new GeneralName(1, "rfc@822.Name"),
+                        new GeneralName(2, "dNSName"),
+                        new GeneralName(6, "http://uniform.Resource.Id"),
+                        new GeneralName(7, "1.1.1.1")
+                }
         ));
         String[] policies = new String[] {
-            "0.0.0.0.0.0",
-            "1.1.1.1.1.1",
+                "0.0.0.0.0.0",
+                "1.1.1.1.1.1",
         };
         TestCert cert = new TestCert("certificate equality criteria");
 
@@ -2753,7 +2750,7 @@ public class X509CertSelectorTest extends TestCase {
         BigInteger serial = new BigInteger("10000");
         X500Principal issuer = new X500Principal("O=Issuer Org.");
         X500Principal subject = new X500Principal("O=Subject Org.");
-        byte[] subject_auth_KeyID = new byte[] {1, 2, 3, 4, 5}; // random value
+        byte[] subject_auth_KeyID = new byte[] { 1, 2, 3, 4, 5 }; // random value
         Date certValid = new Date(2000000000);
         Date[] privateKeyValid = new Date[] {
                 new Date(100000000L),
@@ -2766,24 +2763,24 @@ public class X509CertSelectorTest extends TestCase {
         pkey = new TestKeyPair("RSA").getPublic();
 
         boolean[] keyUsage = new boolean[]
-                    {true, true, true, true, true, true, true, true, false};
+                { true, true, true, true, true, true, true, true, false };
         // OID values was taken from rfc 3280
         HashSet extKeyUsage = new HashSet(Arrays.asList(new String[] {
                 "1.3.6.1.5.5.7.3.1", "1.3.6.1.5.5.7.3.2", "1.3.6.1.5.5.7.3.3",
                 "1.3.6.1.5.5.7.3.4", "1.3.6.1.5.5.7.3.8", "1.3.6.1.5.5.7.3.9",
-                "1.3.6.1.5.5.7.3.5", "1.3.6.1.5.5.7.3.6", "1.3.6.1.5.5.7.3.7"}
+                "1.3.6.1.5.5.7.3.5", "1.3.6.1.5.5.7.3.6", "1.3.6.1.5.5.7.3.7" }
         ));
         GeneralNames subjectAltNames = new GeneralNames(Arrays.asList(
-            new GeneralName[] {
-                new GeneralName(1, "rfc@822.Name"),
-                new GeneralName(2, "dNSName"),
-                new GeneralName(6, "http://uniform.Resource.Id"),
-                new GeneralName(7, "1.1.1.1")
-            }
+                new GeneralName[] {
+                        new GeneralName(1, "rfc@822.Name"),
+                        new GeneralName(2, "dNSName"),
+                        new GeneralName(6, "http://uniform.Resource.Id"),
+                        new GeneralName(7, "1.1.1.1")
+                }
         ));
         String[] policies = new String[] {
-            "0.0.0.0.0.0",
-            "1.1.1.1.1.1",
+                "0.0.0.0.0.0",
+                "1.1.1.1.1.1",
         };
 
         TestCert cert = new TestCert("certificate equality criteria");
@@ -2817,9 +2814,9 @@ public class X509CertSelectorTest extends TestCase {
         selector.setPolicy(new HashSet(Arrays.asList(policies)));
 
         assertFalse("The null object should not match",
-                                    selector.match((X509Certificate) null));
+                selector.match((X509Certificate) null));
         assertTrue("The certificate should match the selector",
-                                    selector.match(cert));
+                selector.match(cert));
     }
 
     /**
@@ -2848,7 +2845,7 @@ public class X509CertSelectorTest extends TestCase {
         BigInteger serial = new BigInteger("10000");
         X500Principal issuer = new X500Principal("O=Issuer Org.");
         X500Principal subject = new X500Principal("O=Subject Org.");
-        byte[] subject_auth_KeyID = new byte[] {1, 2, 3, 4, 5}; // random value
+        byte[] subject_auth_KeyID = new byte[] { 1, 2, 3, 4, 5 }; // random value
         Date certValid = new Date(2000000000);
         Date[] privateKeyValid = new Date[] {
                 new Date(100000000L),
@@ -2861,24 +2858,24 @@ public class X509CertSelectorTest extends TestCase {
         pkey = new TestKeyPair("RSA").getPublic();
 
         boolean[] keyUsage = new boolean[]
-                    {true, true, true, true, true, true, true, true, false};
+                { true, true, true, true, true, true, true, true, false };
         // OID values was taken from rfc 3280
         HashSet extKeyUsage = new HashSet(Arrays.asList(new String[] {
                 "1.3.6.1.5.5.7.3.1", "1.3.6.1.5.5.7.3.2", "1.3.6.1.5.5.7.3.3",
                 "1.3.6.1.5.5.7.3.4", "1.3.6.1.5.5.7.3.8", "1.3.6.1.5.5.7.3.9",
-                "1.3.6.1.5.5.7.3.5", "1.3.6.1.5.5.7.3.6", "1.3.6.1.5.5.7.3.7"}
+                "1.3.6.1.5.5.7.3.5", "1.3.6.1.5.5.7.3.6", "1.3.6.1.5.5.7.3.7" }
         ));
         GeneralNames subjectAltNames = new GeneralNames(Arrays.asList(
-            new GeneralName[] {
-                new GeneralName(1, "rfc@822.Name"),
-                new GeneralName(2, "dNSName"),
-                new GeneralName(6, "http://uniform.Resource.Id"),
-                new GeneralName(7, "1.1.1.1")
-            }
+                new GeneralName[] {
+                        new GeneralName(1, "rfc@822.Name"),
+                        new GeneralName(2, "dNSName"),
+                        new GeneralName(6, "http://uniform.Resource.Id"),
+                        new GeneralName(7, "1.1.1.1")
+                }
         ));
         String[] policies = new String[] {
-            "0.0.0.0.0.0",
-            "1.1.1.1.1.1",
+                "0.0.0.0.0.0",
+                "1.1.1.1.1.1",
         };
 
         TestCert cert = new TestCert("certificate equality criteria");
@@ -2912,7 +2909,7 @@ public class X509CertSelectorTest extends TestCase {
         selector.setPolicy(new HashSet(Arrays.asList(policies)));
 
         assertTrue("The certificate should match the selector",
-                            ((X509CertSelector)selector.clone()).match(cert));
+                ((X509CertSelector) selector.clone()).match(cert));
     }
 
 

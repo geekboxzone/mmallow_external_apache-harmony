@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class NumberFormatExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.NumberFormatException#NumberFormatException()
-	 */
+    /**
+     * @tests java.lang.NumberFormatException#NumberFormatException()
+     */
     public void test_Constructor() {
         NumberFormatException e = new NumberFormatException();
         assertNull(e.getMessage());

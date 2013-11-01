@@ -27,7 +27,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SSLServerSocket</code> class constructors.
- *  
  */
 public class SSLServerSocketTest extends TestCase {
 

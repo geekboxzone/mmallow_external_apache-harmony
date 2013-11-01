@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -29,12 +29,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>RSAPrivateKeySpec</code> class fields and methods
- * 
  */
 public class RSAPrivateKeySpecTest extends TestCase {
 
     /**
      * Constructor for RSAPrivateKeySpecTest.
+     *
      * @param name
      */
     public RSAPrivateKeySpecTest(String name) {
@@ -48,7 +48,7 @@ public class RSAPrivateKeySpecTest extends TestCase {
      */
     public final void testRSAPrivateKeySpec() {
         KeySpec ks = new RSAPrivateKeySpec(BigInteger.valueOf(1234567890L),
-                                           BigInteger.valueOf(3L));
+                BigInteger.valueOf(3L));
         assertTrue(ks instanceof RSAPrivateKeySpec);
     }
 
@@ -58,8 +58,8 @@ public class RSAPrivateKeySpecTest extends TestCase {
      */
     public final void testGetModulus() {
         RSAPrivateKeySpec rpks =
-            new RSAPrivateKeySpec(BigInteger.valueOf(1234567890L),
-                                  BigInteger.valueOf(3L));
+                new RSAPrivateKeySpec(BigInteger.valueOf(1234567890L),
+                        BigInteger.valueOf(3L));
         assertEquals(1234567890L, rpks.getModulus().longValue());
     }
 
@@ -69,8 +69,8 @@ public class RSAPrivateKeySpecTest extends TestCase {
      */
     public final void testGetPrivateExponent() {
         RSAPrivateKeySpec rpks =
-            new RSAPrivateKeySpec(BigInteger.valueOf(1234567890L),
-                                  BigInteger.valueOf(3L));
+                new RSAPrivateKeySpec(BigInteger.valueOf(1234567890L),
+                        BigInteger.valueOf(3L));
         assertEquals(3L, rpks.getPrivateExponent().longValue());
     }
 

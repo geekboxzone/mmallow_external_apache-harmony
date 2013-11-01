@@ -32,24 +32,24 @@ public class IOErrorTest extends TestCase {
     public void test_IOError_LThrowable() {
         IOError e = new IOError(null);
         assertNull(e.getCause());
-        
+
         String errorMsg = "java.io.IOError"; //$NON-NLS-1$
         assertTrue(e.toString().contains(errorMsg));
-        
+
         errorMsg = "A dummy error"; //$NON-NLS-1$
         e = new IOError(new Throwable(errorMsg));
         assertTrue(e.toString().contains(errorMsg));
-        
+
         try {
             throw new IOError(null);
-        }catch(IOError error) {
+        } catch (IOError error) {
             return;
-        }catch(Error error) {
+        } catch (Error error) {
             fail("Error during IOException test" + error.toString()); //$NON-NLS-1$
         }
         fail("Failed to generate error"); //$NON-NLS-1$
     }
-    
+
     /**
      * @tests serialization/deserialization.
      * @since 1.6
@@ -59,7 +59,7 @@ public class IOErrorTest extends TestCase {
         IOError e = new IOError(new Throwable(errorMsg));
         SerializationTest.verifySelf(e);
     }
-    
+
     /**
      * @tests serialization/deserialization compatibility with RI.
      * @since 1.6

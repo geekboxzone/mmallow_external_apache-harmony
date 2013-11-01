@@ -335,7 +335,7 @@ public class SQLSyntaxErrorExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLSyntaxErrorException should be equals to cause.toString()",
                 "java.lang.Exception: MYTHROWABLE", sQLSyntaxErrorException
-                        .getMessage());
+                .getMessage());
         assertNull("The SQLState of SQLSyntaxErrorException should be null",
                 sQLSyntaxErrorException.getSQLState());
         assertEquals("The error code of SQLSyntaxErrorException should be 0",

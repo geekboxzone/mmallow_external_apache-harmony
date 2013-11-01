@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.KeyStoreException;
 
 import junit.framework.TestCase;
@@ -27,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyStoreException</code> class constructors and methods.
- * 
  */
 public class KeyStoreExceptionTest extends TestCase {
 
@@ -36,7 +36,7 @@ public class KeyStoreExceptionTest extends TestCase {
 
     /**
      * Constructor for KeyStoreExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public KeyStoreExceptionTest(String arg0) {

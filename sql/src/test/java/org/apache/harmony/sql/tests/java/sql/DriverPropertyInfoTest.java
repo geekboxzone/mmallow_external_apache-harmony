@@ -24,7 +24,6 @@ import junit.framework.TestCase;
 
 /**
  * JUnit Testcase for the java.sql.DriverPropertyInfo class
- * 
  */
 
 public class DriverPropertyInfoTest extends TestCase {

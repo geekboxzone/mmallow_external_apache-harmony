@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto.spec;
 
@@ -40,7 +40,7 @@ public class PBEParameterSpecTest extends TestCase {
      * and tests that input array is copied during the object initialization.
      */
     public void testPBEParameterSpec() {
-        byte[] salt = {1, 2, 3, 4, 5};
+        byte[] salt = { 1, 2, 3, 4, 5 };
         int iterationCount = 10;
 
         try {
@@ -51,11 +51,11 @@ public class PBEParameterSpecTest extends TestCase {
         }
 
         PBEParameterSpec pbeps = new PBEParameterSpec(salt, iterationCount);
-        salt[0] ++;
+        salt[0]++;
         assertFalse("The change of salt specified in the constructor "
-                    + "should not cause the change of internal array.",
-                    salt[0] == pbeps.getSalt()[0]);
-   }
+                + "should not cause the change of internal array.",
+                salt[0] == pbeps.getSalt()[0]);
+    }
 
     /**
      * getSalt() method testing. Tests that returned salt is equal
@@ -63,18 +63,18 @@ public class PBEParameterSpecTest extends TestCase {
      * returned array does not cause the change of internal array.
      */
     public void testGetSalt() {
-        byte[] salt = new byte[] {1, 2, 3, 4, 5};
+        byte[] salt = new byte[] { 1, 2, 3, 4, 5 };
         int iterationCount = 10;
         PBEParameterSpec pbeps = new PBEParameterSpec(salt, iterationCount);
         byte[] result = pbeps.getSalt();
-        if (! Arrays.equals(salt, result)) {
+        if (!Arrays.equals(salt, result)) {
             fail("The returned salt is not equal to the specified "
                     + "in the constructor.");
         }
-        result[0] ++;
+        result[0]++;
         assertFalse("The change of returned by getSalt() method salt"
-                    + "should not cause the change of internal array.",
-                    result[0] == pbeps.getSalt()[0]);
+                + "should not cause the change of internal array.",
+                result[0] == pbeps.getSalt()[0]);
     }
 
     /**
@@ -82,7 +82,7 @@ public class PBEParameterSpecTest extends TestCase {
      * to the value specified in the constructor.
      */
     public void testGetIterationCount() {
-        byte[] salt = new byte[] {1, 2, 3, 4, 5};
+        byte[] salt = new byte[] { 1, 2, 3, 4, 5 };
         int iterationCount = 10;
         PBEParameterSpec pbeps = new PBEParameterSpec(salt, iterationCount);
         assertTrue("The returned iterationCount is not equal to the specified "

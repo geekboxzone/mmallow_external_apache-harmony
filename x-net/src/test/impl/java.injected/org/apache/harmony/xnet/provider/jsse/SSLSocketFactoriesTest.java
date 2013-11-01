@@ -65,9 +65,9 @@ public class SSLSocketFactoriesTest extends TestCase {
     public void testDefaultInitialized() throws Exception {
 
         SSLServerSocketFactory ssfactory =
-            (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
+                (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
         SSLSocketFactory sfactory =
-            (SSLSocketFactory) SSLSocketFactory.getDefault();
+                (SSLSocketFactory) SSLSocketFactory.getDefault();
 
         assertNotNull(ssfactory.getDefaultCipherSuites());
         assertNotNull(ssfactory.getSupportedCipherSuites());
@@ -80,38 +80,38 @@ public class SSLSocketFactoriesTest extends TestCase {
 
     public void testSocketCreation() throws Throwable {
         SSLSocketFactory socketFactory
-            = new SSLSocketFactoryImpl(JSSETestData.getSSLParameters());
+                = new SSLSocketFactoryImpl(JSSETestData.getSSLParameters());
         SSLServerSocketFactory serverSocketFactory
-            = new SSLServerSocketFactoryImpl(JSSETestData.getSSLParameters());
+                = new SSLServerSocketFactoryImpl(JSSETestData.getSSLParameters());
 
-        String[] enabled = {"TLS_RSA_WITH_RC4_128_MD5"};
-        for (int i=0; i<4; i++) {
+        String[] enabled = { "TLS_RSA_WITH_RC4_128_MD5" };
+        for (int i = 0; i < 4; i++) {
             SSLServerSocket ssocket;
             switch (i) {
                 case 0:
                     if (doLog) {
                         System.out.println(
-                            "*** ServerSocketFactory.createServerSocket()");
+                                "*** ServerSocketFactory.createServerSocket()");
                     }
                     ssocket = (SSLServerSocket)
-                        serverSocketFactory.createServerSocket();
+                            serverSocketFactory.createServerSocket();
                     ssocket.bind(null);
                     break;
                 case 1:
                     if (doLog) {
                         System.out.println(
-                            "*** ServerSocketFactory.createServerSocket(int)");
+                                "*** ServerSocketFactory.createServerSocket(int)");
                     }
                     ssocket = (SSLServerSocket)
-                        serverSocketFactory.createServerSocket(0);
+                            serverSocketFactory.createServerSocket(0);
                     break;
                 case 2:
                     if (doLog) {
                         System.out.println(
-                        "*** ServerSocketFactory.createServerSocket(int,int)");
+                                "*** ServerSocketFactory.createServerSocket(int,int)");
                     }
                     ssocket = (SSLServerSocket)
-                        serverSocketFactory.createServerSocket(0, 6);
+                            serverSocketFactory.createServerSocket(0, 6);
                     break;
                 default:
                     if (doLog) {
@@ -119,32 +119,32 @@ public class SSLSocketFactoriesTest extends TestCase {
                                 + "createServerSocket(int,int,InetAddress)");
                     }
                     ssocket = (SSLServerSocket)
-                        serverSocketFactory.createServerSocket(0, 6, null);
+                            serverSocketFactory.createServerSocket(0, 6, null);
                     break;
             }
             ssocket.setUseClientMode(false);
             ssocket.setEnabledCipherSuites(enabled);
-            for (int j=0; j<6; j++) {
+            for (int j = 0; j < 6; j++) {
                 SSLSocket csocket;
                 switch (j) {
                     case 0:
                         if (doLog) {
                             System.out.println(
-                                "=== SocketFactory.createSocket()");
+                                    "=== SocketFactory.createSocket()");
                         }
                         csocket = (SSLSocket) socketFactory.createSocket();
                         csocket.connect(
                                 new InetSocketAddress("localhost",
-                                    ssocket.getLocalPort()));
+                                        ssocket.getLocalPort()));
                         break;
                     case 1:
                         if (doLog) {
                             System.out.println(
-                                "=== SocketFactory.createSocket(String,int)");
+                                    "=== SocketFactory.createSocket(String,int)");
                         }
                         csocket = (SSLSocket)
-                            socketFactory.createSocket("localhost",
-                                    ssocket.getLocalPort());
+                                socketFactory.createSocket("localhost",
+                                        ssocket.getLocalPort());
                         break;
                     case 2:
                         if (doLog) {
@@ -152,9 +152,9 @@ public class SSLSocketFactoriesTest extends TestCase {
                                     + "String,int,InetAddress,int)");
                         }
                         csocket = (SSLSocket)
-                            socketFactory.createSocket("localhost",
-                                ssocket.getLocalPort(),
-                                InetAddress.getByName("localhost"), 0);
+                                socketFactory.createSocket("localhost",
+                                        ssocket.getLocalPort(),
+                                        InetAddress.getByName("localhost"), 0);
                         break;
                     case 3:
                         if (doLog) {
@@ -180,7 +180,7 @@ public class SSLSocketFactoriesTest extends TestCase {
                         if (doLog) {
                             System.out.println(
                                     "=== SSLSocketFactory.createSocket("
-                                    + "socket,String,int,boolean)");
+                                            + "socket,String,int,boolean)");
                         }
                         Socket socket = new Socket(
                                 InetAddress.getByName("localhost"),
@@ -203,12 +203,12 @@ public class SSLSocketFactoriesTest extends TestCase {
      */
     public void testGetSupportedCipherSuites1() throws Exception {
         SSLSocketFactory socketFactory
-            = new SSLSocketFactoryImpl(JSSETestData.getSSLParameters());
+                = new SSLSocketFactoryImpl(JSSETestData.getSSLParameters());
         String[] supported = socketFactory.getSupportedCipherSuites();
         assertNotNull(supported);
         supported[0] = "NOT_SUPPORTED_CIPHER_SUITE";
         supported = socketFactory.getSupportedCipherSuites();
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             if ("NOT_SUPPORTED_CIPHER_SUITE".equals(supported[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -221,12 +221,12 @@ public class SSLSocketFactoriesTest extends TestCase {
      */
     public void testGetSupportedCipherSuites2() throws Exception {
         SSLServerSocketFactory serverSocketFactory
-            = new SSLServerSocketFactoryImpl(JSSETestData.getSSLParameters());
+                = new SSLServerSocketFactoryImpl(JSSETestData.getSSLParameters());
         String[] supported = serverSocketFactory.getSupportedCipherSuites();
         assertNotNull(supported);
         supported[0] = "NOT_SUPPORTED_CIPHER_SUITE";
         supported = serverSocketFactory.getSupportedCipherSuites();
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             if ("NOT_SUPPORTED_CIPHER_SUITE".equals(supported[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -239,14 +239,15 @@ public class SSLSocketFactoriesTest extends TestCase {
      */
     public void testGetDefaultCipherSuites1() throws Exception {
         SSLSocketFactory socketFactory
-            = new SSLSocketFactoryImpl(JSSETestData.getSSLParameters());
+                = new SSLSocketFactoryImpl(JSSETestData.getSSLParameters());
         String[] supported = socketFactory.getSupportedCipherSuites();
         String[] defaultcs = socketFactory.getDefaultCipherSuites();
         assertNotNull(supported);
         assertNotNull(defaultcs);
-        for (int i=0; i<defaultcs.length; i++) {
-            found: {
-                for (int j=0; j<supported.length; j++) {
+        for (int i = 0; i < defaultcs.length; i++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (defaultcs[i].equals(supported[j])) {
                         break found;
                     }
@@ -262,14 +263,15 @@ public class SSLSocketFactoriesTest extends TestCase {
      */
     public void testGetDefaultCipherSuites2() throws Exception {
         SSLServerSocketFactory serverSocketFactory
-            = new SSLServerSocketFactoryImpl(JSSETestData.getSSLParameters());
+                = new SSLServerSocketFactoryImpl(JSSETestData.getSSLParameters());
         String[] supported = serverSocketFactory.getSupportedCipherSuites();
         String[] defaultcs = serverSocketFactory.getDefaultCipherSuites();
         assertNotNull(supported);
         assertNotNull(defaultcs);
-        for (int i=0; i<defaultcs.length; i++) {
-            found: {
-                for (int j=0; j<supported.length; j++) {
+        for (int i = 0; i < defaultcs.length; i++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (defaultcs[i].equals(supported[j])) {
                         break found;
                     }
@@ -282,6 +284,7 @@ public class SSLSocketFactoriesTest extends TestCase {
 
     /**
      * Performs SSL connection between the sockets
+     *
      * @return
      */
     public void doTest(SSLServerSocket ssocket, SSLSocket csocket)
@@ -314,7 +317,7 @@ public class SSLSocketFactoriesTest extends TestCase {
                         int len = is.read(buff);
                         if (doLog) {
                             System.out.println("Received message of length "
-                                + len + ": '" + new String(buff, 0, len)+"'");
+                                    + len + ": '" + new String(buff, 0, len) + "'");
                         }
                         assertTrue("Read message does not equal to expected",
                                 Arrays.equals(client_message.getBytes(), buff));
@@ -323,17 +326,17 @@ public class SSLSocketFactoriesTest extends TestCase {
                                 255, is.read());
                         if (doLog) {
                             System.out.println("Server is closed: "
-                                    +s.isClosed());
+                                    + s.isClosed());
                         }
                         assertEquals("Returned value should be -1",
-                        // initiate an exchange of closure alerts
+                                // initiate an exchange of closure alerts
                                 -1, is.read());
                         if (doLog) {
                             System.out.println("Server is closed: "
-                                    +s.isClosed());
+                                    + s.isClosed());
                         }
                         assertEquals("Returned value should be -1",
-                        // initiate an exchange of closure alerts
+                                // initiate an exchange of closure alerts
                                 -1, is.read());
                     } catch (Throwable e) {
                         synchronized (throwed) {
@@ -349,17 +352,20 @@ public class SSLSocketFactoriesTest extends TestCase {
                             if (is != null) {
                                 is.close();
                             }
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                        }
                         try {
                             if (os != null) {
                                 os.close();
                             }
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                        }
                         try {
                             if (s != null) {
                                 s.close();
                             }
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                        }
                     }
                 }
             };
@@ -385,24 +391,24 @@ public class SSLSocketFactoriesTest extends TestCase {
                         int len = is.read(buff);
                         if (doLog) {
                             System.out.println("Received message of length "
-                                + len + ": '" + new String(buff, 0, len)+"'");
+                                    + len + ": '" + new String(buff, 0, len) + "'");
                         }
                         assertTrue("Read message does not equal to expected",
                                 Arrays.equals(server_message.getBytes(), buff));
                         // send the response
-                        buff = (" "+client_message+" ").getBytes();
-                        os.write(buff, 1, buff.length-2);
+                        buff = (" " + client_message + " ").getBytes();
+                        os.write(buff, 1, buff.length - 2);
                         assertEquals("Read data differs from expected",
                                 255, is.read());
                         os.write(-1);
                         if (doLog) {
                             System.out.println("Client is closed: "
-                                    +s.isClosed());
+                                    + s.isClosed());
                         }
                         s.close();
                         if (doLog) {
                             System.out.println("Client is closed: "
-                                    +s.isClosed());
+                                    + s.isClosed());
                         }
                     } catch (Throwable e) {
                         synchronized (throwed) {
@@ -418,17 +424,20 @@ public class SSLSocketFactoriesTest extends TestCase {
                             if (is != null) {
                                 is.close();
                             }
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                        }
                         try {
                             if (os != null) {
                                 os.close();
                             }
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                        }
                         try {
                             if (s != null) {
                                 s.close();
                             }
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                        }
                     }
                 }
             };
@@ -442,7 +451,8 @@ public class SSLSocketFactoriesTest extends TestCase {
                 }
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
             }
         } finally {
             if (server != null) {

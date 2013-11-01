@@ -24,7 +24,6 @@ public class UndeclaredThrowableExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.lang.reflect.UndeclaredThrowableException#UndeclaredThrowableException(java.lang.Throwable)}
-     *
      */
     public void test_UndeclaredThrowableException_LThrowable() {
         UndeclaredThrowableException e = new UndeclaredThrowableException(
@@ -36,7 +35,6 @@ public class UndeclaredThrowableExceptionTest extends TestCase {
 
     /**
      * @tests {@link java.lang.reflect.UndeclaredThrowableException#UndeclaredThrowableException(java.lang.Throwable, java.lang.String)}
-     *
      */
     public void test_UndeclaredThrowableException_LThrowable_LString() {
         UndeclaredThrowableException e = new UndeclaredThrowableException(null,

@@ -30,41 +30,41 @@ import junit.framework.TestCase;
 
 public class ResponseCacheTest extends TestCase {
 
-	/**
-	 * @tests java.net.ResponseCache#getDefault()
-	 */
-	public void test_GetDefault() throws Exception {
-		assertNull(ResponseCache.getDefault());
-	}
+    /**
+     * @tests java.net.ResponseCache#getDefault()
+     */
+    public void test_GetDefault() throws Exception {
+        assertNull(ResponseCache.getDefault());
+    }
 
-	/**
-	 * @tests java.net.ResponseCache#setDefault(ResponseCache)
-	 */
-	public void test_SetDefaultLjava_net_ResponseCache_Normal()
-			throws Exception {
-		ResponseCache rc1 = new MockResponseCache();
-		ResponseCache rc2 = new MockResponseCache();
-		ResponseCache.setDefault(rc1);
-		assertSame(ResponseCache.getDefault(), rc1);
-		ResponseCache.setDefault(rc2);
-		assertSame(ResponseCache.getDefault(), rc2);
-		ResponseCache.setDefault(null);
-		assertNull(ResponseCache.getDefault());
-	}
+    /**
+     * @tests java.net.ResponseCache#setDefault(ResponseCache)
+     */
+    public void test_SetDefaultLjava_net_ResponseCache_Normal()
+            throws Exception {
+        ResponseCache rc1 = new MockResponseCache();
+        ResponseCache rc2 = new MockResponseCache();
+        ResponseCache.setDefault(rc1);
+        assertSame(ResponseCache.getDefault(), rc1);
+        ResponseCache.setDefault(rc2);
+        assertSame(ResponseCache.getDefault(), rc2);
+        ResponseCache.setDefault(null);
+        assertNull(ResponseCache.getDefault());
+    }
 
-	/*
-	 * MockResponseCache for testSetDefault(ResponseCache)
-	 */
-	class MockResponseCache extends ResponseCache {
+    /*
+      * MockResponseCache for testSetDefault(ResponseCache)
+      */
+    class MockResponseCache extends ResponseCache {
 
-		public CacheResponse get(URI arg0, String arg1, Map arg2)
-				throws IOException {
-			return null;
-		}
+        public CacheResponse get(URI arg0, String arg1, Map arg2)
+                throws IOException {
+            return null;
+        }
 
-		public CacheRequest put(URI arg0, URLConnection arg1)
-				throws IOException {
-			return null;
-		}
-	}
+        public CacheRequest put(URI arg0, URLConnection arg1)
+                throws IOException {
+            return null;
+        }
+    }
 }

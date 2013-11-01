@@ -455,12 +455,12 @@ public class OutputStreamWriterTest extends TestCase {
 
                 int upper = UPPER;
                 switch (i) {
-                case 0:
-                    upper = 128;
-                    break;
-                case 1:
-                    upper = 256;
-                    break;
+                    case 0:
+                        upper = 128;
+                        break;
+                    case 1:
+                        upper = 256;
+                        break;
                 }
 
                 for (int c = 0; c < upper; ++c) {
@@ -498,12 +498,12 @@ public class OutputStreamWriterTest extends TestCase {
 
                 int upper = UPPER;
                 switch (i) {
-                case 0:
-                    upper = 128;
-                    break;
-                case 1:
-                    upper = 256;
-                    break;
+                    case 0:
+                        upper = 128;
+                        break;
+                    case 1:
+                        upper = 256;
+                        break;
                 }
 
                 int m = 0;
@@ -551,7 +551,7 @@ public class OutputStreamWriterTest extends TestCase {
 
     /**
      * @tests java.io.OutputStreamWriter#OutputStreamWriter(java.io.OutputStream,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_ConstructorLjava_io_OutputStreamLjava_lang_String()
             throws UnsupportedEncodingException {

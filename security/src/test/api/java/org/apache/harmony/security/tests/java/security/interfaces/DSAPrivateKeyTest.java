@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.interfaces;
 
@@ -30,13 +30,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>DSAPrivateKey</code> class field
- * 
  */
 public class DSAPrivateKeyTest extends TestCase {
 
     /**
      * Constructor for DSAPrivateKeyTest.
-     * 
+     *
      * @param arg0
      */
     public DSAPrivateKeyTest(String arg0) {
@@ -52,25 +51,30 @@ public class DSAPrivateKeyTest extends TestCase {
                 k.getSerVerUID(), //DSAPrivateKey.serialVersionUID 
                 7776497482533790279L);
     }
-    
+
     public class checkDSAPrivateKey implements DSAPrivateKey {
         public String getAlgorithm() {
             return "DSAPrivateKey";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return new byte[0];
         }
+
         public long getSerVerUID() {
             return serialVersionUID;
         }
+
         public BigInteger getX() {
             return null;
         }
+
         public DSAParams getParams() {
             return null;
-        }        
+        }
     }
 }

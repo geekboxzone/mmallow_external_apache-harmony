@@ -32,7 +32,7 @@ public class TestHelper_ClassLoader extends ClassLoader {
 
     /**
      * Loads a class specified by its name
-     * <p>
+     * <p/>
      * This classloader makes the assumption that any class it is asked to load
      * is in the current directory....
      */

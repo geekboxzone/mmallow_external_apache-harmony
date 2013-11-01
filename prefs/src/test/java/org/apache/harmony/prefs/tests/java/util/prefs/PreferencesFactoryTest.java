@@ -22,7 +22,7 @@ import java.util.prefs.PreferencesFactory;
 import junit.framework.TestCase;
 
 /**
- * 
+ *
  */
 public class PreferencesFactoryTest extends TestCase {
 

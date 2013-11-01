@@ -23,59 +23,59 @@ import java.util.ResourceBundle;
 
 public class MissingResourceExceptionTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.util.MissingResourceException#MissingResourceException(java.lang.String,
-	 *        java.lang.String, java.lang.String)
-	 */
-	public void test_ConstructorLjava_lang_StringLjava_lang_StringLjava_lang_String() {
-		// Test for method java.util.MissingResourceException(java.lang.String,
-		// java.lang.String, java.lang.String)
-		try {
-			ResourceBundle.getBundle("Non-ExistentBundle");
-		} catch (MissingResourceException e) {
-			return;
-		}
-		fail("Failed to generate expected exception");
-	}
+    /**
+     * @tests java.util.MissingResourceException#MissingResourceException(java.lang.String,
+     *java.lang.String, java.lang.String)
+     */
+    public void test_ConstructorLjava_lang_StringLjava_lang_StringLjava_lang_String() {
+        // Test for method java.util.MissingResourceException(java.lang.String,
+        // java.lang.String, java.lang.String)
+        try {
+            ResourceBundle.getBundle("Non-ExistentBundle");
+        } catch (MissingResourceException e) {
+            return;
+        }
+        fail("Failed to generate expected exception");
+    }
 
-	/**
-	 * @tests java.util.MissingResourceException#getClassName()
-	 */
-	public void test_getClassName() {
-		// Test for method java.lang.String
-		// java.util.MissingResourceException.getClassName()
-		try {
-			ResourceBundle.getBundle("Non-ExistentBundle");
-		} catch (MissingResourceException e) {
-			assertEquals("Returned incorrect class name", "Non-ExistentBundle"
+    /**
+     * @tests java.util.MissingResourceException#getClassName()
+     */
+    public void test_getClassName() {
+        // Test for method java.lang.String
+        // java.util.MissingResourceException.getClassName()
+        try {
+            ResourceBundle.getBundle("Non-ExistentBundle");
+        } catch (MissingResourceException e) {
+            assertEquals("Returned incorrect class name", "Non-ExistentBundle"
                     + '_' + Locale.getDefault(), e.getClassName());
-		}
-	}
+        }
+    }
 
-	/**
-	 * @tests java.util.MissingResourceException#getKey()
-	 */
-	public void test_getKey() {
-		// Test for method java.lang.String
-		// java.util.MissingResourceException.getKey()
-		try {
-			ResourceBundle.getBundle("Non-ExistentBundle");
-		} catch (MissingResourceException e) {
-			assertTrue("Returned incorrect class name", e.getKey().equals(""));
-		}
-	}
+    /**
+     * @tests java.util.MissingResourceException#getKey()
+     */
+    public void test_getKey() {
+        // Test for method java.lang.String
+        // java.util.MissingResourceException.getKey()
+        try {
+            ResourceBundle.getBundle("Non-ExistentBundle");
+        } catch (MissingResourceException e) {
+            assertTrue("Returned incorrect class name", e.getKey().equals(""));
+        }
+    }
 
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

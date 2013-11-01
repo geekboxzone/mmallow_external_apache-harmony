@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.support.cert;
 
@@ -50,7 +50,6 @@ import tests.support.resource.Support_Resources;
 
 /**
  * java.security.cert test utilities
- * 
  */
 public class TestUtils {
     // Certificate type used during testing
@@ -73,7 +72,7 @@ public class TestUtils {
     // Common passwords for all test keystores
     //
     private final static char[] storepass =
-        new char[] {'s','t','o','r','e','p','w','d'};
+            new char[] { 's', 't', 'o', 'r', 'e', 'p', 'w', 'd' };
 
     /**
      * Creates <code>TrustAnchor</code> instance
@@ -97,7 +96,7 @@ public class TestUtils {
         try {
             bis = new BufferedInputStream(new ByteArrayInputStream(
                     getEncodedX509Certificate()));
-            X509Certificate c1 = (X509Certificate)cf.generateCertificate(bis);
+            X509Certificate c1 = (X509Certificate) cf.generateCertificate(bis);
 
             return new TrustAnchor(c1, null);
         } catch (Exception e) {
@@ -106,8 +105,9 @@ public class TestUtils {
         } finally {
             if (bis != null) {
                 try {
-                    bis.close() ;
-                } catch (IOException ign) {}
+                    bis.close();
+                } catch (IOException ign) {
+                }
             }
         }
     }
@@ -115,6 +115,7 @@ public class TestUtils {
     /**
      * Creates <code>Set</code> of <code>TrustAnchor</code>s
      * containing single element (self signed test certificate).
+     *
      * @return Returns <code>Set</code> of <code>TrustAnchor</code>s
      */
     public static Set getTrustAnchorSet() {
@@ -131,17 +132,13 @@ public class TestUtils {
 
     /**
      * Creates test <code>KeyStore</code> instance
-     * 
-     * @param initialize
-     *  Do not initialize returned <code>KeyStore</code> if false
-     * 
-     * @param testKeyStoreType 
-     *  this parameter ignored if <code>initialize</code> is false;
-     *  The following types supported:<br>
-     *  1 - <code>KeyStore</code> with untrusted certificates only<br>
-     *  2 - <code>KeyStore</code> with trusted certificates only<br>
-     *  3 - <code>KeyStore</code> with both trusted and untrusted certificates
-     * 
+     *
+     * @param initialize       Do not initialize returned <code>KeyStore</code> if false
+     * @param testKeyStoreType this parameter ignored if <code>initialize</code> is false;
+     *                         The following types supported:<br>
+     *                         1 - <code>KeyStore</code> with untrusted certificates only<br>
+     *                         2 - <code>KeyStore</code> with trusted certificates only<br>
+     *                         3 - <code>KeyStore</code> with both trusted and untrusted certificates
      * @return Returns test <code>KeyStore</code> instance
      */
     public static KeyStore getKeyStore(boolean initialize,
@@ -161,7 +158,8 @@ public class TestUtils {
             if (initialize && bis != null) {
                 try {
                     bis.close();
-                } catch (IOException ign) {}
+                } catch (IOException ign) {
+                }
             }
         }
     }
@@ -170,13 +168,13 @@ public class TestUtils {
      * Creates <code>List</code> of <code>CollectionCertStores</code>
      *
      * @return The list created
-     * 
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws NoSuchAlgorithmException
      */
     public static List getCollectionCertStoresList()
-        throws InvalidAlgorithmParameterException,
-               NoSuchAlgorithmException {
+            throws InvalidAlgorithmParameterException,
+            NoSuchAlgorithmException {
         CertStore cs = CertStore.getInstance("Collection",
                 new CollectionCertStoreParameters());
         ArrayList l = new ArrayList();
@@ -224,6 +222,7 @@ public class TestUtils {
     public static PolicyNode getPolicyTree() {
         return new PolicyNode() {
             final PolicyNode parent = this;
+
             public int getDepth() {
                 // parent
                 return 0;
@@ -286,6 +285,7 @@ public class TestUtils {
             }
         };
     }
+
     // X.509 encoded certificate
     private static final String ENCODED_X509_CERTIFICATE = "-----BEGIN CERTIFICATE-----\n"
             + "MIIDHTCCAtsCBEFT72swCwYHKoZIzjgEAwUAMHQxCzAJBgNVBAYTAlJVMQwwCgYDVQQIEwNOU08x\n"
@@ -313,93 +313,93 @@ public class TestUtils {
         }
         return cert;
     }
-    
+
     /**
      * Returns X.509 certificate encoding corresponding to version v1.
-     * 
+     * <p/>
      * Certificate encoding was created by hands according to X.509 Certificate
      * ASN.1 notation. The certificate encoding has the following encoded
-     * field values:<br> 
+     * field values:<br>
      * - version: 1<br>
      * - serialNumber: 5<br>
      * - issuer: CN=Z<br>
      * - notBefore: 13 Dec 1999 14:15:16<br>
      * - notAfter: 01 Jan 2000 00:00:00<br>
      * - subject: CN=Y<br>
-     * 
+     *
      * @return X.509 certificate encoding corresponding to version v1.
      */
     public static byte[] getX509Certificate_v1() {
         return new byte[] {
-        // Certificate: SEQUENCE
-            0x30, 0x6B,
+                // Certificate: SEQUENCE
+                0x30, 0x6B,
 
-            //
-            // TBSCertificate: SEQUENCE {
-            //
-            0x30, 0x5C,
+                //
+                // TBSCertificate: SEQUENCE {
+                //
+                0x30, 0x5C,
 
-            // version: [0] EXPLICIT Version DEFAULT v1
-            (byte) 0xA0, 0x03, 0x02, 0x01, 0x00,
+                // version: [0] EXPLICIT Version DEFAULT v1
+                (byte) 0xA0, 0x03, 0x02, 0x01, 0x00,
 
-            // serialNumber: CertificateSerialNumber
-            0x02, 0x01, 0x05,
+                // serialNumber: CertificateSerialNumber
+                0x02, 0x01, 0x05,
 
-            // signature: AlgorithmIdentifier
-            0x30, 0x07, // SEQUENCE
-            0x06, 0x02, 0x03, 0x05,//OID
-            0x01, 0x01, 0x07, //ANY
+                // signature: AlgorithmIdentifier
+                0x30, 0x07, // SEQUENCE
+                0x06, 0x02, 0x03, 0x05,//OID
+                0x01, 0x01, 0x07, //ANY
 
-            //issuer: Name
-            0x30, 0x0C, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55, 0x04, 0x03,
-            0x13, 0x01, 0x5A, // CN=Z
+                //issuer: Name
+                0x30, 0x0C, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55, 0x04, 0x03,
+                0x13, 0x01, 0x5A, // CN=Z
 
-            //validity: Validity
-            0x30, 0x1E, // SEQUENCE
-            // notBefore: UTCTime
-            0x17, 0x0D, 0x39, 0x39, 0x31, 0x32, 0x31, 0x33, 0x31, 0x34, 0x31,
-            0x35, 0x31, 0x36, 0x5A, // 13 Dec 1999 14:15:16
-            // notAfter:  UTCTime
-            0x17, 0x0D, 0x30, 0x30, 0x30, 0x31, 0x30, 0x31, 0x30, 0x30, 0x30,
-            0x30, 0x30, 0x30, 0x5A, // 01 Jan 2000 00:00:00
+                //validity: Validity
+                0x30, 0x1E, // SEQUENCE
+                // notBefore: UTCTime
+                0x17, 0x0D, 0x39, 0x39, 0x31, 0x32, 0x31, 0x33, 0x31, 0x34, 0x31,
+                0x35, 0x31, 0x36, 0x5A, // 13 Dec 1999 14:15:16
+                // notAfter:  UTCTime
+                0x17, 0x0D, 0x30, 0x30, 0x30, 0x31, 0x30, 0x31, 0x30, 0x30, 0x30,
+                0x30, 0x30, 0x30, 0x5A, // 01 Jan 2000 00:00:00
 
-            //subject: Name
-            0x30, 0x0C, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55, 0x04, 0x03,
-            0x13, 0x01, 0x59, // CN=Y
-            //SubjectPublicKeyInfo  ::=  SEQUENCE  {
-            //    algorithm            AlgorithmIdentifier,
-            //    subjectPublicKey     BIT STRING  }
-            0x30, 0x0D, // SEQUENCE
-            0x30, 0x07, // SEQUENCE
-            0x06, 0x02, 0x03, 0x05,//OID
-            0x01, 0x01, 0x07, //ANY
-            0x03, 0x02, 0x00, 0x01, // subjectPublicKey
+                //subject: Name
+                0x30, 0x0C, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55, 0x04, 0x03,
+                0x13, 0x01, 0x59, // CN=Y
+                //SubjectPublicKeyInfo  ::=  SEQUENCE  {
+                //    algorithm            AlgorithmIdentifier,
+                //    subjectPublicKey     BIT STRING  }
+                0x30, 0x0D, // SEQUENCE
+                0x30, 0x07, // SEQUENCE
+                0x06, 0x02, 0x03, 0x05,//OID
+                0x01, 0x01, 0x07, //ANY
+                0x03, 0x02, 0x00, 0x01, // subjectPublicKey
 
-            // issuerUniqueID - missed
-            // subjectUniqueID - missed
-            // extensions - missed
+                // issuerUniqueID - missed
+                // subjectUniqueID - missed
+                // extensions - missed
 
-            // } end TBSCertificate
+                // } end TBSCertificate
 
-            //
-            // signatureAlgorithm: AlgorithmIdentifier
-            //
-            0x30, 0x07, // SEQUENCE
-            0x06, 0x02, 0x03, 0x05,//OID
-            0x01, 0x01, 0x07, //ANY
+                //
+                // signatureAlgorithm: AlgorithmIdentifier
+                //
+                0x30, 0x07, // SEQUENCE
+                0x06, 0x02, 0x03, 0x05,//OID
+                0x01, 0x01, 0x07, //ANY
 
-            //
-            // signature: BIT STRING  
-            //
-            0x03, 0x02, 0x00, 0x01 };
+                //
+                // signature: BIT STRING
+                //
+                0x03, 0x02, 0x00, 0x01 };
     }
 
     /**
      * Returns X.509 certificate encoding corresponding to version v3.
-     * 
+     * <p/>
      * Certificate encoding was created by hands according to X.509 Certificate
      * ASN.1 notation. The certificate encoding has the following encoded
-     * field values:<br> 
+     * field values:<br>
      * - version: 3<br>
      * - serialNumber: 5<br>
      * - issuer: CN=Z<br>
@@ -407,107 +407,107 @@ public class TestUtils {
      * - notAfter: 01 Jan 2000 00:00:00<br>
      * - subject: CN=Y<br>
      * - extensions:
-     *       1) AuthorityKeyIdentifier(OID=2.5.29.35): no values in it(empty sequence) 
-     * 
+     * 1) AuthorityKeyIdentifier(OID=2.5.29.35): no values in it(empty sequence)
+     *
      * @return X.509 certificate encoding corresponding to version v3.
      */
     public static byte[] getX509Certificate_v3() {
         return new byte[] {
-        // Certificate: SEQUENCE
-            0x30, 0x7D,
+                // Certificate: SEQUENCE
+                0x30, 0x7D,
 
-            //
-            // TBSCertificate: SEQUENCE {
-            //
-            0x30, 0x6E,
+                //
+                // TBSCertificate: SEQUENCE {
+                //
+                0x30, 0x6E,
 
-            // version: [0] EXPLICIT Version DEFAULT v1
-            (byte) 0xA0, 0x03, 0x02, 0x01, 0x02,
+                // version: [0] EXPLICIT Version DEFAULT v1
+                (byte) 0xA0, 0x03, 0x02, 0x01, 0x02,
 
-            // serialNumber: CertificateSerialNumber
-            0x02, 0x01, 0x05,
+                // serialNumber: CertificateSerialNumber
+                0x02, 0x01, 0x05,
 
-            // signature: AlgorithmIdentifier
-            0x30, 0x07, // SEQUENCE
-            0x06, 0x02, 0x03, 0x05,//OID
-            0x01, 0x01, 0x07, //ANY
+                // signature: AlgorithmIdentifier
+                0x30, 0x07, // SEQUENCE
+                0x06, 0x02, 0x03, 0x05,//OID
+                0x01, 0x01, 0x07, //ANY
 
-            //issuer: Name
-            0x30, 0x0C, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55, 0x04, 0x03,
-            0x13, 0x01, 0x5A, // CN=Z
+                //issuer: Name
+                0x30, 0x0C, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55, 0x04, 0x03,
+                0x13, 0x01, 0x5A, // CN=Z
 
-            //validity: Validity
-            0x30, 0x1E, // SEQUENCE
-            // notBefore: UTCTime
-            0x17, 0x0D, 0x39, 0x39, 0x31, 0x32, 0x31, 0x33, 0x31, 0x34, 0x31,
-            0x35, 0x31, 0x36, 0x5A, // 13 Dec 1999 14:15:16
-            // notAfter:  UTCTime
-            0x17, 0x0D, 0x30, 0x30, 0x30, 0x31, 0x30, 0x31, 0x30, 0x30, 0x30,
-            0x30, 0x30, 0x30, 0x5A, // 01 Jan 2000 00:00:00
+                //validity: Validity
+                0x30, 0x1E, // SEQUENCE
+                // notBefore: UTCTime
+                0x17, 0x0D, 0x39, 0x39, 0x31, 0x32, 0x31, 0x33, 0x31, 0x34, 0x31,
+                0x35, 0x31, 0x36, 0x5A, // 13 Dec 1999 14:15:16
+                // notAfter:  UTCTime
+                0x17, 0x0D, 0x30, 0x30, 0x30, 0x31, 0x30, 0x31, 0x30, 0x30, 0x30,
+                0x30, 0x30, 0x30, 0x5A, // 01 Jan 2000 00:00:00
 
-            //subject: Name
-            0x30, 0x0C, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55, 0x04, 0x03,
-            0x13, 0x01, 0x59, // CN=Y
-            //SubjectPublicKeyInfo  ::=  SEQUENCE  {
-            //    algorithm            AlgorithmIdentifier,
-            //    subjectPublicKey     BIT STRING  }
-            0x30, 0x0D, // SEQUENCE
-            0x30, 0x07, // SEQUENCE
-            0x06, 0x02, 0x03, 0x05,//OID
-            0x01, 0x01, 0x07, //ANY
-            0x03, 0x02, 0x00, 0x01, // subjectPublicKey
+                //subject: Name
+                0x30, 0x0C, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55, 0x04, 0x03,
+                0x13, 0x01, 0x59, // CN=Y
+                //SubjectPublicKeyInfo  ::=  SEQUENCE  {
+                //    algorithm            AlgorithmIdentifier,
+                //    subjectPublicKey     BIT STRING  }
+                0x30, 0x0D, // SEQUENCE
+                0x30, 0x07, // SEQUENCE
+                0x06, 0x02, 0x03, 0x05,//OID
+                0x01, 0x01, 0x07, //ANY
+                0x03, 0x02, 0x00, 0x01, // subjectPublicKey
 
-            // issuerUniqueID - missed
-            // subjectUniqueID - missed
-            // extensions : [3]  EXPLICIT Extensions OPTIONAL
-            (byte) 0xA3, 0x10,
-            // Extensions  ::=  SEQUENCE SIZE (1..MAX) OF Extension
-            0x30, 0x0E,
-            // Extension  ::=  SEQUENCE  {
-            // extnID      OBJECT IDENTIFIER,
-            // critical    BOOLEAN DEFAULT FALSE,
-            // extnValue   OCTET STRING  }
+                // issuerUniqueID - missed
+                // subjectUniqueID - missed
+                // extensions : [3]  EXPLICIT Extensions OPTIONAL
+                (byte) 0xA3, 0x10,
+                // Extensions  ::=  SEQUENCE SIZE (1..MAX) OF Extension
+                0x30, 0x0E,
+                // Extension  ::=  SEQUENCE  {
+                // extnID      OBJECT IDENTIFIER,
+                // critical    BOOLEAN DEFAULT FALSE,
+                // extnValue   OCTET STRING  }
 
-            // 1) AuthorityKeyIdentifier extension (see HARMONY-3384)
-            0x30, 0x0C,
-            0x06, 0x03, 0x55, 0x1D, 0x23, // OID = 2.5.29.35
-            0x01, 0x01, 0x00, // critical = FALSE
-            0x04, 0x02, 0x30, 0x00, // extnValue: MUST be empty sequence
-            // missed: keyIdentifier
-            // missed: authorityCertIssuer
-            // missed" authorityCertSerialNumber
+                // 1) AuthorityKeyIdentifier extension (see HARMONY-3384)
+                0x30, 0x0C,
+                0x06, 0x03, 0x55, 0x1D, 0x23, // OID = 2.5.29.35
+                0x01, 0x01, 0x00, // critical = FALSE
+                0x04, 0x02, 0x30, 0x00, // extnValue: MUST be empty sequence
+                // missed: keyIdentifier
+                // missed: authorityCertIssuer
+                // missed" authorityCertSerialNumber
 
-            // } end TBSCertificate
+                // } end TBSCertificate
 
-            //
-            // signatureAlgorithm: AlgorithmIdentifier
-            //
-            0x30, 0x07, // SEQUENCE
-            0x06, 0x02, 0x03, 0x05,//OID
-            0x01, 0x01, 0x07, //ANY
+                //
+                // signatureAlgorithm: AlgorithmIdentifier
+                //
+                0x30, 0x07, // SEQUENCE
+                0x06, 0x02, 0x03, 0x05,//OID
+                0x01, 0x01, 0x07, //ANY
 
-            //
-            // signature: BIT STRING  
-            //
-            0x03, 0x02, 0x00, 0x01 };
+                //
+                // signature: BIT STRING
+                //
+                0x03, 0x02, 0x00, 0x01 };
     }
 
     /**
      * Returns X.509 CRL encoding corresponding to version v1.
-     * 
+     * <p/>
      * CRL encoding was created by hands according to X.509 CRL ASN.1
-     * notation. The CRL encoding has the following encoded field values:<br> 
+     * notation. The CRL encoding has the following encoded field values:<br>
      * - version: 1<br>
      * - issuer: CN=Z<br>
      * - thisUpdate: 01 Jan 2001 01:02:03<br>
-     * 
+     *
      * @return X.509 CRL encoding corresponding to version v1.
      */
     public static byte[] getX509CRL_v1() {
         return new byte[] {
                 //CertificateList: SEQUENCE
-                0x30, 0x35, 
-                
+                0x30, 0x35,
+
                 // TBSCertList: SEQUENCE  
                 0x30, 0x27,
                 // Version: INTEGER OPTIONAL
@@ -523,11 +523,11 @@ public class TestUtils {
                 // GeneralizedTime: 01 Jan 2001 01:02:03
                 0x18, 0x0F, 0x32, 0x30, 0x30, 0x31, 0x30, 0x31, 0x30, 0x31,
                 0x30, 0x31, 0x30, 0x32, 0x30, 0x33, 0x5A,
-                
+
                 // nextUpdate - missed
                 // revokedCertificates - missed
                 // crlExtensions - missed
-                
+
                 // signatureAlgorithm: AlgorithmIdentifier
                 0x30, 0x06, // SEQUENCE
                 0x06, 0x01, 0x01, //OID

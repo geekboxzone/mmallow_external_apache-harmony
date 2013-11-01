@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -28,12 +28,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>RSAOtherPrimeInfo</code> class fields and methods.
- * 
  */
 public class RSAOtherPrimeInfoTest extends TestCase {
 
     /**
      * Constructor for RSAOtherPrimeInfoTest.
+     *
      * @param name
      */
     public RSAOtherPrimeInfoTest(String name) {
@@ -47,12 +47,12 @@ public class RSAOtherPrimeInfoTest extends TestCase {
      */
     public final void testRSAOtherPrimeInfo01() {
         Object o =
-            new RSAOtherPrimeInfo(BigInteger.valueOf(1L),
-                                  BigInteger.valueOf(2L),
-                                  BigInteger.valueOf(3L));
+                new RSAOtherPrimeInfo(BigInteger.valueOf(1L),
+                        BigInteger.valueOf(2L),
+                        BigInteger.valueOf(3L));
         assertTrue(o instanceof RSAOtherPrimeInfo);
     }
-    
+
     /**
      * Test #2 for <code>RSAOtherPrimeInfo(BigInteger,BigInteger,BigInteger)</code> ctor
      * Assertion: NullPointerException if prime is null
@@ -60,13 +60,13 @@ public class RSAOtherPrimeInfoTest extends TestCase {
     public final void testRSAOtherPrimeInfo02() {
         try {
             new RSAOtherPrimeInfo(null,
-                                  BigInteger.valueOf(2L),
-                                  BigInteger.valueOf(3L));
+                    BigInteger.valueOf(2L),
+                    BigInteger.valueOf(3L));
             fail("Expected NPE not thrown");
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test #3 for <code>RSAOtherPrimeInfo(BigInteger,BigInteger,BigInteger)</code> ctor
      * Assertion: NullPointerException if primeExponent is null
@@ -74,13 +74,13 @@ public class RSAOtherPrimeInfoTest extends TestCase {
     public final void testRSAOtherPrimeInfo03() {
         try {
             new RSAOtherPrimeInfo(BigInteger.valueOf(1L),
-                                  null,
-                                  BigInteger.valueOf(3L));
+                    null,
+                    BigInteger.valueOf(3L));
             fail("Expected NPE not thrown");
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test #4 for <code>RSAOtherPrimeInfo(BigInteger,BigInteger,BigInteger)</code> ctor
      * Assertion: NullPointerException if crtCoefficient is null
@@ -88,13 +88,13 @@ public class RSAOtherPrimeInfoTest extends TestCase {
     public final void testRSAOtherPrimeInfo04() {
         try {
             new RSAOtherPrimeInfo(BigInteger.valueOf(1L),
-                                  BigInteger.valueOf(2L),
-                                  null);
+                    BigInteger.valueOf(2L),
+                    null);
             fail("Expected NPE not thrown");
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test #5 for <code>RSAOtherPrimeInfo(BigInteger,BigInteger,BigInteger)</code> ctor
      * Assertion: NullPointerException if prime and crtCoefficient is null
@@ -102,8 +102,8 @@ public class RSAOtherPrimeInfoTest extends TestCase {
     public final void testRSAOtherPrimeInfo05() {
         try {
             new RSAOtherPrimeInfo(null,
-                                  BigInteger.valueOf(2L),
-                                  null);
+                    BigInteger.valueOf(2L),
+                    null);
             fail("Expected NPE not thrown");
         } catch (NullPointerException e) {
         }
@@ -114,10 +114,10 @@ public class RSAOtherPrimeInfoTest extends TestCase {
      * Assertion: returns CRT coefficient value
      */
     public final void testGetCrtCoefficient() {
-        RSAOtherPrimeInfo ropi = 
-            new RSAOtherPrimeInfo(BigInteger.valueOf(1L),
-                                  BigInteger.valueOf(2L),
-                                  BigInteger.valueOf(3L));
+        RSAOtherPrimeInfo ropi =
+                new RSAOtherPrimeInfo(BigInteger.valueOf(1L),
+                        BigInteger.valueOf(2L),
+                        BigInteger.valueOf(3L));
         assertEquals(3L, ropi.getCrtCoefficient().longValue());
     }
 
@@ -126,10 +126,10 @@ public class RSAOtherPrimeInfoTest extends TestCase {
      * Assertion: returns prime value
      */
     public final void testGetPrime() {
-        RSAOtherPrimeInfo ropi = 
-            new RSAOtherPrimeInfo(BigInteger.valueOf(1L),
-                                  BigInteger.valueOf(2L),
-                                  BigInteger.valueOf(3L));
+        RSAOtherPrimeInfo ropi =
+                new RSAOtherPrimeInfo(BigInteger.valueOf(1L),
+                        BigInteger.valueOf(2L),
+                        BigInteger.valueOf(3L));
         assertEquals(1L, ropi.getPrime().longValue());
     }
 
@@ -138,10 +138,10 @@ public class RSAOtherPrimeInfoTest extends TestCase {
      * Assertion: returns prime exponent value
      */
     public final void testGetExponent() {
-        RSAOtherPrimeInfo ropi = 
-            new RSAOtherPrimeInfo(BigInteger.valueOf(1L),
-                                  BigInteger.valueOf(2L),
-                                  BigInteger.valueOf(3L));
+        RSAOtherPrimeInfo ropi =
+                new RSAOtherPrimeInfo(BigInteger.valueOf(1L),
+                        BigInteger.valueOf(2L),
+                        BigInteger.valueOf(3L));
         assertEquals(2L, ropi.getExponent().longValue());
     }
 

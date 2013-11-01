@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.asn1.der;
 
@@ -68,7 +68,7 @@ public class BooleanTest extends TestCase {
     public void testDecode_Invalid() throws IOException {
 
         byte[][] invalid = new byte[][] {
-        // wrong tag: tag is not 0x01
+                // wrong tag: tag is not 0x01
                 new byte[] { 0x02, 0x01, 0x00 },
                 // wrong length: length is not 1
                 new byte[] { 0x01, 0x02, 0x00 },

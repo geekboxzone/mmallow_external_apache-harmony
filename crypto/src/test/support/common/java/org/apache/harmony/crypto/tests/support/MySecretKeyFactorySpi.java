@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.support;
 
@@ -29,12 +29,11 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactorySpi;
 
 /**
- * Additional class for verification of SecretKeyFactorySpi 
+ * Additional class for verification of SecretKeyFactorySpi
  * and SecretKeyFactory functionality
- * 
  */
 
-public class MySecretKeyFactorySpi  extends SecretKeyFactorySpi {
+public class MySecretKeyFactorySpi extends SecretKeyFactorySpi {
     @Override
     protected SecretKey engineGenerateSecret(KeySpec keySpec)
             throws InvalidKeySpecException {
