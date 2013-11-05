@@ -28,6 +28,9 @@ import java.util.Vector;
 
 public class GregorianCalendarTest extends junit.framework.TestCase {
 
+    private static final TimeZone AMERICA_CHICAGO = TimeZone.getTimeZone("America/Chicago");
+    private static final TimeZone AMERICA_NEW_YORK = TimeZone.getTimeZone("America/New_York");
+
     /**
      * @tests java.util.GregorianCalendar#GregorianCalendar()
      */
@@ -130,16 +133,13 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
         // Test for method java.util.GregorianCalendar(java.util.TimeZone)
         Date date = new Date(2008, 1, 1);
         TimeZone.getDefault();
-        GregorianCalendar gc1 = new GregorianCalendar(TimeZone
-                .getTimeZone("EST"));
+        GregorianCalendar gc1 = new GregorianCalendar(AMERICA_NEW_YORK);
         gc1.setTime(date);
-        GregorianCalendar gc2 = new GregorianCalendar(TimeZone
-                .getTimeZone("CST"));
+        GregorianCalendar gc2 = new GregorianCalendar(AMERICA_CHICAGO);
         gc2.setTime(date);
-        // CST is 1 hour before EST, add 1 to the CST time and convert to 0-12
-        // value
-        assertTrue("Incorrect calendar returned",
-                gc1.get(Calendar.HOUR) == ((gc2.get(Calendar.HOUR) + 1) % 12));
+        // Chicago is 1 hour before New York, add 1 to the Chicago time and convert to 0-12 value
+        assertEquals("Incorrect calendar returned",
+                gc1.get(Calendar.HOUR), ((gc2.get(Calendar.HOUR) + 1) % 12));
 
         // Regression test for HARMONY-2961
         SimpleTimeZone timezone = new SimpleTimeZone(-3600 * 24 * 1000 * 2,
@@ -169,19 +169,15 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
         // java.util.Locale)
         Date date = new Date(2008, 1, 1);
         TimeZone.getDefault();
-        GregorianCalendar gc1 = new GregorianCalendar(TimeZone
-                .getTimeZone("EST"), Locale.JAPAN);
+        GregorianCalendar gc1 = new GregorianCalendar(AMERICA_NEW_YORK, Locale.JAPAN);
         gc1.setTime(date);
-        GregorianCalendar gc2 = new GregorianCalendar(TimeZone
-                .getTimeZone("EST"), Locale.JAPAN);
+        GregorianCalendar gc2 = new GregorianCalendar(AMERICA_NEW_YORK, Locale.JAPAN);
         gc2.setTime(date);
-        GregorianCalendar gc3 = new GregorianCalendar(TimeZone
-                .getTimeZone("CST"), Locale.ITALY);
+        GregorianCalendar gc3 = new GregorianCalendar(AMERICA_CHICAGO, Locale.ITALY);
         gc3.setTime(date);
-        // CST is 1 hour before EST, add 1 to the CST time and convert to 0-12
-        // value
-        assertTrue("Incorrect calendar returned",
-                gc1.get(Calendar.HOUR) == ((gc3.get(Calendar.HOUR) + 1) % 12));
+        // Chicago is 1 hour before New York, add 1 to the Chicago time and convert to 0-12 value
+        assertEquals("Incorrect calendar returned",
+                gc1.get(Calendar.HOUR), ((gc3.get(Calendar.HOUR) + 1) % 12));
         assertTrue("Locales not created correctly", gc1.equals(gc2)
                 && !gc1.equals(gc3));
     }
@@ -209,7 +205,7 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
                 gc1.get(Calendar.MONTH) == Calendar.FEBRUARY);
         assertEquals("Wrong result date 2", 28, gc1.get(Calendar.DATE));
 
-        gc1 = new GregorianCalendar(TimeZone.getTimeZone("EST"));
+        gc1 = new GregorianCalendar(AMERICA_NEW_YORK);
         gc1.set(1999, Calendar.APRIL, 3, 16, 0); // day before DST change
         gc1.add(Calendar.MILLISECOND, 24 * 60 * 60 * 1000);
         assertEquals("Wrong time after MILLISECOND change", 16, gc1
@@ -395,8 +391,7 @@ public class GregorianCalendarTest extends junit.framework.TestCase {
         // Test for method java.util.Date
         // java.util.GregorianCalendar.getGregorianChange()
         GregorianCalendar gc = new GregorianCalendar();
-        GregorianCalendar returnedChange = new GregorianCalendar(TimeZone
-                .getTimeZone("EST"));
+        GregorianCalendar returnedChange = new GregorianCalendar(AMERICA_NEW_YORK);
         returnedChange.setTime(gc.getGregorianChange());
         assertEquals("Returned incorrect year",
                 1582, returnedChange.get(Calendar.YEAR));
