@@ -31,19 +31,19 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SSLSessionBindingEvent</code> class constructors and methods.
- * 
  */
 public class SSLSessionBindingEventTest extends TestCase {
 
     public final void testSSLSessionBindingEvent() {
         SSLSession ses = new MySSLSession();
         SSLSessionBindingEvent event = new SSLSessionBindingEvent(ses, "test");
-        
+
         assertEquals("test", event.getName());
         assertEquals(ses, event.getSession());
     }
 
 }
+
 class MySSLSession implements SSLSession {
     /*
      * @see javax.net.ssl.SSLSession#getApplicationBufferSize()
@@ -106,7 +106,7 @@ class MySSLSession implements SSLSession {
      */
     public X509Certificate[] getPeerCertificateChain()
             throws SSLPeerUnverifiedException {
-    	throw new SSLPeerUnverifiedException("test exception");
+        throw new SSLPeerUnverifiedException("test exception");
     }
 
     /*
@@ -114,7 +114,7 @@ class MySSLSession implements SSLSession {
      */
     public Certificate[] getPeerCertificates()
             throws SSLPeerUnverifiedException {
-    	throw new SSLPeerUnverifiedException("test exception");
+        throw new SSLPeerUnverifiedException("test exception");
     }
 
     /*

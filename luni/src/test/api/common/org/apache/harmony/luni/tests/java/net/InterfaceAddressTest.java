@@ -34,7 +34,6 @@ public class InterfaceAddressTest extends TestCase {
 
     /**
      * @tests java.net.InterfaceAddress.hashCode()
-     * 
      * @since 1.6
      */
     public void test_hashCode() {
@@ -48,7 +47,6 @@ public class InterfaceAddressTest extends TestCase {
 
     /**
      * @tests java.net.InterfaceAddress.equals(Object)
-     * 
      * @since 1.6
      */
     public void test_equals_LObject() {
@@ -64,7 +62,6 @@ public class InterfaceAddressTest extends TestCase {
 
     /**
      * @tests java.net.InterfaceAddress.toString()
-     * 
      * @since 1.6
      */
     public void test_toString() {
@@ -80,7 +77,6 @@ public class InterfaceAddressTest extends TestCase {
 
     /**
      * @tests java.net.InterfaceAddress.getAddress()
-     * 
      * @since 1.6
      */
     public void test_getAddress() {
@@ -95,7 +91,6 @@ public class InterfaceAddressTest extends TestCase {
 
     /**
      * @tests java.net.InterfaceAddress.getBroadcast()
-     * 
      * @since 1.6
      */
     public void test_getBroadcast() {
@@ -114,7 +109,6 @@ public class InterfaceAddressTest extends TestCase {
 
     /**
      * @tests java.net.InterfaceAddress.getNetworkPrefixLength()
-     * 
      * @since 1.6
      */
     public void test_getNetworkPrefixLength() {

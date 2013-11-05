@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.*;
 import org.apache.harmony.security.tests.support.SpiEngUtils;
 
@@ -28,7 +29,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for KeyPairGenerator class
- *
  */
 
 public class KeyPairGenerator3Test extends TestCase {
@@ -125,9 +125,9 @@ public class KeyPairGenerator3Test extends TestCase {
             kp = kpg[i].generateKeyPair();
             kp1 = kpg[i].genKeyPair();
             assertFalse("Incorrect private key", kp.getPrivate().equals(
-                kp1.getPrivate()));
+                    kp1.getPrivate()));
             assertFalse("Incorrect public key", kp.getPublic().equals(
-                kp1.getPublic()));
+                    kp1.getPublic()));
         }
     }
 

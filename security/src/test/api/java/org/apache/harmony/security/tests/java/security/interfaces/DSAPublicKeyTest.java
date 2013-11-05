@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.interfaces;
 
@@ -30,13 +30,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>DSAPublicKey</code> class field
- * 
  */
 public class DSAPublicKeyTest extends TestCase {
 
     /**
      * Constructor for DSAPublicKeyTest.
-     * 
+     *
      * @param arg0
      */
     public DSAPublicKeyTest(String arg0) {
@@ -52,24 +51,30 @@ public class DSAPublicKeyTest extends TestCase {
                 k.getSerVerUID(), //DSAPublicKey.serialVersionUID 
                 1234526332779022332L);
     }
+
     public class checkDSAPublicKey implements DSAPublicKey {
         public String getAlgorithm() {
             return "DSAPublicKey";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return new byte[0];
         }
+
         public long getSerVerUID() {
             return serialVersionUID;
         }
+
         public BigInteger getY() {
             return null;
         }
+
         public DSAParams getParams() {
             return null;
-        }        
+        }
     }
 }

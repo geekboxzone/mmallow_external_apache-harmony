@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 
 /**
  * Unit test for LastOwnerException.
- *
  */
 
 public class LastOwnerExceptionTest extends TestCase {

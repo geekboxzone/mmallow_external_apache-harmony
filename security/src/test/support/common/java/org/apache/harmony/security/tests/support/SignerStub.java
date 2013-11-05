@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Aleksei Y. Semenov
-*/
+ * @author Aleksei Y. Semenov
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -27,13 +27,12 @@ import java.security.Signer;
 
 /**
  * Stub for abstract class Signer, necessary for testing purposes
- * 
  */
 
 public class SignerStub extends Signer {
 
     /**
-     * Default constructor 
+     * Default constructor
      */
     public SignerStub() {
         super();
@@ -41,7 +40,7 @@ public class SignerStub extends Signer {
 
     /**
      * Constructor, sets given name
-     * 
+     *
      * @param name
      */
     public SignerStub(String name) {
@@ -50,7 +49,7 @@ public class SignerStub extends Signer {
 
     /**
      * Constructor, sets given name and scope
-     * 
+     *
      * @param name
      * @param scope
      * @throws KeyManagementException

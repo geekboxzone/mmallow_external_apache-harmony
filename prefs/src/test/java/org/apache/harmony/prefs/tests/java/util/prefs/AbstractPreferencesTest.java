@@ -46,7 +46,6 @@ import org.xml.sax.SAXException;
 
 /**
  * TODO: refine this test to adapt all implementations
- *
  */
 public class AbstractPreferencesTest extends TestCase {
 
@@ -90,7 +89,7 @@ public class AbstractPreferencesTest extends TestCase {
         super.setUp();
         root = (AbstractPreferences) Preferences.userRoot();
         parent = (AbstractPreferences) Preferences
-        .userNodeForPackage(Preferences.class);
+                .userNodeForPackage(Preferences.class);
         // FIXME: change here is dangerous
         // pref = new MockAbstractPreferences((AbstractPreferences) parent,
         // "mock");
@@ -103,7 +102,7 @@ public class AbstractPreferencesTest extends TestCase {
         try {
             if (pref instanceof MockAbstractPreferences) {
                 ((MockAbstractPreferences) pref)
-                .setResult(MockAbstractPreferences.NORMAL);
+                        .setResult(MockAbstractPreferences.NORMAL);
             }
             // make sure remove it successfully
             parent.node("mock").removeNode();
@@ -173,7 +172,7 @@ public class AbstractPreferencesTest extends TestCase {
         assertTrue(p.getNewNode());
 
         p = (MockAbstractPreferences) ((MockAbstractPreferences) pref)
-        .publicChildSpi("child2");
+                .publicChildSpi("child2");
         assertTrue(p.getNewNode());
     }
 
@@ -514,7 +513,7 @@ public class AbstractPreferencesTest extends TestCase {
             return;
         }
         MockAbstractPreferences child = (MockAbstractPreferences) ((MockAbstractPreferences) pref)
-        .publicChildSpi("child");
+                .publicChildSpi("child");
         assertSame(child, pref.node("child"));
 
         Preferences child2 = pref.node("child2");
@@ -529,7 +528,7 @@ public class AbstractPreferencesTest extends TestCase {
 
         grandchild = pref.node("child3/grandchild");
         AbstractPreferences[] childs = ((MockAbstractPreferences) pref)
-        .cachedChildrenImpl();
+                .cachedChildrenImpl();
         Preferences child3 = child;
         for (int i = 0; i < childs.length; i++) {
             if (childs[i].name().equals("child3")) {
@@ -959,9 +958,9 @@ public class AbstractPreferencesTest extends TestCase {
 
         p.resetSyncTimes();
         MockAbstractPreferences child = (MockAbstractPreferences) p
-        .node("child");
+                .node("child");
         MockAbstractPreferences child2 = new MockAbstractPreferences(p,
-        "child2");
+                "child2");
         p.childs.put("child2", child2);
         assertEquals(1, p.cachedChildrenImpl().length);
         assertSame(child, p.cachedChildrenImpl()[0]);
@@ -979,7 +978,7 @@ public class AbstractPreferencesTest extends TestCase {
         p.resetSyncTimes();
         child.resetSyncTimes();
         MockAbstractPreferences grandson = (MockAbstractPreferences) child
-        .node("grandson");
+                .node("grandson");
         child.sync();
         assertEquals(0, p.getSyncTimes());
         assertEquals(1, child.getSyncTimes());
@@ -998,9 +997,9 @@ public class AbstractPreferencesTest extends TestCase {
 
         p.resetFlushedTimes();
         MockAbstractPreferences child = (MockAbstractPreferences) p
-        .node("child");
+                .node("child");
         MockAbstractPreferences child2 = new MockAbstractPreferences(p,
-        "child2");
+                "child2");
         p.childs.put("child2", child2);
         assertEquals(1, p.cachedChildrenImpl().length);
         assertSame(child, p.cachedChildrenImpl()[0]);
@@ -1018,7 +1017,7 @@ public class AbstractPreferencesTest extends TestCase {
         p.resetFlushedTimes();
         child.resetFlushedTimes();
         MockAbstractPreferences grandson = (MockAbstractPreferences) child
-        .node("grandson");
+                .node("grandson");
         child.flush();
         assertEquals(0, p.getFlushedTimes());
         assertEquals(1, child.getFlushedTimes());
@@ -1047,7 +1046,7 @@ public class AbstractPreferencesTest extends TestCase {
 
         assertNull(p.getChildImpl("child/grandson"));
         child.childs.put("grandson", new MockAbstractPreferences(child,
-        "grandson"));
+                "grandson"));
         assertNull(p.getChildImpl("child/grandson"));
 
         assertNull(p.getChildImpl(null));
@@ -1114,7 +1113,7 @@ public class AbstractPreferencesTest extends TestCase {
     }
 
     private static Document parseXmlStream(InputStream input, boolean validating)
-    throws SAXException, IOException, ParserConfigurationException {
+            throws SAXException, IOException, ParserConfigurationException {
         // Create a builder factory
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setValidating(validating);
@@ -1193,7 +1192,7 @@ public class AbstractPreferencesTest extends TestCase {
         assertEquals(0, p.cachedChildrenImpl().length);
 
         MockAbstractPreferences child = (MockAbstractPreferences) p
-        .getChildImpl("child");
+                .getChildImpl("child");
         assertNull(child);
 
         child = new MockAbstractPreferences(p, "child");
@@ -1205,7 +1204,7 @@ public class AbstractPreferencesTest extends TestCase {
         assertSame(child, p.cachedChildrenImpl()[0]);
 
         MockAbstractPreferences grandchild = new MockAbstractPreferences(child,
-        "grandchild");
+                "grandchild");
         assertSame(grandchild, child.getChildImpl("grandchild"));
         assertNull(p.getChildImpl("grandchild"));
 
@@ -1243,7 +1242,7 @@ public class AbstractPreferencesTest extends TestCase {
     }
 
     public void testBackingStoreException() throws IOException,
-    BackingStoreException {
+            BackingStoreException {
         if (!(pref instanceof MockAbstractPreferences)) {
             return;
         }
@@ -1351,7 +1350,7 @@ public class AbstractPreferencesTest extends TestCase {
     }
 
     public void testRuntimeException() throws IOException,
-    BackingStoreException {
+            BackingStoreException {
         if (!(pref instanceof MockAbstractPreferences)) {
             return;
         }
@@ -1583,7 +1582,7 @@ public class AbstractPreferencesTest extends TestCase {
     }
 
     public void testIllegalStateException() throws IOException,
-    BackingStoreException {
+            BackingStoreException {
         if (!(pref instanceof MockAbstractPreferences)) {
             return;
         }
@@ -1923,7 +1922,7 @@ public class AbstractPreferencesTest extends TestCase {
     }
 
     public static class MockPreferenceChangeListener implements
-    PreferenceChangeListener {
+            PreferenceChangeListener {
         private int changed = 0;
 
         // private Object lock = new Object();

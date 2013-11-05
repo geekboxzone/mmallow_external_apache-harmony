@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class InternalErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.InternalError#InternalError()
-	 */
+    /**
+     * @tests java.lang.InternalError#InternalError()
+     */
     public void test_Constructor() {
         InternalError e = new InternalError();
         assertNull(e.getMessage());

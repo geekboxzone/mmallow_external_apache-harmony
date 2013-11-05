@@ -22,42 +22,42 @@ import java.util.Stack;
 
 public class EmptyStackExceptionTest extends junit.framework.TestCase {
 
-	static Object[] objArray = new Object[10];
-	Stack s;
-	
-	{
-		for (int counter = 0; counter < objArray.length; counter++)
-			objArray[counter] = new Integer(counter);
-	}
+    static Object[] objArray = new Object[10];
+    Stack s;
 
-	/**
-	 * @tests java.util.EmptyStackException#EmptyStackException()
-	 */
-	public void test_Constructor() {
-		// Test for method java.util.EmptyStackException()
-		try {
-			for (int counter = 0; counter < objArray.length + 1; counter++)
-				s.pop();
-		} catch (EmptyStackException e) {
-			return;
-		}
-		fail("Expected EmptyStackException not thrown");
-	}
+    {
+        for (int counter = 0; counter < objArray.length; counter++)
+            objArray[counter] = new Integer(counter);
+    }
 
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-		s = new Stack();
-		for (int counter = 0; counter < objArray.length; counter++)
-			s.push(objArray[counter]);
-	}
+    /**
+     * @tests java.util.EmptyStackException#EmptyStackException()
+     */
+    public void test_Constructor() {
+        // Test for method java.util.EmptyStackException()
+        try {
+            for (int counter = 0; counter < objArray.length + 1; counter++)
+                s.pop();
+        } catch (EmptyStackException e) {
+            return;
+        }
+        fail("Expected EmptyStackException not thrown");
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+        s = new Stack();
+        for (int counter = 0; counter < objArray.length; counter++)
+            s.push(objArray[counter]);
+    }
+
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

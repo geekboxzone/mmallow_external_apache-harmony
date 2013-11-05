@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -27,7 +27,6 @@ import junit.framework.TestCase;
 
 /**
  * Test for MGF1ParameterSpec class
- * 
  */
 public class MGF1ParameterSpecTest extends TestCase {
 
@@ -38,6 +37,7 @@ public class MGF1ParameterSpecTest extends TestCase {
 
     /**
      * Constructor for MGF1ParameterSpecTest.
+     *
      * @param arg0
      */
     public MGF1ParameterSpecTest(String arg0) {

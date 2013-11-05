@@ -24,7 +24,6 @@ import junit.framework.TestCase;
 /**
  * Please note that this case can only be passed on Linux with the user is
  * 'root'.
- * 
  */
 public class UnixNetworkInterfaceTest extends TestCase {
     private Enumeration<NetworkInterface> netifs = null;
@@ -33,7 +32,6 @@ public class UnixNetworkInterfaceTest extends TestCase {
 
     /**
      * @tests java.net.NetworkInterface#isUp()
-     * 
      * @since 1.6
      */
     public void test_isUp() throws Exception {
@@ -59,7 +57,6 @@ public class UnixNetworkInterfaceTest extends TestCase {
 
     /**
      * @tests java.net.NetworkInterface#supportsMulticast()
-     * 
      * @since 1.6
      */
     public void test_supportsMulticast() throws Exception {
@@ -87,7 +84,6 @@ public class UnixNetworkInterfaceTest extends TestCase {
 
     /**
      * @tests java.net.NetworkInterface#getHardwareAddress()
-     * 
      * @since 1.6
      */
     public void test_getHardwareAddress() throws Exception {
@@ -119,7 +115,6 @@ public class UnixNetworkInterfaceTest extends TestCase {
 
     /**
      * @tests java.net.NetworkInterface#getMTU()
-     * 
      * @since 1.6
      */
     public void test_getMTU() throws Exception {
@@ -144,7 +139,6 @@ public class UnixNetworkInterfaceTest extends TestCase {
 
     /**
      * @tests java.net.NetworkInterface#getSubInterfaces()
-     * 
      * @since 1.6
      */
     public void test_getSubInterfaces() throws Exception {
@@ -166,7 +160,6 @@ public class UnixNetworkInterfaceTest extends TestCase {
 
     /**
      * @tests java.net.NetworkInterface#getParent()
-     * 
      * @since 1.6
      */
     public void test_getParent() {
@@ -192,9 +185,7 @@ public class UnixNetworkInterfaceTest extends TestCase {
     }
 
     /**
-     * 
      * @tests java.net.NetworkInterface#isVirtual()
-     * 
      * @since 1.6
      */
     public void test_isVirtual() {

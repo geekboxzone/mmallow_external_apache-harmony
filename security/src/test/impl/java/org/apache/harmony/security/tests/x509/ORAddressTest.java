@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.security.tests.x509;
 
@@ -35,15 +35,15 @@ import junit.framework.TestSuite;
 public class ORAddressTest extends TestCase {
 
     public static void printAsHex(int perLine, String prefix,
-                                  String delimiter, byte[] data) {
-        for (int i=0; i<data.length; i++) {
+            String delimiter, byte[] data) {
+        for (int i = 0; i < data.length; i++) {
             String tail = Integer.toHexString(0x000000ff & data[i]);
             if (tail.length() == 1) {
                 tail = "0" + tail;
             }
             System.out.print(prefix + "0x" + tail + delimiter);
 
-            if (((i+1)%perLine) == 0) {
+            if (((i + 1) % perLine) == 0) {
                 System.out.println();
             }
         }

@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.*;
 import java.security.spec.AlgorithmParameterSpec;
 
@@ -32,7 +33,6 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>AlgorithmParameterGenerator</code> class constructors and
  * methods.
- *
  */
 
 public class AlgorithmParameterGenerator1Test extends TestCase {
@@ -47,7 +47,7 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
 
     private static String[] invalidValues = SpiEngUtils.invalidValues;
     private static String validAlgName = "DSA";
-    private static String[] algs =  {
+    private static String[] algs = {
             "DSA", "dsa", "Dsa", "DsA", "dsA" };
 
     public static final String srvAlgorithmParameterGenerator = "AlgorithmParameterGenerator";
@@ -91,7 +91,6 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
      * Assertion:
      * throws NullPointerException must be thrown is null
      * throws NoSuchAlgorithmException must be thrown if algorithm is not available
-     *
      */
     public void testAlgorithmParameterGenerator01()
             throws NoSuchAlgorithmException {
@@ -357,7 +356,7 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
         AlgorithmParameterGenerator apg =
                 new myAlgPG(spi, validProvider, validAlgName);
         assertEquals("Incorrect algorithm", apg.getAlgorithm(), validAlgName);
-        assertEquals("Incorrect provider",apg.getProvider(),validProvider);
+        assertEquals("Incorrect provider", apg.getProvider(), validProvider);
         try {
             apg.init(-10, null);
             fail("IllegalArgumentException must be thrown");
@@ -375,6 +374,7 @@ public class AlgorithmParameterGenerator1Test extends TestCase {
     }
 
 }
+
 /**
  * Additional class to verify AlgorithmParameterGenerator constructor
  */

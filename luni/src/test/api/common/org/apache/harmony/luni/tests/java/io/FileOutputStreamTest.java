@@ -79,7 +79,7 @@ public class FileOutputStreamTest extends TestCase {
 
     /**
      * @tests java.io.FileOutputStream#FileOutputStream(java.lang.String,
-     *        boolean)
+     *boolean)
      */
     public void test_ConstructorLjava_lang_StringZ() throws IOException {
         f = new File(System.getProperty("user.home"), "fos.tst");
@@ -290,7 +290,7 @@ public class FileOutputStreamTest extends TestCase {
         try {
             fos.getChannel().position();
             fail("should throw ClosedChannelException");
-        } catch (java.nio.channels.ClosedChannelException e){
+        } catch (java.nio.channels.ClosedChannelException e) {
             // Expected
         }
     }
@@ -311,7 +311,7 @@ public class FileOutputStreamTest extends TestCase {
         try {
             fos.getChannel().position();
             fail("should throw ClosedChannelException");
-        } catch (java.nio.channels.ClosedChannelException e){
+        } catch (java.nio.channels.ClosedChannelException e) {
             // Expected
         }
     }

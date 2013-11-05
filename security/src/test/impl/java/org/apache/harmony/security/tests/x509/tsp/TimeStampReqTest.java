@@ -32,7 +32,7 @@ import org.apache.harmony.security.x509.tsp.TimeStampReq;
 public class TimeStampReqTest extends TestCase {
 
     /**
-     * @throws IOException 
+     * @throws IOException
      * @tests 'org.apache.harmony.security.x509.tsp.TimeStampReq.getEncoded()'
      */
     public void testTimeStampReq() throws IOException {
@@ -40,7 +40,7 @@ public class TimeStampReqTest extends TestCase {
         MessageImprint msgImprint = new MessageImprint(new AlgorithmIdentifier(
                 "1.3.14.3.2.26"), new byte[20]);
         String reqPolicy = "1.2.3.4.5";
-        BigInteger nonce = BigInteger.valueOf(1234567890L); 
+        BigInteger nonce = BigInteger.valueOf(1234567890L);
         Extensions exts = new Extensions();
         int[] extOID = new int[] { 1, 2, 3, 2, 1 };
         byte[] extValue = new byte[] { (byte) 1, (byte) 2, (byte) 3 };
@@ -56,7 +56,7 @@ public class TimeStampReqTest extends TestCase {
                 .getVersion());
         assertTrue("Decoded messageImprint is incorrect", Arrays.equals(
                 MessageImprint.ASN1.encode(msgImprint), MessageImprint.ASN1
-                        .encode(decoded.getMessageImprint())));
+                .encode(decoded.getMessageImprint())));
         assertEquals("Decoded reqPolicy is incorrect", reqPolicy, decoded
                 .getReqPolicy());
         assertEquals("Decoded nonce is incorrect", nonce, decoded.getNonce());

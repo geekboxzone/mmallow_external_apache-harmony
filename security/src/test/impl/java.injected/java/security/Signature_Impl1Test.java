@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package java.security;
 
@@ -27,40 +27,39 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>Signature</code> constructor and methods
- * 
  */
 public class Signature_Impl1Test extends TestCase {
 
-	/*
-	 * Class under test for int sign(byte[], int, int)
-	 */
-	public void testSignbyteArrayintint() throws Exception {
-		MySignature1 s = new MySignature1("ABC");
-		byte[] b = new byte[8];
-		try {
-			s.sign(b, 0, 5);
-			fail("No expected SignatureException 1");
-		} catch (SignatureException e) {		
-		}
-		
+    /*
+      * Class under test for int sign(byte[], int, int)
+      */
+    public void testSignbyteArrayintint() throws Exception {
+        MySignature1 s = new MySignature1("ABC");
+        byte[] b = new byte[8];
+        try {
+            s.sign(b, 0, 5);
+            fail("No expected SignatureException 1");
+        } catch (SignatureException e) {
+        }
+
         s.initVerify(new MyPublicKey());
-		
-		try {
-			s.sign(b, 0, 5);
-			fail("No expected SignatureException 1");
-		} catch (SignatureException e) {		
-		}
-		
+
+        try {
+            s.sign(b, 0, 5);
+            fail("No expected SignatureException 1");
+        } catch (SignatureException e) {
+        }
+
         s.initSign(new MyPrivateKey());
         s.sign(b, 0, 5);
         assertEquals("state", Signature.SIGN, s.getState());
         assertTrue("sign() failed", s.runEngineSign);
-	}
+    }
 
-	/*
-	 * Class under test for String toString()
-	 */
-	public void testToString() {
+    /*
+      * Class under test for String toString()
+      */
+    public void testToString() {
         MySignature1 s = new MySignature1("ABC");
         assertEquals("toString() failed", "SIGNATURE ABC state: UNINITIALIZED",
                 s.toString());
@@ -70,16 +69,20 @@ public class Signature_Impl1Test extends TestCase {
         public String getFormat() {
             return "123";
         }
+
         public byte[] getEncoded() {
             return null;
         }
+
         public String getAlgorithm() {
             return "aaa";
-        }       
+        }
     }
-    
-    private class MyPublicKey extends MyKey implements PublicKey {}
 
-    private class MyPrivateKey extends MyKey implements PrivateKey {}
+    private class MyPublicKey extends MyKey implements PublicKey {
+    }
+
+    private class MyPrivateKey extends MyKey implements PrivateKey {
+    }
 
 }

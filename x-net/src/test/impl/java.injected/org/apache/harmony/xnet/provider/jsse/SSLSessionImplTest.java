@@ -26,7 +26,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SSLSessionContextImp</code> constructor and methods
- *  
  */
 public class SSLSessionImplTest extends TestCase {
 
@@ -55,35 +54,35 @@ public class SSLSessionImplTest extends TestCase {
         assertNull(session.getPeerHost());
         assertEquals(-1, session.getPeerPort());
         assertNull(session.getSessionContext());
-        
+
         try {
             session.getPeerCertificateChain();
             fail("getPeerCertificateChain: No expected SSLPeerUnverifiedException");
         } catch (SSLPeerUnverifiedException e) {
         }
-        
+
         try {
             session.getPeerCertificates();
             fail("getPeerCertificates: No expected SSLPeerUnverifiedException");
         } catch (SSLPeerUnverifiedException e) {
         }
-        
+
         try {
             session.getPeerPrincipal();
             fail("getPeerPrincipal: No expected SSLPeerUnverifiedException");
         } catch (SSLPeerUnverifiedException e) {
-        } 
+        }
     }
 
     public void testGetApplicationBufferSize() {
         assertEquals(SSLSessionImpl.NULL_SESSION.getApplicationBufferSize(),
                 SSLRecordProtocol.MAX_DATA_LENGTH);
     }
-    
+
     public void testGetPacketBufferSize() {
         assertEquals(SSLSessionImpl.NULL_SESSION.getPacketBufferSize(),
                 SSLRecordProtocol.MAX_SSL_PACKET_SIZE);
-    }    
+    }
 
     public void testInvalidate() {
         SSLSessionImpl session = new SSLSessionImpl(
@@ -103,49 +102,49 @@ public class SSLSessionImplTest extends TestCase {
 
     public void testGetValue() {
         SSLSessionImpl session = new SSLSessionImpl(null);
-        
+
         assertEquals(0, session.getValueNames().length);
-        
+
         try {
             session.getValue(null);
             fail("No expected IllegalArgumentException");
-        } catch (IllegalArgumentException e) {            
+        } catch (IllegalArgumentException e) {
         }
         assertNull(session.getValue("abc"));
-        
+
         try {
             session.removeValue(null);
             fail("No expected IllegalArgumentException");
-        } catch (IllegalArgumentException e) {            
+        } catch (IllegalArgumentException e) {
         }
         session.removeValue("abc");
-        
+
         try {
             session.putValue(null, "1");
             fail("No expected IllegalArgumentException");
-        } catch (IllegalArgumentException e) {            
+        } catch (IllegalArgumentException e) {
         }
-        
+
         try {
             session.putValue("abc", null);
             fail("No expected IllegalArgumentException");
-        } catch (IllegalArgumentException e) {            
+        } catch (IllegalArgumentException e) {
         }
-        
+
         Object o = new Object();
         session.putValue("abc", o);
         assertSame(session.getValue("abc"), o);
         assertEquals("abc", session.getValueNames()[0]);
-        
+
         session.removeValue("abc");
-        assertNull(session.getValue("abc"));    
+        assertNull(session.getValue("abc"));
     }
-    
+
     public void testClone() {
         SSLSessionImpl session1 = new SSLSessionImpl(
                 CipherSuite.TLS_RSA_WITH_NULL_MD5, new SecureRandom());
-        SSLSessionImpl session2 = (SSLSessionImpl)session1.clone();
+        SSLSessionImpl session2 = (SSLSessionImpl) session1.clone();
         assertTrue(Arrays.equals(session1.getId(), session2.getId()));
     }
-    
+
 }

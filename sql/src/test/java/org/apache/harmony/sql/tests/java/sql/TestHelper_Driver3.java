@@ -19,7 +19,6 @@ package org.apache.harmony.sql.tests.java.sql;
 
 /**
  * TODO Type description
- * 
  */
 public class TestHelper_Driver3 extends TestHelper_Driver1 {
 

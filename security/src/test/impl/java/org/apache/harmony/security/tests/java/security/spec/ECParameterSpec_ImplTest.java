@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -31,7 +31,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ECParameterSpec</code> class fields and methods.
- * 
  */
 public class ECParameterSpec_ImplTest extends TestCase {
 
@@ -45,7 +44,7 @@ public class ECParameterSpec_ImplTest extends TestCase {
     //
 
     /**
-     * Test #1 for <code>ECParameterSpec(EllipticCurve, ECPoint, BigInteger, int)</code> constructor<br> 
+     * Test #1 for <code>ECParameterSpec(EllipticCurve, ECPoint, BigInteger, int)</code> constructor<br>
      * Assertion: creates <code>ECParameterSpec</code> instance<br>
      * Test preconditions: valid parameters passed<br>
      * Expected: must pass without any exceptions
@@ -53,15 +52,15 @@ public class ECParameterSpec_ImplTest extends TestCase {
     public final void testECParameterSpec01() {
         // Valid (see note below) parameters set
         EllipticCurve c =
-            new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
-                              BigInteger.ZERO,
-                              BigInteger.valueOf(4L));
+                new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
+                        BigInteger.ZERO,
+                        BigInteger.valueOf(4L));
         ECPoint g = new ECPoint(BigInteger.ZERO, BigInteger.valueOf(2L));
-        new ECParameterSpec(c, g, BigInteger.valueOf(5L), 10);        
+        new ECParameterSpec(c, g, BigInteger.valueOf(5L), 10);
     }
 
     /**
-     * Test #2 for <code>ECParameterSpec(EllipticCurve, ECPoint, BigInteger, int)</code> constructor<br> 
+     * Test #2 for <code>ECParameterSpec(EllipticCurve, ECPoint, BigInteger, int)</code> constructor<br>
      * Assertion: throws <code>NullPointerException</code> if
      * <code>curve</code>, <code>generator</code> or <code>order</code> is <code>null</code><br>
      * Test preconditions: pass <code>null</code> as mentioned parameters<br>
@@ -70,9 +69,9 @@ public class ECParameterSpec_ImplTest extends TestCase {
     public final void testECParameterSpec02() {
         // Valid (see note below) parameters set
         EllipticCurve curve =
-            new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
-                              BigInteger.ZERO,
-                              BigInteger.valueOf(4L));
+                new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
+                        BigInteger.ZERO,
+                        BigInteger.valueOf(4L));
         ECPoint generator = new ECPoint(BigInteger.ZERO, BigInteger.valueOf(2L));
         BigInteger order = BigInteger.valueOf(5L);
 
@@ -109,7 +108,7 @@ public class ECParameterSpec_ImplTest extends TestCase {
     }
 
     /**
-     * Test #3 for <code>ECParameterSpec(EllipticCurve, ECPoint, BigInteger, int)</code> constructor<br> 
+     * Test #3 for <code>ECParameterSpec(EllipticCurve, ECPoint, BigInteger, int)</code> constructor<br>
      * Assertion: throws <code>IllegalArgumentException</code> if
      * <code>order</code> or <code>cofactor</code> is not positive<br>
      * Test preconditions: pass not positive as mentioned parameters<br>
@@ -118,9 +117,9 @@ public class ECParameterSpec_ImplTest extends TestCase {
     public final void testECParameterSpec03() {
         // Valid (see note below) parameters set
         EllipticCurve curve =
-            new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
-                              BigInteger.ZERO,
-                              BigInteger.valueOf(4L));
+                new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
+                        BigInteger.ZERO,
+                        BigInteger.valueOf(4L));
         ECPoint generator = new ECPoint(BigInteger.ZERO, BigInteger.valueOf(2L));
 
 
@@ -175,14 +174,14 @@ public class ECParameterSpec_ImplTest extends TestCase {
     public final void testGetCofactor() {
         // Valid (see note below) parameters set
         EllipticCurve curve =
-            new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
-                              BigInteger.ZERO,
-                              BigInteger.valueOf(4L));
+                new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
+                        BigInteger.ZERO,
+                        BigInteger.valueOf(4L));
         ECPoint generator = new ECPoint(BigInteger.ZERO, BigInteger.valueOf(2L));
         BigInteger order = BigInteger.valueOf(5L);
         int cofactor = 10;
-        ECParameterSpec ps = 
-            new ECParameterSpec(curve, generator, order, cofactor);
+        ECParameterSpec ps =
+                new ECParameterSpec(curve, generator, order, cofactor);
         assertEquals(cofactor, ps.getCofactor());
     }
 
@@ -198,14 +197,14 @@ public class ECParameterSpec_ImplTest extends TestCase {
     public final void testGetCurve() {
         // Valid (see note below) parameters set
         EllipticCurve curve =
-            new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
-                              BigInteger.ZERO,
-                              BigInteger.valueOf(4L));
+                new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
+                        BigInteger.ZERO,
+                        BigInteger.valueOf(4L));
         ECPoint generator = new ECPoint(BigInteger.ZERO, BigInteger.valueOf(2L));
         BigInteger order = BigInteger.valueOf(5L);
         int cofactor = 10;
-        ECParameterSpec ps = 
-            new ECParameterSpec(curve, generator, order, cofactor);
+        ECParameterSpec ps =
+                new ECParameterSpec(curve, generator, order, cofactor);
         EllipticCurve curveRet = ps.getCurve();
         assertEquals(curve, curveRet);
         assertSame(curve, curveRet);
@@ -223,14 +222,14 @@ public class ECParameterSpec_ImplTest extends TestCase {
     public final void testGetGenerator() {
         // Valid (see note below) parameters set
         EllipticCurve curve =
-            new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
-                              BigInteger.ZERO,
-                              BigInteger.valueOf(4L));
+                new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
+                        BigInteger.ZERO,
+                        BigInteger.valueOf(4L));
         ECPoint generator = new ECPoint(BigInteger.ZERO, BigInteger.valueOf(2L));
         BigInteger order = BigInteger.valueOf(5L);
         int cofactor = 10;
-        ECParameterSpec ps = 
-            new ECParameterSpec(curve, generator, order, cofactor);
+        ECParameterSpec ps =
+                new ECParameterSpec(curve, generator, order, cofactor);
         ECPoint generatorRet = ps.getGenerator();
         assertEquals(generator, generatorRet);
         assertSame(generator, generatorRet);
@@ -248,14 +247,14 @@ public class ECParameterSpec_ImplTest extends TestCase {
     public final void testGetOrder() {
         // Valid (see note below) parameters set
         EllipticCurve curve =
-            new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
-                              BigInteger.ZERO,
-                              BigInteger.valueOf(4L));
+                new EllipticCurve(new ECFieldFp(BigInteger.valueOf(5L)),
+                        BigInteger.ZERO,
+                        BigInteger.valueOf(4L));
         ECPoint generator = new ECPoint(BigInteger.ZERO, BigInteger.valueOf(2L));
         BigInteger order = BigInteger.valueOf(5L);
         int cofactor = 10;
-        ECParameterSpec ps = 
-            new ECParameterSpec(curve, generator, order, cofactor);
+        ECParameterSpec ps =
+                new ECParameterSpec(curve, generator, order, cofactor);
         BigInteger orderRet = ps.getOrder();
         assertEquals(order, orderRet);
         assertSame(order, orderRet);

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.security.tests.fortress;
 
@@ -28,60 +28,59 @@ import junit.framework.TestCase;
 
 
 /**
- *
  * Tests for Services
  */
 public class ServicesTest extends TestCase {
 
-	public void testInitServiceInfo() {
-		Provider p = new MyProvider();
-		Services.initServiceInfo(p);
-		Provider ap = new AnotherProvider();
-		Services.initServiceInfo(ap);
-		
-		Provider.Service serv = Services.getService("Service.ALGORITHM");	
-		if (serv == null) {
-			fail("Service is null");
-		}
-		if (serv.getProvider() != p ||
-				! "org.apache.harmony.security.tests.fortress.SomeClass".equals(serv.getClassName())) {
-			fail("Incorrect Service");
-		}
-		Services.updateServiceInfo(); // restore from registered providers
-		serv = Services.getService("Service.ALGORITHM");
-		if (serv != null) {
-			fail("ServiceDescription not removed");
-		}
-	}
+    public void testInitServiceInfo() {
+        Provider p = new MyProvider();
+        Services.initServiceInfo(p);
+        Provider ap = new AnotherProvider();
+        Services.initServiceInfo(ap);
 
-	public void testRefresh() {
-		Provider p = new MyProvider();
-		Services.updateServiceInfo();  //to make needRefresh = false;
-		Services.initServiceInfo(p);
-		Provider.Service serv = Services.getService("Service.ALGORITHM");
-		Services.refresh();
-		serv = Services.getService("Service.ALGORITHM");	
-		if (serv == null) {
-			fail("Service removed");
-		}
-		
-		Services.setNeedRefresh();
-		Services.refresh();
-		serv = Services.getService("Service.ALGORITHM");
-		if (serv != null) {
-			fail("Service not removed");
-		}
-	}
-		
-	class AnotherProvider extends Provider {
-		AnotherProvider() {
-			super("MyProvider", 1.0, "Provider for testing");
-			put("Service.Algorithm", "AnotherClassName");
-		}
-		
-		AnotherProvider(String name, double version, String info) {
-			super(name, version, info);
-		}
-	}
+        Provider.Service serv = Services.getService("Service.ALGORITHM");
+        if (serv == null) {
+            fail("Service is null");
+        }
+        if (serv.getProvider() != p ||
+                !"org.apache.harmony.security.tests.fortress.SomeClass".equals(serv.getClassName())) {
+            fail("Incorrect Service");
+        }
+        Services.updateServiceInfo(); // restore from registered providers
+        serv = Services.getService("Service.ALGORITHM");
+        if (serv != null) {
+            fail("ServiceDescription not removed");
+        }
+    }
+
+    public void testRefresh() {
+        Provider p = new MyProvider();
+        Services.updateServiceInfo();  //to make needRefresh = false;
+        Services.initServiceInfo(p);
+        Provider.Service serv = Services.getService("Service.ALGORITHM");
+        Services.refresh();
+        serv = Services.getService("Service.ALGORITHM");
+        if (serv == null) {
+            fail("Service removed");
+        }
+
+        Services.setNeedRefresh();
+        Services.refresh();
+        serv = Services.getService("Service.ALGORITHM");
+        if (serv != null) {
+            fail("Service not removed");
+        }
+    }
+
+    class AnotherProvider extends Provider {
+        AnotherProvider() {
+            super("MyProvider", 1.0, "Provider for testing");
+            put("Service.Algorithm", "AnotherClassName");
+        }
+
+        AnotherProvider(String name, double version, String info) {
+            super(name, version, info);
+        }
+    }
 
 }

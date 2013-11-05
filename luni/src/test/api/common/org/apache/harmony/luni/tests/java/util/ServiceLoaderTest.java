@@ -90,7 +90,7 @@ public class ServiceLoaderTest extends TestCase {
     /**
      * @tests {@link java.util.ServiceLoader#iterator()}.
      */
-    @SuppressWarnings( { "nls", "unchecked" })
+    @SuppressWarnings({ "nls", "unchecked" })
     public void test_iterator() {
         URLClassLoader ucl = new URLClassLoader(new URL[] { jarFile });
         Iterator itr = ServiceLoader.load(Service.class, ucl).iterator();
@@ -147,7 +147,7 @@ public class ServiceLoaderTest extends TestCase {
         }
     }
 
-    @SuppressWarnings( { "nls", "unchecked" })
+    @SuppressWarnings({ "nls", "unchecked" })
     private void nullIteratorTester(Iterator itr) {
         assertNotNull(itr);
         try {
@@ -176,7 +176,7 @@ public class ServiceLoaderTest extends TestCase {
      * @throws MalformedURLException
      * @tests {@link java.util.ServiceLoader#load(java.lang.Class, java.lang.ClassLoader)}.
      */
-    @SuppressWarnings( { "nls", "unchecked" })
+    @SuppressWarnings({ "nls", "unchecked" })
     public void test_loadLjava_lang_ClassLjava_lang_ClassLoader()
             throws MalformedURLException {
         URLClassLoader ucl = new URLClassLoader(new URL[] { jarFile });
@@ -365,7 +365,7 @@ public class ServiceLoaderTest extends TestCase {
     /**
      * @tests {@link java.util.ServiceLoader#load(java.lang.Class)}.
      */
-    @SuppressWarnings( { "nls", "unchecked" })
+    @SuppressWarnings({ "nls", "unchecked" })
     public void test_loadLjava_lang_Class() {
         ServiceLoader serviceLoader = ServiceLoader.load(Service.class);
         assertFalse(serviceLoader.iterator().hasNext());
@@ -408,7 +408,7 @@ public class ServiceLoaderTest extends TestCase {
     /**
      * @tests {@link java.util.ServiceLoader#toString()}.
      */
-    @SuppressWarnings( { "unchecked", "nls" })
+    @SuppressWarnings({ "unchecked", "nls" })
     public void test_toString() {
         URLClassLoader ucl = new URLClassLoader(new URL[] { jarFile });
         ServiceLoader serviceLoader = ServiceLoader.load(Service.class, ucl);

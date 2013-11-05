@@ -43,9 +43,9 @@ import org.apache.harmony.security.asn1.ASN1BitString.ASN1NamedBitList;
 public class BitStringTest extends TestCase {
 
     private static Object[][] validBitstring = new Object[][] {
-    //bitstring array format: bitstring object/ byte array
+            //bitstring array format: bitstring object/ byte array
             //
-            { new BitString(new byte[] {}, 0), // object
+            { new BitString(new byte[] { }, 0), // object
                     new byte[] { 0x03, 0x01, 0x00 } },
             //
             { new BitString(new byte[] { 0x05 }, 0), // object
@@ -100,7 +100,7 @@ public class BitStringTest extends TestCase {
 
     public void testDecode_Invalid() throws IOException {
         byte[][] invalid = new byte[][] {
-        // wrong tag: tag is not 0x03
+                // wrong tag: tag is not 0x03
                 new byte[] { 0x02, 0x01, 0x00 },
                 // wrong length: length is 0
                 new byte[] { 0x03, 0x00 },
@@ -134,7 +134,7 @@ public class BitStringTest extends TestCase {
         Object[][] testcaseBoolean = new Object[][] {
                 // bitstring array format: bitstring object/ byte array
                 //
-                { new boolean[] {}, // object
+                { new boolean[] { }, // object
                         new byte[] { 0x03, 0x01, 0x00 } },
                 //
                 { new boolean[] { true }, // object
@@ -161,7 +161,7 @@ public class BitStringTest extends TestCase {
 
             assertTrue("Testcase: " + i, Arrays.equals(
                     (boolean[]) testcaseBoolean[i][0], (boolean[]) decoder
-                            .decode(in)));
+                    .decode(in)));
         }
     }
 
@@ -203,7 +203,7 @@ public class BitStringTest extends TestCase {
 
             assertTrue("Testcase: " + i, Arrays.equals(
                     (boolean[]) testcaseBoolean[i][0], (boolean[]) decoder
-                            .decode(in)));
+                    .decode(in)));
         }
     }
 
@@ -212,7 +212,7 @@ public class BitStringTest extends TestCase {
         Object[][] testcaseBoolean = new Object[][] {
                 //bitstring array format: bitstring object/ byte array
                 //
-                { new boolean[] {}, // object
+                { new boolean[] { }, // object
                         new byte[] { 0x03, 0x01, 0x00 } },
                 //
                 { new boolean[] { false }, // object

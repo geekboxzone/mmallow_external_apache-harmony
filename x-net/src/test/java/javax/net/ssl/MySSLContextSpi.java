@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package javax.net.ssl;
 
@@ -28,11 +28,11 @@ import java.security.SecureRandom;
 /**
  * Additional class for verification of SSLContextSpi and SSLContext
  * functionality
- * 
  */
 
 public class MySSLContextSpi extends SSLContextSpi {
     private boolean init = false;
+
     @Override
     protected void engineInit(KeyManager[] km, TrustManager[] tm,
             SecureRandom sr) throws KeyManagementException {
@@ -47,7 +47,7 @@ public class MySSLContextSpi extends SSLContextSpi {
     protected SSLSocketFactory engineGetSocketFactory() {
         if (!init) {
             throw new RuntimeException("Not initialiazed");
-        }   
+        }
         return null;
     }
 
@@ -77,7 +77,7 @@ public class MySSLContextSpi extends SSLContextSpi {
 
     /*
      * FIXME: add these methods
-     */   
+     */
     @Override
     protected SSLEngine engineCreateSSLEngine(String host, int port) {
         if (!init) {
@@ -93,78 +93,141 @@ public class MySSLContextSpi extends SSLContextSpi {
         }
         return new tmpSSLEngine();
     }
-    
+
     public class tmpSSLEngine extends SSLEngine {
         String tmpHost;
         int tmpPort;
+
         public tmpSSLEngine() {
             tmpHost = null;
-            tmpPort = 0;        
+            tmpPort = 0;
         }
+
         public tmpSSLEngine(String host, int port) {
             tmpHost = host;
-            tmpPort = port;        
+            tmpPort = port;
         }
+
         @Override
         public String getPeerHost() {
-            return tmpHost;        
+            return tmpHost;
         }
+
         @Override
         public int getPeerPort() {
             return tmpPort;
         }
+
         @Override
-        public void beginHandshake() throws SSLException { }
+        public void beginHandshake() throws SSLException {
+        }
+
         @Override
-        public void closeInbound() throws SSLException { }
+        public void closeInbound() throws SSLException {
+        }
+
         @Override
-        public void closeOutbound() {}
+        public void closeOutbound() {
+        }
+
         @Override
-        public Runnable getDelegatedTask() { return null; }
+        public Runnable getDelegatedTask() {
+            return null;
+        }
+
         @Override
-        public String[] getEnabledCipherSuites() { return null; }
+        public String[] getEnabledCipherSuites() {
+            return null;
+        }
+
         @Override
-        public String[] getEnabledProtocols() {return null; }
+        public String[] getEnabledProtocols() {
+            return null;
+        }
+
         @Override
-        public boolean getEnableSessionCreation() { return true; }
+        public boolean getEnableSessionCreation() {
+            return true;
+        }
+
         @Override
-        public SSLEngineResult.HandshakeStatus getHandshakeStatus() { return null; }
+        public SSLEngineResult.HandshakeStatus getHandshakeStatus() {
+            return null;
+        }
+
         @Override
-        public boolean getNeedClientAuth() { return true; }
+        public boolean getNeedClientAuth() {
+            return true;
+        }
+
         @Override
-        public SSLSession getSession() { return null; }
+        public SSLSession getSession() {
+            return null;
+        }
+
         @Override
-        public String[] getSupportedCipherSuites()  { return null; }
+        public String[] getSupportedCipherSuites() {
+            return null;
+        }
+
         @Override
-        public String[] getSupportedProtocols()  { return null; }
+        public String[] getSupportedProtocols() {
+            return null;
+        }
+
         @Override
-        public boolean getUseClientMode()  { return true; }
+        public boolean getUseClientMode() {
+            return true;
+        }
+
         @Override
-        public boolean getWantClientAuth()  { return true; }
+        public boolean getWantClientAuth() {
+            return true;
+        }
+
         @Override
-        public boolean isInboundDone()  { return true; }
+        public boolean isInboundDone() {
+            return true;
+        }
+
         @Override
-        public boolean isOutboundDone()  { return true; }
+        public boolean isOutboundDone() {
+            return true;
+        }
+
         @Override
-        public void setEnabledCipherSuites(String[] suites) { }
+        public void setEnabledCipherSuites(String[] suites) {
+        }
+
         @Override
-        public void setEnabledProtocols(String[] protocols) { }
+        public void setEnabledProtocols(String[] protocols) {
+        }
+
         @Override
-        public void setEnableSessionCreation(boolean flag) { }
+        public void setEnableSessionCreation(boolean flag) {
+        }
+
         @Override
-        public void setNeedClientAuth(boolean need) { }
+        public void setNeedClientAuth(boolean need) {
+        }
+
         @Override
-        public void setUseClientMode(boolean mode) { }
+        public void setUseClientMode(boolean mode) {
+        }
+
         @Override
-        public void setWantClientAuth(boolean want) { }        
+        public void setWantClientAuth(boolean want) {
+        }
+
         @Override
         public SSLEngineResult unwrap(ByteBuffer src, ByteBuffer[] dsts,
                 int offset, int length) throws SSLException {
             return null;
-        }        
+        }
+
         @Override
         public SSLEngineResult wrap(ByteBuffer[] srcs, int offset,
-                int length, ByteBuffer dst) throws SSLException { 
+                int length, ByteBuffer dst) throws SSLException {
             return null;
         }
 

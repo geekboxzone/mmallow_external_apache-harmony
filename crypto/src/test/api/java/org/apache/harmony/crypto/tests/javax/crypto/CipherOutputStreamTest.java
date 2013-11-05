@@ -36,7 +36,8 @@ public class CipherOutputStreamTest extends junit.framework.TestCase {
             // expected
         }
 
-        CipherOutputStream ch = new CipherOutputStream((OutputStream) null) {};
+        CipherOutputStream ch = new CipherOutputStream((OutputStream) null) {
+        };
         try {
             new CipherOutputStream(ch, Cipher
                     .getInstance("DES/CBC/PKCS5Padding")).close();

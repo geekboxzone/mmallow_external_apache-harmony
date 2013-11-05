@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.callback;
 
@@ -41,7 +41,7 @@ public class PasswordCallbackTest extends TestCase {
         pc.setPassword(null);
         pc.clearPassword();
         assertNull(pc.getPassword());
-        char[] pwd = {'a','b','c'};
+        char[] pwd = { 'a', 'b', 'c' };
         pc.setPassword(pwd);
         assertEquals(new String(pwd), new String(pc.getPassword()));
         pc.clearPassword();
@@ -52,19 +52,21 @@ public class PasswordCallbackTest extends TestCase {
         pc.clearPassword();
         assertEquals(p.length, pc.getPassword().length);
     }
-    
+
     public final void testInit_01() {
         try {
-        pc = new PasswordCallback("", true);
-        fail("Prompt and DefaultName should not be empty");
-        } catch (IllegalArgumentException e){}
+            pc = new PasswordCallback("", true);
+            fail("Prompt and DefaultName should not be empty");
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     public final void testInit_02() {
         try {
-        pc = new PasswordCallback(null, true);
-        fail("Prompt and DefaultName should not null");
-        } catch (IllegalArgumentException e){}
+            pc = new PasswordCallback(null, true);
+            fail("Prompt and DefaultName should not null");
+        } catch (IllegalArgumentException e) {
+        }
     }
 
 }

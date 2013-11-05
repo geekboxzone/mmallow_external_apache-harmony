@@ -28,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ServerHelloDone</code> constructor and methods
- *  
  */
 public class ServerHelloDoneTest extends TestCase {
 

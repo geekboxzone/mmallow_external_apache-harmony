@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -37,12 +37,11 @@ import junit.framework.TestCase;
 
 /**
  * Tests for CertPathValidator class constructors and methods
- * 
  */
 
 public class CertPathValidator2Test extends TestCase {
     private static final String defaultAlg = "CertPB";
-    
+
     public static final String CertPathValidatorProviderClass = "org.apache.harmony.security.tests.support.cert.MyCertPathValidatorSpi";
 
     private static final String[] invalidValues = SpiEngUtils.invalidValues;
@@ -63,7 +62,7 @@ public class CertPathValidator2Test extends TestCase {
         super.setUp();
         mProv = (new SpiEngUtils()).new MyProvider("MyCertPathValidatorProvider",
                 "Provider for testing", CertPathValidator1Test.srvCertPathValidator
-                        .concat(".").concat(defaultAlg),
+                .concat(".").concat(defaultAlg),
                 CertPathValidatorProviderClass);
         Security.insertProviderAt(mProv, 1);
     }
@@ -78,41 +77,42 @@ public class CertPathValidator2Test extends TestCase {
 
     /**
      * Constructor for CertPathValidator2Test.
-     * 
+     *
      * @param arg0
      */
     public CertPathValidator2Test(String arg0) {
         super(arg0);
     }
 
-    private void checkResult(CertPathValidator certV) 
-            throws CertPathValidatorException, 
+    private void checkResult(CertPathValidator certV)
+            throws CertPathValidatorException,
             InvalidAlgorithmParameterException {
         String dt = CertPathValidator.getDefaultType();
         String propName = "certpathvalidator.type";
-        for (int i = 0; i <invalidValues.length; i++) {
+        for (int i = 0; i < invalidValues.length; i++) {
             Security.setProperty(propName, invalidValues[i]);
             assertEquals("Incorrect default type", CertPathValidator.getDefaultType(),
                     invalidValues[i]);
         }
         Security.setProperty(propName, dt);
         assertEquals("Incorrect default type", CertPathValidator.getDefaultType(),
-                dt);       certV.validate(null, null);
-       try {
-           certV.validate(null, null);           
-       } catch (CertPathValidatorException e) {
-       }
-       try {
-           certV.validate(null, null);           
-       } catch (InvalidAlgorithmParameterException e) {
-       }
+                dt);
+        certV.validate(null, null);
+        try {
+            certV.validate(null, null);
+        } catch (CertPathValidatorException e) {
+        }
+        try {
+            certV.validate(null, null);
+        } catch (InvalidAlgorithmParameterException e) {
+        }
     }
 
     /**
-     * Test for <code>getInstance(String algorithm)</code> method 
+     * Test for <code>getInstance(String algorithm)</code> method
      * Assertions:
-	 * throws NullPointerException when algorithm is null 
-	 * throws NoSuchAlgorithmException when algorithm  is not available
+     * throws NullPointerException when algorithm is null
+     * throws NoSuchAlgorithmException when algorithm  is not available
      * returns CertPathValidator object
      */
     public void testGetInstance01() throws NoSuchAlgorithmException,
@@ -142,11 +142,11 @@ public class CertPathValidator2Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
-     * Assertions: 
-	 * throws NullPointerException when algorithm is null 
-	 * throws NoSuchAlgorithmException when algorithm  is not available
-     * throws IllegalArgumentException when provider is null or empty; 
-     * throws NoSuchProviderException when provider is available; 
+     * Assertions:
+     * throws NullPointerException when algorithm is null
+     * throws NoSuchAlgorithmException when algorithm  is not available
+     * throws IllegalArgumentException when provider is null or empty;
+     * throws NoSuchProviderException when provider is available;
      * returns CertPathValidator object
      */
     public void testGetInstance02() throws NoSuchAlgorithmException,
@@ -207,11 +207,11 @@ public class CertPathValidator2Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
-     * method 
-     * Assertions: 
-	 * throws NullPointerException when algorithm is null 
-	 * throws NoSuchAlgorithmException when algorithm  is not available
-     * throws IllegalArgumentException when provider is null; 
+     * method
+     * Assertions:
+     * throws NullPointerException when algorithm is null
+     * throws NoSuchAlgorithmException when algorithm  is not available
+     * throws IllegalArgumentException when provider is null;
      * returns CertPathValidator object
      */
     public void testGetInstance03() throws NoSuchAlgorithmException,

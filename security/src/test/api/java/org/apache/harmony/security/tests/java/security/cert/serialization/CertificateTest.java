@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert.serialization;
 
@@ -68,13 +68,13 @@ public class CertificateTest extends TestCase {
 
     /**
      * Test for <code>Certificate.CertificateRep.readResolve()</code> method<br>
-     * 
+     * <p/>
      * Assertion: ObjectStreamException if a <code>CertPath</code> could not
      * be constructed
      */
     public final void testCertificateRep_readResolve() throws Exception {
         // Create object to be serialized
-        Certificate c1 = new MyCertificate("DUMMY", new byte[] {(byte)0, (byte)1});
+        Certificate c1 = new MyCertificate("DUMMY", new byte[] { (byte) 0, (byte) 1 });
 
         // try to serialize/deserialize cert
         try {
@@ -88,8 +88,7 @@ public class CertificateTest extends TestCase {
      * Test for <code>writeReplace()</code> method<br>
      * ByteArray streams used.
      */
-    public final void testWriteReplace() throws Exception
-               {
+    public final void testWriteReplace() throws Exception {
         // Create object to be serialized
         Certificate c1 = new MyCertificate("DUMMY", null);
 

@@ -23,46 +23,46 @@ import java.io.UnsupportedEncodingException;
 
 public class UnsupportedEncodingExceptionTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.io.UnsupportedEncodingException#UnsupportedEncodingException()
-	 */
-	public void test_Constructor() {
-		// Test for method java.io.UnsupportedEncodingException()
-		try {
-			new OutputStreamWriter(new ByteArrayOutputStream(), "BogusEncoding");
-		} catch (UnsupportedEncodingException e) {
-			return;
-		}
+    /**
+     * @tests java.io.UnsupportedEncodingException#UnsupportedEncodingException()
+     */
+    public void test_Constructor() {
+        // Test for method java.io.UnsupportedEncodingException()
+        try {
+            new OutputStreamWriter(new ByteArrayOutputStream(), "BogusEncoding");
+        } catch (UnsupportedEncodingException e) {
+            return;
+        }
 
-		fail("Failed to generate expected exception");
-	}
+        fail("Failed to generate expected exception");
+    }
 
-	/**
-	 * @tests java.io.UnsupportedEncodingException#UnsupportedEncodingException(java.lang.String)
-	 */
-	public void test_ConstructorLjava_lang_String() {
-		// Test for method
-		// java.io.UnsupportedEncodingException(java.lang.String)
-		try {
-			new OutputStreamWriter(new ByteArrayOutputStream(), "BogusEncoding");
-		} catch (UnsupportedEncodingException e) {
-			return;
-		}
+    /**
+     * @tests java.io.UnsupportedEncodingException#UnsupportedEncodingException(java.lang.String)
+     */
+    public void test_ConstructorLjava_lang_String() {
+        // Test for method
+        // java.io.UnsupportedEncodingException(java.lang.String)
+        try {
+            new OutputStreamWriter(new ByteArrayOutputStream(), "BogusEncoding");
+        } catch (UnsupportedEncodingException e) {
+            return;
+        }
 
-		fail("Failed to generate expected exception");
-	}
+        fail("Failed to generate expected exception");
+    }
 
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

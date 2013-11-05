@@ -21,7 +21,7 @@ import java.io.File;
 
 public class Support_DeleteOnExitTest {
 
-	public static void main(java.lang.String[] args) {
+    public static void main(java.lang.String[] args) {
         for (int i = 0; i < args.length; i++) {
             File f1 = new File(args[i]);
             f1.deleteOnExit();

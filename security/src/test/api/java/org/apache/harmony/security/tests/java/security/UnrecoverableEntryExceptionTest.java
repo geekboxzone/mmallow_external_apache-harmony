@@ -16,23 +16,23 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.*;
 import junit.framework.TestCase;
 
 /**
  * Tests for <code>UnrecoverableEntryException</code> class
- * 
  */
 
 public class UnrecoverableEntryExceptionTest extends TestCase {
 
     /**
      * Constructor for UnrecoverableEntryExceptionTest.
-     * 
+     *
      * @param arg0
      */
     public UnrecoverableEntryExceptionTest(String arg0) {

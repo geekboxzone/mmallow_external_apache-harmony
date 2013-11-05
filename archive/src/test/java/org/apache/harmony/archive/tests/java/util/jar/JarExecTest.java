@@ -29,227 +29,226 @@ import tests.support.Support_Exec;
 import tests.support.resource.Support_Resources;
 
 /**
- * 
  * tests for various cases of java -jar ... execution
- *
  */
 
 public class JarExecTest extends junit.framework.TestCase {
-	/**
-	 * regression test for HARMONY-1562 issue 
-	 *
-	 */
-	public void test_1562() throws Exception {
-		// create the manifest
-		Manifest man = new Manifest();
-		Attributes att = man.getMainAttributes();
-		att.put(Attributes.Name.MANIFEST_VERSION, "1.0");
-		att.put(Attributes.Name.MAIN_CLASS, "foo.bar.execjartest.Foo");
+    /**
+     * regression test for HARMONY-1562 issue
+     */
+    public void test_1562() throws Exception {
+        // create the manifest
+        Manifest man = new Manifest();
+        Attributes att = man.getMainAttributes();
+        att.put(Attributes.Name.MANIFEST_VERSION, "1.0");
+        att.put(Attributes.Name.MAIN_CLASS, "foo.bar.execjartest.Foo");
 
-		File outputJar = File.createTempFile("hyts_", ".jar");
-		outputJar.deleteOnExit();
-		JarOutputStream jout = new JarOutputStream(new FileOutputStream(outputJar),
-				man);
-		File resources = Support_Resources.createTempFolder();
-		
-		for (String jarClass : new String[] {"Foo", "Bar"}) {
-			jout.putNextEntry(new JarEntry("foo/bar/execjartest/" + jarClass + ".class"));
-			jout.write(getResource(resources, "hyts_" + jarClass + ".ser"));
-		}
+        File outputJar = File.createTempFile("hyts_", ".jar");
+        outputJar.deleteOnExit();
+        JarOutputStream jout = new JarOutputStream(new FileOutputStream(outputJar),
+                man);
+        File resources = Support_Resources.createTempFolder();
 
-		jout.close();
+        for (String jarClass : new String[] { "Foo", "Bar" }) {
+            jout.putNextEntry(new JarEntry("foo/bar/execjartest/" + jarClass + ".class"));
+            jout.write(getResource(resources, "hyts_" + jarClass + ".ser"));
+        }
 
-		
-		// set up the VM parameters
-		String[] args = new String[] {"-jar", outputJar.getAbsolutePath()};
+        jout.close();
 
-	    // execute the JAR and read the result
-		String	res = Support_Exec.execJava(args, null, false);
 
-		assertTrue("Error executing JAR : result returned was incorrect.", res
-				.startsWith("FOOBAR"));
-	}
-	
-	/**
-	 * tests Class-Path entry in manifest
-	 * @throws Exception in case of troubles
-	 */
-	public void test_jar_class_path() throws Exception {
-		File fooJar = File.createTempFile("hyts_", ".jar");
-		File barJar = File.createTempFile("hyts_", ".jar");
-		fooJar.deleteOnExit();
-		barJar.deleteOnExit();
-		
-		// create the manifest
-		Manifest man = new Manifest();
-		Attributes att = man.getMainAttributes();
-		att.put(Attributes.Name.MANIFEST_VERSION, "1.0");
-		att.put(Attributes.Name.MAIN_CLASS, "foo.bar.execjartest.Foo");
-		att.put(Attributes.Name.CLASS_PATH, barJar.getName());
-		
-		File resources = Support_Resources.createTempFolder();
+        // set up the VM parameters
+        String[] args = new String[] { "-jar", outputJar.getAbsolutePath() };
 
-		JarOutputStream joutFoo = new JarOutputStream(new FileOutputStream(fooJar), man);
-		joutFoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
-		joutFoo.write(getResource(resources, "hyts_Foo.ser"));
-		joutFoo.close();
-		
-		JarOutputStream joutBar = new JarOutputStream(new FileOutputStream(barJar));
-		joutBar.putNextEntry(new JarEntry("foo/bar/execjartest/Bar.class"));
-		joutBar.write(getResource(resources, "hyts_Bar.ser"));
-		joutBar.close();
+        // execute the JAR and read the result
+        String res = Support_Exec.execJava(args, null, false);
 
-		String[] args = new String[] {"-jar", fooJar.getAbsolutePath()};
+        assertTrue("Error executing JAR : result returned was incorrect.", res
+                .startsWith("FOOBAR"));
+    }
 
-	    // execute the JAR and read the result
-		String	res = Support_Exec.execJava(args, null, false);
+    /**
+     * tests Class-Path entry in manifest
+     *
+     * @throws Exception in case of troubles
+     */
+    public void test_jar_class_path() throws Exception {
+        File fooJar = File.createTempFile("hyts_", ".jar");
+        File barJar = File.createTempFile("hyts_", ".jar");
+        fooJar.deleteOnExit();
+        barJar.deleteOnExit();
 
-		assertTrue("Error executing JAR : result returned was incorrect.", res
-				.startsWith("FOOBAR"));
-		
-		//rewrite manifest so it contains not only reference to bar but useless entries as well
-		att.put(Attributes.Name.CLASS_PATH, "xx yy zz " + barJar.getName());
-		joutFoo = new JarOutputStream(new FileOutputStream(fooJar), man);
-		joutFoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
-		joutFoo.write(getResource(resources, "hyts_Foo.ser"));
-		joutFoo.close();
-		// execute the JAR and read the result
-		res = Support_Exec.execJava(args, null, false);
-		assertTrue("Error executing JAR : result returned was incorrect.", res
-				.startsWith("FOOBAR"));
+        // create the manifest
+        Manifest man = new Manifest();
+        Attributes att = man.getMainAttributes();
+        att.put(Attributes.Name.MANIFEST_VERSION, "1.0");
+        att.put(Attributes.Name.MAIN_CLASS, "foo.bar.execjartest.Foo");
+        att.put(Attributes.Name.CLASS_PATH, barJar.getName());
 
-		
-		//play with relative file names - put relative path as ../<parent dir name>/xx.jar
-		att.put(Attributes.Name.CLASS_PATH, ".." + File.separator + barJar.getParentFile().getName() + File.separator + barJar.getName());
-		joutFoo = new JarOutputStream(new FileOutputStream(fooJar), man);
-		joutFoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
-		joutFoo.write(getResource(resources, "hyts_Foo.ser"));
-		joutFoo.close();
-		// execute the JAR and read the result
-		res = Support_Exec.execJava(args, null, false);
-		assertTrue("Error executing JAR : result returned was incorrect.", res
-				.startsWith("FOOBAR"));
-	}
+        File resources = Support_Resources.createTempFolder();
 
-	/**
-	 * tests case when Main-Class is not in the jar launched but in another jar referenced by Class-Path
-	 * @throws Exception in case of troubles
-	 */
-	public void test_main_class_in_another_jar() throws Exception {
-		File fooJar = File.createTempFile("hyts_", ".jar");
-		File barJar = File.createTempFile("hyts_", ".jar");
-		fooJar.deleteOnExit();
-		barJar.deleteOnExit();
-		
-		// create the manifest
-		Manifest man = new Manifest();
-		Attributes att = man.getMainAttributes();
-		att.put(Attributes.Name.MANIFEST_VERSION, "1.0");
-		att.put(Attributes.Name.MAIN_CLASS, "foo.bar.execjartest.Foo");
-		att.put(Attributes.Name.CLASS_PATH, fooJar.getName());
-		
-		File resources = Support_Resources.createTempFolder();
+        JarOutputStream joutFoo = new JarOutputStream(new FileOutputStream(fooJar), man);
+        joutFoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
+        joutFoo.write(getResource(resources, "hyts_Foo.ser"));
+        joutFoo.close();
 
-		JarOutputStream joutFoo = new JarOutputStream(new FileOutputStream(fooJar));
-		joutFoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
-		joutFoo.write(getResource(resources, "hyts_Foo.ser"));
-		joutFoo.close();
-		
-		JarOutputStream joutBar = new JarOutputStream(new FileOutputStream(barJar), man);
-		joutBar.putNextEntry(new JarEntry("foo/bar/execjartest/Bar.class"));
-		joutBar.write(getResource(resources, "hyts_Bar.ser"));
-		joutBar.close();
+        JarOutputStream joutBar = new JarOutputStream(new FileOutputStream(barJar));
+        joutBar.putNextEntry(new JarEntry("foo/bar/execjartest/Bar.class"));
+        joutBar.write(getResource(resources, "hyts_Bar.ser"));
+        joutBar.close();
 
-		String[] args = new String[] {"-jar", barJar.getAbsolutePath()};
+        String[] args = new String[] { "-jar", fooJar.getAbsolutePath() };
 
-	    // execute the JAR and read the result
-		String	res = Support_Exec.execJava(args, null, false);
+        // execute the JAR and read the result
+        String res = Support_Exec.execJava(args, null, false);
 
-		assertTrue("Error executing JAR : result returned was incorrect.", res
-				.startsWith("FOOBAR"));
-	}
-	
-	public void test_classpath() throws Exception {
-		File resources = Support_Resources.createTempFolder();
+        assertTrue("Error executing JAR : result returned was incorrect.", res
+                .startsWith("FOOBAR"));
 
-		File fooJar = File.createTempFile("hyts_", ".jar");
-		fooJar.deleteOnExit();
+        //rewrite manifest so it contains not only reference to bar but useless entries as well
+        att.put(Attributes.Name.CLASS_PATH, "xx yy zz " + barJar.getName());
+        joutFoo = new JarOutputStream(new FileOutputStream(fooJar), man);
+        joutFoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
+        joutFoo.write(getResource(resources, "hyts_Foo.ser"));
+        joutFoo.close();
+        // execute the JAR and read the result
+        res = Support_Exec.execJava(args, null, false);
+        assertTrue("Error executing JAR : result returned was incorrect.", res
+                .startsWith("FOOBAR"));
 
-		JarOutputStream joutFoo = new JarOutputStream(new FileOutputStream(fooJar));
-		joutFoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
-		joutFoo.write(getResource(resources, "hyts_Foo.ser"));
-		joutFoo.putNextEntry(new JarEntry("foo/bar/execjartest/Bar.class"));
-		joutFoo.write(getResource(resources, "hyts_Bar.ser"));
-		joutFoo.close();
 
-		String[] args = new String[] {"foo.bar.execjartest.Foo"};
+        //play with relative file names - put relative path as ../<parent dir name>/xx.jar
+        att.put(Attributes.Name.CLASS_PATH, ".." + File.separator + barJar.getParentFile().getName() + File.separator + barJar.getName());
+        joutFoo = new JarOutputStream(new FileOutputStream(fooJar), man);
+        joutFoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
+        joutFoo.write(getResource(resources, "hyts_Foo.ser"));
+        joutFoo.close();
+        // execute the JAR and read the result
+        res = Support_Exec.execJava(args, null, false);
+        assertTrue("Error executing JAR : result returned was incorrect.", res
+                .startsWith("FOOBAR"));
+    }
 
-	    // execute the JAR and read the result
-		String	res = Support_Exec.execJava(args, null, new String[] { "CLASSPATH=" + fooJar.getAbsolutePath() }, false);
+    /**
+     * tests case when Main-Class is not in the jar launched but in another jar referenced by Class-Path
+     *
+     * @throws Exception in case of troubles
+     */
+    public void test_main_class_in_another_jar() throws Exception {
+        File fooJar = File.createTempFile("hyts_", ".jar");
+        File barJar = File.createTempFile("hyts_", ".jar");
+        fooJar.deleteOnExit();
+        barJar.deleteOnExit();
 
-		assertTrue("Error executing class from ClassPath : result returned was incorrect.", res
-				.startsWith("FOOBAR"));
-		
-		//ok - next try - add -cp to path - it should override env
-		File booJar = File.createTempFile("hyts_", ".jar");
-		booJar.deleteOnExit();
+        // create the manifest
+        Manifest man = new Manifest();
+        Attributes att = man.getMainAttributes();
+        att.put(Attributes.Name.MANIFEST_VERSION, "1.0");
+        att.put(Attributes.Name.MAIN_CLASS, "foo.bar.execjartest.Foo");
+        att.put(Attributes.Name.CLASS_PATH, fooJar.getName());
 
-		JarOutputStream joutBoo = new JarOutputStream(new FileOutputStream(booJar));
-		joutBoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
-		String booBody = new String(getResource(resources, "hyts_Foo.ser"), "iso-8859-1");
-		booBody = booBody.replaceFirst("FOO", "BOO");
-		joutBoo.write(booBody.getBytes("iso-8859-1"));
-		joutBoo.putNextEntry(new JarEntry("foo/bar/execjartest/Bar.class"));
-		String farBody = new String(getResource(resources, "hyts_Bar.ser"), "iso-8859-1");
-		farBody = farBody.replaceFirst("BAR", "FAR");
-		joutBoo.write(farBody.getBytes("iso-8859-1"));
-		joutBoo.close();
+        File resources = Support_Resources.createTempFolder();
 
-		res = Support_Exec.execJava(args, new String[] {booJar.getAbsolutePath()}, new String[] { "CLASSPATH=" + fooJar.getAbsolutePath() }, false);
+        JarOutputStream joutFoo = new JarOutputStream(new FileOutputStream(fooJar));
+        joutFoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
+        joutFoo.write(getResource(resources, "hyts_Foo.ser"));
+        joutFoo.close();
 
-		assertTrue("Error executing class specified by -cp : result returned was incorrect.", res
-				.startsWith("BOOFAR"));
-		
-		//now add -jar option - it should override env and classpath   
-		Manifest man = new Manifest();
-		Attributes att = man.getMainAttributes();
-		att.put(Attributes.Name.MANIFEST_VERSION, "1.0");
-		att.put(Attributes.Name.MAIN_CLASS, "foo.bar.execjartest.Foo");
+        JarOutputStream joutBar = new JarOutputStream(new FileOutputStream(barJar), man);
+        joutBar.putNextEntry(new JarEntry("foo/bar/execjartest/Bar.class"));
+        joutBar.write(getResource(resources, "hyts_Bar.ser"));
+        joutBar.close();
 
-		File zooJar = File.createTempFile("hyts_", ".jar");
-		zooJar.deleteOnExit();
+        String[] args = new String[] { "-jar", barJar.getAbsolutePath() };
 
-		JarOutputStream joutZoo = new JarOutputStream(new FileOutputStream(zooJar), man);
-		joutZoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
-		String zooBody = new String(getResource(resources, "hyts_Foo.ser"), "iso-8859-1");
-		zooBody = zooBody.replaceFirst("FOO", "ZOO");
-		joutZoo.write(zooBody.getBytes("iso-8859-1"));
-		joutZoo.putNextEntry(new JarEntry("foo/bar/execjartest/Bar.class"));
-		String zarBody = new String(getResource(resources, "hyts_Bar.ser"), "iso-8859-1");
-		zarBody = zarBody.replaceFirst("BAR", "ZAR");
-		joutZoo.write(zarBody.getBytes("iso-8859-1"));
-		joutZoo.close();
+        // execute the JAR and read the result
+        String res = Support_Exec.execJava(args, null, false);
 
-		args = new String[] {"-jar", zooJar.getAbsolutePath()};
-		
-		res = Support_Exec.execJava(args, new String[] {booJar.getAbsolutePath()}, new String[] { "CLASSPATH=" + fooJar.getAbsolutePath() }, false);
+        assertTrue("Error executing JAR : result returned was incorrect.", res
+                .startsWith("FOOBAR"));
+    }
 
-		assertTrue("Error executing class specified by -cp : result returned was incorrect.", res
-				.startsWith("ZOOZAR"));
-	}
-	
-	private static byte[] getResource(File tempDir, String resourceName) throws IOException {
-		Support_Resources.copyFile(tempDir, null, resourceName);
-		File resourceFile = new File(tempDir, resourceName);
-		resourceFile.deleteOnExit();
-		
-		//read whole resource data into memory
-		byte[] resourceBody = new byte[(int) resourceFile.length()];
-		FileInputStream fis = new FileInputStream(resourceFile);
-		fis.read(resourceBody);
-		fis.close();
-		
-		return resourceBody;
-	} 
+    public void test_classpath() throws Exception {
+        File resources = Support_Resources.createTempFolder();
+
+        File fooJar = File.createTempFile("hyts_", ".jar");
+        fooJar.deleteOnExit();
+
+        JarOutputStream joutFoo = new JarOutputStream(new FileOutputStream(fooJar));
+        joutFoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
+        joutFoo.write(getResource(resources, "hyts_Foo.ser"));
+        joutFoo.putNextEntry(new JarEntry("foo/bar/execjartest/Bar.class"));
+        joutFoo.write(getResource(resources, "hyts_Bar.ser"));
+        joutFoo.close();
+
+        String[] args = new String[] { "foo.bar.execjartest.Foo" };
+
+        // execute the JAR and read the result
+        String res = Support_Exec.execJava(args, null, new String[] { "CLASSPATH=" + fooJar.getAbsolutePath() }, false);
+
+        assertTrue("Error executing class from ClassPath : result returned was incorrect.", res
+                .startsWith("FOOBAR"));
+
+        //ok - next try - add -cp to path - it should override env
+        File booJar = File.createTempFile("hyts_", ".jar");
+        booJar.deleteOnExit();
+
+        JarOutputStream joutBoo = new JarOutputStream(new FileOutputStream(booJar));
+        joutBoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
+        String booBody = new String(getResource(resources, "hyts_Foo.ser"), "iso-8859-1");
+        booBody = booBody.replaceFirst("FOO", "BOO");
+        joutBoo.write(booBody.getBytes("iso-8859-1"));
+        joutBoo.putNextEntry(new JarEntry("foo/bar/execjartest/Bar.class"));
+        String farBody = new String(getResource(resources, "hyts_Bar.ser"), "iso-8859-1");
+        farBody = farBody.replaceFirst("BAR", "FAR");
+        joutBoo.write(farBody.getBytes("iso-8859-1"));
+        joutBoo.close();
+
+        res = Support_Exec.execJava(args, new String[] { booJar.getAbsolutePath() }, new String[] { "CLASSPATH=" + fooJar.getAbsolutePath() }, false);
+
+        assertTrue("Error executing class specified by -cp : result returned was incorrect.", res
+                .startsWith("BOOFAR"));
+
+        //now add -jar option - it should override env and classpath
+        Manifest man = new Manifest();
+        Attributes att = man.getMainAttributes();
+        att.put(Attributes.Name.MANIFEST_VERSION, "1.0");
+        att.put(Attributes.Name.MAIN_CLASS, "foo.bar.execjartest.Foo");
+
+        File zooJar = File.createTempFile("hyts_", ".jar");
+        zooJar.deleteOnExit();
+
+        JarOutputStream joutZoo = new JarOutputStream(new FileOutputStream(zooJar), man);
+        joutZoo.putNextEntry(new JarEntry("foo/bar/execjartest/Foo.class"));
+        String zooBody = new String(getResource(resources, "hyts_Foo.ser"), "iso-8859-1");
+        zooBody = zooBody.replaceFirst("FOO", "ZOO");
+        joutZoo.write(zooBody.getBytes("iso-8859-1"));
+        joutZoo.putNextEntry(new JarEntry("foo/bar/execjartest/Bar.class"));
+        String zarBody = new String(getResource(resources, "hyts_Bar.ser"), "iso-8859-1");
+        zarBody = zarBody.replaceFirst("BAR", "ZAR");
+        joutZoo.write(zarBody.getBytes("iso-8859-1"));
+        joutZoo.close();
+
+        args = new String[] { "-jar", zooJar.getAbsolutePath() };
+
+        res = Support_Exec.execJava(args, new String[] { booJar.getAbsolutePath() }, new String[] { "CLASSPATH=" + fooJar.getAbsolutePath() }, false);
+
+        assertTrue("Error executing class specified by -cp : result returned was incorrect.", res
+                .startsWith("ZOOZAR"));
+    }
+
+    private static byte[] getResource(File tempDir, String resourceName) throws IOException {
+        Support_Resources.copyFile(tempDir, null, resourceName);
+        File resourceFile = new File(tempDir, resourceName);
+        resourceFile.deleteOnExit();
+
+        //read whole resource data into memory
+        byte[] resourceBody = new byte[(int) resourceFile.length()];
+        FileInputStream fis = new FileInputStream(resourceFile);
+        fis.read(resourceBody);
+        fis.close();
+
+        return resourceBody;
+    }
 
 }

@@ -32,7 +32,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>HttpsURLConnection</code> class constructors and methods.
- * 
  */
 public class HttpsURLConnectionTest extends TestCase {
 

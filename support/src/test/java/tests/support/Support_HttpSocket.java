@@ -27,28 +27,28 @@ import java.net.Socket;
  */
 public class Support_HttpSocket implements Support_Socket {
 
-	private final Socket instance;
+    private final Socket instance;
 
-	private boolean streamOpen = false;
+    private boolean streamOpen = false;
 
-	Support_HttpSocket(Socket socket) {
-		instance = socket;
-	}
+    Support_HttpSocket(Socket socket) {
+        instance = socket;
+    }
 
-	public InputStream getInputStream() throws IOException {
-		streamOpen = true;
-		return instance.getInputStream();
-	}
+    public InputStream getInputStream() throws IOException {
+        streamOpen = true;
+        return instance.getInputStream();
+    }
 
-	public OutputStream getOutputStream() throws IOException {
-		streamOpen = true;
-		return instance.getOutputStream();
-	}
+    public OutputStream getOutputStream() throws IOException {
+        streamOpen = true;
+        return instance.getOutputStream();
+    }
 
-	public void close() throws IOException {
-		if (!streamOpen && instance != null) {
+    public void close() throws IOException {
+        if (!streamOpen && instance != null) {
             instance.close();
         }
-	}
+    }
 
 }

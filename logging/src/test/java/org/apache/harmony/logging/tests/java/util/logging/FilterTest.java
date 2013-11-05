@@ -24,21 +24,20 @@ import junit.framework.TestCase;
 
 /**
  * This testcase verifies the signature of the interface Filter.
- * 
  */
 public class FilterTest extends TestCase {
-	public void testFilter() {
-		MockFilter f = new MockFilter();
-		f.isLoggable(null);
-	}
+    public void testFilter() {
+        MockFilter f = new MockFilter();
+        f.isLoggable(null);
+    }
 
-	/*
-	 * This inner class implements the interface Filter to verify the signature.
-	 */
-	private class MockFilter implements Filter {
+    /*
+      * This inner class implements the interface Filter to verify the signature.
+      */
+    private class MockFilter implements Filter {
 
-		public boolean isLoggable(LogRecord record) {
-			return false;
-		}
-	}
+        public boolean isLoggable(LogRecord record) {
+            return false;
+        }
+    }
 }

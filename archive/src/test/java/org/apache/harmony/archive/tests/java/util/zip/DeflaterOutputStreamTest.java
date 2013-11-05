@@ -81,7 +81,7 @@ public class DeflaterOutputStreamTest extends TestCase {
 
     /**
      * @tests java.util.zip.DeflaterOutputStream#DeflaterOutputStream(java.io.OutputStream,
-     *        java.util.zip.Deflater)
+     *java.util.zip.Deflater)
      */
     public void test_ConstructorLjava_io_OutputStreamLjava_util_zip_Deflater() throws Exception {
         byte byteArray[] = { 1, 3, 4, 7, 8 };
@@ -126,7 +126,7 @@ public class DeflaterOutputStreamTest extends TestCase {
 
     /**
      * @tests java.util.zip.DeflaterOutputStream#DeflaterOutputStream(java.io.OutputStream,
-     *        java.util.zip.Deflater, int)
+     *java.util.zip.Deflater, int)
      */
     public void test_ConstructorLjava_io_OutputStreamLjava_util_zip_DeflaterI()
             throws Exception {
@@ -186,7 +186,7 @@ public class DeflaterOutputStreamTest extends TestCase {
 
         FileOutputStream fos = new FileOutputStream(f1);
         DeflaterOutputStream dos = new DeflaterOutputStream(fos);
-        byte byteArray[] = {1, 3, 4, 6};
+        byte byteArray[] = { 1, 3, 4, 6 };
         dos.write(byteArray);
         dos.close();
 

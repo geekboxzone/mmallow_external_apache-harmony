@@ -66,7 +66,8 @@ public class SSLServerSocketImplTest extends TestCase {
                 public void run() {
                     try {
                         s.accept().close();
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
                 }
             };
 
@@ -80,15 +81,18 @@ public class SSLServerSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     try {
                         client.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     try {
                         ssocket.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     fail("Handshake was not started");
                 }
             }
@@ -96,12 +100,14 @@ public class SSLServerSocketImplTest extends TestCase {
             if (client != null) {
                 try {
                     client.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (ssocket != null) {
                 try {
                     ssocket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -124,7 +130,8 @@ public class SSLServerSocketImplTest extends TestCase {
                 public void run() {
                     try {
                         s.accept().close();
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
                 }
             };
 
@@ -138,15 +145,18 @@ public class SSLServerSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     try {
                         client.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     try {
                         ssocket.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     fail("Handshake was not started");
                 }
             }
@@ -154,12 +164,14 @@ public class SSLServerSocketImplTest extends TestCase {
             if (client != null) {
                 try {
                     client.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (ssocket != null) {
                 try {
                     ssocket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -182,7 +194,8 @@ public class SSLServerSocketImplTest extends TestCase {
                 public void run() {
                     try {
                         s.accept().close();
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
                 }
             };
 
@@ -196,15 +209,18 @@ public class SSLServerSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     try {
                         client.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     try {
                         ssocket.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     fail("Handshake was not started");
                 }
             }
@@ -212,12 +228,14 @@ public class SSLServerSocketImplTest extends TestCase {
             if (client != null) {
                 try {
                     client.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (ssocket != null) {
                 try {
                     ssocket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -240,7 +258,8 @@ public class SSLServerSocketImplTest extends TestCase {
                 public void run() {
                     try {
                         s.accept().close();
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
                 }
             };
 
@@ -254,15 +273,18 @@ public class SSLServerSocketImplTest extends TestCase {
                 // wait for handshake start
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 timeout--;
                 if (timeout < 0) {
                     try {
                         client.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     try {
                         ssocket.close();
-                    } catch (IOException ex) { }
+                    } catch (IOException ex) {
+                    }
                     fail("Handshake was not started");
                 }
             }
@@ -270,12 +292,14 @@ public class SSLServerSocketImplTest extends TestCase {
             if (client != null) {
                 try {
                     client.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
             if (ssocket != null) {
                 try {
                     ssocket.close();
-                } catch (IOException ex) { }
+                } catch (IOException ex) {
+                }
             }
         }
     }
@@ -289,7 +313,7 @@ public class SSLServerSocketImplTest extends TestCase {
         assertNotNull(supported);
         supported[0] = "NOT_SUPPORTED_CIPHER_SUITE";
         supported = ssocket.getEnabledCipherSuites();
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             if ("NOT_SUPPORTED_CIPHER_SUITE".equals(supported[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -305,10 +329,11 @@ public class SSLServerSocketImplTest extends TestCase {
         String[] enabled = ssocket.getEnabledCipherSuites();
         assertNotNull(enabled);
         String[] supported = ssocket.getSupportedCipherSuites();
-        for (int i=0; i<enabled.length; i++) {
+        for (int i = 0; i < enabled.length; i++) {
             //System.out.println("Checking of "+enabled[i]);
-            found: {
-                for (int j=0; j<supported.length; j++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (enabled[i].equals(supported[j])) {
                         break found;
                     }
@@ -318,18 +343,19 @@ public class SSLServerSocketImplTest extends TestCase {
             }
         }
         ssocket.setEnabledCipherSuites(supported);
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             enabled = new String[supported.length - i];
             System.arraycopy(supported, 0,
-                    enabled, 0, supported.length-i);
+                    enabled, 0, supported.length - i);
             ssocket.setEnabledCipherSuites(enabled);
             String[] result = ssocket.getEnabledCipherSuites();
             if (result.length != enabled.length) {
                 fail("Returned result does not correspond to expected.");
             }
-            for (int k=0; k<result.length; k++) {
-                found: {
-                    for (int n=0; n<enabled.length; n++) {
+            for (int k = 0; k < result.length; k++) {
+                found:
+                {
+                    for (int n = 0; n < enabled.length; n++) {
                         if (result[k].equals(enabled[n])) {
                             break found;
                         }
@@ -351,10 +377,11 @@ public class SSLServerSocketImplTest extends TestCase {
         String[] enabled = ssocket.getEnabledCipherSuites();
         assertNotNull(enabled);
         String[] supported = ssocket.getSupportedCipherSuites();
-        for (int i=0; i<enabled.length; i++) {
+        for (int i = 0; i < enabled.length; i++) {
             //System.out.println("Checking of "+enabled[i]);
-            found: {
-                for (int j=0; j<supported.length; j++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (enabled[i].equals(supported[j])) {
                         break found;
                     }
@@ -366,23 +393,24 @@ public class SSLServerSocketImplTest extends TestCase {
         ssocket.setEnabledCipherSuites(supported);
         ssocket.setEnabledCipherSuites(enabled);
         ssocket.setEnabledCipherSuites(supported);
-        String[] more_than_supported = new String[supported.length+1];
-        for (int i=0; i<supported.length+1; i++) {
+        String[] more_than_supported = new String[supported.length + 1];
+        for (int i = 0; i < supported.length + 1; i++) {
             more_than_supported[i]
-                = "NOT_SUPPORTED_CIPHER_SUITE";
+                    = "NOT_SUPPORTED_CIPHER_SUITE";
             System.arraycopy(supported, 0,
                     more_than_supported, 0, i);
             System.arraycopy(supported, i,
-                    more_than_supported, i+1, supported.length-i);
+                    more_than_supported, i + 1, supported.length - i);
             try {
                 ssocket.setEnabledCipherSuites(more_than_supported);
                 fail("Expected IllegalArgumentException was not thrown");
-            } catch (IllegalArgumentException e) { }
+            } catch (IllegalArgumentException e) {
+            }
         }
         enabled = ssocket.getEnabledCipherSuites();
         enabled[0] = "NOT_SUPPORTED_CIPHER_SUITE";
         enabled = ssocket.getEnabledCipherSuites();
-        for (int i=0; i<enabled.length; i++) {
+        for (int i = 0; i < enabled.length; i++) {
             if ("NOT_SUPPORTED_CIPHER_SUITE".equals(enabled[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -400,7 +428,7 @@ public class SSLServerSocketImplTest extends TestCase {
         assertFalse(supported.length == 0);
         supported[0] = "NOT_SUPPORTED_PROTOCOL";
         supported = ssocket.getSupportedProtocols();
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             if ("NOT_SUPPORTED_PROTOCOL".equals(supported[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -416,10 +444,11 @@ public class SSLServerSocketImplTest extends TestCase {
         String[] enabled = ssocket.getEnabledProtocols();
         assertNotNull(enabled);
         String[] supported = ssocket.getSupportedProtocols();
-        for (int i=0; i<enabled.length; i++) {
+        for (int i = 0; i < enabled.length; i++) {
             //System.out.println("Checking of "+enabled[i]);
-            found: {
-                for (int j=0; j<supported.length; j++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (enabled[i].equals(supported[j])) {
                         break found;
                     }
@@ -429,10 +458,10 @@ public class SSLServerSocketImplTest extends TestCase {
             }
         }
         ssocket.setEnabledProtocols(supported);
-        for (int i=0; i<supported.length; i++) {
+        for (int i = 0; i < supported.length; i++) {
             enabled = new String[supported.length - i];
             System.arraycopy(supported, i,
-                    enabled, 0, supported.length-i);
+                    enabled, 0, supported.length - i);
             //System.out.println("");
             //for (int k=0; k<supported.length - i; k++) {
             //    System.out.println("---- "+enabled[k]);
@@ -442,9 +471,10 @@ public class SSLServerSocketImplTest extends TestCase {
             if (result.length != enabled.length) {
                 fail("Returned result does not correspond to expected.");
             }
-            for (int k=0; k<result.length; k++) {
-                found: {
-                    for (int n=0; n<enabled.length; n++) {
+            for (int k = 0; k < result.length; k++) {
+                found:
+                {
+                    for (int n = 0; n < enabled.length; n++) {
                         if (result[k].equals(enabled[n])) {
                             break found;
                         }
@@ -466,10 +496,11 @@ public class SSLServerSocketImplTest extends TestCase {
         String[] enabled = ssocket.getEnabledProtocols();
         assertNotNull(enabled);
         String[] supported = ssocket.getSupportedProtocols();
-        for (int i=0; i<enabled.length; i++) {
+        for (int i = 0; i < enabled.length; i++) {
             //System.out.println("Checking of "+enabled[i]);
-            found: {
-                for (int j=0; j<supported.length; j++) {
+            found:
+            {
+                for (int j = 0; j < supported.length; j++) {
                     if (enabled[i].equals(supported[j])) {
                         break found;
                     }
@@ -481,23 +512,24 @@ public class SSLServerSocketImplTest extends TestCase {
         ssocket.setEnabledProtocols(supported);
         ssocket.setEnabledProtocols(enabled);
         ssocket.setEnabledProtocols(supported);
-        String[] more_than_supported = new String[supported.length+1];
-        for (int i=0; i<supported.length+1; i++) {
+        String[] more_than_supported = new String[supported.length + 1];
+        for (int i = 0; i < supported.length + 1; i++) {
             more_than_supported[i]
-                = "NOT_SUPPORTED_PROTOCOL";
+                    = "NOT_SUPPORTED_PROTOCOL";
             System.arraycopy(supported, 0,
                     more_than_supported, 0, i);
             System.arraycopy(supported, i,
-                    more_than_supported, i+1, supported.length-i);
+                    more_than_supported, i + 1, supported.length - i);
             try {
                 ssocket.setEnabledProtocols(more_than_supported);
                 fail("Expected IllegalArgumentException was not thrown");
-            } catch (IllegalArgumentException e) { }
+            } catch (IllegalArgumentException e) {
+            }
         }
         enabled = ssocket.getEnabledProtocols();
         enabled[0] = "NOT_SUPPORTED_PROTOCOL";
         enabled = ssocket.getEnabledProtocols();
-        for (int i=0; i<enabled.length; i++) {
+        for (int i = 0; i < enabled.length; i++) {
             if ("NOT_SUPPORTED_PROTOCOL".equals(enabled[i])) {
                 fail("Modification of the returned result "
                         + "causes the modification of the internal state");
@@ -624,7 +656,8 @@ public class SSLServerSocketImplTest extends TestCase {
             if (client != null) {
                 try {
                     client.close();
-                } catch (IOException e) { }
+                } catch (IOException e) {
+                }
             }
             //System.out.println("===== client has been stopped");
         }
@@ -638,7 +671,9 @@ public class SSLServerSocketImplTest extends TestCase {
             client.close();
         }
 
-    };
+    }
+
+    ;
 
     public static Test suite() {
         return new TestSuite(SSLServerSocketImplTest.class);

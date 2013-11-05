@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto.interfaces;
 
@@ -31,7 +31,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>DHPublicKey</code> class field
- * 
  */
 public class DHPublicKeyTest extends TestCase {
 
@@ -40,7 +39,7 @@ public class DHPublicKeyTest extends TestCase {
 
     /**
      * Constructor for DHPublicKey.
-     * 
+     *
      * @param arg0
      */
     public DHPublicKeyTest(String arg0) {
@@ -56,22 +55,28 @@ public class DHPublicKeyTest extends TestCase {
                 key.getSerVerUID(), //DHPublicKey.serialVersionUID
                 -6628103563352519193L);
     }
+
     public class checkDHPublicKey implements DHPublicKey {
         public String getAlgorithm() {
             return "SecretKey";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return new byte[0];
         }
+
         public long getSerVerUID() {
             return serialVersionUID;
         }
+
         public BigInteger getY() {
             return null;
         }
+
         public DHParameterSpec getParams() {
             return null;
         }

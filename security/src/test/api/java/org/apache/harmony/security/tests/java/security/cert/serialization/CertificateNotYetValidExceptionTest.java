@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert.serialization;
 
@@ -28,7 +28,6 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 /**
  * Test for CertificateNotYetValidException serialization
- *
  */
 
 public class CertificateNotYetValidExceptionTest extends SerializationTest {
@@ -40,7 +39,7 @@ public class CertificateNotYetValidExceptionTest extends SerializationTest {
     protected Object[] getData() {
         return new Object[] { new CertificateNotYetValidException(),
                 new CertificateNotYetValidException(null),
-                new CertificateNotYetValidException(msgs[1])};
+                new CertificateNotYetValidException(msgs[1]) };
     }
 
 }

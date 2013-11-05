@@ -40,9 +40,9 @@ public class SSLSocketFunctionalTest extends TestCase {
      * The cipher suites used for functionality testing.
      */
     private String[] cipher_suites = {
-        "RSA_WITH_RC4_128_MD5",
-        "RSA_WITH_DES_CBC_SHA",
-        "DH_anon_EXPORT_WITH_DES40_CBC_SHA"
+            "RSA_WITH_RC4_128_MD5",
+            "RSA_WITH_DES_CBC_SHA",
+            "DH_anon_EXPORT_WITH_DES40_CBC_SHA"
     };
 
     // turn on/off the debug logging
@@ -71,63 +71,63 @@ public class SSLSocketFunctionalTest extends TestCase {
         ctx1 = context;
         ctx2 = ctx_other;
 
-        int k=1;
+        int k = 1;
 
         SSLServerSocket ssocket = (SSLServerSocket) ctx1
-            .getServerSocketFactory().createServerSocket(0);
+                .getServerSocketFactory().createServerSocket(0);
         ssocket.setUseClientMode(false);
         ssocket.setEnabledCipherSuites(
                 ((k & 1) > 0)
-                    ? new String[] {"TLS_"+cipher_suites[0]}
-                    : new String[] {"SSL_"+cipher_suites[0]});
+                        ? new String[] { "TLS_" + cipher_suites[0] }
+                        : new String[] { "SSL_" + cipher_suites[0] });
 
         SSLSocket csocket = (SSLSocket) ctx2
-            .getSocketFactory().createSocket("localhost",
-                    ssocket.getLocalPort());
-        csocket.setEnabledProtocols(new String[] {"TLSv1"});
+                .getSocketFactory().createSocket("localhost",
+                        ssocket.getLocalPort());
+        csocket.setEnabledProtocols(new String[] { "TLSv1" });
         csocket.setUseClientMode(true);
         csocket.setEnabledCipherSuites(
                 (((k & 2) >> 1) > 0)
-                    ? new String[] {"TLS_"+cipher_suites[0]}
-                    : new String[] {"SSL_"+cipher_suites[0]});
+                        ? new String[] { "TLS_" + cipher_suites[0] }
+                        : new String[] { "SSL_" + cipher_suites[0] });
         doTest(ssocket, csocket);
     }
 
     public void _doTestInteraction(SSLContext context, SSLContext ctx_other)
             throws Throwable {
-        for (int i=0; i<cipher_suites.length; i++) {
+        for (int i = 0; i < cipher_suites.length; i++) {
             if (doLog) {
                 System.out.println("======== Checking the work on cipher: "
-                    + cipher_suites[i]);
+                        + cipher_suites[i]);
             }
             SSLContext ctx1, ctx2;
             // k: 00, 01, 10, 11;
             // where 1 means implementation under the test,
             // 0 - another implementation to interract with
-            for (int k=0; k<4; k++) {
+            for (int k = 0; k < 4; k++) {
                 if (doLog) {
-                    System.out.println("======== "+(k & 1)+" "+((k & 2) >> 1));
+                    System.out.println("======== " + (k & 1) + " " + ((k & 2) >> 1));
                 }
                 ctx1 = ((k & 1) > 0) ? context : ctx_other;
                 ctx2 = (((k & 2) >> 1) > 0) ? context : ctx_other;
 
                 SSLServerSocket ssocket = (SSLServerSocket) ctx1
-                    .getServerSocketFactory().createServerSocket(0);
+                        .getServerSocketFactory().createServerSocket(0);
                 ssocket.setUseClientMode(false);
                 ssocket.setEnabledCipherSuites(
                         ((k & 1) > 0)
-                            ? new String[] {"TLS_"+cipher_suites[i]}
-                            : new String[] {"SSL_"+cipher_suites[i]});
+                                ? new String[] { "TLS_" + cipher_suites[i] }
+                                : new String[] { "SSL_" + cipher_suites[i] });
 
                 SSLSocket csocket = (SSLSocket) ctx2
-                    .getSocketFactory().createSocket("localhost",
-                            ssocket.getLocalPort());
-                csocket.setEnabledProtocols(new String[] {"TLSv1"});
+                        .getSocketFactory().createSocket("localhost",
+                                ssocket.getLocalPort());
+                csocket.setEnabledProtocols(new String[] { "TLSv1" });
                 csocket.setUseClientMode(true);
                 csocket.setEnabledCipherSuites(
                         (((k & 2) >> 1) > 0)
-                            ? new String[] {"TLS_"+cipher_suites[i]}
-                            : new String[] {"SSL_"+cipher_suites[i]});
+                                ? new String[] { "TLS_" + cipher_suites[i] }
+                                : new String[] { "SSL_" + cipher_suites[i] });
                 doTest(ssocket, csocket);
             }
         }
@@ -138,26 +138,26 @@ public class SSLSocketFunctionalTest extends TestCase {
      */
     public void doTestSelfInteraction(SSLContext context)
             throws Throwable {
-        String[] protocols = {"SSLv3", "TLSv1"};
-        for (int i=0; i<cipher_suites.length; i++) {
-            for (int j=0; j<2; j++) {
+        String[] protocols = { "SSLv3", "TLSv1" };
+        for (int i = 0; i < cipher_suites.length; i++) {
+            for (int j = 0; j < 2; j++) {
                 if (doLog) {
                     System.out.println("======= " + cipher_suites[i]);
                 }
                 SSLServerSocket ssocket = (SSLServerSocket) context
-                    .getServerSocketFactory().createServerSocket(0);
+                        .getServerSocketFactory().createServerSocket(0);
                 ssocket.setUseClientMode(false);
-                ssocket.setEnabledProtocols(new String[] {protocols[j]});
+                ssocket.setEnabledProtocols(new String[] { protocols[j] });
                 ssocket.setEnabledCipherSuites(
-                        new String[] {"TLS_"+cipher_suites[i]});
+                        new String[] { "TLS_" + cipher_suites[i] });
 
                 SSLSocket csocket = (SSLSocket) context
-                    .getSocketFactory().createSocket("localhost",
-                            ssocket.getLocalPort());
-                csocket.setEnabledProtocols(new String[] {protocols[j]});
+                        .getSocketFactory().createSocket("localhost",
+                                ssocket.getLocalPort());
+                csocket.setEnabledProtocols(new String[] { protocols[j] });
                 csocket.setUseClientMode(true);
                 csocket.setEnabledCipherSuites(
-                        new String[] {"TLS_"+cipher_suites[i]});
+                        new String[] { "TLS_" + cipher_suites[i] });
 
                 doTest(ssocket, csocket);
             }
@@ -165,7 +165,7 @@ public class SSLSocketFunctionalTest extends TestCase {
     }
 
     private static class HandshakeListener
-                                implements HandshakeCompletedListener {
+            implements HandshakeCompletedListener {
         boolean compleated = false;
 
         public void handshakeCompleted(HandshakeCompletedEvent event) {
@@ -175,6 +175,7 @@ public class SSLSocketFunctionalTest extends TestCase {
 
     /**
      * Performs SSL connection between the sockets
+     *
      * @return
      */
     public void doTest(SSLServerSocket ssocket, SSLSocket csocket)
@@ -207,7 +208,7 @@ public class SSLSocketFunctionalTest extends TestCase {
                         int len = is.read(buff);
                         if (doLog) {
                             System.out.println("Received message of length "
-                                + len + ": '" + new String(buff, 0, len)+"'");
+                                    + len + ": '" + new String(buff, 0, len) + "'");
                         }
                         assertTrue("Read message does not equal to expected",
                                 Arrays.equals(client_message.getBytes(), buff));
@@ -216,17 +217,17 @@ public class SSLSocketFunctionalTest extends TestCase {
                                 255, is.read());
                         if (doLog) {
                             System.out.println("Server is closed: "
-                                    +s.isClosed());
+                                    + s.isClosed());
                         }
                         assertEquals("Returned value should be -1",
-                        // initiate an exchange of closure alerts
+                                // initiate an exchange of closure alerts
                                 -1, is.read());
                         if (doLog) {
                             System.out.println("Server is closed: "
-                                    +s.isClosed());
+                                    + s.isClosed());
                         }
                         assertEquals("Returned value should be -1",
-                        // initiate an exchange of closure alerts
+                                // initiate an exchange of closure alerts
                                 -1, is.read());
                     } catch (Throwable e) {
                         synchronized (throwed) {
@@ -242,17 +243,20 @@ public class SSLSocketFunctionalTest extends TestCase {
                             if (is != null) {
                                 is.close();
                             }
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                        }
                         try {
                             if (os != null) {
                                 os.close();
                             }
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                        }
                         try {
                             if (s != null) {
                                 s.close();
                             }
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                        }
                     }
                 }
             };
@@ -278,13 +282,13 @@ public class SSLSocketFunctionalTest extends TestCase {
                         int len = is.read(buff);
                         if (doLog) {
                             System.out.println("Received message of length "
-                                + len + ": '" + new String(buff, 0, len)+"'");
+                                    + len + ": '" + new String(buff, 0, len) + "'");
                         }
                         assertTrue("Read message does not equal to expected",
                                 Arrays.equals(server_message.getBytes(), buff));
                         // send the response
-                        buff = (" "+client_message+" ").getBytes();
-                        os.write(buff, 1, buff.length-2);
+                        buff = (" " + client_message + " ").getBytes();
+                        os.write(buff, 1, buff.length - 2);
                         assertEquals("Read data differs from expected",
                                 255, is.read());
                         os.write(-1);
@@ -293,12 +297,12 @@ public class SSLSocketFunctionalTest extends TestCase {
                         }
                         if (doLog) {
                             System.out.println("Client is closed: "
-                                    +s.isClosed());
+                                    + s.isClosed());
                         }
                         s.close();
                         if (doLog) {
                             System.out.println("Client is closed: "
-                                    +s.isClosed());
+                                    + s.isClosed());
                         }
                     } catch (Throwable e) {
                         synchronized (throwed) {
@@ -314,17 +318,20 @@ public class SSLSocketFunctionalTest extends TestCase {
                             if (is != null) {
                                 is.close();
                             }
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                        }
                         try {
                             if (os != null) {
                                 os.close();
                             }
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                        }
                         try {
                             if (s != null) {
                                 s.close();
                             }
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                        }
                     }
                 }
             };
@@ -338,7 +345,8 @@ public class SSLSocketFunctionalTest extends TestCase {
                 }
                 try {
                     Thread.sleep(500);
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
             }
         } finally {
             if (server != null) {

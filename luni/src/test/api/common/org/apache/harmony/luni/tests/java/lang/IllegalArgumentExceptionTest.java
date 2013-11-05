@@ -23,25 +23,25 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 public class IllegalArgumentExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.IllegalArgumentException#IllegalArgumentException()
-	 */
-	public void test_Constructor() {
-		IllegalArgumentException e = new IllegalArgumentException();
+    /**
+     * @tests java.lang.IllegalArgumentException#IllegalArgumentException()
+     */
+    public void test_Constructor() {
+        IllegalArgumentException e = new IllegalArgumentException();
         assertNull(e.getMessage());
         assertNull(e.getLocalizedMessage());
         assertNull(e.getCause());
-	}
+    }
 
-	/**
-	 * @tests java.lang.IllegalArgumentException#IllegalArgumentException(java.lang.String)
-	 */
-	public void test_ConstructorLjava_lang_String() {
+    /**
+     * @tests java.lang.IllegalArgumentException#IllegalArgumentException(java.lang.String)
+     */
+    public void test_ConstructorLjava_lang_String() {
         IllegalArgumentException e = new IllegalArgumentException("fixture");
         assertEquals("fixture", e.getMessage());
         assertNull(e.getCause());
-	}
-    
+    }
+
     /**
      * @tests {@link java.lang.IllegalArgumentException#IllegalArgumentException(Throwable)}
      */
@@ -58,9 +58,9 @@ public class IllegalArgumentExceptionTest extends TestCase {
         assertEquals(exception.getClass().getName(), emptyException.getLocalizedMessage());
         assertEquals(exception.getClass().getName(), emptyException.getCause().toString());
     }
-    
+
     /**
-     * @tests java.lang.IllegalArgumentException#IllegalArgumentException(String,Throwable)
+     * @tests java.lang.IllegalArgumentException#IllegalArgumentException(String, Throwable)
      */
     @SuppressWarnings("nls")
     public void test_ConstructorLjava_lang_StringLjava_lang_Throwable() {

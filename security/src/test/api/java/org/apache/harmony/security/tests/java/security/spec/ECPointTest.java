@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -28,12 +28,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ECPoint</code> class fields and methods.
- * 
  */
 public class ECPointTest extends TestCase {
 
     /**
      * Constructor for ECPointTest.
+     *
      * @param name
      */
     public ECPointTest(String name) {
@@ -45,7 +45,7 @@ public class ECPointTest extends TestCase {
     //
 
     /**
-     * Test #1 for <code>ECPoint(BigInteger, BigInteger)</code> constructor<br> 
+     * Test #1 for <code>ECPoint(BigInteger, BigInteger)</code> constructor<br>
      * Assertion: creates <code>ECPoint</code> instance<br>
      * Test preconditions: valid parameters passed<br>
      * Expected: must pass without any exceptions
@@ -59,7 +59,7 @@ public class ECPointTest extends TestCase {
     }
 
     /**
-     * Test #2 for <code>ECPoint(BigInteger x, BigInteger y)</code> constructor<br> 
+     * Test #2 for <code>ECPoint(BigInteger x, BigInteger y)</code> constructor<br>
      * Assertion: throws <code>NullPointerException</code> if <code>x</code>or
      * <code>y</code> is <code>null</code><br>
      * Test preconditions: pass <code>null</code> as mentioned parameters<br>
@@ -128,7 +128,7 @@ public class ECPointTest extends TestCase {
      * (both must refer the same object)
      */
     public final void testGetAffineY01() {
-        BigInteger y =  BigInteger.valueOf(23456L);
+        BigInteger y = BigInteger.valueOf(23456L);
         ECPoint p = new ECPoint(BigInteger.valueOf(-23456L), y);
         BigInteger yRet = p.getAffineY();
         assertEquals(y, yRet);
@@ -154,8 +154,8 @@ public class ECPointTest extends TestCase {
      */
     public final void testEqualsObject01() {
         // test case 1: must be equal to itself
-        ECPoint p2=null, p1 =
-            new ECPoint(BigInteger.valueOf(-23456L), BigInteger.ONE);
+        ECPoint p2 = null, p1 =
+                new ECPoint(BigInteger.valueOf(-23456L), BigInteger.ONE);
         assertTrue(p1.equals(p1));
 
         // test case 2: equal objects
@@ -177,8 +177,8 @@ public class ECPointTest extends TestCase {
      */
     public final void testEqualsObject02() {
         // test case 1: must be not equal to null
-        ECPoint p2=null, p1 =
-            new ECPoint(BigInteger.valueOf(-23456L), BigInteger.ONE);
+        ECPoint p2 = null, p1 =
+                new ECPoint(BigInteger.valueOf(-23456L), BigInteger.ONE);
         assertFalse(p1.equals(p2));
 
         // test case 2: not equal objects - x
@@ -199,40 +199,40 @@ public class ECPointTest extends TestCase {
 
     /**
      * Test #1 for <code>hashCode()</code> method.<br>
-     *
+     * <p/>
      * Assertion: must return the same value if invoked
-     * repeatedly on the same object. 
+     * repeatedly on the same object.
      */
     public final void testHashCode01() {
         ECPoint f = new ECPoint(BigInteger.valueOf(-23457L), BigInteger.ONE);
         int hc = f.hashCode();
         assertTrue(hc == f.hashCode() &&
-                   hc == f.hashCode() &&
-                   hc == f.hashCode() &&
-                   hc == f.hashCode() &&
-                   hc == f.hashCode() &&
-                   hc == f.hashCode() &&
-                   hc == f.hashCode() &&
-                   hc == f.hashCode());
+                hc == f.hashCode() &&
+                hc == f.hashCode() &&
+                hc == f.hashCode() &&
+                hc == f.hashCode() &&
+                hc == f.hashCode() &&
+                hc == f.hashCode() &&
+                hc == f.hashCode());
 
-        
+
         // the same for POINT_INFINITY
         hc = ECPoint.POINT_INFINITY.hashCode();
         assertTrue(hc == ECPoint.POINT_INFINITY.hashCode() &&
-                   hc == ECPoint.POINT_INFINITY.hashCode() &&
-                   hc == ECPoint.POINT_INFINITY.hashCode() &&
-                   hc == ECPoint.POINT_INFINITY.hashCode() &&
-                   hc == ECPoint.POINT_INFINITY.hashCode() &&
-                   hc == ECPoint.POINT_INFINITY.hashCode() &&
-                   hc == ECPoint.POINT_INFINITY.hashCode() &&
-                   hc == ECPoint.POINT_INFINITY.hashCode());
+                hc == ECPoint.POINT_INFINITY.hashCode() &&
+                hc == ECPoint.POINT_INFINITY.hashCode() &&
+                hc == ECPoint.POINT_INFINITY.hashCode() &&
+                hc == ECPoint.POINT_INFINITY.hashCode() &&
+                hc == ECPoint.POINT_INFINITY.hashCode() &&
+                hc == ECPoint.POINT_INFINITY.hashCode() &&
+                hc == ECPoint.POINT_INFINITY.hashCode());
     }
 
     /**
      * Test #2 for <code>hashCode()</code> method.<br>
-     *
+     * <p/>
      * Assertion: must return the same value if invoked
-     * on equal (according to the <code>equals(Object)</code> method) objects. 
+     * on equal (according to the <code>equals(Object)</code> method) objects.
      */
     public final void testHashCode02() {
         ECPoint p1 = new ECPoint(BigInteger.valueOf(-23456L), BigInteger.ONE);

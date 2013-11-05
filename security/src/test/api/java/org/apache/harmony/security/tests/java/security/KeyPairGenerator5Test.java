@@ -29,18 +29,16 @@ import java.security.interfaces.DSAParams;
 
 public class KeyPairGenerator5Test extends junit.framework.TestCase {
 
-   private class MockKeyPairGenerator extends KeyPairGenerator
-   {
+    private class MockKeyPairGenerator extends KeyPairGenerator {
 
-    protected MockKeyPairGenerator(String algorithm) {
-        super(algorithm);        
-    }       
-   }
-   
-   
-   public void test_generateKeyPair()
-   {
-       MockKeyPairGenerator mockKeyPairGenerator = new MockKeyPairGenerator("MOCKKEYPAIRGENERATOR");
-       assertNull(mockKeyPairGenerator.generateKeyPair());
-   }
+        protected MockKeyPairGenerator(String algorithm) {
+            super(algorithm);
+        }
+    }
+
+
+    public void test_generateKeyPair() {
+        MockKeyPairGenerator mockKeyPairGenerator = new MockKeyPairGenerator("MOCKKEYPAIRGENERATOR");
+        assertNull(mockKeyPairGenerator.generateKeyPair());
+    }
 }

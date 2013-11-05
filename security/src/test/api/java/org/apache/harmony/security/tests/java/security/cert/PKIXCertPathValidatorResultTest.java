@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -34,7 +34,6 @@ import org.apache.harmony.security.tests.support.cert.TestUtils;
 
 /**
  * Tests for <code>PKIXCertPathValidatorResult</code>
- * 
  */
 public class PKIXCertPathValidatorResultTest extends TestCase {
     /**
@@ -44,16 +43,19 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
         public String getAlgorithm() {
             return "NeverMind";
         }
+
         public String getFormat() {
             return "NeverMind";
         }
+
         public byte[] getEncoded() {
-            return new byte[] {};
+            return new byte[] { };
         }
     };
 
     /**
      * Constructor for PKIXCertPathValidatorResultTest.
+     *
      * @param name
      */
     public PKIXCertPathValidatorResultTest(String name) {
@@ -69,13 +71,13 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
      * PolicyNode, PublicKey)</code> constructor<br>
      * Assertion: creates an instance of
      * <code>PKIXCertPathValidatorResult</code>
-     * 
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
     public final void testPKIXCertPathValidatorResult01()
-        throws InvalidKeySpecException,
-               NoSuchAlgorithmException {
+            throws InvalidKeySpecException,
+            NoSuchAlgorithmException {
         TrustAnchor ta = TestUtils.getTrustAnchor();
         if (ta == null) {
             fail(getName() + ": not performed (could not create test TrustAnchor)");
@@ -146,6 +148,7 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
     /**
      * Test for <code>getTrustAnchor()</code> method<br>
      * Assertion: returns <code>TrustAnchor</code> (never <code>null</code>)
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
@@ -156,10 +159,10 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
         }
 
         PKIXCertPathValidatorResult vr =
-            new PKIXCertPathValidatorResult(
-                    ta,
-                    null,
-                    testPublicKey);
+                new PKIXCertPathValidatorResult(
+                        ta,
+                        null,
+                        testPublicKey);
 
         // must return the same reference passed
         // as a parameter to the constructor
@@ -169,6 +172,7 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
     /**
      * Test for <code>getPublicKey()</code> method<br>
      * Assertion: returns the subject's public key (never <code>null</code>)
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
@@ -180,10 +184,10 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
 
         PublicKey pk = testPublicKey;
         PKIXCertPathValidatorResult vr =
-            new PKIXCertPathValidatorResult(
-                    ta,
-                    null,
-                    pk);
+                new PKIXCertPathValidatorResult(
+                        ta,
+                        null,
+                        pk);
 
         // must return the same reference passed
         // as a parameter to the constructor
@@ -195,6 +199,7 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
      * Assertion: returns the root node of the valid
      * policy tree or <code>null</code> if there are
      * no valid policies
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
@@ -207,10 +212,10 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
         // valid policy tree case;
         PolicyNode pn = TestUtils.getPolicyTree();
         PKIXCertPathValidatorResult vr =
-            new PKIXCertPathValidatorResult(
-                    ta,
-                    pn,
-                    testPublicKey);
+                new PKIXCertPathValidatorResult(
+                        ta,
+                        pn,
+                        testPublicKey);
 
         // must return the same reference passed
         // as a parameter to the constructor
@@ -222,6 +227,7 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
      * Assertion: returns the root node of the valid
      * policy tree or <code>null</code> if there are
      * no valid policies
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
@@ -233,10 +239,10 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
 
         // no valid policy tree case (null)
         PKIXCertPathValidatorResult vr =
-            new PKIXCertPathValidatorResult(
-                    ta,
-                    null,
-                    testPublicKey);
+                new PKIXCertPathValidatorResult(
+                        ta,
+                        null,
+                        testPublicKey);
 
         // must return the same reference passed
         // as a parameter to the constructor
@@ -246,6 +252,7 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
     /**
      * Test for <code>clone()</code> method<br>
      * Assertion: returns a copy of this object
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
@@ -256,13 +263,13 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
         }
 
         PKIXCertPathValidatorResult vr1 =
-            new PKIXCertPathValidatorResult(
-                    ta,
-                    TestUtils.getPolicyTree(),
-                    testPublicKey);
+                new PKIXCertPathValidatorResult(
+                        ta,
+                        TestUtils.getPolicyTree(),
+                        testPublicKey);
 
         PKIXCertPathValidatorResult vr2 =
-            (PKIXCertPathValidatorResult) vr1.clone();
+                (PKIXCertPathValidatorResult) vr1.clone();
 
         // check that method makes shallow copy
         assertNotSame("notSame", vr1, vr2);
@@ -297,6 +304,7 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
     /**
      * Test #1 for <code>toString()</code> method<br>
      * Assertion: Returns a formatted string describing this object
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
@@ -307,10 +315,10 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
         }
 
         PKIXCertPathValidatorResult vr =
-            new PKIXCertPathValidatorResult(
-                    ta,
-                    TestUtils.getPolicyTree(),
-                    testPublicKey);
+                new PKIXCertPathValidatorResult(
+                        ta,
+                        TestUtils.getPolicyTree(),
+                        testPublicKey);
 
         assertNotNull(vr.toString());
     }
@@ -318,6 +326,7 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
     /**
      * Test #2 for <code>toString()</code> method<br>
      * Assertion: Returns a formatted string describing this object
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
@@ -328,10 +337,10 @@ public class PKIXCertPathValidatorResultTest extends TestCase {
         }
 
         PKIXCertPathValidatorResult vr =
-            new PKIXCertPathValidatorResult(
-                    ta,
-                    null,
-                    testPublicKey);
+                new PKIXCertPathValidatorResult(
+                        ta,
+                        null,
+                        testPublicKey);
 
         assertNotNull(vr.toString());
     }

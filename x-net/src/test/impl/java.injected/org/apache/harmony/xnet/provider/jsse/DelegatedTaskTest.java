@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>DelegatedTask</code> constructor and methods
- *  
  */
 public class DelegatedTaskTest extends TestCase {
 

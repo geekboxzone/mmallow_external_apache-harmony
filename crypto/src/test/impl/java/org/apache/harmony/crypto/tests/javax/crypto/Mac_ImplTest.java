@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -39,15 +39,14 @@ import junit.framework.TestCase;
 
 /**
  * Tests for Mac class constructors and methods
- * 
  */
 
 public class Mac_ImplTest extends TestCase {
-    
+
     private static final String srvMac = "Mac";
 
     private static final String defaultAlg = "MyMacProv";
-    
+
     private static final String MacProviderClass = "org.apache.harmony.crypto.tests.support.MyMacSpi";
 
     private static final String[] invalidValues = SpiEngUtils.invalidValues;
@@ -67,28 +66,28 @@ public class Mac_ImplTest extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        mProv = (new SpiEngUtils()).new MyProvider("MyMacProvider", "Testing provider", 
-                srvMac.concat(".").concat(defaultAlg), 
+        mProv = (new SpiEngUtils()).new MyProvider("MyMacProvider", "Testing provider",
+                srvMac.concat(".").concat(defaultAlg),
                 MacProviderClass);
         Security.insertProviderAt(mProv, 2);
     }
-    
+
     /*
-     * @see TestCase#tearDown()
-     */
+    * @see TestCase#tearDown()
+    */
     protected void tearDown() throws Exception {
         super.tearDown();
         Security.removeProvider(mProv.getName());
     }
-    
+
     protected void checkResult(Mac mac) throws InvalidKeyException,
             InvalidAlgorithmParameterException {
         assertEquals("Incorrect MacLength", mac.getMacLength(), 0);
-        byte [] b = {(byte)0, (byte)0, (byte)0, (byte)0, (byte)0};
+        byte[] b = { (byte) 0, (byte) 0, (byte) 0, (byte) 0, (byte) 0 };
         SecretKeySpec scs = new SecretKeySpec(b, "SHA1");
         AlgParSpec parms = new AlgParSpec();
         tmpKey tKey = new tmpKey();
-        mac.init(scs);        
+        mac.init(scs);
         byte[] bb = mac.doFinal();
         assertEquals(bb.length, 0);
         mac.reset();
@@ -115,8 +114,8 @@ public class Mac_ImplTest extends TestCase {
         }
         try {
             mac.clone();
-            fail("No expected CloneNotSupportedException"); 
-        } catch (CloneNotSupportedException e) {           
+            fail("No expected CloneNotSupportedException");
+        } catch (CloneNotSupportedException e) {
         }
     }
 
@@ -153,10 +152,11 @@ public class Mac_ImplTest extends TestCase {
             checkResult(keyAgr);
         }
     }
+
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
      * method
-     * Assertions: 
+     * Assertions:
      * throws NullPointerException when algorithm is null;
      * throws NoSuchAlgorithmException when algorithm is not correct;
      * throws IllegalArgumentException when provider is null;
@@ -166,7 +166,7 @@ public class Mac_ImplTest extends TestCase {
     public void testGetInstance02() throws NoSuchAlgorithmException,
             NoSuchProviderException, IllegalArgumentException,
             InvalidKeyException,
-            InvalidAlgorithmParameterException {            
+            InvalidAlgorithmParameterException {
         try {
             Mac.getInstance(null, mProv.getName());
             fail("NullPointerException or NoSuchAlgorithmException should be thrown when algorithm is null");
@@ -258,21 +258,26 @@ public class Mac_ImplTest extends TestCase {
                     validValues[i]);
             assertEquals("Incorrect provider", keyAgr.getProvider(), mProv);
             checkResult(keyAgr);
-       }
+        }
     }
+
     public static class AlgParSpec implements AlgorithmParameterSpec {
-        
+
     }
+
     public static class tmpKey implements Key {
         public tmpKey() {
-            
+
         }
+
         public String getAlgorithm() {
             return "Test";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return null;
         }

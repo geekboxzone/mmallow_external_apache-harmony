@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Stepan M. Mishura
-*/
+ * @author Stepan M. Mishura
+ */
 
 package org.apache.harmony.security.tests.asn1.der;
 
@@ -113,7 +113,7 @@ public class SequenceTest extends TestCase {
                 { new AppClass(Boolean.FALSE, new ArrayList()),
                         new byte[] { 0x30, 0x05, 0x01, 0x01, 0x00, 0x30, 0x00 } },
 
-        //TODO add testcase for another ASN.1 type`
+                //TODO add testcase for another ASN.1 type`
 
         };
     }

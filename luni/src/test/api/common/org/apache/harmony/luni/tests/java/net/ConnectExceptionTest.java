@@ -25,12 +25,12 @@ import tests.support.Support_PortManager;
 
 public class ConnectExceptionTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.net.ConnectException#ConnectException()
+    /**
+     * @tests java.net.ConnectException#ConnectException()
      * @tests java.net.ConnectException#ConnectException(java.lang.String)
-	 */
-	public void test_Constructor() {
+     */
+    public void test_Constructor() {
         assertNull("Wrong message", new ConnectException().getMessage());
-	    assertEquals("Wrong message", "message", new ConnectException("message").getMessage());
-	}
+        assertEquals("Wrong message", "message", new ConnectException("message").getMessage());
+    }
 }

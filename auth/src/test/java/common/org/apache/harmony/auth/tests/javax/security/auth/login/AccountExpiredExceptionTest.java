@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.login;
 
@@ -39,7 +39,7 @@ public class AccountExpiredExceptionTest extends TestCase {
 
     /**
      * @tests javax.security.auth.login.AccountExpiredException#AccountExpiredException(
-     *        java.lang.String)
+     *java.lang.String)
      */
     public final void testCtor2() {
         assertNull(new AccountExpiredException(null).getMessage());

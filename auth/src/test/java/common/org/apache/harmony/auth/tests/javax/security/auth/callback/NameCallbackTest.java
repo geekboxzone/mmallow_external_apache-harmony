@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.callback;
 
@@ -46,7 +46,7 @@ public class NameCallbackTest extends TestCase {
 
     /**
      * Test for NameCallback(String p, String msg) when
-     * prompt and message is null and empty. 
+     * prompt and message is null and empty.
      */
     public final void testNameCallback_02() {
         try {

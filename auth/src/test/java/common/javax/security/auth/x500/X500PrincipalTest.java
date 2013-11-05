@@ -32,7 +32,7 @@ import tests.support.resource.Support_Resources;
 
 /**
  * Tests X500Principal class
- * 
+ * <p/>
  * Distinguished name(DN) strings follows
  * BNF syntax specified in RFC 2253 and RFC 1779
  *
@@ -178,7 +178,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array
      * gets hashCode
-     * compares with expected value 
+     * compares with expected value
      */
     public void testHashCode() throws Exception {
         byte[] mess = { 0x30, 0x18, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55,
@@ -193,7 +193,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array
      * Inits other X500Principal with equivalent string
-     * checks if <code>equals</code> returns true for first against second one 
+     * checks if <code>equals</code> returns true for first against second one
      */
     public void testEquals() throws Exception {
         byte[] mess = { 0x30, 0x18, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55,
@@ -220,7 +220,7 @@ public class X500PrincipalTest extends TestCase {
      * Value is given as hex value
      * (extra spaces are given)
      * gets Name in RFC1779 format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testKWAsOid_RFC1779() throws Exception {
         String dn = "CN=A, OID.2.5.4.3  =    #130142";
@@ -235,7 +235,7 @@ public class X500PrincipalTest extends TestCase {
      * Value is given as hex value
      * (extra spaces are given)
      * gets Name in RFC2253 format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testKWAsOid_RFC2253() throws Exception {
         String dn = "CN=A, OID.2.5.4.3 =  #130142";
@@ -250,7 +250,7 @@ public class X500PrincipalTest extends TestCase {
      * Value is given as hex value
      * (extra spaces are given)
      * gets Name in CANONICAL format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testKWAsOid_CANONICAL() throws Exception {
         String dn = "CN=A, OID.2.5.4.3 =  #130142";
@@ -263,7 +263,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array, where Oid does not fall into any keyword
      * gets Name in RFC1779 format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testOid_RFC1779() throws Exception {
         byte[] mess = { 0x30, 0x18, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55,
@@ -279,7 +279,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array, where Oid does not fall into any keyword
      * gets Name in RFC2253 format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testOid_RFC2253() throws Exception {
         byte[] mess = { 0x30, 0x18, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55,
@@ -295,7 +295,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array, where Oid does not fall into any keyword
      * gets Name in CANONICAL format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testOid_CANONICAL() throws Exception {
         byte[] mess = { 0x30, 0x18, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55,
@@ -311,7 +311,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with a string
      * gets encoded form
-     * compares with expected byte array 
+     * compares with expected byte array
      */
     public void testNameGetEncoding() throws Exception {
         byte[] mess = { 0x30, (byte) 0x81, (byte) 0x9A, 0x31, 0x0A, 0x30, 0x08,
@@ -340,7 +340,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with a string
      * gets encoded form
-     * compares with expected byte array 
+     * compares with expected byte array
      */
     public void testNameGetEncoding_01() throws Exception {
         byte[] mess = { 0x30, 0x18, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03, 0x55,
@@ -356,7 +356,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array
      * gets Name in RFC1779 format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testGetName_RFC1779() throws Exception {
         byte[] mess = { 0x30, (byte) 0x81, (byte) 0x9A, 0x31, 0x0A, 0x30, 0x08,
@@ -387,7 +387,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array
      * gets Name in RFC2253 format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testGetName_RFC2253() throws Exception {
         byte[] mess = { 0x30, (byte) 0x81, (byte) 0x9A, 0x31, 0x0A, 0x30, 0x08,
@@ -417,7 +417,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array
      * gets Name in CANONICAL format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testGetName_CANONICAL() throws Exception {
         byte[] mess = { 0x30, (byte) 0x81, (byte) 0x9A, 0x31, 0x0A, 0x30, 0x08,
@@ -447,7 +447,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array
      * gets Name in RFC1779 format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testStreamGetName_RFC1779() throws Exception {
         byte[] mess = { 0x30, (byte) 0x81, (byte) 0x9A, 0x31, 0x0A, 0x30, 0x08,
@@ -478,7 +478,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array
      * gets Name in RFC2253 format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testStreamGetName_RFC2253() throws Exception {
         byte[] mess = { 0x30, (byte) 0x81, (byte) 0x9A, 0x31, 0x0A, 0x30, 0x08,
@@ -509,7 +509,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array
      * gets Name in CANONICAL format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testStreamGetName_CANONICAL() throws Exception {
         byte[] mess = { 0x30, (byte) 0x81, (byte) 0x9A, 0x31, 0x0A, 0x30, 0x08,
@@ -538,11 +538,11 @@ public class X500PrincipalTest extends TestCase {
     }
 
     /**
-     * Inits X500Principal with a string, where OID does not fall into any keyword 
+     * Inits X500Principal with a string, where OID does not fall into any keyword
      * gets encoded form
      * inits new X500Principal with the encoding
      * gets string in RFC1779 format
-     * compares with expected value 
+     * compares with expected value
      */
     public void testGetName_EncodingWithWrongOidButGoodName_SeveralRDNs_RFC1779()
             throws Exception {
@@ -556,11 +556,11 @@ public class X500PrincipalTest extends TestCase {
     }
 
     /**
-     * Inits X500Principal with a string, where OID does not fall into any keyword 
+     * Inits X500Principal with a string, where OID does not fall into any keyword
      * gets encoded form
      * inits new X500Principal with the encoding
      * gets string in RFC2253 format
-     * compares with expected value 
+     * compares with expected value
      */
     public void testGetName_EncodingWithWrongOidButGoodName_SeveralRDNs_RFC2253()
             throws Exception {
@@ -574,11 +574,11 @@ public class X500PrincipalTest extends TestCase {
     }
 
     /**
-     * Inits X500Principal with a string, where OID does not fall into any keyword 
+     * Inits X500Principal with a string, where OID does not fall into any keyword
      * gets encoded form
      * inits new X500Principal with the encoding
      * gets string in CANONICAL format
-     * compares with expected value 
+     * compares with expected value
      */
     public void testGetName_EncodingWithWrongOidButGoodName_SeveralRDNs_CANONICAL()
             throws Exception {
@@ -592,9 +592,9 @@ public class X500PrincipalTest extends TestCase {
     }
 
     /**
-     * Inits X500Principal with a string, where OID does not fall into any keyword 
+     * Inits X500Principal with a string, where OID does not fall into any keyword
      * gets string in RFC1779 format
-     * compares with expected value 
+     * compares with expected value
      */
     public void testGetName_wrongOidButGoodName_RFC1779() throws Exception {
         String dn = "OID.2.16.4.3=B + CN=A";
@@ -605,9 +605,9 @@ public class X500PrincipalTest extends TestCase {
     }
 
     /**
-     * Inits X500Principal with a string, where OID does not fall into any keyword 
+     * Inits X500Principal with a string, where OID does not fall into any keyword
      * gets string in RFC2253 format
-     * compares with expected value 
+     * compares with expected value
      */
     public void testGetName_wrongOidButGoodName_RFC2253() throws Exception {
         String dn = "OID.2.16.4.3=B + CN=A";
@@ -731,6 +731,7 @@ public class X500PrincipalTest extends TestCase {
 
     /**
      * FIXME test is failed - implement unicode normalization
+     *
      * @throws Exception
      */
     public void testGetNameUnicodeNormalized() throws Exception {
@@ -768,7 +769,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with string with spaces
      * gets Name in RFC2253 format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testNameOnlySpaces_RFC1779() {
         String dn = "CN=\"  \"";
@@ -779,7 +780,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with string with spaces
      * gets Name in RFC2253 format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testNameOnlySpaces_RFC2253() {
         String dn = "CN=\"  \"";
@@ -799,6 +800,7 @@ public class X500PrincipalTest extends TestCase {
     }
 
     ///*** Negative Tests ***///
+
     /**
      * Inits X500Principal with string, where DN name is improper "CNN"
      * checks if proper exception is thrown
@@ -1258,7 +1260,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array, where there are leading and tailing spaces
      * gets Name in RFC1779 format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testNameSpaceFromEncoding_RFC1779() throws Exception {
         byte[] mess = { 0x30, 0x0E, 0x31, 0x0C, 0x30, 0x0A, 0x06, 0x03, 0x55,
@@ -1272,7 +1274,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array, where there are leading and tailing spaces
      * gets Name in RFC2253 format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testNameSpaceFromEncoding_RFC2253() throws Exception {
         byte[] mess = { 0x30, 0x0E, 0x31, 0x0C, 0x30, 0x0A, 0x06, 0x03, 0x55,
@@ -1286,7 +1288,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array, where there are leading and tailing spaces
      * gets Name in CANONICAL format
-     * compares with expected value of name 
+     * compares with expected value of name
      */
     public void testNameSpaceFromEncoding_CANONICAL() throws Exception {
         byte[] mess = { 0x30, 0x0E, 0x31, 0x0C, 0x30, 0x0A, 0x06, 0x03, 0x55,
@@ -1300,7 +1302,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array, where there are special characters
      * gets Name in RFC1779 format
-     * compares with expected value of name, checks if the string is in quotes 
+     * compares with expected value of name, checks if the string is in quotes
      */
     public void testNameSpecialCharsFromEncoding_RFC1779() throws Exception {
         byte[] mess = { 0x30, 0x0D, 0x31, 0x0B, 0x30, 0x09, 0x06, 0x03, 0x55,
@@ -1314,7 +1316,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array, where there are special characters
      * gets Name in RFC1779 format
-     * compares with expected value of name, checks if the characters are escaped 
+     * compares with expected value of name, checks if the characters are escaped
      */
     public void testNameSpecialCharsFromEncoding_RFC2253() throws Exception {
         byte[] mess = { 0x30, 0x0D, 0x31, 0x0B, 0x30, 0x09, 0x06, 0x03, 0x55,
@@ -1328,7 +1330,7 @@ public class X500PrincipalTest extends TestCase {
     /**
      * Inits X500Principal with byte array, where there are special characters
      * gets Name in CANONICAL format
-     * compares with expected value of name, checks if the characters are escaped 
+     * compares with expected value of name, checks if the characters are escaped
      */
     public void testNameSpecialCharsFromEncoding_CANONICAL() throws Exception {
         byte[] mess = { 0x30, 0x0D, 0x31, 0x0B, 0x30, 0x09, 0x06, 0x03, 0x55,
@@ -1398,7 +1400,7 @@ public class X500PrincipalTest extends TestCase {
      * compares with expected value of name - \\nB
      */
     public void testNameSpecialChars_RFC2253_01() throws Exception {
-        
+
         try {
             // compatibility issue:
             // don't accept escaped \n because it is not a special char
@@ -2058,7 +2060,7 @@ public class X500PrincipalTest extends TestCase {
             // \special
             list.add("CN=\\" + element,
                     "CN=\\" + element, "CN=\"" + element
-                            + "\"");
+                    + "\"");
 
             // A + \special + B
             list.add("CN=A\\" + element + "B", "CN=A\\"
@@ -2150,7 +2152,7 @@ public class X500PrincipalTest extends TestCase {
         list.add("CN= #0101fF", "CN=#0101ff", "CN=#0101FF", // space at beginning 
                 new byte[] { 0x30, 0x0C, 0x31, 0x0A, 0x30, 0x08, 0x06, 0x03,
                         0x55, 0x04, 0x03, 0x01, 0x01, (byte) 0xFF } // ASN.1 Boolean = TRUE
-                );
+        );
         list.add("CN= #0101fF+ST=A", "CN=#0101ff+ST=A", "CN=#0101FF + ST=A",
                 "cn=#0101ff+st=a"); //space
         list.add("CN= #0101fF ", "CN=#0101ff", "CN=#0101FF", // space at the end
@@ -2322,7 +2324,7 @@ public class X500PrincipalTest extends TestCase {
 
     public void testInvalidDN() {
         String[] illegalDN = new String[] {
-        // RDN
+                // RDN
                 //FIXME " ", // space only
                 "CN", // attribute type only
                 "CN=A;", // RFC 1779: BNF allows this, but ...
@@ -2633,7 +2635,7 @@ public class X500PrincipalTest extends TestCase {
         // Multi-valued DN
         //
         list.add(new byte[] { 0x30, 0x14, 0x31, 0x12,
-        // 1
+                // 1
                 0x30, 0x08, 0x06, 0x03, 0x55, 0x04, 0x03,
                 // UTF8String: 'Z'
                 0x0C, 0x01, 0x5A,

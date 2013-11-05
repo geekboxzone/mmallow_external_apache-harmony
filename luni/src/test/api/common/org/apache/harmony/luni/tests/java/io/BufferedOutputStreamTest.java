@@ -44,7 +44,7 @@ public class BufferedOutputStreamTest extends junit.framework.TestCase {
 
     /**
      * @tests java.io.BufferedOutputStream#BufferedOutputStream(java.io.OutputStream,
-     *        int)
+     *int)
      */
     public void test_ConstructorLjava_io_OutputStreamI() throws IOException {
         baos = new java.io.ByteArrayOutputStream();

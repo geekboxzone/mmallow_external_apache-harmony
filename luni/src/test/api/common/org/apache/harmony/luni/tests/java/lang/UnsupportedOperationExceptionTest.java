@@ -23,9 +23,9 @@ import org.apache.harmony.testframework.serialization.SerializationTest;
 
 public class UnsupportedOperationExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.UnsupportedOperationException#UnsupportedOperationException()
-	 */
+    /**
+     * @tests java.lang.UnsupportedOperationException#UnsupportedOperationException()
+     */
     public void test_Constructor() {
         UnsupportedOperationException e = new UnsupportedOperationException();
         assertNull(e.getMessage());
@@ -41,7 +41,7 @@ public class UnsupportedOperationExceptionTest extends TestCase {
         assertEquals("fixture", e.getMessage());
         assertNull(e.getCause());
     }
-    
+
     /**
      * @tests {@link java.land.UnsupportedOperationException#UnsupportedOperationException(java.lang.Throwable)}
      */
@@ -79,8 +79,8 @@ public class UnsupportedOperationExceptionTest extends TestCase {
         assertEquals(throwable.getClass().getName() + ": " + throwable.getMessage(), exception
                 .getCause().toString());
     }
-    
-	
+
+
     /**
      * @tests serialization/deserialization.
      */

@@ -30,54 +30,54 @@ import junit.framework.TestCase;
 
 public class EncodedKeySpec2Test extends TestCase {
 
-	/**
-	 * @tests java.security.spec.EncodedKeySpec#getEncoded()
-	 */
-	public void test_getEncoded() throws Exception {
-		
-       		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DSA");
+    /**
+     * @tests java.security.spec.EncodedKeySpec#getEncoded()
+     */
+    public void test_getEncoded() throws Exception {
 
-       		keyGen.initialize(1024);
-       		KeyPair keys = keyGen.generateKeyPair();
+        KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DSA");
 
-
-       		KeyFactory fact = KeyFactory.getInstance("DSA");
+        keyGen.initialize(1024);
+        KeyPair keys = keyGen.generateKeyPair();
 
 
-       		// check public key encoding
-       		byte[] encoded = keys.getPublic().getEncoded();
-       		Key key = fact.generatePublic(new X509EncodedKeySpec(encoded));
+        KeyFactory fact = KeyFactory.getInstance("DSA");
 
-       		assertTrue("public key encodings were different", 
-       					isEqual(key, keys.getPublic()));
 
-       		// check private key encoding
-       		encoded = keys.getPrivate().getEncoded();
-       		key = fact.generatePrivate(new PKCS8EncodedKeySpec(encoded));
+        // check public key encoding
+        byte[] encoded = keys.getPublic().getEncoded();
+        Key key = fact.generatePublic(new X509EncodedKeySpec(encoded));
 
-       		assertTrue("private key encodings were different",
-       					isEqual(key, keys.getPrivate()));
-	}
+        assertTrue("public key encodings were different",
+                isEqual(key, keys.getPublic()));
 
-	private boolean isEqual(Key key1, Key key2) {
-		if (key1 instanceof DSAPublicKey && key2 instanceof DSAPublicKey) {
-			DSAPublicKey dsa1 = ((DSAPublicKey) key1);
-			DSAPublicKey dsa2 = ((DSAPublicKey) key2);
-			return dsa1.getY().equals(dsa2.getY())
-					&& dsa1.getParams().getG().equals(dsa2.getParams().getG())
-					&& dsa1.getParams().getP().equals(dsa2.getParams().getP())
-					&& dsa1.getParams().getQ().equals(dsa2.getParams().getQ());
+        // check private key encoding
+        encoded = keys.getPrivate().getEncoded();
+        key = fact.generatePrivate(new PKCS8EncodedKeySpec(encoded));
 
-		} else if (key1 instanceof DSAPrivateKey
-				&& key2 instanceof DSAPrivateKey) {
-			DSAPrivateKey dsa1 = ((DSAPrivateKey) key1);
-			DSAPrivateKey dsa2 = ((DSAPrivateKey) key2);
-			return dsa1.getX().equals(dsa2.getX())
-					&& dsa1.getParams().getG().equals(dsa2.getParams().getG())
-					&& dsa1.getParams().getP().equals(dsa2.getParams().getP())
-					&& dsa1.getParams().getQ().equals(dsa2.getParams().getQ());
-		} else {
-			return false;
-		}
-	}
+        assertTrue("private key encodings were different",
+                isEqual(key, keys.getPrivate()));
+    }
+
+    private boolean isEqual(Key key1, Key key2) {
+        if (key1 instanceof DSAPublicKey && key2 instanceof DSAPublicKey) {
+            DSAPublicKey dsa1 = ((DSAPublicKey) key1);
+            DSAPublicKey dsa2 = ((DSAPublicKey) key2);
+            return dsa1.getY().equals(dsa2.getY())
+                    && dsa1.getParams().getG().equals(dsa2.getParams().getG())
+                    && dsa1.getParams().getP().equals(dsa2.getParams().getP())
+                    && dsa1.getParams().getQ().equals(dsa2.getParams().getQ());
+
+        } else if (key1 instanceof DSAPrivateKey
+                && key2 instanceof DSAPrivateKey) {
+            DSAPrivateKey dsa1 = ((DSAPrivateKey) key1);
+            DSAPrivateKey dsa2 = ((DSAPrivateKey) key2);
+            return dsa1.getX().equals(dsa2.getX())
+                    && dsa1.getParams().getG().equals(dsa2.getParams().getG())
+                    && dsa1.getParams().getP().equals(dsa2.getParams().getP())
+                    && dsa1.getParams().getQ().equals(dsa2.getParams().getQ());
+        } else {
+            return false;
+        }
+    }
 }

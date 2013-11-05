@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -28,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ShortBufferException</code> class constructors and methods.
- * 
  */
 public class ShortBufferExceptionTest extends TestCase {
 
@@ -37,7 +36,7 @@ public class ShortBufferExceptionTest extends TestCase {
 
     /**
      * Constructor for ShortBufferExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public ShortBufferExceptionTest(String arg0) {

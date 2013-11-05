@@ -43,7 +43,7 @@ public class KDCReplyTest extends TestCase {
         assertEquals("ticket's realm", "MY.REALM", ticket.getRealm());
         assertEquals("ticket's sname", new PrincipalName(0, new String[] {
                 "krbtgt", "MY.REALM" }), ticket.getSname());
-        
+
         // enc-part
         EncryptedData encPart = reply.getEncPart();
         assertEquals("etype", 3, encPart.getEtype());

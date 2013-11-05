@@ -49,7 +49,7 @@ public class InflaterOutputStreamTest extends TestCase {
     }
 
     /**
-     * @tests java.util.zip.InflaterOutputStream#InflaterOutputStream(java.io.OutputStream,Inflater)
+     * @tests java.util.zip.InflaterOutputStream#InflaterOutputStream(java.io.OutputStream, Inflater)
      */
     public void test_ConstructorLjava_io_OutputStreamLjava_util_zip_Inflater() {
         new InflaterOutputStream(os, new Inflater());
@@ -70,7 +70,7 @@ public class InflaterOutputStreamTest extends TestCase {
     }
 
     /**
-     * @tests java.util.zip.InflaterOutputStream#InflaterOutputStream(java.io.OutputStream,Inflater,int)
+     * @tests java.util.zip.InflaterOutputStream#InflaterOutputStream(java.io.OutputStream, Inflater, int)
      */
     public void test_ConstructorLjava_io_OutputStreamLjava_util_zip_InflaterI() {
         new InflaterOutputStream(os, new Inflater(), 20);
@@ -140,7 +140,7 @@ public class InflaterOutputStreamTest extends TestCase {
         } catch (IOException e) {
             // expected
         }
-        
+
         ios = new InflaterOutputStream(os);
         ios.flush();
         ios.flush();
@@ -158,52 +158,52 @@ public class InflaterOutputStreamTest extends TestCase {
         } catch (IOException e) {
             // expected
         }
-        
+
         ios = new InflaterOutputStream(os);
         ios.finish();
         ios.finish();
         ios.flush();
         ios.flush();
         ios.finish();
-        
-        byte[] bytes1 = {10,20,30,40,50};
+
+        byte[] bytes1 = { 10, 20, 30, 40, 50 };
         Deflater defaultDeflater = new Deflater(Deflater.BEST_SPEED);
         defaultDeflater.setInput(bytes1);
         defaultDeflater.finish();
         int length1 = defaultDeflater.deflate(compressedBytes);
-        
-        byte[] bytes2 = {100,90,80,70,60};
-        Deflater bestDeflater = new Deflater(Deflater.BEST_COMPRESSION );
+
+        byte[] bytes2 = { 100, 90, 80, 70, 60 };
+        Deflater bestDeflater = new Deflater(Deflater.BEST_COMPRESSION);
         bestDeflater.setInput(bytes2);
         bestDeflater.finish();
-        int length2 = bestDeflater.deflate(compressedBytes,length1,compressedBytes.length-length1);
-        
+        int length2 = bestDeflater.deflate(compressedBytes, length1, compressedBytes.length - length1);
+
         ios = new InflaterOutputStream(os);
         for (int i = 0; i < length1; i++) {
             ios.write(compressedBytes[i]);
         }
         ios.finish();
         ios.close();
-        
+
         byte[] result = os.toByteArray();
-        for(int i =0;i<bytes1.length; i++){
-            assertEquals(bytes1[i],result[i]);
+        for (int i = 0; i < bytes1.length; i++) {
+            assertEquals(bytes1[i], result[i]);
         }
-        
+
         ios = new InflaterOutputStream(os);
-        for (int i = length1; i < length2*2; i++) {
+        for (int i = length1; i < length2 * 2; i++) {
             ios.write(compressedBytes[i]);
         }
         ios.finish();
         ios.close();
-        
+
         result = os.toByteArray();
-        for(int i =0;i<bytes2.length; i++){
-            assertEquals(bytes2[i],result[bytes1.length+i]);
+        for (int i = 0; i < bytes2.length; i++) {
+            assertEquals(bytes2[i], result[bytes1.length + i]);
         }
-        
+
     }
-    
+
     /**
      * @tests java.util.zip.InflaterOutputStream#write(int)
      */
@@ -237,7 +237,7 @@ public class InflaterOutputStreamTest extends TestCase {
     }
 
     /**
-     * @tests java.util.zip.InflaterOutputStream#write(byte[],int,int)
+     * @tests java.util.zip.InflaterOutputStream#write(byte[], int, int)
      */
     public void test_write_$BII() throws IOException {
         int length = compressToBytes(testString);
@@ -251,7 +251,7 @@ public class InflaterOutputStreamTest extends TestCase {
     }
 
     /**
-     * @tests java.util.zip.InflaterOutputStream#write(byte[],int,int)
+     * @tests java.util.zip.InflaterOutputStream#write(byte[], int, int)
      */
     public void test_write_$BII_Illegal() throws IOException {
         // write error compression (ZIP) format
@@ -356,20 +356,20 @@ public class InflaterOutputStreamTest extends TestCase {
 
         ios = new InflaterOutputStream(os);
         ios.finish();
-        
+
         try {
-            ios.write(bytes, -1,-100);
+            ios.write(bytes, -1, -100);
             fail("Should throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
             // expected
         }
         try {
-            ios.write(null, -1,-100);
+            ios.write(null, -1, -100);
             fail("Should throw NullPointerException");
         } catch (NullPointerException e) {
             // expected
         }
-        
+
         ios = new InflaterOutputStream(os);
         ios.flush();
         try {

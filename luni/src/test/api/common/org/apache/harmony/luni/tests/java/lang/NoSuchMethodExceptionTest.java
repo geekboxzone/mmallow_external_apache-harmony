@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class NoSuchMethodExceptionTest extends TestCase {
 
-	/**
-	 * @tests java.lang.NoSuchMethodException#NoSuchMethodException()
-	 */
+    /**
+     * @tests java.lang.NoSuchMethodException#NoSuchMethodException()
+     */
     public void test_Constructor() {
         NoSuchMethodException e = new NoSuchMethodException();
         assertNull(e.getMessage());

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -28,7 +28,6 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>InvalidKeySpecException</code> class constructors and
  * methods.
- * 
  */
 public class InvalidKeySpecExceptionTest extends TestCase {
 
@@ -37,7 +36,7 @@ public class InvalidKeySpecExceptionTest extends TestCase {
 
     /**
      * Constructor for InvalidKeySpecExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public InvalidKeySpecExceptionTest(String arg0) {

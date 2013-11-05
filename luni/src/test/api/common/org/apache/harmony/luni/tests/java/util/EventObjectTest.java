@@ -21,50 +21,50 @@ import java.util.EventObject;
 
 public class EventObjectTest extends junit.framework.TestCase {
 
-	Object myObject;
+    Object myObject;
 
-	EventObject myEventObject;
+    EventObject myEventObject;
 
-	/**
-	 * @tests java.util.EventObject#EventObject(java.lang.Object)
-	 */
-	public void test_ConstructorLjava_lang_Object() {
-		// Test for method java.util.EventObject(java.lang.Object)
-		assertTrue("Used to test", true);
-	}
+    /**
+     * @tests java.util.EventObject#EventObject(java.lang.Object)
+     */
+    public void test_ConstructorLjava_lang_Object() {
+        // Test for method java.util.EventObject(java.lang.Object)
+        assertTrue("Used to test", true);
+    }
 
-	/**
-	 * @tests java.util.EventObject#getSource()
-	 */
-	public void test_getSource() {
-		// Test for method java.lang.Object java.util.EventObject.getSource()
-		assertTrue("Wrong source returned",
-				myEventObject.getSource() == myObject);
-	}
+    /**
+     * @tests java.util.EventObject#getSource()
+     */
+    public void test_getSource() {
+        // Test for method java.lang.Object java.util.EventObject.getSource()
+        assertTrue("Wrong source returned",
+                myEventObject.getSource() == myObject);
+    }
 
-	/**
-	 * @tests java.util.EventObject#toString()
-	 */
-	public void test_toString() {
-		// Test for method java.lang.String java.util.EventObject.toString()
-		assertTrue("Incorrect toString returned: " + myEventObject.toString(),
-				myEventObject.toString().indexOf(
-						"java.util.EventObject[source=java.lang.Object@") == 0);
-	}
+    /**
+     * @tests java.util.EventObject#toString()
+     */
+    public void test_toString() {
+        // Test for method java.lang.String java.util.EventObject.toString()
+        assertTrue("Incorrect toString returned: " + myEventObject.toString(),
+                myEventObject.toString().indexOf(
+                        "java.util.EventObject[source=java.lang.Object@") == 0);
+    }
 
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-		myObject = new Object();
-		myEventObject = new EventObject(myObject);
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+        myObject = new Object();
+        myEventObject = new EventObject(myObject);
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

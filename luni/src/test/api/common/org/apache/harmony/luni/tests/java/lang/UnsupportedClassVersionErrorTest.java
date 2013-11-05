@@ -35,7 +35,7 @@ public class UnsupportedClassVersionErrorTest extends TestCase {
     }
 
     /**
-     *@tests java.lang.UnsupportedClassVersionError#UnsupportedClassVersionError(java.lang.String)
+     * @tests java.lang.UnsupportedClassVersionError#UnsupportedClassVersionError(java.lang.String)
      */
     public void test_UnsupportedClassVersionError_LString() {
         UnsupportedClassVersionError e = new UnsupportedClassVersionError(

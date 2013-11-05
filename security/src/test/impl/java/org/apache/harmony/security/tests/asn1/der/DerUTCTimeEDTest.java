@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.asn1.der;
 
@@ -37,34 +37,36 @@ import junit.framework.TestCase;
 
 /**
  * ASN.1 DER test for UTCTime type
- * 
+ *
  * @see http://asn1.elibel.tm.fr/en/standards/index.htm
  */
 public class DerUTCTimeEDTest extends TestCase {
 
     private ASN1UTCTime uTime = ASN1UTCTime.getInstance();
-    
+
     private final int workersNumber = 10;
     private boolean mtTestPassed;
+
     /**
      * UTC TIME DER Encoder test
+     *
      * @throws ParseException
      */
     public final void testUTCEncoder() throws Exception {
         // no fractional seconds (last 3 0s and "." must be trimmed out)
         Date myDate = getGmtDate(1101980374187L);
         byte[] encoded =
-            new DerOutputStream(uTime, myDate).encoded;
+                new DerOutputStream(uTime, myDate).encoded;
         String rep = new String(encoded, 2, encoded[1] & 0xff, "UTF-8");
         assertEquals("no fraction", "041202093934Z", rep);
 
         // midnight
         SimpleDateFormat sdf =
-            new SimpleDateFormat("dd.MM.yyyy HH:mm");
+                new SimpleDateFormat("dd.MM.yyyy HH:mm");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         myDate = sdf.parse("06.06.2004 00:00");
         encoded =
-            new DerOutputStream(uTime, myDate).encoded;
+                new DerOutputStream(uTime, myDate).encoded;
         rep = new String(encoded, 2, encoded[1] & 0xff, "UTF-8");
         assertEquals("midnight", "040606000000Z", rep);
     }
@@ -72,62 +74,64 @@ public class DerUTCTimeEDTest extends TestCase {
     /**
      * UTC TIME DER Encoder/Decoder test
      * (byte array case)
+     *
      * @throws ParseException
      * @throws IOException
      */
     public final void testUTCEncoderDecoder01()
-        throws ParseException,
-               IOException {
+            throws ParseException,
+            IOException {
         runTest(false);
     }
 
     /**
      * UTC TIME DER Encoder/Decoder test
      * (InputStream case)
+     *
      * @throws ParseException
      * @throws IOException
      */
     public final void testUTCEncoderDecoder02()
-        throws ParseException,
-               IOException {
+            throws ParseException,
+            IOException {
         runTest(true);
     }
 
     private final void runTest(boolean useInputStream)
-        throws IOException, ParseException {
+            throws IOException, ParseException {
         Date myDate = new Date(1101980374187L);
         byte[] encoded =
-            new DerOutputStream(uTime, myDate).encoded;
+                new DerOutputStream(uTime, myDate).encoded;
         DerInputStream dis = useInputStream
-        ? new DerInputStream(new ByteArrayInputStream(encoded))
-        : new DerInputStream(encoded);
+                ? new DerInputStream(new ByteArrayInputStream(encoded))
+                : new DerInputStream(encoded);
         // the difference only fractional-seconds
-        assertEquals(187, (myDate.getTime()-((Date)uTime.decode(dis)).getTime()));
+        assertEquals(187, (myDate.getTime() - ((Date) uTime.decode(dis)).getTime()));
 
         // midnight
         myDate = new SimpleDateFormat("MM.dd.yyyy HH:mm").
-            parse("06.06.2004 00:00");
+                parse("06.06.2004 00:00");
         encoded =
-            new DerOutputStream(uTime, myDate).encoded;
+                new DerOutputStream(uTime, myDate).encoded;
         dis = useInputStream
-        ? new DerInputStream(new ByteArrayInputStream(encoded))
-        : new DerInputStream(encoded);
+                ? new DerInputStream(new ByteArrayInputStream(encoded))
+                : new DerInputStream(encoded);
         assertEquals(myDate, uTime.decode(dis));
     }
 
     public final void testMt() throws InterruptedException {
         mtTestPassed = true;
         Thread[] workers = new Thread[workersNumber];
-            for(int i=0; i<workersNumber; i++) {
-                workers[i] = new TestWorker();
-            }
-            for(int i=0; i<workersNumber; i++) {
-                workers[i].start();
-            }
-            for(int i=0; i<workersNumber; i++) {
-                workers[i].join();
-            }
-            assertTrue(mtTestPassed);
+        for (int i = 0; i < workersNumber; i++) {
+            workers[i] = new TestWorker();
+        }
+        for (int i = 0; i < workersNumber; i++) {
+            workers[i].start();
+        }
+        for (int i = 0; i < workersNumber; i++) {
+            workers[i].join();
+        }
+        assertTrue(mtTestPassed);
     }
 
     private static Date getGmtDate(long mills) {
@@ -136,17 +140,17 @@ public class DerUTCTimeEDTest extends TestCase {
 
     /**
      * MT Test worker thread
-     * 
+     *
      * @author Vladimir Molotkov
      * @version 0.1
      */
     private class TestWorker extends Thread {
 
         public void run() {
-            for (int i=0; i<100; i++) {
+            for (int i = 0; i < 100; i++) {
                 try {
                     // Perform DER encoding/decoding:
-                    if(i%2==0) {
+                    if (i % 2 == 0) {
                         testUTCEncoderDecoder01();
                     } else {
                         testUTCEncoderDecoder02();

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -30,18 +30,18 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>CertPath</code> fields and methods
- * 
  */
 public class CertPathTest extends TestCase {
     /**
      * Meaningless cert path encoding just for testing purposes
      */
     private static final byte[] testEncoding = new byte[] {
-            (byte)1, (byte)2, (byte)3, (byte)4, (byte)5
+            (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5
     };
 
     /**
      * Constructor for CertPathTest.
+     *
      * @param name
      */
     public CertPathTest(String name) {
@@ -83,7 +83,7 @@ public class CertPathTest extends TestCase {
 
     /**
      * Test #1 for <code>equals(Object)</code> method<br>
-     * Assertion: object equals to itself 
+     * Assertion: object equals to itself
      */
     public final void testEqualsObject01() {
         CertPath cp1 = new MyCertPath(testEncoding);

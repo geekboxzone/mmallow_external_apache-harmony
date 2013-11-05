@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -38,33 +38,33 @@ public class TestUtils {
      * Prints byte array <code>data</code> as hex to the
      * <code>System.out</code> in the customizable form.
      *
-     * @param perLine how many numbers put on single line
-     * @param prefix custom output number prefix
+     * @param perLine   how many numbers put on single line
+     * @param prefix    custom output number prefix
      * @param delimiter custom output number delimiter
-     * @param data data to be printed
+     * @param data      data to be printed
      */
     public static void printAsHex(int perLine,
-                                  String prefix,
-                                  String delimiter,
-                                  byte[] data) {
-        for (int i=0; i<data.length; i++) {
+            String prefix,
+            String delimiter,
+            byte[] data) {
+        for (int i = 0; i < data.length; i++) {
             String tail = Integer.toHexString(0x000000ff & data[i]);
             if (tail.length() == 1) {
-                tail = "0" + tail; 
+                tail = "0" + tail;
             }
             System.out.print(prefix + "0x" + tail + delimiter);
 
-            if (((i+1)%perLine) == 0) {
+            if (((i + 1) % perLine) == 0) {
                 System.out.println("");
             }
         }
         System.out.println("");
     }
-    
+
     /**
      * Sets system property
      *
-     * @param key - the name of the system property.
+     * @param key   - the name of the system property.
      * @param value - the value to be set
      */
     public static void setSystemProperty(String key, String value) {

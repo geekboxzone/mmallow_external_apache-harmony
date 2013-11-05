@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander V. Astapchuk
-*/
+ * @author Alexander V. Astapchuk
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -30,7 +30,7 @@ import org.apache.harmony.security.tests.support.TestCertUtils;
 import junit.framework.TestCase;
 
 /**
- * Unit test for CodeSigner. 
+ * Unit test for CodeSigner.
  */
 
 public class CodeSigner_ImplTest extends TestCase {

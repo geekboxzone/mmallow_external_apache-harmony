@@ -21,9 +21,9 @@ import junit.framework.TestCase;
 
 public class ErrorTest extends TestCase {
 
-	/**
-	 * @tests java.lang.Error#Error()
-	 */
+    /**
+     * @tests java.lang.Error#Error()
+     */
     public void test_Constructor() {
         Error e = new Error();
         assertNull(e.getMessage());

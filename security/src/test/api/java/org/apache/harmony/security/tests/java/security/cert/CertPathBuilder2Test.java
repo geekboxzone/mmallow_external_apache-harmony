@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -37,7 +37,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for CertPathBuilder class constructors and methods
- *
  */
 
 public class CertPathBuilder2Test extends TestCase {
@@ -62,7 +61,7 @@ public class CertPathBuilder2Test extends TestCase {
         super.setUp();
         mProv = (new SpiEngUtils()).new MyProvider("MyCertPathBuilderProvider",
                 "Provider for testing", CertPathBuilder1Test.srvCertPathBuilder
-                        .concat(".").concat(defaultAlg),
+                .concat(".").concat(defaultAlg),
                 CertPathBuilderProviderClass);
         Security.insertProviderAt(mProv, 1);
     }
@@ -90,7 +89,7 @@ public class CertPathBuilder2Test extends TestCase {
         String dt = CertPathBuilder.getDefaultType();
         String propName = CertPathBuilder1Test.DEFAULT_TYPE_PROPERTY;
         String dtN;
-        for (int i = 0; i <invalidValues.length; i++) {
+        for (int i = 0; i < invalidValues.length; i++) {
             Security.setProperty(propName, invalidValues[i]);
             dtN = CertPathBuilder.getDefaultType();
             if (!dtN.equals(invalidValues[i]) && !dtN.equals(dt)) {
@@ -113,8 +112,8 @@ public class CertPathBuilder2Test extends TestCase {
      * Test for <code>getInstance(String algorithm)</code> method
      * Assertions:
      * throws
-	 * throws NullPointerException when algorithm is null
-	 * throws NoSuchAlgorithmException when algorithm  is not correct
+     * throws NullPointerException when algorithm is null
+     * throws NoSuchAlgorithmException when algorithm  is not correct
      * returns CertPathBuilder object
      */
     public void testGetInstance01() throws NoSuchAlgorithmException,
@@ -145,8 +144,8 @@ public class CertPathBuilder2Test extends TestCase {
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code> method
      * Assertions:
-	 * throws NullPointerException when algorithm is null
-	 * throws NoSuchAlgorithmException when algorithm  is not correct
+     * throws NullPointerException when algorithm is null
+     * throws NoSuchAlgorithmException when algorithm  is not correct
      * throws IllegalArgumentException when provider is null or empty;
      * throws NoSuchProviderException when provider is available;
      * returns CertPathBuilder object
@@ -211,8 +210,8 @@ public class CertPathBuilder2Test extends TestCase {
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
      * method
      * Assertions:
-	 * throws NullPointerException when algorithm is null
-	 * throws NoSuchAlgorithmException when algorithm  is not correct
+     * throws NullPointerException when algorithm is null
+     * throws NoSuchAlgorithmException when algorithm  is not correct
      * returns CertPathBuilder object
      */
     public void testGetInstance03() throws NoSuchAlgorithmException,

@@ -24,102 +24,102 @@ import java.security.Security;
 
 public class Provider2Test extends junit.framework.TestCase {
 
-	class TestProvider extends Provider {
-		TestProvider(String name, double version, String info) {
-			super(name, version, info);
-		}
-	}
+    class TestProvider extends Provider {
+        TestProvider(String name, double version, String info) {
+            super(name, version, info);
+        }
+    }
 
     class MyEntry implements java.util.Map.Entry {
-         public Object getKey() {
-             return null;  
-         }
+        public Object getKey() {
+            return null;
+        }
 
-         public Object getValue() {
-             return null;  
-         }
+        public Object getValue() {
+            return null;
+        }
 
-         public Object setValue(Object value) {
-             return null;  
-         }
+        public Object setValue(Object value) {
+            return null;
+        }
     }
-    
-	TestProvider provTest = new TestProvider("provTest", 1.2,
-			"contains nothings, purely for testing the class");
 
-    
-	/**
-	 * @tests java.security.Provider#entrySet()
-	 */
-	public void test_entrySet() {
-		// test method of java.security.provider.entrySet
-		provTest.put("test.prop", "this is a test property");
-		try {
+    TestProvider provTest = new TestProvider("provTest", 1.2,
+            "contains nothings, purely for testing the class");
+
+
+    /**
+     * @tests java.security.Provider#entrySet()
+     */
+    public void test_entrySet() {
+        // test method of java.security.provider.entrySet
+        provTest.put("test.prop", "this is a test property");
+        try {
             //make it compilable on 1.5
-			provTest.entrySet().add(new MyEntry());
-			fail("was able to modify the entrySet");
-		} catch (UnsupportedOperationException e) {
-			// expected
-		}
-	}
+            provTest.entrySet().add(new MyEntry());
+            fail("was able to modify the entrySet");
+        } catch (UnsupportedOperationException e) {
+            // expected
+        }
+    }
 
-	/**
-	 * @tests java.security.Provider#getInfo()
-	 */
-	public void test_getInfo() {
-		// test method of java.security.provider.getInfo
-		assertEquals("the information of the provider is not stored properly",
-				"contains nothings, purely for testing the class", provTest
-						.getInfo());
-	}
+    /**
+     * @tests java.security.Provider#getInfo()
+     */
+    public void test_getInfo() {
+        // test method of java.security.provider.getInfo
+        assertEquals("the information of the provider is not stored properly",
+                "contains nothings, purely for testing the class", provTest
+                .getInfo());
+    }
 
-	/**
-	 * @tests java.security.Provider#getName()
-	 */
-	public void test_getName() {
-		// test method of java.security.provider.getName
-		assertEquals("the name of the provider is not stored properly",
-				"provTest", provTest.getName());
-	}
+    /**
+     * @tests java.security.Provider#getName()
+     */
+    public void test_getName() {
+        // test method of java.security.provider.getName
+        assertEquals("the name of the provider is not stored properly",
+                "provTest", provTest.getName());
+    }
 
-	/**
-	 * @tests java.security.Provider#getVersion()
-	 */
-	public void test_getVersion() {
-		// test method of java.security.provider.getVersion
-		assertEquals("the version of the provider is not stored properly",
-				1.2, provTest.getVersion(), 0);
-	}
+    /**
+     * @tests java.security.Provider#getVersion()
+     */
+    public void test_getVersion() {
+        // test method of java.security.provider.getVersion
+        assertEquals("the version of the provider is not stored properly",
+                1.2, provTest.getVersion(), 0);
+    }
 
-	/**
-	 * @tests java.security.Provider#keySet()
-	 */
-	public void test_keySet() {
-		// test method of java.security.provider.keySet
-		provTest.put("test.prop", "this is a test property");
-		try {
-			provTest.keySet().add("another property key");
-			fail("was able to modify the keySet");
-		} catch (UnsupportedOperationException e) {
-			// expected
-		}
-	}
+    /**
+     * @tests java.security.Provider#keySet()
+     */
+    public void test_keySet() {
+        // test method of java.security.provider.keySet
+        provTest.put("test.prop", "this is a test property");
+        try {
+            provTest.keySet().add("another property key");
+            fail("was able to modify the keySet");
+        } catch (UnsupportedOperationException e) {
+            // expected
+        }
+    }
 
-	/**
-	 * @tests java.security.Provider#values()
-	 */
-	public void test_values() {
-		// test method of java.security.provider.values
-		provTest.put("test.prop", "this is a test property");
-		try {
-			provTest.values().add("another property value");
-			fail("was able to modify the values collection");
-		} catch (UnsupportedOperationException e) {
-			// expected
-		}
-	}
-    
-    
+    /**
+     * @tests java.security.Provider#values()
+     */
+    public void test_values() {
+        // test method of java.security.provider.values
+        provTest.put("test.prop", "this is a test property");
+        try {
+            provTest.values().add("another property value");
+            fail("was able to modify the values collection");
+        } catch (UnsupportedOperationException e) {
+            // expected
+        }
+    }
+
+
     /**
      * @tests java.security.Provider#toString()
      */
@@ -127,7 +127,7 @@ public class Provider2Test extends junit.framework.TestCase {
         // Regression for HARMONY-3734
         assertEquals("provTest version 1.2", provTest.toString());
     }
-    
+
     // Regression Test for Provider.Service.getAlias(), which is an package
     // private method but will lead to NPE thrown at
     // Secure.SecurityDorr.getAliases
@@ -141,9 +141,7 @@ public class Provider2Test extends junit.framework.TestCase {
         try {
             MessageDigest messageDigest = MessageDigest
                     .getInstance("NOTEXISTS");
-        }
-
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             // expected
         } finally {
             Security.removeProvider("MOCKNAME");

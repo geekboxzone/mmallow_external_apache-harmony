@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -29,12 +29,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>DSAParameterSpec</code>
- * 
  */
 public class DSAParameterSpecTest extends TestCase {
 
     /**
      * Constructor for DSAParameterSpecTest.
+     *
      * @param name
      */
     public DSAParameterSpecTest(String name) {
@@ -42,14 +42,14 @@ public class DSAParameterSpecTest extends TestCase {
     }
 
     /**
-     * Ctor test 
+     * Ctor test
      */
     public final void testDSAParameterSpec() {
         AlgorithmParameterSpec aps = new DSAParameterSpec(
                 new BigInteger("1"),
                 new BigInteger("2"),
                 new BigInteger("3"));
-        
+
         assertTrue(aps instanceof DSAParameterSpec);
     }
 
@@ -60,8 +60,8 @@ public class DSAParameterSpecTest extends TestCase {
         DSAParameterSpec dps = new DSAParameterSpec(
                 new BigInteger("1"),
                 new BigInteger("2"),
-				new BigInteger("3"));
-        
+                new BigInteger("3"));
+
         assertEquals(3, dps.getG().intValue());
     }
 
@@ -73,19 +73,19 @@ public class DSAParameterSpecTest extends TestCase {
                 new BigInteger("1"),
                 new BigInteger("2"),
                 new BigInteger("3"));
-        
+
         assertEquals(1, dps.getP().intValue());
     }
 
     /**
-     * getQ() test 
+     * getQ() test
      */
     public final void testGetQ() {
         DSAParameterSpec dps = new DSAParameterSpec(
                 new BigInteger("1"),
                 new BigInteger("2"),
                 new BigInteger("3"));
-        
+
         assertEquals(2, dps.getQ().intValue());
     }
 }

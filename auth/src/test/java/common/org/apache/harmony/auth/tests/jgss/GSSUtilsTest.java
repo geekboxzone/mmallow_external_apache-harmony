@@ -23,35 +23,35 @@ import junit.framework.TestCase;
 
 public class GSSUtilsTest extends TestCase {
 
-	public void testGSSUtils_getBytes_and_getInt() throws Exception {
-		int i = 0x7F;
-		byte[] bytes = GSSUtils.getBytes(i, 1);
-		int j = GSSUtils.toInt(bytes, 0 , 1);
-		assertEquals(i, j);
+    public void testGSSUtils_getBytes_and_getInt() throws Exception {
+        int i = 0x7F;
+        byte[] bytes = GSSUtils.getBytes(i, 1);
+        int j = GSSUtils.toInt(bytes, 0, 1);
+        assertEquals(i, j);
 
-		i = 0x0F;
-		bytes = GSSUtils.getBytes(i, 1);
-		j = GSSUtils.toInt(bytes, 0 , 1);
-		assertEquals(i, j);
+        i = 0x0F;
+        bytes = GSSUtils.getBytes(i, 1);
+        j = GSSUtils.toInt(bytes, 0, 1);
+        assertEquals(i, j);
 
-		i = 0x01FF;
-		bytes = GSSUtils.getBytes(i, 2);
-		j = GSSUtils.toInt(bytes, 0, 2);
-		assertEquals(i, j);
+        i = 0x01FF;
+        bytes = GSSUtils.getBytes(i, 2);
+        j = GSSUtils.toInt(bytes, 0, 2);
+        assertEquals(i, j);
 
-		i = 0x0503;
-		bytes = GSSUtils.getBytes(i, 2);
-		j = GSSUtils.toInt(bytes, 0, 2);
-		assertEquals(i, j);
+        i = 0x0503;
+        bytes = GSSUtils.getBytes(i, 2);
+        j = GSSUtils.toInt(bytes, 0, 2);
+        assertEquals(i, j);
 
-		i = 0x05804E;
-		bytes = GSSUtils.getBytes(i, 3);
-		j = GSSUtils.toInt(bytes, 0 , 3);
-		assertEquals(i, j);
+        i = 0x05804E;
+        bytes = GSSUtils.getBytes(i, 3);
+        j = GSSUtils.toInt(bytes, 0, 3);
+        assertEquals(i, j);
 
-		i = 0x0580E2;
-		bytes = GSSUtils.getBytes(i, 4);
-		j = GSSUtils.toInt(bytes, 0, 4);
-		assertEquals(i, j);
-	}
+        i = 0x0580E2;
+        bytes = GSSUtils.getBytes(i, 4);
+        j = GSSUtils.toInt(bytes, 0, 4);
+        assertEquals(i, j);
+    }
 }

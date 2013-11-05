@@ -23,7 +23,7 @@ public class MalformedParameterizedTypeExceptionTest extends TestCase {
 
     /**
      * @tests java.lang.reflect.MalformedParameterizedTypeException#
-     *        MalformedParameterizedTypeException()
+     * MalformedParameterizedTypeException()
      */
     public void testMalformedParameterizedTypeException() {
         MalformedParameterizedTypeException e = new MalformedParameterizedTypeException();

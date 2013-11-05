@@ -240,27 +240,33 @@ public class PackageTest extends junit.framework.TestCase {
         try {
             p.isCompatibleWith("");
             fail("Empty version is illegal");
-        } catch (NumberFormatException ok) {}
+        } catch (NumberFormatException ok) {
+        }
         try {
             p.isCompatibleWith(".");
             fail("'.' version is illegal");
-        } catch (NumberFormatException ok) {}
+        } catch (NumberFormatException ok) {
+        }
         try {
             p.isCompatibleWith("1.2.");
             fail("'1.2.' version is illegal");
-        } catch (NumberFormatException ok) {}
+        } catch (NumberFormatException ok) {
+        }
         try {
             p.isCompatibleWith(".9");
             fail("'.9' version is illegal");
-        } catch (NumberFormatException ok) {}
+        } catch (NumberFormatException ok) {
+        }
         try {
             p.isCompatibleWith("2.4..5");
             fail("'2.4..5' version is illegal");
-        } catch (NumberFormatException ok) {}
+        } catch (NumberFormatException ok) {
+        }
         try {
             p.isCompatibleWith("20.-4");
             fail("'20.-4' version is illegal");
-        } catch (NumberFormatException ok) {}
+        } catch (NumberFormatException ok) {
+        }
     }
 
     /**

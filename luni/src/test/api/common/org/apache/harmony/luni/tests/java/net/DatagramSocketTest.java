@@ -716,6 +716,7 @@ public class DatagramSocketTest extends junit.framework.TestCase {
     // socket.leaveGroup(group);
     // socket.close();
     // }
+
     /**
      * @tests java.net.DatagramSocket#send(java.net.DatagramPacket)
      */
@@ -865,19 +866,20 @@ public class DatagramSocketTest extends junit.framework.TestCase {
     /**
      * If the InetAddress of DatagramPacket is null, DatagramSocket.send(DatagramPacket)
      * should throw NullPointer Exception.
+     *
      * @tests java.net.DatagramSocket#send(java.net.DatagramPacket)
      */
     public void test_sendLjava_net_DatagramPacket2() throws IOException {
         int udp_port = 20000;
         int send_port = 23000;
         DatagramSocket udpSocket = new DatagramSocket(udp_port);
-        byte[] data = {65};
+        byte[] data = { 65 };
         DatagramPacket sendPacket = new DatagramPacket(data, data.length, null, send_port);
         try {
             udpSocket.send(sendPacket);
             fail("Should throw SocketException");
         } catch (NullPointerException e) {
-          // Expected
+            // Expected
         } finally {
             udpSocket.close();
         }
@@ -974,10 +976,10 @@ public class DatagramSocketTest extends junit.framework.TestCase {
                         + theSocket.getLocalSocketAddress().toString()
                         + "Expected: "
                         + (new InetSocketAddress(InetAddress.getLocalHost(),
-                                portNumber)).toString(), theSocket
-                        .getLocalSocketAddress().equals(
-                                new InetSocketAddress(InetAddress
-                                        .getLocalHost(), portNumber)));
+                        portNumber)).toString(), theSocket
+                .getLocalSocketAddress().equals(
+                        new InetSocketAddress(InetAddress
+                                .getLocalHost(), portNumber)));
 
         // now make sure that datagrams sent from this socket appear to come
         // from the address we bound to
@@ -1473,7 +1475,7 @@ public class DatagramSocketTest extends junit.framework.TestCase {
         // test the default case which we expect to be the same on all
         // platforms
         try {
-            theAddress = new InetSocketAddress(InetAddress.getLocalHost(),Support_PortManager.getNextPortForUDP());
+            theAddress = new InetSocketAddress(InetAddress.getLocalHost(), Support_PortManager.getNextPortForUDP());
             theSocket1 = new DatagramSocket(null);
             theSocket2 = new DatagramSocket(null);
             theSocket1.bind(theAddress);

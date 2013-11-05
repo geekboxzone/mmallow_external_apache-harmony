@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -31,19 +31,19 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyStore.CallbackHandlerProtection> class constructor and methods
- * 
  */
 
 public class KSCallbackHandlerProtectionTest extends TestCase {
 
     /**
      * Constructor for KSCallbackHandlerProtectionTest.
+     *
      * @param arg0
      */
     public KSCallbackHandlerProtectionTest(String arg0) {
         super(arg0);
     }
-    
+
     /**
      * Test for <code>KeyStore.CallbackHandlerProtection(CallbackHandler handler)</code>
      * constructor
@@ -56,10 +56,10 @@ public class KSCallbackHandlerProtectionTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test for <code>getCallbackHandler()</code> method
-     * Assertion: returns CallbackHandler 
+     * Assertion: returns CallbackHandler
      */
     public void testGetCallBackHandler() {
         CallbackHandler cbh = new tmpCallbackHandler();

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -40,13 +40,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>CertificateFactorySpi</code> class constructors and methods
- * 
  */
 
 public class CertificateFactorySpiTest extends TestCase {
     /**
      * Constructor for CertStoreSpiTest.
-     * 
+     *
      * @param arg0
      */
     public CertificateFactorySpiTest(String arg0) {
@@ -54,7 +53,7 @@ public class CertificateFactorySpiTest extends TestCase {
     }
 
     /**
-     * Test for <code>CertificateFactorySpi</code> constructor 
+     * Test for <code>CertificateFactorySpi</code> constructor
      * Assertion: constructs CertificateFactorySpi
      */
     public void testCertificateFactorySpi01() throws CertificateException,
@@ -118,7 +117,7 @@ public class CertificateFactorySpiTest extends TestCase {
     }
 
     /**
-     * Test for <code>CertificateFactorySpi</code> constructor 
+     * Test for <code>CertificateFactorySpi</code> constructor
      * Assertion: constructs CertificateFactorySpi
      */
     public void testCertificateFactorySpi02() throws CertificateException,
@@ -178,17 +177,17 @@ public class CertificateFactorySpiTest extends TestCase {
         assertNull("Result must be null", col);
 
         List list = null;
-        try { 
+        try {
             certFactorySpi.engineGenerateCertPath(list);
             fail("NullPointerException must be thrown");
-        } catch (NullPointerException e) {            
+        } catch (NullPointerException e) {
         }
         Iterator enc = certFactorySpi.engineGetCertPathEncodings();
         assertTrue("Incorrect Iterator", enc.hasNext());
     }
-    
+
     /**
-     * Test for <code>CertificateFactorySpi</code> constructor 
+     * Test for <code>CertificateFactorySpi</code> constructor
      * Assertion: constructs CertificateFactorySpi
      */
     public void testCertificateFactorySpi03() throws CertificateException,
@@ -253,7 +252,7 @@ public class CertificateFactorySpiTest extends TestCase {
         assertFalse("Incorrect Iterator", enc.hasNext());
     }
 
-    
+
     private static class extCertificateFactorySpi extends CertificateFactorySpi {
         public Certificate engineGenerateCertificate(InputStream inStream)
                 throws CertificateException {

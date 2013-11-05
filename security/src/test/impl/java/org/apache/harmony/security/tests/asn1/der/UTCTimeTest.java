@@ -73,7 +73,7 @@ public class UTCTimeTest extends TestCase {
                         new byte[] { 0x17, 0x0D, 0x34, 0x39, 0x30, 0x32, 0x30,
                                 0x33, 0x30, 0x34, 0x30, 0x35, 0x30, 0x36, 0x5A },
                         null },
-                        };
+        };
 
         try {
             // fill values for Date objects by parsing date string
@@ -89,8 +89,8 @@ public class UTCTimeTest extends TestCase {
     /**
      * Verifies decoding/encoding ASN.1 UTCTime.
      * It must interpret the year field (YY) as follows:
-     *  - if YY is greater than or equal to 50 then interpreted as 19YY
-     *  - and if YY is less than 50 then interpreted as 20YY.
+     * - if YY is greater than or equal to 50 then interpreted as 19YY
+     * - and if YY is less than 50 then interpreted as 20YY.
      */
     public void testDecodeEncode() throws Exception {
 

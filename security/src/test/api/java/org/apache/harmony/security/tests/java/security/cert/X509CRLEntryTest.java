@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -82,7 +82,7 @@ public class X509CRLEntryTest extends TestCase {
     public X509CRLEntryTest() {
         tbt_crlentry = new TBTCRLEntry() {
             public byte[] getEncoded() throws CRLException {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
     }
@@ -95,47 +95,47 @@ public class X509CRLEntryTest extends TestCase {
     public void testEquals() {
         TBTCRLEntry tbt_crlentry_1 = new TBTCRLEntry() {
             public byte[] getEncoded() {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
 
         TBTCRLEntry tbt_crlentry_2 = new TBTCRLEntry() {
             public byte[] getEncoded() {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
 
         TBTCRLEntry tbt_crlentry_3 = new TBTCRLEntry() {
             public byte[] getEncoded() {
-                return new byte[] {3, 2, 1};
+                return new byte[] { 3, 2, 1 };
             }
         };
 
         // checking for reflexive law:
         assertTrue("The equivalence relation should be reflexive.",
-                                            tbt_crlentry.equals(tbt_crlentry));
+                tbt_crlentry.equals(tbt_crlentry));
 
         assertEquals("The CRL Entries with equals encoded form should be equal",
-                                            tbt_crlentry, tbt_crlentry_1);
+                tbt_crlentry, tbt_crlentry_1);
         // checking for symmetric law:
         assertTrue("The equivalence relation should be symmetric.",
-                                            tbt_crlentry_1.equals(tbt_crlentry));
+                tbt_crlentry_1.equals(tbt_crlentry));
 
         assertEquals("The CRL Entries with equals encoded form should be equal",
-                                            tbt_crlentry_1, tbt_crlentry_2);
+                tbt_crlentry_1, tbt_crlentry_2);
         // checking for transitive law:
         assertTrue("The equivalence relation should be transitive.",
-                                            tbt_crlentry.equals(tbt_crlentry_2));
+                tbt_crlentry.equals(tbt_crlentry_2));
 
         assertFalse("Should not be equal to null object.",
-                                            tbt_crlentry.equals(null));
+                tbt_crlentry.equals(null));
 
         assertFalse("The CRL Entries with differing encoded form "
-                                            + "should not be equal.",
-                                            tbt_crlentry.equals(tbt_crlentry_3));
+                + "should not be equal.",
+                tbt_crlentry.equals(tbt_crlentry_3));
         assertFalse("The CRL Entries should not be equals to the object "
-                                + "which is not an instance of X509CRLEntry.",
-                                            tbt_crlentry.equals(new Object()));
+                + "which is not an instance of X509CRLEntry.",
+                tbt_crlentry.equals(new Object()));
     }
 
     /**
@@ -145,11 +145,11 @@ public class X509CRLEntryTest extends TestCase {
     public void testHashCode() {
         TBTCRLEntry tbt_crlentry_1 = new TBTCRLEntry() {
             public byte[] getEncoded() {
-                return new byte[] {1, 2, 3};
+                return new byte[] { 1, 2, 3 };
             }
         };
         assertTrue("Equal objects should have the same hash codes.",
-                        tbt_crlentry.hashCode() == tbt_crlentry_1.hashCode());
+                tbt_crlentry.hashCode() == tbt_crlentry_1.hashCode());
     }
 
     /**

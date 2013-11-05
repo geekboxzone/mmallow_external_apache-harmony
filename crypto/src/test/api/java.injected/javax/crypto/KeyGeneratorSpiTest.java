@@ -16,11 +16,10 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package javax.crypto;
-
 
 
 import java.security.InvalidAlgorithmParameterException;
@@ -34,14 +33,13 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>KeyGeneratorSpi</code> class constructors and methods.
- * 
  */
 
 public class KeyGeneratorSpiTest extends TestCase {
 
     /**
      * Constructor for KeyGeneratorSpiTests.
-     * 
+     *
      * @param arg0
      */
     public KeyGeneratorSpiTest(String arg0) {
@@ -65,16 +63,17 @@ public class KeyGeneratorSpiTest extends TestCase {
             fail("IllegalArgumentException must be thrown");
         } catch (IllegalArgumentException e) {
         }
-        AlgorithmParameterSpec aps = null;        
+        AlgorithmParameterSpec aps = null;
         try {
             kgSpi.engineInit(aps, new SecureRandom());
-            fail("InvalidAlgorithmParameterException must be thrown when parameter is null");            
-       } catch (InvalidAlgorithmParameterException e) {
-       }
-       aps = new APSpecSpi();
-       kgSpi.engineInit(aps, new SecureRandom());
+            fail("InvalidAlgorithmParameterException must be thrown when parameter is null");
+        } catch (InvalidAlgorithmParameterException e) {
+        }
+        aps = new APSpecSpi();
+        kgSpi.engineInit(aps, new SecureRandom());
     }
 }
+
 class APSpecSpi implements AlgorithmParameterSpec {
-    
+
 }

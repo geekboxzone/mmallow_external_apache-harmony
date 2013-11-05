@@ -29,8 +29,9 @@ import java.util.Locale;
 
 public class Signature2Test extends junit.framework.TestCase {
 
-	private static final String MESSAGE = "abc";
+    private static final String MESSAGE = "abc";
     static KeyPair keys;
+
     static {
         try {
             KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DSA");
@@ -40,48 +41,48 @@ public class Signature2Test extends junit.framework.TestCase {
             fail(e.toString());
         }
     }
-    
-	/**
-	 * @tests java.security.Signature#clone()
-	 */
-	public void test_clone() throws Exception {
-       		Signature s = Signature.getInstance("DSA");
-       		try {
-       			s.clone();
-       			fail("A Signature may not be cloneable");
-       		} catch (CloneNotSupportedException e) {
-       			// Expected - a Signature may not be cloneable
-       		}
-	}
 
-	/**
-	 * @tests java.security.Signature#getAlgorithm()
-	 */
-	public void test_getAlgorithm() throws Exception {
-       		String alg = Signature.getInstance("DSA").getAlgorithm();
-       		assertTrue("getAlgorithm did not get DSA (" + alg + ")", alg
-       				.indexOf("DSA") != -1);
-	}
+    /**
+     * @tests java.security.Signature#clone()
+     */
+    public void test_clone() throws Exception {
+        Signature s = Signature.getInstance("DSA");
+        try {
+            s.clone();
+            fail("A Signature may not be cloneable");
+        } catch (CloneNotSupportedException e) {
+            // Expected - a Signature may not be cloneable
+        }
+    }
 
-	/**
-	 * @tests java.security.Signature#getInstance(java.lang.String)
-	 */
-	public void test_getInstanceLjava_lang_String() throws Exception {
-		Signature.getInstance("DSA");
-	}
+    /**
+     * @tests java.security.Signature#getAlgorithm()
+     */
+    public void test_getAlgorithm() throws Exception {
+        String alg = Signature.getInstance("DSA").getAlgorithm();
+        assertTrue("getAlgorithm did not get DSA (" + alg + ")", alg
+                .indexOf("DSA") != -1);
+    }
 
-	/**
-	 * @tests java.security.Signature#getInstance(java.lang.String,
-	 *        java.lang.String)
-	 */
-	public void test_getInstanceLjava_lang_StringLjava_lang_String() throws Exception {
-       		Provider[] providers = Security.getProviders("Signature.DSA");
+    /**
+     * @tests java.security.Signature#getInstance(java.lang.String)
+     */
+    public void test_getInstanceLjava_lang_String() throws Exception {
+        Signature.getInstance("DSA");
+    }
 
-       		for (int i = 0; i < providers.length; i++) {
-       			Signature.getInstance("DSA", providers[i].getName());
-       		}// end for
-	}
-    
+    /**
+     * @tests java.security.Signature#getInstance(java.lang.String,
+     *java.lang.String)
+     */
+    public void test_getInstanceLjava_lang_StringLjava_lang_String() throws Exception {
+        Provider[] providers = Security.getProviders("Signature.DSA");
+
+        for (int i = 0; i < providers.length; i++) {
+            Signature.getInstance("DSA", providers[i].getName());
+        }// end for
+    }
+
     /**
      * @tests java.security.Signature#getParameters()
      */
@@ -94,140 +95,140 @@ public class Signature2Test extends junit.framework.TestCase {
         }
     }
 
-	/**
-	 * @tests java.security.Signature#getParameter(java.lang.String)
-	 */
-	public void test_getParameterLjava_lang_String() throws Exception {
-		Signature sig = Signature.getInstance("DSA");
+    /**
+     * @tests java.security.Signature#getParameter(java.lang.String)
+     */
+    public void test_getParameterLjava_lang_String() throws Exception {
+        Signature sig = Signature.getInstance("DSA");
 
-		try {
-			sig.getParameter("r");
-			sig.getParameter("s");
-		} catch (UnsupportedOperationException e) {
-		}
-	}
+        try {
+            sig.getParameter("r");
+            sig.getParameter("s");
+        } catch (UnsupportedOperationException e) {
+        }
+    }
 
-	/**
-	 * @tests java.security.Signature#getProvider()
-	 */
-	public void test_getProvider() throws Exception {
-       		Provider p = Signature.getInstance("DSA").getProvider();
-       		assertNotNull("provider is null", p);
-	}
+    /**
+     * @tests java.security.Signature#getProvider()
+     */
+    public void test_getProvider() throws Exception {
+        Provider p = Signature.getInstance("DSA").getProvider();
+        assertNotNull("provider is null", p);
+    }
 
-	/**
-	 * @tests java.security.Signature#initSign(java.security.PrivateKey)
-	 */
-	public void test_initSignLjava_security_PrivateKey() throws Exception {
-		Signature.getInstance("DSA").initSign(keys.getPrivate());
-	}
+    /**
+     * @tests java.security.Signature#initSign(java.security.PrivateKey)
+     */
+    public void test_initSignLjava_security_PrivateKey() throws Exception {
+        Signature.getInstance("DSA").initSign(keys.getPrivate());
+    }
 
-	/**
-	 * @tests java.security.Signature#initVerify(java.security.PublicKey)
-	 */
-	public void test_initVerifyLjava_security_PublicKey() throws Exception {
-		Signature.getInstance("DSA").initVerify(keys.getPublic());
-	}
+    /**
+     * @tests java.security.Signature#initVerify(java.security.PublicKey)
+     */
+    public void test_initVerifyLjava_security_PublicKey() throws Exception {
+        Signature.getInstance("DSA").initVerify(keys.getPublic());
+    }
 
-	/**
-	 * @tests java.security.Signature#setParameter(java.lang.String,
-	 *        java.lang.Object)
-	 */
-	public void test_setParameterLjava_lang_StringLjava_lang_Object() throws Exception {
-		Signature sig = Signature.getInstance("DSA");
+    /**
+     * @tests java.security.Signature#setParameter(java.lang.String,
+     *java.lang.Object)
+     */
+    public void test_setParameterLjava_lang_StringLjava_lang_Object() throws Exception {
+        Signature sig = Signature.getInstance("DSA");
 
-		try {
-			sig.setParameter("r", BigInteger.ONE);
-			sig.setParameter("s", BigInteger.ONE);
-		} catch (InvalidParameterException e) {
-			// Could be that it's an invalid param for the found algorithm
-		} catch (UnsupportedOperationException e) {
-			// Could be that the operation is not supported
-		}
-	}
+        try {
+            sig.setParameter("r", BigInteger.ONE);
+            sig.setParameter("s", BigInteger.ONE);
+        } catch (InvalidParameterException e) {
+            // Could be that it's an invalid param for the found algorithm
+        } catch (UnsupportedOperationException e) {
+            // Could be that the operation is not supported
+        }
+    }
 
-	/**
-	 * @tests java.security.Signature#setParameter(java.security.spec.AlgorithmParameterSpec)
-	 */
-	public void test_setParameterLjava_security_spec_AlgorithmParameterSpec() throws Exception {
-		Signature sig = Signature.getInstance("DSA");
+    /**
+     * @tests java.security.Signature#setParameter(java.security.spec.AlgorithmParameterSpec)
+     */
+    public void test_setParameterLjava_security_spec_AlgorithmParameterSpec() throws Exception {
+        Signature sig = Signature.getInstance("DSA");
 
-		try {
-			DSAParameterSpec spec = new DSAParameterSpec(BigInteger.ONE,
-					BigInteger.ONE, BigInteger.ONE);
-			sig.setParameter(spec);
-		} catch (InvalidParameterException e) {
-			// Could be that it's an invalid param for the found algorithm
-		} catch (UnsupportedOperationException e) {
-			// Could be that the operation is not supported
-		}
-	}
+        try {
+            DSAParameterSpec spec = new DSAParameterSpec(BigInteger.ONE,
+                    BigInteger.ONE, BigInteger.ONE);
+            sig.setParameter(spec);
+        } catch (InvalidParameterException e) {
+            // Could be that it's an invalid param for the found algorithm
+        } catch (UnsupportedOperationException e) {
+            // Could be that the operation is not supported
+        }
+    }
 
-	/**
-	 * @tests java.security.Signature#sign()
-	 */
-	public void test_sign() throws Exception {
-		Signature sig = Signature.getInstance("DSA");
-		sig.initSign(keys.getPrivate());
-		sig.update(MESSAGE.getBytes());
-		sig.sign();
-	}
+    /**
+     * @tests java.security.Signature#sign()
+     */
+    public void test_sign() throws Exception {
+        Signature sig = Signature.getInstance("DSA");
+        sig.initSign(keys.getPrivate());
+        sig.update(MESSAGE.getBytes());
+        sig.sign();
+    }
 
-	/**
-	 * @tests java.security.Signature#toString()
-	 */
-	public void test_toString() throws Exception {
-		String str = Signature.getInstance("DSA").toString();
-		assertNotNull("toString is null", str);
-	}
+    /**
+     * @tests java.security.Signature#toString()
+     */
+    public void test_toString() throws Exception {
+        String str = Signature.getInstance("DSA").toString();
+        assertNotNull("toString is null", str);
+    }
 
-	/**
-	 * @tests java.security.Signature#update(byte[])
-	 */
-	public void test_update$B() throws Exception {
-		Signature sig = Signature.getInstance("DSA");
-		sig.initSign(keys.getPrivate());
+    /**
+     * @tests java.security.Signature#update(byte[])
+     */
+    public void test_update$B() throws Exception {
+        Signature sig = Signature.getInstance("DSA");
+        sig.initSign(keys.getPrivate());
 
-		byte[] bytes = MESSAGE.getBytes();
-		sig.update(bytes);
-	}
+        byte[] bytes = MESSAGE.getBytes();
+        sig.update(bytes);
+    }
 
-	/**
-	 * @tests java.security.Signature#update(byte[], int, int)
-	 */
-	public void test_update$BII() throws Exception {
-		Signature sig = Signature.getInstance("DSA");
-		sig.initSign(keys.getPrivate());
+    /**
+     * @tests java.security.Signature#update(byte[], int, int)
+     */
+    public void test_update$BII() throws Exception {
+        Signature sig = Signature.getInstance("DSA");
+        sig.initSign(keys.getPrivate());
 
-		byte[] bytes = MESSAGE.getBytes();
-		sig.update(bytes, 0, bytes.length);
-	}
+        byte[] bytes = MESSAGE.getBytes();
+        sig.update(bytes, 0, bytes.length);
+    }
 
-	/**
-	 * @tests java.security.Signature#update(byte)
-	 */
-	public void test_updateB() throws Exception {
-		Signature sig = Signature.getInstance("DSA");
-		sig.initSign(keys.getPrivate());
+    /**
+     * @tests java.security.Signature#update(byte)
+     */
+    public void test_updateB() throws Exception {
+        Signature sig = Signature.getInstance("DSA");
+        sig.initSign(keys.getPrivate());
 
-		sig.update(MESSAGE.getBytes()[0]);
-	}
+        sig.update(MESSAGE.getBytes()[0]);
+    }
 
-	/**
-	 * @tests java.security.Signature#verify(byte[])
-	 */
-	public void test_verify$B() throws Exception {
-		Signature sig = Signature.getInstance("DSA");
-		sig.initSign(keys.getPrivate());
-		sig.update(MESSAGE.getBytes());
-		byte[] signature = sig.sign();
+    /**
+     * @tests java.security.Signature#verify(byte[])
+     */
+    public void test_verify$B() throws Exception {
+        Signature sig = Signature.getInstance("DSA");
+        sig.initSign(keys.getPrivate());
+        sig.update(MESSAGE.getBytes());
+        byte[] signature = sig.sign();
 
 
-		sig.initVerify(keys.getPublic());
-		sig.update(MESSAGE.getBytes());
-		assertTrue("Sign/Verify does not pass", sig.verify(signature));
-	}
-    
+        sig.initVerify(keys.getPublic());
+        sig.update(MESSAGE.getBytes());
+        assertTrue("Sign/Verify does not pass", sig.verify(signature));
+    }
+
     //Regression Test for HARMONY-4916
     public void test_getInstance_withI18n() throws Exception {
         // Enfore that providers information has been loaded.

@@ -57,7 +57,7 @@ public class SocketImplTest extends junit.framework.TestCase {
             // expected
         }
     }
-    
+
     /**
      * @tests java.net.SocketImpl#shutdownInput()
      */
@@ -142,8 +142,8 @@ public class SocketImplTest extends junit.framework.TestCase {
         public void shutdownOutput() throws IOException {
             super.shutdownOutput();
         }
-        
-        public void shutdownInput() throws IOException{
+
+        public void shutdownInput() throws IOException {
             super.shutdownInput();
         }
 

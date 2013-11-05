@@ -45,20 +45,21 @@ import tests.util.SerializationTester;
 public class PropertyChangeSupportTest extends TestCase {
 
     private File tempFile;
-    
+
     @Override
     protected void setUp() throws Exception {
         tempFile = File.createTempFile("beans", ".ser");
     }
-    
+
     @Override
     protected void tearDown() throws Exception {
         tempFile.delete();
         tempFile = null;
     }
+
     /*
-     * Test the constructor with a normal parameter.
-     */
+    * Test the constructor with a normal parameter.
+    */
     public void testConstructor_Normal() {
         Object src = new Object();
         new PropertyChangeSupport(src);
@@ -574,7 +575,7 @@ public class PropertyChangeSupportTest extends TestCase {
         pcs.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
                 assertEquals(src, evt.getSource());
-                assertEquals(0, ((IndexedPropertyChangeEvent)evt).getIndex());
+                assertEquals(0, ((IndexedPropertyChangeEvent) evt).getIndex());
                 assertEquals("one", evt.getOldValue());
                 assertEquals("two", evt.getNewValue());
             }
@@ -1373,7 +1374,7 @@ public class PropertyChangeSupportTest extends TestCase {
 
     /**
      * @tests java.beans.PropertyChangeSupport#PropertyChangeSupport(
-     *        java.lang.Object)
+     *java.lang.Object)
      */
     public void testConstructor_Null() {
         // Regression for HARMONY-227
@@ -1387,7 +1388,6 @@ public class PropertyChangeSupportTest extends TestCase {
 
     /**
      * @tests java.beans.PropertyChangeSupport#addPropertyChangeSupport
-     * 
      */
     public void test_addPropertyChangeListenerNullNull() throws Exception {
         // Regression for HARMONY-441
@@ -1397,7 +1397,7 @@ public class PropertyChangeSupportTest extends TestCase {
 
     /**
      * @tests java.beans.PropertyChangeSupport#removePropertyChangeListener(
-     *        java.lang.String, java.beans.PropertyChangeListener)
+     *java.lang.String, java.beans.PropertyChangeListener)
      */
     public void testRemovePropertyChangeListener() {
         // Regression for HARMONY-386
@@ -1423,7 +1423,7 @@ public class PropertyChangeSupportTest extends TestCase {
 
     /**
      * @tests java.beans.PropertyChangeSupport#removePropertyChangeListener(
-     *        java.lang.String, java.beans.PropertyChangeListener)
+     *java.lang.String, java.beans.PropertyChangeListener)
      */
     public void testRemovePropertyChangeListener2() {
         // Regression for HARMONY-320

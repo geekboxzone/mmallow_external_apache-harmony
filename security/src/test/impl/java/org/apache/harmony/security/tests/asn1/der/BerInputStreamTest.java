@@ -42,7 +42,7 @@ public class BerInputStreamTest extends TestCase {
 
     /**
      * @tests org.apache.harmony.security.asn1.BerInputStream#BerInputStream(
-     *        java.io.ByteArrayInputStream)
+     *java.io.ByteArrayInputStream)
      */
     public void test_CtorLjava_io_ByteArrayInputStream() throws IOException {
 
@@ -50,7 +50,7 @@ public class BerInputStreamTest extends TestCase {
         // tests for decoding initial length of encodings
         //
         Object[][] testcase = {
-        // length = 0x01
+                // length = 0x01
                 { new byte[] { 0x30, (byte) 0x81, 0x01 }, BigInteger.valueOf(1) },
                 // length = 0xFF
                 { new byte[] { 0x30, (byte) 0x81, (byte) 0xFF },
@@ -124,7 +124,7 @@ public class BerInputStreamTest extends TestCase {
 
     /**
      * @tests org.apache.harmony.security.asn1.BerInputStream#BerInputStream(byte[],
-     *        int,int)
+     *int, int)
      */
     public void test_Ctor$LbyteLintLint() throws IOException {
 

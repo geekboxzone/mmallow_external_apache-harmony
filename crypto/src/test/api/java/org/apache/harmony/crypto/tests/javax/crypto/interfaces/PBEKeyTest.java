@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto.interfaces;
 
@@ -30,14 +30,13 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>PBEKey</code> class field
- * 
  */
 public class PBEKeyTest extends TestCase {
 
 
     /**
      * Constructor for PBEKey.
-     * 
+     *
      * @param arg0
      */
     public PBEKeyTest(String arg0) {
@@ -49,32 +48,40 @@ public class PBEKeyTest extends TestCase {
      */
     public void testField() {
         checkPBEKey key = new checkPBEKey();
-        assertEquals("Incorrect serialVersionUID", 
+        assertEquals("Incorrect serialVersionUID",
                 key.getSerVerUID(), //PBEKey.serialVersionUID
                 -1430015993304333921L);
     }
+
     public class checkPBEKey implements PBEKey {
         public String getAlgorithm() {
             return "SecretKey";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return new byte[0];
         }
+
         public long getSerVerUID() {
             return serialVersionUID;
         }
+
         public BigInteger getY() {
             return null;
         }
+
         public int getIterationCount() {
             return 0;
         }
+
         public byte[] getSalt() {
             return new byte[0];
         }
+
         public char[] getPassword() {
             return new char[0];
         }

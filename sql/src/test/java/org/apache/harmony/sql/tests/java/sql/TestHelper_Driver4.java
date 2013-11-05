@@ -26,7 +26,6 @@ import java.util.Properties;
 
 /**
  * Basic JDBC driver implementation to help with tests
- * 
  */
 public class TestHelper_Driver4 implements Driver {
     int majorVersion = 1;
@@ -36,6 +35,7 @@ public class TestHelper_Driver4 implements Driver {
     String baseURL;
 
     String[] dataSources = { "data1", "data2", "data3" };
+
     static {
         Driver theDriver = new TestHelper_Driver4();
         try {

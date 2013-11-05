@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -36,14 +36,13 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>PKIXCertPathBuilderResult</code>
- * 
  */
 public class PKIXCertPathBuilderResultTest extends TestCase {
     /**
      * Cert path encoding stub
      */
     private static final byte[] testEncoding = new byte[] {
-            (byte)1, (byte)2, (byte)3, (byte)4, (byte)5
+            (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5
     };
 
     /**
@@ -53,17 +52,20 @@ public class PKIXCertPathBuilderResultTest extends TestCase {
         public String getAlgorithm() {
             return "NeverMind";
         }
+
         public String getFormat() {
             return "NeverMind";
         }
+
         public byte[] getEncoded() {
-            return new byte[] {};
+            return new byte[] { };
         }
     };
 
 
     /**
      * Constructor for PKIXCertPathBuilderResultTest.
+     *
      * @param name
      */
     public PKIXCertPathBuilderResultTest(String name) {
@@ -76,53 +78,55 @@ public class PKIXCertPathBuilderResultTest extends TestCase {
 
     /**
      * Test #1 for <code>PKIXCertPathBuilderResult(CertPath, TrustAnchor,
-     *   PolicyNode, PublicKey)</code> constructor<br>
+     * PolicyNode, PublicKey)</code> constructor<br>
      * Assertion: Creates an instance of <code>PKIXCertPathBuilderResult</code>
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
     public final void testPKIXCertPathBuilderResult01()
-        throws InvalidKeySpecException,
-               NoSuchAlgorithmException {
+            throws InvalidKeySpecException,
+            NoSuchAlgorithmException {
         TrustAnchor ta = TestUtils.getTrustAnchor();
         if (ta == null) {
             fail(getName() + ": not performed (could not create test TrustAnchor)");
         }
         CertPathBuilderResult r =
-            new PKIXCertPathBuilderResult(
-                    new MyCertPath(testEncoding),
-                    ta,
-                    TestUtils.getPolicyTree(),
-                    testPublicKey);
+                new PKIXCertPathBuilderResult(
+                        new MyCertPath(testEncoding),
+                        ta,
+                        TestUtils.getPolicyTree(),
+                        testPublicKey);
         assertTrue(r instanceof PKIXCertPathBuilderResult);
     }
 
     /**
      * Test #2 for <code>PKIXCertPathBuilderResult(CertPath, TrustAnchor,
-     *   PolicyNode, PublicKey)</code> constructor<br>
+     * PolicyNode, PublicKey)</code> constructor<br>
      * Assertion: policy tree parameter may be <code>null</code>
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
     public final void testPKIXCertPathBuilderResult02()
-        throws InvalidKeySpecException,
-               NoSuchAlgorithmException {
+            throws InvalidKeySpecException,
+            NoSuchAlgorithmException {
         TrustAnchor ta = TestUtils.getTrustAnchor();
         if (ta == null) {
             fail(getName() + ": not performed (could not create test TrustAnchor)");
         }
         CertPathBuilderResult r =
-            new PKIXCertPathBuilderResult(
-                    new MyCertPath(testEncoding),
-                    ta,
-                    null,
-                    testPublicKey);
+                new PKIXCertPathBuilderResult(
+                        new MyCertPath(testEncoding),
+                        ta,
+                        null,
+                        testPublicKey);
         assertTrue(r instanceof PKIXCertPathBuilderResult);
     }
 
     /**
      * Test #3 for <code>PKIXCertPathBuilderResult(CertPath, TrustAnchor,
-     *   PolicyNode, PublicKey)</code> constructor<br>
+     * PolicyNode, PublicKey)</code> constructor<br>
      * Assertion: <code>NullPointerException</code>
      * if certPath is <code>null</code>
      */
@@ -146,7 +150,7 @@ public class PKIXCertPathBuilderResultTest extends TestCase {
 
     /**
      * Test #4 for <code>PKIXCertPathBuilderResult(CertPath, TrustAnchor,
-     *   PolicyNode, PublicKey)</code> constructor<br>
+     * PolicyNode, PublicKey)</code> constructor<br>
      * Assertion: <code>NullPointerException</code>
      * if trustAnchor is <code>null</code>
      */
@@ -165,7 +169,7 @@ public class PKIXCertPathBuilderResultTest extends TestCase {
 
     /**
      * Test #5 for <code>PKIXCertPathBuilderResult(CertPath, TrustAnchor,
-     *   PolicyNode, PublicKey)</code> constructor<br>
+     * PolicyNode, PublicKey)</code> constructor<br>
      * Assertion: <code>NullPointerException</code>
      * if publicKey is <code>null</code>
      */
@@ -210,6 +214,7 @@ public class PKIXCertPathBuilderResultTest extends TestCase {
      * Test for <code>getCertPath()</code> method<br>
      * Assertion: the built and validated <code>CertPath</code>
      * (never <code>null</code>)
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
@@ -221,11 +226,11 @@ public class PKIXCertPathBuilderResultTest extends TestCase {
 
         CertPath cp = new MyCertPath(testEncoding);
         CertPathBuilderResult r =
-            new PKIXCertPathBuilderResult(
-                    cp,
-                    ta,
-                    TestUtils.getPolicyTree(),
-                    testPublicKey);
+                new PKIXCertPathBuilderResult(
+                        cp,
+                        ta,
+                        TestUtils.getPolicyTree(),
+                        testPublicKey);
 
         // must return the same reference
         // as passed to the constructor
@@ -235,22 +240,23 @@ public class PKIXCertPathBuilderResultTest extends TestCase {
     /**
      * Test for <code>toString()</code> method<br>
      * Assertion: the printable representation of this object
+     *
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
     public final void testToString()
-        throws InvalidKeySpecException,
-               NoSuchAlgorithmException {
+            throws InvalidKeySpecException,
+            NoSuchAlgorithmException {
         TrustAnchor ta = TestUtils.getTrustAnchor();
         if (ta == null) {
             fail(getName() + ": not performed (could not create test TrustAnchor)");
         }
         CertPathBuilderResult r =
-            new PKIXCertPathBuilderResult(
-                    new MyCertPath(testEncoding),
-                    ta,
-                    TestUtils.getPolicyTree(),
-                    testPublicKey);
+                new PKIXCertPathBuilderResult(
+                        new MyCertPath(testEncoding),
+                        ta,
+                        TestUtils.getPolicyTree(),
+                        testPublicKey);
 
         assertNotNull(r.toString());
     }

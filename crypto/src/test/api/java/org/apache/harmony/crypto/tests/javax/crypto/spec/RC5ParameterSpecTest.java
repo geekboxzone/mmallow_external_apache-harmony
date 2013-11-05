@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto.spec;
 
@@ -44,7 +44,7 @@ public class RC5ParameterSpecTest extends TestCase {
         int version = 1;
         int rounds = 5;
         int wordSize = 16;
-        byte[] iv = {1, 2, 3, 4};
+        byte[] iv = { 1, 2, 3, 4 };
 
         try {
             new RC5ParameterSpec(version, rounds, wordSize, null);
@@ -54,25 +54,25 @@ public class RC5ParameterSpecTest extends TestCase {
         }
 
         try {
-            new RC5ParameterSpec(version, rounds, wordSize+8, iv);
+            new RC5ParameterSpec(version, rounds, wordSize + 8, iv);
             fail("An IllegalArgumentException should be thrown "
                     + "in the case of short iv.");
         } catch (IllegalArgumentException e) {
         }
 
         try {
-            new RC5ParameterSpec(version, rounds, wordSize, new byte[] {1, 2, 3});
+            new RC5ParameterSpec(version, rounds, wordSize, new byte[] { 1, 2, 3 });
             fail("An IllegalArgumentException should be thrown "
                     + "in the case of short iv.");
         } catch (IllegalArgumentException e) {
         }
 
         RC5ParameterSpec ps = new RC5ParameterSpec(version, rounds,
-                                                                wordSize, iv);
-        iv[0] ++;
+                wordSize, iv);
+        iv[0]++;
         assertFalse("The change of iv specified in the constructor "
-                    + "should not cause the change of internal array.",
-                    iv[0] == ps.getIV()[0]);
+                + "should not cause the change of internal array.",
+                iv[0] == ps.getIV()[0]);
     }
 
     /**
@@ -85,7 +85,7 @@ public class RC5ParameterSpecTest extends TestCase {
         int version = 1;
         int rounds = 5;
         int wordSize = 16;
-        byte[] iv = {1, 2, 3, 4, 5, 6};
+        byte[] iv = { 1, 2, 3, 4, 5, 6 };
         int offset = 2;
 
         try {
@@ -96,14 +96,14 @@ public class RC5ParameterSpecTest extends TestCase {
         }
 
         try {
-            new RC5ParameterSpec(version, rounds, wordSize+8, iv, offset);
+            new RC5ParameterSpec(version, rounds, wordSize + 8, iv, offset);
             fail("An IllegalArgumentException should be thrown "
                     + "in the case of short iv.");
         } catch (IllegalArgumentException e) {
         }
 
         try {
-            new RC5ParameterSpec(version, rounds, wordSize, iv, offset+1);
+            new RC5ParameterSpec(version, rounds, wordSize, iv, offset + 1);
             fail("An IllegalArgumentException should be thrown "
                     + "in the case of short iv.");
         } catch (IllegalArgumentException e) {
@@ -118,11 +118,11 @@ public class RC5ParameterSpecTest extends TestCase {
         }
 
         RC5ParameterSpec ps = new RC5ParameterSpec(version, rounds, wordSize,
-                                                                    iv, offset);
-        iv[offset] ++;
+                iv, offset);
+        iv[offset]++;
         assertFalse("The change of iv specified in the constructor "
-                    + "should not cause the change of internal array.",
-                    iv[offset] == ps.getIV()[0]);
+                + "should not cause the change of internal array.",
+                iv[offset] == ps.getIV()[0]);
 
         // Regression test for HARMONY-1077
         try {
@@ -188,22 +188,22 @@ public class RC5ParameterSpecTest extends TestCase {
         int version = 1;
         int rounds = 5;
         int wordSize = 16;
-        byte[] iv = {1, 2, 3, 4};
+        byte[] iv = { 1, 2, 3, 4 };
 
         RC5ParameterSpec ps = new RC5ParameterSpec(version, rounds,
-                                                            wordSize, iv);
+                wordSize, iv);
         byte[] result = ps.getIV();
-        if (! Arrays.equals(iv, result)) {
+        if (!Arrays.equals(iv, result)) {
             fail("The returned iv is not equal to the specified "
                     + "in the constructor.");
         }
-        result[0] ++;
+        result[0]++;
         assertFalse("The change of returned by getIV() method iv "
-                    + "should not cause the change of internal array.",
-                    result[0] == ps.getIV()[0]);
+                + "should not cause the change of internal array.",
+                result[0] == ps.getIV()[0]);
         ps = new RC5ParameterSpec(version, rounds, wordSize);
         assertNull("The getIV() method should return null if the parameter "
-                    + "set does not contain IV.", ps.getIV());
+                + "set does not contain IV.", ps.getIV());
     }
 
     /**
@@ -215,45 +215,45 @@ public class RC5ParameterSpecTest extends TestCase {
         int version = 1;
         int rounds = 5;
         int wordSize = 16;
-        byte[] iv = {1, 2, 3, 4, 5, 6};
+        byte[] iv = { 1, 2, 3, 4, 5, 6 };
 
         RC5ParameterSpec ps1 = new RC5ParameterSpec(version, rounds,
-                                                                wordSize, iv);
+                wordSize, iv);
         RC5ParameterSpec ps2 = new RC5ParameterSpec(version, rounds,
-                                                                wordSize, iv);
+                wordSize, iv);
         RC5ParameterSpec ps3 = new RC5ParameterSpec(version, rounds, wordSize,
-                                                    new byte[] {1, 2, 3, 4});
+                new byte[] { 1, 2, 3, 4 });
         // checking for reflexive law:
         assertTrue("The equivalence relation should be reflexive.",
-                                                        ps1.equals(ps1));
+                ps1.equals(ps1));
 
         assertTrue("Objects built on the same parameters should be equal.",
-                                                        ps1.equals(ps2));
+                ps1.equals(ps2));
         // checking for symmetric law:
         assertTrue("The equivalence relation should be symmetric.",
-                                                        ps2.equals(ps1));
+                ps2.equals(ps1));
 
         assertTrue("Objects built on the equal parameters should be equal.",
-                                                        ps2.equals(ps3));
+                ps2.equals(ps3));
 
         // checking for transitive law:
         assertTrue("The equivalence relation should be transitive.",
-                                                        ps1.equals(ps3));
+                ps1.equals(ps3));
 
         assertFalse("Should return not be equal to null object.",
-                                                        ps1.equals(null));
+                ps1.equals(null));
 
-        ps2 = new RC5ParameterSpec(version+1, rounds, wordSize, iv);
+        ps2 = new RC5ParameterSpec(version + 1, rounds, wordSize, iv);
         assertFalse("Objects should not be equal.", ps1.equals(ps2));
 
-        ps2 = new RC5ParameterSpec(version, rounds+1, wordSize, iv);
+        ps2 = new RC5ParameterSpec(version, rounds + 1, wordSize, iv);
         assertFalse("Objects should not be equal.", ps1.equals(ps2));
 
-        ps2 = new RC5ParameterSpec(version, rounds, wordSize/2, iv);
+        ps2 = new RC5ParameterSpec(version, rounds, wordSize / 2, iv);
         assertFalse("Objects should not be equal.", ps1.equals(ps2));
 
         ps2 = new RC5ParameterSpec(version, rounds, wordSize,
-                                                    new byte[] {4, 3, 2, 1});
+                new byte[] { 4, 3, 2, 1 });
         assertFalse("Objects should not be equal.", ps1.equals(ps2));
     }
 
@@ -265,14 +265,14 @@ public class RC5ParameterSpecTest extends TestCase {
         int version = 1;
         int rounds = 5;
         int wordSize = 16;
-        byte[] iv = {1, 2, 3, 4, 5, 6};
+        byte[] iv = { 1, 2, 3, 4, 5, 6 };
 
         RC5ParameterSpec ps1 = new RC5ParameterSpec(version, rounds,
-                                                                wordSize, iv);
+                wordSize, iv);
         RC5ParameterSpec ps2 = new RC5ParameterSpec(version, rounds,
-                                                                wordSize, iv);
+                wordSize, iv);
         assertTrue("Equal objects should have the same hash codes.",
-                                            ps1.hashCode() == ps2.hashCode());
+                ps1.hashCode() == ps2.hashCode());
     }
 
     public static Test suite() {

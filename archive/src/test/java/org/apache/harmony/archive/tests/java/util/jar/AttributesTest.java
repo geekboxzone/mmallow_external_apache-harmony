@@ -240,7 +240,7 @@ public class AttributesTest extends TestCase {
         a2.putValue("TWO", "2");
         assertEquals(a1, a2);
         assertEquals(a1, a1);
-        a2=null;
+        a2 = null;
         assertFalse(a1.equals(a2));
     }
 
@@ -265,7 +265,7 @@ public class AttributesTest extends TestCase {
             // Expected
         }
     }
-    
+
     /**
      * @tests java.util.jar.Attributes.put(java.lang.Object, java.lang.Object)
      */
@@ -292,7 +292,7 @@ public class AttributesTest extends TestCase {
         assertEquals(2, attribute.size());
         assertNull(attribute.get(name));
     }
-    
+
     /**
      * @tests java.util.jar.Attributes.hashCode()
      */

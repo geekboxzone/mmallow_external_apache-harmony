@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto;
 
@@ -43,16 +43,15 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SecretKeyFactory</code> class constructors and methods.
- * 
  */
 
 public class SecretKeyFactoryTest extends TestCase {
-    
+
     public static final String srvSecretKeyFactory = "SecretKeyFactory";
-        
+
     private static String defaultAlgorithm1 = "DESede";
     private static String defaultAlgorithm2 = "DES";
-    
+
     public static String defaultAlgorithm = null;
 
     private static String defaultProviderName = null;
@@ -136,14 +135,14 @@ public class SecretKeyFactoryTest extends TestCase {
         try {
             secKF.translateKey(null);
             fail("NullPointerException must be thrown");
-        } catch (NullPointerException e) {            
+        } catch (NullPointerException e) {
         }
     }
 
     /**
-     * Test for <code>getInstance(String algorithm)</code> method 
+     * Test for <code>getInstance(String algorithm)</code> method
      * Assertions:
-     * throws NullPointerException when algorithm is null; 
+     * throws NullPointerException when algorithm is null;
      * throws NoSuchAlgorithmException when algorithm has invalid value
      */
     public void testSecretKeyFactory02() throws NoSuchAlgorithmException {
@@ -181,8 +180,8 @@ public class SecretKeyFactoryTest extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
-     * method 
-     * Assertion: 
+     * method
+     * Assertion:
      * throws NullPointerException when algorithm is null;
      * throws NoSuchAlgorithmException when algorithm is invalid
      */
@@ -211,8 +210,8 @@ public class SecretKeyFactoryTest extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
-     * method 
-     * Assertion: 
+     * method
+     * Assertion:
      * throws IllegalArgumentException when provider is null or empty;
      * throws NoSuchProviderException when provider has invalid value
      */
@@ -251,7 +250,7 @@ public class SecretKeyFactoryTest extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, String provider)</code>
-     * method 
+     * method
      * Assertion: returns SecretKeyFactory object
      */
     public void testSecretKeyFactory06() throws NoSuchProviderException,
@@ -272,7 +271,7 @@ public class SecretKeyFactoryTest extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
-     * method 
+     * method
      * Assertion: throws NullPointerException when algorithm is null;
      * throws NoSuchAlgorithmException when algorithm is invalid
      */
@@ -299,7 +298,7 @@ public class SecretKeyFactoryTest extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
-     * method 
+     * method
      * Assertion: throws IllegalArgumentException when provider is null
      */
     public void testSecretKeyFactory08() throws NoSuchAlgorithmException {
@@ -320,7 +319,7 @@ public class SecretKeyFactoryTest extends TestCase {
 
     /**
      * Test for <code>getInstance(String algorithm, Provider provider)</code>
-     * method 
+     * method
      * Assertion: returns SecretKeyFactory object
      */
     public void testSecretKeyFactory09() throws NoSuchAlgorithmException {
@@ -342,7 +341,7 @@ public class SecretKeyFactoryTest extends TestCase {
      * Test for <code>generateSecret(KeySpec keySpec)</code> and
      * <code>getKeySpec(SecretKey key, Class keySpec)
      * methods
-     * Assertion: 
+     * Assertion:
      * throw InvalidKeySpecException if parameter is inappropriate
      */
     public void testSecretKeyFactory10() throws InvalidKeyException,
@@ -352,8 +351,8 @@ public class SecretKeyFactoryTest extends TestCase {
             return;
         }
         byte[] bb = new byte[24];
-        KeySpec ks = (defaultAlgorithm.equals(defaultAlgorithm2) ? (KeySpec)new DESKeySpec(bb) :
-            (KeySpec)new DESedeKeySpec(bb));
+        KeySpec ks = (defaultAlgorithm.equals(defaultAlgorithm2) ? (KeySpec) new DESKeySpec(bb) :
+                (KeySpec) new DESedeKeySpec(bb));
         KeySpec rks = null;
         SecretKeySpec secKeySpec = new SecretKeySpec(bb, defaultAlgorithm);
         SecretKey secKey = null;
@@ -385,7 +384,7 @@ public class SecretKeyFactoryTest extends TestCase {
             } catch (NullPointerException e) {
                 // Expected
             }
-                
+
             try {
                 Class c;
                 if (defaultAlgorithm.equals(defaultAlgorithm2)) {
@@ -397,7 +396,7 @@ public class SecretKeyFactoryTest extends TestCase {
                 fail("getKeySpec(secKey, Class): InvalidKeySpecException must be thrown");
             } catch (InvalidKeySpecException e) {
             }
-            rks = skF[i].getKeySpec(secKeySpec, ks.getClass());          
+            rks = skF[i].getKeySpec(secKeySpec, ks.getClass());
             if (defaultAlgorithm.equals(defaultAlgorithm1)) {
                 assertTrue("Incorrect getKeySpec() result 1",
                         rks instanceof DESedeKeySpec);

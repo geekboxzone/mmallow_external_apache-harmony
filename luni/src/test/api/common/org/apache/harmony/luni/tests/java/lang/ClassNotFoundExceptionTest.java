@@ -27,25 +27,25 @@ public class ClassNotFoundExceptionTest extends TestCase {
      * name using the forName method in class Class.
      */
 
-	/**
-	 * @tests java.lang.ClassNotFoundException#ClassNotFoundException()
-	 */
-	public void test_Constructor() {
+    /**
+     * @tests java.lang.ClassNotFoundException#ClassNotFoundException()
+     */
+    public void test_Constructor() {
         ClassNotFoundException e = new ClassNotFoundException();
         assertNull(e.getMessage());
         assertNull(e.getLocalizedMessage());
         assertNull(e.getCause());
-	}
+    }
 
-	/**
-	 * @tests java.lang.ClassNotFoundException#ClassNotFoundException(java.lang.String)
-	 */
-	public void test_ConstructorLjava_lang_String() {
+    /**
+     * @tests java.lang.ClassNotFoundException#ClassNotFoundException(java.lang.String)
+     */
+    public void test_ConstructorLjava_lang_String() {
         ClassNotFoundException e = new ClassNotFoundException("fixture");
         assertEquals("fixture", e.getMessage());
         assertNull(e.getCause());
-	}
-	
+    }
+
     /**
      * @tests java.lang.ClassNotFoundException#ClassNotFoundException(java.lang.String, java.lang.Throwable)
      */

@@ -25,7 +25,6 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>CertPathTrustManagerParameters</code> class constructors
  * and methods.
- *  
  */
 public class CertPathTrustManagerParametersTest extends TestCase {
 

@@ -16,11 +16,10 @@
  */
 
 /**
-* @author Aleksei Y. Semenov
-*/
+ * @author Aleksei Y. Semenov
+ */
 
 package java.security;
-
 
 
 import org.apache.harmony.security.tests.support.CertificateStub;
@@ -31,13 +30,13 @@ import junit.framework.TestCase;
 
 /**
  * Tests for class Identity
- *
  */
 
 public class IdentityTest extends TestCase {
 
     /**
      * Constructor for IdentityTest.
+     *
      * @param name
      */
     public IdentityTest(String name) {
@@ -50,16 +49,17 @@ public class IdentityTest extends TestCase {
 
     public void testEquals() throws Exception {
         Identity i1 = new IdentityStub("testEquals");
-        Object value[] =  {
+        Object value[] = {
                 null, Boolean.FALSE,
                 new Object(), Boolean.FALSE,
                 i1, Boolean.TRUE,
                 new IdentityStub(i1.getName()), Boolean.TRUE
         };
 
-        for (int k=0; k<value.length; k+=2) {
-            assertEquals(value[k+1], new Boolean(i1.equals(value[k])));
-            if (Boolean.TRUE.equals(value[k+1])) assertEquals(i1.hashCode(), value[k].hashCode());
+        for (int k = 0; k < value.length; k += 2) {
+            assertEquals(value[k + 1], new Boolean(i1.equals(value[k])));
+            if (Boolean.TRUE.equals(value[k + 1]))
+                assertEquals(i1.hashCode(), value[k].hashCode());
         }
         // check other cases
         Identity i2 = new IdentityStub("testEquals", IdentityScope.getSystemScope());
@@ -90,7 +90,7 @@ public class IdentityTest extends TestCase {
         Identity i = new IdentityStub("iii");
         assertNotNull(i);
         assertEquals("iii", i.getName());
-        i=new IdentityStub(null);
+        i = new IdentityStub(null);
         assertNotNull(i);
         assertNull(i.getName());
     }
@@ -110,11 +110,10 @@ public class IdentityTest extends TestCase {
     /**
      * verify addCertificate(Certificate certificate) adds a certificate for this identity.
      * If the identity has a public key, the public key in the certificate must be the same
-     *
      */
     public void testAddCertificate1() throws Exception {
         Identity i = new IdentityStub("iii");
-        PublicKeyStub pk1 = new PublicKeyStub("kkk", "fff", new byte[]{1,2,3,4,5});
+        PublicKeyStub pk1 = new PublicKeyStub("kkk", "fff", new byte[] { 1, 2, 3, 4, 5 });
         i.setPublicKey(pk1);
         // try with the same key
         CertificateStub c1 = new CertificateStub("fff", null, null, pk1);
@@ -122,9 +121,10 @@ public class IdentityTest extends TestCase {
         assertSame(c1, i.certificates()[0]);
         // try Certificate with different key
         try {
-            i.addCertificate(new CertificateStub("ccc", null, null, new PublicKeyStub("k2", "fff", new byte[]{6,7,8,9,0})));
+            i.addCertificate(new CertificateStub("ccc", null, null, new PublicKeyStub("k2", "fff", new byte[] { 6, 7, 8, 9, 0 })));
             fail("KeyManagementException should be thrown");
-        } catch (KeyManagementException ok) {}
+        } catch (KeyManagementException ok) {
+        }
     }
 
     /**
@@ -149,7 +149,8 @@ public class IdentityTest extends TestCase {
             new IdentityStub("aaa").addCertificate(null);
             fail("KeyManagementException should be thrown");
         } catch (KeyManagementException ok) {
-        } catch (NullPointerException ok) {}
+        } catch (NullPointerException ok) {
+        }
 
     }
 //
@@ -208,7 +209,7 @@ public class IdentityTest extends TestCase {
 
     public void testIdentityEquals() throws Exception {
         String name = "nnn";
-        PublicKey pk = new PublicKeyStub("aaa", "fff", new byte[]{1,2,3,4,5});
+        PublicKey pk = new PublicKeyStub("aaa", "fff", new byte[] { 1, 2, 3, 4, 5 });
         Identity i = new IdentityStub(name);
         i.setPublicKey(pk);
         Object[] value = {
@@ -220,9 +221,10 @@ public class IdentityTest extends TestCase {
                 i, Boolean.TRUE,
                 new IdentityStub(name, pk), Boolean.TRUE
         };
-        for (int k=0; k<value.length; k+=2){
-            assertEquals(value[k+1], new Boolean(i.identityEquals((Identity)value[k])));
-            if (Boolean.TRUE.equals(value[k+1])) assertEquals(i.hashCode(), value[k].hashCode());
+        for (int k = 0; k < value.length; k += 2) {
+            assertEquals(value[k + 1], new Boolean(i.identityEquals((Identity) value[k])));
+            if (Boolean.TRUE.equals(value[k + 1]))
+                assertEquals(i.hashCode(), value[k].hashCode());
         }
         Identity i2 = IdentityScope.getSystemScope().getIdentity(name);
         i2.setPublicKey(pk);
@@ -243,27 +245,26 @@ public class IdentityTest extends TestCase {
      * verify Identity.getScope() returns identity's scope
      */
     public void testGetScope() throws Exception {
-       Identity i = new IdentityStub("testGetScope");
-       assertNull(i.getScope());
-       IdentityScope s = IdentityScope.getSystemScope();
+        Identity i = new IdentityStub("testGetScope");
+        assertNull(i.getScope());
+        IdentityScope s = IdentityScope.getSystemScope();
 
-       Identity i2 = new IdentityStub("testGetScope2", s);
-       assertSame(s, i2.getScope());
+        Identity i2 = new IdentityStub("testGetScope2", s);
+        assertSame(s, i2.getScope());
 
     }
 
     /**
-     *
      * verify Identity.setPublicKey() throws KeyManagementException if key is invalid
-     *
      */
     public void testSetPublicKey2() throws Exception {
         Identity i2 = new IdentityStub("testSetPublicKey2_2", IdentityScope.getSystemScope());
-        new PublicKeyStub("kkk", "testSetPublicKey2", new byte[]{1,2,3,4,5});
+        new PublicKeyStub("kkk", "testSetPublicKey2", new byte[] { 1, 2, 3, 4, 5 });
         try {
             i2.setPublicKey(null);
             //fail("KeyManagementException should be thrown - key is null");
-        } catch (KeyManagementException ok) {}
+        } catch (KeyManagementException ok) {
+        }
     }
 
 //
@@ -283,10 +284,9 @@ public class IdentityTest extends TestCase {
 //            fail("KeyManagementException should be thrown - key already used");
 //        } catch (KeyManagementException ok) {};
 //    }
+
     /**
-     *
      * verify Identity.setPublicKey()  removes old key and all identity's certificates
-     *
      */
     public void testSetPublicKey4() throws Exception {
         Identity i = new IdentityStub("testSetPublicKey4");
@@ -325,7 +325,7 @@ public class IdentityTest extends TestCase {
 
     public void testGetName() {
         Identity i = new IdentityStub("testGetName");
-        assertEquals ("testGetName", i.getName());
+        assertEquals("testGetName", i.getName());
     }
 
 }

@@ -28,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>HandshakeProtocol</code> constructor and methods
- *  
  */
 public class HandshakeProtocolTest extends TestCase {
 

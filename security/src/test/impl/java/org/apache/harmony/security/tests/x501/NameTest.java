@@ -15,8 +15,8 @@
  *  limitations under the License.
  */
 /**
-* @author Stepan M. Mishura
-*/
+ * @author Stepan M. Mishura
+ */
 
 package org.apache.harmony.security.tests.x501;
 
@@ -35,9 +35,9 @@ import junit.framework.TestCase;
  */
 public class NameTest extends TestCase {
 
-    private static final byte [] mess = {
+    private static final byte[] mess = {
             0x30, //0 seq of
-            (byte) 0x81,(byte) 0x9A, //1 len = 154
+            (byte) 0x81, (byte) 0x9A, //1 len = 154
             0x31, 0x0A, //3,4
             0x30, 0x08, 0x06, 0x03, 0x55, 0x04, 0x03, 0x13, 0x01, 0x5A,
             0x31, 0x0A, //15,16

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package javax.crypto;
 
@@ -32,14 +32,13 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SecretKeyFactorySpi</code> class constructors and methods.
- * 
  */
 
 public class SecretKeyFactorySpiTest extends TestCase {
 
     /**
      * Constructor for SecretKeyfactorySpiTests.
-     * 
+     *
      * @param arg0
      */
     public SecretKeyFactorySpiTest(String arg0) {
@@ -47,7 +46,6 @@ public class SecretKeyFactorySpiTest extends TestCase {
     }
 
     /**
-     * 
      * Test for <code>SecretKeyFactorySpi</code> constructor Assertion:
      * constructs SecretKeyFactorySpi
      */

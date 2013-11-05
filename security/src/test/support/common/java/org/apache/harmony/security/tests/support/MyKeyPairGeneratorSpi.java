@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.support;
 
@@ -30,7 +30,6 @@ import java.security.spec.AlgorithmParameterSpec;
 
 /**
  * Additional class for verification of KeyPairGeneratorSpi and KeyPairGenerator
- * 
  */
 
 public class MyKeyPairGeneratorSpi extends KeyPairGeneratorSpi {

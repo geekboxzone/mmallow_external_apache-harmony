@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.security.tests.x509;
 
@@ -51,10 +51,10 @@ import org.apache.harmony.security.x509.Validity;
 /**
  * Testing the encoding/decoding work of the following structure:
  * (as specified in RFC 3280 -
- *  Internet X.509 Public Key Infrastructure.
- *  Certificate and Certificate Revocation List (CRL) Profile.
- *  http://www.ietf.org/rfc/rfc3280.txt):
- *
+ * Internet X.509 Public Key Infrastructure.
+ * Certificate and Certificate Revocation List (CRL) Profile.
+ * http://www.ietf.org/rfc/rfc3280.txt):
+ * <p/>
  * <pre>
  *   Certificate  ::=  SEQUENCE  {
  *        tbsCertificate       TBSCertificate,
@@ -127,27 +127,27 @@ public class CertificateTest extends TestCase {
         Validity validity = new Validity(new Date(100000000), new Date(200000000));
         Name subject = new Name("O=Subject Organization");
         SubjectPublicKeyInfo subjectPublicKeyInfo =
-            new SubjectPublicKeyInfo(new AlgorithmIdentifier("1.2.840.113549.1.1.2"),
-                    new byte[10]);
-        boolean[]   issuerUniqueID  = new boolean[]
-                    {true, false, true, false, true, false, true, false}; // random value
-        boolean[]   subjectUniqueID = new boolean[]
-                    {false, true, false, true, false, true, false, true}; // random value
+                new SubjectPublicKeyInfo(new AlgorithmIdentifier("1.2.840.113549.1.1.2"),
+                        new byte[10]);
+        boolean[] issuerUniqueID = new boolean[]
+                { true, false, true, false, true, false, true, false }; // random value
+        boolean[] subjectUniqueID = new boolean[]
+                { false, true, false, true, false, true, false, true }; // random value
         // make the Extensions for TBSCertificate
         // Subject Alternative Names
         GeneralName[] san = new GeneralName[] {
-            new GeneralName(
-                new OtherName("1.2.3.4.5",
-                        ASN1Integer.getInstance().encode(
-                                BigInteger.valueOf(55L).toByteArray()))),
-            new GeneralName(1, "rfc@822.Name"),
-            new GeneralName(2, "dNSName"),
-            new GeneralName(new ORAddress()),
-            new GeneralName(4, "O=Organization"),
-            new GeneralName(new EDIPartyName("assigner","party")),
-            new GeneralName(6, "http://Resource.Id"),
-            new GeneralName(new byte[] {1, 1, 1, 1}),
-            new GeneralName(8, "1.2.3.4444.55555")
+                new GeneralName(
+                        new OtherName("1.2.3.4.5",
+                                ASN1Integer.getInstance().encode(
+                                        BigInteger.valueOf(55L).toByteArray()))),
+                new GeneralName(1, "rfc@822.Name"),
+                new GeneralName(2, "dNSName"),
+                new GeneralName(new ORAddress()),
+                new GeneralName(4, "O=Organization"),
+                new GeneralName(new EDIPartyName("assigner", "party")),
+                new GeneralName(6, "http://Resource.Id"),
+                new GeneralName(new byte[] { 1, 1, 1, 1 }),
+                new GeneralName(8, "1.2.3.4444.55555")
         };
         GeneralNames sans = new GeneralNames(Arrays.asList(san));
         Extension extension = new Extension("2.5.29.17", true, sans.getEncoded());
@@ -175,10 +175,10 @@ public class CertificateTest extends TestCase {
         ByteArrayInputStream bais = new ByteArrayInputStream(encoding);
 
         //try {
-            CertificateFactory cf = CertificateFactory.getInstance("X.509");
-            cf.generateCertificate(bais);
+        CertificateFactory cf = CertificateFactory.getInstance("X.509");
+        cf.generateCertificate(bais);
         //} catch (CertificateException e) {
-            // there is no X.509 certificate factory implementation installed
+        // there is no X.509 certificate factory implementation installed
         //}
     }
 
@@ -188,16 +188,16 @@ public class CertificateTest extends TestCase {
     public void testGetTbsCertificate() throws IOException {
         // manually derived data:
         byte[] encoding = new byte[] {
-            (byte)0x30,(byte)0x13, // NameConstraints
-                (byte)0xa1,(byte)0x11, // GeneralSubtrees (excludedSubtrees)
-                    (byte)0x30,(byte)0x0f, // GeneralSubtree
-                        (byte)0xa0,(byte)0x0a, // GeneralName
-                            // OtherName:
-                            (byte)0x06,(byte)0x03, // type-id (OID)
-                                (byte)0x00,(byte)0x01,(byte)0x02, // oid
-                            (byte)0xA0,(byte)0x03, // value (raw)
-                                1, 1, (byte)0xff,  // boolean
-                        (byte)0x80, (byte)0x01, (byte)0x00 // minimum
+                (byte) 0x30, (byte) 0x13, // NameConstraints
+                (byte) 0xa1, (byte) 0x11, // GeneralSubtrees (excludedSubtrees)
+                (byte) 0x30, (byte) 0x0f, // GeneralSubtree
+                (byte) 0xa0, (byte) 0x0a, // GeneralName
+                // OtherName:
+                (byte) 0x06, (byte) 0x03, // type-id (OID)
+                (byte) 0x00, (byte) 0x01, (byte) 0x02, // oid
+                (byte) 0xA0, (byte) 0x03, // value (raw)
+                1, 1, (byte) 0xff,  // boolean
+                (byte) 0x80, (byte) 0x01, (byte) 0x00 // minimum
         };
         NameConstraints.ASN1.decode(encoding);
     }

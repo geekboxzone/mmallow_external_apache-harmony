@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -35,19 +35,19 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>Certificate</code> fields and methods
- * 
  */
 public class CertificateTest extends TestCase {
     /**
      * Meaningless cert encoding just for testing purposes
      */
     private static final byte[] testEncoding = new byte[] {
-            (byte)1, (byte)2, (byte)3, (byte)4, (byte)5
+            (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5
     };
 
 
     /**
      * Constructor for CertificateTest.
+     *
      * @param name
      */
     public CertificateTest(String name) {
@@ -83,7 +83,7 @@ public class CertificateTest extends TestCase {
 
     /**
      * Test for <code>getType()</code> method<br>
-     * Assertion: returns this certificate type 
+     * Assertion: returns this certificate type
      */
     public final void testGetType() {
         Certificate c1 = new MyCertificate("TEST_TYPE", testEncoding);
@@ -92,7 +92,7 @@ public class CertificateTest extends TestCase {
 
     /**
      * Test #1 for <code>equals(Object)</code> method<br>
-     * Assertion: object equals to itself 
+     * Assertion: object equals to itself
      */
     public final void testEqualsObject01() {
         Certificate c1 = new MyCertificate("TEST_TYPE", testEncoding);
@@ -137,6 +137,7 @@ public class CertificateTest extends TestCase {
 
     /**
      * This test just calls <code>getEncoded()</code> method<br>
+     *
      * @throws CertificateEncodingException
      */
     public final void testGetEncoded() throws CertificateEncodingException {
@@ -146,7 +147,7 @@ public class CertificateTest extends TestCase {
 
     /**
      * This test just calls <code>verify(PublicKey)</code> method<br>
-     * 
+     *
      * @throws InvalidKeyException
      * @throws CertificateException
      * @throws NoSuchAlgorithmException
@@ -154,11 +155,11 @@ public class CertificateTest extends TestCase {
      * @throws SignatureException
      */
     public final void testVerifyPublicKey()
-        throws InvalidKeyException,
-               CertificateException,
-               NoSuchAlgorithmException,
-               NoSuchProviderException,
-               SignatureException {
+            throws InvalidKeyException,
+            CertificateException,
+            NoSuchAlgorithmException,
+            NoSuchProviderException,
+            SignatureException {
         Certificate c1 = new MyCertificate("TEST_TYPE", testEncoding);
         c1.verify(null);
     }
@@ -173,11 +174,11 @@ public class CertificateTest extends TestCase {
      * @throws SignatureException
      */
     public final void testVerifyPublicKeyString()
-        throws InvalidKeyException,
-               CertificateException,
-               NoSuchAlgorithmException,
-               NoSuchProviderException,
-               SignatureException {
+            throws InvalidKeyException,
+            CertificateException,
+            NoSuchAlgorithmException,
+            NoSuchProviderException,
+            SignatureException {
         Certificate c1 = new MyCertificate("TEST_TYPE", testEncoding);
         c1.verify(null, null);
     }

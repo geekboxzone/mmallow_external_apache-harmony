@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -32,12 +32,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>PKIXCertPathChecker</code>
- * 
  */
 public class PKIXCertPathCheckerTest extends TestCase {
 
     /**
      * Constructor for PKIXCertPathCheckerTest.
+     *
      * @param name
      */
     public PKIXCertPathCheckerTest(String name) {
@@ -66,7 +66,7 @@ public class PKIXCertPathCheckerTest extends TestCase {
     }
 
     public final void testInit()
-        throws CertPathValidatorException {
+            throws CertPathValidatorException {
         PKIXCertPathChecker pc = TestUtils.getTestCertPathChecker();
         pc.init(true);
     }
@@ -77,7 +77,7 @@ public class PKIXCertPathCheckerTest extends TestCase {
     }
 
     public final void testCheck()
-        throws CertPathValidatorException {
+            throws CertPathValidatorException {
         PKIXCertPathChecker pc = TestUtils.getTestCertPathChecker();
         pc.check(new MyCertificate("", null), new HashSet());
     }

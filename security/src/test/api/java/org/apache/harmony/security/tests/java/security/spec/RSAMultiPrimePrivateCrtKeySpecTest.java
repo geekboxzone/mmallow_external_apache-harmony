@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.spec;
 
@@ -31,7 +31,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>RSAMultiPrimePrivateCrtKeySpec</code> class fields and methods.
- * 
  */
 public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
     /**
@@ -42,9 +41,10 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
             new RSAOtherPrimeInfo(BigInteger.ONE, BigInteger.ONE, BigInteger.ONE),
             new RSAOtherPrimeInfo(BigInteger.ONE, BigInteger.ONE, BigInteger.ONE)
     };
-    
+
     /**
      * Constructor for RSAMultiPrimePrivateCrtKeySpecTest.
+     *
      * @param name
      */
     public RSAMultiPrimePrivateCrtKeySpecTest(String name) {
@@ -56,14 +56,14 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
     /**
      * Test #1 for
      * <code>RSAMultiPrimePrivateCrtKeySpec(BigInteger modulus,
-     *                                      BigInteger publicExponent,
-     *                                      BigInteger privateExponent,
-     *                                      BigInteger primeP,
-     *                                      BigInteger primeQ,
-     *                                      BigInteger primeExponentP,
-     *                                      BigInteger primeExponentQ,
-     *                                      BigInteger crtCoefficient,
-     *                                      RSAOtherPrimeInfo[] otherPrimeInfo)
+     * BigInteger publicExponent,
+     * BigInteger privateExponent,
+     * BigInteger primeP,
+     * BigInteger primeQ,
+     * BigInteger primeExponentP,
+     * BigInteger primeExponentQ,
+     * BigInteger crtCoefficient,
+     * RSAOtherPrimeInfo[] otherPrimeInfo)
      * </code> ctor<br>
      * Assertion: constructs <code>RSAMultiPrimePrivateCrtKeySpec</code>
      * object using valid parameters
@@ -85,14 +85,14 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
     /**
      * Test #2 for
      * <code>RSAMultiPrimePrivateCrtKeySpec(BigInteger modulus,
-     *                                      BigInteger publicExponent,
-     *                                      BigInteger privateExponent,
-     *                                      BigInteger primeP,
-     *                                      BigInteger primeQ,
-     *                                      BigInteger primeExponentP,
-     *                                      BigInteger primeExponentQ,
-     *                                      BigInteger crtCoefficient,
-     *                                      RSAOtherPrimeInfo[] otherPrimeInfo)
+     * BigInteger publicExponent,
+     * BigInteger privateExponent,
+     * BigInteger primeP,
+     * BigInteger primeQ,
+     * BigInteger primeExponentP,
+     * BigInteger primeExponentQ,
+     * BigInteger crtCoefficient,
+     * RSAOtherPrimeInfo[] otherPrimeInfo)
      * </code> ctor<br>
      * Assertion: NullPointerException if modulus is null
      */
@@ -112,18 +112,18 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test #3 for
      * <code>RSAMultiPrimePrivateCrtKeySpec(BigInteger modulus,
-     *                                      BigInteger publicExponent,
-     *                                      BigInteger privateExponent,
-     *                                      BigInteger primeP,
-     *                                      BigInteger primeQ,
-     *                                      BigInteger primeExponentP,
-     *                                      BigInteger primeExponentQ,
-     *                                      BigInteger crtCoefficient,
-     *                                      RSAOtherPrimeInfo[] otherPrimeInfo)
+     * BigInteger publicExponent,
+     * BigInteger privateExponent,
+     * BigInteger primeP,
+     * BigInteger primeQ,
+     * BigInteger primeExponentP,
+     * BigInteger primeExponentQ,
+     * BigInteger crtCoefficient,
+     * RSAOtherPrimeInfo[] otherPrimeInfo)
      * </code> ctor<br>
      * Assertion: NullPointerException if publicExponent is null
      */
@@ -143,18 +143,18 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test #4 for
      * <code>RSAMultiPrimePrivateCrtKeySpec(BigInteger modulus,
-     *                                      BigInteger publicExponent,
-     *                                      BigInteger privateExponent,
-     *                                      BigInteger primeP,
-     *                                      BigInteger primeQ,
-     *                                      BigInteger primeExponentP,
-     *                                      BigInteger primeExponentQ,
-     *                                      BigInteger crtCoefficient,
-     *                                      RSAOtherPrimeInfo[] otherPrimeInfo)
+     * BigInteger publicExponent,
+     * BigInteger privateExponent,
+     * BigInteger primeP,
+     * BigInteger primeQ,
+     * BigInteger primeExponentP,
+     * BigInteger primeExponentQ,
+     * BigInteger crtCoefficient,
+     * RSAOtherPrimeInfo[] otherPrimeInfo)
      * </code> ctor<br>
      * Assertion: NullPointerException if privateExponent is null
      */
@@ -174,18 +174,18 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test #5 for
      * <code>RSAMultiPrimePrivateCrtKeySpec(BigInteger modulus,
-     *                                      BigInteger publicExponent,
-     *                                      BigInteger privateExponent,
-     *                                      BigInteger primeP,
-     *                                      BigInteger primeQ,
-     *                                      BigInteger primeExponentP,
-     *                                      BigInteger primeExponentQ,
-     *                                      BigInteger crtCoefficient,
-     *                                      RSAOtherPrimeInfo[] otherPrimeInfo)
+     * BigInteger publicExponent,
+     * BigInteger privateExponent,
+     * BigInteger primeP,
+     * BigInteger primeQ,
+     * BigInteger primeExponentP,
+     * BigInteger primeExponentQ,
+     * BigInteger crtCoefficient,
+     * RSAOtherPrimeInfo[] otherPrimeInfo)
      * </code> ctor<br>
      * Assertion: NullPointerException if primeP is null
      */
@@ -205,18 +205,18 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test #6 for
      * <code>RSAMultiPrimePrivateCrtKeySpec(BigInteger modulus,
-     *                                      BigInteger publicExponent,
-     *                                      BigInteger privateExponent,
-     *                                      BigInteger primeP,
-     *                                      BigInteger primeQ,
-     *                                      BigInteger primeExponentP,
-     *                                      BigInteger primeExponentQ,
-     *                                      BigInteger crtCoefficient,
-     *                                      RSAOtherPrimeInfo[] otherPrimeInfo)
+     * BigInteger publicExponent,
+     * BigInteger privateExponent,
+     * BigInteger primeP,
+     * BigInteger primeQ,
+     * BigInteger primeExponentP,
+     * BigInteger primeExponentQ,
+     * BigInteger crtCoefficient,
+     * RSAOtherPrimeInfo[] otherPrimeInfo)
      * </code> ctor<br>
      * Assertion: NullPointerException if primeQ is null
      */
@@ -236,18 +236,18 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test #7 for
      * <code>RSAMultiPrimePrivateCrtKeySpec(BigInteger modulus,
-     *                                      BigInteger publicExponent,
-     *                                      BigInteger privateExponent,
-     *                                      BigInteger primeP,
-     *                                      BigInteger primeQ,
-     *                                      BigInteger primeExponentP,
-     *                                      BigInteger primeExponentQ,
-     *                                      BigInteger crtCoefficient,
-     *                                      RSAOtherPrimeInfo[] otherPrimeInfo)
+     * BigInteger publicExponent,
+     * BigInteger privateExponent,
+     * BigInteger primeP,
+     * BigInteger primeQ,
+     * BigInteger primeExponentP,
+     * BigInteger primeExponentQ,
+     * BigInteger crtCoefficient,
+     * RSAOtherPrimeInfo[] otherPrimeInfo)
      * </code> ctor<br>
      * Assertion: NullPointerException if primeExponentP is null
      */
@@ -267,18 +267,18 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test #8 for
      * <code>RSAMultiPrimePrivateCrtKeySpec(BigInteger modulus,
-     *                                      BigInteger publicExponent,
-     *                                      BigInteger privateExponent,
-     *                                      BigInteger primeP,
-     *                                      BigInteger primeQ,
-     *                                      BigInteger primeExponentP,
-     *                                      BigInteger primeExponentQ,
-     *                                      BigInteger crtCoefficient,
-     *                                      RSAOtherPrimeInfo[] otherPrimeInfo)
+     * BigInteger publicExponent,
+     * BigInteger privateExponent,
+     * BigInteger primeP,
+     * BigInteger primeQ,
+     * BigInteger primeExponentP,
+     * BigInteger primeExponentQ,
+     * BigInteger crtCoefficient,
+     * RSAOtherPrimeInfo[] otherPrimeInfo)
      * </code> ctor<br>
      * Assertion: NullPointerException if primeExponentQ is null
      */
@@ -298,18 +298,18 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test #9 for
      * <code>RSAMultiPrimePrivateCrtKeySpec(BigInteger modulus,
-     *                                      BigInteger publicExponent,
-     *                                      BigInteger privateExponent,
-     *                                      BigInteger primeP,
-     *                                      BigInteger primeQ,
-     *                                      BigInteger primeExponentP,
-     *                                      BigInteger primeExponentQ,
-     *                                      BigInteger crtCoefficient,
-     *                                      RSAOtherPrimeInfo[] otherPrimeInfo)
+     * BigInteger publicExponent,
+     * BigInteger privateExponent,
+     * BigInteger primeP,
+     * BigInteger primeQ,
+     * BigInteger primeExponentP,
+     * BigInteger primeExponentQ,
+     * BigInteger crtCoefficient,
+     * RSAOtherPrimeInfo[] otherPrimeInfo)
      * </code> ctor<br>
      * Assertion: NullPointerException if crtCoefficient is null
      */
@@ -329,18 +329,18 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Test #10 for
      * <code>RSAMultiPrimePrivateCrtKeySpec(BigInteger modulus,
-     *                                      BigInteger publicExponent,
-     *                                      BigInteger privateExponent,
-     *                                      BigInteger primeP,
-     *                                      BigInteger primeQ,
-     *                                      BigInteger primeExponentP,
-     *                                      BigInteger primeExponentQ,
-     *                                      BigInteger crtCoefficient,
-     *                                      RSAOtherPrimeInfo[] otherPrimeInfo)
+     * BigInteger publicExponent,
+     * BigInteger privateExponent,
+     * BigInteger primeP,
+     * BigInteger primeQ,
+     * BigInteger primeExponentP,
+     * BigInteger primeExponentQ,
+     * BigInteger crtCoefficient,
+     * RSAOtherPrimeInfo[] otherPrimeInfo)
      * </code> ctor<br>
      * Assertion: otherPrimeInfo can be null
      */
@@ -356,18 +356,18 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
                 BigInteger.ONE,
                 null);
     }
-    
+
     /**
      * Test #11 for
      * <code>RSAMultiPrimePrivateCrtKeySpec(BigInteger modulus,
-     *                                      BigInteger publicExponent,
-     *                                      BigInteger privateExponent,
-     *                                      BigInteger primeP,
-     *                                      BigInteger primeQ,
-     *                                      BigInteger primeExponentP,
-     *                                      BigInteger primeExponentQ,
-     *                                      BigInteger crtCoefficient,
-     *                                      RSAOtherPrimeInfo[] otherPrimeInfo)
+     * BigInteger publicExponent,
+     * BigInteger privateExponent,
+     * BigInteger primeP,
+     * BigInteger primeQ,
+     * BigInteger primeExponentP,
+     * BigInteger primeExponentQ,
+     * BigInteger crtCoefficient,
+     * RSAOtherPrimeInfo[] otherPrimeInfo)
      * </code> ctor<br>
      * Assertion: IllegalArgumentException if otherPrimeInfo length is 0
      */
@@ -391,14 +391,14 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
     /**
      * Test #12 for
      * <code>RSAMultiPrimePrivateCrtKeySpec(BigInteger modulus,
-     *                                      BigInteger publicExponent,
-     *                                      BigInteger privateExponent,
-     *                                      BigInteger primeP,
-     *                                      BigInteger primeQ,
-     *                                      BigInteger primeExponentP,
-     *                                      BigInteger primeExponentQ,
-     *                                      BigInteger crtCoefficient,
-     *                                      RSAOtherPrimeInfo[] otherPrimeInfo)
+     * BigInteger publicExponent,
+     * BigInteger privateExponent,
+     * BigInteger primeP,
+     * BigInteger primeQ,
+     * BigInteger primeExponentP,
+     * BigInteger primeExponentQ,
+     * BigInteger crtCoefficient,
+     * RSAOtherPrimeInfo[] otherPrimeInfo)
      * </code> ctor<br>
      * Assertion: constructs <code>RSAMultiPrimePrivateCrtKeySpec</code>
      * object using valid parameters. Constructed object must be
@@ -417,23 +417,23 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
                 opi);
         assertTrue(ks instanceof RSAPrivateKeySpec);
     }
-    
+
     /**
      * Test for <code>getCrtCoefficient()</code> method<br>
      * Assertion: returns crt coefficient
      */
     public final void testGetCrtCoefficient() {
         RSAMultiPrimePrivateCrtKeySpec ks =
-            new RSAMultiPrimePrivateCrtKeySpec(
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    opi);
+                new RSAMultiPrimePrivateCrtKeySpec(
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        opi);
         assertTrue(BigInteger.ONE.equals(ks.getCrtCoefficient()));
     }
 
@@ -443,16 +443,16 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
      */
     public final void testGetPrimeExponentP() {
         RSAMultiPrimePrivateCrtKeySpec ks =
-            new RSAMultiPrimePrivateCrtKeySpec(
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    opi);
+                new RSAMultiPrimePrivateCrtKeySpec(
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        opi);
         assertTrue(BigInteger.ONE.equals(ks.getPrimeExponentP()));
     }
 
@@ -462,16 +462,16 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
      */
     public final void testGetPrimeExponentQ() {
         RSAMultiPrimePrivateCrtKeySpec ks =
-            new RSAMultiPrimePrivateCrtKeySpec(
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    opi);
+                new RSAMultiPrimePrivateCrtKeySpec(
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        opi);
         assertTrue(BigInteger.ONE.equals(ks.getPrimeExponentQ()));
     }
 
@@ -481,16 +481,16 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
      */
     public final void testGetPrimeP() {
         RSAMultiPrimePrivateCrtKeySpec ks =
-            new RSAMultiPrimePrivateCrtKeySpec(
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    opi);
+                new RSAMultiPrimePrivateCrtKeySpec(
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        opi);
         assertTrue(BigInteger.ONE.equals(ks.getPrimeP()));
     }
 
@@ -500,16 +500,16 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
      */
     public final void testGetPrimeQ() {
         RSAMultiPrimePrivateCrtKeySpec ks =
-            new RSAMultiPrimePrivateCrtKeySpec(
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    opi);
+                new RSAMultiPrimePrivateCrtKeySpec(
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        opi);
         assertTrue(BigInteger.ONE.equals(ks.getPrimeQ()));
     }
 
@@ -519,16 +519,16 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
      */
     public final void testGetPublicExponent() {
         RSAMultiPrimePrivateCrtKeySpec ks =
-            new RSAMultiPrimePrivateCrtKeySpec(
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    opi);
+                new RSAMultiPrimePrivateCrtKeySpec(
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        opi);
         assertTrue(BigInteger.ONE.equals(ks.getPublicExponent()));
     }
 
@@ -538,16 +538,16 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
      */
     public final void testGetOtherPrimeInfo01() {
         RSAMultiPrimePrivateCrtKeySpec ks =
-            new RSAMultiPrimePrivateCrtKeySpec(
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    opi);
+                new RSAMultiPrimePrivateCrtKeySpec(
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        opi);
         assertTrue(checkOtherPrimeInfo(ks.getOtherPrimeInfo()));
     }
 
@@ -558,23 +558,23 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
      */
     public final void testGetOtherPrimeInfo02() {
         RSAMultiPrimePrivateCrtKeySpec ks =
-            new RSAMultiPrimePrivateCrtKeySpec(
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    null);
+                new RSAMultiPrimePrivateCrtKeySpec(
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        null);
         assertNull(ks.getOtherPrimeInfo());
     }
 
     //
     // immutability tests
     //
-    
+
     /**
      * Tests that internal state of the object
      * can not be modified by modifying initial array
@@ -582,7 +582,7 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
     public final void testIsStatePreserved1() {
         // Create initial array
         RSAOtherPrimeInfo[] opi1 = opi.clone();
-        
+
         RSAMultiPrimePrivateCrtKeySpec ks = new RSAMultiPrimePrivateCrtKeySpec(
                 BigInteger.ONE,
                 BigInteger.ONE,
@@ -593,27 +593,27 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
                 BigInteger.ONE,
                 BigInteger.ONE,
                 opi1);
-        
+
         // Modify initial array
         opi1[2] = new RSAOtherPrimeInfo(BigInteger.ZERO,
-                                        BigInteger.ZERO,
-                                        BigInteger.ZERO);
-        
+                BigInteger.ZERO,
+                BigInteger.ZERO);
+
         // Check that above modification
         // does not affect internal state
         assertTrue(checkOtherPrimeInfo(ks.getOtherPrimeInfo()));
     }
-    
+
     /**
      * Tests that internal state of the object
      * can not be modified using array reference
      * returned by <code>getOtherPrimeInfo()</code>
-     * method 
+     * method
      */
     public final void testIsStatePreserved2() {
         // Create initial array
         RSAOtherPrimeInfo[] opi1 = opi.clone();
-        
+
         RSAMultiPrimePrivateCrtKeySpec ks = new RSAMultiPrimePrivateCrtKeySpec(
                 BigInteger.ONE,
                 BigInteger.ONE,
@@ -624,39 +624,39 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
                 BigInteger.ONE,
                 BigInteger.ONE,
                 opi1);
-        
+
         RSAOtherPrimeInfo[] ret = ks.getOtherPrimeInfo();
-        
+
         // Modify returned array
         ret[2] = new RSAOtherPrimeInfo(BigInteger.ZERO,
                 BigInteger.ZERO,
                 BigInteger.ZERO);
-        
+
         // Check that above modification
         // does not affect internal state
         assertTrue(checkOtherPrimeInfo(ks.getOtherPrimeInfo()));
     }
-    
+
     //
     // Tests for inherited methods
     //
-    
+
     /**
      * Test for <code>getModulus()</code> method<br>
      * Assertion: returns modulus
      */
     public final void testGetModulus() {
         RSAMultiPrimePrivateCrtKeySpec ks =
-            new RSAMultiPrimePrivateCrtKeySpec(
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    opi);
+                new RSAMultiPrimePrivateCrtKeySpec(
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        opi);
         assertTrue(BigInteger.ONE.equals(ks.getModulus()));
     }
 
@@ -666,39 +666,38 @@ public class RSAMultiPrimePrivateCrtKeySpecTest extends TestCase {
      */
     public final void testGetPrivateExponent() {
         RSAMultiPrimePrivateCrtKeySpec ks =
-            new RSAMultiPrimePrivateCrtKeySpec(
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    BigInteger.ONE,
-                    opi);
+                new RSAMultiPrimePrivateCrtKeySpec(
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        BigInteger.ONE,
+                        opi);
         assertTrue(BigInteger.ONE.equals(ks.getPrivateExponent()));
     }
 
 // private stuff
 //    
+
     /**
      * Compares array passed as a parameter with reference one<br>
-     * 
-     *  <code>private static final RSAOtherPrimeInfo[] opi</code>
-     * 
-     * @param toBeChecked
-     *  Array to be compared
-     * @return
-     *  true if arrays are equal
+     * <p/>
+     * <code>private static final RSAOtherPrimeInfo[] opi</code>
+     *
+     * @param toBeChecked Array to be compared
+     * @return true if arrays are equal
      */
     private boolean checkOtherPrimeInfo(RSAOtherPrimeInfo[] toBeChecked) {
         if (toBeChecked == null || toBeChecked.length != opi.length) {
             return false;
         }
-        for (int i=0; i<opi.length; i++) {
+        for (int i = 0; i < opi.length; i++) {
             if (opi[i].getPrime().equals(toBeChecked[i].getPrime()) &&
-                opi[i].getExponent().equals(toBeChecked[i].getExponent()) &&
-                opi[i].getCrtCoefficient().equals(toBeChecked[i].getCrtCoefficient())) {
+                    opi[i].getExponent().equals(toBeChecked[i].getExponent()) &&
+                    opi[i].getCrtCoefficient().equals(toBeChecked[i].getCrtCoefficient())) {
                 continue;
             }
             return false;

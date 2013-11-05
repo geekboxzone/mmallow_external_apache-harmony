@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -35,7 +35,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>PKIXBuilderParameters</code> fields and methods
- * 
  */
 public class PKIXBuilderParameters_ImplTest extends TestCase {
     private static final int DEFAULT_MAX_PATH_LEN = 5;
@@ -44,19 +43,21 @@ public class PKIXBuilderParameters_ImplTest extends TestCase {
      * Test #1 for <code>PKIXBuilderParameters(KeyStore, CertSelector)</code>
      * constructor<br>
      * Assertion: creates an instance of <code>PKIXBuilderParameters</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws KeyStoreException
      */
     public final void testPKIXBuilderParametersKeyStoreCertSelector01()
-        throws KeyStoreException,
-               InvalidAlgorithmParameterException {
+            throws KeyStoreException,
+            InvalidAlgorithmParameterException {
         KeyStore ks = TestUtils.getKeyStore(true, TestUtils.TRUSTED);
         if (ks == null) {
             fail(getName() + ": not performed (could not create test KeyStore)");
         }
         // both parameters are valid and non-null
         PKIXParameters p =
-            new PKIXBuilderParameters(ks, new X509CertSelector());
+                new PKIXBuilderParameters(ks, new X509CertSelector());
         assertTrue("instanceOf", p instanceof PKIXBuilderParameters);
         assertNotNull("certSelector", p.getTargetCertConstraints());
     }
@@ -65,19 +66,21 @@ public class PKIXBuilderParameters_ImplTest extends TestCase {
      * Test #2 for <code>PKIXBuilderParameters(KeyStore, CertSelector)</code>
      * constructor<br>
      * Assertion: creates an instance of <code>PKIXBuilderParameters</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws KeyStoreException
      */
     public final void testPKIXBuilderParametersKeyStoreCertSelector02()
-        throws KeyStoreException,
-               InvalidAlgorithmParameterException {
+            throws KeyStoreException,
+            InvalidAlgorithmParameterException {
         KeyStore ks = TestUtils.getKeyStore(true, TestUtils.TRUSTED);
         if (ks == null) {
             fail(getName() + ": not performed (could not create test KeyStore)");
         }
         // both parameters are valid but CertSelector is null
         PKIXParameters p =
-            new PKIXBuilderParameters(ks, null);
+                new PKIXBuilderParameters(ks, null);
         assertTrue("instanceOf", p instanceof PKIXBuilderParameters);
         assertNull("certSelector", p.getTargetCertConstraints());
     }
@@ -88,19 +91,21 @@ public class PKIXBuilderParameters_ImplTest extends TestCase {
      * Assertion: Only keystore entries that contain trusted
      * <code>X509Certificates</code> are considered; all other
      * certificate types are ignored
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws KeyStoreException
      */
     public final void testPKIXBuilderParametersKeyStoreCertSelector03()
-        throws KeyStoreException,
-               InvalidAlgorithmParameterException {
+            throws KeyStoreException,
+            InvalidAlgorithmParameterException {
         KeyStore ks = TestUtils.getKeyStore(true, TestUtils.TRUSTED_AND_UNTRUSTED);
         if (ks == null) {
             fail(getName() + ": not performed (could not create test KeyStore)");
         }
         // both parameters are valid but CertSelector is null
         PKIXParameters p =
-            new PKIXBuilderParameters(ks, null);
+                new PKIXBuilderParameters(ks, null);
         assertTrue("instanceof", p instanceof PKIXBuilderParameters);
         assertEquals("size", 1, p.getTrustAnchors().size());
     }
@@ -116,7 +121,7 @@ public class PKIXBuilderParameters_ImplTest extends TestCase {
         if (ks == null) {
             fail(getName() + ": not performed (could not create test KeyStore)");
         }
-        
+
         try {
             // pass not initialized KeyStore
             new PKIXBuilderParameters(ks, null);
@@ -150,12 +155,14 @@ public class PKIXBuilderParameters_ImplTest extends TestCase {
     /**
      * Test for <code>getMaxPathLength()</code> method<br>
      * Assertion: The default maximum path length, if not specified, is 5
+     *
      * @throws KeyStoreException
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testGetMaxPathLength01()
-        throws KeyStoreException,
-               InvalidAlgorithmParameterException {
+            throws KeyStoreException,
+            InvalidAlgorithmParameterException {
         KeyStore ks = TestUtils.getKeyStore(true, TestUtils.TRUSTED);
         if (ks == null) {
             fail(getName() + ": not performed (could not create test KeyStore)");
@@ -168,23 +175,25 @@ public class PKIXBuilderParameters_ImplTest extends TestCase {
      * Test #1 for <code>setMaxPathLength(int)</code> method<br>
      * Assertion: sets the maximum number of non-self-signed certificates
      * in the cert path
+     *
      * @throws KeyStoreException
      * @throws InvalidAlgorithmParameterException
+     *
      */
     public final void testSetMaxPathLength01()
-        throws KeyStoreException,
-               InvalidAlgorithmParameterException {
+            throws KeyStoreException,
+            InvalidAlgorithmParameterException {
         KeyStore ks = TestUtils.getKeyStore(true, TestUtils.TRUSTED);
         if (ks == null) {
             fail(getName() + ": not performed (could not create test KeyStore)");
         }
         // all these VALID maxPathLength values must be
         // set (and get) without exceptions
-        int[] testPathLength = new int[] {-1, 0, 1, 999, Integer.MAX_VALUE};
-        for (int i=0; i<testPathLength.length; i++) {
+        int[] testPathLength = new int[] { -1, 0, 1, 999, Integer.MAX_VALUE };
+        for (int i = 0; i < testPathLength.length; i++) {
             PKIXBuilderParameters p = new PKIXBuilderParameters(ks, null);
             p.setMaxPathLength(testPathLength[i]);
-            assertEquals("i="+i, testPathLength[i], p.getMaxPathLength());
+            assertEquals("i=" + i, testPathLength[i], p.getMaxPathLength());
         }
     }
 
@@ -192,12 +201,14 @@ public class PKIXBuilderParameters_ImplTest extends TestCase {
      * Test #2 for <code>setMaxPathLength(int)</code> method<br>
      * Assertion: throws InvalidParameterException if parameter is
      * less than -1
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws KeyStoreException
      */
     public final void testSetMaxPathLength02()
-        throws KeyStoreException,
-               InvalidAlgorithmParameterException {
+            throws KeyStoreException,
+            InvalidAlgorithmParameterException {
         KeyStore ks = TestUtils.getKeyStore(true, TestUtils.TRUSTED);
         if (ks == null) {
             fail(getName() + ": not performed (could not create test KeyStore)");
@@ -215,18 +226,20 @@ public class PKIXBuilderParameters_ImplTest extends TestCase {
     /**
      * Test for <code>toString()</code> method<br>
      * Assertion: returns string describing this object
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws KeyStoreException
      */
     public final void testToString()
-        throws KeyStoreException,
-               InvalidAlgorithmParameterException {
-        KeyStore ks = TestUtils.getKeyStore(true,TestUtils.TRUSTED_AND_UNTRUSTED);
+            throws KeyStoreException,
+            InvalidAlgorithmParameterException {
+        KeyStore ks = TestUtils.getKeyStore(true, TestUtils.TRUSTED_AND_UNTRUSTED);
         if (ks == null) {
             fail(getName() + ": not performed (could not create test KeyStore)");
         }
         PKIXBuilderParameters p =
-            new PKIXBuilderParameters(ks, new X509CertSelector());
+                new PKIXBuilderParameters(ks, new X509CertSelector());
         String rep = p.toString();
 
         assertNotNull(rep);

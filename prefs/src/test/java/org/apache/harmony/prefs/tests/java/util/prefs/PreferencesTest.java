@@ -257,12 +257,12 @@ public class PreferencesTest extends TestCase {
 
         private void checkException() throws IOException {
             switch (result) {
-            case normal:
-                return;
-            case exception:
-                throw new IOException("test");
-            case runtimeException:
-                throw new RuntimeException("test");
+                case normal:
+                    return;
+                case exception:
+                    throw new IOException("test");
+                case runtimeException:
+                    throw new RuntimeException("test");
             }
         }
 
@@ -299,12 +299,12 @@ public class PreferencesTest extends TestCase {
 
         @Override
         public void exportNode(OutputStream ostream) throws IOException,
-        BackingStoreException {
+                BackingStoreException {
         }
 
         @Override
         public void exportSubtree(OutputStream ostream) throws IOException,
-        BackingStoreException {
+                BackingStoreException {
         }
 
         @Override

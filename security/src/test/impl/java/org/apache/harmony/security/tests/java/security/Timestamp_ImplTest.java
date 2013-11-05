@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander V. Astapchuk
-*/
+ * @author Alexander V. Astapchuk
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -32,7 +32,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>Timestamp</code> class fields and methods
- * 
  */
 
 public class Timestamp_ImplTest extends TestCase {

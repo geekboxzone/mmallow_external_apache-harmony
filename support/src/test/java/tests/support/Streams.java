@@ -27,7 +27,8 @@ import java.io.StringWriter;
  * Utility methods for working with byte and character streams.
  */
 public class Streams {
-    private Streams() {}
+    private Streams() {
+    }
 
     /**
      * Drains the stream into a byte array and returns the result.

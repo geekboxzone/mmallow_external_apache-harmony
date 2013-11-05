@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.security.tests.java.security;
 
@@ -32,77 +32,76 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>MessageDigest</code> constructor and methods
- * 
  */
 public class MessageDigest_Impl2Test extends TestCase {
 
-	/**
-	 * Provider
-	 */
-	Provider p;
-	
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		super.setUp();
-		p = new MyProvider();
-		Security.insertProviderAt(p, 1);
-	}
+    /**
+     * Provider
+     */
+    Provider p;
 
-	/*
-	 * @see TestCase#tearDown()
-	 */
-	protected void tearDown() throws Exception {
-		super.tearDown();
-		Security.removeProvider(p.getName());
-	}
+    /*
+      * @see TestCase#setUp()
+      */
+    protected void setUp() throws Exception {
+        super.setUp();
+        p = new MyProvider();
+        Security.insertProviderAt(p, 1);
+    }
 
-	/*
-	 * Class under test for MessageDigest getInstance(String)
-	 */
-	public void testGetInstanceString1() throws Exception {
-		MessageDigest md1 = MessageDigest.getInstance("ABC");		
-		checkMD1(md1, p);
-	}
-	
-	/*
-	 * Class under test for MessageDigest getInstance(String)
-	 */
-	public void testGetInstanceString2() throws Exception {
-		MessageDigest md2 = MessageDigest.getInstance("CBA");
-		checkMD2(md2, p);
-	}
+    /*
+      * @see TestCase#tearDown()
+      */
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        Security.removeProvider(p.getName());
+    }
 
-	/*
-	 * Class under test for MessageDigest getInstance(String, String)
-	 */
-	public void testGetInstanceStringString1() throws Exception {
-		MessageDigest md1 = MessageDigest.getInstance("ABC", "MyProvider");		
-		checkMD1(md1, p);
-	}
-	
-	/*
-	 * Class under test for MessageDigest getInstance(String, String)
-	 */
-	public void testGetInstanceStringString2() throws Exception {
-		MessageDigest md2 = MessageDigest.getInstance("CBA", "MyProvider");
-		checkMD2(md2, p);
-	}
+    /*
+      * Class under test for MessageDigest getInstance(String)
+      */
+    public void testGetInstanceString1() throws Exception {
+        MessageDigest md1 = MessageDigest.getInstance("ABC");
+        checkMD1(md1, p);
+    }
 
-	/*
-	 * Class under test for MessageDigest getInstance(String, Provider)
-	 */
-	public void testGetInstanceStringProvider1() throws Exception {
-		Provider p = new MyProvider();
-        MessageDigest md1 = MessageDigest.getInstance("ABC", p);		
-		checkMD1(md1, p);
-	}
-	
-	/*
-	 * Class under test for MessageDigest getInstance(String, Provider)
-	 */
-	public void testGetInstanceStringProvider2() throws Exception {
+    /*
+      * Class under test for MessageDigest getInstance(String)
+      */
+    public void testGetInstanceString2() throws Exception {
+        MessageDigest md2 = MessageDigest.getInstance("CBA");
+        checkMD2(md2, p);
+    }
+
+    /*
+      * Class under test for MessageDigest getInstance(String, String)
+      */
+    public void testGetInstanceStringString1() throws Exception {
+        MessageDigest md1 = MessageDigest.getInstance("ABC", "MyProvider");
+        checkMD1(md1, p);
+    }
+
+    /*
+      * Class under test for MessageDigest getInstance(String, String)
+      */
+    public void testGetInstanceStringString2() throws Exception {
+        MessageDigest md2 = MessageDigest.getInstance("CBA", "MyProvider");
+        checkMD2(md2, p);
+    }
+
+    /*
+      * Class under test for MessageDigest getInstance(String, Provider)
+      */
+    public void testGetInstanceStringProvider1() throws Exception {
+        Provider p = new MyProvider();
+        MessageDigest md1 = MessageDigest.getInstance("ABC", p);
+        checkMD1(md1, p);
+    }
+
+    /*
+      * Class under test for MessageDigest getInstance(String, Provider)
+      */
+    public void testGetInstanceStringProvider2() throws Exception {
         Provider p = new MyProvider();
         MessageDigest md2 = MessageDigest.getInstance("CBA", p);
         checkMD2(md2, p);
@@ -115,8 +114,8 @@ public class MessageDigest_Impl2Test extends TestCase {
         MyMessageDigest1 md = new MyMessageDigest1("ABC");
         assertEquals("incorrect result", "MESSAGE DIGEST ABC", md.toString());
     }
-	
-	private void checkMD1(MessageDigest md1, Provider p) throws Exception {
+
+    private void checkMD1(MessageDigest md1, Provider p) throws Exception {
         byte[] b = { 1, 2, 3, 4, 5 };
         assertTrue("getInstance() failed", md1 instanceof MyMessageDigest1);
         assertEquals("getProvider() failed", p, md1.getProvider());
@@ -141,8 +140,8 @@ public class MessageDigest_Impl2Test extends TestCase {
         } catch (CloneNotSupportedException e) {
         }
     }
-	
-	private void checkMD2(MessageDigest md2, Provider p) throws Exception {
+
+    private void checkMD2(MessageDigest md2, Provider p) throws Exception {
         byte[] b = { 1, 2, 3, 4, 5 };
         assertEquals("getProvider() failed", p, md2.getProvider());
         assertEquals("getAlgorithm() failed", "CBA", md2.getAlgorithm());
@@ -166,16 +165,16 @@ public class MessageDigest_Impl2Test extends TestCase {
         } catch (CloneNotSupportedException e) {
         }
     }
-	
-	private class MyProvider extends Provider {
-		MyProvider() {
-			super("MyProvider", 1.0, "Provider for testing");
-			put("MessageDigest.ABC", "org.apache.harmony.security.tests.support.MyMessageDigest1");
-			put("MessageDigest.CBA", "org.apache.harmony.security.tests.support.MyMessageDigest2");
-		}
-		
-		MyProvider(String name, double version, String info) {
-			super(name, version, info);
-		}
-	}
+
+    private class MyProvider extends Provider {
+        MyProvider() {
+            super("MyProvider", 1.0, "Provider for testing");
+            put("MessageDigest.ABC", "org.apache.harmony.security.tests.support.MyMessageDigest1");
+            put("MessageDigest.CBA", "org.apache.harmony.security.tests.support.MyMessageDigest2");
+        }
+
+        MyProvider(String name, double version, String info) {
+            super(name, version, info);
+        }
+    }
 }

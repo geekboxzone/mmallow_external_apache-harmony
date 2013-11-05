@@ -72,19 +72,19 @@ public class SocketTest extends junit.framework.TestCase {
 
                 ServerSocket socket = null;
                 switch (serverSocketConstructor) {
-                case FIRST_TIME:
-                    socket = new ServerSocket(port, backlog,
-                            new InetSocketAddress(host, port).getAddress());
-                    port = socket.getLocalPort();
-                    break;
-                case SECOND_TIME:
-                    socket = new ServerSocket(port, backlog);
-                    host = socket.getInetAddress().getHostName();
-                    port = socket.getLocalPort();
-                    break;
-                default:
-                    socket = new ServerSocket();
-                    break;
+                    case FIRST_TIME:
+                        socket = new ServerSocket(port, backlog,
+                                new InetSocketAddress(host, port).getAddress());
+                        port = socket.getLocalPort();
+                        break;
+                    case SECOND_TIME:
+                        socket = new ServerSocket(port, backlog);
+                        host = socket.getInetAddress().getHostName();
+                        port = socket.getLocalPort();
+                        break;
+                    default:
+                        socket = new ServerSocket();
+                        break;
                 }
 
                 synchronized (this) {
@@ -525,7 +525,7 @@ public class SocketTest extends junit.framework.TestCase {
 
     /**
      * @tests java.net.Socket#Socket(java.lang.String, int,
-     *        java.net.InetAddress, int)
+     *java.net.InetAddress, int)
      */
     public void test_ConstructorLjava_lang_StringILjava_net_InetAddressI()
             throws IOException {
@@ -597,7 +597,7 @@ public class SocketTest extends junit.framework.TestCase {
 
     /**
      * @tests java.net.Socket#Socket(java.net.InetAddress, int,
-     *        java.net.InetAddress, int)
+     *java.net.InetAddress, int)
      */
     public void test_ConstructorLjava_net_InetAddressILjava_net_InetAddressI()
             throws IOException {
@@ -1502,7 +1502,7 @@ public class SocketTest extends junit.framework.TestCase {
 
     public void test_setTcpNoDelayZ() throws Exception {
         ServerSocket server = new ServerSocket(0);
-        Socket client = new Socket(InetAddress.getLocalHost(), server .getLocalPort());
+        Socket client = new Socket(InetAddress.getLocalHost(), server.getLocalPort());
 
         boolean bool;
         client.setTcpNoDelay(bool = !client.getTcpNoDelay());

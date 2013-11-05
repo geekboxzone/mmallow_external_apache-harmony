@@ -30,7 +30,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>TrustManagerFactoryImpl</code> constructor and methods
- *  
  */
 public class TrustManagerFactoryImplTest extends TestCase {
 

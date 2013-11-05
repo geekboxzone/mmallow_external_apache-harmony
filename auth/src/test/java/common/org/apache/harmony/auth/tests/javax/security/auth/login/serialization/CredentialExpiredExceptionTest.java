@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.login.serialization;
 
@@ -34,6 +34,6 @@ public class CredentialExpiredExceptionTest extends SerializationTest {
 
     @Override
     protected Object[] getData() {
-        return new Object[] {new CredentialExpiredException("message")};
+        return new Object[] { new CredentialExpiredException("message") };
     }
 }

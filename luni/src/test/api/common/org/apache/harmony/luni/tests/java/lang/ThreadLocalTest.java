@@ -21,13 +21,13 @@ import junit.framework.TestCase;
 
 public class ThreadLocalTest extends TestCase {
 
-	/**
+    /**
      * @tests java.lang.ThreadLocal#ThreadLocal()
      */
     public void test_Constructor() {
         new ThreadLocal<Object>();
     }
-    
+
     /**
      * @tests java.lang.ThreadLocal#remove()
      */
@@ -38,7 +38,7 @@ public class ThreadLocalTest extends TestCase {
                 return "initial";
             }
         };
-        
+
         assertEquals("initial", tl.get());
         tl.set("fixture");
         assertEquals("fixture", tl.get());
@@ -46,105 +46,105 @@ public class ThreadLocalTest extends TestCase {
         assertEquals("initial", tl.get());
     }
 
-	/**
-	 * @tests java.lang.ThreadLocal#get()
-	 */
-	public void test_get() {
-		// Test for method java.lang.Object java.lang.ThreadLocal.get()
-		ThreadLocal<Object> l = new ThreadLocal<Object>();
-		assertNull("ThreadLocal's initial value is null", l.get());
+    /**
+     * @tests java.lang.ThreadLocal#get()
+     */
+    public void test_get() {
+        // Test for method java.lang.Object java.lang.ThreadLocal.get()
+        ThreadLocal<Object> l = new ThreadLocal<Object>();
+        assertNull("ThreadLocal's initial value is null", l.get());
 
-		// The ThreadLocal has to run once for each thread that touches the
-		// ThreadLocal
-		final Object INITIAL_VALUE = "'foo'";
-		final ThreadLocal<Object> l1 = new ThreadLocal<Object>() {
-			@Override
+        // The ThreadLocal has to run once for each thread that touches the
+        // ThreadLocal
+        final Object INITIAL_VALUE = "'foo'";
+        final ThreadLocal<Object> l1 = new ThreadLocal<Object>() {
+            @Override
             protected Object initialValue() {
-				return INITIAL_VALUE;
-			}
-		};
+                return INITIAL_VALUE;
+            }
+        };
 
-		assertTrue("ThreadLocal's initial value should be " + INITIAL_VALUE
-				+ " but is " + l1.get(), l1.get() == INITIAL_VALUE);
+        assertTrue("ThreadLocal's initial value should be " + INITIAL_VALUE
+                + " but is " + l1.get(), l1.get() == INITIAL_VALUE);
 
-		// We need this because inner types cannot assign to variables in
-		// container method. But assigning to object slots in the container
-		// method is ok.
-		class ResultSlot {
-			public Object result = null;
-		}
+        // We need this because inner types cannot assign to variables in
+        // container method. But assigning to object slots in the container
+        // method is ok.
+        class ResultSlot {
+            public Object result = null;
+        }
 
-		final ResultSlot THREADVALUE = new ResultSlot();
-		Thread t = new Thread() {
-			@Override
+        final ResultSlot THREADVALUE = new ResultSlot();
+        Thread t = new Thread() {
+            @Override
             public void run() {
-				THREADVALUE.result = l1.get();
-			}
-		};
+                THREADVALUE.result = l1.get();
+            }
+        };
 
-		// Wait for the other Thread assign what it observes as the value of the
-		// variable
-		t.start();
-		try {
-			t.join();
-		} catch (InterruptedException ie) {
-			fail("Interrupted!!");
-		}
+        // Wait for the other Thread assign what it observes as the value of the
+        // variable
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException ie) {
+            fail("Interrupted!!");
+        }
 
-		assertTrue("ThreadLocal's initial value in other Thread should be "
-				+ INITIAL_VALUE, THREADVALUE.result == INITIAL_VALUE);
+        assertTrue("ThreadLocal's initial value in other Thread should be "
+                + INITIAL_VALUE, THREADVALUE.result == INITIAL_VALUE);
 
         /* Regression test for implementation vulnerability reported
          * on Harmony dev list.
          */
-       ThreadLocal<Object> thrVar = new ThreadLocal<Object>() {
-           public int hashCode() {
-               fail("ThreadLocal should not be asked for it's hashCode");
-               return 0; // never reached
-           }
-       };
-       thrVar.get();
-	}
+        ThreadLocal<Object> thrVar = new ThreadLocal<Object>() {
+            public int hashCode() {
+                fail("ThreadLocal should not be asked for it's hashCode");
+                return 0; // never reached
+            }
+        };
+        thrVar.get();
+    }
 
-	/**
-	 * @tests java.lang.ThreadLocal#set(java.lang.Object)
-	 */
-	public void test_setLjava_lang_Object() {
-		// Test for method void java.lang.ThreadLocal.set(java.lang.Object)
+    /**
+     * @tests java.lang.ThreadLocal#set(java.lang.Object)
+     */
+    public void test_setLjava_lang_Object() {
+        // Test for method void java.lang.ThreadLocal.set(java.lang.Object)
 
-		final Object OBJ = new Object();
-		final ThreadLocal<Object> l = new ThreadLocal<Object>();
-		l.set(OBJ);
-		assertTrue("ThreadLocal's initial value is " + OBJ, l.get() == OBJ);
+        final Object OBJ = new Object();
+        final ThreadLocal<Object> l = new ThreadLocal<Object>();
+        l.set(OBJ);
+        assertTrue("ThreadLocal's initial value is " + OBJ, l.get() == OBJ);
 
-		// We need this because inner types cannot assign to variables in
-		// container method.
-		// But assigning to object slots in the container method is ok.
-		class ResultSlot {
-			public Object result = null;
-		}
+        // We need this because inner types cannot assign to variables in
+        // container method.
+        // But assigning to object slots in the container method is ok.
+        class ResultSlot {
+            public Object result = null;
+        }
 
-		final ResultSlot THREADVALUE = new ResultSlot();
-		Thread t = new Thread() {
-			@Override
+        final ResultSlot THREADVALUE = new ResultSlot();
+        Thread t = new Thread() {
+            @Override
             public void run() {
-				THREADVALUE.result = l.get();
-			}
-		};
+                THREADVALUE.result = l.get();
+            }
+        };
 
-		// Wait for the other Thread assign what it observes as the value of the
-		// variable
-		t.start();
-		try {
-			t.join();
-		} catch (InterruptedException ie) {
-			fail("Interrupted!!");
-		}
+        // Wait for the other Thread assign what it observes as the value of the
+        // variable
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException ie) {
+            fail("Interrupted!!");
+        }
 
-		// ThreadLocal is not inherited, so the other Thread should see it as
-		// null
-		assertNull("ThreadLocal's value in other Thread should be null",
-				THREADVALUE.result);
+        // ThreadLocal is not inherited, so the other Thread should see it as
+        // null
+        assertNull("ThreadLocal's value in other Thread should be null",
+                THREADVALUE.result);
 
-	}
+    }
 }

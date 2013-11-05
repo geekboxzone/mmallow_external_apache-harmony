@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.auth.tests.javax.security.sasl;
 
@@ -34,20 +34,20 @@ public class SaslExceptionTest extends TestCase {
             "Check new message",
             "Check new message Check new message Check new message Check new message Check new message" };
 
-    private static final Throwable[] thUpd = { 
+    private static final Throwable[] thUpd = {
             new Exception("New exception"),
-            new Exception(), 
+            new Exception(),
             new Exception("exception", new Throwable()),
             new Throwable("throwable", new Throwable("New throwable")),
             new Exception(new Exception("Another exception"))
     };
- 
+
     static Throwable tCause = new Throwable("Throwable for exception");
 
     /**
-     * Test for <code>SaslException()</code> constructor 
-     * Assertion: constructs SaslException with null message and 
-     * null root exception. 
+     * Test for <code>SaslException()</code> constructor
+     * Assertion: constructs SaslException with null message and
+     * null root exception.
      */
     public void testSaslException01() {
         SaslException tE;
@@ -57,9 +57,9 @@ public class SaslExceptionTest extends TestCase {
     }
 
     /**
-     * Test for <code>SaslException(String detail)</code> constructor 
+     * Test for <code>SaslException(String detail)</code> constructor
      * Assertion:
-     * constructs SaslException with defined detail message. 
+     * constructs SaslException with defined detail message.
      * Parameter <code>detail</code> is not null.
      */
     public void testSaslException02() {
@@ -73,7 +73,7 @@ public class SaslExceptionTest extends TestCase {
     }
 
     /**
-     * Test for <code>SaslException(String detail)</code> constructor 
+     * Test for <code>SaslException(String detail)</code> constructor
      * Assertion: constructs SaslException when <code>detail</code> is null
      */
     public void testSaslException03() {
@@ -114,7 +114,7 @@ public class SaslExceptionTest extends TestCase {
      * Assertion: constructs SaslException when <code>ex</code> is not null
      * <code>detail</code> is null
      */
-    public void testSaslException06() {        
+    public void testSaslException06() {
         SaslException tE = new SaslException(null, tCause);
         if (tE.getMessage() != null) {
             String toS = tCause.toString();
@@ -160,7 +160,7 @@ public class SaslExceptionTest extends TestCase {
             }
         }
     }
-    
+
     /**
      * Test for <code>toString()</code> method
      * Assertion: returns not null string
@@ -191,9 +191,9 @@ public class SaslExceptionTest extends TestCase {
             }
         }
     }
-    
+
     /**
-     * Test for <code>getCause()</code> and <code>initCause(Throwable cause)</code> 
+     * Test for <code>getCause()</code> and <code>initCause(Throwable cause)</code>
      * methods
      * Assertion: return cause
      */
@@ -214,9 +214,9 @@ public class SaslExceptionTest extends TestCase {
             }
         }
     }
-    
+
     /**
-     * Test for <code>getCause()</code> and <code>initCause(Throwable cause)</code> 
+     * Test for <code>getCause()</code> and <code>initCause(Throwable cause)</code>
      * methods
      * Assertion: return cause
      */
@@ -243,7 +243,7 @@ public class SaslExceptionTest extends TestCase {
     }
 
     /**
-     * Test for <code>getCause()</code> and <code>initCause(Throwable cause)</code> 
+     * Test for <code>getCause()</code> and <code>initCause(Throwable cause)</code>
      * methods
      * Assertion: return cause
      */

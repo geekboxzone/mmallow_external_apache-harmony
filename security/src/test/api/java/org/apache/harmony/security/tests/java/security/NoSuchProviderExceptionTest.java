@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.NoSuchProviderException;
 
 import junit.framework.TestCase;
@@ -28,7 +29,6 @@ import junit.framework.TestCase;
 /**
  * Tests for <code>NoSuchProviderException</code> class constructors and
  * methods.
- * 
  */
 public class NoSuchProviderExceptionTest extends TestCase {
 
@@ -37,7 +37,7 @@ public class NoSuchProviderExceptionTest extends TestCase {
 
     /**
      * Constructor for NoSuchProviderExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public NoSuchProviderExceptionTest(String arg0) {

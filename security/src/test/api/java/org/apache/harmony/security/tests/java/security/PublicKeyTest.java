@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.PublicKey;
 
 import junit.framework.TestCase;
@@ -27,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>PublicKey</code> class field
- * 
  */
 
 public class PublicKeyTest extends TestCase {
@@ -35,7 +35,7 @@ public class PublicKeyTest extends TestCase {
 
     /**
      * Constructor for PublicKeyTest.
-     * 
+     *
      * @param arg0
      */
     public PublicKeyTest(String arg0) {
@@ -50,19 +50,22 @@ public class PublicKeyTest extends TestCase {
         assertEquals("Incorrect serialVersionUID", cPK.getSerVerUID(), //PublicKey.serialVersionUID,
                 7187392471159151072L);
     }
-    
+
     public class checkPublicKey implements PublicKey {
         public String getAlgorithm() {
             return "PublicKey";
         }
+
         public String getFormat() {
             return "Format";
         }
+
         public byte[] getEncoded() {
             return new byte[0];
         }
+
         public long getSerVerUID() {
             return serialVersionUID;
-        }        
+        }
     }
 }

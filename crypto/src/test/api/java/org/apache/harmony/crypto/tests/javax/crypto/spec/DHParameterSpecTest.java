@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto.spec;
 
@@ -41,31 +41,31 @@ public class DHParameterSpecTest extends TestCase {
      * The tested object is created by different constructors.
      */
     public void testDHParameterSpec() {
-        BigInteger[] ps = {new BigInteger("-1000000000000"), BigInteger.ZERO,
-                            BigInteger.ONE, new BigInteger("1000000000000")};
-        BigInteger[] gs = {new BigInteger("-1000000000000"), BigInteger.ZERO,
-                            BigInteger.ONE, new BigInteger("1000000000000")};
-        int[] ls = {Integer.MIN_VALUE, 0, 1, Integer.MAX_VALUE};
-        for (int i=0; i<ps.length; i++) {
+        BigInteger[] ps = { new BigInteger("-1000000000000"), BigInteger.ZERO,
+                BigInteger.ONE, new BigInteger("1000000000000") };
+        BigInteger[] gs = { new BigInteger("-1000000000000"), BigInteger.ZERO,
+                BigInteger.ONE, new BigInteger("1000000000000") };
+        int[] ls = { Integer.MIN_VALUE, 0, 1, Integer.MAX_VALUE };
+        for (int i = 0; i < ps.length; i++) {
             DHParameterSpec dhps = new DHParameterSpec(ps[i], gs[i]);
             assertEquals("The value returned by getP() must be "
-                        + "equal to the value specified in the constructor",
-                        dhps.getP(), ps[i]);
+                    + "equal to the value specified in the constructor",
+                    dhps.getP(), ps[i]);
             assertEquals("The value returned by getG() must be "
-                        + "equal to the value specified in the constructor",
-                        dhps.getG(), gs[i]);
+                    + "equal to the value specified in the constructor",
+                    dhps.getG(), gs[i]);
         }
-        for (int i=0; i<ps.length; i++) {
+        for (int i = 0; i < ps.length; i++) {
             DHParameterSpec dhps = new DHParameterSpec(ps[i], gs[i], ls[i]);
             assertEquals("The value returned by getP() must be "
-                        + "equal to the value specified in the constructor",
-                        dhps.getP(), ps[i]);
+                    + "equal to the value specified in the constructor",
+                    dhps.getP(), ps[i]);
             assertEquals("The value returned by getG() must be "
-                        + "equal to the value specified in the constructor",
-                        dhps.getG(), gs[i]);
+                    + "equal to the value specified in the constructor",
+                    dhps.getG(), gs[i]);
             assertEquals("The value returned by getL() must be "
-                        + "equal to the value specified in the constructor",
-                        dhps.getL(), ls[i]);
+                    + "equal to the value specified in the constructor",
+                    dhps.getL(), ls[i]);
         }
     }
 

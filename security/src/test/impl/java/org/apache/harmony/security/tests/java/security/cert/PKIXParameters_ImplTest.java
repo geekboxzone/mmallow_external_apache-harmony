@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vladimir N. Molotkov
-*/
+ * @author Vladimir N. Molotkov
+ */
 
 package org.apache.harmony.security.tests.java.security.cert;
 
@@ -43,16 +43,17 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>PKIXParameters</code> fields and methods
- * 
  */
 public class PKIXParameters_ImplTest extends TestCase {
-   
+
     /**
      * Test #1 for <code>PKIXParameters(KeyStore)</code> constructor<br>
      * Assertion: Creates an instance of <code>PKIXParameters</code>
      * that populates the set of most-trusted CAs from the trusted
      * certificate entries contained in the specified <code>KeyStore</code>
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws KeyStoreException
      */
     public final void testPKIXParametersKeyStore01() throws Exception {
@@ -72,7 +73,9 @@ public class PKIXParameters_ImplTest extends TestCase {
      * Assertion: Only keystore entries that contain trusted
      * <code>X509Certificates</code> are considered; all other
      * certificate types are ignored
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws KeyStoreException
      */
     public final void testPKIXParametersKeyStore02() throws Exception {
@@ -130,7 +133,9 @@ public class PKIXParameters_ImplTest extends TestCase {
      * Test #5 for <code>setTrustAnchors(Set)</code> method<br>
      * Assertion: <code>Set</code> is copied to protect against
      * subsequent modifications
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws KeyStoreException
      */
     public final void testSetTrustAnchors05() throws Exception {
@@ -143,7 +148,7 @@ public class PKIXParameters_ImplTest extends TestCase {
         PKIXParameters p = new PKIXParameters(ks);
         // prepare new Set
         HashSet newSet = new HashSet(p.getTrustAnchors());
-        HashSet newSetCopy = (HashSet)newSet.clone();
+        HashSet newSetCopy = (HashSet) newSet.clone();
         // set new Set
         p.setTrustAnchors(newSetCopy);
         // modify set - remove one element
@@ -156,8 +161,10 @@ public class PKIXParameters_ImplTest extends TestCase {
     /**
      * Test #1 for <code>clone()</code> method<br>
      * Assertion: Makes a copy of this <code>PKIXParameters</code> object
+     *
      * @throws KeyStoreException
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws NoSuchAlgorithmException
      */
     public final void testClone01() throws Exception {
@@ -165,7 +172,7 @@ public class PKIXParameters_ImplTest extends TestCase {
         if (ks == null) {
             fail(getName() + ": not performed (could not create test KeyStore)");
         }
-        
+
         PKIXParameters p1 = new PKIXParameters(ks);
         // set to some non-default values
         p1.setPolicyQualifiersRejected(false);
@@ -196,7 +203,7 @@ public class PKIXParameters_ImplTest extends TestCase {
 
         // TrustAnchors already set
 
-        PKIXParameters p2 = (PKIXParameters)p1.clone();
+        PKIXParameters p2 = (PKIXParameters) p1.clone();
 
         // check that objects match
         assertEquals("check1", p1.getPolicyQualifiersRejected(),
@@ -229,8 +236,10 @@ public class PKIXParameters_ImplTest extends TestCase {
      * Test #2 for <code>clone()</code> method<br>
      * Assertion: Changes to the copy will not affect
      * the original and vice versa
+     *
      * @throws KeyStoreException
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws NoSuchAlgorithmException
      */
     public final void testClone02() throws Exception {
@@ -240,7 +249,7 @@ public class PKIXParameters_ImplTest extends TestCase {
             fail(getName() + ": not performed (could not create test KeyStore)");
         }
 
-        for (int i = 0; i<p.length; i++) {
+        for (int i = 0; i < p.length; i++) {
             p[i] = new PKIXParameters(ks);
 
             p[i].setCertStores(TestUtils.getCollectionCertStoresList());
@@ -252,7 +261,7 @@ public class PKIXParameters_ImplTest extends TestCase {
 
             p[i].setDate(new Date(555L));
 
-            p[(i == 0 ? 1 : 0)] = (PKIXParameters)p[i].clone();
+            p[(i == 0 ? 1 : 0)] = (PKIXParameters) p[i].clone();
 
             // modify the first object (original or copy)
             p[1].addCertStore(CertStore.getInstance("Collection",
@@ -260,9 +269,9 @@ public class PKIXParameters_ImplTest extends TestCase {
             p[1].addCertPathChecker(TestUtils.getTestCertPathChecker());
             // check that the second object has not been affected by
             // above modification
-            assertTrue("certStores["+i+"]",
+            assertTrue("certStores[" + i + "]",
                     p[0].getCertStores().size() == 1);
-            assertTrue("certPathCheckers["+i+"]",
+            assertTrue("certPathCheckers[" + i + "]",
                     p[0].getCertPathCheckers().size() == 1);
         }
     }
@@ -270,7 +279,9 @@ public class PKIXParameters_ImplTest extends TestCase {
     /**
      * Test for <code>toString()</code> method<br>
      * Assertion: Returns a formatted string describing the parameters
+     *
      * @throws InvalidAlgorithmParameterException
+     *
      * @throws KeyStoreException
      */
     public final void testToString() throws Exception {

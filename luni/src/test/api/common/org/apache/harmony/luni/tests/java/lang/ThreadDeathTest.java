@@ -19,12 +19,12 @@ package org.apache.harmony.luni.tests.java.lang;
 
 public class ThreadDeathTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.lang.ThreadDeath#ThreadDeath()
-	 */
-	public void test_Constructor() {
-		ThreadDeath td = new ThreadDeath();
+    /**
+     * @tests java.lang.ThreadDeath#ThreadDeath()
+     */
+    public void test_Constructor() {
+        ThreadDeath td = new ThreadDeath();
         assertNull(td.getCause());
         assertNull(td.getMessage());
-	}
+    }
 }

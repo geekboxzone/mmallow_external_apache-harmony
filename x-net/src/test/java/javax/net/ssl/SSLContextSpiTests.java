@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package javax.net.ssl;
 
@@ -31,13 +31,12 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SSLContextSpi</code> class constructors and methods.
- * 
  */
 
 public class SSLContextSpiTests extends TestCase {
     /**
      * Constructor for SSLContextSpiTests.
-     * 
+     *
      * @param arg0
      */
     public SSLContextSpiTests(String arg0) {
@@ -73,7 +72,7 @@ public class SSLContextSpiTests extends TestCase {
             fail("RuntimeException must be thrown");
         } catch (RuntimeException e) {
             assertEquals("Incorrect message", "Not initialiazed", e.getMessage());
-        }       
+        }
         try {
             sslConSpi.engineCreateSSLEngine();
             fail("RuntimeException must be thrown");
@@ -81,7 +80,7 @@ public class SSLContextSpiTests extends TestCase {
             assertEquals("Incorrect message", "Not initialiazed", e.getMessage());
         }
         try {
-            sslConSpi.engineCreateSSLEngine("host",1);
+            sslConSpi.engineCreateSSLEngine("host", 1);
             fail("RuntimeException must be thrown");
         } catch (RuntimeException e) {
             assertEquals("Incorrect message", "Not initialiazed", e.getMessage());
@@ -90,7 +89,7 @@ public class SSLContextSpiTests extends TestCase {
         assertNull("Not null result", sslConSpi.engineGetSocketFactory());
         assertNull("Not null result", sslConSpi.engineGetServerSocketFactory());
         assertNotNull("Null result", sslConSpi.engineCreateSSLEngine());
-        assertNotNull("Null result", sslConSpi.engineCreateSSLEngine("host",1));
+        assertNotNull("Null result", sslConSpi.engineCreateSSLEngine("host", 1));
         assertNull("Not null result", sslConSpi.engineGetServerSessionContext());
         assertNull("Not null result", sslConSpi.engineGetClientSessionContext());
     }

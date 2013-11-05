@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Stepan M. Mishura
-*/
+ * @author Stepan M. Mishura
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth;
 
@@ -44,7 +44,7 @@ import org.apache.harmony.auth.internal.SecurityTest;
 public class SubjectDomainCombinerTest extends SecurityTest {
     /**
      * @tests javax.security.auth.SubjectDomainCombiner#SubjectDomainCombiner(
-     *        javax.security.auth.Subject)
+     *javax.security.auth.Subject)
      */
     public final void test_ConstructorLjavax_security_auth_Subject() {
 
@@ -64,7 +64,7 @@ public class SubjectDomainCombinerTest extends SecurityTest {
 
     /**
      * @tests javax.security.auth.SubjectDomainCombiner#combine(ProtectionDomain[],
-     *        ProtectionDomain[])
+     *ProtectionDomain[])
      */
     public final void testCombine() throws Exception {
 
@@ -117,7 +117,7 @@ public class SubjectDomainCombinerTest extends SecurityTest {
         assertSame("Inherited domain", domain, pd[0]);
 
         //Regression for HARMONY-1129
-        assertNotNull(new SubjectDomainCombiner(new Subject()).combine(new ProtectionDomain[] {null}, new ProtectionDomain[] {null}));
+        assertNotNull(new SubjectDomainCombiner(new Subject()).combine(new ProtectionDomain[] { null }, new ProtectionDomain[] { null }));
     }
 
     public final void testSecurityException() {

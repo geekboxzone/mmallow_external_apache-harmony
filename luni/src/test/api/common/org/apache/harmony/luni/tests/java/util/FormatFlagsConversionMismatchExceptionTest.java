@@ -28,7 +28,7 @@ public class FormatFlagsConversionMismatchExceptionTest extends TestCase {
 
     /**
      * @tests java.util.FormatFlagsConversionMismatchException#FormatFlagsConversionMismatchException(String,
-     *        char)
+     *char)
      */
     public void test_formatFlagsConversionMismatchException() {
         try {

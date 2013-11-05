@@ -122,6 +122,7 @@ public class OutputStreamTesterTest {
             executor = Executors.newSingleThreadExecutor();
             future = executor.submit(new Callable<byte[]>() {
                 final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+
                 public byte[] call() throws Exception {
                     byte[] buffer = new byte[256];
                     int count;

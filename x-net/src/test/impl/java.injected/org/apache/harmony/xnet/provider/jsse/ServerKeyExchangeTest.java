@@ -25,7 +25,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>ServerKeyExchange</code> constructor and methods
- *  
  */
 public class ServerKeyExchangeTest extends TestCase {
 

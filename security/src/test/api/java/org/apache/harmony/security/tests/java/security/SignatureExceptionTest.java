@@ -16,10 +16,11 @@
  */
 
 /**
-* @author Vera Y. Petrashkova
-*/
+ * @author Vera Y. Petrashkova
+ */
 
 package org.apache.harmony.security.tests.java.security;
+
 import java.security.SignatureException;
 
 import junit.framework.TestCase;
@@ -27,7 +28,6 @@ import junit.framework.TestCase;
 
 /**
  * Tests for <code>SignatureException</code> class constructors and methods.
- * 
  */
 public class SignatureExceptionTest extends TestCase {
 
@@ -36,7 +36,7 @@ public class SignatureExceptionTest extends TestCase {
 
     /**
      * Constructor for SignatureExceptionTests.
-     * 
+     *
      * @param arg0
      */
     public SignatureExceptionTest(String arg0) {

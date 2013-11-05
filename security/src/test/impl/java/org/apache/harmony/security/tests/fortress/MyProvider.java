@@ -16,24 +16,23 @@
  */
 
 /**
-* @author Boris V. Kuznetsov
-*/
+ * @author Boris V. Kuznetsov
+ */
 
 package org.apache.harmony.security.tests.fortress;
 
 import java.security.Provider;
 
 /**
- *
  * Provider for testing
  */
 public class MyProvider extends Provider {
-	MyProvider() {
-		super("MyProvider", 1.0, "Provider for testing");
-		put("Service.Algorithm", "org.apache.harmony.security.tests.fortress.SomeClass");
-	}
-		
-	MyProvider(String name, double version, String info) {
-		super(name, version, info);
-	}
+    MyProvider() {
+        super("MyProvider", 1.0, "Provider for testing");
+        put("Service.Algorithm", "org.apache.harmony.security.tests.fortress.SomeClass");
+    }
+
+    MyProvider(String name, double version, String info) {
+        super(name, version, info);
+    }
 }

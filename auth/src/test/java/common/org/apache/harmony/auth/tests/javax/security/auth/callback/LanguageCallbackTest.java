@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.callback;
 
@@ -34,9 +34,9 @@ import junit.framework.TestCase;
 
 public class LanguageCallbackTest extends TestCase {
     LanguageCallback lc;
-    
+
     /**
-     * test of Ctor, method set/getLocale() 
+     * test of Ctor, method set/getLocale()
      */
     public final void testLanguageCallback_01() {
         lc = new LanguageCallback();
@@ -46,14 +46,15 @@ public class LanguageCallbackTest extends TestCase {
     }
 
     /**
-     * locale is null 
+     * locale is null
      */
     public final void testLanguageCallback_02() {
         lc = new LanguageCallback();
         assertNull(lc.getLocale());
         try {
-        lc.setLocale(null);
-        } catch (NullPointerException e ){}
+            lc.setLocale(null);
+        } catch (NullPointerException e) {
+        }
     }
 
 }

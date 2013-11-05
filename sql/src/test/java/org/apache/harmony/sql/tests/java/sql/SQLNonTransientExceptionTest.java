@@ -335,7 +335,7 @@ public class SQLNonTransientExceptionTest extends TestCase {
         assertEquals(
                 "The reason of SQLNonTransientException should be equals to cause.toString()",
                 "java.lang.Exception: MYTHROWABLE", sQLNonTransientException
-                        .getMessage());
+                .getMessage());
         assertNull("The SQLState of SQLNonTransientException should be null",
                 sQLNonTransientException.getSQLState());
         assertEquals("The error code of SQLNonTransientException should be 0",

@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Alexander Y. Kleymenov
-*/
+ * @author Alexander Y. Kleymenov
+ */
 
 package org.apache.harmony.crypto.tests.javax.crypto.spec;
 
@@ -40,17 +40,17 @@ public class DHGenParameterSpecTest extends TestCase {
      * by getters.
      */
     public void testDHGenParameterSpec() {
-        int[] primes = {Integer.MIN_VALUE, -1, 0, 1, Integer.MAX_VALUE};
-        int[] exponents = {Integer.MIN_VALUE, -1, 0, 1, Integer.MAX_VALUE};
-        for (int i=0; i<primes.length; i++) {
+        int[] primes = { Integer.MIN_VALUE, -1, 0, 1, Integer.MAX_VALUE };
+        int[] exponents = { Integer.MIN_VALUE, -1, 0, 1, Integer.MAX_VALUE };
+        for (int i = 0; i < primes.length; i++) {
             DHGenParameterSpec ps = new DHGenParameterSpec(primes[i],
-                                                            exponents[i]);
+                    exponents[i]);
             assertEquals("The value returned by getPrimeSize() must be "
-                        + "equal to the value specified in the constructor",
-                        ps.getPrimeSize(), primes[i]);
+                    + "equal to the value specified in the constructor",
+                    ps.getPrimeSize(), primes[i]);
             assertEquals("The value returned by getExponentSize() must be "
-                        + "equal to the value specified in the constructor",
-                        ps.getPrimeSize(), exponents[i]);
+                    + "equal to the value specified in the constructor",
+                    ps.getPrimeSize(), exponents[i]);
         }
     }
 

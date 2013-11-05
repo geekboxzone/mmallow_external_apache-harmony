@@ -35,20 +35,20 @@ import junit.framework.TestCase;
 
 /**
  * Tests for SSLContext class constructors and methods
- * 
  */
 
 public class SSLContext2Test extends TestCase {
-    
+
     private static String srvSSLContext = "SSLContext";
-    
+
     private static final String defaultProtocol = "S+S+L";
-    
+
     public static final String SSLContextProviderClass = "org.apache.harmony.xnet.tests.support.MySSLContextSpi";
 
     private static final String[] invalidValues = SpiEngUtils.invalidValues;
 
     private static final String[] validValues;
+
     static {
         validValues = new String[4];
         validValues[0] = defaultProtocol;
@@ -76,10 +76,10 @@ public class SSLContext2Test extends TestCase {
         super.tearDown();
         Security.removeProvider(mProv.getName());
     }
-    
-    private void checkSSLContext(SSLContext sslC) 
+
+    private void checkSSLContext(SSLContext sslC)
             throws KeyManagementException {
-        
+
         try {
             sslC.getSocketFactory();
             fail("RuntimeException must be thrown");
@@ -103,7 +103,7 @@ public class SSLContext2Test extends TestCase {
             fail("RuntimeException must be thrown");
         } catch (RuntimeException e) {
             assertEquals("Incorrect message", "Not initialiazed", e.getMessage());
-        }      
+        }
         try {
             sslC.createSSLEngine();
             fail("RuntimeException must be thrown");
@@ -111,48 +111,48 @@ public class SSLContext2Test extends TestCase {
             assertEquals("Incorrect message", "Not initialiazed", e.getMessage());
         }
         try {
-            sslC.createSSLEngine("host",1);
+            sslC.createSSLEngine("host", 1);
             fail("RuntimeException must be thrown");
         } catch (RuntimeException e) {
             assertEquals("Incorrect message", "Not initialiazed", e.getMessage());
         }
-        TrustManager [] tm = new TManager[10];
-        KeyManager [] km = new KManager[5];
+        TrustManager[] tm = new TManager[10];
+        KeyManager[] km = new KManager[5];
         try {
             sslC.init(km, tm, null);
             fail("KeyManagementException must be thrown");
         } catch (KeyManagementException e) {
         }
         sslC.init(km, tm, new SecureRandom());
-        
+
         SSLEngine sslE = sslC.createSSLEngine();
-        assertTrue("Not null result",sslE instanceof SSLEngine);
+        assertTrue("Not null result", sslE instanceof SSLEngine);
         assertNull("Incorrect host", sslE.getPeerHost());
         assertEquals("Incorrect port", 0, sslE.getPeerPort());
         String host = "ZZZ";
         int port = 8080;
         sslE = sslC.createSSLEngine(host, port);
-        assertTrue("Not null result",sslE instanceof SSLEngine);
+        assertTrue("Not null result", sslE instanceof SSLEngine);
         assertEquals("Incorrect host", sslE.getPeerHost(), host);
         assertEquals("Incorrect port", sslE.getPeerPort(), port);
         try {
             assertNull("Not null result", sslC.getServerSessionContext());
         } catch (NullPointerException e) {
         }
-        try {            
+        try {
             assertNull("Not null result", sslC.getClientSessionContext());
         } catch (NullPointerException e) {
         }
     }
-    
+
     /**
-     * Test for <code>getInstance(String protocol)</code> method 
+     * Test for <code>getInstance(String protocol)</code> method
      * Assertions:
      * throws NullPointerException when protocol is null;
      * throws NoSuchAlgorithmException when protocol is not correct;
      * returns SSLContext object
      */
-    public void testGetInstance01() throws NoSuchAlgorithmException, 
+    public void testGetInstance01() throws NoSuchAlgorithmException,
             KeyManagementException {
         try {
             SSLContext.getInstance(null);
@@ -182,16 +182,16 @@ public class SSLContext2Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String protocol, String provider)</code>
-     * method 
-     * Assertions: 
+     * method
+     * Assertions:
      * throws NullPointerException when protocol is null;
      * throws NoSuchAlgorithmException when protocol is not correct;
-     * throws IllegalArgumentException when provider is null or empty; 
+     * throws IllegalArgumentException when provider is null or empty;
      * throws NoSuchProviderException when provider is available;
      * returns SSLContext object
      */
     public void testGetInstance02() throws NoSuchAlgorithmException,
-            NoSuchProviderException, IllegalArgumentException, 
+            NoSuchProviderException, IllegalArgumentException,
             KeyManagementException {
         try {
             SSLContext.getInstance(null, mProv.getName());
@@ -248,8 +248,8 @@ public class SSLContext2Test extends TestCase {
 
     /**
      * Test for <code>getInstance(String protocol, Provider provider)</code>
-     * method 
-     * Assertions: 
+     * method
+     * Assertions:
      * throws NullPointerException when protocol is null;
      * throws NoSuchAlgorithmException when protocol is not correct;
      * throws IllegalArgumentException when provider is null;
@@ -289,13 +289,14 @@ public class SSLContext2Test extends TestCase {
                     validValues[i]);
             assertEquals("Incorrect provider", sslC.getProvider(), mProv);
             checkSSLContext(sslC);
-       }
+        }
     }
 
     class TManager implements TrustManager {
-        
+
     }
+
     class KManager implements KeyManager {
-        
+
     }
 }

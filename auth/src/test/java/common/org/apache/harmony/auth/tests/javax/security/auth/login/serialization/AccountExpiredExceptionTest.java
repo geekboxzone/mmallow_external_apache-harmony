@@ -16,8 +16,8 @@
  */
 
 /**
-* @author Maxim V. Makarov
-*/
+ * @author Maxim V. Makarov
+ */
 
 package org.apache.harmony.auth.tests.javax.security.auth.login.serialization;
 
@@ -33,6 +33,6 @@ public class AccountExpiredExceptionTest extends SerializationTest {
 
     @Override
     protected Object[] getData() {
-        return new Object[] {new AccountExpiredException("message")};
+        return new Object[] { new AccountExpiredException("message") };
     }
 }

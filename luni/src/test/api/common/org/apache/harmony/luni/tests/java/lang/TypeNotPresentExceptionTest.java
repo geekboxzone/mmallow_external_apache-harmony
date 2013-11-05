@@ -28,12 +28,12 @@ public class TypeNotPresentExceptionTest extends TestCase {
         assertNotNull(e);
         String m = e.getMessage();
         assertNotNull(m);
-        
+
         e = new TypeNotPresentException(getClass().getName(), null);
         assertNotNull(e);
         m = e.getMessage();
         assertNotNull(m);
-        
+
         NullPointerException npe = new NullPointerException();
         e = new TypeNotPresentException(getClass().getName(), npe);
         assertNotNull(e.getMessage());
@@ -46,7 +46,7 @@ public class TypeNotPresentExceptionTest extends TestCase {
     public void test_typeName() {
         TypeNotPresentException e = new TypeNotPresentException(null, null);
         assertNull(e.typeName());
-        
+
         e = new TypeNotPresentException(getClass().getName(), null);
         assertEquals(getClass().getName(), e.typeName());
     }

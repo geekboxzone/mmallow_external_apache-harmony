@@ -24,37 +24,37 @@ import java.io.SyncFailedException;
 
 public class SyncFailedExceptionTest extends junit.framework.TestCase {
 
-	/**
-	 * @tests java.io.SyncFailedException#SyncFailedException(java.lang.String)
-	 */
-	public void test_ConstructorLjava_lang_String() throws Exception {
-		// Test for method java.io.SyncFailedException(java.lang.String)
-                File f = null;
-                try {
-                    f = new File(System.getProperty("user.dir"), "synfail.tst");
-                    FileOutputStream fos = new FileOutputStream(f.getPath());
-                    FileDescriptor fd = fos.getFD();
-                    fos.close();
-                    fd.sync();
-		} catch (SyncFailedException e) {
-			f.delete();
-			return;
-		} 
+    /**
+     * @tests java.io.SyncFailedException#SyncFailedException(java.lang.String)
+     */
+    public void test_ConstructorLjava_lang_String() throws Exception {
+        // Test for method java.io.SyncFailedException(java.lang.String)
+        File f = null;
+        try {
+            f = new File(System.getProperty("user.dir"), "synfail.tst");
+            FileOutputStream fos = new FileOutputStream(f.getPath());
+            FileDescriptor fd = fos.getFD();
+            fos.close();
+            fd.sync();
+        } catch (SyncFailedException e) {
+            f.delete();
+            return;
+        }
 
-		fail("Failed to generate expected Exception");
-	}
+        fail("Failed to generate expected Exception");
+    }
 
-	/**
-	 * Sets up the fixture, for example, open a network connection. This method
-	 * is called before a test is executed.
-	 */
-	protected void setUp() {
-	}
+    /**
+     * Sets up the fixture, for example, open a network connection. This method
+     * is called before a test is executed.
+     */
+    protected void setUp() {
+    }
 
-	/**
-	 * Tears down the fixture, for example, close a network connection. This
-	 * method is called after a test is executed.
-	 */
-	protected void tearDown() {
-	}
+    /**
+     * Tears down the fixture, for example, close a network connection. This
+     * method is called after a test is executed.
+     */
+    protected void tearDown() {
+    }
 }

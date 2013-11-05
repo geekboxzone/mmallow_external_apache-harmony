@@ -25,24 +25,24 @@ import java.io.OutputStream;
 import tests.support.Support_Exec;
 
 public class Process2Test extends junit.framework.TestCase {
-	/**
-	 * @tests java.lang.Process#getInputStream(), 
-	 *        java.lang.Process#getErrorStream()
-	 *        java.lang.Process#getOutputStream()
-	 * Tests if these methods return buffered streams.
-	 */
-	public void test_isBufferedStreams() throws Exception {
-		// Regression test for HARMONY-2735.
-                Object[] execArgs = Support_Exec.execJava2(new String[0], null, true);
-                Process p = (Process) execArgs[0];
-                InputStream in = p.getInputStream();
-                assertTrue("getInputStream() returned non-buffered stream: " + in, (in instanceof BufferedInputStream));
-                in = p.getErrorStream();
-                assertTrue("getErrorStream() returned non-buffered stream: " + in, (in instanceof BufferedInputStream));
-                OutputStream out = p.getOutputStream();
-                assertTrue("getOutputStream() returned non-buffered stream: " + out, (out instanceof BufferedOutputStream));
-                in.close();
-                out.close();
-                p.destroy();
-	}
+    /**
+     * @tests java.lang.Process#getInputStream(),
+     * java.lang.Process#getErrorStream()
+     * java.lang.Process#getOutputStream()
+     * Tests if these methods return buffered streams.
+     */
+    public void test_isBufferedStreams() throws Exception {
+        // Regression test for HARMONY-2735.
+        Object[] execArgs = Support_Exec.execJava2(new String[0], null, true);
+        Process p = (Process) execArgs[0];
+        InputStream in = p.getInputStream();
+        assertTrue("getInputStream() returned non-buffered stream: " + in, (in instanceof BufferedInputStream));
+        in = p.getErrorStream();
+        assertTrue("getErrorStream() returned non-buffered stream: " + in, (in instanceof BufferedInputStream));
+        OutputStream out = p.getOutputStream();
+        assertTrue("getOutputStream() returned non-buffered stream: " + out, (out instanceof BufferedOutputStream));
+        in.close();
+        out.close();
+        p.destroy();
+    }
 }

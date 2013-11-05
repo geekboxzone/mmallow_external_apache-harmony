@@ -119,7 +119,7 @@ public class URLConnectionTest extends junit.framework.TestCase {
         list.add("value2");
         list.add("value");
 
-        Map<String,List<String>> propertyMap = u.getRequestProperties();
+        Map<String, List<String>> propertyMap = u.getRequestProperties();
         // Check this map is unmodifiable
         try {
             propertyMap.put("test", null);
@@ -150,7 +150,7 @@ public class URLConnectionTest extends junit.framework.TestCase {
     }
 
     /**
-     * @tests java.net.URLConnection#addRequestProperty(java.lang.String,java.lang.String)
+     * @tests java.net.URLConnection#addRequestProperty(java.lang.String, java.lang.String)
      */
     public void test_addRequestPropertyLjava_lang_StringLjava_lang_String()
             throws IOException {
@@ -668,7 +668,7 @@ public class URLConnectionTest extends junit.framework.TestCase {
 
     /**
      * @tests java.net.URLConnection#setDefaultRequestProperty(java.lang.String,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_setDefaultRequestPropertyLjava_lang_StringLjava_lang_String() {
         assertTrue("Used to test", true);
@@ -763,10 +763,10 @@ public class URLConnectionTest extends junit.framework.TestCase {
 
     /**
      * @tests java.net.URLConnection#setRequestProperty(java.lang.String,
-     *        java.lang.String)
+     *java.lang.String)
      */
     public void test_setRequestPropertyLjava_lang_StringLjava_lang_String()
-                throws MalformedURLException{
+            throws MalformedURLException {
         MockURLConnection u = new MockURLConnection(new URL(
                 "http://www.apache.org"));
 
