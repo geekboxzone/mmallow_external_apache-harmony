@@ -55,13 +55,11 @@ ifeq ($(WITH_HOST_DALVIK),true)
     include $(CLEAR_VARS)
     LOCAL_SRC_FILES := $(harmony_test_src_files)
     LOCAL_JAVA_RESOURCE_DIRS := $(harmony_test_resource_dirs)
-    LOCAL_NO_STANDARD_LIBRARIES := true
-    LOCAL_JAVA_LIBRARIES := core-hostdex core-junit-hostdex
+    LOCAL_JAVA_LIBRARIES := core-junit-hostdex
     LOCAL_JAVACFLAGS := $(harmony_test_javac_flags)
     LOCAL_MODULE := apache-harmony-tests-hostdex
     LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
-    LOCAL_BUILD_HOST_DEX := true
-    include $(BUILD_HOST_JAVA_LIBRARY)
+    include $(BUILD_HOST_DALVIK_JAVA_LIBRARY)
 endif
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
