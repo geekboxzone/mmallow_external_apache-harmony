@@ -18,7 +18,6 @@ package org.apache.harmony.archive.tests.java.util.jar;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -29,7 +28,6 @@ import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 
-import tests.support.resource.Support_Resources;
 
 public class JarInputStreamTest extends junit.framework.TestCase {
     // a 'normal' jar file
@@ -48,8 +46,8 @@ public class JarInputStreamTest extends junit.framework.TestCase {
 
     @Override
     protected void setUp() {
-        jarName = Support_Resources.getURL("morestuff/hyts_patch.jar");
-        jarName2 = Support_Resources.getURL("morestuff/hyts_patch2.jar");
+        jarName = getURL("morestuff/hyts_patch.jar");
+        jarName2 = getURL("morestuff/hyts_patch2.jar");
     }
 
     /**
@@ -72,9 +70,7 @@ public class JarInputStreamTest extends junit.framework.TestCase {
     }
 
     public void test_closeAfterException() throws Exception {
-        File resources = Support_Resources.createTempFolder();
-        Support_Resources.copyFile(resources, null, "Broken_entry.jar");
-        InputStream is = Support_Resources.getStream("Broken_entry.jar");
+        InputStream is = (new URL(getURL("Broken_entry.jar")).openStream());
         JarInputStream jis = new JarInputStream(is, false);
         jis.getNextEntry();
         try {
@@ -110,18 +106,6 @@ public class JarInputStreamTest extends junit.framework.TestCase {
             jis.getNextJarEntry();
             fail("IOException expected");
         } catch (IOException ee) {
-            // expected
-        }
-
-        File resources = Support_Resources.createTempFolder();
-        Support_Resources.copyFile(resources, null, "Broken_entry.jar");
-        is = Support_Resources.getStream("Broken_entry.jar");
-        jis = new JarInputStream(is, false);
-        jis.getNextJarEntry();
-        try {
-            jis.getNextJarEntry();
-            fail("ZipException expected");
-        } catch (ZipException ee) {
             // expected
         }
     }
@@ -163,7 +147,7 @@ public class JarInputStreamTest extends junit.framework.TestCase {
 
     public void test_JarInputStream_Integrate_Jar_getNextEntry()
             throws IOException {
-        String intJarName = Support_Resources.getURL("Integrate.jar");
+        String intJarName = getURL("Integrate.jar");
         InputStream is = new URL(intJarName).openConnection()
                 .getInputStream();
         JarInputStream jin = new JarInputStream(is, true);
@@ -179,7 +163,7 @@ public class JarInputStreamTest extends junit.framework.TestCase {
 
     public void test_JarInputStream_Modified_Class_getNextEntry()
             throws IOException {
-        String modJarName = Support_Resources.getURL("Modified_Class.jar");
+        String modJarName = getURL("Modified_Class.jar");
         InputStream is = new URL(modJarName).openConnection()
                 .getInputStream();
         JarInputStream jin = new JarInputStream(is, true);
@@ -206,7 +190,7 @@ public class JarInputStreamTest extends junit.framework.TestCase {
 
     public void test_JarInputStream_Modified_Manifest_MainAttributes_getNextEntry()
             throws IOException {
-        String modJarName = Support_Resources.getURL("Modified_Manifest_MainAttributes.jar");
+        String modJarName = getURL("Modified_Manifest_MainAttributes.jar");
         InputStream is = new URL(modJarName).openConnection()
                 .getInputStream();
         JarInputStream jin = new JarInputStream(is, true);
@@ -226,8 +210,7 @@ public class JarInputStreamTest extends junit.framework.TestCase {
 
     public void test_JarInputStream_Modified_Manifest_EntryAttributes_getNextEntry()
             throws IOException {
-        String modJarName = Support_Resources
-                .getURL("Modified_Manifest_EntryAttributes.jar");
+        String modJarName = getURL("Modified_Manifest_EntryAttributes.jar");
         InputStream is = new URL(modJarName).openConnection()
                 .getInputStream();
         JarInputStream jin = new JarInputStream(is, true);
@@ -253,8 +236,7 @@ public class JarInputStreamTest extends junit.framework.TestCase {
 
     public void test_JarInputStream_Modified_SF_EntryAttributes_getNextEntry()
             throws IOException {
-        String modJarName = Support_Resources
-                .getURL("Modified_SF_EntryAttributes.jar");
+        String modJarName = getURL("Modified_SF_EntryAttributes.jar");
         InputStream is = new URL(modJarName).openConnection()
                 .getInputStream();
         JarInputStream jin = new JarInputStream(is, true);
@@ -279,7 +261,7 @@ public class JarInputStreamTest extends junit.framework.TestCase {
     }
 
     public void test_JarInputStream_Modified_Class_read() throws IOException {
-        String modJarName = Support_Resources.getURL("Modified_Class.jar");
+        String modJarName = getURL("Modified_Class.jar");
         InputStream is = new URL(modJarName).openConnection()
                 .getInputStream();
         JarInputStream jin = new JarInputStream(is, true);
@@ -308,7 +290,7 @@ public class JarInputStreamTest extends junit.framework.TestCase {
     }
 
     public void test_Integrate_Jar_read() throws IOException {
-        String intJarName = Support_Resources.getURL("Integrate.jar");
+        String intJarName = getURL("Integrate.jar");
         InputStream is = new URL(intJarName).openConnection()
                 .getInputStream();
         JarInputStream jin = new JarInputStream(is, true);
@@ -330,8 +312,7 @@ public class JarInputStreamTest extends junit.framework.TestCase {
 
     public void test_JarInputStream_Modified_Manifest_MainAttributes_read()
             throws IOException {
-        String modJarName = Support_Resources
-                .getURL("Modified_Manifest_MainAttributes.jar");
+        String modJarName = getURL("Modified_Manifest_MainAttributes.jar");
         InputStream is = new URL(modJarName).openConnection()
                 .getInputStream();
         JarInputStream jin = new JarInputStream(is, true);
@@ -361,8 +342,7 @@ public class JarInputStreamTest extends junit.framework.TestCase {
 
     public void test_JarInputStream_Modified_SF_EntryAttributes_read()
             throws IOException {
-        String modJarName = Support_Resources
-                .getURL("Modified_SF_EntryAttributes.jar");
+        String modJarName = getURL("Modified_SF_EntryAttributes.jar");
         InputStream is = new URL(modJarName).openConnection()
                 .getInputStream();
         JarInputStream jin = new JarInputStream(is, true);
@@ -391,9 +371,7 @@ public class JarInputStreamTest extends junit.framework.TestCase {
     }
 
     public void test_getNextEntry() throws Exception {
-        File resources = Support_Resources.createTempFolder();
-        Support_Resources.copyFile(resources, null, "Broken_entry.jar");
-        InputStream is = Support_Resources.getStream("Broken_entry.jar");
+        InputStream is = (new URL(getURL("Broken_entry.jar")).openStream());
         JarInputStream jis = new JarInputStream(is, false);
         jis.getNextEntry();
         try {
@@ -410,5 +388,9 @@ public class JarInputStreamTest extends junit.framework.TestCase {
         } catch (IOException ee) {
             // expected
         }
+    }
+
+    public static String getURL(String fileName) {
+        return "file:///sdcard/test_resources/" + fileName;
     }
 }
