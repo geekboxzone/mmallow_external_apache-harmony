@@ -16,70 +16,30 @@
  */
 package org.apache.harmony.archive.tests.java.util.jar;
 
+import junit.framework.TestCase;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.security.cert.Certificate;
 import java.util.Enumeration;
-import java.util.Vector;
 import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
-
-import junit.framework.TestCase;
-import tests.support.Support_PlatformFile;
-import tests.support.resource.Support_Resources;
+import libcore.io.Streams;
 
 public class JarFileTest extends TestCase {
+    private static final String JAR1 = "hyts_patch.jar";
 
-    /**
-     * The file contains the following entries:
-     * <p/>
-     * <pre>
-     * META-INF/ META-INF/MANIFEST.MF
-     * foo/ foo/bar/ foo/bar/A.class
-     * Blah.txt
-     * </pre>
-     */
-    private final String JAR1 = "hyts_patch.jar";
+    private static final String JAR2 = "hyts_patch2.jar";
 
-    private final String JAR2 = "hyts_patch2.jar";
-
-    private final String JAR3 = "hyts_manifest1.jar";
-
-    private final String JAR4 = "hyts_signed.jar";
-
-    private final String JAR5 = "Integrate.jar";
-
-    private final String JAR1_ENTRY1 = "foo/bar/A.class";
-
-    private final String JAR5_SIGNED_ENTRY = "Test.class";
-
-    private final String JAR4_SIGNED_ENTRY = "coucou/FileAccess.class";
-
-    private File resources;
-
-    private final String jarName = "hyts_patch.jar"; // a 'normal' jar file
-
-    private final String entryName = "foo/bar/A.class";
-
-    private final String emptyEntryJar = "EmptyEntries_signed.jar";
-
-    private final String emptyEntry1 = "subfolder/internalSubset01.js";
-
-    private final String emptyEntry2 = "svgtest.js";
-
-    private final String emptyEntry3 = "svgunit.js";
+    private static final String JAR1_ENTRY1 = "foo/bar/A.class";
 
     @Override
     protected void setUp() {
-        resources = Support_Resources.createTempFolder();
     }
 
     /**
@@ -89,20 +49,17 @@ public class JarFileTest extends TestCase {
      * @tests java.util.jar.JarFile#JarFile(java.lang.String)
      */
     public void testConstructor() throws IOException {
-        File f = new File(resources, JAR1);
-        Support_Resources.copyFile(resources, null, JAR1);
-        assertTrue(new JarFile(f).getEntry(JAR1_ENTRY1).getName().equals(
-                JAR1_ENTRY1));
-        assertTrue(new JarFile(f.getPath()).getEntry(JAR1_ENTRY1).getName()
-                .equals(JAR1_ENTRY1));
+        File f = getFile(JAR1);
+
+        assertTrue(new JarFile(f).getEntry(JAR1_ENTRY1).getName().equals(JAR1_ENTRY1));
+        assertTrue(new JarFile(f.getPath()).getEntry(JAR1_ENTRY1).getName().equals(JAR1_ENTRY1));
     }
 
     /**
      * @tests java.util.jar.JarFile#entries()
      */
     public void testEntries() throws Exception {
-        Support_Resources.copyFile(resources, null, JAR1);
-        JarFile jarFile = new JarFile(new File(resources, JAR1));
+        JarFile jarFile = new JarFile(getFile(JAR1));
         Enumeration<JarEntry> e = jarFile.entries();
         int i;
         for (i = 0; e.hasMoreElements(); i++) {
@@ -114,8 +71,7 @@ public class JarFileTest extends TestCase {
     }
 
     public void testEntriesIterator() throws Exception {
-        Support_Resources.copyFile(resources, null, JAR1);
-        JarFile jarFile = new JarFile(new File(resources, JAR1));
+        JarFile jarFile = new JarFile(getFile(JAR1));
         Enumeration<JarEntry> enumeration = jarFile.entries();
         jarFile.close();
         try {
@@ -123,8 +79,8 @@ public class JarFileTest extends TestCase {
             fail("hasMoreElements() did not detect a closed jar file");
         } catch (IllegalStateException e) {
         }
-        Support_Resources.copyFile(resources, null, JAR1);
-        jarFile = new JarFile(new File(resources, JAR1));
+
+        jarFile = new JarFile(getFile(JAR1));
         enumeration = jarFile.entries();
         jarFile.close();
         try {
@@ -136,17 +92,15 @@ public class JarFileTest extends TestCase {
 
     public void test_getEntryLjava_lang_String() throws IOException {
         try {
-            Support_Resources.copyFile(resources, null, jarName);
-            JarFile jarFile = new JarFile(new File(resources, jarName));
+            JarFile jarFile = new JarFile(getFile(JAR1));
             assertEquals("Error in returned entry", 311, jarFile.getEntry(
-                    entryName).getSize());
+                    JAR1_ENTRY1).getSize());
             jarFile.close();
         } catch (Exception e) {
             fail("Exception during test: " + e.toString());
         }
 
-        Support_Resources.copyFile(resources, null, jarName);
-        JarFile jarFile = new JarFile(new File(resources, jarName));
+        JarFile jarFile = new JarFile(getFile(JAR1));
         Enumeration<JarEntry> enumeration = jarFile.entries();
         assertTrue(enumeration.hasMoreElements());
         while (enumeration.hasMoreElements()) {
@@ -160,43 +114,26 @@ public class JarFileTest extends TestCase {
         try {
             jarFile.close();
             jarFile.getEntry(je.getName());
-            // fail("IllegalStateException expected.");
-        } catch (IllegalStateException ee) { // Per documentation exception
-            // may be thrown.
-            // expected
+            fail("IllegalStateException expected.");
+        } catch (IllegalStateException expected) {
         }
     }
 
     public void test_getJarEntryLjava_lang_String() throws IOException {
-        try {
-            Support_Resources.copyFile(resources, null, jarName);
-            JarFile jarFile = new JarFile(new File(resources, jarName));
-            assertEquals("Error in returned entry", 311, jarFile.getJarEntry(
-                    entryName).getSize());
-            jarFile.close();
-        } catch (Exception e) {
-            fail("Exception during test: " + e.toString());
-        }
+        JarFile jarFile = new JarFile(getFile(JAR1));
+        assertEquals("Error in returned entry", 311, jarFile.getJarEntry(
+                JAR1_ENTRY1).getSize());
+        jarFile.close();
 
-        Support_Resources.copyFile(resources, null, jarName);
-        JarFile jarFile = new JarFile(new File(resources, jarName));
+        jarFile = new JarFile(getFile(JAR1));
         Enumeration<JarEntry> enumeration = jarFile.entries();
         assertTrue(enumeration.hasMoreElements());
-        while (enumeration.hasMoreElements()) {
-            JarEntry je = enumeration.nextElement();
-            jarFile.getJarEntry(je.getName());
-        }
-
-        enumeration = jarFile.entries();
-        assertTrue(enumeration.hasMoreElements());
         JarEntry je = enumeration.nextElement();
+        jarFile.close();
         try {
-            jarFile.close();
             jarFile.getJarEntry(je.getName());
-            // fail("IllegalStateException expected.");
-        } catch (IllegalStateException ee) { // Per documentation exception
-            // may be thrown.
-            // expected
+            fail("IllegalStateException expected.");
+        } catch (IllegalStateException ee) {
         }
     }
 
@@ -204,80 +141,10 @@ public class JarFileTest extends TestCase {
      * @tests java.util.jar.JarFile#getJarEntry(java.lang.String)
      */
     public void testGetJarEntry() throws Exception {
-        Support_Resources.copyFile(resources, null, JAR1);
-        JarFile jarFile = new JarFile(new File(resources, JAR1));
+        JarFile jarFile = new JarFile(getFile(JAR1));
         assertEquals("Error in returned entry", 311, jarFile.getEntry(
                 JAR1_ENTRY1).getSize());
         jarFile.close();
-
-        // tests for signed jars
-        // test all signed jars in the /Testres/Internal/SignedJars directory
-        String jarDirUrl = Support_Resources
-                .getResourceURL("/../internalres/signedjars");
-        Vector<String> signedJars = new Vector<String>();
-        try {
-            InputStream is = new URL(jarDirUrl + "/jarlist.txt").openStream();
-            while (is.available() > 0) {
-                StringBuilder linebuff = new StringBuilder(80); // Typical line
-                // length
-                done:
-                while (true) {
-                    int nextByte = is.read();
-                    switch (nextByte) {
-                        case -1:
-                            break done;
-                        case (byte) '\r':
-                            if (linebuff.length() == 0) {
-                                // ignore
-                            }
-                            break done;
-                        case (byte) '\n':
-                            if (linebuff.length() == 0) {
-                                // ignore
-                            }
-                            break done;
-                        default:
-                            linebuff.append((char) nextByte);
-                    }
-                }
-                if (linebuff.length() == 0) {
-                    break;
-                }
-                String line = linebuff.toString();
-                signedJars.add(line);
-            }
-            is.close();
-        } catch (IOException e) {
-            // no list of jars found
-        }
-
-        for (int i = 0; i < signedJars.size(); i++) {
-            String jarName = signedJars.get(i);
-            try {
-                File file = Support_Resources.getExternalLocalFile(jarDirUrl
-                        + "/" + jarName);
-                jarFile = new JarFile(file, true);
-                boolean foundCerts = false;
-                Enumeration<JarEntry> e = jarFile.entries();
-                while (e.hasMoreElements()) {
-                    JarEntry entry = e.nextElement();
-                    InputStream is = jarFile.getInputStream(entry);
-                    is.skip(100000);
-                    is.close();
-                    Certificate[] certs = entry.getCertificates();
-                    if (certs != null && certs.length > 0) {
-                        foundCerts = true;
-                        break;
-                    }
-                }
-                assertTrue(
-                        "No certificates found during signed jar test for jar \""
-                                + jarName + "\"", foundCerts);
-            } catch (IOException e) {
-                fail("Exception during signed jar test for jar \"" + jarName
-                        + "\": " + e.toString());
-            }
-        }
     }
 
     /**
@@ -286,23 +153,19 @@ public class JarFileTest extends TestCase {
     public void testGetManifest() throws Exception {
         // Test for method java.util.jar.Manifest
         // java.util.jar.JarFile.getManifest()
-        Support_Resources.copyFile(resources, null, JAR1);
-        JarFile jarFile = new JarFile(new File(resources, JAR1));
+        JarFile jarFile = new JarFile(getFile(JAR1));
         InputStream is = jarFile.getInputStream(jarFile.getEntry(JAR1_ENTRY1));
         assertTrue(is.available() > 0);
         assertNotNull("Error--Manifest not returned", jarFile.getManifest());
         jarFile.close();
 
-        Support_Resources.copyFile(resources, null, JAR2);
-        jarFile = new JarFile(new File(resources, JAR2));
+        jarFile = new JarFile(getFile(JAR2));
         assertNull("Error--should have returned null", jarFile.getManifest());
         jarFile.close();
 
         // jarName3 was created using the following test
-        Support_Resources.copyFile(resources, null, JAR3);
-        jarFile = new JarFile(new File(resources, JAR3));
-        assertNotNull("Should find manifest without verifying", jarFile
-                .getManifest());
+        jarFile = new JarFile(getFile("hyts_manifest1.jar"));
+        assertNotNull("Should find manifest without verifying", jarFile.getManifest());
         jarFile.close();
 
         // this is used to create jarName3 used in the previous test
@@ -312,31 +175,32 @@ public class JarFileTest extends TestCase {
         ByteArrayOutputStream manOut = new ByteArrayOutputStream();
         manifest.write(manOut);
         byte[] manBytes = manOut.toByteArray();
-        File file = new File(Support_PlatformFile.getNewPlatformFile(
-                "hyts_manifest1", ".jar"));
-        JarOutputStream jarOut = new JarOutputStream(new FileOutputStream(file
-                .getAbsolutePath()));
-        ZipEntry entry = new ZipEntry("META-INF/");
-        entry.setSize(0);
-        jarOut.putNextEntry(entry);
-        entry = new ZipEntry(JarFile.MANIFEST_NAME);
-        entry.setSize(manBytes.length);
-        jarOut.putNextEntry(entry);
-        jarOut.write(manBytes);
-        entry = new ZipEntry("myfile");
-        entry.setSize(1);
-        jarOut.putNextEntry(entry);
-        jarOut.write(65);
-        jarOut.close();
-        JarFile jar = new JarFile(file.getAbsolutePath(), false);
-        assertNotNull("Should find manifest without verifying", jar
-                .getManifest());
-        jar.close();
-        file.delete();
+        File file = File.createTempFile("test", ".jar");
+        try {
+            JarOutputStream jarOut = new JarOutputStream(new FileOutputStream(file
+                    .getAbsolutePath()));
+            ZipEntry entry = new ZipEntry("META-INF/");
+            entry.setSize(0);
+            jarOut.putNextEntry(entry);
+            entry = new ZipEntry(JarFile.MANIFEST_NAME);
+            entry.setSize(manBytes.length);
+            jarOut.putNextEntry(entry);
+            jarOut.write(manBytes);
+            entry = new ZipEntry("myfile");
+            entry.setSize(1);
+            jarOut.putNextEntry(entry);
+            jarOut.write(65);
+            jarOut.close();
+            JarFile jar = new JarFile(file.getAbsolutePath(), false);
+            assertNotNull("Should find manifest without verifying", jar
+                    .getManifest());
+            jar.close();
+        } finally {
+            file.delete();
+        }
 
         try {
-            Support_Resources.copyFile(resources, null, JAR2);
-            JarFile jF = new JarFile(new File(resources, JAR2));
+            JarFile jF = new JarFile(getFile(JAR2));
             jF.close();
             jF.getManifest();
             fail("IllegalStateException expected");
@@ -349,24 +213,17 @@ public class JarFileTest extends TestCase {
      * @tests java.util.jar.JarFile#getInputStream(java.util.zip.ZipEntry)
      */
     public void testGetInputStream() throws Exception {
-        File localFile;
-        byte[] b = new byte[1024];
-        JarFile jf;
-        InputStream is;
+        JarFile jf = new JarFile(getFile(JAR1));
 
-        Support_Resources.copyFile(resources, null, JAR1);
-        localFile = new File(resources, JAR1);
-
-        jf = new JarFile(localFile);
-
-        is = jf.getInputStream(new JarEntry("invalid"));
+        InputStream is = jf.getInputStream(new JarEntry("invalid"));
         assertNull("Got stream for non-existent entry", is);
 
         is = jf.getInputStream(jf.getEntry(JAR1_ENTRY1));
         assertTrue("Returned invalid stream", is.available() > 0);
 
         // try to read class file header
-        is.read(b, 0, 1024);
+        byte[] b = new byte[4];
+        Streams.readFully(is, b);
         jf.close();
         assertEquals("Invalid bytes were read", (byte) 0xCA, b[0]);
         assertEquals("Invalid bytes were read", (byte) 0xFE, b[1]);
@@ -380,17 +237,17 @@ public class JarFileTest extends TestCase {
      * @tests java.util.jar.JarFile#getInputStream(java.util.zip.ZipEntry)
      */
     public void testInputStreamOperations() throws Exception {
-        Support_Resources.copyFile(resources, null, JAR4);
-        File signedFile = new File(resources, JAR4);
+        final String inputJar = "hyts_signed.jar";
+        final String signedEntry = "coucou/FileAccess.class";
 
-        JarFile jar = new JarFile(signedFile);
-        JarEntry entry = new JarEntry(JAR4_SIGNED_ENTRY);
+        JarFile jar = new JarFile(getFile(inputJar));
+        JarEntry entry = new JarEntry(signedEntry);
         InputStream in = jar.getInputStream(entry);
         in.read();
 
         // RI verifies only entries which appear via getJarEntry method
-        jar = new JarFile(signedFile);
-        entry = jar.getJarEntry(JAR4_SIGNED_ENTRY);
+        jar = new JarFile(getFile(inputJar));
+        entry = jar.getJarEntry(signedEntry);
         in = jar.getInputStream(entry);
         readExactly(in, (int) entry.getSize() - 1);
         assertNull(entry.getCertificates());
@@ -398,8 +255,8 @@ public class JarFileTest extends TestCase {
         assertNotNull(entry.getCertificates());
         assertEquals(-1, in.read());
 
-        jar = new JarFile(signedFile);
-        entry = jar.getJarEntry(JAR4_SIGNED_ENTRY);
+        jar = new JarFile(getFile(inputJar));
+        entry = jar.getJarEntry(signedEntry);
         entry.setSize(entry.getSize() - 1);
         in = jar.getInputStream(entry);
         readExactly(in, (int) entry.getSize() - 1);
@@ -417,7 +274,7 @@ public class JarFileTest extends TestCase {
      * Performs as many read() calls as necessary to read {@code numBytes} from
      * the stream. Should the stream exhaust early, this method will fail.
      */
-    private void readExactly(InputStream in, int numBytes) throws IOException {
+    private static void readExactly(InputStream in, int numBytes) throws IOException {
         byte[] buffer = new byte[1024];
         while (numBytes > 0) {
             int read = in.read(buffer, 0, Math.min(numBytes, 1024));
@@ -431,14 +288,11 @@ public class JarFileTest extends TestCase {
      * algorithm-Digest-Manifest-Main-Attributes entry in .SF file.
      */
     public void testJar14() throws IOException {
-        String modifiedJarName = "Created_by_1_4.jar";
-        Support_Resources.copyFile(resources, null, modifiedJarName);
-        JarFile jarFile = new JarFile(new File(resources, modifiedJarName),
-                true);
+        JarFile jarFile = new JarFile(getFile("Created_by_1_4.jar"), true);
         Enumeration<JarEntry> entries = jarFile.entries();
         while (entries.hasMoreElements()) {
             ZipEntry zipEntry = entries.nextElement();
-            jarFile.getInputStream(zipEntry);
+            jarFile.getInputStream(zipEntry).skip(Long.MAX_VALUE);
         }
     }
 
@@ -446,8 +300,7 @@ public class JarFileTest extends TestCase {
      * The jar is intact, then everything is all right.
      */
     public void testJarVerification() throws IOException {
-        Support_Resources.copyFile(resources, null, JAR5);
-        JarFile jarFile = new JarFile(new File(resources, JAR5), true);
+        JarFile jarFile = new JarFile(getFile("Integrate.jar"), true);
         Enumeration<JarEntry> entries = jarFile.entries();
         while (entries.hasMoreElements()) {
             ZipEntry zipEntry = entries.nextElement();
@@ -459,16 +312,16 @@ public class JarFileTest extends TestCase {
      * The jar is intact, but the entry object is modified.
      */
     public void testJarVerificationModifiedEntry() throws IOException {
-        Support_Resources.copyFile(resources, null, JAR5);
-        File f = new File(resources, JAR5);
+        final String inputJar = "Integrate.jar";
+        final String signedEntry = "Test.class";
 
-        JarFile jarFile = new JarFile(f);
-        ZipEntry zipEntry = jarFile.getJarEntry(JAR5_SIGNED_ENTRY);
+        JarFile jarFile = new JarFile(getFile(inputJar));
+        ZipEntry zipEntry = jarFile.getJarEntry(signedEntry);
         zipEntry.setSize(zipEntry.getSize() + 1);
         jarFile.getInputStream(zipEntry).skip(Long.MAX_VALUE);
 
-        jarFile = new JarFile(f);
-        zipEntry = jarFile.getJarEntry(JAR5_SIGNED_ENTRY);
+        jarFile = new JarFile(getFile(inputJar));
+        zipEntry = jarFile.getJarEntry(signedEntry);
         zipEntry.setSize(zipEntry.getSize() - 1);
         try {
             //jarFile.getInputStream(zipEntry).skip(Long.MAX_VALUE);
@@ -484,14 +337,10 @@ public class JarFileTest extends TestCase {
      * thrown out.
      */
     public void testJarFileInsertEntryInManifestJar() throws IOException {
-        String modifiedJarName = "Inserted_Entry_Manifest.jar";
-        Support_Resources.copyFile(resources, null, modifiedJarName);
-        JarFile jarFile = new JarFile(new File(resources, modifiedJarName),
-                true);
+        JarFile jarFile = new JarFile(getFile("Inserted_Entry_Manifest.jar"), true);
         Enumeration<JarEntry> entries = jarFile.entries();
         int count = 0;
         while (entries.hasMoreElements()) {
-
             ZipEntry zipEntry = entries.nextElement();
             jarFile.getInputStream(zipEntry);
             count++;
@@ -504,10 +353,7 @@ public class JarFileTest extends TestCase {
      * thrown out.
      */
     public void testInsertedEntryManifestWithDigestCode() throws IOException {
-        String modifiedJarName = "Inserted_Entry_Manifest_with_DigestCode.jar";
-        Support_Resources.copyFile(resources, null, modifiedJarName);
-        JarFile jarFile = new JarFile(new File(resources, modifiedJarName),
-                true);
+        JarFile jarFile = new JarFile(getFile("Inserted_Entry_Manifest_with_DigestCode.jar"), true);
         Enumeration<JarEntry> entries = jarFile.entries();
         int count = 0;
         while (entries.hasMoreElements()) {
@@ -524,10 +370,7 @@ public class JarFileTest extends TestCase {
      * from getInputStream method has been read to end.
      */
     public void testJarFileModifiedClass() throws IOException {
-        String modifiedJarName = "Modified_Class.jar";
-        Support_Resources.copyFile(resources, null, modifiedJarName);
-        JarFile jarFile = new JarFile(new File(resources, modifiedJarName),
-                true);
+        JarFile jarFile = new JarFile(getFile("Modified_Class.jar"), true);
         Enumeration<JarEntry> entries = jarFile.entries();
         while (entries.hasMoreElements()) {
             ZipEntry zipEntry = entries.nextElement();
@@ -553,10 +396,7 @@ public class JarFileTest extends TestCase {
      * JarEntry will throw security exception.
      */
     public void testJarFileModifiedManifestMainAttributes() throws IOException {
-        String modifiedJarName = "Modified_Manifest_MainAttributes.jar";
-        Support_Resources.copyFile(resources, null, modifiedJarName);
-        JarFile jarFile = new JarFile(new File(resources, modifiedJarName),
-                true);
+        JarFile jarFile = new JarFile(getFile("Modified_Manifest_MainAttributes.jar"), true);
         Enumeration<JarEntry> entries = jarFile.entries();
         while (entries.hasMoreElements()) {
             ZipEntry zipEntry = entries.nextElement();
@@ -575,9 +415,7 @@ public class JarFileTest extends TestCase {
      * Security Exception.
      */
     public void testJarFileModifiedManifestEntryAttributes() throws IOException {
-        String modifiedJarName = "Modified_Manifest_EntryAttributes.jar";
-        Support_Resources.copyFile(resources, null, modifiedJarName);
-        JarFile jarFile = new JarFile(new File(resources, modifiedJarName),
+        JarFile jarFile = new JarFile(getFile("Modified_Manifest_EntryAttributes.jar"),
                 true);
         Enumeration<JarEntry> entries = jarFile.entries();
         while (entries.hasMoreElements()) {
@@ -596,10 +434,7 @@ public class JarFileTest extends TestCase {
      * JarFile.getInputStream of any JarEntry will throw Security Exception.
      */
     public void testJarFileModifiedSfEntryAttributes() throws IOException {
-        String modifiedJarName = "Modified_SF_EntryAttributes.jar";
-        Support_Resources.copyFile(resources, null, modifiedJarName);
-        JarFile jarFile = new JarFile(new File(resources, modifiedJarName),
-                true);
+        JarFile jarFile = new JarFile(getFile("Modified_SF_EntryAttributes.jar"), true);
         Enumeration<JarEntry> entries = jarFile.entries();
         while (entries.hasMoreElements()) {
             ZipEntry zipEntry = entries.nextElement();
@@ -613,8 +448,7 @@ public class JarFileTest extends TestCase {
     }
 
     public void testGetInputStreamLjava_util_jar_JarEntry() throws IOException {
-        Support_Resources.copyFile(resources, null, JAR1);
-        JarFile jf = new JarFile(new File(resources, JAR1));
+        JarFile jf = new JarFile(getFile(JAR1));
         InputStream is = jf.getInputStream(jf.getEntry(JAR1_ENTRY1));
         assertTrue(is.available() > 0);
 
@@ -638,37 +472,29 @@ public class JarFileTest extends TestCase {
             // Expected
         }
 
-        jf = new JarFile(new File(resources, JAR1));
+        jf = new JarFile(getFile(JAR1));
         is = jf.getInputStream(new JarEntry("invalid"));
         assertNull(is);
         jf.close();
     }
 
     public void testJarVerificationEmptyEntry() throws IOException {
-        Support_Resources.copyFile(resources, null, emptyEntryJar);
-        File f = new File(resources, emptyEntryJar);
+        JarFile jarFile = new JarFile(getFile("EmptyEntries_signed.jar"));
 
-        JarFile jarFile = new JarFile(f);
-
-        ZipEntry zipEntry = jarFile.getJarEntry(emptyEntry1);
+        ZipEntry zipEntry = jarFile.getJarEntry("subfolder/internalSubset01.js");
         int res = jarFile.getInputStream(zipEntry).read(new byte[100], 0, 100);
         assertEquals("Wrong length of empty jar entry", -1, res);
 
-        zipEntry = jarFile.getJarEntry(emptyEntry2);
+        zipEntry = jarFile.getJarEntry("svgtest.js");
         res = jarFile.getInputStream(zipEntry).read(new byte[100], 0, 100);
         assertEquals("Wrong length of empty jar entry", -1, res);
 
-        zipEntry = jarFile.getJarEntry(emptyEntry3);
+        zipEntry = jarFile.getJarEntry("svgunit.js");
         res = jarFile.getInputStream(zipEntry).read();
         assertEquals("Wrong length of empty jar entry", -1, res);
     }
 
-    // Regression test for HARMONY-6384
-    public void testJarWrittenWithFlush() throws IOException {
-        File f = new File(resources, "hyts_flushed.jar");
-        Support_Resources.copyFile(resources, null, "hyts_flushed.jar");
-
-        // Used to crash with ZipException: Central Directory Entry not found
-        new JarFile(f);
+    public static File getFile(String fileName) {
+        return new File("/sdcard/test_resources/" + fileName);
     }
 }
