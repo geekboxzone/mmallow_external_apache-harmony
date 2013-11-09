@@ -32,11 +32,10 @@ harmony_test_src_files := \
 
 # We need to use -maxdepth 4 because there's a non-resource directory called "resources" deeper in the tree.
 define harmony-test-resource-dirs
-  $(shell cd $(LOCAL_PATH) && find . -maxdepth 4 -name resources 2> /dev/null)
+  $(foreach dir,$(1),$(patsubst %,./%,$(shell cd $(LOCAL_PATH) && find $(dir) -maxdepth 4 -name resources 2> /dev/null)))
 endef
-harmony_test_resource_dirs := \
-    $(call harmony-test-resource-dirs,$(harmony_test_dirs)) \
-    $(call harmony-test-resource-dirs,luni)
+
+harmony_test_resource_dirs := $(call harmony-test-resource-dirs,$(harmony_test_dirs))
 
 harmony_test_javac_flags=-encoding UTF-8
 harmony_test_javac_flags+=-Xmaxwarns 9999999
@@ -47,8 +46,8 @@ LOCAL_JAVA_RESOURCE_DIRS := $(harmony_test_resource_dirs)
 LOCAL_NO_STANDARD_LIBRARIES := true
 LOCAL_JAVA_LIBRARIES := core core-junit
 LOCAL_JAVACFLAGS := $(harmony_test_javac_flags)
-LOCAL_MODULE_TAGS := tests
 LOCAL_MODULE := apache-harmony-tests
+LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(BUILD_STATIC_JAVA_LIBRARY)
 
@@ -59,5 +58,8 @@ ifeq ($(WITH_HOST_DALVIK),true)
     LOCAL_JAVA_LIBRARIES := core-junit-hostdex
     LOCAL_JAVACFLAGS := $(harmony_test_javac_flags)
     LOCAL_MODULE := apache-harmony-tests-hostdex
+    LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
     include $(BUILD_HOST_DALVIK_JAVA_LIBRARY)
 endif
+
+include $(call all-makefiles-under,$(LOCAL_PATH))
