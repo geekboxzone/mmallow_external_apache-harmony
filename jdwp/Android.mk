@@ -25,11 +25,13 @@ LOCAL_JAVA_LIBRARIES := junit
 LOCAL_MODULE := apache-harmony-jdwp-tests-host
 include $(BUILD_HOST_JAVA_LIBRARY)
 
+ifeq ($(WITH_HOST_DALVIK),true)
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(harmony_jdwp_test_src_files)
 LOCAL_JAVA_LIBRARIES := junit-hostdex
 LOCAL_MODULE := apache-harmony-jdwp-tests-hostdex
 include $(BUILD_HOST_DALVIK_JAVA_LIBRARY)
+endif
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
@@ -43,7 +45,9 @@ jdwp_test_runtime_options += -verbose:jdwp
 #jdwp_test_runtime_options += -verbose:threads
 jdwp_test_timeout_ms := 10000 # 10s.
 
+ifeq ($(WITH_HOST_DALVIK),true)
 jdwp_test_classpath_host := $(ANDROID_HOST_OUT)/framework/apache-harmony-jdwp-tests-hostdex.jar:$(ANDROID_HOST_OUT)/framework/junit-hostdex.jar
+endif
 jdwp_test_classpath_target := /data/jdwp/apache-harmony-jdwp-tests.jar:/data/junit/junit-targetdex.jar
 
 # If this fails complaining about TestRunner, build "external/junit" manually.
@@ -60,6 +64,7 @@ run-jdwp-tests-target: $(TARGET_OUT_DATA)/jdwp/apache-harmony-jdwp-tests.jar $(T
           -Djpda.settings.waitingTime=$(jdwp_test_timeout_ms) \
           org.apache.harmony.jpda.tests.share.AllTests
 
+ifeq ($(WITH_HOST_DALVIK),true)
 # If this fails complaining about TestRunner, build "external/junit" manually.
 .PHONY: run-jdwp-tests-host
 run-jdwp-tests-host: $(HOST_OUT_JAVA_LIBRARIES)/apache-harmony-jdwp-tests-hostdex.jar $(HOST_OUT_JAVA_LIBRARIES)/junit-hostdex.jar
@@ -70,6 +75,7 @@ run-jdwp-tests-host: $(HOST_OUT_JAVA_LIBRARIES)/apache-harmony-jdwp-tests-hostde
           -Djpda.settings.timeout=$(jdwp_test_timeout_ms) \
           -Djpda.settings.waitingTime=$(jdwp_test_timeout_ms) \
           org.apache.harmony.jpda.tests.share.AllTests
+endif
 
 .PHONY: run-jdwp-tests-ri
 run-jdwp-tests-ri: $(HOST_OUT_JAVA_LIBRARIES)/apache-harmony-jdwp-tests-host.jar $(HOST_OUT_JAVA_LIBRARIES)/junit.jar
