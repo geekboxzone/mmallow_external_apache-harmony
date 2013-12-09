@@ -177,9 +177,9 @@ public class SingleStepTest extends JDWPEventTestCase {
 
         // clear SINGLE_STEP event
         logWriter.println("==> Clearing SINGLE_STEP event..");
-        //ReplyPacket reply =
+        ReplyPacket clearRequestReply =
             debuggeeWrapper.vmMirror.clearEvent(JDWPConstants.EventKind.SINGLE_STEP, (int) requestID);
-        checkReplyPacket(setRequestReply, "Clear SINGLE_STEP event");
+        checkReplyPacket(clearRequestReply, "Clear SINGLE_STEP event");
         logWriter.println("==> SINGLE_STEP event has been cleared");
 
         // resuming debuggee
