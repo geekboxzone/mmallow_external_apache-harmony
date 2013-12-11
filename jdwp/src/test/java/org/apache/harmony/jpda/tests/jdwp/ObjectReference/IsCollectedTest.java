@@ -244,4 +244,48 @@ public class IsCollectedTest extends JDWPSyncTestCase {
 
         assertAllDataRead(checkedReply);
     }
+
+    /**
+     * This testcase exercises ObjectReference.IsCollected command.
+     * <BR>The test starts IsCollectedDebuggee class. Then attempts to know
+     * if an invalid objectID is collected and checks INVALID_OBJECT is
+     * returned.
+     */
+    public void testIsCollected002() {
+        synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
+
+        long invalidObjectID = 0xdead;
+
+        CommandPacket command = new CommandPacket(
+                JDWPCommands.ObjectReferenceCommandSet.CommandSetID,
+                JDWPCommands.ObjectReferenceCommandSet.IsCollectedCommand);
+        command.setNextValueAsObjectID(invalidObjectID);
+
+        ReplyPacket reply = debuggeeWrapper.vmMirror.performCommand(command);
+        checkReplyPacket(reply, thisCommandName, JDWPConstants.Error.INVALID_OBJECT);
+
+        synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
+    }
+
+    /**
+     * This testcase exercises ObjectReference.IsCollected command.
+     * <BR>The test starts IsCollectedDebuggee class. Then attempts to know
+     * if "null" object (id=0) is collected and checks INVALID_OBJECT is
+     * returned.
+     */
+    public void testIsCollected003() {
+        synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
+
+        long invalidObjectID = 0xdead;
+
+        CommandPacket command = new CommandPacket(
+                JDWPCommands.ObjectReferenceCommandSet.CommandSetID,
+                JDWPCommands.ObjectReferenceCommandSet.IsCollectedCommand);
+        command.setNextValueAsObjectID(invalidObjectID);
+
+        ReplyPacket reply = debuggeeWrapper.vmMirror.performCommand(command);
+        checkReplyPacket(reply, thisCommandName, JDWPConstants.Error.INVALID_OBJECT);
+
+        synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
+    }
 }
