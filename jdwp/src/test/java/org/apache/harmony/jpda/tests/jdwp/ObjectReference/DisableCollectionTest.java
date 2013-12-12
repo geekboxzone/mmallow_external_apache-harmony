@@ -144,4 +144,44 @@ public class DisableCollectionTest extends JDWPSyncTestCase {
 
         assertAllDataRead(checkedReply);
     }
+
+    /**
+     * This testcase exercises ObjectReference.DisableCollection command.
+     * <BR>The test starts DisableCollectionDebuggee class. Then attempts to
+     * disable collection for an invalid objectID and checks INVALID_OBJECT is
+     * returned.
+     */
+    public void testDisableCollection002() {
+        synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
+
+        long invalidObjectID = 0xdead;
+        disableCollection(invalidObjectID, JDWPConstants.Error.INVALID_OBJECT);
+
+        synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
+    }
+
+    /**
+     * This testcase exercises ObjectReference.DisableCollection command.
+     * <BR>The test starts DisableCollectionDebuggee class. Then attempts to
+     * disable collection for "null" object (id=0) and checks INVALID_OBJECT is
+     * returned.
+     */
+    public void testDisableCollection003() {
+        synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
+
+        long nullObjectID = 0x0;
+        disableCollection(nullObjectID, JDWPConstants.Error.INVALID_OBJECT);
+
+        synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
+    }
+
+    private void disableCollection(long objectID, int expectedErrorCode) {
+      CommandPacket command = new CommandPacket(
+          JDWPCommands.ObjectReferenceCommandSet.CommandSetID,
+          JDWPCommands.ObjectReferenceCommandSet.DisableCollectionCommand);
+      command.setNextValueAsObjectID(objectID);
+
+      ReplyPacket reply = debuggeeWrapper.vmMirror.performCommand(command);
+      checkReplyPacket(reply, thisCommandName, expectedErrorCode);
+    }
 }

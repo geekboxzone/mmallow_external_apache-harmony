@@ -149,4 +149,44 @@ public class EnableCollectionTest extends JDWPSyncTestCase {
         synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
         logWriter.println("==> " + thisTestName + " for " + thisCommandName + ": FINISH");
     }
+
+    /**
+     * This testcase exercises ObjectReference.EnableCollection command.
+     * <BR>The test starts EnableCollectionDebuggee class. Then attempts to
+     * enable collection for an invalid objectID and checks no error is
+     * returned.
+     */
+    public void testEnableCollection002() {
+        synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
+
+        long invalidObjectID = 0xdead;
+        enableCollection(invalidObjectID, JDWPConstants.Error.INVALID_OBJECT);
+
+        synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
+    }
+
+    /**
+     * This testcase exercises ObjectReference.EnableCollection command.
+     * <BR>The test starts EnableCollectionDebuggee class. Then attempts to
+     * enable collection for for "null" object (id=0) and checks no error is
+     * returned.
+     */
+    public void testEnableCollection003() {
+        synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
+
+        long nullObjectID = 0x0;
+        enableCollection(nullObjectID, JDWPConstants.Error.INVALID_OBJECT);
+
+        synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
+    }
+
+    private void enableCollection(long objectID, int expectedErrorCode) {
+      CommandPacket command = new CommandPacket(
+          JDWPCommands.ObjectReferenceCommandSet.CommandSetID,
+          JDWPCommands.ObjectReferenceCommandSet.EnableCollectionCommand);
+      command.setNextValueAsObjectID(objectID);
+
+      ReplyPacket reply = debuggeeWrapper.vmMirror.performCommand(command);
+      checkReplyPacket(reply, thisCommandName, expectedErrorCode);
+    }
 }
