@@ -7,7 +7,6 @@ define all-harmony-test-java-files-under
 endef
 
 harmony_test_dirs := \
-    archive \
     beans \
     logging \
     luni \
