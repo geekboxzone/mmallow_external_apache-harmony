@@ -31,6 +31,7 @@ import org.apache.harmony.jpda.tests.framework.jdwp.JDWPConstants;
 import org.apache.harmony.jpda.tests.framework.jdwp.ReplyPacket;
 import org.apache.harmony.jpda.tests.framework.jdwp.Value;
 import org.apache.harmony.jpda.tests.jdwp.share.JDWPSyncTestCase;
+import org.apache.harmony.jpda.tests.jdwp.share.JDWPTestConstants;
 import org.apache.harmony.jpda.tests.share.JPDADebuggeeSynchronizer;
 
 
@@ -248,21 +249,22 @@ public class IsCollectedTest extends JDWPSyncTestCase {
     /**
      * This testcase exercises ObjectReference.IsCollected command.
      * <BR>The test starts IsCollectedDebuggee class. Then attempts to know
-     * if an invalid objectID is collected and checks INVALID_OBJECT is
-     * returned.
+     * if an invalid objectID is collected and checks no error is returned and
+     * result is true.
      */
-    public void testIsCollected002() {
+    public void testIsCollected_invalid() {
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
-
-        long invalidObjectID = 0xdead;
 
         CommandPacket command = new CommandPacket(
                 JDWPCommands.ObjectReferenceCommandSet.CommandSetID,
                 JDWPCommands.ObjectReferenceCommandSet.IsCollectedCommand);
-        command.setNextValueAsObjectID(invalidObjectID);
+        command.setNextValueAsObjectID(JDWPTestConstants.INVALID_OBJECT_ID);
 
         ReplyPacket reply = debuggeeWrapper.vmMirror.performCommand(command);
-        checkReplyPacket(reply, thisCommandName, JDWPConstants.Error.INVALID_OBJECT);
+        checkReplyPacket(reply, thisCommandName);
+        boolean is_collected = reply.getNextValueAsBoolean();
+        assertAllDataRead(reply);
+        assertTrue("Invalid object id is assumed to be collected", is_collected);
 
         synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
     }
@@ -273,15 +275,13 @@ public class IsCollectedTest extends JDWPSyncTestCase {
      * if "null" object (id=0) is collected and checks INVALID_OBJECT is
      * returned.
      */
-    public void testIsCollected003() {
+    public void testIsCollected_null() {
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
-
-        long invalidObjectID = 0xdead;
 
         CommandPacket command = new CommandPacket(
                 JDWPCommands.ObjectReferenceCommandSet.CommandSetID,
                 JDWPCommands.ObjectReferenceCommandSet.IsCollectedCommand);
-        command.setNextValueAsObjectID(invalidObjectID);
+        command.setNextValueAsObjectID(JDWPTestConstants.NULL_OBJECT_ID);
 
         ReplyPacket reply = debuggeeWrapper.vmMirror.performCommand(command);
         checkReplyPacket(reply, thisCommandName, JDWPConstants.Error.INVALID_OBJECT);

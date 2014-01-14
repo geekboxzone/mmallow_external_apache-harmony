@@ -31,6 +31,7 @@ import org.apache.harmony.jpda.tests.framework.jdwp.JDWPConstants;
 import org.apache.harmony.jpda.tests.framework.jdwp.ReplyPacket;
 import org.apache.harmony.jpda.tests.framework.jdwp.Value;
 import org.apache.harmony.jpda.tests.jdwp.share.JDWPSyncTestCase;
+import org.apache.harmony.jpda.tests.jdwp.share.JDWPTestConstants;
 import org.apache.harmony.jpda.tests.share.JPDADebuggeeSynchronizer;
 
 
@@ -156,11 +157,11 @@ public class EnableCollectionTest extends JDWPSyncTestCase {
      * enable collection for an invalid objectID and checks no error is
      * returned.
      */
-    public void testEnableCollection002() {
+    public void testEnableCollection_invalid() {
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
 
-        long invalidObjectID = 0xdead;
-        enableCollection(invalidObjectID, JDWPConstants.Error.INVALID_OBJECT);
+        enableCollection(JDWPTestConstants.INVALID_OBJECT_ID,
+            JDWPConstants.Error.INVALID_OBJECT);
 
         synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
     }
@@ -171,11 +172,11 @@ public class EnableCollectionTest extends JDWPSyncTestCase {
      * enable collection for for "null" object (id=0) and checks no error is
      * returned.
      */
-    public void testEnableCollection003() {
+    public void testEnableCollection_null() {
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
 
-        long nullObjectID = 0x0;
-        enableCollection(nullObjectID, JDWPConstants.Error.INVALID_OBJECT);
+        enableCollection(JDWPTestConstants.NULL_OBJECT_ID,
+            JDWPConstants.Error.INVALID_OBJECT);
 
         synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
     }
