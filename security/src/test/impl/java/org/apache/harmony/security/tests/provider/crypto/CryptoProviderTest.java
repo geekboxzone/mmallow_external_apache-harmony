@@ -35,54 +35,16 @@ public class CryptoProviderTest extends TestCase {
 
     private static final String providerName = "Crypto";     // name of provider
     private static final String shaprng = "SHA1PRNG";   // name of algorithm
-    private static final String sha_1 = "SHA-1";      // name of algorithm
-    private static final String sha_1_alias = "SHA1";       // alias name
-    private static final String sha_1_alias2 = "SHA";        // alias name
-
-    private static final String dsaNames[] = { "SHA1withDSA",
-            "SHAwithDSA",
-            "DSAwithSHA1",
-            "SHA1/DSA",
-            "SHA/DSA",
-            "SHA-1/DSA",
-            "DSA",
-            "DSS",
-            "OID.1.2.840.10040.4.3",
-            "1.2.840.10040.4.3",
-            "1.3.14.3.2.13",
-            "1.3.14.3.2.27" };
-
-    private static final String keyFactoryNames[] = { "DSA",
-            "1.3.14.3.2.12",
-            "1.2.840.10040.4.1" };
 
     /**
      * Test against CryptoProvider() methods.
      */
     public void testCrypto() throws NoSuchAlgorithmException, NoSuchProviderException {
-        SecureRandom sr;
-        MessageDigest md;
-        Signature sign;
-        KeyFactory keyFactory;
-
-        sr = SecureRandom.getInstance(shaprng, providerName);
-
-        md = MessageDigest.getInstance(sha_1, providerName);
-        md = MessageDigest.getInstance(sha_1_alias, providerName);
-        md = MessageDigest.getInstance(sha_1_alias2, providerName);
-
-        for (int i = 0; i < dsaNames.length; i++) {
-            sign = Signature.getInstance(dsaNames[i], providerName);
-        }
-
-        for (int i = 0; i < keyFactoryNames.length; i++) {
-            keyFactory = KeyFactory.getInstance(keyFactoryNames[i], providerName);
-        }
+        SecureRandom sr = SecureRandom.getInstance(shaprng, providerName);
     }
 
 
     public static Test suite() {
         return new TestSuite(CryptoProviderTest.class);
     }
-
 }
