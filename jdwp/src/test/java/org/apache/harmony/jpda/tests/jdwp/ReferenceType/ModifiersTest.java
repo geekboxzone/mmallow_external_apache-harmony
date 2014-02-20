@@ -41,6 +41,8 @@ public class ModifiersTest extends JDWPSyncTestCase {
     static final int testStatusFailed = -1;
     static final String thisCommandName = "ReferenceType.Modifiers command";
     static final String debuggeeSignature = "Lorg/apache/harmony/jpda/tests/jdwp/share/debuggee/HelloWorld;";
+    static final String debuggeeInterfaceSignature = "Lorg/apache/harmony/jpda/tests/jdwp/share/debuggee/HelloWorldInterface;";
+    static final String debuggeeInterfaceClassName = "org.apache.harmony.jpda.tests.jdwp.share.debuggee.HelloWorldInterface";
 
     protected String getDebuggeeClassName() {
         return "org.apache.harmony.jpda.tests.jdwp.share.debuggee.HelloWorld";
@@ -125,13 +127,106 @@ public class ModifiersTest extends JDWPSyncTestCase {
                 "Returned modifiers contain unexpected ACC_ABSTRACT flag(0x0400);\n";
         }
 
-        logWriter.println
-        ("=> CHECK1: PASSED: expected modifiers are returned: ACC_PUBLIC flag(0x0001), ACC_SUPER flag(0x0020)");
         synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
         logWriter.println("==> " + thisTestName + " for " + thisCommandName + ": FINISH");
 
         if (failMessage.length() > 0) {
             fail(failMessage);
+        } else {
+            logWriter.println
+            ("=> CHECK1: PASSED: expected modifiers are returned: ACC_PUBLIC flag(0x0001), ACC_SUPER flag(0x0020)");
+        }
+
+        assertAllDataRead(modifiersReply);
+    }
+
+    /**
+     * This testcase exercises ReferenceType.Modifiers command.
+     * <BR>The test starts HelloWorld debuggee, requests referenceTypeId
+     * for an interface HelloWorldInterface by VirtualMachine.ClassesBySignature command,
+     * then performs ReferenceType.Modifiers command and checks that returned
+     * Modifiers contain expected flags: ACC_ABSTRACT, ACC_INTERFACE;
+     * but do NOT contain flags: ACC_PUBLIC, ACC_FINAL, ACC_SUPER, ACC_ABSTRACT
+     */
+    public void testModifiers002() {
+        String thisTestName = "testModifiers002";
+        logWriter.println("==> " + thisTestName + " for " + thisCommandName + ": START...");
+        String failMessage = "";
+        synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
+
+        long refTypeID = getClassIDBySignature(debuggeeInterfaceSignature);
+
+        logWriter.println("=> Debuggee Interface class = " + debuggeeInterfaceClassName);
+        logWriter.println("=> referenceTypeID for Debuggee interface = " + refTypeID);
+        logWriter.println("=> CHECK1: send " + thisCommandName + " and check reply...");
+
+        CommandPacket modifiersCommand = new CommandPacket(
+                JDWPCommands.ReferenceTypeCommandSet.CommandSetID,
+                JDWPCommands.ReferenceTypeCommandSet.ModifiersCommand);
+        modifiersCommand.setNextValueAsReferenceTypeID(refTypeID);
+
+        ReplyPacket modifiersReply = debuggeeWrapper.vmMirror.performCommand(modifiersCommand);
+        modifiersCommand = null;
+        checkReplyPacket(modifiersReply, thisCommandName);
+
+        int returnedModifiers = modifiersReply.getNextValueAsInt();
+/*
+ * The value of the access_flags item is a mask of modifiers used with class and
+ * interface declarations. The access_flags modifiers are:
+ * Flag Name      Value   Meaning                                               Used By
+ * ACC_PUBLIC     0x0001  Is public; may be accessed from outside its package.  Class, interface
+ * ACC_FINAL      0x0010  Is final; no subclasses allowed.                      Class
+ * ACC_SUPER      0x0020  Treat superclass methods specially in invokespecial.  Class, interface
+ * ACC_INTERFACE  0x0200  Is an interface.                                      Interface
+ * ACC_ABSTRACT   0x0400  Is abstract; may not be instantiated.                 Class, interface
+ */
+        logWriter.println("=> Returned modifiers = 0x" + Integer.toHexString(returnedModifiers));
+
+        int publicFlag = 0x0001; // expected
+        int finalFlag = 0x0010; // unexpected
+        int superFlag = 0x0020; // unexpected
+        int interfaceFlag = 0x0200; // expected
+        int abstractFlag = 0x0400; // unexpected
+
+        if ( (returnedModifiers & publicFlag) != 0 ) {
+            logWriter.println
+                ("## CHECK1: FAILURE: Returned modifiers contain unexpected ACC_PUBLIC flag(0x0001)");
+            failMessage = failMessage +
+                "Returned modifiers contain unexpected ACC_PUBLIC flag(0x0001);\n";
+        }
+        if ( (returnedModifiers & superFlag) != 0 ) {
+            logWriter.println
+                ("## CHECK1: FAILURE: Returned modifiers contain unexpected ACC_SUPER flag(0x0020)");
+            failMessage = failMessage +
+                "Returned modifiers contain unexpected ACC_SUPER flag(0x0020);\n";
+        }
+        if ( (returnedModifiers & finalFlag) != 0 ) {
+            logWriter.println
+                ("## CHECK1: FAILURE: Returned modifiers contain unexpected ACC_FINAL flag(0x0010)");
+            failMessage = failMessage +
+                "Returned modifiers contain unexpected ACC_FINAL flag(0x0010);\n";
+        }
+        if ( (returnedModifiers & interfaceFlag) == 0 ) {
+            logWriter.println
+                ("## CHECK1: FAILURE: Returned modifiers do not contain expected ACC_INTERFACE flag(0x0200)");
+            failMessage = failMessage +
+                "Returned modifiers do not contain expected ACC_INTERFACE flag(0x0200);\n";
+        }
+        if ( (returnedModifiers & abstractFlag) == 0 ) {
+            logWriter.println
+                ("## CHECK1: FAILURE: Returned modifiers do not contain expected ACC_ABSTRACT flag(0x0400)");
+            failMessage = failMessage +
+                "Returned modifiers do not contain expected ACC_ABSTRACT flag(0x0400);\n";
+        }
+
+        synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
+        logWriter.println("==> " + thisTestName + " for " + thisCommandName + ": FINISH");
+
+        if (failMessage.length() > 0) {
+            fail(failMessage);
+        } else {
+            logWriter.println
+            ("=> CHECK1: PASSED: expected modifiers are returned: ACC_INTERFACE flag(0x0200), ACC_ABSTRACT flag(0x0400)");
         }
 
         assertAllDataRead(modifiersReply);

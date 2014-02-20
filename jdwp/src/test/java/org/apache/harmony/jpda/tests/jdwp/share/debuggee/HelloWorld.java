@@ -31,7 +31,7 @@ import org.apache.harmony.jpda.tests.share.SyncDebuggee;
 /**
  * This class provides simple HelloWorld debuggee class used sync connection.
  */
-public class HelloWorld extends SyncDebuggee {
+public class HelloWorld extends SyncDebuggee implements HelloWorldInterface {
 
     public void run() {
         synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_READY);
@@ -42,4 +42,8 @@ public class HelloWorld extends SyncDebuggee {
     public static void main(String [] args) {
         runDebuggee(HelloWorld.class);
     }
+}
+
+interface HelloWorldInterface {
+    void run();
 }
