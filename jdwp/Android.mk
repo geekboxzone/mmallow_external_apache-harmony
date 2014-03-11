@@ -37,7 +37,8 @@ include $(call all-makefiles-under,$(LOCAL_PATH))
 
 #jdwp_test_runtime_target := dalvikvm -XXlib:libart.so
 jdwp_test_runtime_target := dalvikvm -XXlib:libartd.so
-jdwp_test_runtime_host := $(ANDROID_BUILD_TOP)/art/tools/art
+#jdwp_test_runtime_host := $(ANDROID_HOST_OUT)/bin/art
+jdwp_test_runtime_host := $(ANDROID_HOST_OUT)/bin/art -d
 
 jdwp_test_runtime_options :=
 jdwp_test_runtime_options += -verbose:jdwp
@@ -67,7 +68,7 @@ run-jdwp-tests-target: $(TARGET_OUT_DATA)/jdwp/apache-harmony-jdwp-tests.jar $(T
 ifeq ($(WITH_HOST_DALVIK),true)
 # If this fails complaining about TestRunner, build "external/junit" manually.
 .PHONY: run-jdwp-tests-host
-run-jdwp-tests-host: $(HOST_OUT_JAVA_LIBRARIES)/apache-harmony-jdwp-tests-hostdex.jar $(HOST_OUT_JAVA_LIBRARIES)/junit-hostdex.jar
+run-jdwp-tests-host: $(HOST_OUT_EXECUTABLES)/art $(HOST_OUT_JAVA_LIBRARIES)/apache-harmony-jdwp-tests-hostdex.jar $(HOST_OUT_JAVA_LIBRARIES)/junit-hostdex.jar
 	$(jdwp_test_runtime_host) -cp $(jdwp_test_classpath_host) \
           -Djpda.settings.verbose=true \
           -Djpda.settings.syncPort=34016 \
