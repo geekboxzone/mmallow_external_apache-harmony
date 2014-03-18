@@ -74,6 +74,7 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.SetValues002Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.SetValuesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.SuperClassTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.Breakpoint002Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.BreakpointTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.ClassPrepareTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.CombinedEvents002Test.class);
