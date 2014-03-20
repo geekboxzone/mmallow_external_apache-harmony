@@ -113,6 +113,7 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.GetValues003Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.GetValuesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.InvokeMethod002Test.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.InvokeMethod003Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.InvokeMethodTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.IsCollectedTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ObjectReference.MonitorInfoTest.class);
