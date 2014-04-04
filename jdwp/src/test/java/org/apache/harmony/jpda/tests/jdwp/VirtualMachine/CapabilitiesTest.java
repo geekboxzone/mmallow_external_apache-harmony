@@ -69,12 +69,10 @@ public class CapabilitiesTest extends JDWPSyncTestCase {
 
         logWriter.println("\tcanWatchFieldModification\t= "
                 + canWatchFieldModification);
-        // TODO: the RI implements this, and we should, but currently don't. "@KnownFailure".
-        //assertTrue("canWatchFieldModification must be true", canWatchFieldModification);
+        assertTrue("canWatchFieldModification must be true", canWatchFieldModification);
 
         logWriter.println("\tcanWatchFieldAccess\t\t= " + canWatchFieldAccess);
-        // TODO: the RI implements this, and we should, but currently don't. "@KnownFailure".
-        //assertTrue("canWatchFieldAccess must be true", canWatchFieldAccess);
+        assertTrue("canWatchFieldAccess must be true", canWatchFieldAccess);
 
         logWriter.println("\tcanGetBytecodes\t\t\t= " + canGetBytecodes);
         assertTrue("canGetBytecodes must be true", canGetBytecodes);

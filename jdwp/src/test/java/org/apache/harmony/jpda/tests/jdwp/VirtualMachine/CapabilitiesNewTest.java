@@ -38,8 +38,8 @@ import org.apache.harmony.jpda.tests.share.JPDADebuggeeSynchronizer;
 public class CapabilitiesNewTest extends JDWPSyncTestCase {
 
     static Object [][] capabilitiesFlags = {
-            {"canWatchFieldModification",        null},
-            {"canWatchFieldAccess",              null},
+            {"canWatchFieldModification",        "true"},
+            {"canWatchFieldAccess",              "true"},
             {"canGetBytecodes",                  "true"},
             {"canGetSyntheticAttribute",         "true"},
             {"canGetOwnedMonitorInfo",           "true"},
