@@ -49,7 +49,7 @@ public class CapabilitiesNewTest extends JDWPSyncTestCase {
             {"canAddMethod",                     null},
             {"canUnrestrictedlyRedefineClasses", null},
             {"canPopFrames",                     null},
-            {"canUseInstanceFilters",            null},
+            {"canUseInstanceFilters",            "true"},
             {"canGetSourceDebugExtension",       null},
             {"canRequestVMDeathEvent",           null},
             {"canSetDefaultStratum",             null},
