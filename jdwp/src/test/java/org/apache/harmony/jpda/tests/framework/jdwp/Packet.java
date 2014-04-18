@@ -1111,6 +1111,9 @@ public class Packet {
         case JDWPConstants.Tag.THREAD_TAG:
             value = new Value(tag, this.getNextValueAsObjectID());
             break;
+        case JDWPConstants.Tag.VOID_TAG:
+            // no bytes to read.
+            break;
         default:
             throw new TestErrorException("Illegal tag value = " + tag);
         }

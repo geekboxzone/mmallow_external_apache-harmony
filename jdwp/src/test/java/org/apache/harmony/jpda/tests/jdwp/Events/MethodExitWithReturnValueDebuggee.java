@@ -53,6 +53,8 @@ public class MethodExitWithReturnValueDebuggee extends SyncDebuggee {
     
     public static final Object EXPECTED_OBJECT = new MethodExitWithReturnValueDebuggee();
 
+    public static final String VOID_TYPE = "VOID";
+
     public static void main(String[] args) {
         runDebuggee(MethodExitWithReturnValueDebuggee.class);
     }
@@ -90,6 +92,10 @@ public class MethodExitWithReturnValueDebuggee extends SyncDebuggee {
         logWriter.println("--> calling doubleMethod()");
         return EXPECTED_DOUBLE;
     }
+
+    public void voidMethod() {
+        logWriter.println("--> calling voidMethod()");
+    }
     
     public void run() {
         logWriter.println("--> MethodExitWithReturnValueDebuggee started");
@@ -118,6 +124,9 @@ public class MethodExitWithReturnValueDebuggee extends SyncDebuggee {
         }else if(type.equals(DOUBLE_TYPE)){
             double d = doubleMethod();
             logWriter.println("--> doubleMethod() is invoked, return value:" + d);
+        } else if (type.equals(VOID_TYPE)) {
+            voidMethod();
+            logWriter.println("--> voidMethod() is invoked");
         }else if(type.equals(EXCEPTION_TYPE)){
             try {
                 MockExceptionMethodClass.exceptionMethod();

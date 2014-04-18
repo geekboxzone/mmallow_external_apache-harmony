@@ -135,6 +135,16 @@ public class MethodExitWithReturnValueTest extends JDWPEventTestCase {
         runMethodExitWithReturn(MethodExitWithReturnValueDebuggee.DOUBLE_TYPE);
     }
 
+    /**
+     * This testcase is for METHOD_EXIT_WITH_RETURN_VALUE event. <BR>
+     * It runs MethodExitWithReturnValueDebuggee that executed own voidMethod.
+     * It then verify that requested METHOD_EXIT_WITH_RETURN_VALUE event occurs
+     * and there is no returned value.
+     */
+    public void testMethodExitWithReturnValueOfVoid() {
+        runMethodExitWithReturn(MethodExitWithReturnValueDebuggee.VOID_TYPE);
+    }
+
 
     /*
      * Internal function used to receive MethodExitWithReturnValue event.
@@ -210,6 +220,9 @@ public class MethodExitWithReturnValueTest extends JDWPEventTestCase {
             logWriter.println("==> CHECK: doubleMethod() is invoked, return value:" + d);
             assertEquals("Invalid return value,",
                     MethodExitWithReturnValueDebuggee.EXPECTED_DOUBLE, d);
+        } else if (type.equals(MethodExitWithReturnValueDebuggee.VOID_TYPE)) {
+            logWriter.println("==> CHECK: voidMethod() is invoked");
+            assertEquals("Invalid return value,", null, value);
         }
     }
 }
