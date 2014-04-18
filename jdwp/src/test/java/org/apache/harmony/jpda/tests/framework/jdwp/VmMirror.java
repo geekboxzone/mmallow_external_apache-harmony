@@ -436,6 +436,21 @@ public class VmMirror {
         return replyPacket;
     }
 
+    public boolean canWatchFieldModification() {
+        capabilities();
+        return targetVMCapabilities.canWatchFieldModification;
+    }
+
+    public boolean canWatchFieldAccess() {
+        capabilities();
+        return targetVMCapabilities.canWatchFieldAccess;
+    }
+
+    public boolean canUseInstanceFilters() {
+        capabilities();
+        return targetVMCapabilities.canUseInstanceFilters;
+    }
+
     /**
      * Resumes debuggee VM.
      * 

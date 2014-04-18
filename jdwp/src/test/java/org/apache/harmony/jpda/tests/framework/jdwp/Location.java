@@ -49,7 +49,7 @@ public class Location {
     /**
      * Creates new Location value with specified data.
      */
-    Location(byte tag, long classID, long methodID, long index) {
+    public Location(byte tag, long classID, long methodID, long index) {
         this.tag = tag;
         this.classID = classID;
         this.methodID = methodID;

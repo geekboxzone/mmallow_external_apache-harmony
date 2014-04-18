@@ -101,7 +101,7 @@ public class ParsedEvent {
     /**
      * The class extends EventThread by associating it with a location.
      */
-    private static class EventThreadLocation extends EventThread {
+    public static class EventThreadLocation extends EventThread {
 
         private Location location;
 
