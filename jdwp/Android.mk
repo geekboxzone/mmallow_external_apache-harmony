@@ -9,6 +9,39 @@ endef
 harmony_jdwp_test_src_files := \
     $(call all-harmony-test-java-files-under,,src/test/java/)
 
+#jdwp_test_runtime_target := dalvikvm -XXlib:libart.so
+jdwp_test_runtime_target := dalvikvm -XXlib:libartd.so
+#jdwp_test_runtime_host := $(ANDROID_HOST_OUT)/bin/art
+jdwp_test_runtime_host := $(ANDROID_HOST_OUT)/bin/art -d
+
+jdwp_test_runtime_options :=
+jdwp_test_runtime_options += -verbose:jdwp
+#jdwp_test_runtime_options += -Xint
+#jdwp_test_runtime_options += -verbose:threads
+jdwp_test_timeout_ms := 10000 # 10s.
+
+jdwp_test_classpath_host := $(ANDROID_HOST_OUT)/framework/apache-harmony-jdwp-tests-hostdex.jar:$(ANDROID_HOST_OUT)/framework/junit-hostdex.jar
+jdwp_test_classpath_target := /data/jdwp/apache-harmony-jdwp-tests.jar:/data/junit/junit-targetdex.jar
+
+jdwp_test_target_runtime_args :=  \
+	-Djpda.settings.verbose=true \
+	-Djpda.settings.syncPort=34016 \
+	-Djpda.settings.debuggeeJavaPath='$(jdwp_test_runtime_target) $(jdwp_test_runtime_options)' \
+	-Djpda.settings.timeout=$(jdwp_test_timeout_ms) \
+	-Djpda.settings.waitingTime=$(jdwp_test_timeout_ms)
+
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := $(harmony_jdwp_test_src_files)
+LOCAL_JAVA_LIBRARIES := junit-targetdex
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE := CtsJdwp
+LOCAL_NO_EMMA_INSTRUMENT := true
+LOCAL_NO_EMMA_COMPILE := true
+LOCAL_CTS_TEST_PACKAGE := android.jdwp
+LOCAL_CTS_TARGET_RUNTIME_ARGS := $(jdwp_test_target_runtime_args)
+include $(BUILD_CTS_TARGET_JAVA_LIBRARY)
+
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(harmony_jdwp_test_src_files)
 LOCAL_JAVA_LIBRARIES := junit-targetdex
@@ -33,20 +66,6 @@ include $(BUILD_HOST_DALVIK_JAVA_LIBRARY)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
-#jdwp_test_runtime_target := dalvikvm -XXlib:libart.so
-jdwp_test_runtime_target := dalvikvm -XXlib:libartd.so
-#jdwp_test_runtime_host := $(ANDROID_HOST_OUT)/bin/art
-jdwp_test_runtime_host := $(ANDROID_HOST_OUT)/bin/art -d
-
-jdwp_test_runtime_options :=
-jdwp_test_runtime_options += -verbose:jdwp
-#jdwp_test_runtime_options += -Xint
-#jdwp_test_runtime_options += -verbose:threads
-jdwp_test_timeout_ms := 10000 # 10s.
-
-jdwp_test_classpath_host := $(ANDROID_HOST_OUT)/framework/apache-harmony-jdwp-tests-hostdex.jar:$(ANDROID_HOST_OUT)/framework/junit-hostdex.jar
-jdwp_test_classpath_target := /data/jdwp/apache-harmony-jdwp-tests.jar:/data/junit/junit-targetdex.jar
-
 # If this fails complaining about TestRunner, build "external/junit" manually.
 .PHONY: run-jdwp-tests-target
 run-jdwp-tests-target: $(TARGET_OUT_DATA)/jdwp/apache-harmony-jdwp-tests.jar $(TARGET_OUT_DATA)/junit/junit-targetdex.jar
@@ -54,11 +73,7 @@ run-jdwp-tests-target: $(TARGET_OUT_DATA)/jdwp/apache-harmony-jdwp-tests.jar $(T
 	adb remount
 	adb sync
 	adb shell $(jdwp_test_runtime_target) -cp $(jdwp_test_classpath_target) \
-          -Djpda.settings.verbose=true \
-          -Djpda.settings.syncPort=34016 \
-          -Djpda.settings.debuggeeJavaPath="$(jdwp_test_runtime_target) $(jdwp_test_runtime_options)" \
-          -Djpda.settings.timeout=$(jdwp_test_timeout_ms) \
-          -Djpda.settings.waitingTime=$(jdwp_test_timeout_ms) \
+	  $(jdwp_test_target_runtime_args) \
           org.apache.harmony.jpda.tests.share.AllTests
 
 # If this fails complaining about TestRunner, build "external/junit" manually.
