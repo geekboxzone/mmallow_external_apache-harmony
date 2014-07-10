@@ -16,13 +16,6 @@
  *  limitations under the License.
  */
 
-/**
- * @author Viacheslav G. Rybalov
- */
-
-/**
- * Created on 05.03.2005
- */
 package org.apache.harmony.jpda.tests.jdwp.ClassObjectReference;
 
 import org.apache.harmony.jpda.tests.framework.jdwp.CommandPacket;
@@ -38,31 +31,28 @@ import org.apache.harmony.jpda.tests.share.JPDADebuggeeSynchronizer;
  * JDWP unit test for ClassObjectReference.ReflectedType command.
  */
 
-public class ReflectedTypeTest extends AbstractReflectedTypeTestCase {
-
-    private static final String DEBUGGEE_CLASS_NAME =
-            "org.apache.harmony.jpda.tests.jdwp.share.debuggee.HelloWorld";
+public class ReflectedType002Test extends AbstractReflectedTypeTestCase {
 
     /**
      * Returns full name of debuggee class which is used by this test.
      * @return full name of debuggee class.
      */
     protected String getDebuggeeClassName() {
-        return DEBUGGEE_CLASS_NAME;
+        return ReflectedType002Debuggee.class.getName();
     }
 
     /**
      * This testcase exercises ClassObjectReference.ReflectedType command.
-     * <BR>Starts <A HREF="../share/debuggee/HelloWorld.html">HelloWorld</A> debuggee.
-     * <BR>Then checks the following four classes:
-     * <BR>&nbsp;&nbsp; - java/lang/Object;
-     * <BR>&nbsp;&nbsp; - java/lang/String;
-     * <BR>&nbsp;&nbsp; - java/lang/Runnable;
-     * <BR>&nbsp;&nbsp; - HelloWorld.
+     * <BR>Starts ReflectedType002Debuggee then checks the following array
+     * classes:
+     * <BR>&nbsp;&nbsp; - java/lang/Object[];
+     * <BR>&nbsp;&nbsp; - java/lang/String[];
+     * <BR>&nbsp;&nbsp; - java/lang/Runnable[];
+     * <BR>&nbsp;&nbsp; - char[];
      * <BR>&nbsp;&nbsp;
      * <BR>The following statements are checked:
      * <BR>&nbsp;It is expected:
-     * <BR>&nbsp;&nbsp; - refTypeTag takes one of the TypeTag constants: CLASS, INTERFACE;
+     * <BR>&nbsp;&nbsp; - refTypeTag takes the TypeTag constant ARRAY
      * <BR>&nbsp;&nbsp; - refTypeTag equals to refTypeTag returned by command
      *  VirtualMachine.ClassesBySignature;
      * <BR>&nbsp;&nbsp; - typeID equals to typeID returned by the JDWP command
@@ -73,19 +63,14 @@ public class ReflectedTypeTest extends AbstractReflectedTypeTestCase {
         logWriter.println("==> testReflectedType001 START...");
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
 
-        // Builds debuggee class signature string.
-        String debuggeeClassSignature =
-                "L" + DEBUGGEE_CLASS_NAME.replace('.', '/') + ";";
-
         TypeSignatureAndTag[] array = new TypeSignatureAndTag[] {
-            new TypeSignatureAndTag("Ljava/lang/Object;",
-                                    JDWPConstants.TypeTag.CLASS),
-            new TypeSignatureAndTag("Ljava/lang/String;",
-                                    JDWPConstants.TypeTag.CLASS),
-            new TypeSignatureAndTag("Ljava/lang/Runnable;",
-                                    JDWPConstants.TypeTag.INTERFACE),
-            new TypeSignatureAndTag(debuggeeClassSignature,
-                                    JDWPConstants.TypeTag.CLASS)
+            new TypeSignatureAndTag("[Ljava/lang/Object;",
+                                    JDWPConstants.TypeTag.ARRAY),
+            new TypeSignatureAndTag("[Ljava/lang/String;",
+                                    JDWPConstants.TypeTag.ARRAY),
+            new TypeSignatureAndTag("[Ljava/lang/Runnable;",
+                                    JDWPConstants.TypeTag.ARRAY),
+            new TypeSignatureAndTag("[C", JDWPConstants.TypeTag.ARRAY)
         };
 
         runReflectedTypeTest(array);
