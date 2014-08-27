@@ -82,6 +82,16 @@ done
 $(hide) echo "Boot complete"
 endef
 
+# Waits for device to boot completely.
+define wait-for-boot-complete
+$(hide) echo "Wait for boot complete ..."
+$(hide) while [ `adb wait-for-device shell getprop dev.bootcomplete | grep -c 1` -eq 0 ]; \
+do \
+  sleep 1; \
+done
+$(hide) echo "Boot complete"
+endef
+
 # If this fails complaining about TestRunner, build "external/junit" manually.
 .PHONY: run-jdwp-tests-target
 run-jdwp-tests-target: $(TARGET_OUT_DATA)/jdwp/apache-harmony-jdwp-tests.jar $(TARGET_OUT_DATA)/junit/junit-targetdex.jar
