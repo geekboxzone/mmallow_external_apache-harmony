@@ -17,9 +17,12 @@
 
 package org.apache.harmony.logging.tests.java.util.logging;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.security.Permission;
+import junit.framework.TestCase;
+
+import org.apache.harmony.logging.tests.java.util.logging.util.EnvironmentHelper;
+
+import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Properties;
@@ -30,11 +33,6 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-import java.util.logging.LoggingPermission;
-
-import junit.framework.TestCase;
-
-import org.apache.harmony.logging.tests.java.util.logging.util.EnvironmentHelper;
 
 import tests.util.CallVerificationStack;
 
@@ -43,15 +41,18 @@ import tests.util.CallVerificationStack;
  */
 public class LoggerTest extends TestCase {
 
-    private final static String VALID_RESOURCE_BUNDLE = "bundles/java/util/logging/res";
+    private final static String VALID_RESOURCE_BUNDLE = "bundles/com/android/java/util/logging/res";
 
-    private final static String VALID_RESOURCE_BUNDLE2 = "bundles/java/util/logging/res2";
+    private final static String VALID_RESOURCE_BUNDLE2 =
+            "bundles/com/android/java/util/logging/res2";
 
-    private final static String VALID_RESOURCE_BUNDLE3 = "bundles/java/util/logging/res3";
+    private final static String VALID_RESOURCE_BUNDLE3 =
+            "bundles/com/android/java/util/logging/res3";
 
     private final static String INVALID_RESOURCE_BUNDLE = "impossible_not_existing";
 
-    private final static String LOGGING_CONFIG_FILE = "resources/config/java/util/logging/logging.config";
+    private final static String LOGGING_CONFIG_RESOURCE =
+            "config/com/android/java/util/logging/logging.config";
 
     private final static String VALID_KEY = "LOGGERTEST";
 
@@ -3015,14 +3016,21 @@ public class LoggerTest extends TestCase {
      * test initHandler
      */
     public void test_initHandler() throws Exception {
-        File logProps = new File(LOGGING_CONFIG_FILE);
-        LogManager lm = LogManager.getLogManager();
-        lm.readConfiguration(new FileInputStream(logProps));
+        InputStream logPropsStream = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream(LOGGING_CONFIG_RESOURCE);
+        try {
+            LogManager lm = LogManager.getLogManager();
+            lm.readConfiguration(logPropsStream);
 
-        Logger log = Logger.getLogger("");
-        // can log properly
-        Handler[] handlers = log.getHandlers();
-        assertEquals(2, handlers.length);
+            Logger log = Logger.getLogger("");
+            // can log properly
+            Handler[] handlers = log.getHandlers();
+            assertEquals(2, handlers.length);
+        } finally {
+            if (logPropsStream != null) {
+                logPropsStream.close();
+            }
+        }
     }
 
     /*
