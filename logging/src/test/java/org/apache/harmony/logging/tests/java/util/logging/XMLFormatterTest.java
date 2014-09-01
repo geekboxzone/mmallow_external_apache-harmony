@@ -53,7 +53,7 @@ public class XMLFormatterTest extends TestCase {
         // but put the original message into the key element
         // further more, if message pattern has no effect
         ResourceBundle rb = ResourceBundle
-                .getBundle("bundles/java/util/logging/res");
+                .getBundle("bundles/com/android/java/util/logging/res");
         lr.setResourceBundle(rb);
         lr.setMessage("pattern");
         String result = formatter.format(lr);
@@ -88,7 +88,7 @@ public class XMLFormatterTest extends TestCase {
         lr.setParameters(new Object[] { "100", "200" });
         lr.setSequenceNumber(1);
         ResourceBundle rb = ResourceBundle
-                .getBundle("bundles/java/util/logging/res");
+                .getBundle("bundles/com/android/java/util/logging/res");
         lr.setResourceBundle(rb);
         lr.setResourceBundleName("rbname");
         String output = formatter.format(lr);
@@ -194,8 +194,7 @@ public class XMLFormatterTest extends TestCase {
     }
 
     public void test_TestFileHandlerClass_constructor() throws Exception {
-        File logFile = new File(System.getProperty("user.home"),
-                "TestFileHandlerClass.log");
+        File logFile = File.createTempFile("TestFileHandlerClass", ".log");
         logFile.deleteOnExit();
 
         PrintStream out = System.out;

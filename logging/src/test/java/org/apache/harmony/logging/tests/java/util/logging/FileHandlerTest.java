@@ -23,13 +23,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FilePermission;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.StringWriter;
-import java.security.Permission;
 import java.util.Properties;
 import java.util.logging.FileHandler;
 import java.util.logging.Filter;
@@ -38,7 +35,6 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
-import java.util.logging.LoggingPermission;
 import java.util.logging.XMLFormatter;
 
 import junit.framework.TestCase;
@@ -46,44 +42,31 @@ import junit.framework.TestCase;
 import org.apache.harmony.logging.tests.java.util.logging.HandlerTest.NullOutputStream;
 import org.apache.harmony.logging.tests.java.util.logging.util.EnvironmentHelper;
 
-/**
- */
 public class FileHandlerTest extends TestCase {
 
-    static LogManager manager = LogManager.getLogManager();
-
+    final static LogManager manager = LogManager.getLogManager();
     final static Properties props = new Properties();
-
     final static String className = FileHandlerTest.class.getName();
-
-    final static StringWriter writer = new StringWriter();
-
     final static String USR_HOME_KEY = "user.home";
-
     final static String TMP_DIR_KEY = "java.io.tmpdir";
-
-    final static String HOMEPATH = System.getProperty(USR_HOME_KEY);
-
-    final static String TEMPPATH = System.getProperty(TMP_DIR_KEY);
-
     final static String SEP = File.separator;
 
     private final PrintStream err = System.err;
-
     private OutputStream errSubstituteStream = null;
 
+    String homePath;
+    String tempPath;
     FileHandler handler;
-
     LogRecord r;
 
-    /*
-     * @see TestCase#setUp()
-     */
     protected void setUp() throws Exception {
         super.setUp();
         manager.reset();
         initProps();
-        File file = new File(TEMPPATH + SEP + "log");
+        homePath = System.getProperty(USR_HOME_KEY);
+        tempPath = System.getProperty(TMP_DIR_KEY);
+
+        File file = new File(tempPath + SEP + "log");
         file.mkdir();
         manager.readConfiguration(EnvironmentHelper
                 .PropertiesToInputStream(props));
@@ -93,9 +76,6 @@ public class FileHandlerTest extends TestCase {
         System.setErr(new PrintStream(errSubstituteStream));
     }
 
-    /**
-     *
-     */
     private void initProps() {
         props.clear();
         props.put("java.util.logging.FileHandler.level", "FINE");
@@ -110,19 +90,14 @@ public class FileHandlerTest extends TestCase {
         props.put("java.util.logging.FileHandler.count", "2");
         // using append mode
         props.put("java.util.logging.FileHandler.append", "true");
-        props
-                .put("java.util.logging.FileHandler.pattern",
-                        "%t/log/java%u.test");
+        props.put("java.util.logging.FileHandler.pattern", "%t/log/java%u.test");
     }
 
-    /*
-     * @see TestCase#tearDown()
-     */
     protected void tearDown() throws Exception {
         if (null != handler) {
             handler.close();
         }
-        reset(TEMPPATH + SEP + "log", "");
+        reset(tempPath + SEP + "log", "");
         System.setErr(err);
         super.tearDown();
     }
@@ -136,8 +111,8 @@ public class FileHandlerTest extends TestCase {
         } catch (NullPointerException e) {
             // Expected
         } finally {
-            if (HOMEPATH != null) {
-                System.setProperty(USR_HOME_KEY, HOMEPATH);
+            if (homePath != null) {
+                System.setProperty(USR_HOME_KEY, homePath);
             }
         }
     }
@@ -148,13 +123,13 @@ public class FileHandlerTest extends TestCase {
         try {
             new FileHandler("%t/log_NoTmpDir.log");
         } finally {
-            if (TEMPPATH != null) {
-                System.setProperty(TMP_DIR_KEY, TEMPPATH);
+            if (tempPath != null) {
+                System.setProperty(TMP_DIR_KEY, tempPath);
             }
         }
-        assertFalse(new File(TEMPPATH, "log_NoTmpDir.log").exists());
-        assertTrue(new File(HOMEPATH, "log_NoTmpDir.log").exists());
-        new File(HOMEPATH, "log_NoTmpDir.log").delete();
+        assertFalse(new File(tempPath, "log_NoTmpDir.log").exists());
+        assertTrue(new File(homePath, "log_NoTmpDir.log").exists());
+        new File(homePath, "log_NoTmpDir.log").delete();
     }
 
     public void testConstructor_NoTmpDir_NoUsrHome() throws IOException {
@@ -167,22 +142,22 @@ public class FileHandlerTest extends TestCase {
         } catch (NullPointerException e) {
             // Expected
         } finally {
-            if (TEMPPATH != null) {
-                System.setProperty(TMP_DIR_KEY, TEMPPATH);
+            if (tempPath != null) {
+                System.setProperty(TMP_DIR_KEY, tempPath);
             }
-            if (HOMEPATH != null) {
-                System.setProperty(USR_HOME_KEY, HOMEPATH);
+            if (homePath != null) {
+                System.setProperty(USR_HOME_KEY, homePath);
             }
         }
     }
 
     public void testLock() throws Exception {
-        FileOutputStream output = new FileOutputStream(TEMPPATH + SEP + "log"
+        FileOutputStream output = new FileOutputStream(tempPath + SEP + "log"
                 + SEP + "java1.test.0");
         FileHandler h = new FileHandler();
         h.publish(r);
         h.close();
-        assertFileContent(TEMPPATH + SEP + "log", "java1.test.0", h
+        assertFileContent(tempPath + SEP + "log", "java1.test.0", h
                 .getFormatter(), "UTF-8");
         output.close();
     }
@@ -205,7 +180,7 @@ public class FileHandlerTest extends TestCase {
             handler.publish(r);
             handler.close();
         }
-        assertFileContent(TEMPPATH + SEP + "log", "java0.test.0",
+        assertFileContent(tempPath + SEP + "log", "java0.test.0",
                 new LogRecord[] { r, null, r, null, r, null, r },
                 new MockFormatter(), "UTF-8");
     }
@@ -231,7 +206,7 @@ public class FileHandlerTest extends TestCase {
             handler.publish(r);
             handler.close();
         }
-        assertFileContent(HOMEPATH, "java0.log", new XMLFormatter(), null);
+        assertFileContent(homePath, "java0.log", new XMLFormatter(), null);
     }
 
     private void assertFileContent(String homepath, String filename,
@@ -327,14 +302,14 @@ public class FileHandlerTest extends TestCase {
         handler = new FileHandler("%t/testLimitCount%g", 1, 2, false);
         handler.publish(r);
         handler.close();
-        assertFileContent(TEMPPATH, "testLimitCount1", handler.getFormatter(), "UTF-8");
+        assertFileContent(tempPath, "testLimitCount1", handler.getFormatter(), "UTF-8");
 
         // very small limit value, count=1
         // output once, rotate(equals to nothing output)
         handler = new FileHandler("%t/testLimitCount%g", 1, 1, false);
         handler.publish(r);
         handler.close();
-        assertFileContent(TEMPPATH, "testLimitCount0", new LogRecord[0],
+        assertFileContent(tempPath, "testLimitCount0", new LogRecord[0],
                 handler.getFormatter(), "UTF-8");
 
         // normal case, limit is 60(>2*msg length <3*msg length), append is
@@ -353,9 +328,9 @@ public class FileHandlerTest extends TestCase {
             handler.publish(rs[i]);
         }
 
-        assertFileContent(TEMPPATH, "testLimitCount0.1", new LogRecord[] {
+        assertFileContent(tempPath, "testLimitCount0.1", new LogRecord[] {
                 rs[5], rs[6], rs[7] }, handler.getFormatter(), "UTF-8");
-        assertFileContent(TEMPPATH, "testLimitCount0.0", new LogRecord[] {
+        assertFileContent(tempPath, "testLimitCount0.0", new LogRecord[] {
                 rs[8], rs[9] }, handler.getFormatter(), "UTF-8");
 
         // normal case, limit is 60(>2*msg length <3*msg length), append is true
@@ -372,22 +347,22 @@ public class FileHandlerTest extends TestCase {
             handler.publish(rs[i]);
         }
         handler.close();
-        assertFileContent(TEMPPATH, "testLimitCount0.2", new LogRecord[] {
+        assertFileContent(tempPath, "testLimitCount0.2", new LogRecord[] {
                 rs[3], rs[4], null, rs[5] }, handler.getFormatter(), "UTF-8");
-        assertFileContent(TEMPPATH, "testLimitCount0.1", new LogRecord[] {
+        assertFileContent(tempPath, "testLimitCount0.1", new LogRecord[] {
                 rs[6], rs[7], rs[8] }, handler.getFormatter(), "UTF-8");
-        assertFileContent(TEMPPATH, "testLimitCount0.0",
+        assertFileContent(tempPath, "testLimitCount0.0",
                 new LogRecord[] { rs[9] }, handler.getFormatter(), "UTF-8");
 
         FileHandler h1 = null;
         FileHandler h2 = null;
         try {
-            File logDir = new File("log");
-            reset("log", "");
+            File logDir = new File(tempPath, "log");
+            reset(tempPath, "log");
             logDir.mkdir();
-            h1 = new FileHandler("log/a", 0, 1);
+            h1 = new FileHandler("%t/log/a", 0, 1);
             assertNotNull(h1);
-            h2 = new FileHandler("log/a", 0, 1, false);
+            h2 = new FileHandler("%t/log/a", 0, 1, false);
             assertNotNull(h2);
         } finally {
             try {
@@ -398,7 +373,7 @@ public class FileHandlerTest extends TestCase {
                 h2.close();
             } catch (Exception e) {
             }
-            reset("log", "");
+            reset(tempPath, "log");
         }
     }
 
@@ -442,40 +417,45 @@ public class FileHandlerTest extends TestCase {
         // %t and %p parsing can add file separator automatically
         FileHandler h1 = new FileHandler("%taaa");
         h1.close();
-        File file = new File(TEMPPATH + SEP + "aaa");
+        File file = new File(tempPath + SEP + "aaa");
         assertTrue(file.exists());
-        reset(TEMPPATH, "aaa");
+        reset(tempPath, "aaa");
 
+        // On platforms besides Android this test was probably checking a non-existent directory:
+        // i.e. when expanded %t/%h would have been a nonexistent path but would have contained
+        // multiple names separated by path separators. On Android %h is "/" so this test breaks.
+        // Removed for Android.
         // always parse special pattern
-        try {
-            h1 = new FileHandler("%t/%h");
-            fail("should throw null exception");
-        } catch (FileNotFoundException e) {
-        }
+        // try {
+        //    h1 = new FileHandler("%t/%h");
+        //    fail("should throw null exception");
+        //} catch (FileNotFoundException e) {
+        //}
+
         h1 = new FileHandler("%t%g");
         h1.close();
-        file = new File(TEMPPATH + SEP + "0");
+        file = new File(tempPath + SEP + "0");
         assertTrue(file.exists());
-        reset(TEMPPATH, "0");
+        reset(tempPath, "0");
         h1 = new FileHandler("%t%u%g");
         h1.close();
-        file = new File(TEMPPATH + SEP + "00");
+        file = new File(tempPath + SEP + "00");
         assertTrue(file.exists());
-        reset(TEMPPATH, "00");
+        reset(tempPath, "00");
 
         // this is normal case
         h1 = new FileHandler("%t/%u%g%%g");
         h1.close();
-        file = new File(TEMPPATH + SEP + "00%g");
+        file = new File(tempPath + SEP + "00%g");
         assertTrue(file.exists());
-        reset(TEMPPATH, "00%g");
+        reset(tempPath, "00%g");
 
         // multi separator has no effect
         h1 = new FileHandler("//%t//multi%g");
         h1.close();
-        file = new File(TEMPPATH + SEP + "multi0");
+        file = new File(tempPath + SEP + "multi0");
         assertTrue(file.exists());
-        reset(TEMPPATH, "multi0");
+        reset(tempPath, "multi0");
 
         // bad directory, IOException
         try {
@@ -483,7 +463,7 @@ public class FileHandlerTest extends TestCase {
             fail("should throw IO exception");
         } catch (IOException e) {
         }
-        file = new File(TEMPPATH + SEP + "baddir" + SEP + "multi0");
+        file = new File(tempPath + SEP + "baddir" + SEP + "multi0");
         assertFalse(file.exists());
 
         try {
@@ -522,7 +502,7 @@ public class FileHandlerTest extends TestCase {
 
     // set output stream still works, just like super StreamHandler
     public void testSetOutputStream() throws Exception {
-        MockFileHandler handler = new MockFileHandler("%h/setoutput.log");
+        MockFileHandler handler = new MockFileHandler("%t/setoutput.log");
         handler.setFormatter(new MockFormatter());
         handler.publish(r);
 
@@ -533,7 +513,7 @@ public class FileHandlerTest extends TestCase {
         String msg = new String(out.toByteArray());
         Formatter f = handler.getFormatter();
         assertEquals(msg, f.getHead(handler) + f.format(r) + f.getTail(handler));
-        assertFileContent(HOMEPATH, "setoutput.log", handler.getFormatter(), null);
+        assertFileContent(tempPath, "setoutput.log", handler.getFormatter(), null);
     }
 
     /*
@@ -554,10 +534,10 @@ public class FileHandlerTest extends TestCase {
         h2.close();
         h3.close();
         h4.close();
-        assertFileContent(TEMPPATH + SEP + "log", "string", h.getFormatter(), "UTF-8");
-        assertFileContent(TEMPPATH + SEP + "log", "string.1", h.getFormatter(), "UTF-8");
-        assertFileContent(TEMPPATH + SEP + "log", "string.2", h.getFormatter(), "UTF-8");
-        assertFileContent(TEMPPATH + SEP + "log", "string.3", h.getFormatter(), "UTF-8");
+        assertFileContent(tempPath + SEP + "log", "string", h.getFormatter(), "UTF-8");
+        assertFileContent(tempPath + SEP + "log", "string.1", h.getFormatter(), "UTF-8");
+        assertFileContent(tempPath + SEP + "log", "string.2", h.getFormatter(), "UTF-8");
+        assertFileContent(tempPath + SEP + "log", "string.3", h.getFormatter(), "UTF-8");
 
         // default is append mode
         FileHandler h6 = new FileHandler("%t/log/string%u.log");
@@ -567,12 +547,12 @@ public class FileHandlerTest extends TestCase {
         h7.publish(r);
         h7.close();
         try {
-            assertFileContent(TEMPPATH + SEP + "log", "string0.log", h
+            assertFileContent(tempPath + SEP + "log", "string0.log", h
                     .getFormatter(), "UTF-8");
             fail("should assertion failed");
         } catch (Error e) {
         }
-        File file = new File(TEMPPATH + SEP + "log");
+        File file = new File(tempPath + SEP + "log");
         assertTrue(file.list().length <= 2);
 
         // test unique ids
@@ -582,11 +562,11 @@ public class FileHandlerTest extends TestCase {
         h9.publish(r);
         h9.close();
         h8.close();
-        assertFileContent(TEMPPATH + SEP + "log", "0string0.log", h
+        assertFileContent(tempPath + SEP + "log", "0string0.log", h
                 .getFormatter(), "UTF-8");
-        assertFileContent(TEMPPATH + SEP + "log", "1string1.log", h
+        assertFileContent(tempPath + SEP + "log", "1string1.log", h
                 .getFormatter(), "UTF-8");
-        file = new File(TEMPPATH + SEP + "log");
+        file = new File(tempPath + SEP + "log");
         assertTrue(file.list().length <= 2);
     }
 
