@@ -10,13 +10,10 @@ harmony_test_dirs := \
     beans \
     logging \
     luni \
-    prefs \
     sql \
     support \
-    text \
 
 # TODO: get these working too!
-#    auth \
 #    crypto \
 #    security \
 #    x-net

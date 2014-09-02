@@ -594,14 +594,13 @@ public abstract class SerializationTest extends TestCase {
     private static Serializable getObject(TestCase test, String toAppend)
             throws Exception {
 
-        StringBuilder path = new StringBuilder("serialization");
+        StringBuilder path = new StringBuilder("/serialization");
 
         path.append(File.separatorChar);
         path.append(test.getClass().getName().replace('.', File.separatorChar));
         path.append(toAppend);
 
-        InputStream in = ClassLoader.getSystemClassLoader()
-                .getResourceAsStream(path.toString());
+        InputStream in = SerializationTest.class.getResourceAsStream(path.toString());
 
         Assert.assertNotNull("Failed to load serialization resource file: "
                 + path, in);
