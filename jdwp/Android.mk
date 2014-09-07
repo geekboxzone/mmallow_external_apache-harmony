@@ -11,9 +11,11 @@ harmony_jdwp_test_src_files := \
 
 #jdwp_test_runtime_target := dalvikvm -XXlib:libart.so
 jdwp_test_runtime_target := dalvikvm -XXlib:libartd.so
-cts_jdwp_test_runtime_target := dalvikvm -XXlib:libart.so
 #jdwp_test_runtime_host := $(ANDROID_HOST_OUT)/bin/art
 jdwp_test_runtime_host := $(ANDROID_HOST_OUT)/bin/art -d
+
+# Runtime target for CTS. We also support running with a forced abi.
+cts_jdwp_test_runtime_target := dalvikvm|\#ABI\#| -XXlib:libart.so
 
 jdwp_test_runtime_options :=
 jdwp_test_runtime_options += -verbose:jdwp
