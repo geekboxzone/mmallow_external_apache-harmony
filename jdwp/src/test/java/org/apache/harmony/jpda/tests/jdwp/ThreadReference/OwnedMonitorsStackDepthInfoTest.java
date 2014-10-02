@@ -72,6 +72,9 @@ public class OwnedMonitorsStackDepthInfoTest extends JDWPSyncTestCase {
         logWriter.println("==> " + thisTestName + " for " + thisCommandName + ": START...");
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
 
+        // Ensure we signal the debuggee to continue at the end of the test.
+        finalSyncMessage = JPDADebuggeeSynchronizer.SGNL_CONTINUE;
+
         if (!isCapability()) {
             logWriter.println("##WARNING: this VM dosn't possess capability: canGetMonitorFrameInfo");
             return;
@@ -147,7 +150,6 @@ public class OwnedMonitorsStackDepthInfoTest extends JDWPSyncTestCase {
             ++currentMonitor;
         }
 
-        synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
         assertAllDataRead(stackDepthReply);
     }
 
@@ -157,6 +159,9 @@ public class OwnedMonitorsStackDepthInfoTest extends JDWPSyncTestCase {
         logWriter.println("==> " + thisTestName + " for " + thisCommandName
                 + ": START...");
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
+
+        // Ensure we signal the debuggee to continue at the end of the test.
+        finalSyncMessage = JPDADebuggeeSynchronizer.SGNL_CONTINUE;
 
         if (!isCapability()) {
             logWriter
