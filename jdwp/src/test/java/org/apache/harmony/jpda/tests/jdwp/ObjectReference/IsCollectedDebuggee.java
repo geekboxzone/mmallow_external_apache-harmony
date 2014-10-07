@@ -31,11 +31,11 @@ import org.apache.harmony.jpda.tests.share.SyncDebuggee;
 public class IsCollectedDebuggee extends SyncDebuggee {
     
     static IsCollectedObject001_01 checkedObject_01;
-    static boolean checkedObject_01_Finalized = false; 
+    static volatile boolean checkedObject_01_Finalized = false;
     static IsCollectedObject001_02 checkedObject_02;
-    static boolean checkedObject_02_Finalized = false; 
+    static volatile boolean checkedObject_02_Finalized = false;
     static IsCollectedObject001_03 checkedObject_03;
-    static boolean checkedObject_03_Finalized = false; 
+    static volatile boolean checkedObject_03_Finalized = false;
 
     public void run() {
         logWriter.println("--> Debuggee: IsCollectedDebuggee: START");
@@ -69,7 +69,10 @@ public class IsCollectedDebuggee extends SyncDebuggee {
             // logWriter.println("--> Debuggee: i = " + i);
         }
         longArray = null;
-        System.gc();
+        Runtime.getRuntime().gc();
+        System.runFinalization();  // Make sure that the finalizers are finished running.
+        // Make sure the JNI weak globals are cleared, need to do this after runFinalization.
+        Runtime.getRuntime().gc();
         logWriter.println("--> Debuggee: AFTER System.gc():");
         logWriter.println("--> Debuggee: checkedObject_01 = " + 
                 checkedObject_01);
