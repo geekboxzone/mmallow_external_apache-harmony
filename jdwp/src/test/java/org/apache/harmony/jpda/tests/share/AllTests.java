@@ -154,6 +154,7 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StackFrame.GetValuesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StackFrame.PopFrames002Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StackFrame.PopFramesTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StackFrame.ProxyThisObjectTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StackFrame.SetValuesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StackFrame.ThisObjectTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.StringReference.ValueTest.class);
