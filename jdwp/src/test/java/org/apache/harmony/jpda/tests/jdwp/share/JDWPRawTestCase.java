@@ -59,6 +59,21 @@ public abstract class JDWPRawTestCase extends TestCase {
     protected abstract String getDebuggeeClassName();
 
     /**
+     * Returns the signature of the debuggee class. This is computed based on
+     * {@link #getDebuggeeClassName}.
+     *
+     * @return full debuggee class signature.
+     */
+    protected String getDebuggeeClassSignature() {
+        String debuggeeClassName = getDebuggeeClassName();
+        StringBuilder builder = new StringBuilder();
+        builder.append('L');
+        builder.append(debuggeeClassName.replace('.', '/'));
+        builder.append(';');
+        return builder.toString();
+    }
+
+    /**
      * This method will be invoked before starting each test.
      * 
      * @throws Exception
