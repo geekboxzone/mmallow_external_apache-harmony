@@ -33,6 +33,7 @@ import org.apache.harmony.jpda.tests.framework.jdwp.JDWPCommands;
 import org.apache.harmony.jpda.tests.framework.jdwp.ParsedEvent;
 import org.apache.harmony.jpda.tests.framework.jdwp.TaggedObject;
 import org.apache.harmony.jpda.tests.framework.jdwp.Location;
+import org.apache.harmony.jpda.tests.framework.jdwp.ParsedEvent.EventThread;
 import org.apache.harmony.jpda.tests.share.JPDADebuggeeSynchronizer;
 
 
@@ -80,6 +81,11 @@ public class ExceptionTest extends JDWPEventTestCase {
                 parsedEvents[0].getEventKind(),
                 JDWPConstants.EventKind.getName(JDWPConstants.EventKind.EXCEPTION),
                 JDWPConstants.EventKind.getName(parsedEvents[0].getEventKind()));
+
+        long eventThreadID = ((EventThread) parsedEvents[0]).getThreadID();
+        checkThreadState(eventThreadID, JDWPConstants.ThreadStatus.RUNNING,
+                JDWPConstants.SuspendStatus.SUSPEND_STATUS_SUSPENDED);
+
         TaggedObject returnedException =((ParsedEvent.Event_EXCEPTION)parsedEvents[0]).getException();
 
         // assert that exception ObjectID is not null
