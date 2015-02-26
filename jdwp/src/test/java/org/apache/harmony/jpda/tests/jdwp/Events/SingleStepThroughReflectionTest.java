@@ -70,7 +70,7 @@ public class SingleStepThroughReflectionTest extends JDWPEventTestCase {
         logWriter.println("=> Send ReferenceType::Methods command and get methodIDs ");
 
         // Set breakpoint to suspend execution.
-        long breakpointRequestID = debuggeeWrapper.vmMirror.setBreakpointAtMethodBegin(
+        int breakpointRequestID = debuggeeWrapper.vmMirror.setBreakpointAtMethodBegin(
                 refTypeID, BREAKPOINT_METHOD);
         logWriter.println("=> breakpointID = " + breakpointRequestID);
         logWriter.println("=> starting thread");

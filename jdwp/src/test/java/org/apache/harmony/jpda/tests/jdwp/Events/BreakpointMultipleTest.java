@@ -111,7 +111,7 @@ public class BreakpointMultipleTest extends JDWPEventTestCase {
      */
     private int setBreakpoint(long classID) {
         VmMirror mirror = debuggeeWrapper.vmMirror;
-        return (int) mirror.setBreakpointAtMethodBegin(classID, "breakpointTest");
+        return mirror.setBreakpointAtMethodBegin(classID, "breakpointTest");
     }
 
     /**
