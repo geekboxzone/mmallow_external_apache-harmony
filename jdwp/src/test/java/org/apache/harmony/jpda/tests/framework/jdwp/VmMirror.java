@@ -217,9 +217,7 @@ public class VmMirror {
      *            name of required method
      * @return requestID id of request
      */
-    public long setBreakpointAtMethodBegin(long classID, String methodName) {
-        long requestID;
-
+    public int setBreakpointAtMethodBegin(long classID, String methodName) {
         long methodID = getMethodID(classID, methodName);
 
         ReplyPacket lineTableReply = getLineTable(classID, methodID);
@@ -250,9 +248,7 @@ public class VmMirror {
         ReplyPacket reply = setBreakpoint(breakpointLocation);
         checkReply(reply);
 
-        requestID = reply.getNextValueAsInt();
-
-        return requestID;
+        return reply.getNextValueAsInt();
     }
 
     /**
@@ -262,7 +258,7 @@ public class VmMirror {
      *            id of request for breakpoint
      * @return threadID id of thread, where we stop on breakpoint
      */
-    public long waitForBreakpoint(long requestID) {
+    public long waitForBreakpoint(int requestID) {
         // receive event
         CommandPacket event = null;
         event = receiveEvent();
