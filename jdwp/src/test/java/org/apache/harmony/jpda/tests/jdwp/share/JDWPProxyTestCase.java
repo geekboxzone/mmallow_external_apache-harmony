@@ -61,7 +61,7 @@ public abstract class JDWPProxyTestCase extends JDWPSyncTestCase {
         // Set breakpoint.
         String debuggeeSignature = getDebuggeeClassSignature();
         long classId = getClassIDBySignature(debuggeeSignature);
-        long requestId = debuggeeWrapper.vmMirror.setBreakpointAtMethodBegin(
+        int requestId = debuggeeWrapper.vmMirror.setBreakpointAtMethodBegin(
                 classId, "breakpointMethodFromProxy");
 
         // Signal debuggee to continue execution.
