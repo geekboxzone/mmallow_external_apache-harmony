@@ -206,6 +206,9 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.TopLevelThreadGroupsTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.VersionTest.class);
 
-    junit.textui.TestRunner.run(suite);
+    junit.framework.TestResult result = junit.textui.TestRunner.run(suite);
+    if (!result.wasSuccessful()) {
+        System.exit(1);
+    }
   }
 }
