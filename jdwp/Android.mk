@@ -20,7 +20,7 @@ jdwp_test_target_runtime_common_args :=  \
 # CTS configuration
 #
 # We run in non-debug mode and support running with a forced abi.
-cts_jdwp_test_runtime_target := dalvikvm|\#ABI\#| -XXlib:libart.so
+cts_jdwp_test_runtime_target := dalvikvm|\#ABI\#| -XXlib:libart.so -Xcompiler-option --debuggable
 cts_jdwp_test_target_runtime_args :=  $(jdwp_test_target_runtime_common_args)
 cts_jdwp_test_target_runtime_args += -Djpda.settings.debuggeeJavaPath='$(cts_jdwp_test_runtime_target)'
 

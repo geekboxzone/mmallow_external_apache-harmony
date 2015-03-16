@@ -28,7 +28,7 @@ jdwp_test_classpath_host := $(HOST_OUT_JAVA_LIBRARIES)/apache-harmony-jdwp-tests
 jdwp_test_runtime_bin_host := $(HOST_OUT_EXECUTABLES)/art
 
 # Common runtime settings for runner and debuggee.
-jdwp_test_common_runtime_options := -XXlib:libartd.so
+jdwp_test_common_runtime_options := -XXlib:libartd.so -Xcompiler-option --debuggable
 
 # Debuggee runtime options
 jdwp_test_runtime_options := -verbose:jdwp
