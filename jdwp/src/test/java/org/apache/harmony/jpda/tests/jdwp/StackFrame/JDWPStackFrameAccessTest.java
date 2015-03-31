@@ -116,12 +116,27 @@ public class JDWPStackFrameAccessTest extends JDWPStackFrameTestCase {
         }
     }
 
-    protected void runStackFrameTest(StackFrameTester tester) {
+    @Override
+    protected void internalSetUp() throws Exception {
+        super.internalSetUp();
+
         printTestLog("STARTED");
 
         // Wait for debuggee to start.
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
+    }
 
+    @Override
+    protected void internalTearDown() {
+        // Resume debuggee.
+        debuggeeWrapper.vmMirror.resume();
+
+        printTestLog("FINISHED");
+
+        super.internalTearDown();
+    }
+
+    protected void runStackFrameTest(StackFrameTester tester) {
         // Get variable information.
         long classID = getClassIDBySignature(getDebuggeeClassSignature());
 
@@ -149,12 +164,6 @@ public class JDWPStackFrameAccessTest extends JDWPStackFrameTestCase {
 
         // Check every local variable of every method.
         checkStackFrame(classID, eventThreadID, tester, false);
-
-        // Resume debuggee.
-        // TODO we should let the test disconnects from debuggee.
-        debuggeeWrapper.vmMirror.resume();
-
-        printTestLog("FINISHED");
     }
 
     /**
