@@ -33,8 +33,7 @@ endef
 
 harmony_test_resource_dirs := $(call harmony-test-resource-dirs,$(harmony_test_dirs))
 
-harmony_test_javac_flags=-encoding UTF-8
-harmony_test_javac_flags+=-Xmaxwarns 9999999
+harmony_test_javac_flags:=-Xmaxwarns 9999999
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(harmony_test_src_files)
