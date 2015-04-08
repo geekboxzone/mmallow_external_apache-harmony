@@ -70,6 +70,7 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.SetValues002Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.SetValuesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ClassType.SuperClassTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Deoptimization.DeoptimizationWithExceptionHandlingTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.EventModifiers.CountModifierTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.EventModifiers.InstanceOnlyModifierTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.EventModifiers.ThreadOnlyModifierTest.class);
