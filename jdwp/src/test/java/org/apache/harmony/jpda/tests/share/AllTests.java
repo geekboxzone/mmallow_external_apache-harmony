@@ -18,8 +18,6 @@
 
 package org.apache.harmony.jpda.tests.share;
 
-import org.apache.harmony.jpda.tests.framework.LogWriter;
-import org.apache.harmony.jpda.tests.framework.TestErrorException;
 
 public class AllTests {
   public static void main(String[] args) {
@@ -205,6 +203,7 @@ public class AllTests {
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.IDSizesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.InstanceCountsTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.RedefineClassesTest.class);
+    suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.Resume002Test.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ResumeTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.SetDefaultStratumTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.SuspendTest.class);
