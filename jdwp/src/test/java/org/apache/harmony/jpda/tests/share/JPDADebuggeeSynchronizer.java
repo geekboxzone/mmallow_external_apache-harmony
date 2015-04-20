@@ -29,7 +29,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
-import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.ServerSocket;
@@ -166,7 +166,7 @@ public class JPDADebuggeeSynchronizer implements DebuggeeSynchronizer {
     public InetSocketAddress getSyncServerAddress() {
         // Use the LOOPBACK directly instead of doing a DNS lookup.
         int port = settings.getSyncPortNumber();
-        return new InetSocketAddress(Inet4Address.LOOPBACK, port);
+        return new InetSocketAddress(InetAddress.getLoopbackAddress(), port);
     }
 
     /**
